@@ -11,7 +11,7 @@ import { CenterBox, IconSmall, TopNavLinks } from "./styledComponents";
 import { Button, Divider, useMediaQuery, useTheme } from "@mui/material";
 import Sidebar from "./Sidebar";
 import { UserContext } from "../../App";
-import UserBox from "./UserBox";
+import UserBox from "./user/UserBox";
 import { colorHex } from "../../constants";
 
 export const drawerWidth = 220;
@@ -28,7 +28,6 @@ export const topNavHeight = "2.5rem";
 export default function Header(props: Props) {
   const theme = useTheme();
   const value = React.useContext(UserContext);
-  console.log(value);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -83,10 +82,10 @@ export default function Header(props: Props) {
         }}
       >
         <Toolbar
+          className="toolbar-padding"
           sx={{
             gap: 1,
             alignItems: "flex-start",
-            
             pt: 2,
             [theme.breakpoints.down("lg")]: {
               bgcolor: colorHex.bg3,

@@ -11,13 +11,12 @@ import {
 import { BiTennisBall } from "react-icons/bi";
 import { IoIosFootball, IoIosBasketball } from "react-icons/io";
 import { MdSportsKabaddi } from "react-icons/md";
-import { Divider, Typography, useMediaQuery } from "@mui/material";
+import { Divider, Grid, Typography, useMediaQuery } from "@mui/material";
 import { FaTableTennis } from "react-icons/fa";
 import { grey } from "@mui/material/colors";
 import { colorHex } from "../../constants";
 
-
-const sportsTabList = [
+export const sportsTabList = [
   {
     name: "Cricket",
     icon: <GiCricketBat />,
@@ -63,19 +62,24 @@ const sportsTabList = [
     icon: <GiHockey />,
     color: "#3D2B58",
   },
- 
 ];
 
 interface TabsProps {
   value: number;
   setValue: Dispatch<SetStateAction<number>>;
   color: string;
+  sports: any[];
 }
-function ScrollableTabsButtonVisible({ setValue, color, value }: TabsProps) {
+function ScrollableTabsButtonVisible({
+  setValue,
+  color,
+  value,
+  sports,
+}: TabsProps) {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  
+
   const matches = useMediaQuery("(min-width:1200px)");
 
   return (
@@ -90,9 +94,11 @@ function ScrollableTabsButtonVisible({ setValue, color, value }: TabsProps) {
         onChange={handleChange}
         variant="scrollable"
         scrollButtons
-        TabScrollButtonProps={{
-          // sx: { borderRight: "0.5px solid #d9d9d9", }
-        }}
+        TabScrollButtonProps={
+          {
+            // sx: { borderRight: "0.5px solid #d9d9d9", }
+          }
+        }
         TabIndicatorProps={{ sx: { display: "none" } }}
         aria-label="visible arrows tabs example"
         sx={{
@@ -104,7 +110,7 @@ function ScrollableTabsButtonVisible({ setValue, color, value }: TabsProps) {
           minHeight: "40px",
         }}
       >
-        {sportsTabList.map((s, index) => (
+        {sports.map((s, index) => (
           <Tab
             label={s.name}
             icon={s.icon}
@@ -113,7 +119,7 @@ function ScrollableTabsButtonVisible({ setValue, color, value }: TabsProps) {
               py: 0,
               my: -2,
               bgcolor: index === value ? color : "",
-              borderLeft:index!==0 ? "0.5px solid #d9d9d9":"",
+              borderLeft: index !== 0 ? "0.5px solid #d9d9d9" : "",
             }}
           />
         ))}
@@ -135,25 +141,37 @@ function ScrollableTabsButtonVisible({ setValue, color, value }: TabsProps) {
   );
 }
 
-const Sports = () => {
+const Sports = ({ sportsList }: any) => {
   const [value, setValue] = React.useState(0);
-  const color = sportsTabList[value].color;
-
+  const color = sportsList[value]?.color;
   return (
-    <>
+    <div>
       <ScrollableTabsButtonVisible
         value={value}
         color={color}
         setValue={setValue}
+        sports={sportsList}
       />
-      <Box bgcolor={color} sx={{ width: "100%", height: "40px" }}>
-        <Typography>
-          {sportsTabList[value]?.icon}
-          {sportsTabList[value]?.name}
-        </Typography>
-        <Box>kmlsdl</Box>
-      </Box>
-    </>
+      <Grid container bgcolor={color}>
+        <Grid item xs={6} textAlign="left" display="flex">
+          <Box pl={2} py={0.5}>
+            {sportsTabList[value]?.icon}
+          </Box>
+          <Box pl={2} py={0.5}>
+            {sportsTabList[value]?.name}
+          </Box>
+        </Grid>
+        <Grid item xs={0} pl={2} py={0.5} lg={2}>
+          1
+        </Grid>
+        <Grid item xs={0} pl={2} py={0.5} lg={2}>
+          x
+        </Grid>
+        <Grid item xs={0} pl={2} py={0.5} lg={2}>
+          2
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 

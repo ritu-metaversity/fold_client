@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
 import "./App.css";
 import Layout from "./components/layout";
 import {
@@ -21,13 +21,15 @@ const theme = createTheme({
     primary: {
       main: "#fdcf13",
     },
+    secondary: {
+      main: "#03B37F",
+    },
   },
   components: {
     MuiToolbar: {
       styleOverrides: {
         root: {
           backgroundColor: "#23292D",
-          paddingInline:"0px",
         },
       },
     },
@@ -54,21 +56,48 @@ const theme = createTheme({
   },
 });
 
-export const UserContext = createContext({ isSignedIn: false });
+interface UserContextType {
+  setIsSignedIn: Dispatch<SetStateAction<boolean>> | null;
+  setUser: Dispatch<SetStateAction<any>> | null;
+  isSignedIn: boolean;
+  user: any;
+}
+
+export const UserContext = createContext<UserContextType>({
+  isSignedIn: false,
+  user: null,
+  setIsSignedIn: null,
+  setUser: null,
+});
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const user = localStorage.getItem("user")
+    if (user) {
+      setUser(JSON.parse(user));
+      setIsSignedIn(true);
+    } else {
+      setUser(null);
+      setIsSignedIn(false);
+    }
+    return () => {
 
+    }
+  }, [])
+  
   return (
     <ThemeProvider theme={theme}>
-      <SnackbarProvider >
-      <div className="App">
-        <UserContext.Provider value={{ isSignedIn }}>
-          <Layout>
-            
-            <Home />
-          </Layout>
-        </UserContext.Provider>
-      </div>
+      <SnackbarProvider autoHideDuration={1500}>
+        <div className="App">
+          <UserContext.Provider
+            value={{ isSignedIn, user, setIsSignedIn, setUser }}
+          >
+            <Layout>
+              <Home />
+            </Layout>
+          </UserContext.Provider>
+        </div>
         <SnackbarUtilsConfigurator />
       </SnackbarProvider>
     </ThemeProvider>

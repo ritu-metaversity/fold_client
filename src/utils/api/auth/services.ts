@@ -2,11 +2,11 @@ import { apiWithSnackbar } from "../apiService";
 import { authResourcs as authResources } from "./resources";
 
 interface LoginPayload {
-  login: string;
+  userId: string;
   password: string;
-  userIp: string;
-  userType: string;
-  type: string;
+  // userIp: string;
+  // userType: string;
+  // type: string;
 }
 interface SendOtpPayload extends LoginPayload {
   purpose: string;

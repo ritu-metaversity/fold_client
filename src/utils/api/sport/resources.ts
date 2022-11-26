@@ -3,7 +3,7 @@ import { ApiResource } from "../apiService";
 export const sportsResourses: { [x: string]: ApiResource } = {
   GET_ACTIVE_SPORTS_LIST: {
     URL: "/enduser/active-sport-list/",
-    METHOD: "GET",
+    METHOD: "POST",
   },
   GET_EVENT_FROM_SPORTS: {
     URL: "/market/get-active-eventlist-sportwise/:sport_id",

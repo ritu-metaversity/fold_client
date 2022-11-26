@@ -24,12 +24,12 @@ export const userResources: {
     METHOD: "POST",
   },
   UPDATE_BUTTON_VALUE: {
-    URL: "/enduser/set-stack-button",
-    METHOD: "PATCH",
+    URL: "/enduser/set-stake-button",
+    METHOD: "POST",
   },
   GET_BUTTON_VALUE: {
-    URL: "/enduser/get-stack-button",
-    METHOD: "GET",
+    URL: "/enduser/get-stake-button",
+    METHOD: "POST",
   },
   CHANGE_PASSWORD: {
     URL: "user/change-password",

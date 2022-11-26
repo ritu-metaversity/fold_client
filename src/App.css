@@ -6,7 +6,14 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.toolbar-padding {
+  padding-right: 0!important;
+  padding-top: 8px!important;
+  padding-left: 0!important;
+}
+a {
+  color : #03B37F;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

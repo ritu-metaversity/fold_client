@@ -46,6 +46,9 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
 }) => {
   const { METHOD, URL } = resource;
   const token = localStorage.getItem("token");
+  // if (!token) { 
+  //   return;
+  // }
   let url = URL;
   Object.keys(pathVars).forEach((key) => {
     if (url) url = url.replace(":" + key, pathVars[key].toString());
@@ -76,14 +79,14 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
 const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
   args
 ) => {
-  let result: any;
+  let result: any={};
   await apiService(args)
     .catch((error) => {
-      result = error.response?.data;
+      result["error"] = error.response?.data;
     })
     .then((response) => {
       if (response) {
-        result = response.data;
+        result["response"] = response.data;
       }
     });
   if (result?.responseCode === 403) {
@@ -94,17 +97,18 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
 
     // Navigate({ to: "/sign-in", replace: true });
   }
-  if (result?.type === "success") {
-    return {
-      response: { ...result },
-      error: null,
-    };
-  } else {
-    return {
-      error: { message: result?.message },
-      response: null,
-    };
-  }
+  return result;
+  // if (result) {
+  //   return {
+  //     response: { ...result },
+  //     error: null,
+  //   };
+  // } else {
+  //   return {
+  //     error: { message: result?.message },
+  //     response: null,
+  //   };
+  // }
 };
 
 const apiSnackbarNotifications: (
