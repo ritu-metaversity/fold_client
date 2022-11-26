@@ -11,13 +11,21 @@ import Typography from "@mui/material/Typography";
 import { Grid, MenuItem, TextField } from "@mui/material";
 import { colorHex } from "../../../constants";
 import { userServices } from "../../../utils/api/user/services";
+import { Box } from "@mui/system";
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+export const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
   },
   "& .MuiDialogActions-root": {
     padding: theme.spacing(1),
+  },
+  "& .MuiPaper-root": {
+    background: colorHex.bg1,
+    borderRadius: 10,
+
+    maxWidth: "xs",
+    innerWidth: "100%",
   },
 }));
 
@@ -27,7 +35,7 @@ export interface DialogTitleProps {
   onClose: () => void;
 }
 
-function BootstrapDialogTitle(props: DialogTitleProps) {
+export function BootstrapDialogTitle(props: DialogTitleProps) {
   const { children, onClose, ...other } = props;
 
   return (
@@ -54,6 +62,7 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 
 export default function CustomizedDialogStack({}) {
   const [open, setOpen] = React.useState(false);
+  const [tab, setTab] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -94,9 +103,8 @@ export default function CustomizedDialogStack({}) {
   }, []);
 
   const handleClick = async (e: any) => {
-     await userServices.updateButtonValue(buttonValue);
-  }
-
+    await userServices.updateButtonValue(buttonValue);
+  };
 
   return (
     <>
@@ -105,11 +113,6 @@ export default function CustomizedDialogStack({}) {
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
-        maxWidth="xs"
-        PaperProps={{
-          sx:{bgcolor:colorHex.bg2}
-        }}
-        fullWidth
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
@@ -117,28 +120,59 @@ export default function CustomizedDialogStack({}) {
         >
           <Typography color="primary.main">Set Button Value</Typography>
         </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <Grid container bgcolor={colorHex.bg2} p={2} >
-            <Grid item xs={6}>
-              Price Label
+        <DialogContent
+          sx={{ bgcolor: colorHex.bg1, color: "text.secondary" }}
+          dividers
+        >
+          <Box p={0.5}>
+            <Button
+              sx={{
+                borderRadius: "10px 10px 0px 0px",
+                bgcolor: tab ? colorHex.bg6 : colorHex.bg2,
+                color: "white",
+                fontWeight: 700,
+                m: 0.5,
+              }}
+              onClick={() => setTab(false)}
+            >
+              Game Buttons
+            </Button>
+            <Button
+              sx={{
+                borderRadius: "10px 10px 0px 0px",
+                bgcolor: !tab ? colorHex.bg6 : colorHex.bg2,
+                color: "white",
+                fontWeight: 700,
+                m: 0.5,
+              }}
+              onClick={() => setTab(true)}
+            >
+              {" "}
+              Casino Buttons
+            </Button>
+            <Grid container bgcolor={colorHex.bg2} p={1}>
+              <Grid item xs={6}>
+                Price Label
+              </Grid>
+              <Grid item xs={6}>
+                Price Value
+              </Grid>
             </Grid>
-            <Grid item xs={6}>
-              Price Value
-            </Grid>
-          </Grid>
+          </Box>
+
           {Object.keys(buttonValue).map((item) => (
             <Grid container key={item}>
-              <Grid item xs={6} p={0.25}>
+              <Grid item xs={6} p={0.5}>
                 <TextField
                   value={item}
                   disabled
                   fullWidth
                   size="small"
                   variant="outlined"
-                  sx={{ bgcolor: colorHex.bg1 }}
+                  sx={{ bgcolor: colorHex.bg6, fontSize: "0.8rem", p: 0 }}
                 />
               </Grid>
-              <Grid item xs={6} p={0.25}>
+              <Grid item xs={6} p={0.5}>
                 <TextField
                   value={buttonValue[item]}
                   fullWidth
@@ -147,14 +181,19 @@ export default function CustomizedDialogStack({}) {
                   onChange={handleChange}
                   variant="outlined"
                   type={"number"}
-                  sx={{ bgcolor: colorHex.bg1 }}
+                  sx={{ bgcolor: colorHex.bg6, fontSize: "0.8rem", p: 0 }}
                 />
               </Grid>
             </Grid>
           ))}
         </DialogContent>
         <DialogActions>
-          <Button  fullWidth  color="secondary" variant="contained" onClick={handleClick}>
+          <Button
+            fullWidth
+            color="secondary"
+            variant="contained"
+            onClick={handleClick}
+          >
             Save changes
           </Button>
         </DialogActions>

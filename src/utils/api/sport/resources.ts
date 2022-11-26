@@ -6,8 +6,8 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     METHOD: "POST",
   },
   GET_EVENT_FROM_SPORTS: {
-    URL: "/market/get-active-eventlist-sportwise/:sport_id",
-    METHOD: "GET",
+    URL: "/enduser/active-sport-match-wise",
+    METHOD: "POST",
   },
   GET_EVENT_MARKET: {
     URL: "https://odds-api.kalyanexch.com/event-odds/match-odds",

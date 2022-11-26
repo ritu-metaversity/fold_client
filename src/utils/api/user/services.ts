@@ -3,7 +3,8 @@ import { userResources } from "./resources";
 
 interface ChangePasswordPayload {
   newPassword: string;
-  oldPassword: string;
+  currentPassword: string;
+  confirmPassword?: string;
 }
 
 export const userServices = {

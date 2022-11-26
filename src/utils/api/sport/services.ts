@@ -7,10 +7,10 @@ export const sportServices = {
         };
         return apiHandler(params);
     }, 
-    activeEventFromSport: (sport_id: number) => { 
+    activeEventFromSport: (sportId: number) => { 
         const params:ApiServiceInterface = {
             resource: sportsResourses.GET_EVENT_FROM_SPORTS,
-            pathVars: {sport_id}
+            data: {sportId}
         }
         return apiHandler(params);
     },

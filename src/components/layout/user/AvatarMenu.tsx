@@ -1,6 +1,7 @@
 import { Menu, MenuItem } from "@mui/material";
 import React, { useContext } from "react";
 import { UserContext } from "../../../App";
+import CustomizedDialogPassword from "./ResetPasswordDailog";
 import CustomizedDialogStack from "./StackDailog";
 export function AvatarMenu({ anchorEl, open, handleClose }: any) {
   const { setIsSignedIn, setUser } = useContext(UserContext);
@@ -33,6 +34,8 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
+
+        <CustomizedDialogPassword />
         <CustomizedDialogStack />
         <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>

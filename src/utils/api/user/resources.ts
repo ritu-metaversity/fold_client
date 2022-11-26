@@ -32,7 +32,7 @@ export const userResources: {
     METHOD: "POST",
   },
   CHANGE_PASSWORD: {
-    URL: "user/change-password",
+    URL: "/enduser/change-password",
     METHOD: "PATCH",
   },
 };
