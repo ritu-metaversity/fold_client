@@ -7,7 +7,9 @@ export const CenterBox = styled(Box)`
   justify-content: center;
   padding: 0.5em;
 `;
-
+export const BlinkImage = styled.img`
+  width:100%;
+`;
 export const TopNavLinks = styled(Link)`
   font-weight: 900;
   text-decoration: none;

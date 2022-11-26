@@ -27,7 +27,10 @@ const drawer = (
   <Box p={1} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
     <Icon src="/assets/images/icon.png" alt="ico" />
     <BoxWithTitle title="Upcoming Fixure">
+      <Box >
+      
       ksdflajsdlfkjasldfkjlaskdj
+      </Box>
     </BoxWithTitle>
     <BoxWithTitleBox sx={{overflow:"scroll"}}>
       <List>
@@ -60,7 +63,7 @@ const drawer = (
           "Trash",
           "Spam",
         ].map((text, index) => (
-          <ListItem key={text} disablePadding>
+          <ListItem key={text+index} disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
