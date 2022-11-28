@@ -1,7 +1,7 @@
 import { LoginForm } from './LoginForm';
 import {
   Box,
-  Button,
+  // Button,
   Checkbox,
   FormControlLabel,
   TextField,
@@ -14,7 +14,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import CustomizedDialogs from "../../common/Dailog";
 import { LoginButton, UserContainer } from "../styledComponents";
-import { Info, InfoOutlined } from '@mui/icons-material';
+// import { Info, InfoOutlined } from '@mui/icons-material';
 import { FaInfo } from "react-icons/fa"
 import { useFormik } from "formik";
 import { authServices } from "../../../utils/api/auth/services";
