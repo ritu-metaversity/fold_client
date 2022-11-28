@@ -6,4 +6,5 @@ export const colorHex = {
   sec: "#03B37F",
   bg5: "#343943",
   bg6: "#23292D",
+  bg7: "#17191C",
 };

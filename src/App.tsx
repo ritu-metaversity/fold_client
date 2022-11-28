@@ -3,7 +3,7 @@ import "./App.css";
 import Layout from "./components/layout";
 import {
   createTheme,
-  ThemeProvider,
+  ThemeProvider
 } from "@mui/material";
 import Home from "./components/home";
 
@@ -11,7 +11,17 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { SnackbarUtilsConfigurator } from "./components/layout/snackBarUtil";
 import { SnackbarProvider } from "notistack"
 
+const font =  '"Noto Sans"';
 const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 580,
+      md: 768,
+      lg: 1280,
+      xl: 1600,
+    }
+  },
   palette: {
     mode: "dark",
     background: {
@@ -24,6 +34,12 @@ const theme = createTheme({
     secondary: {
       main: "#03B37F",
     },
+  },
+  typography: {
+    fontFamily: font,
+    button: {
+      textTransform: "none"
+    }
   },
   components: {
     MuiToolbar: {

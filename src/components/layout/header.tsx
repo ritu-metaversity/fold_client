@@ -55,7 +55,7 @@ export default function Header(props: Props) {
         </TopNavLinks>
         <TopNavLinks to="#">Live Casino</TopNavLinks>
         <TopNavLinks to="#">Virtual Casino</TopNavLinks>
-        {value.isSignedIn && (
+        {/* {value.isSignedIn && (
           <Box height="100%" sx={{ position: "absolute", right: 5, top: 5 }}>
             <Button variant="contained" color="success" sx={{ mr: 2, py: 0.3 }}>
               {" "}
@@ -66,7 +66,7 @@ export default function Header(props: Props) {
               Withdraw
             </Button>
           </Box>
-        )}
+        )} */}
       </CenterBox>
       <AppBar
         position="fixed"

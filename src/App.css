@@ -1,7 +1,30 @@
+@media (min-width:1600px) {
+  :root {
+    font-size: 18px;
+  }
+}
+
 .App {
   text-align: center;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #2E3438; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3C444A; 
+}
+/* 
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+} */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;400;500;600;700;800;900&display=swap');
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -11,6 +34,7 @@
   padding-top: 8px!important;
   padding-left: 0!important;
 }
+
 a {
   color : #03B37F;
 }
