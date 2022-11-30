@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import { Divider, Grid, Typography } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { Grid } from "@mui/material";
+// import { grey } from "@mui/material/colors";
 import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "./sportsTabList";
 import { ScrollableTabsButtonVisible } from "./ScrollableTabsButtonVisible";
@@ -38,7 +38,7 @@ const Sports = () => {
       if (response?.data) {
         // setActiveEventList(response.data);
         if (response?.data?.length > 0) {
-          const events = response?.data.map((item: any) => item.eventId);
+          // const events = response?.data.map((item: any) => item.eventId);
           // const { response: response1 } = await sportServices.matchOdds(events);
           // console.log(response1);
           setActiveEventList(response.data);

@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+// import { Typography } from "@mui/material";
 import React from "react";
 import Marquee from "react-fast-marquee";
 import { AnnouncementBox } from "./styledComponents";
