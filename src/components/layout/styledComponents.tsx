@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Box, Button, ListItemText, ListSubheader, Theme } from "@mui/material";
+import { Box, Button, ListSubheader } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const CenterBox = styled(Box)`

@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import { CenterBox, IconSmall, TopNavLinks } from "./styledComponents";
-import { Button, Divider, useMediaQuery, useTheme } from "@mui/material";
+import {  Divider, useMediaQuery, useTheme } from "@mui/material";
 import Sidebar from "./Sidebar";
 import { UserContext } from "../../App";
 import UserBox from "./user/UserBox";

@@ -16,39 +16,78 @@ const Footer = () => {
             </div>
           </div>
           <div className="footer-social">
-            <a href="https://wa.me/+447380173801" target="_blank">
-              <img src="https://sitethemedata.com/v89/static/front/img/home-banners/social/whatsapp.png" />
+            <a
+              href="https://wa.me/+447380173801"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                alt=""
+                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/whatsapp.png"
+              />
             </a>
-            <a href="https://www.facebook.com/wolf777exchange" target="_blank">
-              <img src="https://sitethemedata.com/v89/static/front/img/home-banners/social/facebook.png" />
+            <a
+              href="https://www.facebook.com/wolf777exchange"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                alt=""
+                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/facebook.png"
+              />
             </a>
             <a
               href=" https://www.instagram.com/wolf777exchange"
               target="_blank"
+              rel="noreferrer"
             >
-              <img src="https://sitethemedata.com/v89/static/front/img/home-banners/social/instagram.png" />
+              <img
+                alt=""
+                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/instagram.png"
+              />
             </a>
-            <a href="https://t.me/wolf777_official" target="_blank">
-              <img src="https://sitethemedata.com/v89/static/front/img/home-banners/social/telegram.png" />
+            <a
+              href="https://t.me/wolf777_official"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                alt=""
+                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/telegram.png"
+              />
             </a>
-            <a href="https://www.twitter.com/wolf777exchange" target="_blank">
-              <img src="https://sitethemedata.com/v89/static/front/img/home-banners/social/twitter.png" />
+            <a
+              href="https://www.twitter.com/wolf777exchange"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                alt=""
+                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/twitter.png"
+              />
             </a>
             <a
               href="https://www.youtube.com/channel/UC8-Cc6t61DhtbyPGIGDXJbg"
               target="_blank"
+              rel="noreferrer"
             >
-              <img src="https://sitethemedata.com/v89/static/front/img/home-banners/social/youtube.png" />
+              <img
+                alt=""
+                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/youtube.png"
+              />
             </a>{" "}
-            <a href="https://wolfcfd.com" target="_blank">
-              <img src="https://sitethemedata.com/v89/static/front/img/home-banners/social/news.png" />
+            <a href="https://wolfcfd.com" target="_blank" rel="noreferrer">
+              <img
+                alt=""
+                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/news.png"
+              />
             </a>
           </div>
         </div>
         <div className="footer-menu">
           <ul>
             <li>
-              <a href="/about-us" className="" target="_blank">
+              <a href="/about-us" className="" target="_blank" rel="noreferrer">
                 About Us
               </a>
             </li>{" "}
@@ -61,12 +100,22 @@ const Footer = () => {
               <a href="/">Rules</a>
             </li>
             <li>
-              <a href="/terms-and-conditions" className="" target="_blank">
+              <a
+                href="/terms-and-conditions"
+                className=""
+                target="_blank"
+                rel="noreferrer"
+              >
                 Terms and Conditions
               </a>
             </li>{" "}
             <li>
-              <a href="/responsible-gaming" className="" target="_blank">
+              <a
+                href="/responsible-gaming"
+                className=""
+                target="_blank"
+                rel="noreferrer"
+              >
                 Responsible Gaming
               </a>
             </li>
@@ -93,13 +142,13 @@ const Footer = () => {
                   alt=""
                 />
               </a>{" "}
-              <a href=" /" target="_blank">
+              <a href=" /" target="_blank" rel="noreferrer">
                 <img
                   src="https://sitethemedata.com/v89/static/front/img/gamecare.png"
                   alt=""
                 />
               </a>{" "}
-              <a href=" /" target="_blank">
+              <a href=" /" target="_blank" rel="noreferrer">
                 <img
                   src="https://sitethemedata.com/v89/static/front/img/gt.png"
                   alt=""

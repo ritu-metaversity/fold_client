@@ -8,11 +8,9 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
-import { Box, Collapse, ListSubheader } from "@mui/material";
+import { Box, Collapse } from "@mui/material";
 import { Icon, SidebarHeader } from "./styledComponents";
 import { drawerWidth, topNavHeight } from "./header";
-import BoxWithTitle from "../common/BoxWithTitle";
-import { BoxWithTitleBox } from "../common/styledComponents";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { colorHex } from "../../constants";
 

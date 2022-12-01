@@ -10,7 +10,7 @@ import { userServices } from "../../../utils/api/user/services";
 import { BootstrapDialog, BootstrapDialogTitle } from "./StackDailog";
 import { useFormik } from "formik";
 
-export default function CustomizedDialogPassword({}) {
+export default function CustomizedDialogPassword() {
   const [open, setOpen] = React.useState(false);
   // const [tab, setTab] = React.useState(false);
 

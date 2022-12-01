@@ -4,7 +4,7 @@ import Hero from "./Hero";
 import Sports from "./Sports";
 // import { sportsTabList } from "./sportsTabList";
 
-const Home = ({}) => {
+const Home = () => {
   return (
     <>
       <Hero />

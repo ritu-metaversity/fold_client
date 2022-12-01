@@ -1,7 +1,6 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import { colorHex } from "../../constants";
-import { WhiteForNull } from "./styledComponents";
 
 interface MatchInterface {
   matchName: string;

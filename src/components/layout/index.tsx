@@ -2,7 +2,7 @@ import Header, { drawerWidth } from "./header";
 
 import React, { FC, PropsWithChildren } from "react";
 import Footer from "./Footer";
-import { Box, Grid, Toolbar, useMediaQuery } from "@mui/material";
+import { Box, Toolbar, useMediaQuery } from "@mui/material";
 import { Announcement } from "./Announcement";
 import BoxWithTitle from "../common/BoxWithTitle";
 import { BlinkImage } from "./styledComponents";

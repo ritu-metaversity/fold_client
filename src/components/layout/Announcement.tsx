@@ -2,7 +2,7 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 import { AnnouncementBox } from "./styledComponents";
-export function Announcement({}) {
+export function Announcement() {
   return (
     <AnnouncementBox>
       <Marquee gradient={false} speed={150}

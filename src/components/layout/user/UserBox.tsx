@@ -1,6 +1,6 @@
 import { AvatarMenu } from './AvatarMenu';
 import { KeyboardArrowDownOutlined } from "@mui/icons-material";
-import { Avatar, Collapse, Menu, MenuItem, Typography } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useContext } from "react";
 import { UserContext } from "../../../App";
