@@ -19,20 +19,80 @@ interface MatchInterface {
 interface Props {
   matches: MatchInterface;
 }
+
+const buttonGridProps = {
+  item: true,
+  xl: 1.7,
+  lg: 1.8,
+  xs: 1.8,
+  borderRadius: 1,
+};
+
+const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ]
+const getDay = (date: string) => {
+  const now = new Date()
+  const dat = new Date(date)
+  const nowDate = now.getUTCDate();
+  const datDate = dat.getUTCDate();
+  console.log(nowDate, datDate)
+  if (nowDate === datDate) return "Today";
+  now.setDate(nowDate + 1)
+  if (now.getUTCDate() === datDate) return "Tomorrow";
+  
+  return days[dat.getDay()];;
+}
+const getTimeInMIn = (date: string) => {
+  const dat = new Date(date);
+  if (!date) return "";
+  let hours:string|number = dat.getUTCHours()
+  hours = (hours < 10 ? "0" : "") + hours;
+
+  let mins: string | number = dat.getUTCMinutes();
+  mins = (mins < 10 ? "0" : "") + mins;
+  return hours + ":" + mins;
+}
+
+const ButtonPropps = {
+  sx: {
+    minWidth: "",
+    fontSize: "0.9rem",
+    p: { xs: 0.5, lg: 0 },
+    width: { xl: "4rem" },
+    mx: -0.25,
+    color: "#000",
+    fontWeight: 700,
+  },
+};
+
 const Match = ({ matches }: Props) => {
   return (
-    <Grid container bgcolor={colorHex.bg2} p={0.75} m={0.5}>
+    <Grid
+      container
+      bgcolor={{ xs: colorHex.bg2, lg: colorHex.bg1 }}
+      p={{ xs: 0.5, lg: 0 }}
+      m={{ xs: 0.5, lg: 0 }}
+      gap={{ xs: 0.5, lg: 0 }}
+      borderBottom={{ xs: "", lg: "1px solid gray" }}
+    >
       <Grid
         item
         xs={12}
-        lg={6}
+        lg={6.6}
         bgcolor={colorHex.bg1}
         display="flex"
         fontSize={"0.8rem"}
         alignItems={"center"}
-        p={2}
+        p={{ xs: 1, lg: 1 }}
       >
-        <Grid item xs={3}>
+        <Box>
           {matches.live ? (
             <Typography
               component={"div"}
@@ -47,44 +107,59 @@ const Match = ({ matches }: Props) => {
               </Box>
             </Typography>
           ) : (
-            matches.openDate
+            <Box
+              display="flex"
+              width={{ lg: 150 }}
+              justifyContent={"space-between"}
+            >
+              <span>{getDay(matches.openDate)}</span>
+              <span>{getTimeInMIn(matches.openDate)}</span>
+            </Box>
           )}
-        </Grid>
-              <Grid textAlign="left" item xs={9}>
-        {matches.matchName}
-              </Grid>
-
+        </Box>
+        <Box textAlign="left" pl={2}>
+          {matches.matchName}
+        </Box>
       </Grid>
-      <Grid item xs={12} lg={6} p={2} display="flex" alignItems={"center"}>
-        <Grid item xs={1.8} margin="auto" borderRadius={1} bgcolor="#72BBEF">
-          <Button sx={{ p: 0.5, color: "#000", fontWeight: 700 }}>
-            {matches.team1Back || "--"}
-          </Button>
+      <Grid
+        container
+        xs={12}
+        lg={5.4}
+        maxWidth={{ lg: 356, xl: 700 }}
+        ml={{
+          lg: "auto",
+        }}
+        py={{ xs: 0, md: 2, lg: 2 }}
+        px={{ xs: 0, md: 4, lg: 1 }}
+        display="flex"
+        alignItems={"center"}
+        gap={{ xs: "1.2%", md: "1.2%", lg: 0.5 }}
+      >
+        <Grid
+          {...buttonGridProps}
+          marginLeft={{ xs: 0, md: "auto", lg: 0, xl: "auto" }}
+          bgcolor="#72BBEF"
+        >
+          <Button {...ButtonPropps}>{matches.team1Back || "—"} </Button>
         </Grid>{" "}
-        <Grid item xs={1.8} margin="auto" borderRadius={1} bgcolor="#F994BA">
-          <Button sx={{ p: 0.5, color: "#000", fontWeight: 700 }}>
-            {matches.team1Lay || "--"}
-          </Button>
+        <Grid {...buttonGridProps} marginRight="auto" bgcolor="#F994BA">
+          <Button {...ButtonPropps}>{matches.team1Lay || "—"} </Button>
         </Grid>
-        <Grid item xs={1.8} margin="auto" borderRadius={1} bgcolor="#72BBEF">
-          <Button sx={{ p: 0.5, color: "#000", fontWeight: 700 }}>
-            {matches.drawBack || "--"}
-          </Button>
+        <Grid {...buttonGridProps} marginLeft="auto" bgcolor="#72BBEF">
+          <Button {...ButtonPropps}>{matches.drawBack || "—"}</Button>
         </Grid>{" "}
-        <Grid item xs={1.8} margin="auto" borderRadius={1} bgcolor="#F994BA">
-          <Button sx={{ p: 0.5, color: "#000", fontWeight: 700 }}>
-            {matches.drawLay || "--"}
-          </Button>
+        <Grid {...buttonGridProps} marginRight="auto" bgcolor="#F994BA">
+          <Button {...ButtonPropps}>{matches.drawLay || "—"}</Button>
         </Grid>
-        <Grid item xs={1.8} margin="auto" borderRadius={1} bgcolor="#72BBEF">
-          <Button sx={{ p: 0.5, color: "#000", fontWeight: 700 }}>
-            {matches.team2Back || "--"}
-          </Button>
+        <Grid {...buttonGridProps} marginLeft="auto" bgcolor="#72BBEF">
+          <Button {...ButtonPropps}>{matches.team2Back || "—"} </Button>
         </Grid>
-        <Grid item xs={1.8} margin="auto" borderRadius={1} bgcolor="#F994BA">
-          <Button sx={{ p: 0.5, color: "#000", fontWeight: 700 }}>
-            {matches.team2Lay || "--"}
-          </Button>
+        <Grid
+          {...buttonGridProps}
+          marginRight={{ xs: 0, md: "auto", lg: 0, xl: "auto" }}
+          bgcolor="#F994BA"
+        >
+          <Button {...ButtonPropps}>{matches.team2Lay || "—"} </Button>
         </Grid>{" "}
       </Grid>
     </Grid>

@@ -68,7 +68,7 @@ const Sports = () => {
   const color = activeSportList[value]?.color;
 
   return (
-    <div>
+    <Box color="text.secondary">
       <ScrollableTabsButtonVisible
         value={value}
         color={color}
@@ -76,28 +76,46 @@ const Sports = () => {
         sports={activeSportList}
       />
       <Grid container display={{ xs: "none", lg: "flex" }} bgcolor={color}>
-        <Grid item xs={6} textAlign="left" display="flex">
-          <Box pl={2} py={0.5}>
+        <Grid
+          item
+          xs={6.6}
+          textAlign="left"
+          alignItems={"center"}
+          display="flex"
+        >
+          <Box pl={2} pt={0.5}>
             {sportsTabList[value]?.icon}
           </Box>
-          <Box pl={2} py={0.5}>
+          <Box pl={0.5} py={0.5}>
             {sportsTabList[value]?.name}
           </Box>
         </Grid>
-        <Grid item xs={0} pl={2} py={0.5} lg={2}>
-          1
-        </Grid>
-        <Grid item xs={0} pl={2} py={0.5} lg={2}>
-          x
-        </Grid>
-        <Grid item xs={0} pl={2} py={0.5} lg={2}>
-          2
+        <Grid
+          container
+          lg={5.4}
+          maxWidth={{ lg: 356, xl: 700 }}
+          ml={{
+            lg: "auto",
+          }}
+          pr={{ lg: 2 }}
+          display="flex"
+          alignItems={"center"}
+        >
+          <Grid item xs={0} pl={2} py={0.5} lg={4}>
+            1
+          </Grid>
+          <Grid item xs={0} pl={2} py={0.5} lg={4}>
+            X
+          </Grid>
+          <Grid item xs={0} pl={2} py={0.5} lg={4}>
+            2
+          </Grid>
         </Grid>
       </Grid>
       {activeEventList.map((item) => (
         <Match matches={item} />
       ))}
-    </div>
+    </Box>
   );
 };
 

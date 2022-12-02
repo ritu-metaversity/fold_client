@@ -15,11 +15,7 @@ interface VerifyPayload {
   otp: number;
   contact: string;
 }
-interface ChangePasswordPayload {
-  newPassword: string;
-  oldPassword: string;
-  confirmPassword: string;
-}
+
 export const authServices = {
   login: async (data: LoginPayload) => {
     const params = {

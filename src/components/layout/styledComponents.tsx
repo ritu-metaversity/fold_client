@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Box, Button } from "@mui/material";
+import { Box, Button, ListSubheader } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const CenterBox = styled(Box)`
@@ -23,7 +23,11 @@ export const TopNavLinks = styled(Link)`
     border-bottom: 2px solid #fdcf13;
   }
 `;
-
+export const SidebarHeader = styled(ListSubheader)`
+  padding: 0;
+  color: #fdcf13;
+  text-decoration: underline;
+`;
 export const AnnouncementBox = styled(Box)`
   flex: 1;
   background-color: #70315670;

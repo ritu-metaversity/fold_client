@@ -60,7 +60,7 @@ export function BootstrapDialogTitle(props: DialogTitleProps) {
   );
 }
 
-export default function CustomizedDialogStack({}) {
+export default function CustomizedDialogStack() {
   const [open, setOpen] = React.useState(false);
   const [tab, setTab] = React.useState(false);
 

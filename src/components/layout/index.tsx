@@ -2,7 +2,7 @@ import Header, { drawerWidth } from "./header";
 
 import React, { FC, PropsWithChildren } from "react";
 import Footer from "./Footer";
-import {  Grid, Toolbar, useMediaQuery } from "@mui/material";
+import { Box, Toolbar, useMediaQuery } from "@mui/material";
 import { Announcement } from "./Announcement";
 import BoxWithTitle from "../common/BoxWithTitle";
 import { BlinkImage } from "./styledComponents";
@@ -13,8 +13,8 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div>
       <Header></Header>
-      <Grid
-        container
+      <Toolbar />
+      <Box
         component="main"
         sx={{
           flexGrow: 1,
@@ -26,23 +26,38 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
           mt: { lg: 1.2 },
         }}
       >
-        <Grid
-          item
-          xs={12}
-          lg={9.5}
-          sx={{ display: "flex", gap: 0.5, flexDirection: "column" }}
+        <Box
+          sx={{
+            display: "flex",
+            // flexGrow: 1,
+            maxWidth: {
+              lg: "calc(100% - 250px)",
+              xl: "calc(100% - 300px)",
+            },
+            gap: 0.5,
+            flexDirection: "column",
+          }}
         >
-          <Toolbar />
           {!matches && <Announcement />}
           {children}
           <Footer />
-        </Grid>
-        <Grid item xs={0} lg={2.4} p={0.5} gap={0.5}>
-          <Toolbar />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            width: { xs: 0, lg: 250, xl: 300 },
+            boxSizing: "content-box"
+          }}
+          // xs={0}
+          // lg={3}
+          p={0.5}
+          gap={5}
+        >
           <BoxWithTitle title="New Launched">
             <BlinkImage src="/assets/lc/ab3.jpg" alt="" />
           </BoxWithTitle>
-          <BoxWithTitle title="Our Casino" >
+          <BoxWithTitle title="Our Casino">
             <BlinkImage src="/assets/lc/ab3.jpg" alt="" />
             <BlinkImage src="/assets/lc/abj.jpg" alt="" />
             <BlinkImage src="/assets/lc/card32.jpg" alt="" />
@@ -52,8 +67,8 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
             <BlinkImage src="/assets/lc/dum10.jpg" alt="" />
             <BlinkImage src="/assets/lc/kbc.jpg" alt="" />
           </BoxWithTitle>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
       {/* <Footer/> */}
     </div>
   );

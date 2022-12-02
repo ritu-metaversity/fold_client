@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Drawer from "@mui/material/Drawer";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
@@ -8,11 +8,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
-import { Box } from "@mui/material";
-import { Icon } from "./styledComponents";
+import { Box, Collapse } from "@mui/material";
+import { Icon, SidebarHeader } from "./styledComponents";
 import { drawerWidth, topNavHeight } from "./header";
-import BoxWithTitle from "../common/BoxWithTitle";
-import { BoxWithTitleBox } from "../common/styledComponents";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { colorHex } from "../../constants";
 
 interface Props extends React.PropsWithChildren {
   /**
@@ -23,59 +23,120 @@ interface Props extends React.PropsWithChildren {
   handleDrawerToggle: () => void;
   window?: () => Window;
 }
-const drawer = (
-  <Box p={1} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-    <Icon src="/assets/images/icon.png" alt="ico" />
-    <BoxWithTitle title="Upcoming Fixure">
+
+
+const list = [
+  "All mail",
+  "Trash",
+  "Spam",
+  "All mail",
+  "Trash",
+  "Spam",
+  "All mail",
+  "Trash",
+  "Spam",
+  "All mail",
+  "Trash",
+  "Spam",
+  "All mail",
+  "Trash",
+  "Spam",
+  "All mail",
+  "Trash",
+  "Spam",
+  "All mail",
+  "Trash",
+  "Spam",
+  "All mail",
+  "Trash",
+  "Spam",
+  "All mail",
+  "Trash",
+  "Spam",
+  "All mail",
+  "Trash",
+  "Spam",
+].map((text, index) => (
+  <ListItem key={text + index} disablePadding>
+    <ListItemButton sx={{ color: "text.secondary" }}>
+      <ListItemIcon>
+        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+      </ListItemIcon>
+      <ListItemText primary={text} />
+    </ListItemButton>
+  </ListItem>
+));
+const Drawers = () => {
+  const [open, setOpen] = useState([false, false, false, false, false]);
+  const handleClick = (index: number) => {
+    const openList = [...open];
+    openList[index] = !open[index];
+    setOpen(openList);
+  };
+  return (
+    <Box p={1} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      <Icon src="/assets/images/icon.png" alt="ico" />
+      {/* <BoxWithTitle title="Upcoming Fixure">
       <Box >
       
       ksdflajsdlfkjasldfkjlaskdj
       </Box>
-    </BoxWithTitle>
-    <BoxWithTitleBox sx={{overflow:"scroll"}}>
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+    </BoxWithTitle>*/}
+      <Box
+        
+        sx={{
+          bgcolor: colorHex.bg7,
+          overflow: "auto",
+          height: "100%",
+          position: "relative",
+          maxHeight: "100vh",
+        }}
+      >
+        <List sx={{p:0, m:0}}>
+          <SidebarHeader>
+            <ListItemButton onClick={() => handleClick(0)}>
+              <ListItemText primary={"Exchange"} />
+              {open[0] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <List sx={{overflow:"scroll",height:"100%"}}>
-        {[
-          "All mail",
-          "Trash",
-          "Spam",
-          "All mail",
-          "Trash",
-          "Spam",
-          "All mail",
-          "Trash",
-          "Spam",
-          "All mail",
-          "Trash",
-          "Spam",
-          "All mail",
-          "Trash",
-          "Spam",
-        ].map((text, index) => (
-          <ListItem key={text+index} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+          </SidebarHeader>
+          <Collapse in={open[0]}>{list}</Collapse>
+          <SidebarHeader>
+            <ListItemButton onClick={() => handleClick(1)}>
+              <ListItemText primary={"Live Casino"} />
+
+              {open[1] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </BoxWithTitleBox>
-  </Box>
-);
+          </SidebarHeader>
+          <Collapse in={open[1]}>{list}</Collapse>
+          <SidebarHeader>
+            <ListItemButton onClick={() => handleClick(2)}>
+              <ListItemText primary={"Indian Games"} />
+
+              {open[2] ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+          </SidebarHeader>
+          <Collapse in={open[2]}>{list}</Collapse>
+          <SidebarHeader>
+            <ListItemButton onClick={() => handleClick(3)}>
+              <ListItemText primary={"Virtual Casino"} />
+
+              {open[3] ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+          </SidebarHeader>
+          <Collapse in={open[3]}>{list}</Collapse>
+          <SidebarHeader>
+            <ListItemButton onClick={() => handleClick(4)}>
+              <ListItemText primary={"Others"} />
+
+              {open[4] ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+          </SidebarHeader>
+          <Collapse in={open[4]}>{list}</Collapse>
+        </List>
+      </Box>
+    </Box>
+  );
+};
 
 const Sidebar = (props: Props) => {
   const { window } = props;
@@ -110,7 +171,8 @@ const Sidebar = (props: Props) => {
           },
         }}
       >
-        {drawer}
+        {/* {drawer} */}
+        <Drawers />
       </Drawer>
       <Drawer
         variant="permanent"
@@ -120,12 +182,13 @@ const Sidebar = (props: Props) => {
             boxSizing: "border-box",
             width: drawerWidth,
             mt: { lg: topNavHeight },
-            overflow: "hidden"
+            overflow: "hidden",
           },
         }}
         open
       >
-        {drawer}
+        <Drawers />
+        {/* {drawer} */}
       </Drawer>
     </Box>
   );
