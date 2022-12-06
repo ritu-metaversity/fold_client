@@ -15,6 +15,7 @@ import UserBox from "./user/UserBox";
 import { colorHex } from "../../constants";
 
 export const drawerWidth = 220;
+export const drawerWidthXl = 270;
 
 interface Props extends React.PropsWithChildren {
   /**
@@ -72,8 +73,11 @@ export default function Header(props: Props) {
         position="fixed"
         elevation={0}
         sx={{
-          width: { lg: `calc(100% - ${drawerWidth}px)` },
-          ml: { lg: `${drawerWidth}px` },
+          width: {
+            lg: `calc(100% - ${drawerWidth}px)`,
+            xl: `calc(100% - ${drawerWidthXl}px)`,
+          },
+          ml: { lg: `${drawerWidth}px`, xl: `${drawerWidthXl}px` },
           px: 0,
           mt: { lg: topNavHeight },
           [theme.breakpoints.down("lg")]: {

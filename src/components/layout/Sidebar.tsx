@@ -10,7 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
 import { Box, Collapse } from "@mui/material";
 import { Icon, SidebarHeader } from "./styledComponents";
-import { drawerWidth, topNavHeight } from "./header";
+import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { colorHex } from "../../constants";
 
@@ -89,7 +89,7 @@ const Drawers = () => {
           overflow: "auto",
           height: "100%",
           position: "relative",
-          maxHeight: "100vh",
+          maxHeight: "calc(100vh - 180px)",
         }}
       >
         <List sx={{p:0, m:0}}>
@@ -148,7 +148,7 @@ const Sidebar = (props: Props) => {
     <Box
       component="nav"
       sx={{
-        width: { lg: drawerWidth },
+        width: { lg: drawerWidth, xl: drawerWidthXl },
         mt: { lg: topNavHeight },
         flexShrink: { lg: 0 },
       }}
@@ -167,7 +167,7 @@ const Sidebar = (props: Props) => {
           display: { xs: "block", lg: "none" },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
-            width: drawerWidth,
+            width: { lg: drawerWidth, xl: drawerWidthXl },
           },
         }}
       >
@@ -180,7 +180,7 @@ const Sidebar = (props: Props) => {
           display: { xs: "none", lg: "block" },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
-            width: drawerWidth,
+            width: { lg: drawerWidth, xl: drawerWidthXl },
             mt: { lg: topNavHeight },
             overflow: "hidden",
           },
