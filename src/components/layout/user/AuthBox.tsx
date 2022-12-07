@@ -19,7 +19,8 @@ import { FaInfo } from "react-icons/fa"
 import { useFormik } from "formik";
 import { authServices } from "../../../utils/api/auth/services";
 import { UserContext } from "../../../App";
-export function AuthBox({}) {
+
+export function AuthBox() {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const { setIsSignedIn, setUser } = useContext(UserContext);

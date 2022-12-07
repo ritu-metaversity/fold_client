@@ -75,7 +75,7 @@ const Sports = () => {
         setValue={setValue}
         sports={activeSportList}
       />
-      <Grid container display={{ xs: "none", lg: "flex" }} bgcolor={color}>
+      <Grid container display={{ xs: "none", lg: "flex" }} color="white" bgcolor={color}>
         <Grid
           item
           xs={6.6}

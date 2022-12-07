@@ -1,5 +1,4 @@
 import { ApiResource } from "../apiService";
-type resourceKeys =  'LOGIN' | 'SIGN_UP';
 export const authResourcs: {
   [x: string]: ApiResource;
 } = {

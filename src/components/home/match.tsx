@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { colorHex } from "../../constants";
-import { WhiteForNull } from "./styledComponents";
 
 interface MatchInterface {
   matchName: string;
@@ -30,39 +30,40 @@ const buttonGridProps = {
 };
 
 const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ]
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 const getDay = (date: string) => {
-  const now = new Date()
-  const dat = new Date(date)
+  const now = new Date();
+  const dat = new Date(date);
   const nowDate = now.getUTCDate();
   const datDate = dat.getUTCDate();
-  console.log(nowDate, datDate)
+  console.log(nowDate, datDate);
   if (nowDate === datDate) return "Today";
-  now.setDate(nowDate + 1)
+  now.setDate(nowDate + 1);
   if (now.getUTCDate() === datDate) return "Tomorrow";
-  
-  return days[dat.getDay()];;
-}
+
+  return days[dat.getDay()];
+};
 const getTimeInMIn = (date: string) => {
   const dat = new Date(date);
   if (!date) return "";
-  let hours:string|number = dat.getUTCHours()
+  let hours: string | number = dat.getUTCHours();
   hours = (hours < 10 ? "0" : "") + hours;
 
   let mins: string | number = dat.getUTCMinutes();
   mins = (mins < 10 ? "0" : "") + mins;
   return hours + ":" + mins;
-}
+};
 
 const ButtonPropps = {
   sx: {
+    fullWidth: true,
     minWidth: "",
     fontSize: "0.9rem",
     p: { xs: 0.5, lg: 0 },
@@ -74,14 +75,17 @@ const ButtonPropps = {
 };
 
 const Match = ({ matches }: Props) => {
+  const navigate = useNavigate();
   return (
     <Grid
       container
+      onClick={() => navigate("/sports/details")}
       bgcolor={{ xs: colorHex.bg2, lg: colorHex.bg1 }}
       p={{ xs: 0.5, lg: 0 }}
+      sx={{ cursor: "pointer" }}
       m={{ xs: 0.5, lg: 0 }}
       gap={{ xs: 0.5, lg: 0 }}
-      borderBottom={{ xs: "", lg: "1px solid gray" }}
+      borderBottom={{ xs: "", lg: "1px solid rgba(60,68,75)" }}
     >
       <Grid
         item

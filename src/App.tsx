@@ -10,6 +10,7 @@ import Home from "./components/home";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { SnackbarUtilsConfigurator } from "./components/layout/snackBarUtil";
 import { SnackbarProvider } from "notistack"
+import Pages from "./components/pages";
 
 const font =  '"Noto Sans"';
 const theme = createTheme({
@@ -110,7 +111,7 @@ function App() {
             value={{ isSignedIn, user, setIsSignedIn, setUser }}
           >
             <Layout>
-              <Home />
+          <Pages />
             </Layout>
           </UserContext.Provider>
         </div>

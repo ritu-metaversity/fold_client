@@ -1,8 +1,8 @@
-import Header, { drawerWidth } from "./header";
+import Header, { drawerWidth, drawerWidthXl } from "./header";
 
 import React, { FC, PropsWithChildren } from "react";
 import Footer from "./Footer";
-import { Box, Grid, Toolbar, useMediaQuery } from "@mui/material";
+import { Box, Toolbar, useMediaQuery } from "@mui/material";
 import { Announcement } from "./Announcement";
 import BoxWithTitle from "../common/BoxWithTitle";
 import { BlinkImage } from "./styledComponents";
@@ -20,9 +20,9 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
           flexGrow: 1,
           // p: 3,
           zIndex: -10,
-          ml: { lg: `${drawerWidth}px` },
+          ml: { lg: `${drawerWidth}px`, xl: `${drawerWidthXl}px` },
           display: "flex",
-          width: { lg: `calc(100% - ${drawerWidth}px)` },
+          width: { lg: `calc(100% - ${drawerWidth}px)`, xl : `calc(100% - ${drawerWidthXl}px)`  },
           mt: { lg: 1.2 },
         }}
       >
@@ -44,8 +44,9 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
         </Box>
         <Box
           sx={{
-            display: "flex",
+            display: { xs: "none", lg: "flex" },
             flexDirection: "column",
+
             width: { xs: 0, lg: 250, xl: 300 },
             boxSizing: "content-box"
           }}
