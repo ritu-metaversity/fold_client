@@ -1,95 +1,71 @@
-import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
+import { theme } from "./utils/theme";
+import React, {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import "./App.css";
 import Layout from "./components/layout";
-import {
-  createTheme,
-  ThemeProvider
-} from "@mui/material";
-import Home from "./components/home";
-
+import { ThemeProvider } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { SnackbarUtilsConfigurator } from "./components/layout/snackBarUtil";
-import { SnackbarProvider } from "notistack"
-
-const font =  '"Noto Sans"';
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 580,
-      md: 768,
-      lg: 1280,
-      xl: 1600,
-    }
-  },
-  palette: {
-    mode: "dark",
-    background: {
-      default: "#23292D",
-      paper: "#17191C",
-    },
-    primary: {
-      main: "#fdcf13",
-    },
-    secondary: {
-      main: "#03B37F",
-    },
-  },
-  typography: {
-    fontFamily: font,
-    button: {
-      textTransform: "none"
-    }
-  },
-  components: {
-    MuiToolbar: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "#23292D",
-        },
-      },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          border: "none !important",
-          backgroundColor: "#23292D",
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {},
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          borderRadius: 0,
-        },
-      },
-    },
-  },
-});
+import { SnackbarProvider } from "notistack";
+import Pages from "./components/pages";
+import { userServices } from "./utils/api/user/services";
 
 interface UserContextType {
-  setIsSignedIn: Dispatch<SetStateAction<boolean>> | null;
+  setIsSignedIn: Dispatch<SetStateAction<boolean|null>> | null;
   setUser: Dispatch<SetStateAction<any>> | null;
-  isSignedIn: boolean;
+  isSignedIn: boolean|null;
   user: any;
+  stakes: { [x: string]: number };
 }
 
+const defaultStake = {
+  stack1: 0,
+  stack2: 0,
+  stack3: 0,
+  stack4: 0,
+  stack5: 0,
+  stack6: 0,
+  stack7: 0,
+  stack8: 0,
+  stack9: 0,
+  stack10: 0,
+};
 export const UserContext = createContext<UserContextType>({
-  isSignedIn: false,
+  isSignedIn: null,
   user: null,
   setIsSignedIn: null,
   setUser: null,
+  stakes: defaultStake,
 });
+
+
 function App() {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState<null|boolean>(null);
   const [user, setUser] = useState(null);
+
+  const [stakes, setButtonValue] = React.useState<{ [x: string]: number }>(
+    defaultStake
+  );
+
+  const handleChange = (e: any) => {
+    const buttons = { ...stakes };
+    setButtonValue({ ...buttons, [e.target.name]: e.target.value });
+  };
+
+  const getButtonValue = async () => {
+    const { response } = await userServices.getButtonValue();
+    if (response?.data) {
+      setButtonValue(response.data);
+    }
+  };
+
   useEffect(() => {
-    const user = localStorage.getItem("user")
+    const user = localStorage.getItem("user");
     if (user) {
       setUser(JSON.parse(user));
       setIsSignedIn(true);
@@ -97,20 +73,25 @@ function App() {
       setUser(null);
       setIsSignedIn(false);
     }
-    return () => {
+    return () => {};
+  }, []);
 
-    }
-  }, [])
-  
+  useEffect(() => {
+    if (isSignedIn) getButtonValue();
+    return () => {
+      setButtonValue(defaultStake);
+    };
+  }, [isSignedIn]);
+
   return (
     <ThemeProvider theme={theme}>
       <SnackbarProvider autoHideDuration={1500}>
         <div className="App">
           <UserContext.Provider
-            value={{ isSignedIn, user, setIsSignedIn, setUser }}
+            value={{ stakes,isSignedIn, user, setIsSignedIn, setUser }}
           >
             <Layout>
-              <Home />
+              <Pages />
             </Layout>
           </UserContext.Provider>
         </div>

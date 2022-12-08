@@ -7,14 +7,16 @@ import CssBaseline from "@mui/material/CssBaseline";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import { CenterBox, IconSmall, TopNavLinks } from "./styledComponents";
+import { CenterBox, Icon, IconSmall, TopNavLinks } from "./styledComponents";
 import {  Divider, useMediaQuery, useTheme } from "@mui/material";
 import Sidebar from "./Sidebar";
 import { UserContext } from "../../App";
 import UserBox from "./user/UserBox";
 import { colorHex } from "../../constants";
-
+import { useLocation, useNavigate } from "react-router-dom";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 export const drawerWidth = 220;
+export const drawerWidthXl = 270;
 
 interface Props extends React.PropsWithChildren {
   /**
@@ -24,17 +26,25 @@ interface Props extends React.PropsWithChildren {
   window?: () => Window;
 }
 
+
+const linksWithoutSideBar = ["/report/accountstatement"];
+
 export const topNavHeight = "2.5rem";
 export default function Header(props: Props) {
   const theme = useTheme();
   const value = React.useContext(UserContext);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+const nav = useNavigate()
+  const loc = useLocation();
+  const notShowSidebar = linksWithoutSideBar.includes(loc.pathname);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const matches = useMediaQuery("(min-width:1200px)");
+  const matches = useMediaQuery("(min-width:1280px)");
+  const drawerWidthLocal = notShowSidebar ? 0:drawerWidth  ;
+  const drawerWidthXlLocal = notShowSidebar ?0: drawerWidthXl ;
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -72,8 +82,11 @@ export default function Header(props: Props) {
         position="fixed"
         elevation={0}
         sx={{
-          width: { lg: `calc(100% - ${drawerWidth}px)` },
-          ml: { lg: `${drawerWidth}px` },
+          width: {
+            lg: `calc(100% - ${drawerWidthLocal}px)`,
+            xl: `calc(100% - ${drawerWidthXlLocal}px)`,
+          },
+          ml: { lg: `${drawerWidthLocal}px`, xl: `${drawerWidthXlLocal}px` },
           px: 0,
           mt: { lg: topNavHeight },
           [theme.breakpoints.down("lg")]: {
@@ -85,32 +98,40 @@ export default function Header(props: Props) {
           className="toolbar-padding"
           sx={{
             gap: 1,
-            alignItems: "flex-start",
+            alignItems: !notShowSidebar ?"flex-start":"center",
             pt: 2,
             [theme.breakpoints.down("lg")]: {
               bgcolor: colorHex.bg3,
             },
+
           }}
         >
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { lg: "none" } }}
+            onClick={notShowSidebar? ()=>nav("/"):handleDrawerToggle}
+            sx={{ mx: 2, display: { lg: "none" } }}
           >
-            <MenuIcon />
+            {notShowSidebar ? <HomeRoundedIcon /> : < MenuIcon />}
           </IconButton>
+          {notShowSidebar && matches && <Box width={220} p={1}>
+            
+            <Icon src="/assets/images/icon.png" alt="ico" />
+            </Box>
+          }
           <IconSmall src="/assets/images/icon.png" />
           {matches && <Announcement />}
           {value?.isSignedIn ? <UserBox /> : <AuthBox />}
         </Toolbar>
         <Divider sx={{ p: 0, borderBottomWidth: 2 }} />
       </AppBar>
-      <Sidebar
-        mobileOpen={mobileOpen}
-        handleDrawerToggle={handleDrawerToggle}
-      />
+      {!notShowSidebar && (
+        <Sidebar
+          mobileOpen={mobileOpen}
+          handleDrawerToggle={handleDrawerToggle}
+        />
+      )}
     </Box>
   );
 }

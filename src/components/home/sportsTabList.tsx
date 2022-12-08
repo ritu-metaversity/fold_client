@@ -17,6 +17,11 @@ export const sportsTabList = [
     color: "#20327B",
   },
   {
+    name: "Soccer",
+    icon: <IoIosFootball />,
+    color: "#03B37F",
+  },
+  {
     name: "Football",
     icon: <IoIosFootball />,
     color: "#03B37F",
