@@ -89,11 +89,11 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
         result["response"] = response.data;
       }
     });
-  if (result?.responseCode === 403) {
+  if (result?.error?.message === "JWT Token Expired") {
     localStorage.clear();
     snackBarUtil.error("Session changed. Please login again!");
     alert("Session changed. Please login again!");
-    window.location.replace("/sign-in");
+    window.location.replace("/");
 
     // Navigate({ to: "/sign-in", replace: true });
   }

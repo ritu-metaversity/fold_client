@@ -13,10 +13,13 @@ export const colorHex = {
     3: "#F994BAA3",
     hover: "#E16F9A",
   },
+  borderLine: "#3C444B",
   back: {
     1: "#72BBEF",
     2: "#72BBEFCC",
     3: "#72BBEFA3",
     hover: "#4FA1DC",
   },
+  gr2: "#03B37F52",
+  gr1: "#03B37F",
 };
