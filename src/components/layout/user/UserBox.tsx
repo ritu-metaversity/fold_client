@@ -20,7 +20,7 @@ const UserBox = () => {
 
   return (
     <>
-    <UserContainer color="text.secondary" alignItems={"center"}>
+    <UserContainer sx={{flexDirection: {xs:"column",lg:"row"}}} color="text.secondary" alignItems={"center"}>
       <Typography my="auto">pt : 0 | 0</Typography>
       <Box
         display="flex"
@@ -28,13 +28,14 @@ const UserBox = () => {
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
-        gap={2}
+          gap={{xs:1,lg:1.5}}
+          fontSize={"0.8rem" }
         onClick={handleClick}
       >
-        <Avatar color="gray.100"></Avatar>
+        <Avatar color="gray.100" sx={{maxWidth:{xs:"1rem",lg:"3rem"},maxHeight:{xs:"1rem",lg:"3rem"}}} ></Avatar>
 
         {user?.username}
-        <KeyboardArrowDownOutlined />
+        <KeyboardArrowDownOutlined sx={{ml:-0.5}} fontSize="small" />
       </Box>
       
     </UserContainer>

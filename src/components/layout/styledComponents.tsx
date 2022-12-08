@@ -37,7 +37,7 @@ export const AnnouncementBox = styled(Box)`
   justify-content: space-between;
 `;
 export const Icon = styled.img`
-  max-width: 300px;
+  max-width: 250px;
   width: 100%;
 `;
 export const IconSmall = styled.img`
@@ -45,7 +45,7 @@ export const IconSmall = styled.img`
   width: 100%;
   margin-left: -10px;
   margin-bottom: -10px;
-  @media (min-width: 1200px) {
+  @media (min-width: 1280px) {
     display: none !important;
   }
 `;
@@ -60,4 +60,5 @@ export const UserContainer = styled(Box)({
   alignItems: "flex-start",
   marginLeft: "auto",
   gap: 10,
+  
 });

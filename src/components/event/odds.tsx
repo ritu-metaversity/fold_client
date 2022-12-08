@@ -1,10 +1,12 @@
 import {  Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { colorHex } from "../../constants";
 
 interface Props {
-  title: any | string ;
+  title: any | string;
+  setBetId: Dispatch<SetStateAction<number>>;
 }
+
 const gridProps = {
   item: true,
   height: "38px",
@@ -36,8 +38,13 @@ const values = (
   </>
 );
 
-const Odds = ({ title }: Props) => {
-  
+const Odds = ({ title,setBetId }: Props) => {
+  const handleClick = () => {
+    setBetId(1)
+  }
+  const handleClick2 = () => {
+    setBetId(2);
+  };
   return (
     <Grid container>
       <Grid
@@ -65,22 +72,22 @@ const Odds = ({ title }: Props) => {
         alignItems={"center"}
         gap={{ xs: "1%", md: "1%", lg: "1%" }}
       >
-        <Grid {...gridProps2} bgcolor={colorHex.back[3]}>
+        <Grid {...gridProps2} onClick={handleClick} bgcolor={colorHex.back[3]}>
           {values}{" "}
         </Grid>
-        <Grid {...gridProps2} bgcolor={colorHex.back[2]}>
+        <Grid {...gridProps2} onClick={handleClick} bgcolor={colorHex.back[2]}>
           {values}{" "}
         </Grid>
-        <Grid {...gridProps2} bgcolor={colorHex.back[1]}>
+        <Grid {...gridProps2} onClick={handleClick} bgcolor={colorHex.back[1]}>
           {values}{" "}
         </Grid>
-        <Grid {...gridProps} bgcolor={colorHex.lay[1]}>
+        <Grid {...gridProps} onClick={handleClick2} bgcolor={colorHex.lay[1]}>
           {values}{" "}
         </Grid>
-        <Grid {...gridProps} bgcolor={colorHex.lay[2]}>
+        <Grid {...gridProps} onClick={handleClick2} bgcolor={colorHex.lay[2]}>
           {values}{" "}
         </Grid>
-        <Grid {...gridProps} bgcolor={colorHex.lay[3]}>
+        <Grid {...gridProps} onClick={handleClick2} bgcolor={colorHex.lay[3]}>
           {values}{" "}
         </Grid>
       </Grid>

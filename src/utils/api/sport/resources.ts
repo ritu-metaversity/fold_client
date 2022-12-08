@@ -5,8 +5,16 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     URL: "/enduser/active-sport-list/",
     METHOD: "POST",
   },
+  GET_ACTIVE_SPORTS_LIST_OPEN: {
+    URL: "/enduser/sport-with-active-matches-open",
+    METHOD: "POST",
+  },
   GET_EVENT_FROM_SPORTS: {
     URL: "/enduser/active-sport-match-wise",
+    METHOD: "POST",
+  },
+  GET_EVENT_FROM_SPORTS_OPEN: {
+    URL: "/enduser/active-sport-match-wise-open",
     METHOD: "POST",
   },
   GET_EVENT_MARKET: {

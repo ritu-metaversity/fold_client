@@ -12,7 +12,6 @@ import { colorHex } from "../../constants";
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
-  marginBlock: "6px",
   border: `1px solid ${theme.palette.divider}`,
   "&:not(:last-child)": {
     borderBottom: 0,
@@ -32,7 +31,7 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
 
 ))(({ theme }) => ({
   borderRadius: "10px 10px 0 0", 
-  marginTop: 5,
+  marginTop: 1,
   minHeight:"25px",
   backgroundColor:
     theme.palette.mode === "dark" ? colorHex.bg2 : "rgba(0, 0, 0, .03)",

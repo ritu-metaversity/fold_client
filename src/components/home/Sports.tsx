@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
 // import { grey } from "@mui/material/colors";
@@ -6,12 +6,15 @@ import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "./sportsTabList";
 import { ScrollableTabsButtonVisible } from "./ScrollableTabsButtonVisible";
 import Match from "./match";
+import { UserContext } from "../../App";
 
 const Sports = () => {
   const [value, setValue] = React.useState(0);
+  const { isSignedIn} = useContext(UserContext)
   const [activeSportList, setActiveSportList] = useState<any>(null);
   const [activeEventList, setActiveEventList] = useState([]);
   useEffect(() => {
+    if (isSignedIn === null) return;
     const getList = async () => {
       const { response } = await sportServices.activeSportList();
       if (response?.data) {
@@ -23,50 +26,71 @@ const Sports = () => {
         setActiveSportList(data1);
       }
     };
-    getList();
-  }, []);
+    const getListOpen = async () => {
+      const { response } = await sportServices.activeSportListOpen();
+      if (response?.data) {
+        const data = [...response.data];
+        const data1 = data.map((item) => {
+          const sport = sportsTabList.find((i) => i.name === item.sportName);
+          return { ...sport, ...item };
+        });
+        setActiveSportList(data1);
+      }
+    };
+    if (isSignedIn) {
+      
+      getList();
+    } else {
+      getListOpen()
+    }
+  }, [isSignedIn]);
 
   useEffect(() => {
     const getNewEvent = async () => {
       if (!activeSportList) return;
       const { sportId } = activeSportList[value];
-      console.log(sportId);
       if (!sportId) return;
 
       const { response } = await sportServices.activeEventFromSport(sportId);
 
       if (response?.data) {
-        // setActiveEventList(response.data);
         if (response?.data?.length > 0) {
-          // const events = response?.data.map((item: any) => item.eventId);
-          // const { response: response1 } = await sportServices.matchOdds(events);
-          // console.log(response1);
           setActiveEventList(response.data);
-          // if (response1?.data?.length > 0) {
-          //   const newEventList = response.data.map((event: any) => {
-          //     const match = response1.data.find(
-          //       (i: any) => i.matchId === event.eventId
-          //     );
-          //     event["inPlay"] = match?.inPlay;
-          //     event["runner"] = match?.runner;
-          //     return event;
-          //   });
-          //   setActiveEventList(newEventList);
-          //   console.log(newEventList);
-          // }
         }
       } else {
         setActiveEventList([]);
       }
     };
-    getNewEvent();
+        const getNewEventOpen = async () => {
+          if (!activeSportList) return;
+          const { sportId } = activeSportList[value];
+          if (!sportId) return;
+
+          const { response } = await sportServices.activeEventFromSportOpen(
+            sportId
+          );
+
+          if (response?.data) {
+            if (response?.data?.length > 0) {
+              setActiveEventList(response.data);
+            }
+          } else {
+            setActiveEventList([]);
+          }
+        };
+    if (isSignedIn) {
+      
+      getNewEvent();
+    } else {
+      getNewEventOpen()
+    }
   }, [value, activeSportList]);
 
   if (!(activeSportList?.length > 0)) {
     return <div></div>;
   }
   const color = activeSportList[value]?.color;
-
+console.log()
   return (
     <Box color="text.secondary">
       <ScrollableTabsButtonVisible
@@ -75,7 +99,9 @@ const Sports = () => {
         setValue={setValue}
         sports={activeSportList}
       />
-      <Grid container display={{ xs: "none", lg: "flex" }} color="white" bgcolor={color}>
+      <Grid container display={{ xs: "none", lg: "flex" }} color="white"
+        fontSize= "0.9rem"
+        bgcolor={color}>
         <Grid
           item
           xs={6.6}
@@ -84,10 +110,10 @@ const Sports = () => {
           display="flex"
         >
           <Box pl={2} pt={0.5}>
-            {sportsTabList[value]?.icon}
+            {activeSportList[value]?.icon}
           </Box>
           <Box pl={0.5} py={0.5}>
-            {sportsTabList[value]?.name}
+            {activeSportList[value]?.name}
           </Box>
         </Grid>
         <Grid

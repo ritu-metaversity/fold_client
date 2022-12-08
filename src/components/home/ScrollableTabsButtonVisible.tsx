@@ -21,12 +21,13 @@ export function ScrollableTabsButtonVisible({
     setValue(newValue);
   };
 
-  const matches = useMediaQuery("(min-width:1200px)");
+  const matches = useMediaQuery("(min-width:1280px)");
 
   return (
     <Box
       sx={{
         flexGrow: 1,
+        mt: 1,
         bgcolor: "background.paper",
       }}
     >
@@ -43,19 +44,23 @@ export function ScrollableTabsButtonVisible({
           },
           bgcolor: colorHex.bg1,
           py: 0,
-          minHeight: "40px",
+          minHeight: {
+            xs: "44px",
+            lg: "30px",
+          },
         }}
       >
         {sports.map((s, index) => (
           <Tab
             label={s.name}
             icon={s.icon}
+            key={s.name+s.color}
             iconPosition={matches ? "start" : "top"}
             sx={{
               py: 0,
-              my: -2,
+              my: { xs: -1.5, lg: -2.5 },
               bgcolor: index === value ? color : "",
-              borderLeft: index !== 0 ? "0.5px solid #d9d9d9" : "",
+              borderLeft: index !== 0 ? "0.5px solid rgb(60,68,75)" : "",
             }}
           />
         ))}
