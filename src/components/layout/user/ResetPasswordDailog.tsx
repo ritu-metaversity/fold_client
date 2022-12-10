@@ -7,8 +7,9 @@ import { MenuItem , TextField} from "@mui/material";
 import { colorHex } from "../../../constants";
 import { userServices } from "../../../utils/api/user/services";
 // import { Box } from "@mui/system";
-import { BootstrapDialog, BootstrapDialogTitle } from "./StackDailog";
 import { useFormik } from "formik";
+import { BootstrapDialog, BootstrapDialogTitle } from "../../common/Dailog2";
+import { DialogTitleStyledTypo } from "./styledComponents";
 
 export default function CustomizedDialogPassword() {
   const [open, setOpen] = React.useState(false);
@@ -43,7 +44,7 @@ export default function CustomizedDialogPassword() {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          <Typography color="primary.main">Set Button Value</Typography>
+          <DialogTitleStyledTypo>Change Password</DialogTitleStyledTypo>
         </BootstrapDialogTitle>
         <form onSubmit={handleSubmit}>
           <DialogContent
@@ -96,7 +97,8 @@ export default function CustomizedDialogPassword() {
               color="secondary"
               variant="contained"
               type="submit"
-              //   onClick={handleClick}
+              sx={{ color: "white" }}
+                // onClick={handleClick}
             >
               Change Password
             </Button>
@@ -106,3 +108,4 @@ export default function CustomizedDialogPassword() {
     </>
   );
 }
+  

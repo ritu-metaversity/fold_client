@@ -1,9 +1,10 @@
 import { Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { colorHex } from "../../constants";
 
 interface Props {
   title: any | string;
+  setBetId: Dispatch<SetStateAction<number>>;
 }
 const gridProps = {
   item: true,
@@ -12,6 +13,7 @@ const gridProps = {
   borderRadius: 1,
   sx: {
     "&:hover": {
+      cursor: "pointer",
       backgroundColor: colorHex.lay.hover,
     },
   },
@@ -21,6 +23,7 @@ const gridProps2 = {
   ...gridProps,
   sx: {
     "&:hover": {
+      cursor: "pointer",
       backgroundColor: colorHex.back.hover,
     },
   },
@@ -38,7 +41,15 @@ const values = (
   </>
 );
 
-const OddsOnlyTwo = ({ title }: Props) => {
+const OddsOnlyTwo = ({ title, setBetId }: Props) => {
+
+    const handleClick = () => {
+      setBetId(1);
+    };
+    const handleClick2 = () => {
+      setBetId(2);
+    };
+  
   return (
     <Grid
       container
@@ -73,8 +84,8 @@ const OddsOnlyTwo = ({ title }: Props) => {
         alignItems={"center"}
         gap={{ xs: "1.2%", md: "2%", lg: "2%" }}
       >
-        <Grid {...gridProps2}>{values} </Grid>
-        <Grid {...gridProps}>{values} </Grid>
+        <Grid {...gridProps2} onClick={handleClick}>{values} </Grid>
+        <Grid {...gridProps} onClick={handleClick2} >{values} </Grid>
         <Grid
           item
           xs={3.5}

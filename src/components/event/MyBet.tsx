@@ -22,8 +22,7 @@ interface Props {
 }
 
 const MyBet: FC<Props> = ({ bets }) => {
-
-    const [open, setOpen] = useState<boolean|string>(false);
+  const [open, setOpen] = useState<boolean | string>(false);
 
   if (!(Object.keys(bets)?.length > 0)) {
     return <></>;
@@ -39,15 +38,15 @@ const MyBet: FC<Props> = ({ bets }) => {
       {Object.keys(bets).map((betCategory) => (
         <Accordion
           expanded={open === betCategory}
-              onChange={handleChange(betCategory)}
-              disableGutters
-              square
+          onChange={handleChange(betCategory)}
+          disableGutters
+          square
           defaultExpanded
           sx={{
             "& :before": {
               display: "none",
-              },
-              m:0,
+            },
+            m: 0,
             color: "text.secondary",
           }}
         >
@@ -66,32 +65,38 @@ const MyBet: FC<Props> = ({ bets }) => {
               {betCategory} ({bets[betCategory].length})
             </AccordianSummaryTitle>
           </AccordionSummary>
-          <AccordionDetails sx={{ fontSize: "0.75rem", p: 0, mx: 0, my:1 }}>
-            {bets[betCategory].map((bet) => (
-              <Grid
-                container
-                p={1}
-                py={2}
-                borderLeft={`5px solid ${
-                  bet.type === "back" ? colorHex.back[1] : colorHex.lay[1]
-                } `}
-              >
-                <Grid item xs={6} textAlign="left">
-                  {bet.name}
-                </Grid>
-                <Grid item xs={3}>
-                  {bet.value}
-                </Grid>
-                <Grid item xs={3}>
-                  {bet.amount}
-                </Grid>
-              </Grid>
-            ))}
+          <AccordionDetails sx={{ fontSize: "0.75rem", p: 0, mx: 0, my: 1 }}>
+            {getMyBets(bets[betCategory])}
           </AccordionDetails>
         </Accordion>
       ))}
     </>
   );
 };
+
+export const getMyBets = (betList: any[]) =>
+  betList.map((bet) => (
+    <Grid
+      container
+      p={1}
+      py={2}
+      my={0.5}
+      fontSize="0.75rem"
+      borderLeft={`5px solid ${
+        bet.type === "back" ? colorHex.back[1] : colorHex.lay[1]
+      } `}
+    >
+      <Grid item xs={6} textAlign="left">
+        {bet.name}
+      </Grid>
+      <Grid item xs={3} textAlign="center" >
+        {bet.value}
+      </Grid>
+      <Grid item xs={3} textAlign="center">
+        {bet.amount}
+      </Grid>
+    </Grid>
+  ));
+
 
 export default MyBet;

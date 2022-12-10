@@ -12,11 +12,12 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
+// import Calendar from "react-calendar"
 import { Box } from "@mui/system";
 import React from "react";
 import { colorHex } from "../../constants";
-import { IconSmall } from "../layout/styledComponents";
 import { PdfIcon } from "./styledComponents";
+import DatePicker from "react-date-picker"
 
 const LabelText = styled(Typography)(({ theme }) => ({
   color: "text.secondary",
@@ -68,14 +69,17 @@ const Filter = () => {
           <LabelText>From</LabelText>
           <TextField
             size="small"
-            fullWidth={matches}
+            fullWidth
             aria-labelledby="from-date-label"
             type="date"
           />
         </Grid>
         <Grid item xs={6} pr={2} lg={1.5} textAlign="left">
           <LabelText>To</LabelText>
-          <TextField size="small" fullWidth={matches} type="date" />
+          <DatePicker/>
+          {/* <Calendar /> */}
+          {/* <TextField size="small"  type="date" />
+           */}
         </Grid>
         <Grid item xs={12} pr={2} lg={2}>
           <LabelText>Type</LabelText>

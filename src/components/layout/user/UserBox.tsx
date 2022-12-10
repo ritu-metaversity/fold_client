@@ -21,7 +21,7 @@ const UserBox = () => {
   return (
     <>
     <UserContainer sx={{flexDirection: {xs:"column",lg:"row"}}} color="text.secondary" alignItems={"center"}>
-      <Typography my="auto">pt : 0 | 0</Typography>
+      <Typography my="auto" fontSize="0.8rem" textAlign={"center"} fontWeight={700} whiteSpace="nowrap">pts : 0 | 0</Typography>
       <Box
         display="flex"
         alignItems={"center"}

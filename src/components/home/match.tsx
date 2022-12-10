@@ -113,9 +113,13 @@ const Match = ({ matches }: Props) => {
           ) : (
             <Box
               display="flex"
-                width={{ lg: 150 }}
-
-                sx={{ opacity: 0.6, pr:2,  borderRight: `1px solid ${colorHex.borderLine}` }}
+              width={{ lg: 150 }}
+              sx={{
+                opacity: 0.6,
+                pr: 2,
+                flexDirection: { xs: "column", lg: "row" },
+                borderRight: `1px solid ${colorHex.borderLine}`,
+              }}
               justifyContent={"space-between"}
             >
               <span>{getDay(matches.openDate)}</span>
