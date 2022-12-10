@@ -20,7 +20,7 @@ export const sportServices = {
     };
     return apiHandler(params);
   },
-  activeEventFromSportOpen: (sportId: number) => {
+  activeEventFromSportOpen: (sportId?: number) => {
     const params: ApiServiceInterface = {
       resource: sportsResourses.GET_EVENT_FROM_SPORTS_OPEN,
       data: { sportId },
@@ -38,6 +38,12 @@ export const sportServices = {
     const params: ApiServiceInterface = {
       resource: sportsResourses.GET_EVENT_ODDS,
       pathVars: { eventId },
+    };
+    return apiHandler(params);
+  },
+  leftMenu: () => {
+    const params: ApiServiceInterface = {
+      resource: sportsResourses.GET_LEFT_MENU_LIST,
     };
     return apiHandler(params);
   },

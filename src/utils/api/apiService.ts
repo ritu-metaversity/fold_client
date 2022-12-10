@@ -83,32 +83,22 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
   await apiService(args)
     .catch((error) => {
       result["error"] = error.response?.data;
+      console.log(error.response.status)
+      if (error.response?.status === 401) {
+        console.log("sd")
+        localStorage.clear();
+        snackBarUtil.error("Session changed. Please login again!");
+        alert("Session changed. Please login again!");
+        window.location.replace("/");
+      }
     })
     .then((response) => {
       if (response) {
         result["response"] = response.data;
       }
     });
-  if (result?.error?.message === "JWT Token Expired") {
-    localStorage.clear();
-    snackBarUtil.error("Session changed. Please login again!");
-    alert("Session changed. Please login again!");
-    window.location.replace("/");
 
-    // Navigate({ to: "/sign-in", replace: true });
-  }
   return result;
-  // if (result) {
-  //   return {
-  //     response: { ...result },
-  //     error: null,
-  //   };
-  // } else {
-  //   return {
-  //     error: { message: result?.message },
-  //     response: null,
-  //   };
-  // }
 };
 
 const apiSnackbarNotifications: (

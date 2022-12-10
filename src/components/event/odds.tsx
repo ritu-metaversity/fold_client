@@ -11,9 +11,11 @@ const gridProps = {
   item: true,
   height: "38px",
   xs: 1.9,
+  
   borderRadius: 1,
   sx: {
     "&:hover": {
+      cursor: "pointer",
       backgroundColor: colorHex.lay.hover,
     },
   },
@@ -22,6 +24,7 @@ const gridProps2 = {
   ...gridProps,
   sx: {
     "&:hover": {
+      cursor: "pointer",
       backgroundColor: colorHex.back.hover,
     },
   },
@@ -72,10 +75,10 @@ const Odds = ({ title,setBetId }: Props) => {
         alignItems={"center"}
         gap={{ xs: "1%", md: "1%", lg: "1%" }}
       >
-        <Grid {...gridProps2} onClick={handleClick} bgcolor={colorHex.back[3]}>
+        <Grid {...gridProps2}  bgcolor={colorHex.back[3]}>
           {values}{" "}
         </Grid>
-        <Grid {...gridProps2} onClick={handleClick} bgcolor={colorHex.back[2]}>
+        <Grid {...gridProps2}  bgcolor={colorHex.back[2]}>
           {values}{" "}
         </Grid>
         <Grid {...gridProps2} onClick={handleClick} bgcolor={colorHex.back[1]}>
@@ -84,10 +87,10 @@ const Odds = ({ title,setBetId }: Props) => {
         <Grid {...gridProps} onClick={handleClick2} bgcolor={colorHex.lay[1]}>
           {values}{" "}
         </Grid>
-        <Grid {...gridProps} onClick={handleClick2} bgcolor={colorHex.lay[2]}>
+        <Grid {...gridProps}  bgcolor={colorHex.lay[2]}>
           {values}{" "}
         </Grid>
-        <Grid {...gridProps} onClick={handleClick2} bgcolor={colorHex.lay[3]}>
+        <Grid {...gridProps}  bgcolor={colorHex.lay[3]}>
           {values}{" "}
         </Grid>
       </Grid>
