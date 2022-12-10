@@ -119,7 +119,7 @@ export function AuthBox() {
         <LoginButton
           variant="contained"
           sx={{
-            height: "2.5rem",
+            height: { xs:"2rem",lg: "2.5rem" },
           }}
           type="submit"
           onClick={() => {
@@ -128,7 +128,7 @@ export function AuthBox() {
             }
           }}
         >
-          Login
+          LOGIN
         </LoginButton>
       </form>
       <CustomizedDialogs title="Login" open={open} setOpen={setOpen}>

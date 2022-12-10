@@ -11,12 +11,14 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
   const nav = useNavigate()
   const logout = () => {
     localStorage.clear();
+    nav("/")
     if (setUser) {
       setUser(null);
     }
     if (setIsSignedIn) {
       setIsSignedIn(false);
     }
+    
   };
   return (
     <>
@@ -42,7 +44,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
 
         <CustomizedDialogPassword />
         <CustomizedDialogStack />
-        <MenuItem onClick={logout}>Logout</MenuItem>
+        <MenuItem onClick={logout}>Log out</MenuItem>
       </Menu>
     </>
   );

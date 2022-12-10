@@ -43,8 +43,8 @@ export function OddsNumberTitle() {
         gap="1%"
       >
         <Grid item xs={3.9}></Grid>
-        <Grid {...gridProps2}>Back</Grid>
-        <Grid {...gridProps}>Lay</Grid>
+        <Grid {...gridProps2} >Back</Grid>
+        <Grid {...gridProps}  >Lay</Grid>
       </Grid>
     </Grid>
   );

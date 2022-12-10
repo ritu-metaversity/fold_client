@@ -60,7 +60,7 @@ const nav = useNavigate()
           zIndex: 100,
         }}
       >
-        <TopNavLinks to="#" id={"top-nav-current"}>
+        <TopNavLinks to="/"  id={"top-nav-current"}>
           Exchange
         </TopNavLinks>
         <TopNavLinks to="#">Live Casino</TopNavLinks>

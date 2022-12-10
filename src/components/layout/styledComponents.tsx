@@ -41,7 +41,7 @@ export const Icon = styled.img`
   width: 100%;
 `;
 export const IconSmall = styled.img`
-  max-width: 120px;
+  max-width: 100px;
   width: 100%;
   margin-left: -10px;
   margin-bottom: -10px;

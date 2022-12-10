@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import Drawer from "@mui/material/Drawer";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
@@ -13,6 +13,8 @@ import { Icon, SidebarHeader } from "./styledComponents";
 import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { colorHex } from "../../constants";
+import { sportServices } from "../../utils/api/sport/services";
+import { sportsTabList } from "../home/sportsTabList";
 
 interface Props extends React.PropsWithChildren {
   /**
@@ -24,7 +26,15 @@ interface Props extends React.PropsWithChildren {
   window?: () => Window;
 }
 
-
+interface SportInterface {
+  sportId: number;
+  sportName: string;
+  totalMatch: number;
+  matchList: {
+    matchId: number;
+    matchName: string;
+  }[];
+}
 const list = [
   "All mail",
   "Trash",
@@ -68,11 +78,85 @@ const list = [
 ));
 const Drawers = () => {
   const [open, setOpen] = useState([false, false, false, false, false]);
+  const [matchCollapse, setMatchCollapse] = useState<boolean[]>([]);
+  const [activeEventList, setActiveEventList] = useState<SportInterface[]>([]);
+
+  useEffect(() => {
+    const getNewEventOpen = async () => {
+      const { response } = await sportServices.leftMenu();
+
+      if (response?.data) {
+        console.log(response.data);
+        if (response?.data?.length > 0) {
+          setActiveEventList(response.data);
+          setMatchCollapse(response.data.map((i: any) => (i ? false : false)));
+        }
+      } else {
+        setActiveEventList([]);
+      }
+    };
+    getNewEventOpen();
+  }, []);
+
   const handleClick = (index: number) => {
     const openList = [...open];
     openList[index] = !open[index];
     setOpen(openList);
   };
+  const handleClickSport = (index: number) => {
+    const openList = [...matchCollapse];
+    openList[index] = !matchCollapse[index];
+    setMatchCollapse(openList);
+  };
+
+  const exchangeList = useMemo(
+    () =>
+      activeEventList.map((sport, index) => (
+        <>
+          {" "}
+          <ListItem sx={{p:0, gap:0}} key={sport.sportId + sport.totalMatch} disablePadding>
+            <ListItemButton
+              onClick={() => handleClickSport(index)}
+              sx={{ color: "text.secondary" }}
+            >
+              <ListItemIcon sx={{minWidth:30}}>
+                {
+                  sportsTabList.find((sItem) => sItem.name === sport.sportName)
+                    ?.icon
+                }
+              </ListItemIcon>
+              <ListItemText
+                primaryTypographyProps={{
+                  sx: { fontSize: "0.8rem", textOverflow:"ellipsis", overflow:"hidden", whiteSpace:"nowrap" },
+
+                }}
+                primary={`${sport.sportName} ( ${sport.totalMatch} )`}
+              />
+              {matchCollapse[index] ? <ExpandLess fontSize="small" /> : <ExpandMore fontSize="small" />}
+            </ListItemButton>
+          </ListItem>
+          <Collapse in={matchCollapse[index]}>
+            {sport.matchList.map((match) => (
+              <ListItem
+                key={sport.sportId + "-" + match.matchId}
+                disablePadding
+              >
+                <ListItemButton sx={{ color: "text.secondary" }}>
+                  <ListItemText
+                    primaryTypographyProps={{
+                      sx: { fontSize: "0.8rem",textOverflow:"ellipsis", overflow:"hidden", whiteSpace:"nowrap" },
+                    }}
+                    primary={`${match.matchName} )`}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </Collapse>
+        </>
+      )),
+    [activeEventList, matchCollapse]
+  );
+
   return (
     <Box p={1} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
       <Icon src="/assets/images/icon.png" alt="ico" />
@@ -83,7 +167,6 @@ const Drawers = () => {
       </Box>
     </BoxWithTitle>*/}
       <Box
-        
         sx={{
           bgcolor: colorHex.bg7,
           overflow: "auto",
@@ -92,14 +175,14 @@ const Drawers = () => {
           maxHeight: "calc(100vh - 180px)",
         }}
       >
-        <List sx={{p:0, m:0}}>
+        <List sx={{ p: 0, m: 0 }}>
           <SidebarHeader>
             <ListItemButton onClick={() => handleClick(0)}>
               <ListItemText primary={"Exchange"} />
               {open[0] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
           </SidebarHeader>
-          <Collapse in={open[0]}>{list}</Collapse>
+          <Collapse in={open[0]}>{exchangeList}</Collapse>
           <SidebarHeader>
             <ListItemButton onClick={() => handleClick(1)}>
               <ListItemText primary={"Live Casino"} />

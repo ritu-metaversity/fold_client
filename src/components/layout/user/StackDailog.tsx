@@ -1,64 +1,16 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import { Grid, MenuItem, TextField } from "@mui/material";
 import { colorHex } from "../../../constants";
 import { userServices } from "../../../utils/api/user/services";
 import { Box } from "@mui/system";
+import { BootstrapDialog, BootstrapDialogTitle } from "../../common/Dailog2";
+import { DialogTitleStyledTypo } from "./styledComponents";
 
-export const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-  },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
-  },
-  "& .MuiPaper-root": {
-    background: colorHex.bg1,
-    borderRadius: 10,
 
-    maxWidth: "xs",
-    innerWidth: "100%",
-  },
-}));
-
-export interface DialogTitleProps {
-  id: string;
-  children?: React.ReactNode;
-  onClose: () => void;
-}
-
-export function BootstrapDialogTitle(props: DialogTitleProps) {
-  const { children, onClose, ...other } = props;
-
-  return (
-    <DialogTitle sx={{ m: 0, p: 2, bgcolor: colorHex.bg2 }} {...other}>
-      {children}
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{
-            position: "absolute",
-            right: 8,
-
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </DialogTitle>
-  );
-}
 
 export default function CustomizedDialogStack() {
   const [open, setOpen] = React.useState(false);
@@ -118,26 +70,30 @@ export default function CustomizedDialogStack() {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          <Typography color="primary.main">Set Button Value</Typography>
+          <DialogTitleStyledTypo >
+            Set Button Value
+          </DialogTitleStyledTypo>
         </BootstrapDialogTitle>
         <DialogContent
           sx={{ bgcolor: colorHex.bg1, color: "text.secondary" }}
           dividers
         >
-          <Box p={0.5}>
+          <Box>
             <Button
               sx={{
-                borderRadius: "10px 10px 0px 0px",
-                bgcolor: tab ? colorHex.bg6 : colorHex.bg2,
-                color: "white",
-                fontWeight: 700,
-                m: 0.5,
+                borderRadius: "5px 5px 0px 0px",
+                bgcolor: tab ? colorHex.bg3 : colorHex.bg2,
+                fontWeight: 500,
+                color:"text.secondary",
+                my: 0.5,
+                p: "8px 16px",
+                fontSize: "0.8rem",
               }}
               onClick={() => setTab(false)}
             >
               Game Buttons
             </Button>
-            <Button
+            {/* <Button
               sx={{
                 borderRadius: "10px 10px 0px 0px",
                 bgcolor: !tab ? colorHex.bg6 : colorHex.bg2,
@@ -149,8 +105,14 @@ export default function CustomizedDialogStack() {
             >
               {" "}
               Casino Buttons
-            </Button>
-            <Grid container bgcolor={colorHex.bg2} p={1}>
+            </Button> */}
+            <Grid
+              container
+              bgcolor={colorHex.bg2}
+              p={1}
+              fontSize="0.8rem"
+              fontWeight={700}
+            >
               <Grid item xs={6}>
                 Price Label
               </Grid>
@@ -161,7 +123,11 @@ export default function CustomizedDialogStack() {
           </Box>
 
           {Object.keys(buttonValue).map((item) => (
-            <Grid container key={item}>
+            <Grid
+              container
+              key={item}
+              border={`1px solid ${colorHex.borderLine}`}
+            >
               <Grid item xs={6} p={0.5}>
                 <TextField
                   value={item}
@@ -169,7 +135,8 @@ export default function CustomizedDialogStack() {
                   fullWidth
                   size="small"
                   variant="outlined"
-                  sx={{ bgcolor: colorHex.bg6, fontSize: "0.8rem", p: 0 }}
+                  InputProps={{ style: { fontSize: "0.8rem" } }}
+                  sx={{ bgcolor: colorHex.bg6 }}
                 />
               </Grid>
               <Grid item xs={6} p={0.5}>
@@ -180,8 +147,9 @@ export default function CustomizedDialogStack() {
                   name={item}
                   onChange={handleChange}
                   variant="outlined"
+                  InputProps={{ style: { fontSize: "0.8rem" } }}
                   type={"number"}
-                  sx={{ bgcolor: colorHex.bg6, fontSize: "0.8rem", p: 0 }}
+                  sx={{ bgcolor: colorHex.bg6, fontSize: "0.8rem" }}
                 />
               </Grid>
             </Grid>
@@ -193,8 +161,9 @@ export default function CustomizedDialogStack() {
             color="secondary"
             variant="contained"
             onClick={handleClick}
+            sx={{ color: "white"}}
           >
-            Save changes
+            Submit
           </Button>
         </DialogActions>
       </BootstrapDialog>

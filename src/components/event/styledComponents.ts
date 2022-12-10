@@ -1,17 +1,26 @@
 import styled from "@emotion/styled";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { colorHex } from "../../constants";
+import { styled as muiStyled } from "@mui/material";
 
 export const AmountInput = styled.input`
   width: calc(100% - 22px);
-  z-index: 10;
-  border: 0;
-  padding: 10px;
-  color: #fff;
   ::-webkit-outer-spin-button,
   ::-webkit-inner-spin-button {
     display: none;
   }
+  @media (max-width: 1280px) {
+    width: calc(100% - 2px);
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      display: block;
+    }
+  }
+  z-index: 10;
+  border: 0;
+  padding: 10px;
+  color: #fff;
+
   position: relative;
   margin: 1px;
   border-radius: 0px;
@@ -89,3 +98,26 @@ export const AmountInputBGLay = styled.div`
     }
   }
 `;
+
+export const BetAlert = muiStyled(Box)(({ theme }) => ({
+  height: 50,
+  width: 50,
+  background: theme.palette.secondary.main,
+  borderRadius: "50%",
+  color: "white",
+  textAlign: "center",
+  verticalAlign: "center",
+  fontSize: "1.5rem",
+  position: "fixed",
+  bottom: 0,
+  right: 0,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 200, 
+  fontWeight: 700,
+  margin: 5,
+  [theme.breakpoints.up("lg")]: {
+    display:"none"
+  }
+}));

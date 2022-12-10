@@ -25,4 +25,8 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     URL: "https://odds-api.kalyanexch.com/event-odds/odds/:eventId",
     METHOD: "GET",
   },
+  GET_LEFT_MENU_LIST: {
+    URL: "/enduser/sport-with-active-matches-open",
+    METHOD: "POST"
+  }
 };
