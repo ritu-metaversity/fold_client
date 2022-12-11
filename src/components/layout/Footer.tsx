@@ -10,7 +10,7 @@ const Footer = () => {
               <b>24X7 Support</b>
             </div>
             <div className="text-center w-100">
-              <span>
+              <span className="phones" >
                 +447403777777 /+447411114111 /+447380173801 /+447377773777{" "}
               </span>
             </div>
@@ -91,14 +91,6 @@ const Footer = () => {
                 About Us
               </a>
             </li>{" "}
-            <li>
-              <a href="/faq" className="">
-                FAQ
-              </a>
-            </li>{" "}
-            <li>
-              <a href="/">Rules</a>
-            </li>
             <li>
               <a
                 href="/terms-and-conditions"

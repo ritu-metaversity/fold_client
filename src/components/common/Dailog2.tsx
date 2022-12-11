@@ -9,10 +9,10 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import {  useMediaQuery } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Breakpoint } from "@mui/system";
 import { colorHex } from "../../constants";
 
-export const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+export const BootstrapDialog = styled(Dialog)(({ theme, maxWidth }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(1),
 
@@ -24,7 +24,7 @@ export const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     background: colorHex.bg1,
     borderRadius: 0,
     margin: 0,
-    maxWidth: 500,
+    maxWidth: maxWidth ? maxWidth: 500,
     width: "100%",
   },
 }));
@@ -61,10 +61,12 @@ export function BootstrapDialogTitle(props: DialogTitleProps) {
 }
 interface Props extends React.PropsWithChildren {
   title?: string;
-    open: boolean;
-    handleClose: () => void;
+  maxWidth?: Breakpoint | false;
+
+  open: boolean;
+  handleClose: () => void;
 }
-export default function CustomizedDialog2({children,open,title,handleClose}:Props) {
+export default function CustomizedDialog2({children,maxWidth,open,title,handleClose}:Props) {
 
   const matches = useMediaQuery("(max-width: 580px)");
   return (
@@ -73,7 +75,7 @@ export default function CustomizedDialog2({children,open,title,handleClose}:Prop
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
-
+        maxWidth={maxWidth}
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"

@@ -1,4 +1,5 @@
 import { Search } from "@mui/icons-material";
+import "./datePicker.css"
 import {
   Button,
   Grid,
@@ -32,7 +33,9 @@ const Filter = () => {
     <Box p={1} py={{ xs: 1, md: 2, lg: 1 }} px={{ xs: 1, md: 4, lg: 1 }}>
       <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
         <Typography
-          variant="h6"
+          // variant="h6"
+          fontSize={"1.15rem"}
+          fontWeight="500"
           flex={1}
           color={"text.secondary"}
           textAlign="left"
@@ -41,58 +44,70 @@ const Filter = () => {
         </Typography>
 
         <TextField
-          size="small"
+          size={"small"}
           placeholder="Search"
           sx={{
-            border: "none",
+            fontSize: "0.8rem",
+            "& fieldset": {
+              border: "none",
+            },
             flex: 1,
-            maxWidth: { md: 320 },
-            ml: "auto",
-            outline: "none",
+            my: 1,
+            maxWidth: { lg: 320 },
           }}
           fullWidth
           InputProps={{
             style: {
+              fontSize: "0.8rem",
               background: colorHex.bg6,
             },
             endAdornment: (
               <InputAdornment position="end">
-                <Search />
+                <Search htmlColor={"#aaafb5"} />
               </InputAdornment>
             ),
           }}
         />
       </Box>
 
-      <Grid container>
+      <Grid container rowGap={1}>
         <Grid item xs={6} lg={1.5} textAlign="left" pr={1}>
           <LabelText>From</LabelText>
-          <TextField
-            size="small"
-            fullWidth
-            aria-labelledby="from-date-label"
-            type="date"
-          />
+          <DatePicker maxDate={new Date()} />
         </Grid>
-        <Grid item xs={6} pr={2} lg={1.5} textAlign="left">
+        <Grid item xs={6} pr={{ lg: 2 }} lg={1.5} textAlign="left">
           <LabelText>To</LabelText>
-          <DatePicker/>
-          {/* <Calendar /> */}
-          {/* <TextField size="small"  type="date" />
-           */}
+          <DatePicker maxDate={new Date()} />
         </Grid>
-        <Grid item xs={12} pr={2} lg={2}>
+        <Grid item xs={12} pr={{ lg: 2 }} lg={2}>
           <LabelText>Type</LabelText>
-          <Select margin="dense" size="small" defaultValue={"0"} fullWidth>
+
+          <Select
+            margin="dense"
+            size="small"
+            sx={{
+              maxHeight: 30,
+              textAlign: "start",
+            }}
+            defaultValue={"0"}
+            fullWidth
+          >
             <MenuItem value="0">All</MenuItem>
             <MenuItem value="1">Deposit/Withdrawal Report</MenuItem>
             <MenuItem value="2">Game report</MenuItem>
           </Select>
         </Grid>
-        <Grid item xs={12} pr={2} lg={1.5} display="flex" alignItems="flex-end">
+        <Grid
+          item
+          xs={12}
+          pr={{ lg: 2 }}
+          lg={1.5}
+          display="flex"
+          alignItems="flex-end"
+        >
           <Button
             fullWidth
-            sx={{ mt: "auto" }}
+            sx={{ mt: "auto", color: "white", fontSize: "1.1rem" }}
             type="submit"
             color="secondary"
             variant="contained"
@@ -110,7 +125,10 @@ const Filter = () => {
       >
         <Box display="flex" alignItems="center">
           <LabelText>Show</LabelText>
-          <Select defaultValue={5000} sx={{ mx:1, maxHeight: 30 }}>
+          <Select
+            defaultValue={5000}
+            sx={{ mx: 0.2, minWidth: 100, maxHeight: 30 }}
+          >
             <MenuItem value="0">25</MenuItem>
             <MenuItem>50</MenuItem>
             <MenuItem>100</MenuItem>

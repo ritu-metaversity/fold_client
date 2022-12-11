@@ -14,6 +14,7 @@ import { SnackbarUtilsConfigurator } from "./components/layout/snackBarUtil";
 import { SnackbarProvider } from "notistack";
 import Pages from "./components/pages";
 import { userServices } from "./utils/api/user/services";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 interface UserContextType {
   setIsSignedIn: Dispatch<SetStateAction<boolean|null>> | null;
