@@ -20,26 +20,48 @@ const UserBox = () => {
 
   return (
     <>
-    <UserContainer sx={{flexDirection: {xs:"column",lg:"row"}}} color="text.secondary" alignItems={"center"}>
-      <Typography my="auto" fontSize="0.8rem" textAlign={"center"} fontWeight={700} whiteSpace="nowrap">pts : 0 | 0</Typography>
-      <Box
-        display="flex"
+      <UserContainer
+        sx={{ flexDirection: { xs: "column", lg: "row" } }}
+        color="text.secondary"
+        alignContent={"center"}
         alignItems={"center"}
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-          gap={{xs:1,lg:1.5}}
-          fontSize={"0.8rem" }
-        onClick={handleClick}
+        // gap={{lg:1.25}}
       >
-        <Avatar color="gray.100" sx={{maxWidth:{xs:"1rem",lg:"3rem"},maxHeight:{xs:"1rem",lg:"3rem"}}} ></Avatar>
+        <Typography
+          my="auto"
+          fontSize={{ xs: "0.6rem", sm: "0.75rem", lg: "0.8rem" }}
+          color={{ xs: "white", lg: "text.primary" }}
+          textAlign={"center"}
+          pl={{lg:"10px"}}
+          fontWeight={{ xs: 800, lg: 500 }}
+          whiteSpace="nowrap"
+        >
+          pts : 0 | 0
+        </Typography>
+        <Box
+          display="flex"
+          alignItems={{ xs: "flex-start", lg: "center" }}
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          gap={{ xs: 1, lg: 1.5 }}
+          p={0.8}
+          fontSize={{ xs: "0.75rem", lg: "0.8rem" }}
+          onClick={handleClick}
+        >
+          <Avatar
+            color="gray.100"
+            sx={{
+              maxWidth: { xs: "1rem", lg: "2rem" },
+              maxHeight: { xs: "1rem", lg: "2rem" },
+            }}
+          ></Avatar>
 
-        {user?.username}
-        <KeyboardArrowDownOutlined sx={{ml:-0.5}} fontSize="small" />
-      </Box>
-      
-    </UserContainer>
-   <AvatarMenu   anchorEl={anchorEl} open={open} handleClose={handleClose}  />
+          {user?.username}
+          <KeyboardArrowDownOutlined sx={{ ml: -1, fontSize: "1rem" }} />
+        </Box>
+      </UserContainer>
+      <AvatarMenu anchorEl={anchorEl} open={open} handleClose={handleClose} />
     </>
   );
 };

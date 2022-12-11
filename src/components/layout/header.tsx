@@ -7,14 +7,15 @@ import CssBaseline from "@mui/material/CssBaseline";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import { CenterBox, Icon, IconSmall, TopNavLinks } from "./styledComponents";
-import {  Divider, useMediaQuery, useTheme } from "@mui/material";
+import { CenterBox, Icon, IconSmall, StyledAppBar, TopNavLinks } from "./styledComponents";
+import {  Divider, useMediaQuery, useTheme, appBarClasses } from "@mui/material";
 import Sidebar from "./Sidebar";
 import { UserContext } from "../../App";
 import UserBox from "./user/UserBox";
 import { colorHex } from "../../constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import { styled } from "@mui/system";
 export const drawerWidth = 220;
 export const drawerWidthXl = 270;
 
@@ -27,7 +28,17 @@ interface Props extends React.PropsWithChildren {
 }
 
 
+
 const linksWithoutSideBar = ["/report/accountstatement"];
+console.log(appBarClasses)
+const NewAppBar = styled(AppBar)(({ theme }) => ({
+  [`& .${appBarClasses.positionFixed}`]: {
+    flexDirection: "row",
+    display: "flex",
+    
+    // pt:1,
+  },
+}));
 
 export const topNavHeight = "2.5rem";
 export default function Header(props: Props) {
@@ -41,6 +52,7 @@ const nav = useNavigate()
     setMobileOpen(!mobileOpen);
   };
 
+  const { isSignedIn} = React.useContext(UserContext)
   const matches = useMediaQuery("(min-width:1280px)");
   const drawerWidthLocal = notShowSidebar ? 0:drawerWidth  ;
   const drawerWidthXlLocal = notShowSidebar ?0: drawerWidthXl ;
@@ -60,7 +72,7 @@ const nav = useNavigate()
           zIndex: 100,
         }}
       >
-        <TopNavLinks to="/"  id={"top-nav-current"}>
+        <TopNavLinks to="/" id={"top-nav-current"}>
           Exchange
         </TopNavLinks>
         <TopNavLinks to="#">Live Casino</TopNavLinks>
@@ -78,7 +90,7 @@ const nav = useNavigate()
           </Box>
         )} */}
       </CenterBox>
-      <AppBar
+      <StyledAppBar
         position="fixed"
         elevation={0}
         sx={{
@@ -90,42 +102,49 @@ const nav = useNavigate()
           px: 0,
           mt: { lg: topNavHeight },
           [theme.breakpoints.down("lg")]: {
-            bgcolor: colorHex.bg3,
+            bgcolor: isSignedIn ? "" : colorHex.bg3,
+            height: 50,
           },
         }}
       >
-        <Toolbar
+        {/* <Toolbar
           className="toolbar-padding"
           sx={{
             gap: 1,
-            alignItems: !notShowSidebar ?"flex-start":"center",
-            pt: 2,
+            alignItems: !notShowSidebar ? "flex-start" : "center",
+            pt: { lg: 2 },
             [theme.breakpoints.down("lg")]: {
               bgcolor: colorHex.bg3,
+              height: !isSignedIn ? 50 : undefined,
+              
             },
-
+            maxHeight: 50,
           }}
+        > */}
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          // edge="start"
+          onClick={notShowSidebar ? () => nav("/") : handleDrawerToggle}
+          sx={{ mr: 1, pt: 0, display: { lg: "none" } }}
         >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={notShowSidebar? ()=>nav("/"):handleDrawerToggle}
-            sx={{ mx: 2, display: { lg: "none" } }}
-          >
-            {notShowSidebar ? <HomeRoundedIcon /> : < MenuIcon />}
-          </IconButton>
-          {notShowSidebar && matches && <Box width={220} p={1}>
-            
+          {notShowSidebar ? (
+            <HomeRoundedIcon sx={{ fontSize: "2rem", mt:1.5 }} />
+          ) : (
+            <MenuIcon sx={{ fontSize: "2rem" }} />
+          )}
+        </IconButton>
+        {notShowSidebar && matches && (
+          <Box width={220} p={1}>
             <Icon src="/assets/images/icon.png" alt="ico" />
-            </Box>
-          }
-          <IconSmall src="/assets/images/icon.png" />
-          {matches && <Announcement />}
-          {value?.isSignedIn ? <UserBox /> : <AuthBox />}
-        </Toolbar>
-        <Divider sx={{ p: 0, borderBottomWidth: 2 }} />
-      </AppBar>
+          </Box>
+        )}
+        <IconSmall src="/assets/images/icon.png" />
+        {matches && <Announcement />}
+        {value?.isSignedIn ? <UserBox /> : <AuthBox />}
+        {/* </Toolbar>  */}
+        {/* <Divider sx={{ p: 0, borderBottomWidth: 2 }} /> */}
+      </StyledAppBar>
       {!notShowSidebar && (
         <Sidebar
           mobileOpen={mobileOpen}

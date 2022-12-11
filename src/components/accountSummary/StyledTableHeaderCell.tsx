@@ -13,7 +13,7 @@ function createData(
 }
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   color: theme.palette.text.secondary,
-  fontSize: "0.85rem",
+  fontSize: "0.8rem",
   padding: 4,
   whiteSpace: "nowrap",
 }));
@@ -32,7 +32,7 @@ export interface ColumnsInterface {
 export const rows = [
   createData("Frozen yoghurt", 159, 6.0, 24, 4.0, "adf"),
   createData("Ice cream sandwich", 237, 9.0, 37, 4.3, "adfasdf kjs"),
-  createData("Eclair", 262, 16.0, 24, 6.0, "adfadfasdf asd "),
+  createData("Eclair", 262, 16.0, 24, 6.0, "adfadfa adslkadj askdf alksdfj akdf adsf laksdjf alsdfk lasdksdf asd "),
   createData("Cupcake", 305, 3.7, 67, 4.3, "Adfadfasdf"),
   createData("Gingerbread", 356, 16.0, 49, 3.9, "adfdafads dsa f"),
 ];

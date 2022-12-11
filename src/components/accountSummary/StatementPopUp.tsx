@@ -15,12 +15,14 @@ import {
   TooltipProps,
   Typography,
 } from "@mui/material";
-import React from "react";
+import "./style.css";
+import React, { useState } from "react";
 import {
   StyledTableCell,
   StyledTableHeaderCell,
 } from "./StyledTableHeaderCell";
 import { colorHex } from "../../constants";
+import { Form, FormCheck } from "react-bootstrap";
 
 type columnsIdType =
   | "nation"
@@ -97,7 +99,11 @@ const ResultRows = [
   {
     nation: (
       <label>
-        <input type="checkbox" />
+        <Form.Check
+          type="checkbox"
+          color="black"
+          style={{ display: "inline", marginRight: 4 }}
+        />
         1st inn 10 over odd run bhav PAK(PAK vs ENG)adv - ODD
       </label>
     ),
@@ -105,18 +111,22 @@ const ResultRows = [
     bhav: 0.34,
     amount: 0.43,
     win: 0,
-    date: "07/12/2022 17:14:59",
+    date: "07/12/2022 12:14:59",
     ip: "115.246.121.179",
     browser: (
       <BootstrapTooltip title="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36">
-        <Box>Detail</Box>
+        <Box sx={{ textDecoration: "underline", cursor: "pointer" }}>Detail</Box>
       </BootstrapTooltip>
     ),
+    type: "back",
   },
   {
     nation: (
       <label>
-        <input type="checkbox" />
+        <Form.Check
+          type="checkbox"
+          style={{ display: "inline", marginRight: 4 }}
+        />
         1st inn 10 over odd run bhav PAK(PAK vs ENG)adv - ODD
       </label>
     ),
@@ -128,25 +138,31 @@ const ResultRows = [
     ip: "115.246.121.179",
     browser: (
       <BootstrapTooltip title="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36">
-        <Box>Detail</Box>
+        <Box sx={{ textDecoration: "underline", cursor: "pointer" }}>Detail</Box>
       </BootstrapTooltip>
     ),
+    type: "lay",
   },
 ];
 
 export function StatementPopUp() {
+
+  const [checked, setChecked] = useState("");
   return (
-    <Box fontSize={"0.75rem"}>
+    <Box fontSize={"0.75rem"} lineHeight="2">
       <Box>{`Cricket -> Test Matches -> Pakistan v England -> oddeven`}</Box>
       <Box display={"flex"} justifyContent="space-between">
-        <span>Winner: 1</span>
-        <span>Game Time: 09/12/2022 10:30:00</span>
+        <span style={{ flex: 1 }}>Winner: 1</span>
+        <span style={{ flex: 1, textAlign: "right" }}>
+          Game Time: 09/12/2022 10:30:00
+        </span>
       </Box>
 
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
+        onChange={(e:any,value:string)=>setChecked(value)}
       >
         {["all", "back", "lay", "deleted"].map((value) => (
           <FormControlLabel
@@ -157,18 +173,12 @@ export function StatementPopUp() {
               },
             }}
             value={value}
-            control={
-              <Radio
-                sx={{
-                  fontSize: "0.8rem",
-                }}
-              />
-            }
+            control={<Form.Check checked={value===checked} onChange={(e:any)=>setChecked(value)} style={{ paddingInline: 10 }} type="radio" />}
             label={value}
           />
         ))}
       </RadioGroup>
-      <Box display="flex" gap={1}>
+      <Box display="flex" gap={1} pb={1}>
         <Typography component={"span"} fontSize="inherit">
           Total Bets:
         </Typography>
@@ -229,6 +239,9 @@ export function StatementPopUp() {
                   "&:last-child td, &:last-child th": {
                     border: 0,
                   },
+                  borderLeft: ` 5px solid  ${
+                    row.type === "back" ? colorHex.back[1] : colorHex.lay[1]
+                  }`,
                 }}
               >
                 {resultColumns.map(({ id, align }) => (

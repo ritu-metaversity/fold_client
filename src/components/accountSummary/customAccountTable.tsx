@@ -8,8 +8,12 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { colorHex } from "../../constants";
 import {
+  Breakpoint,
   Pagination,
   PaginationItem,
+  Theme,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -21,6 +25,27 @@ import {
 } from "./StyledTableHeaderCell";
 import CustomizedDialog2 from "../common/Dailog2";
 
+
+type BreakpointOrNull = Breakpoint | null;
+
+export const useWidth = (): Breakpoint => {
+  const theme: Theme = useTheme();
+  const keys: readonly Breakpoint[] = [...theme.breakpoints.keys];
+  console.log(
+    keys.reduce((output: BreakpointOrNull, key: Breakpoint) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const matches = useMediaQuery(theme.breakpoints.up(key));
+      return output != null && matches ? key : output;
+    }, "xs")
+  );
+  return (
+    keys.reduce((output: BreakpointOrNull, key: Breakpoint) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const matches = useMediaQuery(theme.breakpoints.up(key));
+      return output != null && matches ? key : output;
+    }, "xs") ?? "xs"
+  );
+};
 export default function AccountTable() {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
@@ -29,10 +54,16 @@ export default function AccountTable() {
   const handleRowClick = () => {
     setOpen(true);
   };
-
+  const breakpoints = useWidth();
+  // console.log(breakpoints)
   return (
     <>
-      <CustomizedDialog2 open={open} handleClose={handleClose} title=" Result">
+      <CustomizedDialog2
+        maxWidth={breakpoints}
+        open={open}
+        handleClose={handleClose}
+        title=" Result"
+      >
         <StatementPopUp />
       </CustomizedDialog2>
       <TableContainer
