@@ -10,7 +10,6 @@ import HomeLayout from "../layout/homeLayout";
 import { BetSlip } from "./BetSlip";
 import { colorHex } from "../../constants";
 import MyBet from './MyBet';
-import CustomizedDialogs from "../common/Dailog";
 import CustomizedDialog2 from "../common/Dailog2";
 import MybetMobile from './MybetMobile';
 

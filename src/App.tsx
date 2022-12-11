@@ -53,11 +53,6 @@ function App() {
     defaultStake
   );
 
-  const handleChange = (e: any) => {
-    const buttons = { ...stakes };
-    setButtonValue({ ...buttons, [e.target.name]: e.target.value });
-  };
-
   const getButtonValue = async () => {
     const { response } = await userServices.getButtonValue();
     if (response?.data) {

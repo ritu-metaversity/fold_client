@@ -2,7 +2,6 @@ import {
   Box,
   FormControlLabel,
   Paper,
-  Radio,
   RadioGroup,
   styled,
   Table,
@@ -22,7 +21,7 @@ import {
   StyledTableHeaderCell,
 } from "./StyledTableHeaderCell";
 import { colorHex } from "../../constants";
-import { Form, FormCheck } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 type columnsIdType =
   | "nation"

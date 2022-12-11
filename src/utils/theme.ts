@@ -1,5 +1,5 @@
 
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material";
 export const font = '"Noto Sans"';
 export const theme = createTheme({
   breakpoints: {

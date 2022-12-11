@@ -1,21 +1,24 @@
 import { AuthBox } from "./user/AuthBox";
 import { Announcement } from "./Announcement";
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import { CenterBox, Icon, IconSmall, StyledAppBar, TopNavLinks } from "./styledComponents";
-import {  Divider, useMediaQuery, useTheme, appBarClasses } from "@mui/material";
+import {
+  CenterBox,
+  Icon,
+  IconSmall,
+  StyledAppBar,
+  TopNavLinks,
+} from "./styledComponents";
+import { useMediaQuery, useTheme } from "@mui/material";
 import Sidebar from "./Sidebar";
 import { UserContext } from "../../App";
 import UserBox from "./user/UserBox";
 import { colorHex } from "../../constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import { styled } from "@mui/system";
 export const drawerWidth = 220;
 export const drawerWidthXl = 270;
 
@@ -27,35 +30,25 @@ interface Props extends React.PropsWithChildren {
   window?: () => Window;
 }
 
-
-
 const linksWithoutSideBar = ["/report/accountstatement"];
-console.log(appBarClasses)
-const NewAppBar = styled(AppBar)(({ theme }) => ({
-  [`& .${appBarClasses.positionFixed}`]: {
-    flexDirection: "row",
-    display: "flex",
-    
-    // pt:1,
-  },
-}));
 
 export const topNavHeight = "2.5rem";
+
 export default function Header(props: Props) {
   const theme = useTheme();
   const value = React.useContext(UserContext);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-const nav = useNavigate()
+  const nav = useNavigate();
   const loc = useLocation();
   const notShowSidebar = linksWithoutSideBar.includes(loc.pathname);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const { isSignedIn} = React.useContext(UserContext)
+  const { isSignedIn } = React.useContext(UserContext);
   const matches = useMediaQuery("(min-width:1280px)");
-  const drawerWidthLocal = notShowSidebar ? 0:drawerWidth  ;
-  const drawerWidthXlLocal = notShowSidebar ?0: drawerWidthXl ;
+  const drawerWidthLocal = notShowSidebar ? 0 : drawerWidth;
+  const drawerWidthXlLocal = notShowSidebar ? 0 : drawerWidthXl;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -94,12 +87,13 @@ const nav = useNavigate()
         position="fixed"
         elevation={0}
         sx={{
+          alignItems: notShowSidebar ? "center" : "",
           width: {
             lg: `calc(100% - ${drawerWidthLocal}px)`,
             xl: `calc(100% - ${drawerWidthXlLocal}px)`,
           },
           ml: { lg: `${drawerWidthLocal}px`, xl: `${drawerWidthXlLocal}px` },
-          px: 0,
+          pr: 1,
           mt: { lg: topNavHeight },
           [theme.breakpoints.down("lg")]: {
             bgcolor: isSignedIn ? "" : colorHex.bg3,
@@ -129,7 +123,7 @@ const nav = useNavigate()
           sx={{ mr: 1, pt: 0, display: { lg: "none" } }}
         >
           {notShowSidebar ? (
-            <HomeRoundedIcon sx={{ fontSize: "2rem", mt:1.5 }} />
+            <HomeRoundedIcon sx={{ fontSize: "2rem", mt: 1.5 }} />
           ) : (
             <MenuIcon sx={{ fontSize: "2rem" }} />
           )}

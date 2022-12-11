@@ -34,7 +34,7 @@ export const AnnouncementBox = styled(Box)`
   padding: 10px;
   height: 2.5rem;
   @media (max-width: 1280px) {
-    padding-block: 0px;
+    padding-block: 2px;
     border-radius : 5px;  
     margin: 5px;
     height : initial;

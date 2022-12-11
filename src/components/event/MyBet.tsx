@@ -1,14 +1,10 @@
 import {
   ArrowBackIosNewSharp,
-  ArrowDownwardSharp,
-  ArrowForwardIosSharp,
-  Expand,
 } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Box,
   Grid,
 } from "@mui/material";
 import React, { FC, useState } from "react";

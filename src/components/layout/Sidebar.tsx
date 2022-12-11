@@ -15,16 +15,14 @@ import {
   InputAdornment,
   TextField,
   TextFieldProps,
-  Toolbar,
 } from "@mui/material";
-import { Icon, SidebarHeader, UserContainer } from "./styledComponents";
+import { Icon, SidebarHeader } from "./styledComponents";
 import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
 import { ExpandLess, ExpandMore, Menu, Search } from "@mui/icons-material";
 import { colorHex } from "../../constants";
 import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "../home/sportsTabList";
 import { UserContext } from "../../App";
-import HomeRounded from "@mui/icons-material/HomeRounded";
 interface Props extends React.PropsWithChildren {
   /**
    * Injected by the documentation to work in an iframe.

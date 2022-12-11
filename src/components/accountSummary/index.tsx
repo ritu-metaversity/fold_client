@@ -1,5 +1,7 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
-import React from "react";
+import { Box, useMediaQuery } from "@mui/material";
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
 import { Announcement } from "../layout/Announcement";
 import Footer from "../layout/Footer";
@@ -8,6 +10,13 @@ import Filter from "./Filter";
 
 const Account = () => {
   const matches = useMediaQuery("(min-width:1280px)");
+  const { isSignedIn } = useContext(UserContext);
+  const nav = useNavigate();
+  useEffect(() => {
+    if (isSignedIn === false) nav("/");
+    return () => {};
+  }, [isSignedIn]);
+
   return (
     <>
       <Box
@@ -19,7 +28,7 @@ const Account = () => {
         {!matches && <Announcement />}
 
         <Box minHeight="calc(100vh - 60px)">
-          <Filter ></Filter>
+          <Filter></Filter>
           <AccountTable />
         </Box>
       </Box>

@@ -1,9 +1,9 @@
-import { ArrowBackIos, ArrowForwardIos, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Title } from "@mui/icons-material";
-import { Box, IconButton, Tab, Tabs, Typography } from "@mui/material";
+import { ChevronLeft, ChevronRight, } from "@mui/icons-material";
+import { Box, IconButton, Tab, Tabs } from "@mui/material";
 import React, { FC, useState } from "react";
 import { colorHex } from "../../constants";
 import CustomizedDialog2 from "./Dailog3withNoPadding";
-import MyBet, { getMyBets } from "./MyBet";
+import { getMyBets } from "./MyBet";
 import { BetAlert, TitleStyled } from "./styledComponents";
 
 interface Props {
