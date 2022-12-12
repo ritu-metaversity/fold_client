@@ -82,7 +82,7 @@ const Match = ({ matches }: Props) => {
       bgcolor={{ xs: colorHex.bg2, lg: colorHex.bg1 }}
       p={{ xs: 0.5, lg: 0 }}
       sx={{ cursor: "pointer" }}
-      m={{ xs: 0.5, lg: 0 }}
+      m={{ xs: "4px 0px", lg: 0 }}
       gap={{ xs: 0.5, lg: 0 }}
       borderBottom={{ xs: "", lg: "1px solid rgba(60,68,75)" }}
     >

@@ -1,24 +1,20 @@
+import { CustomizedDatePicker } from "./CustomizedDatePicker";
 import { Search } from "@mui/icons-material";
-import "./datePicker.css"
+import "./accountDatePicker.css";
 import {
   Button,
   Grid,
   InputAdornment,
-  InputBase,
-  InputLabel,
   MenuItem,
   Select,
   styled,
   TextField,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
-// import Calendar from "react-calendar"
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import { colorHex } from "../../constants";
 import { PdfIcon } from "./styledComponents";
-import DatePicker from "react-date-picker"
 
 const LabelText = styled(Typography)(({ theme }) => ({
   color: "text.secondary",
@@ -28,7 +24,8 @@ const LabelText = styled(Typography)(({ theme }) => ({
 }));
 
 const Filter = () => {
-  const matches = useMediaQuery("(min-width : 1280)");
+  const [toDate, setToDate] = useState(new Date());
+  const [fromDate, setFromDate] = useState(new Date());
   return (
     <Box p={1} py={{ xs: 1, md: 2, lg: 1 }} px={{ xs: 1, md: 4, lg: 1 }}>
       <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
@@ -73,11 +70,11 @@ const Filter = () => {
       <Grid container rowGap={1}>
         <Grid item xs={6} lg={1.5} textAlign="left" pr={1}>
           <LabelText>From</LabelText>
-          <DatePicker maxDate={new Date()} />
+          <CustomizedDatePicker value={fromDate} onChange={setFromDate} />
         </Grid>
         <Grid item xs={6} pr={{ lg: 2 }} lg={1.5} textAlign="left">
           <LabelText>To</LabelText>
-          <DatePicker maxDate={new Date()} />
+          <CustomizedDatePicker value={toDate} onChange={setToDate} />
         </Grid>
         <Grid item xs={12} pr={{ lg: 2 }} lg={2}>
           <LabelText>Type</LabelText>
@@ -86,8 +83,9 @@ const Filter = () => {
             margin="dense"
             size="small"
             sx={{
-              maxHeight: 30,
+              maxHeight: { xs: 30, lg: 36 },
               textAlign: "start",
+              fontSize: { xs: "0.8rem", lg: "1rem" },
             }}
             defaultValue={"0"}
             fullWidth
@@ -107,7 +105,7 @@ const Filter = () => {
         >
           <Button
             fullWidth
-            sx={{ mt: "auto", color: "white", fontSize: "1.1rem" }}
+            sx={{ mt: "auto", color: "white", fontSize: "1rem" }}
             type="submit"
             color="secondary"
             variant="contained"
@@ -127,7 +125,13 @@ const Filter = () => {
           <LabelText>Show</LabelText>
           <Select
             defaultValue={5000}
-            sx={{ mx: 0.2, minWidth: 100, maxHeight: 30 }}
+            sx={{
+              mx: 0.2,
+              minWidth: 100,
+              textAlign: "start",
+              fontSize: { xs: "0.8rem", lg: "1rem" },
+              maxHeight: { xs: 30, lg: 36 },
+            }}
           >
             <MenuItem value="0">25</MenuItem>
             <MenuItem>50</MenuItem>

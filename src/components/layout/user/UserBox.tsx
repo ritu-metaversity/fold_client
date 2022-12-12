@@ -1,4 +1,4 @@
-import { AvatarMenu } from './AvatarMenu';
+import { AvatarMenu } from "./AvatarMenu";
 import { KeyboardArrowDownOutlined } from "@mui/icons-material";
 import { Avatar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
@@ -17,7 +17,6 @@ const UserBox = () => {
     setAnchorEl(null);
   };
 
-
   return (
     <>
       <UserContainer
@@ -29,14 +28,14 @@ const UserBox = () => {
       >
         <Typography
           my="auto"
-          fontSize={{ xs: "0.6rem", sm: "0.75rem", lg: "0.8rem" }}
+          fontSize={{ xs: "0.75rem", lg: "0.8rem" }}
           color={{ xs: "white", lg: "text.primary" }}
           textAlign={"center"}
-          pl={{lg:"10px"}}
+          pl={{ lg: "10px" }}
           fontWeight={{ xs: 800, lg: 500 }}
           whiteSpace="nowrap"
         >
-          pts : 0 | 0
+          pts: 0 | 0
         </Typography>
         <Box
           display="flex"
@@ -52,13 +51,16 @@ const UserBox = () => {
           <Avatar
             color="gray.100"
             sx={{
+              my: "auto",
               maxWidth: { xs: "1rem", lg: "2rem" },
               maxHeight: { xs: "1rem", lg: "2rem" },
             }}
           ></Avatar>
 
           {user?.username}
-          <KeyboardArrowDownOutlined sx={{ ml: -1, fontSize: "1rem" }} />
+          <KeyboardArrowDownOutlined
+            sx={{ ml: -1, my: "auto", fontSize: "1rem" }}
+          />
         </Box>
       </UserContainer>
       <AvatarMenu anchorEl={anchorEl} open={open} handleClose={handleClose} />

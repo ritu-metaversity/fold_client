@@ -1,27 +1,140 @@
-
-.react-calendar{
-    width: 248px !important;
-    background-color: var(--bg-body) !important;
-    border: 1px solid var(--bg-sidebar) !important;
-}
-.react-calendar__tile:enabled:hover, .react-calendar__tile:enabled:focus {
-
-    color: var(--text-highlight);
-    background-color: var(--bg-sidebar) !important;
-}
-.react-calendar__navigation,.react-calendar__navigation__arrow ,.react-calendar__navigation__label{
-    color: var(--text-sidebar) !important;
+.react-calendar {
+  width: 248px !important;
+  padding: 6px 12px;
+  background-color: var(--bg-body) !important;
+  border: 1px solid var(--bg-sidebar) !important;
+  border-radius: 4px !important;
 }
 
-.react-calendar__tile{ 
-        cursor: pointer;
-    background-color: var(--bg-table-header);
+.react-calendar__navigation button {
+  min-width: unset !important;
+  background: none;
+}
 
-    height: 32px;
+.react-calendar__navigation__label {
+  box-sizing: border-box;
+  line-height: 1;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  cursor: pointer;
+  color: var(--text-sidebar);
+  white-space: nowrap;
+}
+.react-calendar__month-view__weekdays {
+  text-transform: capitalize !important;
+}
+abbr[title] {
+  width: 2ch !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-decoration: none !important;
+  color: white;
+  font-weight: 600;
+}
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: transparent !important;
+  color: white !important;
+}
+.react-calendar__tile:enabled {
+  background-color: var(--bg-table-header);
+}
+
+.react-calendar__month-view__days__day--weekend,
+.react-calendar__month-view__days__day--weekend {
+  color: var(--text-highlight) !important;
+}
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  color: var(--text-highlight);
+  background-color: var(--bg-sidebar) !important;
+}
+.react-calendar__navigation,
+.react-calendar__navigation__arrow,
+.react-calendar__navigation__label {
+  margin-bottom: 0 !important;
+
+  color: var(--text-sidebar) !important;
+}
+.react-calendar__navigation__arrow {
+  transform: scale(1.2);
+}
+
+.react-calendar__tile {
+  cursor: pointer;
+  background-color: var(--bg-table-header);
+
+  height: 32px;
+  font-size: 12px;
+  color: var(--text-highlight);
+}
+.react-calendar__tile--now {
+  background-color: var(--bg-sidebar) !important;
+}
+.react-calendar__navigation button:disabled,
+.react-calendar__tile:disabled {
+  background-color: transparent !important;
+  color: #ccc !important;
+  cursor: not-allowed !important;
+}
+
+.react-date-picker__inputGroup__input {
+  color: var(--text-table);
+}
+
+.mx-icon-calendar,
+.mx-icon-clear svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: #ccc;
+  overflow: hidden;
+}
+.react-date-picker__inputGroup__input:invalid {
+  background: initial !important;
+}
+.mx-icon-calendar,
+.mx-icon-clear {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text-table);
+  vertical-align: middle;
+}
+
+.react-date-picker__calendar {
+  max-width: 250px;
+
+    inset: 100% 0 auto auto!important;
+}
+
+.react-date-picker__wrapper {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 10em;
+  height: 36px;
+  padding: 6px 10px;
+  padding-left: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  background-color: transparent;
+  border: 1px solid var(--text-table);
+  color: var(--text-table);
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1279px){
+ .react-date-picker__wrapper {
+    width: 100%;
     font-size: 12px;
-    color: var(--text-highlight);
+    height: 32px;
 }
-
-.react-calendar__navigation button:disabled,.react-calendar__tile:disabled {
-    background-color: transparent !important;
 }

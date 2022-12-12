@@ -3,7 +3,6 @@ import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Typography from "@mui/material/Typography";
-import {  useMediaQuery } from "@mui/material";
 import { colorHex } from "../../constants";
 import { BootstrapDialogTitle } from "../common/Dailog2";
 
