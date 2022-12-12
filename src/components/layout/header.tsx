@@ -97,7 +97,7 @@ export default function Header(props: Props) {
           mt: { lg: topNavHeight },
           [theme.breakpoints.down("lg")]: {
             bgcolor: isSignedIn ? "" : colorHex.bg3,
-            height: 50,
+            height: isSignedIn ? 64 :50,
           },
         }}
       >
@@ -119,8 +119,9 @@ export default function Header(props: Props) {
           color="inherit"
           aria-label="open drawer"
           // edge="start"
+
           onClick={notShowSidebar ? () => nav("/") : handleDrawerToggle}
-          sx={{ mr: 1, pt: 0, display: { lg: "none" } }}
+          sx={{ "&:hover": {bgcolor:"transparent"}, my:"auto", mr: 1, pt: 0, display: { lg: "none" } }}
         >
           {notShowSidebar ? (
             <HomeRoundedIcon sx={{ fontSize: "2rem", mt: 1.5 }} />
