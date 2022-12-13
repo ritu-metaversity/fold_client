@@ -1,5 +1,6 @@
 import {  Grid, Typography } from "@mui/material";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
+import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
 
 interface Props {
@@ -41,11 +42,24 @@ const values = (
   </>
 );
 
-const Odds = ({ title,setBetId }: Props) => {
+const Odds = ({ title, setBetId }: Props) => {
+  const {isSignedIn, setModal} = useContext(UserContext)
   const handleClick = () => {
+    if (!isSignedIn) {
+      if (setModal) {
+        setModal({ login: true })
+        return
+      }
+    }
     setBetId(1)
   }
   const handleClick2 = () => {
+    if (!isSignedIn) {
+      if (setModal) {
+        setModal({ login: true });
+        return;
+      }
+    }
     setBetId(2);
   };
   return (

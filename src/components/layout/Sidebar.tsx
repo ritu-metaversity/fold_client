@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import Drawer from "@mui/material/Drawer";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
@@ -8,14 +8,22 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
-import { Box, Collapse } from "@mui/material";
+import {
+  Box,
+  Collapse,
+  IconButton,
+  InputAdornment,
+  TextField,
+  TextFieldProps,
+} from "@mui/material";
 import { Icon, SidebarHeader } from "./styledComponents";
 import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { ExpandLess, ExpandMore, Menu, Search } from "@mui/icons-material";
 import { colorHex } from "../../constants";
 import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "../home/sportsTabList";
-
+import { UserContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 interface Props extends React.PropsWithChildren {
   /**
    * Injected by the documentation to work in an iframe.
@@ -76,17 +84,15 @@ const list = [
     </ListItemButton>
   </ListItem>
 ));
-const Drawers = () => {
+const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
   const [open, setOpen] = useState([false, false, false, false, false]);
   const [matchCollapse, setMatchCollapse] = useState<boolean[]>([]);
   const [activeEventList, setActiveEventList] = useState<SportInterface[]>([]);
-
+  const { isSignedIn } = useContext(UserContext);
   useEffect(() => {
     const getNewEventOpen = async () => {
       const { response } = await sportServices.leftMenu();
-
       if (response?.data) {
-        console.log(response.data);
         if (response?.data?.length > 0) {
           setActiveEventList(response.data);
           setMatchCollapse(response.data.map((i: any) => (i ? false : false)));
@@ -114,12 +120,23 @@ const Drawers = () => {
       activeEventList.map((sport, index) => (
         <>
           {" "}
-          <ListItem sx={{p:0, gap:0}} key={sport.sportId + sport.totalMatch} disablePadding>
+          <ListItem
+            sx={{
+              p: 0,
+              gap: 0,
+              bgcolor: matchCollapse[index]
+                ? sportsTabList.find((sItem) => sItem.name === sport.sportName)
+                    ?.color
+                : "",
+            }}
+            key={sport.sportId + sport.totalMatch}
+            disablePadding
+          >
             <ListItemButton
               onClick={() => handleClickSport(index)}
-              sx={{ color: "text.secondary" }}
+              sx={{ color: matchCollapse[index] ? "white" : "text.secondary" }}
             >
-              <ListItemIcon sx={{minWidth:30}}>
+              <ListItemIcon sx={{ minWidth: 30 }}>
                 {
                   sportsTabList.find((sItem) => sItem.name === sport.sportName)
                     ?.icon
@@ -127,12 +144,20 @@ const Drawers = () => {
               </ListItemIcon>
               <ListItemText
                 primaryTypographyProps={{
-                  sx: { fontSize: "0.8rem", textOverflow:"ellipsis", overflow:"hidden", whiteSpace:"nowrap" },
-
+                  sx: {
+                    fontSize: "0.8rem",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                  },
                 }}
                 primary={`${sport.sportName} ( ${sport.totalMatch} )`}
               />
-              {matchCollapse[index] ? <ExpandLess fontSize="small" /> : <ExpandMore fontSize="small" />}
+              {matchCollapse[index] ? (
+                <ExpandLess fontSize="small" />
+              ) : (
+                <ExpandMore fontSize="small" />
+              )}
             </ListItemButton>
           </ListItem>
           <Collapse in={matchCollapse[index]}>
@@ -144,7 +169,12 @@ const Drawers = () => {
                 <ListItemButton sx={{ color: "text.secondary" }}>
                   <ListItemText
                     primaryTypographyProps={{
-                      sx: { fontSize: "0.8rem",textOverflow:"ellipsis", overflow:"hidden", whiteSpace:"nowrap" },
+                      sx: {
+                        fontSize: "0.8rem",
+                        textOverflow: "ellipsis",
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                      },
                     }}
                     primary={`${match.matchName} )`}
                   />
@@ -157,18 +187,39 @@ const Drawers = () => {
     [activeEventList, matchCollapse]
   );
 
+  const nav  = useNavigate()
+
   return (
-    <Box p={1} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-      <Icon src="/assets/images/icon.png" alt="ico" />
-      {/* <BoxWithTitle title="Upcoming Fixure">
-      <Box >
-      
-      ksdflajsdlfkjasldfkjlaskdj
-      </Box>
-    </BoxWithTitle>*/}
+    <Box
+      // p={{ lg: 1 }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        minHeight: "100vh",
+        bgcolor: {
+          xs: colorHex.bg3,
+          lg: isSignedIn ? colorHex.bg3 : colorHex.bg6,
+        },
+      }}
+    >
+      {<Icon onClick={()=>nav("/")} src="/assets/images/icon.png" alt="ico" />}
+      {isSignedIn && (
+        <Box display={"flex"} alignItems="center" px={1}>
+          <SearchTextField />
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerToggle}
+            sx={{ pt: 1, display: { lg: "none" } }}
+          >
+            <Menu fontSize="large" />
+          </IconButton>
+        </Box>
+      )}
       <Box
         sx={{
-          bgcolor: colorHex.bg7,
+          bgcolor: { lg: colorHex.bg7 },
           overflow: "auto",
           height: "100%",
           position: "relative",
@@ -223,7 +274,7 @@ const Drawers = () => {
 
 const Sidebar = (props: Props) => {
   const { window } = props;
-
+  const { isSignedIn } = useContext(UserContext);
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -233,6 +284,7 @@ const Sidebar = (props: Props) => {
       sx={{
         width: { lg: drawerWidth, xl: drawerWidthXl },
         mt: { lg: topNavHeight },
+        // ml:0.5,
         flexShrink: { lg: 0 },
       }}
       aria-label="mailbox folders"
@@ -248,14 +300,18 @@ const Sidebar = (props: Props) => {
         }}
         sx={{
           display: { xs: "block", lg: "none" },
+          zIndex: !isSignedIn ? 100 : undefined,
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
-            width: { lg: drawerWidth, xl: drawerWidthXl },
+            width: "70%",
+            bgcolor: colorHex.bg7,
+            backgroundImage: "none",
+            height: "100vh",
           },
         }}
       >
         {/* {drawer} */}
-        <Drawers />
+        <Drawers handleDrawerToggle={props.handleDrawerToggle} />
       </Drawer>
       <Drawer
         variant="permanent"
@@ -266,11 +322,12 @@ const Sidebar = (props: Props) => {
             width: { lg: drawerWidth, xl: drawerWidthXl },
             mt: { lg: topNavHeight },
             overflow: "hidden",
+            pr: 1,
           },
         }}
         open
       >
-        <Drawers />
+        <Drawers handleDrawerToggle={props.handleDrawerToggle} />
         {/* {drawer} */}
       </Drawer>
     </Box>
@@ -278,3 +335,36 @@ const Sidebar = (props: Props) => {
 };
 
 export default Sidebar;
+
+export function SearchTextField(props:TextFieldProps) {
+  return (
+    <TextField
+      size={"small"}
+      placeholder="Search"
+      sx={{
+        fontSize: "0.8rem",
+        "& fieldset": {
+          border: "none",
+        },
+        flex: 1,
+        m: {
+          sx: 1,
+          lg: 0,
+        },
+      }}
+      fullWidth
+      InputProps={{
+        style: {
+          fontSize: "0.8rem",
+          background: colorHex.bg6,
+        },
+        endAdornment: (
+          <InputAdornment position="end">
+            <Search htmlColor={"#aaafb5"} />
+          </InputAdornment>
+        ),
+      }}
+      {...props}
+    />
+  );
+}

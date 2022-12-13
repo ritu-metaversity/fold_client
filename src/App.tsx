@@ -14,11 +14,14 @@ import { SnackbarUtilsConfigurator } from "./components/layout/snackBarUtil";
 import { SnackbarProvider } from "notistack";
 import Pages from "./components/pages";
 import { userServices } from "./utils/api/user/services";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 interface UserContextType {
-  setIsSignedIn: Dispatch<SetStateAction<boolean|null>> | null;
+  setIsSignedIn: Dispatch<SetStateAction<boolean | null>> | null;
   setUser: Dispatch<SetStateAction<any>> | null;
-  isSignedIn: boolean|null;
+  setModal: Dispatch<SetStateAction<{ login: boolean }>> | null;
+  isSignedIn: boolean | null;
+  modal: { login: boolean };
   user: any;
   stakes: { [x: string]: number };
 }
@@ -39,7 +42,9 @@ export const UserContext = createContext<UserContextType>({
   isSignedIn: null,
   user: null,
   setIsSignedIn: null,
+  modal: { login: false },
   setUser: null,
+  setModal: null,
   stakes: defaultStake,
 });
 
@@ -47,15 +52,10 @@ export const UserContext = createContext<UserContextType>({
 function App() {
   const [isSignedIn, setIsSignedIn] = useState<null|boolean>(null);
   const [user, setUser] = useState(null);
-
+  const [modal, setModal] = useState<{ login: boolean }>({ login: false });
   const [stakes, setButtonValue] = React.useState<{ [x: string]: number }>(
     defaultStake
   );
-
-  const handleChange = (e: any) => {
-    const buttons = { ...stakes };
-    setButtonValue({ ...buttons, [e.target.name]: e.target.value });
-  };
 
   const getButtonValue = async () => {
     const { response } = await userServices.getButtonValue();
@@ -88,7 +88,15 @@ function App() {
       <SnackbarProvider autoHideDuration={1500}>
         <div className="App">
           <UserContext.Provider
-            value={{ stakes,isSignedIn, user, setIsSignedIn, setUser }}
+            value={{
+              stakes,
+              isSignedIn,
+              user,
+              modal,
+              setModal,
+              setIsSignedIn,
+              setUser,
+            }}
           >
             <Layout>
               <Pages />

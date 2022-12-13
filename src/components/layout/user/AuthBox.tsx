@@ -21,9 +21,9 @@ import { authServices } from "../../../utils/api/auth/services";
 import { UserContext } from "../../../App";
 
 export function AuthBox() {
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   const theme = useTheme();
-  const { setIsSignedIn, setUser } = useContext(UserContext);
+  const { setIsSignedIn, setUser, modal, setModal } = useContext(UserContext);
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       userId: "",
@@ -40,6 +40,9 @@ export function AuthBox() {
     },
   });
   const matches = useMediaQuery("(max-width:1280px)");
+  const handleClose=() => {
+    setModal && setModal({login:false})
+  }
   return (
     <UserContainer>
       <form onSubmit={handleSubmit} style={{ display: "flex", gap: 5 }}>
@@ -124,14 +127,14 @@ export function AuthBox() {
           type="submit"
           onClick={() => {
             if (matches) {
-              setOpen(true);
+              setModal && setModal({ login: true });
             }
           }}
         >
           LOGIN
         </LoginButton>
       </form>
-      <CustomizedDialogs title="Login" open={open} setOpen={setOpen}>
+      <CustomizedDialogs title="Login" open={modal.login} handleClose={handleClose}>
         <LoginForm
           values={values}
           handleSubmit={handleSubmit}

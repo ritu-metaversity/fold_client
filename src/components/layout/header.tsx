@@ -1,14 +1,18 @@
 import { AuthBox } from "./user/AuthBox";
 import { Announcement } from "./Announcement";
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import { CenterBox, Icon, IconSmall, TopNavLinks } from "./styledComponents";
-import {  Divider, useMediaQuery, useTheme } from "@mui/material";
+import {
+  CenterBox,
+  Icon,
+  IconSmall,
+  StyledAppBar,
+  TopNavLinks,
+} from "./styledComponents";
+import { useMediaQuery, useTheme } from "@mui/material";
 import Sidebar from "./Sidebar";
 import { UserContext } from "../../App";
 import UserBox from "./user/UserBox";
@@ -26,24 +30,25 @@ interface Props extends React.PropsWithChildren {
   window?: () => Window;
 }
 
-
-const linksWithoutSideBar = ["/report/accountstatement"];
+const linksWithoutSideBar = ["/report/accountstatement","/report/activity"];
 
 export const topNavHeight = "2.5rem";
+
 export default function Header(props: Props) {
   const theme = useTheme();
   const value = React.useContext(UserContext);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-const nav = useNavigate()
+  const nav = useNavigate();
   const loc = useLocation();
   const notShowSidebar = linksWithoutSideBar.includes(loc.pathname);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const { isSignedIn } = React.useContext(UserContext);
   const matches = useMediaQuery("(min-width:1280px)");
-  const drawerWidthLocal = notShowSidebar ? 0:drawerWidth  ;
-  const drawerWidthXlLocal = notShowSidebar ?0: drawerWidthXl ;
+  const drawerWidthLocal = notShowSidebar ? 0 : drawerWidth;
+  const drawerWidthXlLocal = notShowSidebar ? 0 : drawerWidthXl;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -60,7 +65,7 @@ const nav = useNavigate()
           zIndex: 100,
         }}
       >
-        <TopNavLinks to="/"  id={"top-nav-current"}>
+        <TopNavLinks to="/" id={"top-nav-current"}>
           Exchange
         </TopNavLinks>
         <TopNavLinks to="#">Live Casino</TopNavLinks>
@@ -78,54 +83,73 @@ const nav = useNavigate()
           </Box>
         )} */}
       </CenterBox>
-      <AppBar
+      <StyledAppBar
         position="fixed"
         elevation={0}
         sx={{
+          alignItems: notShowSidebar ? "center" : "",
           width: {
             lg: `calc(100% - ${drawerWidthLocal}px)`,
             xl: `calc(100% - ${drawerWidthXlLocal}px)`,
           },
           ml: { lg: `${drawerWidthLocal}px`, xl: `${drawerWidthXlLocal}px` },
-          px: 0,
+          pr: 1,
           mt: { lg: topNavHeight },
           [theme.breakpoints.down("lg")]: {
-            bgcolor: colorHex.bg3,
+            bgcolor: isSignedIn ? "" : colorHex.bg3,
+            height: isSignedIn ? 64 : 50,
           },
         }}
       >
-        <Toolbar
+        {/* <Toolbar
           className="toolbar-padding"
           sx={{
             gap: 1,
-            alignItems: !notShowSidebar ?"flex-start":"center",
-            pt: 2,
+            alignItems: !notShowSidebar ? "flex-start" : "center",
+            pt: { lg: 2 },
             [theme.breakpoints.down("lg")]: {
               bgcolor: colorHex.bg3,
+              height: !isSignedIn ? 50 : undefined,
+              
             },
+            maxHeight: 50,
+          }}
+        > */}
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          // edge="start"
 
+          onClick={notShowSidebar ? () => nav("/") : handleDrawerToggle}
+          sx={{
+            "&:hover": { bgcolor: "transparent" },
+            my: "auto",
+            mr: 1,
+            pt: 0,
+            display: { lg: "none" },
           }}
         >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={notShowSidebar? ()=>nav("/"):handleDrawerToggle}
-            sx={{ mx: 2, display: { lg: "none" } }}
-          >
-            {notShowSidebar ? <HomeRoundedIcon /> : < MenuIcon />}
-          </IconButton>
-          {notShowSidebar && matches && <Box width={220} p={1}>
-            
-            <Icon src="/assets/images/icon.png" alt="ico" />
-            </Box>
-          }
-          <IconSmall src="/assets/images/icon.png" />
-          {matches && <Announcement />}
-          {value?.isSignedIn ? <UserBox /> : <AuthBox />}
-        </Toolbar>
-        <Divider sx={{ p: 0, borderBottomWidth: 2 }} />
-      </AppBar>
+          {notShowSidebar ? (
+            <HomeRoundedIcon sx={{ fontSize: "2rem", mt: 1.5 }} />
+          ) : (
+            <MenuIcon sx={{ fontSize: "2rem" }} />
+          )}
+        </IconButton>
+        {notShowSidebar && matches && (
+          <Box width={220} p={1}>
+            <Icon
+              onClick={() => nav("/")}
+              src="/assets/images/icon.png"
+              alt="ico"
+            />
+          </Box>
+        )}
+        <IconSmall onClick={() => nav("/")} src="/assets/images/icon.png" />
+        {matches && <Announcement />}
+        {value?.isSignedIn ? <UserBox /> : <AuthBox />}
+        {/* </Toolbar>  */}
+        {/* <Divider sx={{ p: 0, borderBottomWidth: 2 }} /> */}
+      </StyledAppBar>
       {!notShowSidebar && (
         <Sidebar
           mobileOpen={mobileOpen}

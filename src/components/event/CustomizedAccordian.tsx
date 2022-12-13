@@ -6,7 +6,6 @@ import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import { colorHex } from "../../constants";
 
 const Accordion = styled((props: AccordionProps) => (

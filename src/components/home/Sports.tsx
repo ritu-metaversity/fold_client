@@ -7,6 +7,7 @@ import { sportsTabList } from "./sportsTabList";
 import { ScrollableTabsButtonVisible } from "./ScrollableTabsButtonVisible";
 import Match from "./match";
 import { UserContext } from "../../App";
+import "./miniScrollbar.css";
 
 const Sports = () => {
   const [value, setValue] = React.useState(0);
@@ -99,9 +100,13 @@ console.log()
         setValue={setValue}
         sports={activeSportList}
       />
-      <Grid container display={{ xs: "none", lg: "flex" }} color="white"
-        fontSize= "0.9rem"
-        bgcolor={color}>
+      <Grid
+        container
+        display={{ xs: "none", lg: "flex" }}
+        color="white"
+        fontSize="0.9rem"
+        bgcolor={color}
+      >
         <Grid
           item
           xs={6.6}
@@ -138,9 +143,15 @@ console.log()
           </Grid>
         </Grid>
       </Grid>
-      {activeEventList.map((item) => (
-        <Match matches={item} />
-      ))}
+      <Box
+        id="scrollable-match-list"
+        maxHeight={"60vh"}
+        sx={{ overflowY: "overlay", overflowX: "hidden", p: { xs: 0.5, lg: 0 } }}
+      >
+        {activeEventList.map((item) => (
+          <Match matches={item} />
+        ))}
+      </Box>
     </Box>
   );
 };

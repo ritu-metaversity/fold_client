@@ -66,21 +66,18 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 interface Props extends React.PropsWithChildren {
   title?: string;
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleClose?: () => void;
 }
 export default function CustomizedDialogs({
   title,
   children,
   open,
-  setOpen,
+  handleClose,
 }: Props) {
   // const handleClickOpen = () => {
   //   setOpen(true);
   // };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  
   return (
     <div>
       {/* <Button variant="outlined" onClick={handleClickOpen}>
@@ -102,7 +99,7 @@ export default function CustomizedDialogs({
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
-          onClose={handleClose}
+          onClose={handleClose?handleClose:()=>{}}
         >
           {title}
         </BootstrapDialogTitle>

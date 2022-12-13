@@ -1,7 +1,7 @@
 import Header, { drawerWidth, drawerWidthXl } from "./header";
 
-import React, { FC, PropsWithChildren } from "react";
-import { Box, BoxProps, Theme, Toolbar, useMediaQuery } from "@mui/material";
+import { FC, PropsWithChildren } from "react";
+import { Box, Toolbar } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export const StyledMain = styled(Box)(({ theme }) => ({
@@ -22,7 +22,6 @@ export const StyledMain = styled(Box)(({ theme }) => ({
 }));
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
-  const matches = useMediaQuery("(min-width:1280px)");
 
   return (
     <div>

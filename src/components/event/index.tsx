@@ -2,7 +2,7 @@ import { OddsNumberTitle } from './OddsNumberTitle';
 import { OddsNumberTitleTwo } from './OddsNumberTitleTwo';
 import Odds from "./odds";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CustomizedAccordions from "./CustomizedAccordian";
 import { Grid, Typography, useMediaQuery } from "@mui/material";
 import OddsOnlyTwo from "./oddsOnlyTwo";
@@ -10,9 +10,11 @@ import HomeLayout from "../layout/homeLayout";
 import { BetSlip } from "./BetSlip";
 import { colorHex } from "../../constants";
 import MyBet from './MyBet';
-import CustomizedDialogs from "../common/Dailog";
 import CustomizedDialog2 from "../common/Dailog2";
 import MybetMobile from './MybetMobile';
+import { userServices } from '../../utils/api/user/services';
+import { useSearchParams } from 'react-router-dom';
+import { UserContext } from '../../App';
 
 
 const bets = {
@@ -45,13 +47,44 @@ const bets = {
     },
   ],
 };
+
+interface BetsInterface {
+  [x: string]: {
+    nation: string;
+    rate: number;
+    amount: number;
+    priveValue: number;
+    marketName: string;
+    back: boolean;
+  }[];
+}
+
 const value = -1;
 const Event = () => {
+  const [bets, setBets] = useState<BetsInterface | null>(null);
   const [betId, setBetId] = useState(0);
+  const [searchParams] = useSearchParams();
+  const {isSignedIn}  = useContext(UserContext)
   const { title } = {
     title: <Typography fontSize={"0.85rem"}>Pakistan</Typography>,
   };
   const matches = useMediaQuery("(max-width : 1280px)");
+  const matchId = searchParams.get("match-id")
+  console.log(matchId)
+
+  const getBets = async () => {
+    if (!matchId || !isSignedIn) return;
+    const { response } = await userServices.betListByMatch(matchId);
+  }
+  useEffect(() => {
+    getBets()
+    return () => {
+      
+    }
+  }, [isSignedIn])
+  
+  if (!matchId) return <></>;
+
   console.log(matches);
   return (
     <Box m={0.3} mt={0.6}>
@@ -67,11 +100,11 @@ const Event = () => {
             height={"100%"}
           >
             <BetSlip betId={betId} setBetId={setBetId} />
-            <MyBet bets={bets} />
+            {bets && <MyBet bets={bets} />}
           </Box>
         }
       >
-        <MybetMobile bets={bets} ></MybetMobile>
+        {bets && <MybetMobile bets={bets} ></MybetMobile>}
         <CustomizedDialog2
           title="Bet Slip"
           open={Boolean(betId) && matches}

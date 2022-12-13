@@ -1,6 +1,5 @@
-import { CustomizedDatePicker } from "./CustomizedDatePicker";
 import { Search } from "@mui/icons-material";
-import "./accountDatePicker.css";
+import "../accountSummary/accountDatePicker.css";
 import {
   Button,
   Grid,
@@ -14,7 +13,8 @@ import {
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { colorHex } from "../../constants";
-import { PdfIcon } from "./styledComponents";
+import { PdfIcon } from "../accountSummary/styledComponents";
+import { CustomizedDatePicker } from "../accountSummary/CustomizedDatePicker";
 
 const LabelText = styled(Typography)(({ theme }) => ({
   color: "text.secondary",
@@ -26,18 +26,19 @@ const LabelText = styled(Typography)(({ theme }) => ({
 const Filter = () => {
   const [toDate, setToDate] = useState(new Date());
   const [fromDate, setFromDate] = useState(new Date());
+
   return (
     <Box p={1} py={{ xs: 1, md: 2, lg: 1 }} px={{ xs: 1, md: 4, lg: 1 }}>
       <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
         <Typography
           // variant="h6"
-          fontSize={"1.15rem"}
+          fontSize={{xs:"1.15rem",md:"1.4rem"}}
           fontWeight="500"
           flex={1}
           color={"text.secondary"}
           textAlign="left"
         >
-          Account Statement
+          Activity Log
         </Typography>
 
         <TextField
@@ -90,9 +91,8 @@ const Filter = () => {
             defaultValue={"0"}
             fullWidth
           >
-            <MenuItem value="0">All</MenuItem>
-            <MenuItem value="1">Deposit/Withdrawal Report</MenuItem>
-            <MenuItem value="2">Game report</MenuItem>
+            <MenuItem value="0">Login</MenuItem>
+            <MenuItem value="1">Change Password</MenuItem>
           </Select>
         </Grid>
         <Grid

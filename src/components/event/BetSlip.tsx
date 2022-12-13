@@ -17,7 +17,6 @@ import React, {
   useContext,
   useState,
 } from "react";
-import { useNavigation } from "react-router-dom";
 import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
 import {
