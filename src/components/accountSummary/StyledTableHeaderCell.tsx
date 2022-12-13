@@ -14,6 +14,9 @@ function createData(
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   color: theme.palette.text.secondary,
   fontSize: "0.8rem",
+  [theme.breakpoints.up("lg")]: {
+    fontSize: "0.9rem",
+  },
   padding: 4,
   whiteSpace: "nowrap",
 }));
@@ -21,12 +24,18 @@ export const StyledTableHeaderCell = styled(StyledTableCell)(({ theme }) => ({
   color: theme.palette.text.secondary,
   fontWeight: 800,
 }));
-type columnIds = "date" | "index" | "credit" | "debit" | "points" | "remarks";
+export type columnIds =
+  | "date"
+  | "index"
+  | "credit"
+  | "debit"
+  | "points"
+  | "remarks";
 
-export interface ColumnsInterface {
-  id: columnIds;
+export interface ColumnsInterface<Type> {
+  id: Type;
   label: string;
-  minWidth?: number;
+  minWidth?: number|string;
   align?: "left" | "right" | "center";
 }
 export const rows = [

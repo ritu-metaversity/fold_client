@@ -85,10 +85,8 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
       result["error"] = error.response?.data;
       console.log(error.response.status)
       if (error.response?.status === 401) {
-        console.log("sd")
         localStorage.clear();
         snackBarUtil.error("Session changed. Please login again!");
-        alert("Session changed. Please login again!");
         window.location.replace("/");
       }
     })

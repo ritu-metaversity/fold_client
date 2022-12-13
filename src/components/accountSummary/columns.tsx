@@ -1,6 +1,6 @@
-import { ColumnsInterface } from "./StyledTableHeaderCell";
+import { columnIds, ColumnsInterface } from "./StyledTableHeaderCell";
 
-export const columns: ColumnsInterface[] = [
+export const columns: ColumnsInterface<columnIds>[] = [
   {
     id: "date",
     label: "Date",

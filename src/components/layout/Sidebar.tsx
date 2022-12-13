@@ -23,6 +23,7 @@ import { colorHex } from "../../constants";
 import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "../home/sportsTabList";
 import { UserContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 interface Props extends React.PropsWithChildren {
   /**
    * Injected by the documentation to work in an iframe.
@@ -186,6 +187,8 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
     [activeEventList, matchCollapse]
   );
 
+  const nav  = useNavigate()
+
   return (
     <Box
       // p={{ lg: 1 }}
@@ -193,13 +196,14 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
         display: "flex",
         flexDirection: "column",
         gap: 2,
+        minHeight: "100vh",
         bgcolor: {
           xs: colorHex.bg3,
           lg: isSignedIn ? colorHex.bg3 : colorHex.bg6,
         },
       }}
     >
-      {<Icon src="/assets/images/icon.png" alt="ico" />}
+      {<Icon onClick={()=>nav("/")} src="/assets/images/icon.png" alt="ico" />}
       {isSignedIn && (
         <Box display={"flex"} alignItems="center" px={1}>
           <SearchTextField />

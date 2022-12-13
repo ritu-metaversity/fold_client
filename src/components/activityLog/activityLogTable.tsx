@@ -1,4 +1,3 @@
-import { StatementPopUp } from "./StatementPopUp";
 import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,6 +8,7 @@ import Paper from "@mui/material/Paper";
 import { colorHex } from "../../constants";
 import {
   Breakpoint,
+  Grid,
   Pagination,
   PaginationItem,
   Theme,
@@ -17,62 +17,23 @@ import {
 } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import { columns } from "./columns";
 import {
   StyledTableHeaderCell,
-  rows,
   StyledTableCell,
   ColumnsInterface,
-} from "./StyledTableHeaderCell";
+} from "../accountSummary/StyledTableHeaderCell";
 import CustomizedDialog2 from "../common/Dailog2";
-import { Type } from "typescript";
-
-
-type BreakpointOrNull = Breakpoint | null;
-
-export const useWidth = (): Breakpoint => {
-  const theme: Theme = useTheme();
-  const keys: readonly Breakpoint[] = [...theme.breakpoints.keys];
-  console.log(
-    keys.reduce((output: BreakpointOrNull, key: Breakpoint) => {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const matches = useMediaQuery(theme.breakpoints.up(key));
-      return output != null && matches ? key : output;
-    }, "xs")
-  );
-  return (
-    keys.reduce((output: BreakpointOrNull, key: Breakpoint) => {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const matches = useMediaQuery(theme.breakpoints.up(key));
-      return output != null && matches ? key : output;
-    }, "xs") ?? "xs"
-  );
-};
 
 interface Props {
   columns: ColumnsInterface<any>[];
   rows: any[];
 }
-export default function AccountTable({ columns, rows }: Props) {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleRowClick = () => {
-    setOpen(true);
-  };
-  const breakpoints = useWidth();
+export default function ActivityTable({ columns, rows }: Props) {
+
   // console.log(breakpoints)
   return (
     <>
-      <CustomizedDialog2
-        maxWidth={breakpoints}
-        open={open}
-        handleClose={handleClose}
-        title=" Result"
-      >
-        <StatementPopUp />
-      </CustomizedDialog2>
+
       <TableContainer
         component={Paper}
         elevation={0}
@@ -105,12 +66,11 @@ export default function AccountTable({ columns, rows }: Props) {
           <TableBody>
             {rows.map((row) => (
               <TableRow
-                key={row.index + row.date}
-                onClick={handleRowClick}
+                key={row.ip + row.date}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 {columns.map(({ id, align }) => (
-                  <StyledTableCell align={align}>{row[id]}</StyledTableCell>
+                  <StyledTableCell align={align} >{row[id]}</StyledTableCell>
                 ))}
               </TableRow>
             ))}
@@ -118,28 +78,6 @@ export default function AccountTable({ columns, rows }: Props) {
         </Table>
       </TableContainer>
 
-      <Pagination
-        count={4}
-        siblingCount={0}
-        color="secondary"
-        renderItem={(item) => (
-          <PaginationItem
-            slots={{
-              first: KeyboardDoubleArrowLeftIcon,
-              last: KeyboardDoubleArrowRightIcon,
-            }}
-            {...item}
-          />
-        )}
-        sx={{
-          display: "inline-block",
-          maxWidth: "100%",
-          m: "auto",
-          justifyContent: "center",
-        }}
-        showFirstButton
-        showLastButton
-      />
     </>
   );
 }

@@ -64,7 +64,7 @@ interface Props extends React.PropsWithChildren {
   handleClose: () => void;
 }
 export default function CustomizedDialog2({children,maxWidth,open,title,handleClose}:Props) {
-
+  
   return (
     <>
       <BootstrapDialog

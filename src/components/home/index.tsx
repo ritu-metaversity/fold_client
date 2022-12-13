@@ -7,7 +7,7 @@ import Hero from "./Hero";
 import Sports from "./Sports";
 // import { sportsTabList } from "./sportsTabList";
 
-const rightMenu = (
+export const homeRightMenu = (
   <>
     <BoxWithTitle title="New Launched">
       <BlinkImage src="/assets/lc/ab3.jpg" alt="" />
@@ -26,7 +26,7 @@ const rightMenu = (
 );
 const Home = () => {
   return (
-    <HomeLayout sideWidth={250} sideWidthXl={300} rightMenu={rightMenu} >
+    <HomeLayout sideWidth={250} sideWidthXl={300} rightMenu={homeRightMenu} >
       <Hero />
       {<Sports />}
     </HomeLayout>

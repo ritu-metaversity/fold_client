@@ -1,4 +1,4 @@
-import { apiWithSnackbar } from "../apiService";
+import { apiHandler, apiWithSnackbar } from "../apiService";
 import { userResources } from "./resources";
 
 interface ChangePasswordPayload {
@@ -15,9 +15,9 @@ export const userServices = {
     };
     return await apiWithSnackbar(params);
   },
-  fullUser: async () => {
+  profile: async () => {
     const params = { resource: userResources.USER_INFO };
-    return await apiWithSnackbar(params);
+    return await apiHandler(params);
   },
   update: async (data: any) => {
     const params = {
@@ -26,11 +26,11 @@ export const userServices = {
     };
     return await apiWithSnackbar(params);
   },
-  wallet: async () => {
+  balance: async () => {
     const params = {
-      resource: userResources.GET_WALLET,
+      resource: userResources.GET_BALANCE,
     };
-    return await apiWithSnackbar(params);
+    return await apiHandler(params);
   },
   changePassword: async (data: ChangePasswordPayload) => {
     const params = { resource: userResources.CHANGE_PASSWORD, data };
@@ -49,6 +49,13 @@ export const userServices = {
       data,
     };
     return await apiWithSnackbar(params);
+  },
+  betListByMatch: async (matchId: string) => {
+    const params = {
+      resource: userResources.GET_BET_LIST,
+      data: {matchId}
+    };
+    return await apiHandler(params);
   },
   getButtonValue: async () => {
     const params = {

@@ -78,7 +78,7 @@ const Match = ({ matches }: Props) => {
   return (
     <Grid
       container
-      onClick={() => navigate("/sports/details")}
+      onClick={() => navigate(`/sports/details/?match-id=${matches.matchId}`)}
       bgcolor={{ xs: colorHex.bg2, lg: colorHex.bg1 }}
       p={{ xs: 0.5, lg: 0 }}
       sx={{ cursor: "pointer" }}

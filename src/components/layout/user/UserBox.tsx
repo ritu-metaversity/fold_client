@@ -2,12 +2,22 @@ import { AvatarMenu } from "./AvatarMenu";
 import { KeyboardArrowDownOutlined } from "@mui/icons-material";
 import { Avatar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../App";
 import { UserContainer } from "../styledComponents";
+import { userServices } from "../../../utils/api/user/services";
 
+interface BalanceDataInterface {
+  userId: number;
+  balance: number;
+  message: null | string;
+  libality: number;
+}
 const UserBox = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [balanceData, setBalanceData] = useState<BalanceDataInterface | null>(
+    null
+  );
   const open = Boolean(anchorEl);
   const { user } = useContext(UserContext);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -16,6 +26,18 @@ const UserBox = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const getBalance = async () => {
+    const { response } = await userServices.balance();
+    if (response?.data) {
+      setBalanceData(response.data);
+    }
+  };
+  useEffect(() => {
+    getBalance();
+
+    return () => {};
+  }, []);
 
   return (
     <>
@@ -35,7 +57,7 @@ const UserBox = () => {
           fontWeight={{ xs: 800, lg: 500 }}
           whiteSpace="nowrap"
         >
-          pts: 0 | 0
+          pts: {balanceData?.balance} | {balanceData?.libality}
         </Typography>
         <Box
           display="flex"
