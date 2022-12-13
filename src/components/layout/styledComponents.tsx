@@ -57,6 +57,7 @@ export const SpeakerIcon = styled.img`
 
 export const Icon = styled.img`
   padding: 10px;
+  cursor: pointer;
   max-width: 250px;
   @media (max-width: 1280px) {
     display: none;
@@ -67,6 +68,7 @@ export const IconSmall = styled.img`
   width: 95px;
   height: 40px;
   aspect-ratio: 1;
+  cursor: pointer;
   margin-left: -10px;
   margin-bottom: -10px;
   @media (min-width: 768px) {

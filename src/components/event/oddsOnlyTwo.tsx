@@ -1,5 +1,6 @@
 import { Grid, Typography } from "@mui/material";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
+import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
 
 interface Props {
@@ -42,14 +43,26 @@ const values = (
 );
 
 const OddsOnlyTwo = ({ title, setBetId }: Props) => {
+  const { isSignedIn, setModal } = useContext(UserContext);
+  const handleClick = () => {
+    if (!isSignedIn) {
+      if (setModal) {
+        setModal({ login: true });
+        return;
+      }
+    }
+    setBetId(1);
+  };
+  const handleClick2 = () => {
+    if (!isSignedIn) {
+      if (setModal) {
+        setModal({ login: true });
+        return;
+      }
+    }
+    setBetId(2);
+  };
 
-    const handleClick = () => {
-      setBetId(1);
-    };
-    const handleClick2 = () => {
-      setBetId(2);
-    };
-  
   return (
     <Grid
       container
@@ -84,8 +97,12 @@ const OddsOnlyTwo = ({ title, setBetId }: Props) => {
         alignItems={"center"}
         gap={{ xs: "1.2%", md: "2%", lg: "2%" }}
       >
-        <Grid {...gridProps2} onClick={handleClick}>{values} </Grid>
-        <Grid {...gridProps} onClick={handleClick2} >{values} </Grid>
+        <Grid {...gridProps2} onClick={handleClick}>
+          {values}{" "}
+        </Grid>
+        <Grid {...gridProps} onClick={handleClick2}>
+          {values}{" "}
+        </Grid>
         <Grid
           item
           xs={3.5}

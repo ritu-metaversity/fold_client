@@ -109,7 +109,7 @@ abbr[title] {
 
 .react-date-picker__calendar {
   max-width: 250px;
-
+  
     inset: 100% 0 auto auto!important;
 }
 

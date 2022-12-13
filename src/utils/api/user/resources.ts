@@ -3,8 +3,8 @@ export const userResources: {
   [x: string]: ApiResource;
 } = {
   USER_INFO: {
-    URL: "user/full-user",
-    METHOD: "GET",
+    URL: "enduser/profile",
+    METHOD: "POST",
   },
   USER: {
     URL: "user/:id",
@@ -14,9 +14,9 @@ export const userResources: {
     URL: "user",
     METHOD: "PUT",
   },
-  GET_WALLET: {
-    URL: "user/get-balance",
-    METHOD: "GET",
+  GET_BALANCE: {
+    URL: "enduser/get-user-balance",
+    METHOD: "POST",
   },
   MAKE_TRANSACTION: {
     URL: "transaction",
@@ -31,7 +31,11 @@ export const userResources: {
     METHOD: "POST",
   },
   CHANGE_PASSWORD: {
-    URL: "/enduser/change-password",
-    METHOD: "PATCH",
+    URL: "enduser/change-password",
+    METHOD: "POST",
+  },
+  GET_BET_LIST: {
+    URL: "enduser/bet-list-by-matchid",
+    METHOD: "POST",
   },
 };

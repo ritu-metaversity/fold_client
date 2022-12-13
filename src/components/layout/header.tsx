@@ -30,7 +30,7 @@ interface Props extends React.PropsWithChildren {
   window?: () => Window;
 }
 
-const linksWithoutSideBar = ["/report/accountstatement"];
+const linksWithoutSideBar = ["/report/accountstatement","/report/activity"];
 
 export const topNavHeight = "2.5rem";
 
@@ -97,7 +97,7 @@ export default function Header(props: Props) {
           mt: { lg: topNavHeight },
           [theme.breakpoints.down("lg")]: {
             bgcolor: isSignedIn ? "" : colorHex.bg3,
-            height: isSignedIn ? 64 :50,
+            height: isSignedIn ? 64 : 50,
           },
         }}
       >
@@ -121,7 +121,13 @@ export default function Header(props: Props) {
           // edge="start"
 
           onClick={notShowSidebar ? () => nav("/") : handleDrawerToggle}
-          sx={{ "&:hover": {bgcolor:"transparent"}, my:"auto", mr: 1, pt: 0, display: { lg: "none" } }}
+          sx={{
+            "&:hover": { bgcolor: "transparent" },
+            my: "auto",
+            mr: 1,
+            pt: 0,
+            display: { lg: "none" },
+          }}
         >
           {notShowSidebar ? (
             <HomeRoundedIcon sx={{ fontSize: "2rem", mt: 1.5 }} />
@@ -131,10 +137,14 @@ export default function Header(props: Props) {
         </IconButton>
         {notShowSidebar && matches && (
           <Box width={220} p={1}>
-            <Icon src="/assets/images/icon.png" alt="ico" />
+            <Icon
+              onClick={() => nav("/")}
+              src="/assets/images/icon.png"
+              alt="ico"
+            />
           </Box>
         )}
-        <IconSmall src="/assets/images/icon.png" />
+        <IconSmall onClick={() => nav("/")} src="/assets/images/icon.png" />
         {matches && <Announcement />}
         {value?.isSignedIn ? <UserBox /> : <AuthBox />}
         {/* </Toolbar>  */}

@@ -39,8 +39,14 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         }} // transitionDuration={500}
         // TransitionComponent={Collapse}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={()=>nav("/report/accountstatement")}> Account Statement</MenuItem>
+        <MenuItem onClick={() => nav("/profile")}>Profile</MenuItem>
+        <MenuItem onClick={() => nav("/report/accountstatement")}>
+          {" "}
+          Account Statement
+        </MenuItem>
+        <MenuItem onClick={() => nav("/report/activity")}>
+          Activity Log
+        </MenuItem>
 
         <CustomizedDialogPassword />
         <CustomizedDialogStack />
