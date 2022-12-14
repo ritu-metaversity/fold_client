@@ -11,10 +11,11 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { Dispatch, FormEvent, FormEventHandler, SetStateAction, useState } from "react";
 import { colorHex } from "../../constants";
 import { PdfIcon } from "../accountSummary/styledComponents";
 import { CustomizedDatePicker } from "../accountSummary/CustomizedDatePicker";
+import { searchFilters } from ".";
 
 const LabelText = styled(Typography)(({ theme }) => ({
   color: "text.secondary",
@@ -23,97 +24,109 @@ const LabelText = styled(Typography)(({ theme }) => ({
   marginBlock: 4,
 }));
 
-const Filter = () => {
+interface Props { 
+  searchFilters: searchFilters;
+  setSearchFilters: Dispatch<SetStateAction<searchFilters>>;
+}
+const Filter = ({searchFilters,setSearchFilters}:Props) => {
   const [toDate, setToDate] = useState(new Date());
+  const [type, setType] = useState("login");
   const [fromDate, setFromDate] = useState(new Date());
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSearchFilters({...searchFilters,type}) 
+  }
   return (
     <Box p={1} py={{ xs: 1, md: 2, lg: 1 }} px={{ xs: 1, md: 4, lg: 1 }}>
-      <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
-        <Typography
-          // variant="h6"
-          fontSize={{xs:"1.15rem",md:"1.4rem"}}
-          fontWeight="500"
-          flex={1}
-          color={"text.secondary"}
-          textAlign="left"
-        >
-          Activity Log
-        </Typography>
+      <form onSubmit={handleSubmit} >
+        <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
+          <Typography
+            // variant="h6"
+            fontSize={{ xs: "1.15rem", md: "1.4rem" }}
+            fontWeight="500"
+            flex={1}
+            color={"text.secondary"}
+            textAlign="left"
+          >
+            Activity Log
+          </Typography>
 
-        <TextField
-          size={"small"}
-          placeholder="Search"
-          sx={{
-            fontSize: "0.8rem",
-            "& fieldset": {
-              border: "none",
-            },
-            flex: 1,
-            my: 1,
-            maxWidth: { lg: 320 },
-          }}
-          fullWidth
-          InputProps={{
-            style: {
-              fontSize: "0.8rem",
-              background: colorHex.bg6,
-            },
-            endAdornment: (
-              <InputAdornment position="end">
-                <Search htmlColor={"#aaafb5"} />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Box>
-
-      <Grid container rowGap={1}>
-        <Grid item xs={6} lg={1.5} textAlign="left" pr={1}>
-          <LabelText>From</LabelText>
-          <CustomizedDatePicker value={fromDate} onChange={setFromDate} />
-        </Grid>
-        <Grid item xs={6} pr={{ lg: 2 }} lg={1.5} textAlign="left">
-          <LabelText>To</LabelText>
-          <CustomizedDatePicker value={toDate} onChange={setToDate} />
-        </Grid>
-        <Grid item xs={12} pr={{ lg: 2 }} lg={2}>
-          <LabelText>Type</LabelText>
-
-          <Select
-            margin="dense"
-            size="small"
+          <TextField
+            size={"small"}
+            placeholder="Search"
             sx={{
-              maxHeight: { xs: 30, lg: 36 },
-              textAlign: "start",
-              fontSize: { xs: "0.8rem", lg: "1rem" },
+              fontSize: "0.8rem",
+              "& fieldset": {
+                border: "none",
+              },
+              flex: 1,
+              my: 1,
+              maxWidth: { lg: 320 },
             }}
-            defaultValue={"0"}
             fullWidth
+            InputProps={{
+              style: {
+                fontSize: "0.8rem",
+                background: colorHex.bg6,
+              },
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Search htmlColor={"#aaafb5"} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Box>
+
+        <Grid container rowGap={1}>
+          <Grid item xs={6} lg={1.5} textAlign="left" pr={1}>
+            <LabelText>From</LabelText>
+            <CustomizedDatePicker value={fromDate} onChange={setFromDate} />
+          </Grid>
+          <Grid item xs={6} pr={{ lg: 2 }} lg={1.5} textAlign="left">
+            <LabelText>To</LabelText>
+            <CustomizedDatePicker value={toDate} onChange={setToDate} />
+          </Grid>
+          <Grid item xs={12} pr={{ lg: 2 }} lg={2}>
+            <LabelText>Type</LabelText>
+
+            <Select
+              margin="dense"
+              size="small"
+              sx={{
+                maxHeight: { xs: 30, lg: 36 },
+                textAlign: "start",
+                fontSize: { xs: "0.8rem", lg: "1rem" },
+              }}
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              fullWidth
+            >
+              <MenuItem value="login">Login</MenuItem>
+              <MenuItem value="password">Change Password</MenuItem>
+            </Select>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            pr={{ lg: 2 }}
+            lg={1.5}
+            display="flex"
+            alignItems="flex-end"
           >
-            <MenuItem value="0">Login</MenuItem>
-            <MenuItem value="1">Change Password</MenuItem>
-          </Select>
+            <Button
+              fullWidth
+              sx={{ mt: "auto", color: "white", fontSize: "1rem" }}
+              type="submit"
+              color="secondary"
+              variant="contained"
+            >
+              Submit
+            </Button>
+          </Grid>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          pr={{ lg: 2 }}
-          lg={1.5}
-          display="flex"
-          alignItems="flex-end"
-        >
-          <Button
-            fullWidth
-            sx={{ mt: "auto", color: "white", fontSize: "1rem" }}
-            type="submit"
-            color="secondary"
-            variant="contained"
-          >
-            Submit
-          </Button>
-        </Grid>
-      </Grid>
+      </form>
       <Box
         display="flex"
         justifyContent={"space-between"}
