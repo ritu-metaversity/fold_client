@@ -6,12 +6,13 @@ import {
   InputAdornment,
   MenuItem,
   Select,
+  SelectChangeEvent,
   styled,
   TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { Dispatch, FormEvent, FormEventHandler, SetStateAction, useState } from "react";
+import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { colorHex } from "../../constants";
 import { PdfIcon } from "../accountSummary/styledComponents";
 import { CustomizedDatePicker } from "../accountSummary/CustomizedDatePicker";
@@ -31,15 +32,20 @@ interface Props {
 const Filter = ({searchFilters,setSearchFilters}:Props) => {
   const [toDate, setToDate] = useState(new Date());
   const [type, setType] = useState("login");
+  const [pageSize, setPageSize] = useState< number>(25);
   const [fromDate, setFromDate] = useState(new Date());
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchFilters({...searchFilters,type}) 
   }
+  const handlePageSizeChange = (e: SelectChangeEvent<number>) => {
+    setPageSize(Number(e.target.value));
+    setSearchFilters({ ...searchFilters, pageSize: Number(e.target.value)});
+  };
   return (
     <Box p={1} py={{ xs: 1, md: 2, lg: 1 }} px={{ xs: 1, md: 4, lg: 1 }}>
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit}>
         <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
           <Typography
             // variant="h6"
@@ -138,6 +144,8 @@ const Filter = ({searchFilters,setSearchFilters}:Props) => {
           <LabelText>Show</LabelText>
           <Select
             defaultValue={5000}
+            onChange={handlePageSizeChange}
+            value={pageSize}
             sx={{
               mx: 0.2,
               minWidth: 100,
@@ -146,11 +154,11 @@ const Filter = ({searchFilters,setSearchFilters}:Props) => {
               maxHeight: { xs: 30, lg: 36 },
             }}
           >
-            <MenuItem value="0">25</MenuItem>
-            <MenuItem>50</MenuItem>
-            <MenuItem>100</MenuItem>
-            <MenuItem>500</MenuItem>
-            <MenuItem>1000</MenuItem>
+            <MenuItem value={25}>25</MenuItem>
+            <MenuItem value={50}>50</MenuItem>
+            <MenuItem value={100}>100</MenuItem>
+            <MenuItem value={500}>500</MenuItem>
+            <MenuItem value={1000}>1000</MenuItem>
             <MenuItem value={5000}>5000</MenuItem>
           </Select>
           <LabelText>Entries</LabelText>

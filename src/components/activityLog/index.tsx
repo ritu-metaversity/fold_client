@@ -17,12 +17,13 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import { utilServices } from "../../utils/api/util/services";
 import { BootstrapTooltip } from "../accountSummary/StatementPopUp";
 
-export type searchFilters = { type: string };
+export type searchFilters = { type: string; pageSize: number; };
 
 const Activity = () => {
   const matches = useMediaQuery("(min-width:1280px)");
   const [searchFilters, setSearchFilters] = useState<searchFilters>({
     type: "login",
+    pageSize: 25,
   });
   const [rows, setRows] = useState<any[]>([]);
   const [originalRows, setOriginalRows] = useState<any[]>([]);
@@ -33,6 +34,9 @@ const Activity = () => {
     if (isSignedIn === false) nav("/");
     return () => {};
   }, [isSignedIn]);
+
+  const [page, setPage] = useState(1);
+
   const [open, setOpen] = React.useState<number>(-1);
   const handleClose = () => {
     setOpen(-1);
@@ -51,6 +55,7 @@ const Activity = () => {
           setRows(
             response.data.map((row: any, index: number) => {
               const newRow: any = { ...row };
+              newRow.id = index;
               newRow.date = new Date(row.lastLogin).toLocaleString();
               newRow.username = row.userid;
               newRow.ip = (
@@ -65,25 +70,37 @@ const Activity = () => {
               return newRow;
             })
           );
+          setPage(1)
         }
       } else if (searchFilters.type === "password") {
         const { response } = await utilServices.passwordHistory();
         console.log(response);
         if (response?.data) {
+          setOriginalRows(response.data);
           setRows(
-            response.data.map((row: any,index:number) => {
+            response.data.map((row: any, index: number) => {
               const newRow: any = { ...row };
-              newRow.username = row.userId
+              newRow.id = index;
+              newRow.username = row.userId;
               newRow.date = new Date(row.createdOn).toLocaleString();
               newRow.ip = (
                 <span>
                   {row.ipAddress}{" "}
-                  <VisibilityIcon fontSize="small" onClick={()=>setOpen(index)} />
+                  <VisibilityIcon
+                    fontSize="small"
+                    onClick={() => setOpen(index)}
+                  />
                 </span>
               );
               newRow.detail = (
-                <BootstrapTooltip title={row.deviceInfo} enterTouchDelay={1} >
-                  <Box sx={{ textDecoration: "underline", cursor: "pointer", width:"min-content" }}>
+                <BootstrapTooltip title={row.deviceInfo} enterTouchDelay={1}>
+                  <Box
+                    sx={{
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                      width: "min-content",
+                    }}
+                  >
                     Detail
                   </Box>
                 </BootstrapTooltip>
@@ -91,6 +108,8 @@ const Activity = () => {
               return newRow;
             })
           );
+          setPage(1);
+
         }
       }
     };
@@ -135,7 +154,7 @@ const Activity = () => {
           ></Filter>
           <Box sx={{ display: { xs: "none", lg: "block" } }}>
             <ActivityTable
-              rows={rows}
+              rows={rows.slice((page-1) * searchFilters.pageSize, page * searchFilters.pageSize)}
               columns={
                 searchFilters.type === "login"
                   ? columns.filter((i) => i.id !== "detail")
@@ -148,10 +167,11 @@ const Activity = () => {
             sx={{ display: { xs: "block", lg: "none" } }}
             fontSize="0.75rem"
           >
-            {rows.map((row) => (
+            {rows.slice((page-1) * searchFilters.pageSize, page * searchFilters.pageSize).map((row) => (
               <>
                 <Box
                   py={{ xs: 0.5, md: 2, lg: 1 }}
+                  key={`${searchFilters.type} - ${row.id}`}
                   px={{ xs: 1, md: 4, lg: 1 }}
                 >
                   {columns
@@ -179,9 +199,11 @@ const Activity = () => {
           </Box>
 
           <Pagination
-            count={4}
+            count={Math.ceil(rows.length/searchFilters.pageSize)}
             siblingCount={0}
             color="secondary"
+            page={page }
+            onChange={(e,page)=>setPage(page)}
             renderItem={(item) => (
               <PaginationItem
                 slots={{
