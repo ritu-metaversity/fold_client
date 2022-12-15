@@ -75,6 +75,10 @@ const Event = () => {
   const getBets = async () => {
     if (!matchId || !isSignedIn) return;
     const { response } = await userServices.betListByMatch(matchId);
+    console.log(response)
+    if (response?.data) {
+      setBets(response.data)
+    }
   }
   useEffect(() => {
     getBets()

@@ -14,7 +14,7 @@ import {
   TooltipProps,
   Typography,
 } from "@mui/material";
-import "./style.css";
+import "./formCheck.css";
 import React, { useState } from "react";
 import {
   StyledTableCell,

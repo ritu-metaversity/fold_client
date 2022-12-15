@@ -1,0 +1,10 @@
+.form-check {
+    /* margin: 0 10px;
+     */
+     margin-right: 1rem;
+    font-size: 0.8rem;
+}
+.form-check-label {
+    vertical-align: middle;
+
+}

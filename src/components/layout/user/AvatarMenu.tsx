@@ -44,6 +44,9 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
           {" "}
           Account Statement
         </MenuItem>
+        <MenuItem onClick={() => nav("/report/currentbets")}>
+          Current Bets
+        </MenuItem>
         <MenuItem onClick={() => nav("/report/activity")}>
           Activity Log
         </MenuItem>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Account from '../accountSummary';
 import Activity from '../activityLog';
+import CurrentBets from '../currentBets';
 import Event from '../event';
 import Home from '../home'
 import Profile from "../profile/Profile";
@@ -15,6 +16,7 @@ const Pages = () => {
         <Route path="/report">
           <Route path="accountstatement" element={<Account />} />
           <Route path="activity" element={<Activity />} />
+          <Route path="currentbets" element={<CurrentBets />} />
         </Route>
         <Route path="/profile" element={<Profile />} />
       </Routes>

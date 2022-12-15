@@ -30,7 +30,11 @@ interface Props extends React.PropsWithChildren {
   window?: () => Window;
 }
 
-const linksWithoutSideBar = ["/report/accountstatement","/report/activity"];
+const linksWithoutSideBar = [
+  "/report/accountstatement",
+  "/report/activity",
+  "/report/currentbets",
+];
 
 export const topNavHeight = "2.5rem";
 
