@@ -75,7 +75,7 @@ export const getMyBets = (betList: any[]) =>
     <Grid
       container
       p={1}
-      py={1}
+      py={1.5}
       my={1}
       fontSize="0.8rem"
       borderLeft={`5px solid ${
@@ -88,7 +88,7 @@ export const getMyBets = (betList: any[]) =>
       <Grid item xs={3} textAlign="center" >
         {bet.rate}
       </Grid>
-      <Grid item xs={3} textAlign="center">
+      <Grid item xs={3} textAlign="right">
         {bet.amount}
       </Grid>
     </Grid>
