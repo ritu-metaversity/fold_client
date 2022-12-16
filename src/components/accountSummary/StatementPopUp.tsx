@@ -14,7 +14,7 @@ import {
   TooltipProps,
   Typography,
 } from "@mui/material";
-import "./style.css";
+import "./formCheck.css";
 import React, { useState } from "react";
 import {
   StyledTableCell,
@@ -38,7 +38,7 @@ interface ResultColumnsInterface {
   align?: "right" | "left";
   minWidth?: number;
 }
-const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => (
+export const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.arrow}`]: {
@@ -113,8 +113,13 @@ const ResultRows = [
     date: "07/12/2022 12:14:59",
     ip: "115.246.121.179",
     browser: (
-      <BootstrapTooltip title="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36">
-        <Box sx={{ textDecoration: "underline", cursor: "pointer" }}>Detail</Box>
+      <BootstrapTooltip
+        enterTouchDelay={1}
+        title="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+      >
+        <Box sx={{ textDecoration: "underline", cursor: "pointer" }}>
+          Detail
+        </Box>
       </BootstrapTooltip>
     ),
     type: "back",
@@ -137,7 +142,9 @@ const ResultRows = [
     ip: "115.246.121.179",
     browser: (
       <BootstrapTooltip title="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36">
-        <Box sx={{ textDecoration: "underline", cursor: "pointer" }}>Detail</Box>
+        <Box sx={{ textDecoration: "underline", cursor: "pointer" }}>
+          Detail
+        </Box>
       </BootstrapTooltip>
     ),
     type: "lay",

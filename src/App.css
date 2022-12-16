@@ -63,12 +63,6 @@ a {
   }
 }
 
-#top-nav-current {
-  color: #fdcf13;
-    /* padding-bottom: 0.1em; */
-    margin-bottom: -0.1em;
-    border-bottom: 2px solid #fdcf13;
-}
 
 .App-header {
   background-color: #282c34;

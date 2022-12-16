@@ -75,20 +75,20 @@ export const getMyBets = (betList: any[]) =>
     <Grid
       container
       p={1}
-      py={2}
-      my={0.5}
-      fontSize="0.75rem"
+      py={1.5}
+      my={1}
+      fontSize="0.8rem"
       borderLeft={`5px solid ${
-        bet.type === "back" ? colorHex.back[1] : colorHex.lay[1]
+        bet.back? colorHex.back[1] : colorHex.lay[1]
       } `}
     >
       <Grid item xs={6} textAlign="left">
-        {bet.name}
+        {bet.nation}
       </Grid>
       <Grid item xs={3} textAlign="center" >
-        {bet.value}
+        {bet.rate}
       </Grid>
-      <Grid item xs={3} textAlign="center">
+      <Grid item xs={3} textAlign="right">
         {bet.amount}
       </Grid>
     </Grid>

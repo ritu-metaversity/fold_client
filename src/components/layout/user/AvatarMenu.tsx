@@ -1,5 +1,5 @@
 import { Menu, MenuItem } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
 import CustomizedDialogPassword from "./ResetPasswordDailog";
@@ -27,6 +27,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         elevation={0}
         anchorEl={anchorEl}
         open={open}
+        disableScrollLock
         onClose={handleClose}
         sx={{
           width: "100%",
@@ -43,6 +44,9 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         <MenuItem onClick={() => nav("/report/accountstatement")}>
           {" "}
           Account Statement
+        </MenuItem>
+        <MenuItem onClick={() => nav("/report/currentbets")}>
+          Current Bets
         </MenuItem>
         <MenuItem onClick={() => nav("/report/activity")}>
           Activity Log
