@@ -7,7 +7,7 @@ function createData(
   return { date,username,ip };
 }
 
-export type columnIds = "username" | "date" | "ip";
+export type columnIds = "username" | "date" | "ip" | "detail";
 
 
 export const rows = [

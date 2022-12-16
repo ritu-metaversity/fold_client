@@ -64,6 +64,7 @@ const Event = () => {
   const [bets, setBets] = useState<BetsInterface | null>(null);
   const [betId, setBetId] = useState(0);
   const [searchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false)
   const {isSignedIn}  = useContext(UserContext)
   const { title } = {
     title: <Typography fontSize={"0.85rem"}>Pakistan</Typography>,
@@ -73,8 +74,16 @@ const Event = () => {
   console.log(matchId)
 
   const getBets = async () => {
+
     if (!matchId || !isSignedIn) return;
+    setLoading(true)
     const { response } = await userServices.betListByMatch(matchId);
+    console.log(response)
+    if (response?.data) {
+      setBets(response.data)
+    }
+    setLoading(false);
+
   }
   useEffect(() => {
     getBets()

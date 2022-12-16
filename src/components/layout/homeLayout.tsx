@@ -29,7 +29,7 @@ const HomeLayout: FC<Props> = ({
             xl: `calc(100% - ${sideWidthXl}px)`,
           },
           pr: 1,
-          gap: 0.5,
+          gap: 0.7,
           flexDirection: "column",
         }}
       >
@@ -47,7 +47,7 @@ const HomeLayout: FC<Props> = ({
           width: { xs: 0, lg: sideWidth, xl: sideWidthXl },
           boxSizing: "content-box",
         }}
-        p={0.5}
+        px={0.5}
         gap={5}
       >
         {rightMenu}

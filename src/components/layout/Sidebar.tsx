@@ -18,12 +18,13 @@ import {
 } from "@mui/material";
 import { Icon, SidebarHeader } from "./styledComponents";
 import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
-import { ExpandLess, ExpandMore, Menu, Search } from "@mui/icons-material";
+import { Add, ChevronRight, ExpandLess, ExpandMore, Menu, Remove, Search } from "@mui/icons-material";
 import { colorHex } from "../../constants";
 import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "../home/sportsTabList";
 import { UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import Loading from "./loading";
 interface Props extends React.PropsWithChildren {
   /**
    * Injected by the documentation to work in an iframe.
@@ -85,7 +86,7 @@ const list = [
   </ListItem>
 ));
 const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
-  const [open, setOpen] = useState([false, false, false, false, false]);
+  const [open, setOpen] = useState([true, false, false, false, false]);
   const [matchCollapse, setMatchCollapse] = useState<boolean[]>([]);
   const [activeEventList, setActiveEventList] = useState<SportInterface[]>([]);
   const { isSignedIn } = useContext(UserContext);
@@ -206,12 +207,12 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
       {<Icon onClick={()=>nav("/")} src="/assets/images/icon.png" alt="ico" />}
       {isSignedIn && (
         <Box display={"flex"} alignItems="center" px={1}>
-          <SearchTextField />
+          {/* <SearchTextField /> */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerToggle}
-            sx={{ pt: 1, display: { lg: "none" } }}
+            sx={{ pt: 1, ml:"auto", display: { lg: "none" } }}
           >
             <Menu fontSize="large" />
           </IconButton>
@@ -227,14 +228,15 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
         }}
       >
         <List sx={{ p: 0, m: 0 }}>
-          <SidebarHeader>
+          
+          <SidebarHeader sx={{ borderBottom:"1px solid "+colorHex.borderLine}}>
             <ListItemButton onClick={() => handleClick(0)}>
-              <ListItemText primary={"Exchange"} />
+              <ListItemText primaryTypographyProps={{fontSize: "0.9rem"}} primary={"Exchange"} />
               {open[0] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
           </SidebarHeader>
           <Collapse in={open[0]}>{exchangeList}</Collapse>
-          <SidebarHeader>
+          {/* <SidebarHeader>
             <ListItemButton onClick={() => handleClick(1)}>
               <ListItemText primary={"Live Casino"} />
 
@@ -265,7 +267,7 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
               {open[4] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
           </SidebarHeader>
-          <Collapse in={open[4]}>{list}</Collapse>
+          <Collapse in={open[4]}>{list}</Collapse> */}
         </List>
       </Box>
     </Box>

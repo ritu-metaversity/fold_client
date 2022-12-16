@@ -18,4 +18,9 @@ export const columns: ColumnsInterface<columnIds>[] = [
     label: "Ip Address",
     minWidth: 70,
   },
+  {
+    id: "detail",
+    label: "Browser Detail",
+    minWidth: 70,
+  },
 ];

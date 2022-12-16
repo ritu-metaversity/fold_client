@@ -33,6 +33,7 @@ const UserBox = () => {
       setBalanceData(response.data);
     }
   };
+  
   useEffect(() => {
     getBalance();
 

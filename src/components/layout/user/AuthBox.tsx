@@ -19,6 +19,10 @@ import { FaInfo } from "react-icons/fa"
 import { useFormik } from "formik";
 import { authServices } from "../../../utils/api/auth/services";
 import { UserContext } from "../../../App";
+import { Form } from 'react-bootstrap';
+
+
+
 
 export function AuthBox() {
   // const [open, setOpen] = React.useState(false);
@@ -39,13 +43,34 @@ export function AuthBox() {
       }
     },
   });
+  const textFieldProps = {
+    // variant: "outlined",
+    sx: {
+      borderRadius: 0,
+      "& fieldset": { outline: "none", border: "none", padding: 0 },
+      border: "1px solid white",
+      height: "2rem",
+    },
+    required: true,
+    inputProps: {
+      style: {
+        maxWidth: "10rem",
+        padding: "0.2rem 0.8rem",
+      },
+    },
+    onChange: handleChange,
+  };
   const matches = useMediaQuery("(max-width:1280px)");
-  const handleClose=() => {
-    setModal && setModal({login:false})
-  }
+  const handleClose = () => {
+    setModal && setModal({ login: false });
+  };
+
   return (
     <UserContainer>
-      <form onSubmit={handleSubmit} style={{ display: "flex", gap: 5 }}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", gap: "0.5rem", marginLeft: "1rem" }}
+      >
         <Box
           display={{
             xs: "none",
@@ -53,11 +78,10 @@ export function AuthBox() {
           }}
         >
           <TextField
+            placeholder="Username*"
+            {...textFieldProps}
             variant="outlined"
             size="small"
-            placeholder="Username*"
-            required
-            sx={{ borderRadius: 0 }}
             name="userId"
             value={values.userId}
             onChange={handleChange}
@@ -66,7 +90,7 @@ export function AuthBox() {
             to=""
             style={{
               display: "block",
-              fontSize: "0.8rem",
+              fontSize: "0.7rem",
               textAlign: "right",
               color: theme.palette.primary.main,
               textDecoration: "none",
@@ -82,27 +106,17 @@ export function AuthBox() {
           }}
         >
           <TextField
+            placeholder="Password*"
+            name="password"
             variant="outlined"
             size="small"
-            placeholder="Password*"
-            sx={{ borderRadius: 0 }}
-            required
-            name="password"
             value={values.password}
-            onChange={handleChange}
+            {...textFieldProps}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                size="small"
-                sx={{
-                  my: -1,
-                }}
-                defaultChecked
-              />
-            }
+          <Form.Check
+            type="checkbox"
             label={
-              <Typography component="span" fontSize={"0.7rem"} my={0}>
+              <Typography component="span" fontSize={"0.65rem"} sx={{verticalAlign:"top"}} my={0}>
                 I agree terms & conditions.
                 <Tooltip title="I am at least 18 years of age and I have read, accept and agree to the Terms and Conditions , Responsible Gaming , GamCare, Gambling Therapy">
                   <Box component="span">
@@ -111,18 +125,12 @@ export function AuthBox() {
                 </Tooltip>
               </Typography>
             }
-            sx={{
-              display: "block",
-              fontSize: "0.6rem",
-              ml: "auto",
-              my: 0,
-            }}
           />
         </Box>
         <LoginButton
           variant="contained"
           sx={{
-            height: { xs:"2rem",lg: "2.5rem" },
+            height: { xs: "2rem", lg: "2.2rem" },
           }}
           type="submit"
           onClick={() => {
@@ -134,7 +142,11 @@ export function AuthBox() {
           LOGIN
         </LoginButton>
       </form>
-      <CustomizedDialogs title="Login" open={modal.login} handleClose={handleClose}>
+      <CustomizedDialogs
+        title="Login"
+        open={modal.login}
+        handleClose={handleClose}
+      >
         <LoginForm
           values={values}
           handleSubmit={handleSubmit}

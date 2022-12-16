@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 export const CenterBox = styled(Box)`
   display: flex;
   justify-content: center;
-  padding: 0.5em;
+  padding-top: 0.2em;
+  padding-bottom: 0px; 
 `;
 export const BlinkImage = styled.img`
   width: 100%;
@@ -19,26 +20,30 @@ export const TopNavLinks = styled(Link)`
   font-size: 0.9rem;
   &:active {
     color: #fdcf13;
-    padding-bottom: 0.2em;
     border-bottom: 2px solid #fdcf13;
+  }
+  &:hover {
+    color: #fdcf13;
   }
 `;
 export const SidebarHeader = styled(ListSubheader)`
   padding: 0;
   color: #fdcf13;
+  font-size : 0.8rem !important;
   text-decoration: underline;
 `;
 export const AnnouncementBox = styled(Box)`
   flex: 1;
-  background-color: #70315670;
+  background-color: rgba(112, 49, 86, 0.4);
   padding: 10px;
-  height: 2.5rem;
+  height: 2.2rem;
   @media (max-width: 1280px) {
     padding-block: 2px;
-    border-radius : 5px;  
+    border-radius: 5px;
     margin: 5px;
-    height : initial;
+    height: initial;
   }
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -86,7 +91,7 @@ export const StyledAppBar = styled(AppBar)`
 `;
 export const LoginButton = styled(Button)({
   borderRadius: 0,
-  paddingInline: 15,
+  paddingInline: "2rem",
 });
 
 export const UserContainer = styled(Box)`
