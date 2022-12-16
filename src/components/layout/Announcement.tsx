@@ -5,8 +5,8 @@ import { AnnouncementBox, SpeakerIcon } from "./styledComponents";
 export function Announcement() {
   return (
     <AnnouncementBox>
-      <Marquee gradient={false} speed={150}
-        style={{ overflow: "hidden" }}
+      <Marquee gradient={false} speed={100}
+        style={{ overflow: "hidden", color: "white", fontSize:"0.8rem" }}
       >
         ball lottery started play now and grab your coupons
       </Marquee>

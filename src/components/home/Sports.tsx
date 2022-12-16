@@ -8,10 +8,12 @@ import { ScrollableTabsButtonVisible } from "./ScrollableTabsButtonVisible";
 import Match from "./match";
 import { UserContext } from "../../App";
 import "./miniScrollbar.css";
+import Loading from "../layout/loading";
 
 const Sports = () => {
   const [value, setValue] = React.useState(0);
-  const { isSignedIn} = useContext(UserContext)
+  const { isSignedIn } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
   const [activeSportList, setActiveSportList] = useState<any>(null);
   const [activeEventList, setActiveEventList] = useState([]);
   useEffect(() => {
@@ -51,7 +53,7 @@ const Sports = () => {
       if (!activeSportList) return;
       const { sportId } = activeSportList[value];
       if (!sportId) return;
-
+      setLoading(true)
       const { response } = await sportServices.activeEventFromSport(sportId);
 
       if (response?.data) {
@@ -61,12 +63,14 @@ const Sports = () => {
       } else {
         setActiveEventList([]);
       }
+      setLoading(false);
+
     };
         const getNewEventOpen = async () => {
           if (!activeSportList) return;
           const { sportId } = activeSportList[value];
           if (!sportId) return;
-
+          setLoading(true);
           const { response } = await sportServices.activeEventFromSportOpen(
             sportId
           );
@@ -78,6 +82,7 @@ const Sports = () => {
           } else {
             setActiveEventList([]);
           }
+          setLoading(false);
         };
     if (isSignedIn) {
       
@@ -145,12 +150,15 @@ console.log()
       </Grid>
       <Box
         id="scrollable-match-list"
-        maxHeight={"60vh"}
+        maxHeight={{ xs: "310px", lg: "60vh" }}
         sx={{ overflowY: "overlay", overflowX: "hidden", p: { xs: 0.5, lg: 0 } }}
       >
-        {activeEventList.map((item) => (
+        { loading ? <Box height={200} >
+            <Loading /> 
+            </Box>: activeEventList.map((item) => (
           <Match matches={item} />
-        ))}
+        )) 
+       }
       </Box>
     </Box>
   );

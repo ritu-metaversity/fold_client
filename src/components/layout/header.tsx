@@ -36,7 +36,7 @@ const linksWithoutSideBar = [
   "/report/currentbets",
 ];
 
-export const topNavHeight = "2.5rem";
+export const topNavHeight = "1.9rem";
 
 export default function Header(props: Props) {
   const theme = useTheme();
@@ -49,6 +49,7 @@ export default function Header(props: Props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const { pathname } = useLocation();
   const { isSignedIn } = React.useContext(UserContext);
   const matches = useMediaQuery("(min-width:1280px)");
   const drawerWidthLocal = notShowSidebar ? 0 : drawerWidth;
@@ -69,11 +70,45 @@ export default function Header(props: Props) {
           zIndex: 100,
         }}
       >
-        <TopNavLinks to="/" id={"top-nav-current"}>
+        <TopNavLinks
+          to="/"
+          style={
+            pathname !== "/casino" && pathname !== "/virtual-casino"
+              ? {
+                  color: "#fdcf13",
+                  borderBottom: "2px solid #fdcf13",
+                }
+              : {}
+          }
+        >
           Exchange
         </TopNavLinks>
-        <TopNavLinks to="#">Live Casino</TopNavLinks>
-        <TopNavLinks to="#">Virtual Casino</TopNavLinks>
+        <TopNavLinks
+          style={
+            pathname === "/casino"
+              ? {
+                  color: "#fdcf13",
+                  borderBottom: "2px solid #fdcf13",
+                }
+              : {}
+          }
+          to="/casino"
+        >
+          Live Casino
+        </TopNavLinks>
+        <TopNavLinks
+          style={
+            pathname === "/virtual-casino"
+              ? {
+                  color: "#fdcf13",
+                  borderBottom: "2px solid #fdcf13",
+                }
+              : {}
+          }
+          to="/virtual-casino"
+        >
+          Virtual Casino
+        </TopNavLinks>
         {/* {value.isSignedIn && (
           <Box height="100%" sx={{ position: "absolute", right: 5, top: 5 }}>
             <Button variant="contained" color="success" sx={{ mr: 2, py: 0.3 }}>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Account from '../accountSummary';
 import Activity from '../activityLog';
+import Casino from '../casino/Casino';
 import CurrentBets from '../currentBets';
 import Event from '../event';
 import Home from '../home'
@@ -18,6 +19,8 @@ const Pages = () => {
           <Route path="activity" element={<Activity />} />
           <Route path="currentbets" element={<CurrentBets />} />
         </Route>
+        <Route path="/casino" element={<Casino />} />
+        <Route path="/virtual-casino" element={<Casino />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
