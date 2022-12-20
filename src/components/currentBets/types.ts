@@ -3,4 +3,6 @@ export interface SearchFiltersCurrentBets {
   status: "matched" | "deleted";
   type: "all" | "back" | "lay";
   pageSize: number;
+  index: number;
+  totalPages: number;
 }

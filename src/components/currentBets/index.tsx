@@ -1,5 +1,5 @@
 import { Box, Pagination, PaginationItem, useMediaQuery } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AccountContainer } from "../accountSummary/styledComponents";
 import { Announcement } from "../layout/Announcement";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
@@ -11,6 +11,7 @@ import "./formRadio.css";
 import CurrentBetTable from "./table";
 import { columnCasino, columnSports } from "./columns";
 import { Form, Row } from "react-bootstrap";
+import { userServices } from "../../utils/api/user/services";
 
 const sportsRow = [
   {
@@ -37,17 +38,49 @@ const sportsRow = [
   },
 ];
 
+const betTypes = ["none", "all", "back", "lay"];
+
 const CurrentBets = () => {
   const matches = useMediaQuery("(min-width:1280px)");
-  const [page, setPage] = useState(1);
+  const [sportsRow, setSportsRow] = useState([]);
   const [searchFilters, setSearchFilters] = useState<SearchFiltersCurrentBets>({
     type: "all",
     category: "sports",
     status: "matched",
     pageSize: 25,
+    totalPages: 1,
+    index: 0,
   });
-  console.log(sportsRow,Math.ceil(sportsRow.length / searchFilters.pageSize),sportsRow.length
-  )
+  const getList = async () => {
+    const payload = {
+      betType: betTypes.indexOf(searchFilters.type),
+      noOfRecords: searchFilters.pageSize,
+      index: searchFilters.index,
+      sportType: 1,
+    };
+    const { response } = await userServices.currentBets(payload);
+    if (response?.data?.dataList) {
+      setSportsRow(
+        response.data.dataList.map((row: any) => {
+          row.action = <Form.Check type="checkbox" />;
+          return row;
+        })
+      );
+      setSearchFilters({
+        ...searchFilters,
+        totalPages: response.data.totalPages,
+      });
+    }
+  };
+  useEffect(() => {
+    getList();
+  }, [searchFilters.type, searchFilters.pageSize, searchFilters.index]);
+
+  console.log(
+    sportsRow,
+    Math.ceil(sportsRow.length / searchFilters.pageSize),
+    sportsRow.length
+  );
   return (
     <>
       <AccountContainer>
@@ -65,33 +98,36 @@ const CurrentBets = () => {
               searchFilters.category === "casino" ? columnCasino : columnSports
             }
           />
-         
         </Box>
-        {sportsRow.length>0 && <Pagination
-          count={Math.ceil(sportsRow.length / searchFilters.pageSize)}
-          siblingCount={0}
-          color="secondary"
-          page={page}
-          onChange={(e, page) => setPage(page)}
-          renderItem={(item) => (
-            <PaginationItem
-              slots={{
-                first: KeyboardDoubleArrowLeftIcon,
-                last: KeyboardDoubleArrowRightIcon,
-              }}
-              {...item}
-            />
-          )}
-          sx={{
-            display: "inline-block",
-            maxWidth: "100%",
-            m: "auto",
-            mt:0,
-            justifyContent: "center",
-          }}
-          showFirstButton
-          showLastButton
-        />}
+        {sportsRow.length > 0 && (
+          <Pagination
+            count={searchFilters.totalPages}
+            siblingCount={0}
+            color="secondary"
+            page={searchFilters.index+1}
+            onChange={(e, page) =>
+              setSearchFilters({ ...searchFilters, index: page-1 })
+            }
+            renderItem={(item) => (
+              <PaginationItem
+                slots={{
+                  first: KeyboardDoubleArrowLeftIcon,
+                  last: KeyboardDoubleArrowRightIcon,
+                }}
+                {...item}
+              />
+            )}
+            sx={{
+              display: "inline-block",
+              maxWidth: "100%",
+              m: "auto",
+              mt: 0,
+              justifyContent: "center",
+            }}
+            showFirstButton
+            showLastButton
+          />
+        )}
       </AccountContainer>
       <Footer />
     </>

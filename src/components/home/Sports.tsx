@@ -40,8 +40,8 @@ const Sports = () => {
         setActiveSportList(data1);
       }
     };
+    console.log("asdfk")
     if (isSignedIn) {
-      
       getList();
     } else {
       getListOpen()

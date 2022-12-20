@@ -12,9 +12,10 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { colorHex } from "../../constants";
 import { PdfIcon } from "./styledComponents";
+import { AccountStatementFilter } from ".";
 
 const LabelText = styled(Typography)(({ theme }) => ({
   color: "text.secondary",
@@ -22,10 +23,22 @@ const LabelText = styled(Typography)(({ theme }) => ({
   textAlign: "left",
   marginBlock: 4,
 }));
-
-const Filter = () => {
+interface Props {
+  searchFilters: AccountStatementFilter;
+  setSearchFilters: React.Dispatch<
+    React.SetStateAction<AccountStatementFilter>
+  >;
+}
+const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
   const [toDate, setToDate] = useState(new Date());
   const [fromDate, setFromDate] = useState(new Date());
+  const handleSubmit = () => {
+    setSearchFilters({
+      ...searchFilters,
+      toDate: toDate.toISOString().split("T")[0],
+      fromDate: fromDate.toISOString().split("T")[0],
+    });
+  };
   return (
     <Box p={1} py={{ xs: 1, md: 2, lg: 1 }} px={{ xs: 1, md: 4, lg: 1 }}>
       <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
@@ -82,6 +95,13 @@ const Filter = () => {
           <Select
             margin="dense"
             size="small"
+            value={searchFilters.type + ""}
+            onChange={(e) =>
+              setSearchFilters({
+                ...searchFilters,
+                type: Number(e.target.value),
+              })
+            }
             sx={{
               maxHeight: { xs: 30, lg: 36 },
               textAlign: "start",
@@ -90,9 +110,9 @@ const Filter = () => {
             defaultValue={"0"}
             fullWidth
           >
-            <MenuItem value="0">All</MenuItem>
-            <MenuItem value="1">Deposit/Withdrawal Report</MenuItem>
-            <MenuItem value="2">Game report</MenuItem>
+            <MenuItem value="1">All</MenuItem>
+            <MenuItem value="2">Deposit/Withdrawal Report</MenuItem>
+            <MenuItem value="3">Game report</MenuItem>
           </Select>
         </Grid>
         <Grid
@@ -107,6 +127,7 @@ const Filter = () => {
             fullWidth
             sx={{ mt: "auto", color: "white", fontSize: "1rem" }}
             type="submit"
+            onClick={handleSubmit}
             color="secondary"
             variant="contained"
           >
@@ -124,7 +145,13 @@ const Filter = () => {
         <Box display="flex" alignItems="center">
           <LabelText>Show</LabelText>
           <Select
-            defaultValue={5000}
+            value={searchFilters.noOfRecords}
+            onChange={(e) => {
+              setSearchFilters({
+                ...searchFilters,
+                noOfRecords: Number(e.target.value),
+              });
+            }}
             sx={{
               mx: 0.2,
               minWidth: 100,
@@ -133,11 +160,11 @@ const Filter = () => {
               maxHeight: { xs: 30, lg: 36 },
             }}
           >
-            <MenuItem value="0">25</MenuItem>
-            <MenuItem>50</MenuItem>
-            <MenuItem>100</MenuItem>
-            <MenuItem>500</MenuItem>
-            <MenuItem>1000</MenuItem>
+            <MenuItem value={25}>25</MenuItem>
+            <MenuItem value={50}>50</MenuItem>
+            <MenuItem value={100}>100</MenuItem>
+            <MenuItem value={500}>500</MenuItem>
+            <MenuItem value={1000}>1000</MenuItem>
             <MenuItem value={5000}>5000</MenuItem>
           </Select>
           <LabelText>Entries</LabelText>
