@@ -13,7 +13,7 @@ export const columnSports: ColumnsInterface<any>[] = [
   },
 
   {
-    id: "market",
+    id: "marketname",
     label: "Market Name",
     minWidth: 70,
   },
@@ -33,7 +33,7 @@ export const columnSports: ColumnsInterface<any>[] = [
     minWidth: 70,
   },
   {
-    id: "date",
+    id: "time",
     label: "Place Date",
     minWidth: 70,
   },

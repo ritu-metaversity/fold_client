@@ -38,4 +38,12 @@ export const userResources: {
     URL: "enduser/bet-list-by-matchid",
     METHOD: "POST",
   },
+  CURRENT_BETS: {
+    URL: "enduser/unsettled-bet",
+    METHOD: "POST",
+  },
+  ACCOUNT_STATEMENT: {
+    URL: "enduser/account-statement",
+    METHOD: "POST",
+  },
 };

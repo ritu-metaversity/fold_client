@@ -60,7 +60,7 @@ export default function CurrentBetTable({ columns, rows }: Props) {
                 sx={{
                   "&:last-child td, &:last-child th": { border: 0 },
                   borderLeft: ` 5px solid  ${
-                    row.type === "back" ? colorHex.back[1] : row.type==="lay"? colorHex.lay[1]:"none"
+                    row.isback ? colorHex.back[1] : colorHex.lay[1]
                   }`,
                 }}
               >
@@ -70,8 +70,7 @@ export default function CurrentBetTable({ columns, rows }: Props) {
               </TableRow>
             ))}
           </TableBody>
-              </Table>
-              
+        </Table>
       </TableContainer>
     </>
   );

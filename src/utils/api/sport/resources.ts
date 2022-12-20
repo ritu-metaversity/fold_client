@@ -6,7 +6,7 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     METHOD: "POST",
   },
   GET_ACTIVE_SPORTS_LIST_OPEN: {
-    URL: "/enduser/sport-with-active-matches-open",
+    URL: "/enduser/left-menu-data-open",
     METHOD: "POST",
   },
   GET_EVENT_FROM_SPORTS: {
@@ -14,7 +14,7 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     METHOD: "POST",
   },
   GET_EVENT_FROM_SPORTS_OPEN: {
-    URL: "/enduser/active-sport-match-wise-open",
+    URL: "/enduser/active-match-sport-wise-open",
     METHOD: "POST",
   },
   GET_EVENT_MARKET: {
@@ -26,7 +26,7 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     METHOD: "GET",
   },
   GET_LEFT_MENU_LIST: {
-    URL: "/enduser/sport-with-active-matches-open",
+    URL: "/enduser/left-menu-data-open",
     METHOD: "POST"
   }
 };

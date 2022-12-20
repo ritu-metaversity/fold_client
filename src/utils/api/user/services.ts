@@ -1,4 +1,8 @@
-import { apiHandler, apiWithSnackbar } from "../apiService";
+import {
+  apiHandler,
+  apiWithErrorSnackbar,
+  apiWithSnackbar,
+} from "../apiService";
 import { userResources } from "./resources";
 
 interface ChangePasswordPayload {
@@ -7,6 +11,19 @@ interface ChangePasswordPayload {
   confirmPassword?: string;
 }
 
+interface CurrentBetsPayload {
+  sportType: number;
+  betType: number;
+  noOfRecords: number;
+  index: number;
+}
+export interface AccountStatementPayload {
+  index: number;
+  noOfRecords: number;
+  fromDate: string;
+  toDate: string;
+  type: number;
+}
 export const userServices = {
   user: async (id: number) => {
     const params = {
@@ -53,7 +70,7 @@ export const userServices = {
   betListByMatch: async (matchId: string) => {
     const params = {
       resource: userResources.GET_BET_LIST,
-      data: {matchId}
+      data: { matchId },
     };
     return await apiHandler(params);
   },
@@ -62,5 +79,19 @@ export const userServices = {
       resource: userResources.GET_BUTTON_VALUE,
     };
     return await apiWithSnackbar(params);
+  },
+  currentBets: async (data: CurrentBetsPayload) => {
+    const params = {
+      resource: userResources.CURRENT_BETS,
+      data,
+    };
+    return await apiWithErrorSnackbar(params);
+  },
+  accountStatement: async (data: AccountStatementPayload) => {
+    const params = {
+      resource: userResources.ACCOUNT_STATEMENT,
+      data,
+    };
+    return await apiWithErrorSnackbar(params);
   },
 };
