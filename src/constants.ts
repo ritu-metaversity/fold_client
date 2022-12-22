@@ -7,6 +7,7 @@ export const colorHex = {
   bg5: "#343943",
   bg6: "#23292D",
   bg7: "#17191C",
+  layArr: ["#F994BA", "#F994BACC", "#F994BAA3"],
   lay: {
     1: "#F994BA",
     2: "#F994BACC",
@@ -14,6 +15,7 @@ export const colorHex = {
     hover: "#E16F9A",
   },
   borderLine: "#3C444B",
+  backArr: ["#72BBEF", "#72BBEFCC", "#72BBEFA3"],
   back: {
     1: "#72BBEF",
     2: "#72BBEFCC",

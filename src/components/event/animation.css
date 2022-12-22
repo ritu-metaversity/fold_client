@@ -1,0 +1,85 @@
+.odds-down {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+}
+
+.odds-up {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+}
+
+
+.odds-down::before {
+    content: "";
+    background: #ff000080;
+    transform: scale(0,0);
+    animation: oddsdown .5s ease-out;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px
+}
+
+.odds-up::before {
+    content: "";
+    background: #13c41380;
+    transform: scale(0,0);
+    animation: oddsup .5s ease-out;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px
+}
+
+@keyframes oddsdown {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+@keyframes oddsup {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+.suspended::after{
+    content: "SUSPENDED";
+    text-transform: uppercase;
+    background-color: #131313c2;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    color: red;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    cursor: not-allowed !important;
+    pointer-events: none;
+
+}
+
+.suspended{
+cursor: not-allowed;
+    pointer-events: none;
+}

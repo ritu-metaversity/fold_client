@@ -40,12 +40,12 @@ const Sports = () => {
         setActiveSportList(data1);
       }
     };
-    console.log("asdfk")
-    if (isSignedIn) {
-      getList();
-    } else {
-      getListOpen()
-    }
+    console.log("asdfk");
+    // if (isSignedIn) {
+    getList();
+    // } else {
+    // getListOpen()
+    // }
   }, [isSignedIn]);
 
   useEffect(() => {
@@ -84,8 +84,8 @@ const Sports = () => {
           }
           setLoading(false);
         };
+    
     if (isSignedIn) {
-      
       getNewEvent();
     } else {
       getNewEventOpen()

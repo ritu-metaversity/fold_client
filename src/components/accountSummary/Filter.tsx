@@ -15,7 +15,7 @@ import { Box } from "@mui/system";
 import React, { FC, useState } from "react";
 import { colorHex } from "../../constants";
 import { PdfIcon } from "./styledComponents";
-import { AccountStatementFilter } from ".";
+import { AccountStatementFilter, subtractMonths } from ".";
 
 const LabelText = styled(Typography)(({ theme }) => ({
   color: "text.secondary",
@@ -31,7 +31,7 @@ interface Props {
 }
 const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
   const [toDate, setToDate] = useState(new Date());
-  const [fromDate, setFromDate] = useState(new Date());
+  const [fromDate, setFromDate] = useState(subtractMonths(1));
   const handleSubmit = () => {
     setSearchFilters({
       ...searchFilters,
@@ -96,7 +96,7 @@ const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
             margin="dense"
             size="small"
             value={searchFilters.type + ""}
-            onChange={(e) =>
+            onChange={(e) => 
               setSearchFilters({
                 ...searchFilters,
                 type: Number(e.target.value),

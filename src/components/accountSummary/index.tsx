@@ -13,6 +13,12 @@ import AccountTable from "./customAccountTable";
 import Filter from "./Filter";
 import { AccountContainer } from "./styledComponents";
 
+export function subtractMonths(numOfMonths: number, date = new Date()) {
+  date.setMonth(date.getMonth() - numOfMonths);
+  console.log(date);
+  return date;
+}
+
 export interface AccountStatementFilter extends AccountStatementPayload {
   totalPages: number;
 }
@@ -31,7 +37,7 @@ const Account = () => {
     noOfRecords: 25,
     totalPages: 1,
     index: 0,
-    fromDate: new Date().toISOString().split("T")[0],
+    fromDate: subtractMonths(1).toISOString().split("T")[0],
     toDate: new Date().toISOString().split("T")[0],
   });
 
@@ -53,6 +59,7 @@ const Account = () => {
     searchFilters.fromDate,
     searchFilters.noOfRecords,
     searchFilters.index,
+    searchFilters.type,
   ]);
   return (
     <>
