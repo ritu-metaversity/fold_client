@@ -46,7 +46,7 @@ const gridProps = {
 export const BetSlip: FC<Props> = ({ betId, setBetId }) => {
   const { stakes } = useContext(UserContext);
   const [amount, setAmount] = useState("");
-  const matches = useMediaQuery("(min-width: 1280px)");
+  const matches = useMediaQuery("(min-width: 1279px)");
   if (!betId) return <></>;
   return (
     <Box textAlign={"left"}>

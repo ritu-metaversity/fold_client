@@ -14,6 +14,7 @@ export interface ApiServiceInterface {
   params?: Query;
   pathVars?: Query;
   data?: any;
+  noAuth?: boolean;
   headers?: AxiosRequestHeaders;
 }
 
@@ -43,6 +44,7 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
   params = {},
   headers = {},
   pathVars = {},
+  noAuth = false,
 }) => {
   const { METHOD, URL } = resource;
   const token = localStorage.getItem("token");
@@ -65,7 +67,7 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
       params:filterQuery(params),
       headers: {
         ...headers,
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...((token && !noAuth) ? { Authorization: `Bearer ${token}` } : {}),
       },
     };
   } catch (errors) {
