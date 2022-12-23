@@ -14,6 +14,7 @@ export interface ApiServiceInterface {
   params?: Query;
   pathVars?: Query;
   data?: any;
+  noAuth?: boolean;
   headers?: AxiosRequestHeaders;
 }
 
@@ -43,6 +44,7 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
   params = {},
   headers = {},
   pathVars = {},
+  noAuth = false,
 }) => {
   const { METHOD, URL } = resource;
   const token = localStorage.getItem("token");
@@ -65,7 +67,7 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
       params:filterQuery(params),
       headers: {
         ...headers,
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...((token && !noAuth) ? { Authorization: `Bearer ${token}` } : {}),
       },
     };
   } catch (errors) {
@@ -85,9 +87,11 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
       result["error"] = error.response?.data;
       console.log(error.response.status)
       if (error.response?.status === 401) {
-        localStorage.clear();
-        snackBarUtil.error("Session changed. Please login again!");
-        window.location.replace("/");
+        if (localStorage.getItem('token')) {
+          localStorage.clear();
+          snackBarUtil.error("Session changed. Please login again!");
+          window.location.replace("/");
+        }
       }
     })
     .then((response) => {
@@ -114,11 +118,24 @@ const apiSnackbarNotifications: (
   }
   return args;
 };
-
+const apiWithErrorSnackbar: (
+  arg: ApiServiceInterface
+) => Promise<ApiResponse> = async (args) => {
+  const result = await apiHandler(args);
+  if (result?.error) {
+    const { message } = result.error;
+    if (typeof message === "object") {
+      message?.forEach((message) => snackBarUtil.error(message));
+    } else {
+      snackBarUtil.error(message);
+    }
+  }
+  return result;
+};
 const apiWithSnackbar: (
   arg: ApiServiceInterface
 ) => Promise<ApiResponse> = async (args) => {
   const result = await apiHandler(args);
   return apiSnackbarNotifications(result);
 };
-export { apiService, apiHandler, apiWithSnackbar };
+export { apiService, apiHandler, apiWithErrorSnackbar, apiWithSnackbar };

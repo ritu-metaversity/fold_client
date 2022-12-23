@@ -6,8 +6,8 @@ export const columns: ColumnsInterface<columnIds>[] = [
     label: "Date",
     minWidth: 70,
   },
-  {
-    id: "index",
+  { 
+    id: "sno",
     label: "Sr no",
     minWidth: 70,
     align: "right",
@@ -25,13 +25,13 @@ export const columns: ColumnsInterface<columnIds>[] = [
     minWidth: 70,
   },
   {
-    id: "points",
+    id: "pts",
     label: "Pts",
     align: "right",
     minWidth: 70,
   },
   {
-    id: "remarks",
+    id: "remark",
     label: "Remarks",
   },
 ];

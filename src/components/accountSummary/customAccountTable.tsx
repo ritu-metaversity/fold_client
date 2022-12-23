@@ -17,16 +17,13 @@ import {
 } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import { columns } from "./columns";
 import {
   StyledTableHeaderCell,
-  rows,
   StyledTableCell,
   ColumnsInterface,
 } from "./StyledTableHeaderCell";
 import CustomizedDialog2 from "../common/Dailog2";
-import { Type } from "typescript";
-
+import { AccountStatementFilter } from ".";
 
 type BreakpointOrNull = Breakpoint | null;
 
@@ -52,8 +49,18 @@ export const useWidth = (): Breakpoint => {
 interface Props {
   columns: ColumnsInterface<any>[];
   rows: any[];
+  searchFilters: AccountStatementFilter;
+  setSearchFilters: React.Dispatch<
+    React.SetStateAction<AccountStatementFilter>
+  >;
 }
-export default function AccountTable({ columns, rows }: Props) {
+
+export default function AccountTable({
+  searchFilters,
+  setSearchFilters,
+  columns,
+  rows,
+}: Props) {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -119,9 +126,13 @@ export default function AccountTable({ columns, rows }: Props) {
       </TableContainer>
 
       <Pagination
-        count={4}
+        count={searchFilters.totalPages}
         siblingCount={0}
+        page={searchFilters.index + 1}
         color="secondary"
+        onChange={(e, page) => {
+          setSearchFilters({ ...searchFilters, index: page - 1 });
+        }}
         renderItem={(item) => (
           <PaginationItem
             slots={{

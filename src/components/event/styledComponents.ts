@@ -9,12 +9,14 @@ export const AmountInput = styled.input`
   ::-webkit-inner-spin-button {
     display: none;
   }
+  -moz-appearance: textfield;
   @media (max-width: 1280px) {
     width: calc(100% - 2px);
     ::-webkit-outer-spin-button,
     ::-webkit-inner-spin-button {
       display: block;
     }
+    -moz-appearance: none;
   }
   z-index: 10;
   border: 0;
