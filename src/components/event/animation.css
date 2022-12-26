@@ -57,7 +57,7 @@
     }
 }
 
-.suspended::after{
+.suspended::after,.fancy-suspended::after{
     content: "SUSPENDED";
     text-transform: uppercase;
     background-color: #131313c2;
@@ -79,7 +79,13 @@
 
 }
 
-.suspended{
+.fancy-suspended::after {
+    width: 68%;
+}
+
+
+
+.suspended,.fancy-suspended {
 cursor: not-allowed;
     pointer-events: none;
 }

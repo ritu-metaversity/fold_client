@@ -15,6 +15,7 @@ import { SnackbarProvider } from "notistack";
 import Pages from "./components/pages";
 import { userServices } from "./utils/api/user/services";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { MatchInterface } from "./components/home/match";
 
 interface UserContextType {
   setIsSignedIn: Dispatch<SetStateAction<boolean | null>> | null;
@@ -23,6 +24,8 @@ interface UserContextType {
   isSignedIn: boolean | null;
   modal: { login: boolean };
   user: any;
+  currentMatch: MatchInterface | null;
+  setCurrentMatch?: Dispatch<SetStateAction<MatchInterface | null>>;
   stakes: { [x: string]: number };
 }
 
@@ -46,6 +49,8 @@ export const UserContext = createContext<UserContextType>({
   setUser: null,
   setModal: null,
   stakes: defaultStake,
+  setCurrentMatch: undefined,
+  currentMatch: null
 });
 
 
@@ -56,7 +61,7 @@ function App() {
   const [stakes, setButtonValue] = React.useState<{ [x: string]: number }>(
     defaultStake
   );
-
+  const [currentMatch, setCurrentMatch] = useState<MatchInterface |null>(null)
   const getButtonValue = async () => {
     const { response } = await userServices.getButtonValue();
     if (response?.data) {
@@ -89,6 +94,8 @@ function App() {
         <div className="App">
           <UserContext.Provider
             value={{
+              setCurrentMatch,
+              currentMatch,
               stakes,
               isSignedIn,
               user,

@@ -7,22 +7,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { colorHex } from "../../constants";
 import {
-  Breakpoint,
-  Grid,
-  Pagination,
-  PaginationItem,
-  Theme,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import {
   StyledTableHeaderCell,
   StyledTableCell,
   ColumnsInterface,
 } from "../accountSummary/StyledTableHeaderCell";
-import CustomizedDialog2 from "../common/Dailog2";
 
 interface Props {
   columns: ColumnsInterface<any>[];

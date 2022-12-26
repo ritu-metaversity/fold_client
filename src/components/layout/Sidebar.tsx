@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import Drawer from "@mui/material/Drawer";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import {
   Box,
   Collapse,
@@ -18,13 +16,13 @@ import {
 } from "@mui/material";
 import { Icon, SidebarHeader } from "./styledComponents";
 import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
-import { Add, ChevronRight, ExpandLess, ExpandMore, Menu, Remove, Search } from "@mui/icons-material";
+import { ExpandLess, ExpandMore, Menu, Search } from "@mui/icons-material";
 import { colorHex } from "../../constants";
 import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "../home/sportsTabList";
 import { UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
-import Loading from "./loading";
+
 interface Props extends React.PropsWithChildren {
   /**
    * Injected by the documentation to work in an iframe.
@@ -44,47 +42,7 @@ interface SportInterface {
     matchName: string;
   }[];
 }
-const list = [
-  "All mail",
-  "Trash",
-  "Spam",
-  "All mail",
-  "Trash",
-  "Spam",
-  "All mail",
-  "Trash",
-  "Spam",
-  "All mail",
-  "Trash",
-  "Spam",
-  "All mail",
-  "Trash",
-  "Spam",
-  "All mail",
-  "Trash",
-  "Spam",
-  "All mail",
-  "Trash",
-  "Spam",
-  "All mail",
-  "Trash",
-  "Spam",
-  "All mail",
-  "Trash",
-  "Spam",
-  "All mail",
-  "Trash",
-  "Spam",
-].map((text, index) => (
-  <ListItem key={text + index} disablePadding>
-    <ListItemButton sx={{ color: "text.secondary" }}>
-      <ListItemIcon>
-        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-      </ListItemIcon>
-      <ListItemText primary={text} />
-    </ListItemButton>
-  </ListItem>
-));
+
 const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
   const [open, setOpen] = useState([true, false, false, false, false]);
   const [matchCollapse, setMatchCollapse] = useState<boolean[]>([]);
@@ -147,9 +105,6 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
                 primaryTypographyProps={{
                   sx: {
                     fontSize: "0.8rem",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
                   },
                 }}
                 primary={`${sport.sportName} ( ${sport.totalMatch} )`}
@@ -167,17 +122,21 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
                 key={sport.sportId + "-" + match.matchId}
                 disablePadding
               >
-                <ListItemButton sx={{ color: "text.secondary" }}>
+                <ListItemButton
+                  onClick={() => {
+                    if (isSignedIn) {
+                      nav(`/sports/details/?match-id=${match.matchId}`);
+                    }
+                  }}
+                  sx={{ color: "text.secondary" }}
+                >
                   <ListItemText
                     primaryTypographyProps={{
                       sx: {
                         fontSize: "0.8rem",
-                        textOverflow: "ellipsis",
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
                       },
                     }}
-                    primary={`${match.matchName} )`}
+                    primary={`${match.matchName}`}
                   />
                 </ListItemButton>
               </ListItem>
@@ -185,10 +144,11 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
           </Collapse>
         </>
       )),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [activeEventList, matchCollapse]
   );
 
-  const nav  = useNavigate()
+  const nav = useNavigate();
 
   return (
     <Box
@@ -204,7 +164,13 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
         },
       }}
     >
-      {<Icon onClick={()=>nav("/")} src="/assets/images/icon.png" alt="ico" />}
+      {
+        <Icon
+          onClick={() => nav("/")}
+          src="/assets/images/icon.png"
+          alt="ico"
+        />
+      }
       {isSignedIn && (
         <Box display={"flex"} alignItems="center" px={1}>
           {/* <SearchTextField /> */}
@@ -212,7 +178,7 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerToggle}
-            sx={{ pt: 1, ml:"auto", display: { lg: "none" } }}
+            sx={{ pt: 1, ml: "auto", display: { lg: "none" } }}
           >
             <Menu fontSize="large" />
           </IconButton>
@@ -228,46 +194,18 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
         }}
       >
         <List sx={{ p: 0, m: 0 }}>
-          
-          <SidebarHeader sx={{ borderBottom:"1px solid "+colorHex.borderLine}}>
+          <SidebarHeader
+            sx={{ borderBottom: "1px solid " + colorHex.borderLine }}
+          >
             <ListItemButton onClick={() => handleClick(0)}>
-              <ListItemText primaryTypographyProps={{fontSize: "0.9rem"}} primary={"Exchange"} />
+              <ListItemText
+                primaryTypographyProps={{ fontSize: "0.9rem" }}
+                primary={"Exchange"}
+              />
               {open[0] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
           </SidebarHeader>
           <Collapse in={open[0]}>{exchangeList}</Collapse>
-          {/* <SidebarHeader>
-            <ListItemButton onClick={() => handleClick(1)}>
-              <ListItemText primary={"Live Casino"} />
-
-              {open[1] ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-          </SidebarHeader>
-          <Collapse in={open[1]}>{list}</Collapse>
-          <SidebarHeader>
-            <ListItemButton onClick={() => handleClick(2)}>
-              <ListItemText primary={"Indian Games"} />
-
-              {open[2] ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-          </SidebarHeader>
-          <Collapse in={open[2]}>{list}</Collapse>
-          <SidebarHeader>
-            <ListItemButton onClick={() => handleClick(3)}>
-              <ListItemText primary={"Virtual Casino"} />
-
-              {open[3] ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-          </SidebarHeader>
-          <Collapse in={open[3]}>{list}</Collapse>
-          <SidebarHeader>
-            <ListItemButton onClick={() => handleClick(4)}>
-              <ListItemText primary={"Others"} />
-
-              {open[4] ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-          </SidebarHeader>
-          <Collapse in={open[4]}>{list}</Collapse> */}
         </List>
       </Box>
     </Box>

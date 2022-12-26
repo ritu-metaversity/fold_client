@@ -33,12 +33,11 @@ interface Props {
   setSearchFilters: Dispatch<SetStateAction<SearchFiltersCurrentBets>>;
 }
 const Filter = ({ searchFilters, setSearchFilters }: Props) => {
-  const [type, setType] = useState<SearchFiltersCurrentBets["type"]>("all");
   const [pageSize, setPageSize] = useState<number>(25);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSearchFilters({ ...searchFilters, type });
+    setSearchFilters({ ...searchFilters });
   };
   const handlePageSizeChange = (e: SelectChangeEvent<number>) => {
     setPageSize(Number(e.target.value));
