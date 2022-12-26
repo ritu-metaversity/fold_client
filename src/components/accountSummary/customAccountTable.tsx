@@ -30,13 +30,6 @@ type BreakpointOrNull = Breakpoint | null;
 export const useWidth = (): Breakpoint => {
   const theme: Theme = useTheme();
   const keys: readonly Breakpoint[] = [...theme.breakpoints.keys];
-  console.log(
-    keys.reduce((output: BreakpointOrNull, key: Breakpoint) => {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const matches = useMediaQuery(theme.breakpoints.up(key));
-      return output != null && matches ? key : output;
-    }, "xs")
-  );
   return (
     keys.reduce((output: BreakpointOrNull, key: Breakpoint) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -69,7 +62,6 @@ export default function AccountTable({
     setOpen(true);
   };
   const breakpoints = useWidth();
-  // console.log(breakpoints)
   return (
     <>
       <CustomizedDialog2

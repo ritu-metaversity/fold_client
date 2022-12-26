@@ -6,12 +6,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { colorHex } from "../../constants";
-import {
-  Pagination,
-  PaginationItem,
-} from "@mui/material";
-import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { ColumnsInterface, StyledTableCell, StyledTableHeaderCell } from "../accountSummary/StyledTableHeaderCell";
 
 

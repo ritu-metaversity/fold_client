@@ -245,7 +245,7 @@ export function StatementPopUp() {
                   "&:last-child td, &:last-child th": {
                     border: 0,
                   },
-                  borderLeft: ` 5px solid  ${
+                  borderLeft: `5px solid  ${
                     row.type === "back" ? colorHex.back[1] : colorHex.lay[1]
                   }`,
                 }}

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box, useMediaQuery } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +16,6 @@ import { AccountContainer } from "./styledComponents";
 
 export function subtractMonths(numOfMonths: number, date = new Date()) {
   date.setMonth(date.getMonth() - numOfMonths);
-  console.log(date);
   return date;
 }
 

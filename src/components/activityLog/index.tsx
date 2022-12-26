@@ -33,6 +33,7 @@ const Activity = () => {
   useEffect(() => {
     if (isSignedIn === false) nav("/");
     return () => {};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSignedIn]);
 
   const [page, setPage] = useState(1);
@@ -41,15 +42,11 @@ const Activity = () => {
   const handleClose = () => {
     setOpen(-1);
   };
-  // const handleClick = () => {
-  //   setOpen(true);
-  // };
 
   useEffect(() => {
     const getList = async () => {
       if (searchFilters.type === "login") {
         const { response } = await utilServices.loginHistory();
-        console.log(response);
         if (response?.data) {
           setOriginalRows(response.data)
           setRows(
@@ -69,12 +66,11 @@ const Activity = () => {
               );
               return newRow;
             })
-          );
+          )
           setPage(1)
         }
       } else if (searchFilters.type === "password") {
         const { response } = await utilServices.passwordHistory();
-        console.log(response);
         if (response?.data) {
           setOriginalRows(response.data);
           setRows(

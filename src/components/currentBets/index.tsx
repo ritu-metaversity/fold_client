@@ -10,33 +10,9 @@ import { SearchFiltersCurrentBets } from "./types";
 import "./formRadio.css";
 import CurrentBetTable from "./table";
 import { columnCasino, columnSports } from "./columns";
-import { Form, Row } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { userServices } from "../../utils/api/user/services";
 
-const sportsRow = [
-  {
-    sportName: "Cricket",
-    eventName: "Bangladesh v India",
-    market: "MATCH_ODDS",
-    nation: "India",
-    rate: "1.45",
-    amount: "100",
-    date: "15/12/2022 10:26:21",
-    action: <Form.Check type="checkbox" />,
-    type: "back",
-  },
-  {
-    sportName: "Cricket",
-    eventName: "Bangladesh v India",
-    market: "MATCH_ODDS",
-    nation: "India",
-    rate: "1.45",
-    amount: "100",
-    date: "15/12/2022 10:26:21",
-    action: <Form.Check type="checkbox" />,
-    type: "lay",
-  },
-];
 
 const betTypes = ["none", "all", "back", "lay"];
 
@@ -74,6 +50,7 @@ const CurrentBets = () => {
   };
   useEffect(() => {
     getList();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchFilters.type, searchFilters.pageSize, searchFilters.index]);
 
   console.log(

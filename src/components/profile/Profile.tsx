@@ -16,7 +16,6 @@ interface ProfileInterface {
 
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileInterface|null>(null);
-  const userName = "HUiHUihUI";
   const getProfile = async () => {
     const { response } = await userServices.profile();
     if (response) {

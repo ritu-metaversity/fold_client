@@ -29,18 +29,17 @@ const Sports = () => {
         setActiveSportList(data1);
       }
     };
-    const getListOpen = async () => {
-      const { response } = await sportServices.activeSportListOpen();
-      if (response?.data) {
-        const data = [...response.data];
-        const data1 = data.map((item) => {
-          const sport = sportsTabList.find((i) => i.name === item.sportName);
-          return { ...sport, ...item };
-        });
-        setActiveSportList(data1);
-      }
-    };
-    console.log("asdfk");
+    // const getListOpen = async () => {
+    //   const { response } = await sportServices.activeSportListOpen();
+    //   if (response?.data) {
+    //     const data = [...response.data];
+    //     const data1 = data.map((item) => {
+    //       const sport = sportsTabList.find((i) => i.name === item.sportName);
+    //       return { ...sport, ...item };
+    //     });
+    //     setActiveSportList(data1);
+    //   }
+    // };
     // if (isSignedIn) {
     getList();
     // } else {
@@ -90,13 +89,12 @@ const Sports = () => {
     } else {
       getNewEventOpen()
     }
-  }, [value, activeSportList]);
+  }, [value,isSignedIn, activeSportList]);
 
   if (!(activeSportList?.length > 0)) {
     return <div></div>;
   }
   const color = activeSportList[value]?.color;
-console.log()
   return (
     <Box color="text.secondary">
       <ScrollableTabsButtonVisible
