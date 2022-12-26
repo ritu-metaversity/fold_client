@@ -16,10 +16,10 @@ export const eventServices = {
     };
     return await apiWithErrorSnackbar(params);
   },
-  fancyOdds: async (marketIds: string) => {
+  fancyOdds: async (eventId: string) => {
     const params = {
       resource: eventResource.GET_FANCY_ODDS,
-      pathVars: { marketIds },
+      data: { eventId },
     };
     return await apiWithErrorSnackbar(params);
   },
