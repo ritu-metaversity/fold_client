@@ -19,7 +19,7 @@ export const eventServices = {
   fancyOdds: async (marketIds: string) => {
     const params = {
       resource: eventResource.GET_FANCY_ODDS,
-      pathVars: { marketIds },
+      data: { eventId: marketIds },
     };
     return await apiWithErrorSnackbar(params);
   },
