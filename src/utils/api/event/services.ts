@@ -1,4 +1,4 @@
-import { apiWithErrorSnackbar } from "../apiService";
+import { apiWithErrorSnackbar, apiWithSnackbar } from "../apiService";
 import { eventResource } from "./resources";
 
 export const eventServices = {
@@ -15,5 +15,19 @@ export const eventServices = {
       data: { marketIds },
     };
     return await apiWithErrorSnackbar(params);
+  },
+  fancyOdds: async (marketIds: string) => {
+    const params = {
+      resource: eventResource.GET_FANCY_ODDS,
+      pathVars: { marketIds },
+    };
+    return await apiWithErrorSnackbar(params);
+  },
+  bet: async (data: any) => {
+    const params = {
+      resource: eventResource.BET_PLACE,
+      data,
+    };
+    return await apiWithSnackbar(params);
   },
 };

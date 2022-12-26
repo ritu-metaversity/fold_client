@@ -1,9 +1,10 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
 
-interface MatchInterface {
+export interface MatchInterface {
   matchName: string;
   matchId: number;
   openDate: string;
@@ -43,6 +44,7 @@ const getDay = (date: string) => {
   const dat = new Date(date);
   const nowDate = now.getUTCDate();
   const datDate = dat.getUTCDate();
+
   if (nowDate === datDate) return "Today";
   now.setDate(nowDate + 1);
   if (now.getUTCDate() === datDate) return "Tomorrow";
@@ -75,10 +77,17 @@ const ButtonPropps = {
 
 const Match = ({ matches }: Props) => {
   const navigate = useNavigate();
+  const { isSignedIn } = useContext(UserContext);
+  const { setCurrentMatch } = useContext(UserContext);
   return (
     <Grid
       container
-      onClick={() => navigate(`/sports/details/?match-id=${matches.matchId}`)}
+      onClick={() => {
+        if (isSignedIn && setCurrentMatch) {
+          setCurrentMatch(matches);
+          navigate(`/sports/details/?match-id=${matches.matchId}`);
+        }
+      }}
       bgcolor={{ xs: colorHex.bg2, lg: colorHex.bg1 }}
       p={{ xs: 0.5, lg: 0 }}
       sx={{ cursor: "pointer" }}

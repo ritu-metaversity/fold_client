@@ -7,20 +7,20 @@ const gridProps = {
   xs: 1.9,
   fontSize: "0.8rem",
   borderRadius: 1,
-  sx: {
-    "&:hover": {
-      backgroundColor: colorHex.lay.hover,
-    },
-  },
+  // sx: {
+  //   "&:hover": {
+  //     backgroundColor: colorHex.lay.hover,
+  //   },
+  // },
   bgcolor: colorHex.lay[3],
 };
 const gridProps2 = {
   ...gridProps,
-  sx: {
-    "&:hover": {
-      backgroundColor: colorHex.back.hover,
-    },
-  },
+  // sx: {
+  //   "&:hover": {
+  //     backgroundColor: colorHex.back.hover,
+  //   },
+  // },
   bgcolor: colorHex.back[3],
 };
 
@@ -36,15 +36,16 @@ export function OddsNumberTitle() {
           lg: 356,
           xl: 700,
         }}
-        ml={{lg: "auto"}}
-        py={{lg: 0.25}}
+        color="white"
+        ml={{ lg: "auto" }}
+        py={{ lg: 0.25 }}
         display="flex"
         alignItems={"center"}
         gap="1%"
       >
         <Grid item xs={3.9}></Grid>
-        <Grid {...gridProps2} >Back</Grid>
-        <Grid {...gridProps}  >Lay</Grid>
+        <Grid {...gridProps2}>Back</Grid>
+        <Grid {...gridProps}>Lay</Grid>
       </Grid>
     </Grid>
   );

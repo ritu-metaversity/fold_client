@@ -1,5 +1,6 @@
 import {  Grid, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useContext } from "react";
+import { BetDetailsInterface } from ".";
 import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
 import "./animation.css";
@@ -8,14 +9,15 @@ interface Props {
   values: any;
   suspended?: boolean;
   prevValues: any;
-  setBetId: Dispatch<SetStateAction<number>>;
+  details: any;
+  marketName?: string;
+  setBetId: Dispatch<SetStateAction<BetDetailsInterface | null>>;
 }
 
 const gridProps = {
   item: true,
   height: "38px",
   xs: 1.9,
-
   borderRadius: 1,
   sx: {
     "&:hover": {
@@ -37,36 +39,70 @@ const gridProps2 = {
 const ValuesComponent = ({ price, size }: { price: number; size: number }) => (
   <>
     <Typography fontWeight={700} mb={"-0.3rem"} fontSize="0.96rem">
-      {price|| "__"}
+      {price || "__"}
     </Typography>
     <Typography fontWeight={400} fontSize="0.75rem">
-      {size}
+      {price ? size : ""}
     </Typography>
   </>
 );
 
-const Odds = ({ title, setBetId, suspended, values, prevValues }: Props) => {
+const Odds = ({
+  details,
+  title,
+  setBetId,
+  suspended,
+  values,
+  marketName,
+  prevValues,
+}: Props) => {
   const { isSignedIn, setModal } = useContext(UserContext);
-  const handleClick = () => {
+  const handleClick = (odds: number) => {
     if (!isSignedIn) {
       if (setModal) {
         setModal({ login: true });
         return;
       }
     }
-    setBetId(1);
+    setBetId({
+      isFancy: false,
+      isBack: true,
+      odds,
+      stake: 0,
+      marketName,
+      selectionId: values.selectionId,
+      priceValue: odds,
+      placeTime: new Date(),
+      marketId: details.marketId,
+      matchId: "",
+    });
   };
-  const handleClick2 = () => {
+  const handleClick2 = (odds: number) => {
     if (!isSignedIn) {
       if (setModal) {
         setModal({ login: true });
         return;
       }
     }
-    setBetId(2);
+    setBetId({
+      isFancy: false,
+      isBack: false,
+      selectionId: values.selectionId,
+      odds,
+      marketName,
+      stake: 0,
+      priceValue: odds,
+      placeTime: new Date(),
+      marketId: details.marketId,
+      matchId: "",
+    });
   };
 
-  const { availableToBack, availableToLay } = values.ex;
+  if (!(values?.ex && prevValues?.ex)) {
+    return <></>;
+  }
+
+  const { availableToBack, availableToLay } = values?.ex;
   const { availableToBack: prevBack, availableToLay: prevLay } = prevValues?.ex;
 
   return (
@@ -113,6 +149,7 @@ const Odds = ({ title, setBetId, suspended, values, prevValues }: Props) => {
                   ? "odds-down"
                   : ""
               }
+              onClick={() => handleClick(back.price)}
               bgcolor={colorHex.backArr[index]}
             >
               <ValuesComponent {...back} />
@@ -122,7 +159,7 @@ const Odds = ({ title, setBetId, suspended, values, prevValues }: Props) => {
 
         {availableToLay.map((lay: any, index: number) => (
           <Grid
-            {...gridProps2}
+            {...gridProps}
             className={
               prevLay[index].price < lay.price
                 ? "odds-up"
@@ -131,6 +168,7 @@ const Odds = ({ title, setBetId, suspended, values, prevValues }: Props) => {
                 : ""
             }
             bgcolor={colorHex.layArr[index]}
+            onClick={() => handleClick2(lay.price)}
           >
             <ValuesComponent {...lay} />
           </Grid>

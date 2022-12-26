@@ -33,7 +33,6 @@ const MybetMobile: FC<Props> = ({ bets }) => {
   if (!(Object.keys(bets)?.length > 0)) {
     return <></>;
   }
-  console.log(Object.keys(bets));
   return (
     <>
       <BetAlert onClick={() => setOpen(true)}>{betCount}</BetAlert>

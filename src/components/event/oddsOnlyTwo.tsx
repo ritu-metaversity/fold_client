@@ -1,11 +1,14 @@
 import { Grid, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useContext } from "react";
+import { BetDetailsInterface, FancyOddsInterface } from ".";
 import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
 
 interface Props {
   title: any | string;
-  setBetId: Dispatch<SetStateAction<number>>;
+  odds: FancyOddsInterface;
+  prevOdds: FancyOddsInterface;
+  setBetId: Dispatch<SetStateAction<BetDetailsInterface | null>>;
 }
 const gridProps = {
   item: true,
@@ -31,18 +34,18 @@ const gridProps2 = {
   bgcolor: colorHex.back[1],
 };
 
-const values = (
+const Values = (price: number, size: number) => (
   <>
     <Typography fontWeight={700} mb={-0.5} fontSize="15px">
-      19
+      {price || "__"}
     </Typography>
     <Typography fontWeight={400} fontSize="12px">
-      26.43
+      {price ? size : ""}
     </Typography>
   </>
 );
 
-const OddsOnlyTwo = ({ title, setBetId }: Props) => {
+const OddsOnlyTwo = ({ title, odds, prevOdds, setBetId }: Props) => {
   const { isSignedIn, setModal } = useContext(UserContext);
   const handleClick = () => {
     if (!isSignedIn) {
@@ -51,7 +54,19 @@ const OddsOnlyTwo = ({ title, setBetId }: Props) => {
         return;
       }
     }
-    setBetId(1);
+    setBetId({
+      isFancy: true,
+      isBack: true,
+      odds: odds.b1,
+      stake: 0,
+      marketName: title,
+      selectionId: odds.sid,
+      priceValue: odds.b1,
+      placeTime: new Date(),
+      marketId: odds.sid,
+      name: odds.nation,
+      matchId: "",
+    });
   };
   const handleClick2 = () => {
     if (!isSignedIn) {
@@ -60,7 +75,19 @@ const OddsOnlyTwo = ({ title, setBetId }: Props) => {
         return;
       }
     }
-    setBetId(2);
+    setBetId({
+      isFancy: true,
+      isBack: false,
+      odds: odds.l1,
+      stake: 0,
+      marketName: title,
+      selectionId: odds.sid,
+      priceValue: odds.l1,
+      placeTime: new Date(),
+      marketId: odds.sid,
+      matchId: "",
+      name: odds.nation,
+    });
   };
 
   return (
@@ -78,8 +105,9 @@ const OddsOnlyTwo = ({ title, setBetId }: Props) => {
         alignItems={"center"}
         lg={5.7}
         xs={12}
+        fontSize={"0.8rem"}
       >
-        <>{title}</>
+        <>{odds?.nation}</>
       </Grid>
       <Grid
         container
@@ -94,14 +122,40 @@ const OddsOnlyTwo = ({ title, setBetId }: Props) => {
         }}
         py={{ xs: 0, lg: 0.25 }}
         display="flex"
+        position="relative"
+        className={
+          ["SUSPENDED", "BALL RUNNING"].includes(odds.gstatus)
+            ? "fancy-suspended"
+            : ""
+        }
         alignItems={"center"}
         gap={{ xs: "1.2%", md: "2%", lg: "2%" }}
       >
-        <Grid {...gridProps2} onClick={handleClick}>
-          {values}{" "}
+        <Grid
+          {...gridProps2}
+          className={
+            prevOdds?.b1 < odds?.b1
+              ? "odds-up"
+              : prevOdds?.b1 > odds?.b1
+              ? "odds-down"
+              : ""
+          }
+          onClick={handleClick}
+        >
+          {Values(odds?.b1, odds?.bs1)}
         </Grid>
-        <Grid {...gridProps} onClick={handleClick2}>
-          {values}{" "}
+        <Grid
+          {...gridProps}
+          className={
+            prevOdds?.l1 < odds?.l1
+              ? "odds-up"
+              : prevOdds?.l1 > odds?.l1
+              ? "odds-down"
+              : ""
+          }
+          onClick={handleClick2}
+        >
+          {Values(odds?.l1, odds?.ls1)}
         </Grid>
         <Grid
           item

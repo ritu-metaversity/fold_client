@@ -15,7 +15,6 @@ import React, {
   FC,
   SetStateAction,
   useContext,
-  useState,
 } from "react";
 import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
@@ -25,10 +24,14 @@ import {
   AmountInputBGLay,
   TitleStyled,
 } from "./styledComponents";
+import { BetDetailsInterface, MarketInterface } from ".";
+import { eventServices } from "../../utils/api/event/services";
 
 interface Props {
-  betId: number;
-  setBetId: Dispatch<SetStateAction<number>>;
+  betId: BetDetailsInterface | null;
+  setBetId: Dispatch<SetStateAction<BetDetailsInterface | null>>;
+  markets: MarketInterface[];
+  matchId: number | string;
 }
 
 const gridProps = {
@@ -43,28 +46,63 @@ const gridProps = {
   bgcolor: colorHex.gr2,
   height: "40px",
 };
-export const BetSlip: FC<Props> = ({ betId, setBetId }) => {
-  const { stakes } = useContext(UserContext);
-  const [amount, setAmount] = useState("");
+const getDeviceType = () => {
+  const ua = navigator.userAgent;
+  if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+    return "tablet";
+  }
+  if (
+    /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
+      ua
+    )
+  ) {
+    return "mobile";
+  }
+  return "desktop";
+};
+export const BetSlip: FC<Props> = ({ betId, setBetId, matchId, markets }) => {
+  const { stakes, currentMatch } = useContext(UserContext);
+
   const matches = useMediaQuery("(min-width: 1279px)");
+
+  const handleSubmit = async () => {
+    const data = {
+      ...betId,
+      matchId,
+      deviceInfo: {
+        userAgent: window.navigator.userAgent,
+        browser: "Chrome",
+        device:"Macintosh",
+        deviceType: getDeviceType(),
+        os: "Windows",
+        os_version: "windows-10",
+        browser_version: "108.0.0.0",
+        orientation: "landscape",
+      },
+    };
+    const { response } = await eventServices.bet(data);
+    if (response) {
+      setBetId(null);
+    }
+  };
   if (!betId) return <></>;
   return (
     <Box textAlign={"left"}>
       {matches && <TitleStyled>Bet Slip</TitleStyled>}
       <Box p={0.5}>
         <Box display="flex" fontSize="0.8rem" justifyContent={"space-between"}>
-          <Typography fontSize="0.8rem">
-            Jaffna Kings v Galle Gladiators
-          </Typography>
+          <Typography fontSize="0.8rem">{currentMatch?.matchName}</Typography>
           <Close
             sx={{ cursor: "pointer" }}
             fontSize="small"
             onClick={() => {
-              setBetId(0);
+              setBetId(null);
             }}
           />
         </Box>
-        <Typography fontSize="0.8rem">MATCH_ODDS</Typography>
+        <Typography fontSize="0.8rem">
+          {betId.marketName}
+        </Typography>
         <Box
           display="flex"
           my="0.8rem"
@@ -72,13 +110,13 @@ export const BetSlip: FC<Props> = ({ betId, setBetId }) => {
           alignItems="center"
         >
           <Typography fontSize="0.8rem" fontWeight={700} color="primary.main">
-            Galle Gladiators
+            {betId.name}
           </Typography>
           {matches ? (
             <TextField
               type={"number"}
               size="small"
-              value={71}
+              value={betId.odds}
               disabled
               InputProps={{ readOnly: true, style: { fontSize: "0.75rem" } }}
               sx={{ width: 80 }}
@@ -110,15 +148,18 @@ export const BetSlip: FC<Props> = ({ betId, setBetId }) => {
           height="min-content"
           overflow="hidden"
         >
-          {betId === 1 ? <AmountInputBGBack /> : <AmountInputBGLay />}
+          {betId.isBack ? <AmountInputBGBack /> : <AmountInputBGLay />}
           <AmountInput
             type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            min={0}
+            value={betId.stake}
+            onChange={(e) =>
+              setBetId({ ...betId, stake: Number(e.target.value) })
+            }
             placeholder="Amount"
           />
         </Box>
-        {amount && (
+        {Boolean(betId.stake) && (
           <Box ml="auto" mr={1}>
             <Typography
               color="text.primary"
@@ -128,7 +169,7 @@ export const BetSlip: FC<Props> = ({ betId, setBetId }) => {
               Profit:
             </Typography>
             <Typography textAlign="right" fontSize={"0.9rem"}>
-              938393.5
+              {((betId.odds - 1) * betId.stake).toFixed(2)}
             </Typography>
           </Box>
         )}
@@ -136,7 +177,11 @@ export const BetSlip: FC<Props> = ({ betId, setBetId }) => {
       <Grid container rowGap={"5px"} gap={"2%"}>
         {Object.keys(stakes).map((key) => (
           <Grid {...gridProps} key={key + stakes[key]}>
-            <Button fullWidth color="inherit">
+            <Button
+              fullWidth
+              color="inherit"
+              onClick={() => setBetId({ ...betId, stake: stakes[key] })}
+            >
               {stakes[key]}
             </Button>
           </Grid>
@@ -147,6 +192,7 @@ export const BetSlip: FC<Props> = ({ betId, setBetId }) => {
         variant="contained"
         sx={{ my: 2, color: "text.secondary" }}
         fullWidth
+        onClick={handleSubmit}
       >
         {" "}
         Place Bet{" "}

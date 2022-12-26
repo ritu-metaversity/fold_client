@@ -9,4 +9,12 @@ export const eventResource: { [x: string]: ApiResource } = {
     URL: "enduser/get-odds",
     METHOD: "POST",
   },
+  GET_FANCY_ODDS: {
+    URL: "http://89.39.105.69:9001/fancy/:marketIds",
+    METHOD: "GET",
+  },
+  BET_PLACE: {
+    URL: "/enduser/place-bets",
+    METHOD: "POST",
+  },
 };
