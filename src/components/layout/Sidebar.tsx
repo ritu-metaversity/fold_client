@@ -33,7 +33,7 @@ interface Props extends React.PropsWithChildren {
   window?: () => Window;
 }
 
-interface SportInterface {
+export interface SportInterface {
   sportId: number;
   sportName: string;
   totalMatch: number;
@@ -46,22 +46,7 @@ interface SportInterface {
 const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
   const [open, setOpen] = useState([true, false, false, false, false]);
   const [matchCollapse, setMatchCollapse] = useState<boolean[]>([]);
-  const [activeEventList, setActiveEventList] = useState<SportInterface[]>([]);
-  const { isSignedIn } = useContext(UserContext);
-  useEffect(() => {
-    const getNewEventOpen = async () => {
-      const { response } = await sportServices.leftMenu();
-      if (response?.data) {
-        if (response?.data?.length > 0) {
-          setActiveEventList(response.data);
-          setMatchCollapse(response.data.map((i: any) => (i ? false : false)));
-        }
-      } else {
-        setActiveEventList([]);
-      }
-    };
-    getNewEventOpen();
-  }, []);
+  const { isSignedIn, activeEventList } = useContext(UserContext);
 
   const handleClick = (index: number) => {
     const openList = [...open];
@@ -74,9 +59,13 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
     setMatchCollapse(openList);
   };
 
+  useEffect(() => {
+    if (activeEventList)
+      setMatchCollapse(activeEventList.map((i: any) => (i ? false : false)));
+  }, [activeEventList]);
   const exchangeList = useMemo(
     () =>
-      activeEventList.map((sport, index) => (
+      activeEventList?.map((sport, index) => (
         <>
           {" "}
           <ListItem
@@ -123,11 +112,10 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
                 disablePadding
               >
                 <ListItemButton
-                  onClick={() => {
-                    if (isSignedIn) {
-                      nav(`/sports/details/?match-id=${match.matchId}`);
-                    }
-                  }}
+                  onClick={() =>
+                    isSignedIn &&
+                    nav(`/sports/details/?match-id=${match.matchId}`)
+                  }
                   sx={{ color: "text.secondary" }}
                 >
                   <ListItemText
@@ -145,7 +133,7 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
         </>
       )),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [activeEventList, matchCollapse]
+    [activeEventList, matchCollapse, isSignedIn]
   );
 
   const nav = useNavigate();
