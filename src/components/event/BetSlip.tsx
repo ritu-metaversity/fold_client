@@ -15,6 +15,7 @@ import React, {
   FC,
   SetStateAction,
   useContext,
+  useMemo,
 } from "react";
 import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
@@ -26,6 +27,7 @@ import {
 } from "./styledComponents";
 import { BetDetailsInterface, MarketInterface } from ".";
 import { eventServices } from "../../utils/api/event/services";
+import { useSearchParams } from "react-router-dom";
 
 interface Props {
   betId: BetDetailsInterface | null;
@@ -61,8 +63,8 @@ const getDeviceType = () => {
   return "desktop";
 };
 export const BetSlip: FC<Props> = ({ betId, setBetId, matchId, markets }) => {
-  const { stakes, currentMatch } = useContext(UserContext);
-
+  const { stakes, activeEventList } = useContext(UserContext);
+  const [searchParams] = useSearchParams();
   const matches = useMediaQuery("(min-width: 1279px)");
 
   const handleSubmit = async () => {
@@ -72,7 +74,7 @@ export const BetSlip: FC<Props> = ({ betId, setBetId, matchId, markets }) => {
       deviceInfo: {
         userAgent: window.navigator.userAgent,
         browser: "Chrome",
-        device:"Macintosh",
+        device: "Macintosh",
         deviceType: getDeviceType(),
         os: "Windows",
         os_version: "windows-10",
@@ -85,13 +87,26 @@ export const BetSlip: FC<Props> = ({ betId, setBetId, matchId, markets }) => {
       setBetId(null);
     }
   };
+  const getMatchName = useMemo(
+    () =>
+      activeEventList?.forEach((sport) => {
+        const match = sport.matchList.find(
+          (match) => match.matchId === matchId
+        );
+        if (match) {
+          return match.matchName;
+        }
+      }),
+    [matchId, activeEventList]
+  );
+console.log(getMatchName)
   if (!betId) return <></>;
   return (
     <Box textAlign={"left"}>
       {matches && <TitleStyled>Bet Slip</TitleStyled>}
       <Box p={0.5}>
         <Box display="flex" fontSize="0.8rem" justifyContent={"space-between"}>
-          <Typography fontSize="0.8rem">{currentMatch?.matchName}</Typography>
+          <Typography fontSize="0.8rem">{<>{getMatchName}</>}</Typography>
           <Close
             sx={{ cursor: "pointer" }}
             fontSize="small"
@@ -100,9 +115,7 @@ export const BetSlip: FC<Props> = ({ betId, setBetId, matchId, markets }) => {
             }}
           />
         </Box>
-        <Typography fontSize="0.8rem">
-          {betId.marketName}
-        </Typography>
+        <Typography fontSize="0.8rem">{betId.marketName}</Typography>
         <Box
           display="flex"
           my="0.8rem"

@@ -78,16 +78,12 @@ const ButtonPropps = {
 const Match = ({ matches }: Props) => {
   const navigate = useNavigate();
   const { isSignedIn } = useContext(UserContext);
-  const { setCurrentMatch } = useContext(UserContext);
   return (
     <Grid
       container
-      onClick={() => {
-        if (isSignedIn && setCurrentMatch) {
-          setCurrentMatch(matches);
-          navigate(`/sports/details/?match-id=${matches.matchId}`);
-        }
-      }}
+      onClick={() =>
+        isSignedIn && navigate(`/sports/details/?match-id=${matches.matchId}`)
+      }
       bgcolor={{ xs: colorHex.bg2, lg: colorHex.bg1 }}
       p={{ xs: 0.5, lg: 0 }}
       sx={{ cursor: "pointer" }}
@@ -104,6 +100,8 @@ const Match = ({ matches }: Props) => {
         fontSize={"0.8rem"}
         alignItems={"center"}
         p={{ xs: 1, lg: 1 }}
+        maxWidth={{ lg: "unset" }}
+        flex={{ lg: 1 }}
       >
         <Box>
           {matches.live ? (
@@ -138,6 +136,16 @@ const Match = ({ matches }: Props) => {
         </Box>
         <Box textAlign="left" pl={2}>
           {matches.matchName}
+        </Box>
+        <Box
+          textAlign="left"
+          ml={"auto"}
+          fontSize={"0.85rem"}
+          width={{ lg: "6rem" }}
+          fontWeight={900}
+          sx={{ wordSpacing: "0.2rem" }}
+        >
+          F1 F {matches.bm && "BM"}
         </Box>
       </Grid>
       <Grid

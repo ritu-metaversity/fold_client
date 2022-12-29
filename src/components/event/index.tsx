@@ -86,7 +86,6 @@ const Event = () => {
     setLoading(false);
   };
   // const transformBookmaker = (odds: FancyOddsInterface) => {
-  //   console.log(odds)
   //   const newOdds = {
   //     marketId: odds.sid,
   //     status: odds.gstatus,
@@ -167,7 +166,7 @@ const Event = () => {
   //     }));
   //   }
   // };
-  const getFancyOdds = async (market: MarketInterface) => {
+  const getFancyOdds = async () => {
     if (matchId) {
       const { response } = await eventServices.fancyOdds(matchId);
       const Odds = transformMatchOdds(response.Odds);
@@ -180,44 +179,44 @@ const Event = () => {
     }
   };
   async function getOdds() {
-    markets.forEach(async (market) => {
-      if (market.type === "Match Odds") {
-        // getMatchOdds(market);
-      } else if (market.type === "Bookmaker") {
-        getFancyOdds(market);
-      } else {
-        return;
-      }
-    });
+    getFancyOdds();
+    // markets.forEach(async (market) => {
+    //   if (market.type === "Match Odds") {
+    //     // getMatchOdds(market);
+    //   } else if (market.type === "Bookmaker") {
+    //   } else {
+    //     return;
+    //   }
+    // });
   }
 
   useEffect(() => {
     getBets();
     getMarketIds();
     return () => {};
-  }, [isSignedIn]);
+  }, [isSignedIn, matchId]);
 
   //odds
   useEffect(() => {
-    const timer = setTimeout(() => getOdds(), 1000);
+    const timer = setTimeout(() => {
+      getOdds();
+    }, 1000);
     return () => {
       clearInterval(timer);
     };
-  }, [markets, fancyOdds]);
+  }, [markets, matchId, fancyOdds]);
 
   useEffect(() => {
     getOdds();
   }, [markets]);
 
   if (!matchId) return <></>;
-  console.log(!fancyOdds);
   if (loading || !fancyOdds)
     return (
       <Box height={"100vh"}>
         <Loading />
       </Box>
     );
-
   return (
     <Box m={0.3} mt={0.6}>
       <HomeLayout

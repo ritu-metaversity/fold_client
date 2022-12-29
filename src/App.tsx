@@ -16,6 +16,8 @@ import Pages from "./components/pages";
 import { userServices } from "./utils/api/user/services";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MatchInterface } from "./components/home/match";
+import { sportServices } from "./utils/api/sport/services";
+import { SportInterface } from "./components/layout/Sidebar";
 
 interface UserContextType {
   setIsSignedIn: Dispatch<SetStateAction<boolean | null>> | null;
@@ -24,9 +26,8 @@ interface UserContextType {
   isSignedIn: boolean | null;
   modal: { login: boolean };
   user: any;
-  currentMatch: MatchInterface | null;
-  setCurrentMatch?: Dispatch<SetStateAction<MatchInterface | null>>;
   stakes: { [x: string]: number };
+  activeEventList: SportInterface[] | null;
 }
 
 const defaultStake = {
@@ -49,8 +50,7 @@ export const UserContext = createContext<UserContextType>({
   setUser: null,
   setModal: null,
   stakes: defaultStake,
-  setCurrentMatch: undefined,
-  currentMatch: null
+  activeEventList: null,
 });
 
 
@@ -61,7 +61,23 @@ function App() {
   const [stakes, setButtonValue] = React.useState<{ [x: string]: number }>(
     defaultStake
   );
-  const [currentMatch, setCurrentMatch] = useState<MatchInterface |null>(null)
+  const [activeEventList, setActiveEventList] = useState<SportInterface[]>([]);
+
+    useEffect(() => {
+      const getNewEventOpen = async () => {
+        const { response } = await sportServices.leftMenu();
+        if (response?.data) {
+          if (response?.data?.length > 0) {
+            setActiveEventList(response.data);
+            
+          }
+        } else {
+          setActiveEventList([]);
+        }
+      };
+      getNewEventOpen();
+    }, []);
+  
   const getButtonValue = async () => {
     const { response } = await userServices.getButtonValue();
     if (response?.data) {
@@ -94,8 +110,7 @@ function App() {
         <div className="App">
           <UserContext.Provider
             value={{
-              setCurrentMatch,
-              currentMatch,
+              activeEventList,
               stakes,
               isSignedIn,
               user,
