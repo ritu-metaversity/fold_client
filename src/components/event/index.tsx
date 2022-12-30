@@ -110,7 +110,7 @@ const Event = () => {
   const [profits, setProfits] = useState<ProfitInterface[]>([]);
   const nav = useNavigate();
   const getBets = async () => {
-    if (!matchId || !isSignedIn) {
+    if (!matchId || isSignedIn===false) {
       nav("/");
       return;
     }
