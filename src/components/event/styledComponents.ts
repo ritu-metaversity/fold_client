@@ -123,3 +123,15 @@ export const BetAlert = muiStyled(Box)(({ theme }) => ({
     display:"none"
   }
 }));
+
+
+export const GameHeader = styled(Box)`
+  padding: 8px;
+  color: white;
+  width: 100%;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+`;

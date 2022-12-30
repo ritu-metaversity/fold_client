@@ -44,6 +44,8 @@ export function ScrollableTabsButtonVisible({
           },
           bgcolor: colorHex.bg1,
           py: 0,
+          maxWidth: "100vw",
+          width: "100%",
           minHeight: {
             xs: "44px",
             lg: "30px",
@@ -54,7 +56,7 @@ export function ScrollableTabsButtonVisible({
           <Tab
             label={s.name}
             icon={s.icon}
-            key={s.name+s.color}
+            key={s.name + s.color}
             iconPosition={matches ? "start" : "top"}
             sx={{
               py: 0,
