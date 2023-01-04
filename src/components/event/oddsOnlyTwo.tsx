@@ -60,14 +60,15 @@ const OddsOnlyTwo = ({ title, odds, prevOdds, setBetId }: Props) => {
       odds: odds.b1,
       stake: 0,
       marketName: title,
-      selectionId: odds.sid,
-      priceValue: odds.b1,
+      selectionId: 0,
+      priceValue: odds.bs1,
       placeTime: new Date(),
       marketId: odds.sid,
       name: odds.nation,
       matchId: "",
     });
   };
+
   const handleClick2 = () => {
     if (!isSignedIn) {
       if (setModal) {
@@ -81,8 +82,8 @@ const OddsOnlyTwo = ({ title, odds, prevOdds, setBetId }: Props) => {
       odds: odds.l1,
       stake: 0,
       marketName: title,
-      selectionId: odds.sid,
-      priceValue: odds.l1,
+      selectionId: 0,
+      priceValue: odds.ls1,
       placeTime: new Date(),
       marketId: odds.sid,
       matchId: "",
@@ -142,7 +143,7 @@ const OddsOnlyTwo = ({ title, odds, prevOdds, setBetId }: Props) => {
           }
           onClick={handleClick}
         >
-          {Values(odds?.b1, odds?.bs1)}
+          {Values(Number(odds?.b1), odds?.bs1)}
         </Grid>
         <Grid
           {...gridProps}
@@ -155,7 +156,7 @@ const OddsOnlyTwo = ({ title, odds, prevOdds, setBetId }: Props) => {
           }
           onClick={handleClick2}
         >
-          {Values(odds?.l1, odds?.ls1)}
+          {Values(Number(odds?.l1), odds?.ls1)}
         </Grid>
         <Grid
           item

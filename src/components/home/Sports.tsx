@@ -22,6 +22,7 @@ const Sports = () => {
       const { response } = await sportServices.activeSportList();
       if (response?.data) {
         const data = [...response.data];
+        console.log(response.data);
         const data1 = data.map((item) => {
           const sport = sportsTabList.find((i) => i.name === item.sportName);
           return { ...sport, ...item };
@@ -94,6 +95,7 @@ const Sports = () => {
   if (!(activeSportList?.length > 0)) {
     return <div></div>;
   }
+  console.log(activeSportList, "sports");
   const color = activeSportList[value]?.color;
   return (
     <Box color="text.secondary">

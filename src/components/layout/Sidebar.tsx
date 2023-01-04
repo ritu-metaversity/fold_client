@@ -46,7 +46,7 @@ export interface SportInterface {
 const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
   const [open, setOpen] = useState([true, false, false, false, false]);
   const [matchCollapse, setMatchCollapse] = useState<boolean[]>([]);
-  const { isSignedIn, activeEventList } = useContext(UserContext);
+  const { isSignedIn, setModal, activeEventList } = useContext(UserContext);
 
   const handleClick = (index: number) => {
     const openList = [...open];
@@ -63,6 +63,11 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
     if (activeEventList)
       setMatchCollapse(activeEventList.map((i: any) => (i ? false : false)));
   }, [activeEventList]);
+  const openLoginModal = () => {
+    if (setModal) {
+      setModal({ login: true });
+    }
+  };
   const exchangeList = useMemo(
     () =>
       activeEventList?.map((sport, index) => (
@@ -113,8 +118,9 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
               >
                 <ListItemButton
                   onClick={() =>
-                    isSignedIn &&
-                    nav(`/sports/details/?match-id=${match.matchId}`)
+                    isSignedIn
+                      ? nav(`/sports/details/?match-id=${match.matchId}`)
+                      : openLoginModal()
                   }
                   sx={{ color: "text.secondary" }}
                 >

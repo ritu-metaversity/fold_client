@@ -77,12 +77,19 @@ const ButtonPropps = {
 
 const Match = ({ matches }: Props) => {
   const navigate = useNavigate();
-  const { isSignedIn } = useContext(UserContext);
+  const { isSignedIn, setModal } = useContext(UserContext);
+  const openLoginModal = () => {
+    if (setModal) {
+      setModal({ login: true });
+    }
+  };
   return (
     <Grid
       container
       onClick={() =>
-        isSignedIn && navigate(`/sports/details/?match-id=${matches.matchId}`)
+        isSignedIn
+          ? navigate(`/sports/details/?match-id=${matches.matchId}`)
+          : openLoginModal()
       }
       bgcolor={{ xs: colorHex.bg2, lg: colorHex.bg1 }}
       p={{ xs: 0.5, lg: 0 }}

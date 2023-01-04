@@ -16,6 +16,7 @@ import React, {
   SetStateAction,
   useContext,
   useMemo,
+  useState,
 } from "react";
 import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
@@ -25,15 +26,15 @@ import {
   AmountInputBGLay,
   TitleStyled,
 } from "./styledComponents";
-import { BetDetailsInterface, MarketInterface } from ".";
+import { BetDetailsInterface, MarketInterface, ProfitInterface } from ".";
 import { eventServices } from "../../utils/api/event/services";
-import { useSearchParams } from "react-router-dom";
+import Loading from "../layout/loading";
 
 interface Props {
   betId: BetDetailsInterface | null;
   setBetId: Dispatch<SetStateAction<BetDetailsInterface | null>>;
-  markets: MarketInterface[];
   matchId: number | string;
+  setProfits: Dispatch<SetStateAction<ProfitInterface[]>>;
 }
 
 const gridProps = {
@@ -62,10 +63,10 @@ const getDeviceType = () => {
   }
   return "desktop";
 };
-export const BetSlip: FC<Props> = ({ betId, setBetId, matchId, markets }) => {
+export const BetSlip: FC<Props> = ({ betId,setProfits, setBetId, matchId }) => {
   const { stakes, activeEventList } = useContext(UserContext);
-  const [searchParams] = useSearchParams();
   const matches = useMediaQuery("(min-width: 1279px)");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
     const data = {
@@ -82,24 +83,26 @@ export const BetSlip: FC<Props> = ({ betId, setBetId, matchId, markets }) => {
         orientation: "landscape",
       },
     };
+    setLoading(true);
     const { response } = await eventServices.bet(data);
     if (response) {
       setBetId(null);
     }
+    setLoading(false);
   };
   const getMatchName = useMemo(
     () =>
-      activeEventList?.forEach((sport) => {
-        const match = sport.matchList.find(
-          (match) => match.matchId === matchId
-        );
-        if (match) {
-          return match.matchName;
-        }
-      }),
+      activeEventList
+        ?.reduce((acc: any[], current) => [...acc, ...current.matchList], [])
+        ?.find((item: any) => item.matchId == matchId)?.matchName || undefined,
     [matchId, activeEventList]
   );
-console.log(getMatchName)
+  if (loading)
+    return (
+      <Box height={400} width={"100%"}>
+        <Loading />
+      </Box>
+    );
   if (!betId) return <></>;
   return (
     <Box textAlign={"left"}>
@@ -130,8 +133,9 @@ console.log(getMatchName)
               type={"number"}
               size="small"
               value={betId.odds}
-              disabled
-              InputProps={{ readOnly: true, style: { fontSize: "0.75rem" } }}
+              // disabled
+              
+              InputProps={{ readOnly:true, style: { fontSize: "0.75rem" } }}
               sx={{ width: 80 }}
             />
           ) : (
