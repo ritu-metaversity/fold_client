@@ -55,10 +55,14 @@ const UserBox = () => {
           color={{ xs: "white", lg: "text.primary" }}
           textAlign={"center"}
           pl={{ lg: "10px" }}
+          maxWidth={{ xs: "10rem",md:"unset" }}
+          overflow="hidden"
+          textOverflow={"ellipsis"}
           fontWeight={{ xs: 800, lg: 500 }}
           whiteSpace="nowrap"
         >
-          pts: {balanceData?.balance} | {balanceData?.libality}
+          pts: {Number(balanceData?.balance)?.toFixed(1)} |{" "}
+          {Number(balanceData?.libality)?.toFixed(1)} 
         </Typography>
         <Box
           display="flex"

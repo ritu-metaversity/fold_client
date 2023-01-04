@@ -18,6 +18,9 @@ import { eventServices } from "../../utils/api/event/services";
 import Loading from "../layout/loading";
 import MybetMobile from "./MybetMobile";
 import CustomizedDialog2 from "../common/Dailog2";
+import { GameHeader } from "./styledComponents";
+import Bookmaker from "./bookmaker";
+import { sportsTabList } from "../home/sportsTabList";
 
 interface BetsInterface {
   [x: string]: {
@@ -38,7 +41,7 @@ export interface BetDetailsInterface {
   odds: number;
   stake: number;
   selectionId: number | string;
-  marketId: string;
+  marketId: string | number;
   matchId: string;
   marketName?: string;
   placeTime: Date;
@@ -55,6 +58,38 @@ export interface FancyOddsInterface {
   ls1: number;
   gstatus: string;
 }
+
+const transformMatchOdds = (odds: any) => {
+  if (!odds.length) {
+    return null;
+  }
+  const newOdds = {
+    ...odds[0],
+  };
+  // managing for dynamic no of odds
+  newOdds.runners = odds[0].runners.map((item: any) => {
+    item.ex.availableToBack = [
+      ...item.ex.availableToBack,
+      { price: "", size: "" },
+      { price: "", size: "" },
+      { price: "", size: "" },
+    ].slice(0, 3);
+    item.ex.availableToLay = [
+      ...item.ex.availableToLay,
+      { price: "", size: "" },
+      { price: "", size: "" },
+      { price: "", size: "" },
+    ].slice(0, 3);
+    return item;
+  });
+  return newOdds;
+};
+export interface ProfitInterface {
+  value: number;
+  sid?: string | number;
+  title: string;
+}
+
 const Event = () => {
   const [bets, setBets] = useState<BetsInterface | null>(null);
   // const [betId, setBetId] = useState(0);
@@ -63,18 +98,19 @@ const Event = () => {
   );
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
-  const { isSignedIn } = useContext(UserContext);
+  const { isSignedIn, activeEventList } = useContext(UserContext);
   const { title } = {
     title: <Typography fontSize={"0.85rem"}>Pakistan</Typography>,
   };
   const matches = useMediaQuery("(min-width : 1280px)");
   const matchId = searchParams.get("match-id");
-  const [markets, setMarkets] = useState<MarketInterface[]>([]);
+  // const [markets, setMarkets] = useState<MarketInterface[]>([]);
   const [fancyOdds, setFancyOdds] = useState<any>();
   const [prevFancyOdds, setPrevFancyOdds] = useState<any>();
+  const [profits, setProfits] = useState<ProfitInterface[]>([]);
   const nav = useNavigate();
   const getBets = async () => {
-    if (!matchId || !isSignedIn) {
+    if (!matchId || isSignedIn===false) {
       nav("/");
       return;
     }
@@ -85,87 +121,50 @@ const Event = () => {
     }
     setLoading(false);
   };
-  // const transformBookmaker = (odds: FancyOddsInterface) => {
-  //   const newOdds = {
-  //     marketId: odds.sid,
-  //     status: odds.gstatus,
-  //     runners: [
-  //       {
 
-  //       }
-  //     ]
-  //   };
-  // };
-  const getMarketIds = async () => {
-    if (!matchId || !isSignedIn) return;
-    setLoading(true);
-    const { response } = await eventServices.marketId({ matchId });
-    if (response?.data) {
-      setMarkets(response.data.marketList);
+  const createProfits = () => {
+    if (betDetails?.stake) {
+      const { isBack, odds, stake } = betDetails;
+      if (betDetails?.marketName === "Match Odds") {
+        const newProfits: ProfitInterface[] = [];
+        fancyOdds.Odds?.runners?.forEach((element: any) => {
+          if (element.selectionId === betDetails?.selectionId) {
+            newProfits.push({
+              title: element.selectionId,
+              value: (isBack ? 1 : -1) * (odds - 1) * stake,
+              sid: element.selectionId,
+            });
+          } else {
+            newProfits.push({
+              title: element.selectionId,
+              value: (isBack ? -1 : 1) * stake,
+              sid: element.selectionId,
+            });
+          }
+        });
+        setProfits(newProfits);
+      } else if (betDetails?.marketName === "Bookmaker") {
+        fancyOdds.Bookmaker.map((element: FancyOddsInterface) => {
+          if (element.sid === betDetails?.selectionId) {
+            return {
+              title: element.nation,
+              value: (isBack ? 1 : -1) * (odds - 1) * stake,
+              sid: element.sid,
+            };
+          } else {
+            return {
+              title: element.nation,
+              value: (isBack ? -1 : 1) * stake,
+              sid: element.sid,
+            };
+          }
+        });
+      }
+    } else {
+      setProfits([]);
     }
-    setLoading(false);
   };
-  const transformMatchOdds = (odds: any) => {
-    if (!odds.length) {
-      return null;
-    }
-    const newOdds = {
-      ...odds[0],
-    };
-    // managing for dynamic no of odds
-    newOdds.runners = odds[0].runners.map((item: any) => {
-      item.ex.availableToBack = [
-        ...item.ex.availableToBack,
-        { price: "", size: "" },
-        { price: "", size: "" },
-        { price: "", size: "" },
-      ].slice(0, 3);
-      item.ex.availableToLay = [
-        ...item.ex.availableToLay,
-        { price: "", size: "" },
-        { price: "", size: "" },
-        { price: "", size: "" },
-      ].slice(0, 3);
-      return item;
-    });
-    return newOdds;
-  };
-  // const getMatchOdds = async (market: MarketInterface) => {
-  //   const { response } = await eventServices.odds(market.marketId);
-  //   if (response) {
-  //     if (!odds[market.type]) {
-  //       setPrevOdds((o: any) => ({ ...o, [market.type]: response[0] }));
-  //     } else {
-  //       const prevOdds = { ...odds };
-  //       setPrevOdds(prevOdds);
-  //     }
-  //     const newOdds = {
-  //       ...response[0],
-  //     };
 
-  //     // managing for dynamic no of odds
-  //     newOdds.runners = response[0].runners.map((item: any) => {
-  //       item.ex.availableToBack = [
-  //         ...item.ex.availableToBack,
-  //         { price: "", size: "" },
-  //         { price: "", size: "" },
-  //         { price: "", size: "" },
-  //       ].slice(0, 3);
-  //       item.ex.availableToLay = [
-  //         ...item.ex.availableToLay,
-  //         { price: "", size: "" },
-  //         { price: "", size: "" },
-  //         { price: "", size: "" },
-  //       ].slice(0, 3);
-  //       return item;
-  //     });
-
-  //     setOdds((o: any) => ({
-  //       ...o,
-  //       [market.type]: newOdds,
-  //     }));
-  //   }
-  // };
   const getFancyOdds = async () => {
     if (matchId) {
       const { response } = await eventServices.fancyOdds(matchId);
@@ -180,43 +179,44 @@ const Event = () => {
   };
   async function getOdds() {
     getFancyOdds();
-    // markets.forEach(async (market) => {
-    //   if (market.type === "Match Odds") {
-    //     // getMatchOdds(market);
-    //   } else if (market.type === "Bookmaker") {
-    //   } else {
-    //     return;
-    //   }
-    // });
   }
 
   useEffect(() => {
     getBets();
-    getMarketIds();
+    // getMarketIds();
     return () => {};
   }, [isSignedIn, matchId]);
 
   //odds
   useEffect(() => {
-    const timer = setTimeout(() => {
-      getOdds();
-    }, 1000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, [markets, matchId, fancyOdds]);
+    const timer = setTimeout(() => getOdds(), 500);
+    return () => clearInterval(timer);
+  }, [matchId, fancyOdds]);
 
   useEffect(() => {
     getOdds();
-  }, [markets]);
+  }, []);
+
+  useEffect(() => {
+    createProfits();
+  }, [betDetails?.stake]);
 
   if (!matchId) return <></>;
+
   if (loading || !fancyOdds)
     return (
       <Box height={"100vh"}>
         <Loading />
       </Box>
     );
+  const betSlip = (
+    <BetSlip
+      setProfits={setProfits}
+      betId={betDetails}
+      setBetId={setBetDetails}
+      matchId={matchId}
+    />
+  );
   return (
     <Box m={0.3} mt={0.6}>
       <HomeLayout
@@ -230,33 +230,43 @@ const Event = () => {
             bgcolor={colorHex.bg1}
             height={"100%"}
           >
-            <BetSlip
-              markets={markets}
-              betId={betDetails}
-              matchId={matchId}
-              setBetId={setBetDetails}
-            />
+            {betSlip}
             {bets && <MyBet bets={bets} />}
           </Box>
         }
       >
-        <Box></Box>
+        <GameHeader
+          bgcolor={
+            sportsTabList.find(
+              (sportTab) =>
+                sportTab.name ===
+                activeEventList?.find((item) =>
+                  item.matchList.find(
+                    (item2) => item2.matchId === Number(matchId)
+                  )
+                )?.sportName
+            )?.color
+          }
+        >
+          {
+            activeEventList
+              ?.reduce(
+                (acc: any[], current) => [...acc, ...current.matchList],
+                []
+              )
+              ?.find((item: any) => item.matchId == matchId)?.matchName
+          }
+        </GameHeader>
         {bets && <MybetMobile bets={bets}></MybetMobile>}
         <CustomizedDialog2
           title="Bet Slip"
           open={Boolean(betDetails) && !matches}
           handleClose={() => setBetDetails(null)}
         >
-          <BetSlip
-            matchId={matchId}
-            markets={markets}
-            betId={betDetails}
-            setBetId={setBetDetails}
-          />
-          {/* <BetResult title={"Eastern Suburbs (Women) W"} value={value} />
-          <BetResult title={"Eastern Suburbs (Women) W"} value={value} />
-          <BetResult title={"Eastern Suburbs (Women) W"} value={value} />
-          <BetResult title={"Eastern Suburbs (Women) W"} value={value} /> */}
+          {betSlip}
+          {profits.map((profit) => (
+            <BetResult {...profit} />
+          ))}
         </CustomizedDialog2>
 
         {fancyOdds.Odds ? (
@@ -280,6 +290,9 @@ const Event = () => {
                   suspended={fancyOdds.Odds?.status !== "OPEN"}
                   prevValues={prevFancyOdds.Odds?.runners[index]}
                   values={selection}
+                  profits={profits?.find(
+                    (profit) => profit.sid === selection.selectionId
+                  )}
                   setBetId={setBetDetails}
                   title={title}
                   marketName={"Match Odds"}
@@ -291,7 +304,7 @@ const Event = () => {
           ""
         )}
 
-        {/* {odds["Bookmaker"] && (
+        {fancyOdds["Bookmaker"] && (
           <CustomizedAccordions
             title={
               <Box flex={1} display="flex" justifyContent={"space-between"}>
@@ -306,40 +319,19 @@ const Event = () => {
           >
             <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
               <OddsNumberTitle />
-              {odds["Bookmaker"]?.runners.map(
-                (selection: any, index: string) => (
-                  <Odds
-                    details={odds["Bookmaker"]}
-                    suspended={odds["Bookmaker"]?.status !== "OPEN"}
-                    prevValues={prevOdds["Bookmaker"]?.runners[index]}
-                    values={selection}
-                    setBetId={setBetDetails}
-                    title={title}
-                  />
-                )
-              )}
+              {fancyOdds["Bookmaker"]?.map((odds: any, index: string) => (
+                <Bookmaker
+                  suspended={odds?.gstatus === "SUSPENDED"}
+                  prevValues={prevFancyOdds["Bookmaker"][index]}
+                  values={odds}
+                  profits={profits?.find((profit) => profit.sid === odds.sid)}
+                  marketName={"Bookmaker"}
+                  setBetId={setBetDetails}
+                />
+              ))}
             </Box>
           </CustomizedAccordions>
-        )} */}
-        {/* 
-        <CustomizedAccordions
-          title={
-            <Box flex={1} display="flex" justifyContent={"space-between"}>
-              <Typography fontSize="0.85rem" fontWeight={500}>
-                Normal
-              </Typography>
-            </Box>
-          }
-        >
-          <Grid container pb={{ xs: 1 }} px={{ xs: 1.5 }} gap={{ md: "3%" }}>
-            <OddsNumberTitleTwo />
-            <OddsNumberTitleTwo />
-            <OddsOnlyTwo setBetId={setBetId} title={title} />
-            <OddsOnlyTwo setBetId={setBetId} title={title} />
-            <OddsOnlyTwo setBetId={setBetId} title={title} />
-            <OddsOnlyTwo setBetId={setBetId} title={title} />
-          </Grid>
-        </CustomizedAccordions> */}
+        )}
 
         {Object.keys(fancyOdds).map((fancyMarket: any) => {
           if (["Odds", "Bookmaker"].includes(fancyMarket)) {
@@ -390,17 +382,16 @@ const Event = () => {
 
 export default Event;
 
-
-    // function BetResult({value, title}:{value:number, title:string}) {
-    //   return (
-    //     <Box display="flex" m={1} justifyContent={"space-between"}>
-    //       <Typography color="text.secondary" fontSize={"0.8rem"}>
-    //         {title}
-    //       </Typography>
-    //       <Typography color={value >= 0 ? "green" : "red"} fontSize={"0.8rem"}>
-    //         {value}
-    //       </Typography>
-    //     </Box>
-    //   );
-    // }
+function BetResult({ value, title }: { value: number; title: string }) {
+  return (
+    <Box display="flex" m={1} justifyContent={"space-between"}>
+      <Typography color="text.secondary" fontSize={"0.8rem"}>
+        {title}
+      </Typography>
+      <Typography color={value >= 0 ? "green" : "red"} fontSize={"0.8rem"}>
+        {value}
+      </Typography>
+    </Box>
+  );
+}
   
