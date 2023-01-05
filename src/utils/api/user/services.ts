@@ -74,6 +74,13 @@ export const userServices = {
     };
     return await apiHandler(params);
   },
+  pnlByMatch: async (matchId: string) => {
+    const params = {
+      resource: userResources.GET_PNL,
+      data: { matchId },
+    };
+    return await apiHandler(params);
+  },
   getButtonValue: async () => {
     const params = {
       resource: userResources.GET_BUTTON_VALUE,

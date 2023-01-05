@@ -46,23 +46,22 @@ const UserBox = () => {
         sx={{ flexDirection: { xs: "column", lg: "row" } }}
         color="text.secondary"
         alignContent={"center"}
-        alignItems={"center"}
-        // gap={{lg:1.25}}
+        alignItems={{ xs: "flex-end", lg: "center" }}
       >
         <Typography
           my="auto"
-          fontSize={{ xs: "0.75rem", lg: "0.8rem" }}
+          fontSize={{ xs: "0.65rem",sm:"0.75rem", lg: "0.8rem" }}
           color={{ xs: "white", lg: "text.primary" }}
           textAlign={"center"}
           pl={{ lg: "10px" }}
-          maxWidth={{ xs: "10rem",md:"unset" }}
-          overflow="hidden"
-          textOverflow={"ellipsis"}
+          // maxWidth={{ xs: "10rem", md: "unset" }}
+          // overflow="hidden"
+          // textOverflow={"ellipsis"}
           fontWeight={{ xs: 800, lg: 500 }}
           whiteSpace="nowrap"
         >
           pts: {Number(balanceData?.balance)?.toFixed(1)} |{" "}
-          {Number(balanceData?.libality)?.toFixed(1)} 
+          {Number(balanceData?.libality)?.toFixed(1)}
         </Typography>
         <Box
           display="flex"

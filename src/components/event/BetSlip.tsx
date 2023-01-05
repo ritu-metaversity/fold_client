@@ -26,15 +26,16 @@ import {
   AmountInputBGLay,
   TitleStyled,
 } from "./styledComponents";
-import { BetDetailsInterface, MarketInterface, ProfitInterface } from ".";
+import { BetDetailsInterface } from ".";
 import { eventServices } from "../../utils/api/event/services";
 import Loading from "../layout/loading";
 
 interface Props {
+  getBets: () => void;
+  getPnl: () => void;
   betId: BetDetailsInterface | null;
   setBetId: Dispatch<SetStateAction<BetDetailsInterface | null>>;
   matchId: number | string;
-  setProfits: Dispatch<SetStateAction<ProfitInterface[]>>;
 }
 
 const gridProps = {
@@ -63,7 +64,13 @@ const getDeviceType = () => {
   }
   return "desktop";
 };
-export const BetSlip: FC<Props> = ({ betId,setProfits, setBetId, matchId }) => {
+export const BetSlip: FC<Props> = ({
+  getBets,
+  betId,
+  setBetId,
+  matchId,
+  getPnl,
+}) => {
   const { stakes, activeEventList } = useContext(UserContext);
   const matches = useMediaQuery("(min-width: 1279px)");
   const [loading, setLoading] = useState(false);
@@ -83,13 +90,21 @@ export const BetSlip: FC<Props> = ({ betId,setProfits, setBetId, matchId }) => {
         orientation: "landscape",
       },
     };
+
     setLoading(true);
+
     const { response } = await eventServices.bet(data);
     if (response) {
       setBetId(null);
+      getBets();
+      setTimeout(() => {
+        getPnl();
+      }, 1000);
     }
+
     setLoading(false);
   };
+
   const getMatchName = useMemo(
     () =>
       activeEventList
@@ -97,13 +112,16 @@ export const BetSlip: FC<Props> = ({ betId,setProfits, setBetId, matchId }) => {
         ?.find((item: any) => item.matchId == matchId)?.matchName || undefined,
     [matchId, activeEventList]
   );
+
   if (loading)
     return (
       <Box height={400} width={"100%"}>
         <Loading />
       </Box>
     );
+  
   if (!betId) return <></>;
+  
   return (
     <Box textAlign={"left"}>
       {matches && <TitleStyled>Bet Slip</TitleStyled>}
@@ -134,8 +152,8 @@ export const BetSlip: FC<Props> = ({ betId,setProfits, setBetId, matchId }) => {
               size="small"
               value={betId.odds}
               // disabled
-              
-              InputProps={{ readOnly:true, style: { fontSize: "0.75rem" } }}
+
+              InputProps={{ readOnly: true, style: { fontSize: "0.75rem" } }}
               sx={{ width: 80 }}
             />
           ) : (
