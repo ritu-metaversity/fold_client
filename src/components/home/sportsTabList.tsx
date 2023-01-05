@@ -4,11 +4,18 @@ import {
   GiVolleyballBall,
   GiEightBall,
   GiHockey,
+  GiBoxingGloveSurprise,
 } from "react-icons/gi";
 import { BiTennisBall } from "react-icons/bi";
 import { IoIosFootball, IoIosBasketball } from "react-icons/io";
-import { MdSportsKabaddi } from "react-icons/md";
-import { FaTableTennis } from "react-icons/fa";
+import { MdSportsEsports, MdSportsKabaddi } from "react-icons/md";
+import {
+  FaFootballBall,
+  FaHorse,
+  FaMotorcycle,
+  FaTableTennis,
+} from "react-icons/fa";
+import { GiGolfFlag } from "react-icons/gi";
 
 export const sportsTabList = [
   {
@@ -32,9 +39,39 @@ export const sportsTabList = [
     color: "#F18521",
   },
   {
+    name: "Boxing",
+    icon: <GiBoxingGloveSurprise />,
+    color: "#e44e24",
+  },
+  {
+    name: "Golf",
+    icon: <GiGolfFlag />,
+    color: "#015900",
+  },
+  {
     name: "Kabaddi",
     icon: <MdSportsKabaddi />,
     color: "#6e2e26",
+  },
+  {
+    name: "Rugby League",
+    icon: <FaFootballBall />,
+    color: "#ED5F62",
+  },
+  {
+    name: "Motor Sport",
+    icon: <FaMotorcycle />,
+    color: "#9FBE3C",
+  },
+  {
+    name: "Esports",
+    icon: <MdSportsEsports />,
+    color: "#623CEA",
+  },
+  {
+    name: "Horse Racing",
+    icon: <FaHorse />,
+    color: "#9E4025",
   },
   {
     name: "Table Tennis",

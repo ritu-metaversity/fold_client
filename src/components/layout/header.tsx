@@ -126,6 +126,7 @@ export default function Header(props: Props) {
         position="fixed"
         elevation={0}
         sx={{
+          flexWrap: "wrap",
           alignItems: notShowSidebar ? "center" : "",
           width: {
             lg: `calc(100% - ${drawerWidthLocal}px)`,
@@ -136,7 +137,7 @@ export default function Header(props: Props) {
           mt: { lg: topNavHeight },
           [theme.breakpoints.down("lg")]: {
             bgcolor: isSignedIn ? "" : colorHex.bg3,
-            height: isSignedIn ? 64 : 50,
+            height: isSignedIn ? "max-content" : 50,
           },
         }}
       >

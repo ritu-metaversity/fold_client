@@ -42,22 +42,22 @@ const days = [
 const getDay = (date: string) => {
   const now = new Date();
   const dat = new Date(date);
-  const nowDate = now.getUTCDate();
-  const datDate = dat.getUTCDate();
+  const nowDate = now.getDate();
+  const datDate = dat.getDate();
 
   if (nowDate === datDate) return "Today";
   now.setDate(nowDate + 1);
-  if (now.getUTCDate() === datDate) return "Tomorrow";
+  if (now.getDate() === datDate) return "Tomorrow";
 
   return days[dat.getDay()];
 };
 const getTimeInMIn = (date: string) => {
   const dat = new Date(date);
   if (!date) return "";
-  let hours: string | number = dat.getUTCHours();
+  let hours: string | number = dat.getHours();
   hours = (hours < 10 ? "0" : "") + hours;
 
-  let mins: string | number = dat.getUTCMinutes();
+  let mins: string | number = dat.getMinutes();
   mins = (mins < 10 ? "0" : "") + mins;
   return hours + ":" + mins;
 };

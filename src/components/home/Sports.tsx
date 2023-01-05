@@ -9,6 +9,7 @@ import Match from "./match";
 import { UserContext } from "../../App";
 import "./miniScrollbar.css";
 import Loading from "../layout/loading";
+import { BoxWithTitleBox } from "../common/styledComponents";
 
 const Sports = () => {
   const [value, setValue] = React.useState(0);
@@ -53,44 +54,39 @@ const Sports = () => {
       if (!activeSportList) return;
       const { sportId } = activeSportList[value];
       if (!sportId) return;
-      setLoading(true)
+      setLoading(true);
       const { response } = await sportServices.activeEventFromSport(sportId);
 
-      if (response?.data) {
-        if (response?.data?.length > 0) {
-          setActiveEventList(response.data);
-        }
+      if (response?.data?.length) {
+        setActiveEventList(response.data);
       } else {
         setActiveEventList([]);
       }
       setLoading(false);
-
     };
-        const getNewEventOpen = async () => {
-          if (!activeSportList) return;
-          const { sportId } = activeSportList[value];
-          if (!sportId) return;
-          setLoading(true);
-          const { response } = await sportServices.activeEventFromSportOpen(
-            sportId
-          );
+    const getNewEventOpen = async () => {
+      if (!activeSportList) return;
+      const { sportId } = activeSportList[value];
+      if (!sportId) return;
+      setLoading(true);
+      const { response } = await sportServices.activeEventFromSportOpen(
+        sportId
+      );
 
-          if (response?.data) {
-            if (response?.data?.length > 0) {
-              setActiveEventList(response.data);
-            }
-          } else {
-            setActiveEventList([]);
-          }
-          setLoading(false);
-        };
-    
+      if (response?.data?.length) {
+        setActiveEventList(response.data);
+      } else {
+        setActiveEventList([]);
+      }
+      setLoading(false);
+    };
+
     if (isSignedIn) {
       getNewEvent();
     } else {
-      getNewEventOpen()
+      getNewEventOpen();
     }
-  }, [value,isSignedIn, activeSportList]);
+  }, [value, isSignedIn, activeSportList]);
 
   if (!(activeSportList?.length > 0)) {
     return <div></div>;
@@ -151,14 +147,22 @@ const Sports = () => {
       <Box
         id="scrollable-match-list"
         maxHeight={{ xs: "310px", lg: "60vh" }}
-        sx={{ overflowY: "overlay", overflowX: "hidden", p: { xs: 0.5, lg: 0 } }}
+        minHeight={{ lg: "calc(100vh - 440px)" }}
+        sx={{
+          overflowY: "overlay",
+          overflowX: "hidden",
+          p: { xs: 0.5, lg: 0 },
+        }}
       >
-        { loading ? <Box height={200} >
-            <Loading /> 
-            </Box>: activeEventList.map((item) => (
-          <Match matches={item} />
-        )) 
-       }
+        {loading ? (
+          <Box height={200}>
+            <Loading />
+          </Box>
+        ) : activeEventList.length > 0 ? (
+          activeEventList.map((item) => <Match matches={item} />)
+        ) : (
+          <BoxWithTitleBox>No Data Found</BoxWithTitleBox>
+        )}
       </Box>
     </Box>
   );
