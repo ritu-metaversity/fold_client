@@ -132,7 +132,7 @@ const Odds = ({
             mr={0.5}
             display={{ xs: "none", lg: "block" }}
           >
-            {profits?.value?.toFixed(2)}
+            {Number(profits?.value?.toFixed(2))}
           </Typography>
         )}
       </Grid>

@@ -143,6 +143,7 @@ const Bookmaker = ({
         xs={12}
         lg={6.6}
         display="flex"
+        justifyContent="space-between"
         alignItems={"center"}
       >
         <Typography fontSize={"0.85rem"}>{values.nation}</Typography>
@@ -153,7 +154,7 @@ const Bookmaker = ({
             mr={0.5}
             display={{ xs: "none", lg: "block" }}
           >
-            {profits?.value?.toFixed(2)}
+            {Number(profits?.value?.toFixed(2))}
           </Typography>
         )}
       </Grid>

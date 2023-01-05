@@ -38,6 +38,10 @@ export const userResources: {
     URL: "enduser/bet-list-by-matchid",
     METHOD: "POST",
   },
+  GET_PNL: {
+    URL: "enduser/user-odds-pnl",
+    METHOD: "POST",
+  },
   CURRENT_BETS: {
     URL: "enduser/unsettled-bet",
     METHOD: "POST",
@@ -46,4 +50,5 @@ export const userResources: {
     URL: "enduser/account-statement",
     METHOD: "POST",
   },
+
 };
