@@ -30,8 +30,8 @@ export function ButtonTabs() {
       >
         <Button sx={selectedSx}>Exchange</Button>
         <Button sx={unSelectedSx}>Live Casino</Button>
-        <Button sx={unSelectedSx}>Slot</Button>
-        <Button sx={unSelectedSx}>Fantasy Games</Button>
+        {/* <Button sx={unSelectedSx}>Slot</Button>
+        <Button sx={unSelectedSx}>Fantasy Games</Button> */}
       </ButtonGroup>
     </Box>
   );

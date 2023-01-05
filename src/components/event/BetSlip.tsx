@@ -97,7 +97,9 @@ export const BetSlip: FC<Props> = ({
     if (response) {
       setBetId(null);
       getBets();
-      getPnl();
+      setTimeout(() => {
+        getPnl();
+      }, 1000);
     }
 
     setLoading(false);
