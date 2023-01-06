@@ -15,10 +15,9 @@ import { SnackbarProvider } from "notistack";
 import Pages from "./components/pages";
 import { userServices } from "./utils/api/user/services";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { MatchInterface } from "./components/home/match";
 import { sportServices } from "./utils/api/sport/services";
 import { SportInterface } from "./components/layout/Sidebar";
-
+import "./components/font.css";
 interface UserContextType {
   setIsSignedIn: Dispatch<SetStateAction<boolean | null>> | null;
   setUser: Dispatch<SetStateAction<any>> | null;
@@ -127,6 +126,7 @@ function App() {
         </div>
         <SnackbarUtilsConfigurator />
       </SnackbarProvider>
+      <i className="d-icon icon-1"></i>
     </ThemeProvider>
   );
 }

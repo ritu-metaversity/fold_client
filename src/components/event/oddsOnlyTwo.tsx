@@ -1,12 +1,14 @@
 import { Grid, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import { BetDetailsInterface, FancyOddsInterface } from ".";
+import { BetDetailsInterface, FancyOddsInterface, ProfitInterface } from "./types";
 import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
 
 interface Props {
   title: any | string;
+  profit?: ProfitInterface;
   odds: FancyOddsInterface;
+  setMarketId: Dispatch<SetStateAction<string>>;
   prevOdds: FancyOddsInterface;
   setBetId: Dispatch<SetStateAction<BetDetailsInterface | null>>;
 }
@@ -45,7 +47,14 @@ const Values = (price: number, size: number) => (
   </>
 );
 
-const OddsOnlyTwo = ({ title, odds, prevOdds, setBetId }: Props) => {
+const OddsOnlyTwo = ({
+  title,
+  odds,
+  profit,
+  prevOdds,
+  setMarketId,
+  setBetId,
+}: Props) => {
   const { isSignedIn, setModal } = useContext(UserContext);
   const handleClick = () => {
     if (!isSignedIn) {
@@ -103,12 +112,23 @@ const OddsOnlyTwo = ({ title, odds, prevOdds, setBetId }: Props) => {
         item
         textAlign={"start"}
         display="flex"
-        alignItems={"center"}
+        flexDirection={{ xs: "row", lg: "column" }}
+        justifyContent={{ xs: "space-between", lg: "center" }}
         lg={5.7}
         xs={12}
         fontSize={"0.8rem"}
       >
         <>{odds?.nation}</>
+        {profit && (
+          <Typography
+            color={profit?.value >= 0 ? "green" : "red"}
+            fontSize={"0.8rem"}
+            sx={{ cursor: "pointer" }}
+            onClick={() => setMarketId(profit.sid+"")}
+          >
+            {Number(profit?.value?.toFixed(2))}
+          </Typography>
+        )}
       </Grid>
       <Grid
         container

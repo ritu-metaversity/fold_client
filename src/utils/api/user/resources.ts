@@ -42,6 +42,10 @@ export const userResources: {
     URL: "enduser/user-odds-pnl",
     METHOD: "POST",
   },
+  GET_FANCY_PNL: {
+    URL: "enduser/user-fancy-pnl",
+    METHOD: "POST",
+  },
   CURRENT_BETS: {
     URL: "enduser/unsettled-bet",
     METHOD: "POST",
@@ -50,5 +54,8 @@ export const userResources: {
     URL: "enduser/account-statement",
     METHOD: "POST",
   },
-
+  PNL_BOOK: {
+    URL: "enduser/user-fancy-book",
+    METHOD: "POST"
+  },
 };

@@ -26,13 +26,14 @@ import {
   AmountInputBGLay,
   TitleStyled,
 } from "./styledComponents";
-import { BetDetailsInterface } from ".";
 import { eventServices } from "../../utils/api/event/services";
 import Loading from "../layout/loading";
+import { BetDetailsInterface } from "./types";
 
 interface Props {
   getBets: () => void;
   getPnl: () => void;
+  getFancyPnl: () => void;
   betId: BetDetailsInterface | null;
   setBetId: Dispatch<SetStateAction<BetDetailsInterface | null>>;
   matchId: number | string;
@@ -70,6 +71,7 @@ export const BetSlip: FC<Props> = ({
   setBetId,
   matchId,
   getPnl,
+  getFancyPnl,
 }) => {
   const { stakes, activeEventList } = useContext(UserContext);
   const matches = useMediaQuery("(min-width: 1279px)");
@@ -98,10 +100,13 @@ export const BetSlip: FC<Props> = ({
       setBetId(null);
       getBets();
       setTimeout(() => {
-        getPnl();
-      }, 1000);
+        if (data.isFancy) {
+          getFancyPnl();
+        } else {
+          getPnl();
+        }
+      }, 2000);
     }
-
     setLoading(false);
   };
 
@@ -113,17 +118,27 @@ export const BetSlip: FC<Props> = ({
     [matchId, activeEventList]
   );
 
-  if (loading)
-    return (
-      <Box height={400} width={"100%"}>
-        <Loading />
-      </Box>
-    );
-  
+  // if (loading)
+  //   return (
+  //     <Box height={400} position="absolute" width={"100%"}>
+  //       <Loading />
+  //     </Box>
+  //   );
+
   if (!betId) return <></>;
-  
+
   return (
-    <Box textAlign={"left"}>
+    <Box textAlign={"left"} height="max-content" position="relative">
+      {loading && (
+        <Box
+          sx={{ opacity: 0.8, zIndex: 20 }}
+          height={"100%"}
+          position="absolute"
+          width={"100%"}
+        >
+          <Loading />
+        </Box>
+      )}
       {matches && <TitleStyled>Bet Slip</TitleStyled>}
       <Box p={0.5}>
         <Box display="flex" fontSize="0.8rem" justifyContent={"space-between"}>
