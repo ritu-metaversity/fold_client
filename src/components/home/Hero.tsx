@@ -10,6 +10,7 @@ const Hero = () => {
         infiniteLoop
         autoPlay
         interval={3000}
+        showArrows={false}
         showThumbs={false}
         showIndicators={false}
         showStatus={false}

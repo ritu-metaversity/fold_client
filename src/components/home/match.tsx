@@ -14,7 +14,7 @@ export interface MatchInterface {
   team2Lay: number | null;
   drawBack: number | null;
   drawLay: number | null;
-  live: boolean;
+  inPlay: boolean;
   bm: boolean;
 }
 
@@ -111,7 +111,7 @@ const Match = ({ matches }: Props) => {
         flex={{ lg: 1 }}
       >
         <Box>
-          {matches.live ? (
+          {matches.inPlay ? (
             <Typography
               component={"div"}
               maxWidth={"min-content"}
@@ -150,6 +150,7 @@ const Match = ({ matches }: Props) => {
           fontSize={"0.85rem"}
           width={{ lg: "6rem" }}
           fontWeight={900}
+          whiteSpace="nowrap"
           sx={{ wordSpacing: "0.2rem" }}
         >
           F1 F {matches.bm && "BM"}

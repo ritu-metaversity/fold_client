@@ -1,6 +1,6 @@
 import {  Grid, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import { BetDetailsInterface, ProfitInterface } from ".";
+import { BetDetailsInterface, ProfitInterface } from "./types";
 import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
 import "./animation.css";
@@ -130,7 +130,6 @@ const Odds = ({
             color={profits?.value >= 0 ? "green" : "red"}
             fontSize={"0.8rem"}
             mr={0.5}
-            display={{ xs: "none", lg: "block" }}
           >
             {Number(profits?.value?.toFixed(2))}
           </Typography>
