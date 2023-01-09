@@ -92,7 +92,6 @@ export const BetSlip: FC<Props> = ({
         orientation: "landscape",
       },
     };
-
     setLoading(true);
 
     const { response } = await eventServices.bet(data);

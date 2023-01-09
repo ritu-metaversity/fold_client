@@ -66,8 +66,6 @@ const Event = () => {
     setLoading(false);
   };
 
-  
-
   const getFancyOdds = async () => {
     if (matchId) {
       const { response } = await eventServices.fancyOdds(matchId);
@@ -89,7 +87,7 @@ const Event = () => {
       setFancyOdds({ ...response, Odds });
     }
   };
-  
+
   async function getOdds() {
     getFancyOdds();
   }
@@ -132,7 +130,14 @@ const Event = () => {
   }, []);
 
   useEffect(() => {
-    createProfits({fancyOdds,fancyPnl,betDetails,pnl,profits,setProfits});
+    createProfits({
+      fancyOdds,
+      fancyPnl,
+      betDetails,
+      pnl,
+      profits,
+      setProfits,
+    });
   }, [betDetails?.stake, pnl, fancyOdds?.Odds?.marketId]);
 
   if (!matchId) return <></>;
@@ -210,7 +215,10 @@ const Event = () => {
           {betSlip}
           {betDetails?.marketName === "Match Odds"
             ? profits.Odds?.map((profit) => <BetResult {...profit} />)
-            : profits.Bookmaker?.map((profit) => <BetResult {...profit} />)}
+            : betDetails?.marketName === "Bookmaker" &&
+              profits.Bookmaker?.filter(
+                (item) => item?.mid === betDetails?.marketId
+              ).map((profit) => <BetResult {...profit} />)}
         </CustomizedDialog2>
 
         {fancyOdds.Odds ? (
@@ -235,7 +243,7 @@ const Event = () => {
                   prevValues={prevFancyOdds.Odds?.runners[index]}
                   values={selection}
                   profits={profits.Odds?.find(
-                    (profit) => profit.sid === selection.selectionId
+                    (profit) => profit.sid == selection.selectionId
                   )}
                   setBetId={setBetDetails}
                   title={title}
@@ -263,21 +271,60 @@ const Event = () => {
           >
             <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
               <OddsNumberTitle />
-              {fancyOdds["Bookmaker"]?.map((odds: any, index: string) => (
-                <Bookmaker
-                  suspended={odds?.gstatus === "SUSPENDED"}
-                  prevValues={prevFancyOdds["Bookmaker"][index]}
-                  values={odds}
-                  profits={profits.Bookmaker?.find(
-                    (profit) => profit.sid === odds.sid
-                  )}
-                  marketName={"Bookmaker"}
-                  setBetId={setBetDetails}
-                />
-              ))}
+              {fancyOdds["Bookmaker"]?.map(
+                (odds: FancyOddsInterface, index: string) =>
+                  odds.t !== "TOSS" && (
+                    <Bookmaker
+                      suspended={odds?.gstatus === "SUSPENDED"}
+                      prevValues={prevFancyOdds["Bookmaker"][index]}
+                      values={odds}
+                      profits={profits.Bookmaker?.find(
+                        (profit) => profit?.sid == odds.sid
+                      )}
+                      marketName={"Bookmaker"}
+                      setBetId={setBetDetails}
+                    />
+                  )
+              )}
             </Box>
           </CustomizedAccordions>
         )}
+        {fancyOdds["Bookmaker"] &&
+          fancyOdds.Bookmaker.find(
+            (odd: FancyOddsInterface) => odd.t === "TOSS"
+          ) && (
+            <CustomizedAccordions
+              title={
+                <Box flex={1} display="flex" justifyContent={"space-between"}>
+                  <Typography fontSize="0.85rem" fontWeight={500}>
+                    Bookmaker Toss
+                  </Typography>
+                  <Typography fontSize="0.85rem" fontWeight={700}>
+                    Min:100 Max:10L
+                  </Typography>
+                </Box>
+              }
+            >
+              <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
+                <OddsNumberTitle />
+                {fancyOdds["Bookmaker"]?.map(
+                  (odds: FancyOddsInterface, index: string) =>
+                    odds.t === "TOSS" && (
+                      <Bookmaker
+                        suspended={odds?.gstatus === "SUSPENDED"}
+                        prevValues={prevFancyOdds["Bookmaker"][index]}
+                        values={odds}
+                        profits={profits.Bookmaker?.find(
+                          (profit) => profit?.sid == odds.sid
+                        )}
+                        marketName={"Bookmaker"}
+                        setBetId={setBetDetails}
+                      />
+                    )
+                )}
+              </Box>
+            </CustomizedAccordions>
+          )}
         {/* accordians for fancy with values */}
         {Object.keys(fancyOdds).map((fancyMarket: any) => {
           if (["Odds", "Bookmaker"].includes(fancyMarket)) return <></>;

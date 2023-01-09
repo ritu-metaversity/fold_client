@@ -1,10 +1,13 @@
 import { Grid, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import { BetDetailsInterface, FancyOddsInterface, ProfitInterface } from ".";
+import {
+  BetDetailsInterface,
+  FancyOddsInterface,
+  ProfitInterface,
+} from "./types";
 import { UserContext } from "../../App";
 import { colorHex } from "../../constants";
 import "./animation.css";
-import Odds from "./odds";
 
 interface Props {
   values: FancyOddsInterface;
@@ -83,8 +86,9 @@ const Bookmaker = ({
       selectionId: Number(values.sid),
       priceValue: odds,
       placeTime: new Date(),
-      marketId: Number(values.sid),
+      marketId: values.mid,
       matchId: "",
+      t: values.t,
     });
   };
   const handleClick2 = (odds: number) => {
@@ -106,8 +110,9 @@ const Bookmaker = ({
       stake: 0,
       priceValue: odds,
       placeTime: new Date(),
-      marketId: Number(values.sid),
+      marketId: values.mid,
       matchId: "",
+      t: values.t,
     });
   };
 
@@ -152,7 +157,6 @@ const Bookmaker = ({
             color={profits?.value >= 0 ? "green" : "red"}
             fontSize={"0.8rem"}
             mr={0.5}
-            display={{ xs: "none", lg: "block" }}
           >
             {Number(profits?.value?.toFixed(2))}
           </Typography>

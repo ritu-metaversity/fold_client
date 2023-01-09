@@ -41,9 +41,12 @@ export interface BetDetailsInterface {
   priceValue: number;
   isFancy: boolean;
   name?: string;
+  t?: string;
 }
 export interface FancyOddsInterface {
+  mid: string;
   sid: string;
+  t: string;
   nation: string;
   b1: number;
   bs1: number;
@@ -55,6 +58,7 @@ export interface FancyOddsInterface {
 export interface ProfitInterface {
   value: number;
   sid?: string | number;
+  mid?: string;
   title: string;
 }
 
