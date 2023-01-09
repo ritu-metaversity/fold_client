@@ -81,6 +81,20 @@ export const userServices = {
     };
     return await apiHandler(params);
   },
+  fancyPnlByMatch: async (matchId: string) => {
+    const params = {
+      resource: userResources.GET_FANCY_PNL,
+      data: { matchId },
+    };
+    return await apiHandler(params);
+  },
+  fancyPnlBook: async (data: any) => {
+    const params = {
+      resource: userResources.PNL_BOOK,
+      data,
+    };
+    return await apiHandler(params);
+  },
   getButtonValue: async () => {
     const params = {
       resource: userResources.GET_BUTTON_VALUE,

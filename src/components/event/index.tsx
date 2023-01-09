@@ -21,84 +21,10 @@ import CustomizedDialog2 from "../common/Dailog2";
 import { GameHeader } from "./styledComponents";
 import Bookmaker from "./bookmaker";
 import { sportsTabList } from "../home/sportsTabList";
+import PnlModal from "./pnlModal";
+import { BetDetailsInterface, BetsInterface, FancyOddsInterface, FancyPnl, Pnl, ProfitInterface } from './types';
+import { createProfits, transformMatchOdds } from './eventUtils';
 
-interface BetsInterface {
-  [x: string]: {
-    nation: string;
-    rate: number;
-    amount: number;
-    priveValue: number;
-    marketName: string;
-    back: boolean;
-  }[];
-}
-export interface MarketInterface {
-  type: string;
-  marketId: string;
-}
-export interface BetDetailsInterface {
-  isBack: boolean;
-  odds: number;
-  stake: number;
-  selectionId: number | string;
-  marketId: string | number;
-  matchId: string;
-  marketName?: string;
-  placeTime: Date;
-  priceValue: number;
-  isFancy: boolean;
-  name?: string;
-}
-export interface FancyOddsInterface {
-  sid: string;
-  nation: string;
-  b1: number;
-  bs1: number;
-  l1: number;
-  ls1: number;
-  gstatus: string;
-}
-
-const transformMatchOdds = (odds: any) => {
-  if (!odds.length) {
-    return null;
-  }
-  const newOdds = {
-    ...odds[0],
-  };
-  // managing for dynamic no of odds
-  newOdds.runners = odds[0].runners.map((item: any) => {
-    item.ex.availableToBack = [
-      ...item.ex.availableToBack,
-      { price: "", size: "" },
-      { price: "", size: "" },
-      { price: "", size: "" },
-    ].slice(0, 3);
-    item.ex.availableToLay = [
-      ...item.ex.availableToLay,
-      { price: "", size: "" },
-      { price: "", size: "" },
-      { price: "", size: "" },
-    ].slice(0, 3);
-    return item;
-  });
-  return newOdds;
-};
-export interface ProfitInterface {
-  value: number;
-  sid?: string | number;
-  title: string;
-}
-
-export interface Pnl {
-  marketId: string;
-  pnl1: number;
-  pnl2: number;
-  pnl3: number;
-  selection1: string | number;
-  selection2: string | number;
-  selection3: string | number;
-}
 
 const Event = () => {
   const [bets, setBets] = useState<BetsInterface | null>(null);
@@ -117,11 +43,14 @@ const Event = () => {
   // const [markets, setMarkets] = useState<MarketInterface[]>([]);
   const [fancyOdds, setFancyOdds] = useState<any>();
   const [pnl, setPnl] = useState<Pnl[] | null>(null);
+  const [fancyPnl, setFancyPnl] = useState<FancyPnl[] | null>(null);
   const [prevFancyOdds, setPrevFancyOdds] = useState<any>();
+  const [selectedPnlMarketId, setSelectedPnlMarketId] = useState("");
   const [profits, setProfits] = useState<{
     Odds: ProfitInterface[];
     Bookmaker: ProfitInterface[];
-  }>({ Odds: [], Bookmaker: [] });
+    Fancy: ProfitInterface[];
+  }>({ Odds: [], Bookmaker: [], Fancy: [] });
   const nav = useNavigate();
 
   const getBets = async () => {
@@ -137,89 +66,6 @@ const Event = () => {
     setLoading(false);
   };
 
-  const createProfits = () => {
-    if (!fancyOdds) return;
-    const pnlsOdds = pnl?.find(
-      (element) => element.marketId == fancyOdds.Odds.marketId
-    );
-    const plnOddsArray = pnlsOdds
-      ? [
-          { pnl: pnlsOdds.pnl1, selectionId: pnlsOdds.selection1 },
-          { pnl: pnlsOdds.pnl2, selectionId: pnlsOdds.selection2 },
-          { pnl: pnlsOdds.pnl3, selectionId: pnlsOdds.selection3 },
-        ]
-      : [];
-    if (betDetails?.stake) {
-      const isBack = betDetails?.isBack || false,
-        odds = betDetails?.odds || 0,
-        stake = betDetails?.stake || 0;
-
-      if (betDetails?.marketName === "Match Odds") {
-        setProfits({
-          ...profits,
-          Odds: fancyOdds.Odds?.runners?.map((element: any) => {
-            const currentProfit: ProfitInterface = {
-              title: element.selectionId,
-              sid: element.selectionId,
-              value:
-                plnOddsArray.find(
-                  (item) => item.selectionId == element.selectionId
-                )?.pnl || 0,
-            };
-
-            if (element.selectionId === betDetails?.selectionId) {
-              currentProfit.value =
-                currentProfit.value + (isBack ? 1 : -1) * (odds - 1) * stake;
-            } else {
-              currentProfit.value =
-                currentProfit.value + (isBack ? -1 : 1) * stake;
-            }
-            return currentProfit;
-          }),
-        });
-      } else if (betDetails?.marketName === "Bookmaker") {
-        setProfits({
-          ...profits,
-          Bookmaker: fancyOdds?.Bookmaker.map((element: FancyOddsInterface) => {
-            if (element.sid == betDetails?.selectionId) {
-              return {
-                title: element.nation,
-                value: (isBack ? 1 : -1) * (odds - 1) * stake,
-                sid: element.sid,
-              };
-            } else {
-              return {
-                title: element.nation,
-                value: (isBack ? -1 : 1) * stake,
-                sid: element.sid,
-              };
-            }
-          }),
-        });
-      }
-    } else {
-      setProfits({
-        Odds: [
-          ...(pnlsOdds
-            ? fancyOdds?.Odds?.runners?.map((element: any) => {
-                const currentProfit: ProfitInterface = {
-                  title: element.selectionId,
-                  sid: element.selectionId,
-                  value:
-                    plnOddsArray.find(
-                      (item) => item.selectionId == element.selectionId
-                    )?.pnl || 0,
-                };
-
-                return currentProfit;
-              })
-            : []),
-        ],
-        Bookmaker: [],
-      });
-    }
-  };
-
   const getFancyOdds = async () => {
     if (matchId) {
       const { response } = await eventServices.fancyOdds(matchId);
@@ -227,7 +73,7 @@ const Event = () => {
       //showing only part of the data currently
       Object.keys(response).forEach((element) => {
         if (
-          !["Fancy", "Fancy2", "Fancy2", "Odds", "Bookmaker"].includes(element)
+          !["Fancy", "Fancy2", "Fancy3", "Odds", "Bookmaker"].includes(element)
         )
           response[element] = [];
       });
@@ -241,6 +87,7 @@ const Event = () => {
       setFancyOdds({ ...response, Odds });
     }
   };
+
   async function getOdds() {
     getFancyOdds();
   }
@@ -248,16 +95,28 @@ const Event = () => {
   const getPnl = async () => {
     if (!matchId) return;
     const { response } = await userServices.pnlByMatch(matchId);
-    if (response?.data) {
+    if (response?.data?.length) {
       setPnl(response.data);
+    }
+  };
+
+  const getFancyPnl = async () => {
+    if (!matchId) return;
+    const { response } = await userServices.fancyPnlByMatch(matchId);
+    if (response?.data) {
+      setFancyPnl(response.data);
     }
   };
 
   useEffect(() => {
     getBets();
     getPnl();
+    getFancyPnl();
     // getMarketIds();
-    return () => {};
+    return () => {
+      setBetDetails(null);
+      setFancyOdds(null);
+    };
   }, [isSignedIn, matchId]);
 
   //odds
@@ -271,7 +130,14 @@ const Event = () => {
   }, []);
 
   useEffect(() => {
-    createProfits();
+    createProfits({
+      fancyOdds,
+      fancyPnl,
+      betDetails,
+      pnl,
+      profits,
+      setProfits,
+    });
   }, [betDetails?.stake, pnl, fancyOdds?.Odds?.marketId]);
 
   if (!matchId) return <></>;
@@ -285,6 +151,7 @@ const Event = () => {
   const betSlip = (
     <BetSlip
       getBets={getBets}
+      getFancyPnl={getFancyPnl}
       getPnl={getPnl}
       betId={betDetails}
       setBetId={setBetDetails}
@@ -293,6 +160,13 @@ const Event = () => {
   );
   return (
     <Box m={0.3} mt={0.6}>
+      <CustomizedDialog2
+        title="Run Amount"
+        open={Boolean(selectedPnlMarketId)}
+        handleClose={() => setSelectedPnlMarketId("")}
+      >
+        <PnlModal fancyId={selectedPnlMarketId} matchId={matchId} />
+      </CustomizedDialog2>
       <HomeLayout
         sideWidth={364}
         sideWidthXl={364}
@@ -341,7 +215,10 @@ const Event = () => {
           {betSlip}
           {betDetails?.marketName === "Match Odds"
             ? profits.Odds?.map((profit) => <BetResult {...profit} />)
-            : profits.Bookmaker?.map((profit) => <BetResult {...profit} />)}
+            : betDetails?.marketName === "Bookmaker" &&
+              profits.Bookmaker?.filter(
+                (item) => item?.mid === betDetails?.marketId
+              ).map((profit) => <BetResult {...profit} />)}
         </CustomizedDialog2>
 
         {fancyOdds.Odds ? (
@@ -365,15 +242,9 @@ const Event = () => {
                   suspended={fancyOdds.Odds?.status !== "OPEN"}
                   prevValues={prevFancyOdds.Odds?.runners[index]}
                   values={selection}
-                  profits={profits.Odds?.find((profit) => {
-                    console.log(
-                      profit.sid == selection.selectionId,
-                      profit.sid,
-                      profit,
-                      selection.selectionId
-                    );
-                    return profit.sid == selection.selectionId;
-                  })}
+                  profits={profits.Odds?.find(
+                    (profit) => profit.sid == selection.selectionId
+                  )}
                   setBetId={setBetDetails}
                   title={title}
                   marketName={"Match Odds"}
@@ -400,21 +271,60 @@ const Event = () => {
           >
             <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
               <OddsNumberTitle />
-              {fancyOdds["Bookmaker"]?.map((odds: any, index: string) => (
-                <Bookmaker
-                  suspended={odds?.gstatus === "SUSPENDED"}
-                  prevValues={prevFancyOdds["Bookmaker"][index]}
-                  values={odds}
-                  profits={profits.Bookmaker?.find(
-                    (profit) => profit.sid === odds.sid
-                  )}
-                  marketName={"Bookmaker"}
-                  setBetId={setBetDetails}
-                />
-              ))}
+              {fancyOdds["Bookmaker"]?.map(
+                (odds: FancyOddsInterface, index: string) =>
+                  odds.t !== "TOSS" && (
+                    <Bookmaker
+                      suspended={odds?.gstatus === "SUSPENDED"}
+                      prevValues={prevFancyOdds["Bookmaker"][index]}
+                      values={odds}
+                      profits={profits.Bookmaker?.find(
+                        (profit) => profit?.sid == odds.sid
+                      )}
+                      marketName={"Bookmaker"}
+                      setBetId={setBetDetails}
+                    />
+                  )
+              )}
             </Box>
           </CustomizedAccordions>
         )}
+        {fancyOdds["Bookmaker"] &&
+          fancyOdds.Bookmaker.find(
+            (odd: FancyOddsInterface) => odd.t === "TOSS"
+          ) && (
+            <CustomizedAccordions
+              title={
+                <Box flex={1} display="flex" justifyContent={"space-between"}>
+                  <Typography fontSize="0.85rem" fontWeight={500}>
+                    Bookmaker Toss
+                  </Typography>
+                  <Typography fontSize="0.85rem" fontWeight={700}>
+                    Min:100 Max:10L
+                  </Typography>
+                </Box>
+              }
+            >
+              <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
+                <OddsNumberTitle />
+                {fancyOdds["Bookmaker"]?.map(
+                  (odds: FancyOddsInterface, index: string) =>
+                    odds.t === "TOSS" && (
+                      <Bookmaker
+                        suspended={odds?.gstatus === "SUSPENDED"}
+                        prevValues={prevFancyOdds["Bookmaker"][index]}
+                        values={odds}
+                        profits={profits.Bookmaker?.find(
+                          (profit) => profit?.sid == odds.sid
+                        )}
+                        marketName={"Bookmaker"}
+                        setBetId={setBetDetails}
+                      />
+                    )
+                )}
+              </Box>
+            </CustomizedAccordions>
+          )}
         {/* accordians for fancy with values */}
         {Object.keys(fancyOdds).map((fancyMarket: any) => {
           if (["Odds", "Bookmaker"].includes(fancyMarket)) return <></>;
@@ -443,6 +353,10 @@ const Event = () => {
                       return (
                         <OddsOnlyTwo
                           odds={odds}
+                          setMarketId={setSelectedPnlMarketId}
+                          profit={profits.Fancy.find(
+                            (pnl) => pnl.sid === odds.sid
+                          )}
                           prevOdds={prevFancyOdds[fancyMarket].find(
                             (item: FancyOddsInterface) => item.sid === odds.sid
                           )}
@@ -480,21 +394,6 @@ const Event = () => {
                 >
                   <OddsNumberTitleTwo />
                   <OddsNumberTitleTwo />
-
-                  {fancyOdds[fancyMarket].map(
-                    (odds: FancyOddsInterface, index: number) => {
-                      return (
-                        <OddsOnlyTwo
-                          odds={odds}
-                          prevOdds={prevFancyOdds[fancyMarket].find(
-                            (item: FancyOddsInterface) => item.sid === odds.sid
-                          )}
-                          setBetId={setBetDetails}
-                          title={fancyMarket}
-                        />
-                      );
-                    }
-                  )}
                 </Grid>
               </CustomizedAccordions>
             );
