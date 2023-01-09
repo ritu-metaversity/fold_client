@@ -142,7 +142,7 @@ const Event = () => {
 
   if (!matchId) return <></>;
 
-  if (loading || !fancyOdds)
+  if (!fancyOdds)
     return (
       <Box height={"100vh"}>
         <Loading />
@@ -315,7 +315,7 @@ const Event = () => {
                         prevValues={prevFancyOdds["Bookmaker"][index]}
                         values={odds}
                         profits={profits.Bookmaker?.find(
-                          (profit) => profit?.sid == odds.sid
+                          (profit) => profit?.sid === odds.sid
                         )}
                         marketName={"Bookmaker"}
                         setBetId={setBetDetails}
