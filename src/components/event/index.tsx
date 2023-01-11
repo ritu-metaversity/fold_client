@@ -119,16 +119,26 @@ const Event = () => {
     };
   }, [isSignedIn, matchId]);
 
-  //odds
+  //odds polling 0.5 sec
   useEffect(() => {
     const timer = setTimeout(() => getOdds(), 500);
     return () => clearInterval(timer);
   }, [matchId, fancyOdds]);
 
+  //pnl polling 5 sec
+  useEffect(() => {
+    const timer = setInterval(() => {
+      getPnl();
+      getFancyPnl();
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [matchId]);
+
   useEffect(() => {
     getOdds();
   }, []);
 
+  //creating profits
   useEffect(() => {
     createProfits({
       fancyOdds,
@@ -138,10 +148,9 @@ const Event = () => {
       profits,
       setProfits,
     });
-  }, [betDetails?.stake, pnl, fancyOdds?.Odds?.marketId]);
+  }, [betDetails?.stake, pnl, fancyPnl, fancyOdds?.Odds?.marketId]);
 
   if (!matchId) return <></>;
-
   if (!fancyOdds)
     return (
       <Box height={"100vh"}>
@@ -158,6 +167,7 @@ const Event = () => {
       matchId={matchId}
     />
   );
+
   return (
     <Box m={0.3} mt={0.6}>
       <CustomizedDialog2
