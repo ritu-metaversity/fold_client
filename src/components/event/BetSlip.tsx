@@ -15,6 +15,7 @@ import React, {
   FC,
   SetStateAction,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -95,8 +96,8 @@ export const BetSlip: FC<Props> = ({
     setLoading(true);
 
     const { response } = await eventServices.bet(data);
+    setBetId(null);
     if (response) {
-      setBetId(null);
       getBets();
       setTimeout(() => {
         if (data.isFancy) {
@@ -116,6 +117,16 @@ export const BetSlip: FC<Props> = ({
         ?.find((item: any) => item.matchId == matchId)?.matchName || undefined,
     [matchId, activeEventList]
   );
+
+  useEffect(() => {
+    let newTimer: any;
+      newTimer = setTimeout(() => {
+        setBetId(null);
+      }, 15000);
+    return () => {
+      clearTimeout(newTimer);
+    };
+  }, [betId?.selectionId]);
 
   // if (loading)
   //   return (
@@ -140,6 +151,7 @@ export const BetSlip: FC<Props> = ({
       )}
       {matches && <TitleStyled>Bet Slip</TitleStyled>}
       <Box p={0.5}>
+        
         <Box display="flex" fontSize="0.8rem" justifyContent={"space-between"}>
           <Typography fontSize="0.8rem">{<>{getMatchName}</>}</Typography>
           <Close
