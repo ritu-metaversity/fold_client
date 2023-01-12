@@ -109,8 +109,6 @@ abbr[title] {
 
 .react-date-picker__calendar {
   max-width: 250px;
-  
-    inset: 100% 0 auto auto!important;
 }
 
 .react-date-picker__wrapper {
@@ -131,10 +129,10 @@ abbr[title] {
   box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
 }
 
-@media only screen and (min-width: 320px) and (max-width: 1279px){
- .react-date-picker__wrapper {
+@media only screen and (min-width: 320px) and (max-width: 1279px) {
+  .react-date-picker__wrapper {
     width: 100%;
     font-size: 12px;
     height: 32px;
-}
+  }
 }

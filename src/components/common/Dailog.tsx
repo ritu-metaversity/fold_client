@@ -8,6 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 // import CloseIcon from "@mui/icons-material/Close";
 import { Clear } from "@mui/icons-material";
+import { useMediaQuery } from "@mui/material";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -77,7 +78,7 @@ export default function CustomizedDialogs({
   // const handleClickOpen = () => {
   //   setOpen(true);
   // };
-  
+  const matches = useMediaQuery("(max-width : 980px)");
   return (
     <div>
       {/* <Button variant="outlined" onClick={handleClickOpen}>
@@ -85,7 +86,7 @@ export default function CustomizedDialogs({
       </Button> */}
       <BootstrapDialog
         onClose={handleClose}
-        maxWidth="xs"
+        maxWidth={matches ? "sm" : "md"}
         fullWidth
         PaperProps={{
           sx: {
@@ -99,7 +100,7 @@ export default function CustomizedDialogs({
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
-          onClose={handleClose?handleClose:()=>{}}
+          onClose={handleClose ? handleClose : () => {}}
         >
           {title}
         </BootstrapDialogTitle>

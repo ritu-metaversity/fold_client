@@ -18,12 +18,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { sportServices } from "./utils/api/sport/services";
 import { SportInterface } from "./components/layout/Sidebar";
 import "./components/font.css";
+
+interface ModalState { login?: boolean, register?: boolean; }
 interface UserContextType {
   setIsSignedIn: Dispatch<SetStateAction<boolean | null>> | null;
   setUser: Dispatch<SetStateAction<any>> | null;
-  setModal: Dispatch<SetStateAction<{ login: boolean }>> | null;
+  setModal: Dispatch<SetStateAction<ModalState >> | null;
   isSignedIn: boolean | null;
-  modal: { login: boolean };
+  modal: ModalState;
   user: any;
   stakes: { [x: string]: number };
   activeEventList: SportInterface[] | null;
@@ -56,7 +58,7 @@ export const UserContext = createContext<UserContextType>({
 function App() {
   const [isSignedIn, setIsSignedIn] = useState<null|boolean>(null);
   const [user, setUser] = useState(null);
-  const [modal, setModal] = useState<{ login: boolean }>({ login: false });
+  const [modal, setModal] = useState<ModalState>({ login: false });
   const [stakes, setButtonValue] = React.useState<{ [x: string]: number }>(
     defaultStake
   );
@@ -105,7 +107,13 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <SnackbarProvider autoHideDuration={1500}>
+      <SnackbarProvider
+        autoHideDuration={1500}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
         <div className="App">
           <UserContext.Provider
             value={{
