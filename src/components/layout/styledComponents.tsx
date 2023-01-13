@@ -1,12 +1,19 @@
 import styled from "@emotion/styled";
-import { AppBar, Box, Button, ListSubheader } from "@mui/material";
+
+import {
+  AppBar,
+  Box,
+  Button,
+  ListSubheader,
+  styled as MuiStyled,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const CenterBox = styled(Box)`
   display: flex;
   justify-content: center;
   padding-top: 0.2em;
-  padding-bottom: 0px; 
+  padding-bottom: 0px;
 `;
 export const BlinkImage = styled.img`
   width: 100%;
@@ -29,7 +36,7 @@ export const TopNavLinks = styled(Link)`
 export const SidebarHeader = styled(ListSubheader)`
   padding: 0;
   color: #fdcf13;
-  font-size : 0.8rem !important;
+  font-size: 0.8rem !important;
   text-decoration: underline;
 `;
 export const AnnouncementBox = styled(Box)`
@@ -56,7 +63,7 @@ export const SpeakerIcon = styled.img`
   text-align: right;
   @media (max-width: 1280px) {
     width: 20px;
-    margin-top:  0em;
+    margin-top: 0em;
   }
 `;
 
@@ -89,10 +96,19 @@ export const StyledAppBar = styled(AppBar)`
   flex-direction: row !important ;
   padding-top: 8px;
 `;
-export const LoginButton = styled(Button)({
+export const LoginButton = MuiStyled(Button)(({ theme }) => ({
   borderRadius: 0,
-  paddingInline: "2rem",
-});
+  [theme.breakpoints.down("lg")]: {
+    width: 80,
+    height: "2rem",
+  },
+  [theme.breakpoints.up("lg")]: {
+    width: 96,
+    height: "2.2rem",
+  },
+}));
+
+
 
 export const UserContainer = styled(Box)`
   display:flex;

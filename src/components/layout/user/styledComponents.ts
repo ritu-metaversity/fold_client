@@ -5,3 +5,4 @@ export const DialogTitleStyledTypo = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
   fontWeight: 500,
 }));
+
