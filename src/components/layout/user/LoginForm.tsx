@@ -1,14 +1,13 @@
 import {
   Box,
   Button,
-  Checkbox,
-  FormControlLabel,
   TextField,
   Typography,
   useTheme,
   // useThemeProps,
 } from "@mui/material";
 import React from "react";
+import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { colorHex } from "../../../constants";
 
@@ -16,12 +15,13 @@ interface Props {
   values: {
     userId: string;
     password: string;
+    checked: string;
   };
   handleChange: (e: React.ChangeEvent<any>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export function LoginForm({ handleChange, values, handleSubmit}: Props) {
+export function LoginForm({ handleChange, values, handleSubmit }: Props) {
   const theme = useTheme();
   return (
     <Box bgcolor="black" borderRadius={2} p={2} mt={2}>
@@ -77,16 +77,13 @@ export function LoginForm({ handleChange, values, handleSubmit}: Props) {
             Forgot Password ?
           </Link>
         </Typography>
-        <FormControlLabel
-          control={
-            <Checkbox
-              sx={{
-                mb: "auto",
-              }}
-            />
-          }
+        <Form.Check
+          name="checked"
+          value={values.checked}
+          onChange={handleChange}
+          type="checkbox"
           label={
-            <Typography variant="caption">
+            <Typography ml={0.5} color="white" variant="caption">
               I am at least 18 years of age and I have read, accept and agree to
               the Terms and Conditions , Responsible Gaming, GamCare, Gambling
               Therapy
