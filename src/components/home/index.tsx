@@ -29,11 +29,11 @@ export const homeRightMenu = (
 const Home = () => {
   return (
     <HomeLayout sideWidth={250} sideWidthXl={300} rightMenu={homeRightMenu}>
-      <Hero />
+       <Hero />
 
-      <ButtonTabs />
+       <ButtonTabs />
 
-      {<Sports />}
+      <Sports />
     </HomeLayout>
   );
 };

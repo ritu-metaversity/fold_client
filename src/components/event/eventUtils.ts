@@ -56,7 +56,7 @@ export const createProfits = ({
         ...profits,
         Odds: fancyOdds.Odds?.runners?.map((element: any) => {
           const currentProfit: ProfitInterface = {
-            title: element.selectionId,
+            title: element.name,
             sid: element.selectionId,
             value:
               plnOddsArray.find(
@@ -115,7 +115,7 @@ export const createProfits = ({
         ...(pnlsOdds
           ? fancyOdds?.Odds?.runners?.map((element: any) => {
               const currentProfit: ProfitInterface = {
-                title: element.selectionId,
+                title: element.name,
                 sid: element.selectionId,
                 value:
                   plnOddsArray.find(

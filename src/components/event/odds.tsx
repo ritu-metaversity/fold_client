@@ -71,7 +71,7 @@ const Odds = ({
       isBack: true,
       odds,
       stake: 0,
-      name: values.selectionId,
+      name: values.name,
       marketName,
       selectionId: values.selectionId,
       priceValue: odds,
@@ -90,7 +90,7 @@ const Odds = ({
     setBetId({
       isFancy: false,
       isBack: false,
-      selectionId: values.selectionId,
+      selectionId: values.name,
       odds,
       name: values.selectionId,
       marketName,
