@@ -40,7 +40,13 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 
   return (
     <DialogTitle
-      sx={{ m: 0, py: 1,px:2, bgcolor: "black", borderRadius: "0px 0px 15px 15px" }}
+      sx={{
+        m: 0,
+        py: 1,
+        px: 2,
+        bgcolor: "black",
+        borderRadius: "0px 0px 8px 8px",
+      }}
       {...other}
     >
       {children}
@@ -52,12 +58,12 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
             position: "absolute",
             right: 8,
             border: "3px solid red",
-            padding:0,
+            padding: 0,
             top: 8,
             color: (theme) => theme.palette.grey[500],
           }}
         >
-          <Clear sx={{margin:0.5}} fontSize="small" />
+          <Clear sx={{ margin: 0.5 }} fontSize="small" />
         </IconButton>
       ) : null}
     </DialogTitle>

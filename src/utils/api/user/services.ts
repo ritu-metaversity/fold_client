@@ -10,6 +10,12 @@ interface ChangePasswordPayload {
   currentPassword: string;
   confirmPassword?: string;
 }
+interface RegisterPayload {
+  username: string;
+  password: string;
+  mobile: string | number;
+  appUrl: string;
+}
 
 interface CurrentBetsPayload {
   sportType: number;
@@ -94,6 +100,13 @@ export const userServices = {
       data,
     };
     return await apiHandler(params);
+  },
+  register: async (data: RegisterPayload) => {
+    const params = {
+      resource: userResources.REGISTER,
+      data
+    };
+    return await apiWithSnackbar(params)
   },
   getButtonValue: async () => {
     const params = {

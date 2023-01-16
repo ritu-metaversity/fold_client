@@ -9,21 +9,57 @@ import {
   useTheme,
   // useThemeProps,
 } from "@mui/material";
-import React from "react";
+import { useFormik } from "formik";
+import React, { useContext } from "react";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../../App";
 import { colorHex } from "../../../constants";
+import { userServices } from "../../../utils/api/user/services";
 
 import phoneCodes from "../../../utils/phoneCodes.json";
+import snackBarUtil from "../snackBarUtil";
 
 export function RegisterForm() {
   const theme = useTheme();
+  const { setModal } = useContext(UserContext);
   const matches = useMediaQuery("(max-width: 580px)");
+  const matchesForModal = useMediaQuery("max-width: 1279px");
+  const { values, handleChange, handleSubmit } = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+      confirmPassword: "",
+      mobile: "",
+      checked: "",
+      appUrl: "atozscore.com",
+    },
+
+    onSubmit: async () => {
+      if (values.confirmPassword !== values.password) {
+        snackBarUtil.error("Password should be same.");
+        return;
+      }
+      if (!values.checked) {
+        snackBarUtil.error("Please agree Terms and Conditions");
+        return;
+      }
+      const { response } = await userServices.register(values);
+      console.log(response);
+      if (response) {
+        if (setModal) {
+          if (matchesForModal) {
+            setModal({ login: true });
+          } else {
+            setModal({ register: false });
+          }
+        }
+      }
+    },
+  });
   return (
     <Box bgcolor="black" borderRadius={2} p={2} mt={2}>
-      <form
-      // onSubmit={handleSubmit}
-      >
+      <form onSubmit={handleSubmit}>
         <Grid
           fontWeight={400}
           color="white"
@@ -44,9 +80,9 @@ export function RegisterForm() {
                 bgcolor: colorHex.bg4,
               }}
               required
-              // name="userId"
-              // value={values.userId}
-              // onChange={handleChange}
+              name="username"
+              value={values.username}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={5.76}>
@@ -55,8 +91,10 @@ export function RegisterForm() {
               <TextField
                 select
                 margin="dense"
+                defaultValue={"91"}
                 sx={{ width: 100, bgcolor: colorHex.bg4 }}
                 size={matches ? "small" : "medium"}
+                disabled
                 SelectProps={{
                   renderValue: (value) => (
                     <>+{phoneCodes.find((code) => code.code === value)?.code}</>
@@ -80,7 +118,11 @@ export function RegisterForm() {
                   bgcolor: colorHex.bg4,
                   flex: 1,
                 }}
+                type="number"
                 size={matches ? "small" : "medium"}
+                name="mobile"
+                onChange={handleChange}
+                value={values.mobile}
               />
             </Box>
           </Grid>
@@ -95,9 +137,9 @@ export function RegisterForm() {
                 bgcolor: colorHex.bg4,
               }}
               required
-              // name="password"
-              // value={values.password}
-              // onChange={handleChange}
+              name="password"
+              value={values.password}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={5.76}>
@@ -109,16 +151,16 @@ export function RegisterForm() {
               margin="dense"
               sx={{ bgcolor: colorHex.bg4 }}
               required
-              // name="password"
-              // value={values.password}
-              // onChange={handleChange}
+              name="confirmPassword"
+              value={values.confirmPassword}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12}>
             <Form.Check
               name="checked"
-              // value={values.checked}
-              // onChange={handleChange}
+              value={values.checked}
+              onChange={handleChange}
               type="checkbox"
               label={
                 <Typography ml={0.5} color="white" variant="caption">
