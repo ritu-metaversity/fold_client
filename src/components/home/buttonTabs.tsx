@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, ButtonGroup, Tabs } from "@mui/material";
 import { Box } from "@mui/system";
 import { colorHex } from "../../constants";
+import { UserContext } from "../../App";
 
 const unSelectedSx = {
   bgcolor: colorHex.bg2,
@@ -18,6 +19,7 @@ const selectedSx = {
 
 export function ButtonTabs() {
   const [current, setCurrent] = useState("exchange");
+  const { isSignedIn, setModal } = useContext(UserContext);
   const nav = useNavigate();
   return (
     <Box width={"calc(100% - 16px)"} m="auto">
@@ -34,8 +36,12 @@ export function ButtonTabs() {
       >
         <Button
           onClick={() => {
-            nav("/");
-            setCurrent("exchange");
+            if (isSignedIn) {
+              nav("/");
+              setCurrent("exchange");
+            } else if (setModal) {
+              setModal({ login: true });
+            }
           }}
           sx={current === "exchange" ? selectedSx : unSelectedSx}
         >
@@ -43,8 +49,12 @@ export function ButtonTabs() {
         </Button>
         <Button
           onClick={() => {
-            nav("/casino");
-            setCurrent("live-casino");
+            if (isSignedIn) {
+              nav("/casino");
+              setCurrent("live-casino");
+            } else if (setModal) {
+              setModal({ login: true });
+            }
           }}
           sx={current === "live-casino" ? selectedSx : unSelectedSx}
         >
