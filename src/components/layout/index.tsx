@@ -8,14 +8,15 @@ export const StyledMain = styled(Box)(({ theme }) => ({
   flexGrow: 1,
   // p: 3,
   zIndex: -10,
-  display: "flex",
   [theme.breakpoints.up("lg")]: {
+    display: "flex",
     marginTop: 1.2,
     marginLeft: `${drawerWidth}px`,
     width: `calc(100% - ${drawerWidth}px)`,
   },
 
   [theme.breakpoints.up("xl")]: {
+    display: "flex",
     marginLeft: `${drawerWidthXl}px`,
     width: `calc(100% - ${drawerWidthXl}px)`,
   },

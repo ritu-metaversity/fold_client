@@ -1,0 +1,22 @@
+
+@keyframes live {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.live-under {
+    margin-top: -2px;
+    overflow: hidden;
+    border-radius: 3px;
+}
+.live-under-under {
+    border-radius: 3px;
+    width: 100%;
+    animation: live 1s linear alternate 0s infinite;
+    background-color: green;
+    height: 2px;
+}
