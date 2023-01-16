@@ -256,7 +256,11 @@ const Event = () => {
                     (profit) => profit.sid == selection.selectionId
                   )}
                   setBetId={setBetDetails}
-                  title={title}
+                  title={
+                    <Typography fontSize={"0.85rem"}>
+                      {selection.name}
+                    </Typography>
+                  }
                   marketName={"Match Odds"}
                 />
               ))}

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, ButtonGroup, Tabs } from "@mui/material";
 import { Box } from "@mui/system";
 import { colorHex } from "../../constants";
@@ -10,12 +11,14 @@ const unSelectedSx = {
 };
 
 const selectedSx = {
-  bgcolor: "secondary.main",
+  // bgcolor: "secondary.main",
   color: "white",
   borderColor: "unset !important",
 };
 
 export function ButtonTabs() {
+  const [current, setCurrent] = useState("exchange");
+  const nav = useNavigate();
   return (
     <Box width={"calc(100% - 16px)"} m="auto">
       <ButtonGroup
@@ -26,10 +29,27 @@ export function ButtonTabs() {
           },
           fontSize: "0.8rem",
         }}
-        variant="text"
+        color="secondary"
+        variant="contained"
       >
-        <Button sx={selectedSx}>Exchange</Button>
-        <Button sx={unSelectedSx}>Live Casino</Button>
+        <Button
+          onClick={() => {
+            nav("/");
+            setCurrent("exchange");
+          }}
+          sx={current === "exchange" ? selectedSx : unSelectedSx}
+        >
+          Exchange
+        </Button>
+        <Button
+          onClick={() => {
+            nav("/casino");
+            setCurrent("live-casino");
+          }}
+          sx={current === "live-casino" ? selectedSx : unSelectedSx}
+        >
+          Live Casino
+        </Button>
         {/* <Button sx={unSelectedSx}>Slot</Button>
         <Button sx={unSelectedSx}>Fantasy Games</Button> */}
       </ButtonGroup>

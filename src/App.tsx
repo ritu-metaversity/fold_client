@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import "./App.css";
 import Layout from "./components/layout";
-import { ThemeProvider } from "@mui/material";
+import { Alert, Snackbar, ThemeProvider } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { SnackbarUtilsConfigurator } from "./components/layout/snackBarUtil";
 import { SnackbarProvider } from "notistack";
@@ -19,11 +19,14 @@ import { sportServices } from "./utils/api/sport/services";
 import { SportInterface } from "./components/layout/Sidebar";
 import "./components/font.css";
 
-interface ModalState { login?: boolean, register?: boolean; }
+interface ModalState {
+  login?: boolean;
+  register?: boolean;
+}
 interface UserContextType {
   setIsSignedIn: Dispatch<SetStateAction<boolean | null>> | null;
   setUser: Dispatch<SetStateAction<any>> | null;
-  setModal: Dispatch<SetStateAction<ModalState >> | null;
+  setModal: Dispatch<SetStateAction<ModalState>> | null;
   isSignedIn: boolean | null;
   modal: ModalState;
   user: any;
@@ -43,6 +46,10 @@ const defaultStake = {
   stack9: 0,
   stack10: 0,
 };
+
+export let setErrorRef: any;
+export let errorRef: any;
+
 export const UserContext = createContext<UserContextType>({
   isSignedIn: null,
   user: null,
@@ -54,31 +61,34 @@ export const UserContext = createContext<UserContextType>({
   activeEventList: null,
 });
 
-
 function App() {
-  const [isSignedIn, setIsSignedIn] = useState<null|boolean>(null);
+  const [isSignedIn, setIsSignedIn] = useState<null | boolean>(null);
   const [user, setUser] = useState(null);
   const [modal, setModal] = useState<ModalState>({ login: false });
   const [stakes, setButtonValue] = React.useState<{ [x: string]: number }>(
     defaultStake
   );
+  const [error, setError] = useState(false);
   const [activeEventList, setActiveEventList] = useState<SportInterface[]>([]);
 
-    useEffect(() => {
-      const getNewEventOpen = async () => {
-        const { response } = await sportServices.leftMenu();
-        if (response?.data) {
-          if (response?.data?.length > 0) {
-            setActiveEventList(response.data);
-            
-          }
-        } else {
-          setActiveEventList([]);
+  errorRef = error;
+  setErrorRef = setError;
+
+  console.log("error", error);
+  useEffect(() => {
+    const getNewEventOpen = async () => {
+      const { response } = await sportServices.leftMenu();
+      if (response?.data) {
+        if (response?.data?.length > 0) {
+          setActiveEventList(response.data);
         }
-      };
-      getNewEventOpen();
-    }, []);
-  
+      } else {
+        setActiveEventList([]);
+      }
+    };
+    getNewEventOpen();
+  }, []);
+
   const getButtonValue = async () => {
     const { response } = await userServices.getButtonValue();
     if (response?.data) {
@@ -107,6 +117,16 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Snackbar
+        open={error}
+        message="Error /n You seem to be offline!"
+        color="error"
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert variant="filled" severity="error">
+          Error! You seem to be offline."
+        </Alert>
+      </Snackbar>
       <SnackbarProvider
         autoHideDuration={1500}
         anchorOrigin={{
