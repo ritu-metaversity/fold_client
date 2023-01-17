@@ -86,9 +86,7 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
   await apiService(args)
     .catch((error) => {
       result["error"] = error.response?.data;
-      console.log(error.code, "sdf netowrk");
       if (error.code === "ERR_NETWORK") {
-        console.log(errorRef, "netowrk");
         if (!errorRef) {
           setErrorRef(true);
         }

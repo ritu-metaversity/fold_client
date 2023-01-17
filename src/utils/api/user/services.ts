@@ -104,9 +104,9 @@ export const userServices = {
   register: async (data: RegisterPayload) => {
     const params = {
       resource: userResources.REGISTER,
-      data
+      data,
     };
-    return await apiWithSnackbar(params)
+    return await apiWithSnackbar(params);
   },
   getButtonValue: async () => {
     const params = {
@@ -127,5 +127,12 @@ export const userServices = {
       data,
     };
     return await apiWithErrorSnackbar(params);
+  },
+  bannerList: async (type: number) => {
+    const params = {
+      resource: userResources.BANNER_LIST,
+      data: { type },
+    };
+    return await apiHandler(params);
   },
 };

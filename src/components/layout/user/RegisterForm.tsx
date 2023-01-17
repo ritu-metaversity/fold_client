@@ -6,13 +6,10 @@ import {
   TextField,
   Typography,
   useMediaQuery,
-  useTheme,
-  // useThemeProps,
 } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useContext } from "react";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { UserContext } from "../../../App";
 import { colorHex } from "../../../constants";
 import { userServices } from "../../../utils/api/user/services";
@@ -21,7 +18,6 @@ import phoneCodes from "../../../utils/phoneCodes.json";
 import snackBarUtil from "../snackBarUtil";
 
 export function RegisterForm() {
-  const theme = useTheme();
   const { setModal } = useContext(UserContext);
   const matches = useMediaQuery("(max-width: 580px)");
   const matchesForModal = useMediaQuery("max-width: 1279px");
@@ -32,7 +28,7 @@ export function RegisterForm() {
       confirmPassword: "",
       mobile: "",
       checked: "",
-      appUrl: "atozscore.com",
+      appUrl: window.location.hostname || "atozscore.com",
     },
 
     onSubmit: async () => {

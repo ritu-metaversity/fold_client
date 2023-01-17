@@ -44,6 +44,7 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
         m: 0,
         py: 1,
         px: 2,
+        color: "white",
         bgcolor: "black",
         borderRadius: "0px 0px 8px 8px",
       }}

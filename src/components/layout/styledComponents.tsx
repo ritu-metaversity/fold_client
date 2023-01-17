@@ -17,6 +17,7 @@ export const CenterBox = styled(Box)`
 `;
 export const BlinkImage = styled.img`
   width: 100%;
+  margin-block: 3px;
 `;
 export const TopNavLinks = styled(Link)`
   font-weight: 900;

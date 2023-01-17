@@ -62,4 +62,8 @@ export const userResources: {
     URL: "enduser/user-fancy-book",
     METHOD: "POST",
   },
+  BANNER_LIST: {
+    URL: "enduser/user-banner-list",
+    METHOD: "POST"
+  }
 };
