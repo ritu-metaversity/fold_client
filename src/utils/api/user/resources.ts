@@ -8,7 +8,7 @@ export const userResources: {
   },
   REGISTER: {
     URL: "user/self-register",
-    METHOD: "POST"
+    METHOD: "POST",
   },
   USER: {
     URL: "user/:id",
@@ -64,6 +64,10 @@ export const userResources: {
   },
   BANNER_LIST: {
     URL: "enduser/user-banner-list",
+    METHOD: "POST",
+  },
+  FIRST_LOGIN: {
+    URL: "user/first-login-cp",
     METHOD: "POST"
-  }
+  },
 };

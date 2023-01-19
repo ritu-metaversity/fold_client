@@ -90,9 +90,9 @@ const Odds = ({
     setBetId({
       isFancy: false,
       isBack: false,
-      selectionId: values.name,
+      selectionId: values.selectionId,
       odds,
-      name: values.selectionId,
+      name: values.name,
       marketName,
       stake: 0,
       priceValue: odds,

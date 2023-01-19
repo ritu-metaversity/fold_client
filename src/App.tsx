@@ -22,6 +22,7 @@ import "./components/font.css";
 interface ModalState {
   login?: boolean;
   register?: boolean;
+  changePassword?: boolean;
 }
 interface UserContextType {
   setIsSignedIn: Dispatch<SetStateAction<boolean | null>> | null;
@@ -74,7 +75,6 @@ function App() {
   errorRef = error;
   setErrorRef = setError;
 
-  console.log("error", error);
   useEffect(() => {
     const getNewEventOpen = async () => {
       const { response } = await sportServices.leftMenu();

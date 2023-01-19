@@ -9,7 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustomizedDialogs from "../../common/Dailog";
 import { LoginButton, UserContainer } from "../styledComponents";
 // import { Info, InfoOutlined } from '@mui/icons-material';
@@ -19,11 +19,13 @@ import { authServices } from "../../../utils/api/auth/services";
 import { UserContext } from "../../../App";
 import { Form } from "react-bootstrap";
 import snackBarUtil from "../snackBarUtil";
-import { RegisterForm } from './RegisterForm';
+import { RegisterForm } from "./RegisterForm";
 
 export function AuthBox() {
   const theme = useTheme();
   const { setIsSignedIn, setUser, modal, setModal } = useContext(UserContext);
+  const nav = useNavigate();
+
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       userId: "",
@@ -41,6 +43,13 @@ export function AuthBox() {
         localStorage.setItem("user", JSON.stringify(response));
         if (setIsSignedIn) setIsSignedIn(true);
         if (setUser) setUser(response);
+        if (response.passwordtype === "new" && setModal) {
+          setModal({ changePassword: true });
+          nav({
+            pathname: "/",
+            search: "first-login=true",
+          });
+        }
       }
     },
   });

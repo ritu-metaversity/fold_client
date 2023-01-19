@@ -17,8 +17,6 @@ interface Props {
   rows: any[];
 }
 export default function ActivityTable({ columns, rows }: Props) {
-
-  // console.log(breakpoints)
   return (
     <>
 

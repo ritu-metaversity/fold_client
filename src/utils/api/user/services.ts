@@ -10,6 +10,13 @@ interface ChangePasswordPayload {
   currentPassword: string;
   confirmPassword?: string;
 }
+interface FirstLoginPayload {
+  newPassword: string;
+  currentPassword: string;
+  confirmPassword?: string;
+  userid: string;
+  token: string;
+}
 interface RegisterPayload {
   username: string;
   password: string;
@@ -134,5 +141,12 @@ export const userServices = {
       data: { type },
     };
     return await apiHandler(params);
+  },
+  changePasswordFirstLogin: async (data: FirstLoginPayload) => {
+    const params = {
+      resource: userResources.FIRST_LOGIN,
+      data,
+    };
+    return await apiWithSnackbar(params);
   },
 };
