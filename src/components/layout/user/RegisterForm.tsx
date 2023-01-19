@@ -199,6 +199,7 @@ export function RegisterForm() {
               <Form.Check
                 name="checked"
                 value={values.checked}
+                defaultChecked
                 onChange={handleChange}
                 type="checkbox"
                 label={

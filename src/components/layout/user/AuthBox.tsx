@@ -140,6 +140,7 @@ export function AuthBox() {
               value={values.checked}
               onChange={handleChange}
               type="checkbox"
+              defaultChecked
               label={
                 <Typography
                   component="span"
