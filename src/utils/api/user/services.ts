@@ -10,6 +10,19 @@ interface ChangePasswordPayload {
   currentPassword: string;
   confirmPassword?: string;
 }
+interface FirstLoginPayload {
+  newPassword: string;
+  currentPassword: string;
+  confirmPassword?: string;
+  userid: string;
+  token: string;
+}
+interface RegisterPayload {
+  username: string;
+  password: string;
+  mobile: string | number;
+  appUrl: string;
+}
 
 interface CurrentBetsPayload {
   sportType: number;
@@ -95,6 +108,13 @@ export const userServices = {
     };
     return await apiHandler(params);
   },
+  register: async (data: RegisterPayload) => {
+    const params = {
+      resource: userResources.REGISTER,
+      data,
+    };
+    return await apiWithSnackbar(params);
+  },
   getButtonValue: async () => {
     const params = {
       resource: userResources.GET_BUTTON_VALUE,
@@ -114,5 +134,19 @@ export const userServices = {
       data,
     };
     return await apiWithErrorSnackbar(params);
+  },
+  bannerList: async (type: number) => {
+    const params = {
+      resource: userResources.BANNER_LIST,
+      data: { type },
+    };
+    return await apiHandler(params);
+  },
+  changePasswordFirstLogin: async (data: FirstLoginPayload) => {
+    const params = {
+      resource: userResources.FIRST_LOGIN,
+      data,
+    };
+    return await apiWithSnackbar(params);
   },
 };

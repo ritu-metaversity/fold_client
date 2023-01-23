@@ -53,11 +53,6 @@ const CurrentBets = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchFilters.type, searchFilters.pageSize, searchFilters.index]);
 
-  console.log(
-    sportsRow,
-    Math.ceil(sportsRow.length / searchFilters.pageSize),
-    sportsRow.length
-  );
   return (
     <>
       <AccountContainer>

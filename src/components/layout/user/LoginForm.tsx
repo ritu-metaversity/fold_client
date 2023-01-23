@@ -81,6 +81,7 @@ export function LoginForm({ handleChange, values, handleSubmit }: Props) {
           name="checked"
           value={values.checked}
           onChange={handleChange}
+          defaultChecked
           type="checkbox"
           label={
             <Typography ml={0.5} color="white" variant="caption">

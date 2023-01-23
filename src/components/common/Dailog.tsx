@@ -1,6 +1,6 @@
 import * as React from "react";
 // import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
+import { Breakpoint, styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -40,7 +40,14 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 
   return (
     <DialogTitle
-      sx={{ m: 0, py: 1,px:2, bgcolor: "black", borderRadius: "0px 0px 15px 15px" }}
+      sx={{
+        m: 0,
+        py: 1,
+        px: 2,
+        color: "white",
+        bgcolor: "black",
+        borderRadius: "0px 0px 8px 8px",
+      }}
       {...other}
     >
       {children}
@@ -52,12 +59,12 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
             position: "absolute",
             right: 8,
             border: "3px solid red",
-            padding:0,
+            padding: 0,
             top: 8,
             color: (theme) => theme.palette.grey[500],
           }}
         >
-          <Clear sx={{margin:0.5}} fontSize="small" />
+          <Clear sx={{ margin: 0.5 }} fontSize="small" />
         </IconButton>
       ) : null}
     </DialogTitle>
@@ -67,12 +74,14 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 interface Props extends React.PropsWithChildren {
   title?: string;
   open: boolean;
+  maxWidth?: Breakpoint;
   handleClose?: () => void;
 }
 export default function CustomizedDialogs({
   title,
   children,
   open,
+  maxWidth,
   handleClose,
 }: Props) {
   // const handleClickOpen = () => {
@@ -86,7 +95,7 @@ export default function CustomizedDialogs({
       </Button> */}
       <BootstrapDialog
         onClose={handleClose}
-        maxWidth={matches ? "sm" : "md"}
+        maxWidth={maxWidth || (matches ? "sm" : "md")}
         fullWidth
         PaperProps={{
           sx: {

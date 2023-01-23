@@ -43,7 +43,6 @@ const Account = () => {
 
   const getStatement = async () => {
     const { response } = await userServices.accountStatement(searchFilters);
-    console.log(response);
     if (response?.data) {
       setRows(response.data.dataList);
       setSearchFilters({
