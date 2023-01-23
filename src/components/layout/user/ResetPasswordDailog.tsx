@@ -9,10 +9,21 @@ import { userServices } from "../../../utils/api/user/services";
 import { useFormik } from "formik";
 import { BootstrapDialog, BootstrapDialogTitle } from "../../common/Dailog2";
 import { DialogTitleStyledTypo } from "./styledComponents";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { UserContext } from "../../../App";
 
 export default function CustomizedDialogPassword() {
   const [open, setOpen] = React.useState(false);
-  // const [tab, setTab] = React.useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const firstLogin = searchParams.get("first-login");
+  const { modal, user } = React.useContext(UserContext);
+  const nav = useNavigate();
+
+  React.useEffect(() => {
+    if (modal.changePassword) {
+      setOpen(true);
+    }
+  }, [modal]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -20,14 +31,31 @@ export default function CustomizedDialogPassword() {
   const handleClose = () => {
     setOpen(false);
   };
-  const { values, handleChange, handleSubmit } = useFormik({
+  const { values, resetForm, handleChange, handleSubmit } = useFormik({
     initialValues: {
       newPassword: "",
       confirmPassword: "",
       currentPassword: "",
     },
     onSubmit: async () => {
-      await userServices.changePassword(values);
+      if (firstLogin) {
+        const newValues = {
+          ...values,
+          oldPassword: values.currentPassword,
+          userid: user.userId,
+          token: user.token,
+        };
+        const { response } = await userServices.changePasswordFirstLogin(
+          newValues
+        );
+        if (response) {
+          handleClose();
+          resetForm();
+          nav({ pathname: "" });
+        }
+      } else {
+        await userServices.changePassword(values);
+      }
     },
   });
 
@@ -97,7 +125,7 @@ export default function CustomizedDialogPassword() {
               variant="contained"
               type="submit"
               sx={{ color: "white" }}
-                // onClick={handleClick}
+              // onClick={handleClick}
             >
               Change Password
             </Button>

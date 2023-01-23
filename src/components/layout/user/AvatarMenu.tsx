@@ -28,6 +28,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         anchorEl={anchorEl}
         open={open}
         disableScrollLock
+        keepMounted
         onClose={handleClose}
         sx={{
           width: "100%",

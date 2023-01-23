@@ -6,6 +6,10 @@ export const userResources: {
     URL: "enduser/profile",
     METHOD: "POST",
   },
+  REGISTER: {
+    URL: "user/self-register",
+    METHOD: "POST",
+  },
   USER: {
     URL: "user/:id",
     METHOD: "GET",
@@ -56,6 +60,14 @@ export const userResources: {
   },
   PNL_BOOK: {
     URL: "enduser/user-fancy-book",
+    METHOD: "POST",
+  },
+  BANNER_LIST: {
+    URL: "enduser/user-banner-list",
+    METHOD: "POST",
+  },
+  FIRST_LOGIN: {
+    URL: "user/first-login-cp",
     METHOD: "POST"
   },
 };

@@ -22,6 +22,7 @@ import "./components/font.css";
 interface ModalState {
   login?: boolean;
   register?: boolean;
+  changePassword?: boolean;
 }
 interface UserContextType {
   setIsSignedIn: Dispatch<SetStateAction<boolean | null>> | null;
@@ -74,7 +75,6 @@ function App() {
   errorRef = error;
   setErrorRef = setError;
 
-  console.log("error", error);
   useEffect(() => {
     const getNewEventOpen = async () => {
       const { response } = await sportServices.leftMenu();
@@ -124,7 +124,7 @@ function App() {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert variant="filled" severity="error">
-          Error! You seem to be offline."
+          Error! You seem to be offline.
         </Alert>
       </Snackbar>
       <SnackbarProvider
