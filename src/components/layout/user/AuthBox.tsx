@@ -30,7 +30,7 @@ export function AuthBox() {
     initialValues: {
       userId: "",
       password: "",
-      checked: "",
+      checked: "checked",
     },
     onSubmit: async () => {
       if (!values.checked) {
@@ -173,6 +173,7 @@ export function AuthBox() {
       </form>
       <CustomizedDialogs
         title="Login"
+        maxWidth="xs"
         open={Boolean(modal.login)}
         handleClose={handleClose}
       >

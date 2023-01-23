@@ -124,7 +124,7 @@ function App() {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert variant="filled" severity="error">
-          Error! You seem to be offline."
+          Error! You seem to be offline.
         </Alert>
       </Snackbar>
       <SnackbarProvider

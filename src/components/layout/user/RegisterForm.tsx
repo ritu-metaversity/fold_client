@@ -31,7 +31,7 @@ export function RegisterForm() {
       password: "",
       confirmPassword: "",
       mobile: "",
-      checked: "",
+      checked: "checked",
       appUrl: window.location.hostname || "atozscore.com",
     },
 

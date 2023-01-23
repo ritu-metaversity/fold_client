@@ -1,6 +1,6 @@
 import * as React from "react";
 // import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
+import { Breakpoint, styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -74,12 +74,14 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 interface Props extends React.PropsWithChildren {
   title?: string;
   open: boolean;
+  maxWidth?: Breakpoint;
   handleClose?: () => void;
 }
 export default function CustomizedDialogs({
   title,
   children,
   open,
+  maxWidth,
   handleClose,
 }: Props) {
   // const handleClickOpen = () => {
@@ -93,7 +95,7 @@ export default function CustomizedDialogs({
       </Button> */}
       <BootstrapDialog
         onClose={handleClose}
-        maxWidth={matches ? "sm" : "md"}
+        maxWidth={maxWidth || (matches ? "sm" : "md")}
         fullWidth
         PaperProps={{
           sx: {
