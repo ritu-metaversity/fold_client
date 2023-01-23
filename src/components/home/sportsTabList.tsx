@@ -21,6 +21,7 @@ export const sportsTabList = [
   {
     name: "Cricket",
     icon: <GiCricketBat />,
+    iconClass: "d-icon icon-4",
     color: "#20327B",
   },
   {
@@ -65,11 +66,13 @@ export const sportsTabList = [
   },
   {
     name: "Esports",
+    iconClass: "d-icon icon-11",
     icon: <MdSportsEsports />,
     color: "#623CEA",
   },
   {
     name: "Horse Racing",
+    iconClass: "d-icon icon-10",
     icon: <FaHorse />,
     color: "#9E4025",
   },

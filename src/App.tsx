@@ -148,13 +148,14 @@ function App() {
             }}
           >
             <Layout>
+              
               <Pages />
             </Layout>
           </UserContext.Provider>
         </div>
         <SnackbarUtilsConfigurator />
       </SnackbarProvider>
-      <i className="d-icon icon-1"></i>
+      {/* <i className="d-icon icon-1"></i> */}
     </ThemeProvider>
   );
 }

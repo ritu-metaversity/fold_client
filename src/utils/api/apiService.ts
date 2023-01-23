@@ -92,9 +92,9 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
         }
       } else if (error.response?.status === 401) {
         if (localStorage.getItem("token")) {
-          localStorage.clear();
+          // localStorage.clear();
           snackBarUtil.error("Session changed. Please login again!");
-          window.location.replace("/");
+          // window.location.replace("/");
         }
       } else {
         if (errorRef && setErrorRef) {

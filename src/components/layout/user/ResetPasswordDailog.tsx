@@ -11,12 +11,13 @@ import { BootstrapDialog, BootstrapDialogTitle } from "../../common/Dailog2";
 import { DialogTitleStyledTypo } from "./styledComponents";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { UserContext } from "../../../App";
+import snackBarUtil from "../snackBarUtil";
 
 export default function CustomizedDialogPassword() {
   const [open, setOpen] = React.useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const firstLogin = searchParams.get("first-login");
-  const { modal, user } = React.useContext(UserContext);
+  const { modal, user, setModal } = React.useContext(UserContext);
   const nav = useNavigate();
 
   React.useEffect(() => {
@@ -50,8 +51,11 @@ export default function CustomizedDialogPassword() {
         );
         if (response) {
           handleClose();
+          localStorage.clear()
+          if (setModal) { setModal({ login: true }) }
+          snackBarUtil.success("Please login again !! ");
           resetForm();
-          nav({ pathname: "" });
+          nav({ pathname: "", search: "" });
         }
       } else {
         await userServices.changePassword(values);
