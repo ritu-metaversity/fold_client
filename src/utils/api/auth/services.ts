@@ -44,4 +44,8 @@ export const authServices = {
     const params = { resource: authResources.RESEND_OTP, data };
     return await apiWithSnackbar(params);
   },
+  logout: async () => {
+    const params = { resource: authResources.LOGOUT };
+    return await apiWithSnackbar(params);
+  }
 };

@@ -91,8 +91,13 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
             >
               <ListItemIcon sx={{ minWidth: 30 }}>
                 {
-                  sportsTabList.find((sItem) => sItem.name === sport.sportName)
-                    ?.icon
+                  <i
+                    className={
+                      sportsTabList.find(
+                        (sItem) => sItem.name === sport.sportName
+                      )?.iconClass
+                    }
+                  />
                 }
               </ListItemIcon>
               <ListItemText

@@ -1,30 +1,41 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import Account from '../accountSummary';
-import Activity from '../activityLog';
-import Casino from '../casino/Casino';
-import CurrentBets from '../currentBets';
-import Event from '../event';
-import Home from '../home'
-import Profile from "../profile/Profile";
+import { Box } from "@mui/system";
+import React, { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+import Loading from "../layout/loading";
+
+const Account = React.lazy(() => import("../accountSummary"));
+const Activity = React.lazy(() => import("../activityLog"));
+const Casino = React.lazy(() => import("../casino/Casino"));
+const CurrentBets = React.lazy(() => import("../currentBets"));
+const Event = React.lazy(() => import("../event"));
+const Home = React.lazy(() => import("../home"));
+const Profile = React.lazy(() => import("../profile/Profile"));
 
 const Pages = () => {
   return (
     <div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sports/details/" element={<Event />} />
-        <Route path="/report">
-          <Route path="accountstatement" element={<Account />} />
-          <Route path="activity" element={<Activity />} />
-          <Route path="currentbets" element={<CurrentBets />} />
-        </Route>
-        <Route path="/casino" element={<Casino />} />
-        <Route path="/virtual-casino" element={<Casino />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
+      <Suspense
+        fallback={
+          <Box flex={1} height="100vh">
+            <Loading />
+          </Box>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sports/details/" element={<Event />} />
+          <Route path="/report">
+            <Route path="accountstatement" element={<Account />} />
+            <Route path="activity" element={<Activity />} />
+            <Route path="currentbets" element={<CurrentBets />} />
+          </Route>
+          <Route path="/casino" element={<Casino />} />
+          <Route path="/virtual-casino" element={<Casino />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </Suspense>
     </div>
   );
-}
+};
 
-export default Pages
+export default Pages;

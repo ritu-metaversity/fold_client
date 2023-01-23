@@ -161,7 +161,7 @@ export function AuthBox() {
                   I agree terms & conditions.
                   <Tooltip title="I am at least 18 years of age and I have read, accept and agree to the Terms and Conditions , Responsible Gaming , GamCare, Gambling Therapy">
                     <Box component="span">
-                      <FaInfo />
+                      <FaInfo /> 
                     </Box>
                   </Tooltip>
                 </Typography>
