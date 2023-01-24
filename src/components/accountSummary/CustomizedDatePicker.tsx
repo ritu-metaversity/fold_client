@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DatePicker, { DatePickerProps } from "react-date-picker";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import "./datePicker.css";
 
 export function CustomizedDatePicker({

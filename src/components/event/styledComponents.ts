@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import { styled as muiStyled } from "@mui/material";
 
 export const AmountInput = styled.input`

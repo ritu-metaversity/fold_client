@@ -9,7 +9,7 @@ import { Grid, Typography, useMediaQuery } from "@mui/material";
 import OddsOnlyTwo from "./oddsOnlyTwo";
 import HomeLayout from "../layout/homeLayout";
 import { BetSlip } from "./BetSlip";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import MyBet from "./MyBet";
 import { userServices } from "../../utils/api/user/services";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -33,11 +33,9 @@ const Event = () => {
     null
   );
   const [searchParams] = useSearchParams();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const { isSignedIn, activeEventList } = useContext(UserContext);
-  const { title } = {
-    title: <Typography fontSize={"0.85rem"}>Pakistan</Typography>,
-  };
+
   const matches = useMediaQuery("(min-width : 1280px)");
   const matchId = searchParams.get("match-id");
   // const [markets, setMarkets] = useState<MarketInterface[]>([]);
@@ -58,12 +56,12 @@ const Event = () => {
       nav("/");
       return;
     }
-    setLoading(true);
+    // setLoading(true);
     const { response } = await userServices.betListByMatch(matchId);
     if (response?.data) {
       setBets(response.data);
     }
-    setLoading(false);
+    // setLoading(false);
   };
 
   const getFancyOdds = async () => {
@@ -73,7 +71,9 @@ const Event = () => {
       //showing only part of the data currently
       Object.keys(response).forEach((element) => {
         if (
-          !["Fancy", "Fancy2", "Fancy3", "Odds", "Bookmaker"].includes(element)
+          !["Fancy2", "Fancy3", "Odds", "Bookmaker", "OddEven"].includes(
+            element
+          )
         )
           response[element] = [];
       });

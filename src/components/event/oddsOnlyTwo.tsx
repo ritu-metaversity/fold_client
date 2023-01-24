@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import { BetDetailsInterface, FancyOddsInterface, ProfitInterface } from "./types";
 import { UserContext } from "../../App";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 
 interface Props {
   title: any | string;

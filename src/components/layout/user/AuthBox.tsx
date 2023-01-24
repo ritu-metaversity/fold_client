@@ -1,4 +1,4 @@
-import { LoginForm } from './LoginForm';
+import { LoginForm } from "./LoginForm";
 import {
   Box,
   // Button,
@@ -20,10 +20,12 @@ import { UserContext } from "../../../App";
 import { Form } from "react-bootstrap";
 import snackBarUtil from "../snackBarUtil";
 import { RegisterForm } from "./RegisterForm";
+import CustomizedDialogPassword from "./ResetPasswordDailog";
 
 export function AuthBox() {
   const theme = useTheme();
-  const { setIsSignedIn, setUser, modal, setModal } = useContext(UserContext);
+  const { setIsSignedIn, isSignedIn, setUser, modal, setModal } =
+    useContext(UserContext);
   const nav = useNavigate();
 
   const { values, handleChange, handleSubmit } = useFormik({
@@ -39,17 +41,19 @@ export function AuthBox() {
       }
       const { response } = await authServices.login(values);
       if (response) {
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("user", JSON.stringify(response));
-        if (setIsSignedIn) setIsSignedIn(true);
-        if (setUser) setUser(response);
-        if (response.passwordtype === "new" && setModal) {
+        if (response.passwordtype === "old" && setModal) {
           setModal({ changePassword: true });
           nav({
             pathname: "/",
             search: "first-login=true",
           });
+          localStorage.setItem("token", response.token);
+        } else {
+          localStorage.setItem("token", response.token);
+          if (setIsSignedIn) setIsSignedIn(true);
         }
+        if (setUser) setUser(response);
+        localStorage.setItem("user", JSON.stringify(response));
       }
     },
   });
@@ -77,6 +81,11 @@ export function AuthBox() {
 
   return (
     <UserContainer>
+      {!isSignedIn && (
+        <Box display="none">
+          <CustomizedDialogPassword />
+        </Box>
+      )}
       <form onSubmit={handleSubmit}>
         <Box
           sx={{
@@ -151,7 +160,7 @@ export function AuthBox() {
                   I agree terms & conditions.
                   <Tooltip title="I am at least 18 years of age and I have read, accept and agree to the Terms and Conditions , Responsible Gaming , GamCare, Gambling Therapy">
                     <Box component="span">
-                      <FaInfo />
+                      <FaInfo /> 
                     </Box>
                   </Tooltip>
                 </Typography>

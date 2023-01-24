@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import { Grid, MenuItem, TextField } from "@mui/material";
-import { colorHex } from "../../../constants";
+import { colorHex } from "../../../utils/constants";
 import { userServices } from "../../../utils/api/user/services";
 import { Box } from "@mui/system";
 import { BootstrapDialog, BootstrapDialogTitle } from "../../common/Dailog2";

@@ -2,7 +2,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import "./live.css";
 
 export interface MatchInterface {

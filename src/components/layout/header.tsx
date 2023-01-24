@@ -12,11 +12,11 @@ import {
   StyledAppBar,
   TopNavLinks,
 } from "./styledComponents";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Button, useMediaQuery, useTheme } from "@mui/material";
 import Sidebar from "./Sidebar";
 import { UserContext } from "../../App";
 import UserBox from "./user/UserBox";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 export const drawerWidth = 220;
@@ -109,18 +109,29 @@ export default function Header(props: Props) {
         >
           Virtual Casino
         </TopNavLinks>
-        {/* {value.isSignedIn && (
-          <Box height="100%" sx={{ position: "absolute", right: 5, top: 5 }}>
-            <Button variant="contained" color="success" sx={{ mr: 2, py: 0.3 }}>
-              {" "}
+        {value.isSignedIn && (
+          <Box
+            height="100%"
+            sx={{ position: "absolute", right: 5, my: 0.3, top: 0 }}
+          >
+            <Button
+              variant="contained"
+              onClick={() => nav("/deposit")}
+              color="success"
+              sx={{ mr: 2, py: 0.2 }}
+            >
               Deposit
             </Button>
-            <Button variant="contained" color="error" sx={{ mr: 2, py: 0.3 }}>
-              {" "}
+            <Button
+              variant="contained"
+              onClick={() => nav("withdraw-request")}
+              color="error"
+              sx={{ mr: 2, py: 0.2 }}
+            >
               Withdraw
             </Button>
           </Box>
-        )} */}
+        )}
       </CenterBox>
       <StyledAppBar
         position="fixed"
