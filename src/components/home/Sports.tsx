@@ -114,7 +114,7 @@ const Sports = () => {
           display="flex"
         >
           <Box pl={2} pt={0.5}>
-            {activeSportList[value]?.icon}
+            <i className={activeSportList[value]?.iconClass} />
           </Box>
           <Box pl={0.5} py={0.5}>
             {activeSportList[value]?.name}

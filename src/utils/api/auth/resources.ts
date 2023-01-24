@@ -6,22 +6,10 @@ export const authResourcs: {
     URL: "login/client-login",
     METHOD: "POST",
   },
-  SIGN_UP: {
-    URL: "auth/signup",
+  LOGOUT: {
+    URL: "login/logout", 
     METHOD: "POST",
-  },
-  VERIFY_OTP: {
-    URL: "auth/verify-otp",
-    METHOD: "POST",
-  },
-  RESEND_OTP: {
-    URL: "auth/send-otp",
-    METHOD: "POST",
-  },
-  GOOGLE_LOGIN: {
-    URL: "auth/google-login",
-    METHOD: "GET",
-  },
+},
   CHANGE_PASSWORD: {
     URL: "auth/change-password",
     METHOD: "POST",

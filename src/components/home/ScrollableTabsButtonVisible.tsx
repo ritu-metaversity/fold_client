@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction } from "react";
 import Box from "@mui/material/Box";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import Tab, { tabClasses } from "@mui/material/Tab";
 import { useMediaQuery } from "@mui/material";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 
 interface TabsProps {
   value: number;
@@ -42,6 +42,9 @@ export function ScrollableTabsButtonVisible({
           [`& .${tabsClasses.scrollButtons}`]: {
             "&.Mui-disabled": { opacity: 0.3 },
           },
+          [`& .${tabClasses.selected}`]: {
+            color: "white !important",
+          },
           bgcolor: colorHex.bg1,
           py: 0,
           maxWidth: "100vw",
@@ -55,7 +58,7 @@ export function ScrollableTabsButtonVisible({
         {sports.map((s, index) => (
           <Tab
             label={s.name}
-            icon={s.icon}
+            icon={s.iconClass ? <i className={s.iconClass}></i> : s.icon}
             key={s.name + s.color}
             iconPosition={matches ? "start" : "top"}
             sx={{

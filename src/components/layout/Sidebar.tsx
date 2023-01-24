@@ -17,7 +17,7 @@ import {
 import { Icon, SidebarHeader } from "./styledComponents";
 import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
 import { ExpandLess, ExpandMore, Menu, Search } from "@mui/icons-material";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "../home/sportsTabList";
 import { UserContext } from "../../App";
@@ -91,8 +91,13 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
             >
               <ListItemIcon sx={{ minWidth: 30 }}>
                 {
-                  sportsTabList.find((sItem) => sItem.name === sport.sportName)
-                    ?.icon
+                  <i
+                    className={
+                      sportsTabList.find(
+                        (sItem) => sItem.name === sport.sportName
+                      )?.iconClass
+                    }
+                  />
                 }
               </ListItemIcon>
               <ListItemText

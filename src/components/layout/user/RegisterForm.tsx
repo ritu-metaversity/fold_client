@@ -11,7 +11,7 @@ import { useFormik } from "formik";
 import React, { useContext, useState } from "react";
 import { Form } from "react-bootstrap";
 import { UserContext } from "../../../App";
-import { colorHex } from "../../../constants";
+import { colorHex } from "../../../utils/constants";
 import { userServices } from "../../../utils/api/user/services";
 
 import phoneCodes from "../../../utils/phoneCodes.json";

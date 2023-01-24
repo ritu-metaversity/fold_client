@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import { Breakpoint } from "@mui/system";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 
 export const BootstrapDialog = styled(Dialog)(({ theme, maxWidth }) => ({
   "& .MuiDialogContent-root": {

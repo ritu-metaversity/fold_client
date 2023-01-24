@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Typography from "@mui/material/Typography";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import { BootstrapDialogTitle } from "../common/Dailog2";
 
 export const BootstrapDialog = styled(Dialog)(({ theme }) => ({

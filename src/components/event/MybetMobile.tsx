@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight, } from "@mui/icons-material";
 import { Box, IconButton, Tab, Tabs } from "@mui/material";
 import React, { FC, useMemo, useState } from "react";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import CustomizedDialog2 from "./Dailog3withNoPadding";
 import { getMyBets } from "./MyBet";
 import { BetAlert, TitleStyled } from "./styledComponents";
