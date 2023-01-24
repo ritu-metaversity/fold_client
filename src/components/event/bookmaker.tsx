@@ -6,7 +6,7 @@ import {
   ProfitInterface,
 } from "./types";
 import { UserContext } from "../../App";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import "./animation.css";
 
 interface Props {

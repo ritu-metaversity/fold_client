@@ -20,7 +20,7 @@ import React, {
   useState,
 } from "react";
 import { UserContext } from "../../App";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import {
   AmountInput,
   AmountInputBGBack,

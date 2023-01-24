@@ -20,7 +20,6 @@ import { UserContext } from "../../../App";
 import { Form } from "react-bootstrap";
 import snackBarUtil from "../snackBarUtil";
 import { RegisterForm } from "./RegisterForm";
-import BoxWithTitle from "../../common/BoxWithTitle";
 import CustomizedDialogPassword from "./ResetPasswordDailog";
 
 export function AuthBox() {

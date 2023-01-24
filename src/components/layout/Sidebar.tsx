@@ -17,7 +17,7 @@ import {
 import { Icon, SidebarHeader } from "./styledComponents";
 import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
 import { ExpandLess, ExpandMore, Menu, Search } from "@mui/icons-material";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "../home/sportsTabList";
 import { UserContext } from "../../App";

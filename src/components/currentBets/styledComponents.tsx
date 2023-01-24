@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Grid, Typography } from "@mui/material";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 
 export const CurrentBetCategoryTabsContainer = styled(Grid)({
   backgroundColor: colorHex.bg3,

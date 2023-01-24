@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import Tab, { tabClasses } from "@mui/material/Tab";
 import { useMediaQuery } from "@mui/material";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 
 interface TabsProps {
   value: number;

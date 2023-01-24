@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import React from "react";
 
 const gridProps = {

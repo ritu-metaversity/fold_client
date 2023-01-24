@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import { PdfIcon } from "../accountSummary/styledComponents";
 import { CustomizedDatePicker } from "../accountSummary/CustomizedDatePicker";
 import { searchFilters } from ".";

@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { FC, useState } from "react";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import { PdfIcon } from "./styledComponents";
 import { AccountStatementFilter, subtractMonths } from ".";
 

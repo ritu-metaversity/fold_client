@@ -14,13 +14,12 @@ import {
   TooltipProps,
   Typography,
 } from "@mui/material";
-import "./formCheck.css";
 import React, { useState } from "react";
 import {
   StyledTableCell,
   StyledTableHeaderCell,
 } from "./StyledTableHeaderCell";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import { Form } from "react-bootstrap";
 
 type columnsIdType =

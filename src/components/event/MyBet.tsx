@@ -8,7 +8,7 @@ import {
   Grid,
 } from "@mui/material";
 import React, { FC, useState } from "react";
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 import { AccordianSummaryTitle, TitleStyled } from "./styledComponents";
 
 interface Props {

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { colorHex } from "../../constants";
+import { colorHex } from "../../utils/constants";
 export const PdfIcon = styled.img`
   max-width: 40px;
   height: auto;
