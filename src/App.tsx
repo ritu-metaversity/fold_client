@@ -20,6 +20,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { sportServices } from "./utils/api/sport/services";
 import { SportInterface } from "./components/layout/Sidebar";
 import "./components/font.css";
+import { authServices } from "./utils/api/auth/services";
 
 interface ModalState {
   login?: boolean;
@@ -35,6 +36,7 @@ interface UserContextType {
   user: any;
   stakes: { [x: string]: number };
   activeEventList: SportInterface[] | null;
+  appData: AppDataInterface | null;
 }
 
 const defaultStake = {
@@ -50,6 +52,12 @@ const defaultStake = {
   stack10: 0,
 };
 
+interface AppDataInterface {
+  logo: string;
+  mobileLogo: string;
+  selfAllowed: boolean;
+}
+
 export let setErrorRef: any;
 export let errorRef: any;
 
@@ -62,6 +70,7 @@ export const UserContext = createContext<UserContextType>({
   setModal: null,
   stakes: defaultStake,
   activeEventList: null,
+  appData: null
 });
 
 function App() {
@@ -71,11 +80,25 @@ function App() {
   const [stakes, setButtonValue] = React.useState<{ [x: string]: number }>(
     defaultStake
   );
+
   const [error, setError] = useState(false);
   const [activeEventList, setActiveEventList] = useState<SportInterface[]>([]);
+  const [appData, setAppData] = useState<AppDataInterface | null>(null);
 
   errorRef = error;
   setErrorRef = setError;
+
+  const getSelfAllowed = async () => {
+    console.log(window.location.host, "host");
+    const { response } = await authServices.isSelfAllowed({
+      // appUrl: "11hub.atozscore1234.com",
+      appUrl: window.location.host,
+    });
+
+    if (response?.data) {
+      setAppData(response.data);
+    }
+  };
 
   useEffect(() => {
     const getNewEventOpen = async () => {
@@ -88,6 +111,7 @@ function App() {
         setActiveEventList([]);
       }
     };
+    getSelfAllowed();
     getNewEventOpen();
   }, []);
 
@@ -143,6 +167,7 @@ function App() {
               stakes,
               isSignedIn,
               user,
+              appData,
               modal,
               setModal,
               setIsSignedIn,
@@ -150,14 +175,12 @@ function App() {
             }}
           >
             <Layout>
-              
               <Pages />
             </Layout>
           </UserContext.Provider>
         </div>
         <SnackbarUtilsConfigurator />
       </SnackbarProvider>
-      {/* <i className="d-icon icon-1"></i> */}
     </ThemeProvider>
   );
 }

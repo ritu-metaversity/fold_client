@@ -46,7 +46,7 @@ export interface SportInterface {
 const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
   const [open, setOpen] = useState([true, false, false, false, false]);
   const [matchCollapse, setMatchCollapse] = useState<boolean[]>([]);
-  const { isSignedIn, setModal, activeEventList } = useContext(UserContext);
+  const { isSignedIn, setModal,appData, activeEventList } = useContext(UserContext);
 
   const handleClick = (index: number) => {
     const openList = [...open];
@@ -166,7 +166,8 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
       {
         <Icon
           onClick={() => nav("/")}
-          src="/assets/images/icon.png"
+          src={appData?.mobileLogo}
+          // src="/assets/images/icon.png"
           alt="ico"
         />
       }

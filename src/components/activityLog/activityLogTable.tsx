@@ -19,7 +19,6 @@ interface Props {
 export default function ActivityTable({ columns, rows }: Props) {
   return (
     <>
-
       <TableContainer
         component={Paper}
         elevation={0}
@@ -49,6 +48,9 @@ export default function ActivityTable({ columns, rows }: Props) {
               ))}
             </TableRow>
           </TableHead>
+            {!(rows?.length > 0) && (
+              <StyledTableCell colSpan={columns?.length} sx={{margin:"auto",textAlign:"center"}}  width="100%">No Records Found</StyledTableCell>
+            )}
           <TableBody>
             {rows.map((row) => (
               <TableRow
@@ -56,14 +58,13 @@ export default function ActivityTable({ columns, rows }: Props) {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 {columns.map(({ id, align }) => (
-                  <StyledTableCell align={align} >{row[id]}</StyledTableCell>
+                  <StyledTableCell align={align}>{row[id]}</StyledTableCell>
                 ))}
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-
     </>
   );
 }

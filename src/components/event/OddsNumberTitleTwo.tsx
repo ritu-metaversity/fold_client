@@ -50,8 +50,8 @@ export function OddsNumberTitleTwo() {
           lg: "2%",
         }}
       >
-        <Grid {...gridProps1}>Yes</Grid>
         <Grid {...gridProps}>No</Grid>
+        <Grid {...gridProps1}>Yes</Grid>
       </Grid>
     </Grid>
   );

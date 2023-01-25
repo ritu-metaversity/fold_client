@@ -7,7 +7,8 @@ import CustomizedDialogPassword from "./ResetPasswordDailog";
 import CustomizedDialogStack from "./StackDailog";
 
 export function AvatarMenu({ anchorEl, open, handleClose }: any) {
-  const { setIsSignedIn, isSignedIn, setUser } = useContext(UserContext);
+  const { setIsSignedIn, isSignedIn, appData, setUser } =
+    useContext(UserContext);
 
   const nav = useNavigate();
 
@@ -51,7 +52,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         }} // transitionDuration={500}
         // TransitionComponent={Collapse}
       >
-        {isSignedIn && matches && (
+        {isSignedIn && matches && appData?.selfAllowed && (
           <>
             <MenuItem disableRipple>
               <Button
