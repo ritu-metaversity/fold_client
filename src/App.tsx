@@ -91,7 +91,8 @@ function App() {
   const getSelfAllowed = async () => {
     console.log(window.location.host, "host");
     const { response } = await authServices.isSelfAllowed({
-      appUrl: "11hub.atozscore1234.com",
+      // appUrl: "11hub.atozscore1234.com",
+      appUrl: window.location.host,
     });
 
     if (response?.data) {
