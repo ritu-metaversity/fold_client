@@ -8,7 +8,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CustomizedDialogs from "../../common/Dailog";
 import { LoginButton, UserContainer } from "../styledComponents";
@@ -24,7 +24,7 @@ import CustomizedDialogPassword from "./ResetPasswordDailog";
 
 export function AuthBox() {
   const theme = useTheme();
-  const { setIsSignedIn, isSignedIn, setUser, modal, setModal } =
+  const { setIsSignedIn,appData, isSignedIn, setUser, modal, setModal } =
     useContext(UserContext);
   const nav = useNavigate();
 
@@ -94,14 +94,14 @@ export function AuthBox() {
             marginLeft: { sm: "1rem" },
           }}
         >
-          <LoginButton
+          {appData?.selfAllowed && <LoginButton
             variant="contained"
             onClick={() => {
               setModal && setModal({ register: true });
             }}
           >
             REGISTER
-          </LoginButton>
+          </LoginButton>}
           <Box
             display={{
               xs: "none",
@@ -139,6 +139,7 @@ export function AuthBox() {
             <TextField
               placeholder="Password*"
               name="password"
+              type="password"
               variant="outlined"
               size="small"
               value={values.password}
@@ -160,7 +161,7 @@ export function AuthBox() {
                   I agree terms & conditions.
                   <Tooltip title="I am at least 18 years of age and I have read, accept and agree to the Terms and Conditions , Responsible Gaming , GamCare, Gambling Therapy">
                     <Box component="span">
-                      <FaInfo /> 
+                      <FaInfo />
                     </Box>
                   </Tooltip>
                 </Typography>
@@ -192,13 +193,13 @@ export function AuthBox() {
           handleChange={handleChange}
         />
       </CustomizedDialogs>
-      <CustomizedDialogs
+      {appData?.selfAllowed && <CustomizedDialogs
         title="Register"
         open={Boolean(modal.register)}
         handleClose={handleClose}
       >
         <RegisterForm />
-      </CustomizedDialogs>
+      </CustomizedDialogs>}
     </UserContainer>
   );
 }

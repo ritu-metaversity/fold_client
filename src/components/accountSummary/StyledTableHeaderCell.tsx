@@ -14,6 +14,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export const StyledTableHeaderCell = styled(StyledTableCell)(({ theme }) => ({
   color: theme.palette.text.secondary,
   fontWeight: 800,
+  whiteSpace: "normal", 
 }));
 
 export type columnIds =

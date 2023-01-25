@@ -40,7 +40,6 @@ export const topNavHeight = "1.9rem";
 
 export default function Header(props: Props) {
   const theme = useTheme();
-  const value = React.useContext(UserContext);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const nav = useNavigate();
   const loc = useLocation();
@@ -50,7 +49,7 @@ export default function Header(props: Props) {
   };
 
   const { pathname } = useLocation();
-  const { isSignedIn } = React.useContext(UserContext);
+  const { isSignedIn, appData } = React.useContext(UserContext);
   const matches = useMediaQuery("(min-width:1280px)");
   const drawerWidthLocal = notShowSidebar ? 0 : drawerWidth;
   const drawerWidthXlLocal = notShowSidebar ? 0 : drawerWidthXl;
@@ -109,7 +108,7 @@ export default function Header(props: Props) {
         >
           Virtual Casino
         </TopNavLinks>
-        {value.isSignedIn && (
+        {isSignedIn && appData?.selfAllowed && (
           <Box
             height="100%"
             sx={{ position: "absolute", right: 5, my: 0.3, top: 0 }}
@@ -190,14 +189,15 @@ export default function Header(props: Props) {
           <Box width={220} p={1}>
             <Icon
               onClick={() => nav("/")}
-              src="/assets/images/icon.png"
+              src={appData?.mobileLogo}
+              // src="/assets/images/icon.png"
               alt="ico"
             />
           </Box>
         )}
-        <IconSmall onClick={() => nav("/")} src="/assets/images/icon.png" />
+        <IconSmall onClick={() => nav("/")} src={appData?.logo} />
         {matches && <Announcement />}
-        {value?.isSignedIn ? <UserBox /> : <AuthBox />}
+        {isSignedIn ? <UserBox /> : <AuthBox />}
         {/* </Toolbar>  */}
         {/* <Divider sx={{ p: 0, borderBottomWidth: 2 }} /> */}
       </StyledAppBar>

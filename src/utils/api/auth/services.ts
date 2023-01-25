@@ -1,4 +1,4 @@
-import { apiWithSnackbar } from "../apiService";
+import { apiHandler, apiWithSnackbar } from "../apiService";
 import { authResourcs as authResources } from "./resources";
 
 interface LoginPayload {
@@ -7,6 +7,10 @@ interface LoginPayload {
   // userIp: string;
   // userType: string;
   // type: string;
+}
+
+interface SelfAllowedPayload {
+  appUrl: string;
 }
 interface SendOtpPayload extends LoginPayload {
   purpose: string;
@@ -47,5 +51,9 @@ export const authServices = {
   logout: async () => {
     const params = { resource: authResources.LOGOUT };
     return await apiWithSnackbar(params);
-  }
+  },
+  isSelfAllowed: async (data:SelfAllowedPayload) => {
+    const params = { resource: authResources.IS_SELF,data };
+    return await apiHandler(params);
+  },
 };
