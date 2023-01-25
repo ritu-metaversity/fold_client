@@ -18,7 +18,7 @@ import { PdfIcon } from "../accountSummary/styledComponents";
 import { CustomizedDatePicker } from "../accountSummary/CustomizedDatePicker";
 import { searchFilters } from ".";
 
-const LabelText = styled(Typography)(({ theme }) => ({
+export const LabelText = styled(Typography)(({ theme }) => ({
   color: "text.secondary",
   fontSize: "0.8rem",
   textAlign: "left",

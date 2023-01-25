@@ -124,7 +124,7 @@ const OddsOnlyTwo = ({
             color={profit?.value >= 0 ? "green" : "red"}
             fontSize={"0.8rem"}
             sx={{ cursor: "pointer" }}
-            onClick={() => setMarketId(profit.sid+"")}
+            onClick={() => setMarketId(profit.sid + "")}
           >
             {Number(profit?.value?.toFixed(2))}
           </Typography>
@@ -145,26 +145,13 @@ const OddsOnlyTwo = ({
         display="flex"
         position="relative"
         className={
-          ["SUSPENDED", "BALL RUNNING"].includes(odds.gstatus)
+          "suspended"===odds.gstatus?.toLowerCase()
             ? "fancy-suspended"
-            : ""
+            : "ball running"===odds.gstatus?.toLowerCase()?"fancy-ball-running fancy-suspended":""
         }
         alignItems={"center"}
         gap={{ xs: "1.2%", md: "2%", lg: "2%" }}
       >
-        <Grid
-          {...gridProps2}
-          className={
-            prevOdds?.b1 < odds?.b1
-              ? "odds-up"
-              : prevOdds?.b1 > odds?.b1
-              ? "odds-down"
-              : ""
-          }
-          onClick={handleClick}
-        >
-          {Values(Number(odds?.b1), odds?.bs1)}
-        </Grid>
         <Grid
           {...gridProps}
           className={
@@ -178,6 +165,20 @@ const OddsOnlyTwo = ({
         >
           {Values(Number(odds?.l1), odds?.ls1)}
         </Grid>
+        <Grid
+          {...gridProps2}
+          className={
+            prevOdds?.b1 < odds?.b1
+              ? "odds-up"
+              : prevOdds?.b1 > odds?.b1
+              ? "odds-down"
+              : ""
+          }
+          onClick={handleClick}
+        >
+          {Values(Number(odds?.b1), odds?.bs1)}
+        </Grid>
+
         <Grid
           item
           xs={3.5}
