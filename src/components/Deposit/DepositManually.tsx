@@ -6,6 +6,9 @@ import {
   ImageUploadContainer,
 } from "./styledComponents";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import BankInfoComponent from "./BankInfoComponent";
+import UPIDetails from "./UPIDetails";
+import QRcodeComponent from "./QRcodeComponent";
 
 const paymentArr = ["upi", "bank", "qrcode"];
 
@@ -27,7 +30,9 @@ const DepositManually = () => {
             />
           ))}
         </CardContainerContainer>
-
+        {selected === "bank" && <BankInfoComponent />}
+        {selected === "upi" && <UPIDetails />}
+        {selected === "qrcode" && <QRcodeComponent />}
         <label style={{ width: "100%" }}>
           <ImageUploadContainer>
             <AddCircleIcon htmlColor="white" />

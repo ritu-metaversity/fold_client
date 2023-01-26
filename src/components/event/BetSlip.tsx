@@ -97,6 +97,7 @@ export const BetSlip: FC<Props> = ({
       matchId,
       userIp: ipRes.ip,
       deviceInfo: {
+        userIp: ipRes.ip,
         userAgent: window.navigator.userAgent,
         browser: "Chrome",
         device: "Macintosh",
@@ -170,9 +171,7 @@ export const BetSlip: FC<Props> = ({
           <Close
             sx={{ cursor: "pointer" }}
             fontSize="small"
-            onClick={() => {
-              setBetId(null);
-            }}
+            onClick={() => setBetId(null)}
           />
         </Box>
         <Typography fontSize="0.8rem">{betId.marketName}</Typography>

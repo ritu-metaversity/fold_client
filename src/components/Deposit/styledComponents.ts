@@ -16,7 +16,7 @@ export const StyledButtonSmall = styled(Button)(({ theme }) => ({
 }));
 
 export const CardImg = emotionStyled.img`
-  width: 100px;
+  width: 70%;
   aspect-ratio: 1/1;
 `;
 
@@ -28,28 +28,24 @@ export const CardContainerContainer = styled(Box)(({ theme }) => ({
   width: "max-content",
   maxWidth: "100%",
   flexWrap: "wrap",
-  padding: "15px",
+  padding: "0.5em",
   justifyContent: "space-evenly",
-  gap: "15px",
+  gap: "0.5em",
   background: colorHex.bg2,
   borderRadius: "12px",
   margin: "auto",
 }));
 
-export const ImageUploadContainer = styled(Box)(({ theme }) => ({
-  border: `2px solid ${theme.palette.primary.main}`,
-  width: "100%",
-  cursor: "pointer",
-  height: 200,
-  borderRadius: 12,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexDirection: "column",
-}));
 export const CardContainer = emotionStyled.div`
   aspect-ratio:1;
+
   width: 150px;
+  @media (max-width: 768px) {
+    width: 120px;
+  }
+  @media (max-width: 580px) {
+    width: 30%;
+  }
   display: flex;
   cursor: pointer;
   flex-direction: column;
@@ -58,6 +54,46 @@ export const CardContainer = emotionStyled.div`
   border-radius: 12px;
   border: 1px solid gray;
   background: ${colorHex.bg3}
+
+`;
+export const ImageUploadContainer = styled(Box)(({ theme }) => ({
+  border: `2px solid ${theme.palette.primary.main}`,
+  width: "100%",
+  background: colorHex.bg2,
+  cursor: "pointer",
+  height: 200,
+  borderRadius: 12,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "column",
+}));
+
+export const PaymentDetailContainer = emotionStyled.div`
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid gray;
+  background: ${colorHex.bg2};
+  margin-block: 16px;
+  padding: 16px;
+`;
+
+export const SpacedBetween = emotionStyled.div`
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 580px) {
+
+    font-size: 0.8rem;
+  } 
+  
+  `;
+
+export const QrImg = emotionStyled.img`
+width: 100%;
+aspect-ratio: 1/1;
+margin: auto;
+max-width: 200px;
 `;
 
 export const StyledAmountInput = emotionStyled.input`
