@@ -39,6 +39,7 @@ export interface SportInterface {
   totalMatch: number;
   matchList: {
     matchId: number;
+    date: string;
     matchName: string;
   }[];
 }
@@ -46,7 +47,8 @@ export interface SportInterface {
 const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
   const [open, setOpen] = useState([true, false, false, false, false]);
   const [matchCollapse, setMatchCollapse] = useState<boolean[]>([]);
-  const { isSignedIn, setModal,appData, activeEventList } = useContext(UserContext);
+  const { isSignedIn, setModal, appData, activeEventList } =
+    useContext(UserContext);
 
   const handleClick = (index: number) => {
     const openList = [...open];
@@ -135,7 +137,7 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
                         fontSize: "0.8rem",
                       },
                     }}
-                    primary={`${match.matchName}`}
+                    primary={`${match.matchName} ( ${match.date})`}
                   />
                 </ListItemButton>
               </ListItem>

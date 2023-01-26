@@ -30,6 +30,7 @@ import {
 import { eventServices } from "../../utils/api/event/services";
 import Loading from "../layout/loading";
 import { BetDetailsInterface } from "./types";
+import { utilServices } from "../../utils/api/util/services";
 
 interface Props {
   getBets: () => void;
@@ -78,10 +79,23 @@ export const BetSlip: FC<Props> = ({
   const matches = useMediaQuery("(min-width: 1279px)");
   const [loading, setLoading] = useState(false);
 
+  const deviceInfo = {
+    userAgent: window.navigator.userAgent,
+    browser: "",
+    device: window.navigator.mediaDevices,
+    deviceType: getDeviceType(),
+    os: window.navigator.platform,
+    os_version: "windows-10",
+    browser_version: "108.0.0.0",
+    orientation: "",
+  };
+  console.log(deviceInfo, "hehe");
   const handleSubmit = async () => {
+    const { response: ipRes } = await utilServices.getIpfy();
     const data = {
       ...betId,
       matchId,
+      userIp: ipRes.ip,
       deviceInfo: {
         userAgent: window.navigator.userAgent,
         browser: "Chrome",
@@ -120,9 +134,9 @@ export const BetSlip: FC<Props> = ({
 
   useEffect(() => {
     let newTimer: any;
-      newTimer = setTimeout(() => {
-        setBetId(null);
-      }, 15000);
+    newTimer = setTimeout(() => {
+      setBetId(null);
+    }, 15000);
     return () => {
       clearTimeout(newTimer);
     };
@@ -151,7 +165,6 @@ export const BetSlip: FC<Props> = ({
       )}
       {matches && <TitleStyled>Bet Slip</TitleStyled>}
       <Box p={0.5}>
-        
         <Box display="flex" fontSize="0.8rem" justifyContent={"space-between"}>
           <Typography fontSize="0.8rem">{<>{getMatchName}</>}</Typography>
           <Close

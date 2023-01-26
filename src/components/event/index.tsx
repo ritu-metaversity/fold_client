@@ -387,7 +387,7 @@ const Event = () => {
         })}
 
         {/* accordians for fancy without values */}
-        {Object.keys(fancyOdds).map((fancyMarket: any) => {
+        {/* {Object.keys(fancyOdds).map((fancyMarket: any) => {
           if (["Odds", "Bookmaker"].includes(fancyMarket)) return <></>;
           if (fancyOdds[fancyMarket]?.length === 0)
             return (
@@ -412,7 +412,7 @@ const Event = () => {
               </CustomizedAccordions>
             );
           return <></>;
-        })}
+        })} */}
       </HomeLayout>
     </Box>
   );
