@@ -20,66 +20,77 @@ export function WithdrawForm({ }) {
               lg: "flex-end",
             },
             gap: 1,
-            rowGap: 3,
+            rowGap: 2,
+            mb: { lg: 4 },
           }}
         >
           <Box>
-            <Typography m={1} variant="subtitle2">
-              Amount:
+            <Typography m={1} variant="caption">
+              Amount
             </Typography>
-            <WithdrawInput placeholder="Amount" />
+            <WithdrawInput margin="dense" placeholder="Amount" />
           </Box>
           <Box>
-            <Typography variant="subtitle2" m={1}>
-              Account Number:
+            <Typography variant="caption" m={1}>
+              Account Number
             </Typography>
-            <WithdrawInput placeholder="Account Number" />
+            <WithdrawInput margin="dense" placeholder="Account Number" />
           </Box>
           <Box>
-            <Typography variant="subtitle2" m={1}>
+            <Typography variant="caption" m={1}>
               Account Name
             </Typography>
-            <WithdrawInput placeholder="Account Name" />
+            <WithdrawInput margin="dense" placeholder="Account Name" />
           </Box>
           <Box>
-            <Typography variant="subtitle2" m={1}>
+            <Typography variant="caption" m={1}>
               Bank Name
             </Typography>
-            <WithdrawInput placeholder="Bank Name" />
+            <WithdrawInput margin="dense" placeholder="Bank Name" />
           </Box>
           <Box>
-            <Typography variant="subtitle2" m={1}>
+            <Typography variant="caption" m={1}>
               IFSC
             </Typography>
-            <WithdrawInput placeholder="IFSC Code" />
+            <WithdrawInput margin="dense" placeholder="IFSC Code" />
           </Box>
           <Box>
-            <Typography variant="subtitle2" m={1}>
+            <Typography variant="caption" m={1}>
               Account Type / Currency
             </Typography>
-            <WithdrawInput defaultValue="saving" select placeholder="Amount">
-              <MenuItem value="saving">Savings</MenuItem>
+            <WithdrawInput
+              defaultValue="saving"
+              margin="dense"
+              select
+              placeholder="Amount"
+            >
+              <MenuItem value="saving" sx={{ fontSize: "0.8rem" }}>
+                Savings
+              </MenuItem>
               <MenuItem value="current">Current</MenuItem>
             </WithdrawInput>
           </Box>
           <Box>
             <Button
               color="secondary"
+              // disabled
               variant="contained"
               sx={{
+                height: 48,
                 my: 1,
                 color: "white",
+                fontSize: "1.2rem",
                 width: 156,
               }}
             >
-              SUBMIT
+              Submit
             </Button>
           </Box>
         </Box>
       </form>
       <Box
         py={3}
-        my={3}
+        mt={3}
         borderTop={{ xs: `1px solid ${colorHex.borderLine}`, lg: "none" }}
       >
         <Box display="flex" alignItems="center">

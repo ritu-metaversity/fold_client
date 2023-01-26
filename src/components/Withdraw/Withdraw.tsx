@@ -1,9 +1,10 @@
 import { WithdrawForm } from "./WithdrawForm";
 import React from "react";
 import HomeLayout from "../layout/homeLayout";
-import { WithdrawInput } from "./styledComponent";
 import { columns } from "./columns";
 import ActivityTable from "../activityLog/activityLogTable";
+import { AccountContainer } from "../accountSummary/styledComponents";
+import { Box, Typography } from "@mui/material";
 
 const Withdraw = () => {
   // const { values, handleChange, handleSubmit, errors } = useFormik({
@@ -17,11 +18,18 @@ const Withdraw = () => {
   // })
   return (
     <HomeLayout>
-      <div style={{ textAlign: "left", margin: "16px" }}>
-        <WithdrawForm />
+      <AccountContainer>
+        <Box sx={{ textAlign: "left", my: 2 }}>
+          <Box mx={2}>
+            {/* <Typography variant="h5" my={2} color="primary.main">
+              Normal Withdraw
+            </Typography> */}
+            <WithdrawForm />
+          </Box>
 
-        <ActivityTable columns={columns} rows={[]} />
-      </div>
+          <ActivityTable columns={columns} rows={[]} />
+        </Box>
+      </AccountContainer>
     </HomeLayout>
   );
 };
