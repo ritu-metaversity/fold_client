@@ -11,4 +11,7 @@ export const utilResources: {
     URL: "util/password-change-history-report",
     METHOD: "POST",
   },
+  GET_IP_ADDRESS: {
+    URL: "https://api.ipify.org?format=json",
+  },
 };

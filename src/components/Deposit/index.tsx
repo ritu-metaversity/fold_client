@@ -5,6 +5,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Button, Typography } from "@mui/material";
 import HomeLayout from "../layout/homeLayout";
 import { colorHex } from "../../utils/constants";
+import DepositManually from "./DepositManually";
 
 const buttonAmountArr = [100, 500, 1000, 5000];
 const Deposit = () => {
@@ -27,49 +28,57 @@ const Deposit = () => {
   return (
     <HomeLayout>
       <Box
-        display={"flex"}
-        width={{ xs: "95%", md: "100%" }}
-        marginY={2}
         marginX="auto"
-        flexDirection={{ xs: "column", md: "row" }}
-        alignItems={{ xs: "center", md: "flex-end" }}
-        gap={1}
         rowGap={5}
+        display={"flex"}
+        flexDirection="column"
+        width={{ xs: "95%" }}
       >
-        <Box width={{ xs: "100%", md: "125px" }} textAlign="left">
-          <Typography variant="caption" textAlign={"left"}>
-            Enter Amount:
-          </Typography>
-          <Box
-            bgcolor={colorHex.bg3}
-            p="0 5px"
-            alignItems="center"
-            borderRadius={"8px"}
-            height={46}
-            display="flex"
-          >
-            <RemoveIcon onClick={handleMinusClick} />
-            <StyledAmountInput
-              type="text"
-              // onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
-              placeholder="Amount"
-              value={amount || ""}
-              onChange={handleChange}
-            />{" "}
-            <AddIcon onClick={handlePlusClick} />
-          </Box>
-        </Box>
-        <Box display="flex">
-          {buttonAmountArr.map((amount) => (
-            <StyledButtonSmall
-              key={`${amount}-button`}
-              onClick={() => setAmount((o) => o + amount)}
+        <Box
+          display={"flex"}
+          marginY={2}
+          flexDirection={{ xs: "column", md: "row" }}
+          alignItems={{ xs: "center", md: "flex-end" }}
+          gap={1}
+          rowGap={5}
+        >
+          <Box width={{ xs: "100%", md: "125px" }} textAlign="left">
+            <Typography variant="caption" textAlign={"left"}>
+              Enter Amount:
+            </Typography>
+            <Box
+              bgcolor={colorHex.bg3}
+              p="0 5px"
+              alignItems="center"
+              borderRadius={"8px"}
+              height={46}
+              display="flex"
             >
-              +{amount}
-            </StyledButtonSmall>
-          ))}
+              <RemoveIcon onClick={handleMinusClick} />
+              <StyledAmountInput
+                type="text"
+                placeholder="Amount"
+                value={amount || ""}
+                onChange={handleChange}
+              />{" "}
+              <AddIcon onClick={handlePlusClick} />
+            </Box>
+          </Box>
+          <Box display="flex">
+            {buttonAmountArr.map((amount) => (
+              <StyledButtonSmall
+                key={`${amount}-button`}
+                onClick={() => setAmount((o) => o + amount)}
+              >
+                +{amount}
+              </StyledButtonSmall>
+            ))}
+          </Box>
+          <Button color="secondary" variant="contained" sx={{ color: "white" }}>
+            Submit
+          </Button>
         </Box>
-        <Button color="secondary" variant="contained" sx={{ color:"white" }} >SUBMIT</Button>
+        <DepositManually />
       </Box>
     </HomeLayout>
   );

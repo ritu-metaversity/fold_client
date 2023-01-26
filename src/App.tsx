@@ -92,7 +92,7 @@ function App() {
     console.log(window.location.host, "host");
     const { response } = await authServices.isSelfAllowed({
       // appUrl: "11hub.atozscore1234.com",
-      appUrl: window.location.host,
+      appUrl: window.location.hostname,
     });
 
     if (response?.data) {
