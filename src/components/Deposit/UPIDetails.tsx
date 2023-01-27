@@ -6,10 +6,16 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React from "react";
+import React, { FC } from "react";
+import { CopyComp } from "./BankInfoComponent";
+import { UPIDetailsInterface } from "./PaymentMethods";
 import { PaymentDetailContainer } from "./styledComponents";
 
-const UPIDetails = () => {
+interface Props {
+  upiDetails?: UPIDetailsInterface;
+}
+const UPIDetails: FC<Props> = ({ upiDetails }) => {
+  if (!upiDetails) return <></>;
   return (
     <PaymentDetailContainer>
       <Table>
@@ -23,11 +29,13 @@ const UPIDetails = () => {
         <TableBody>
           <TableRow>
             <TableCell>
-              <img />
+              {/* <img />
+               */}
+              {upiDetails.upiName}
             </TableCell>
-            <TableCell>INFINITY BOOKS</TableCell>
+            <TableCell>{upiDetails.displayName}</TableCell>
             <TableCell align="right">
-              INFINITYBOOKS@rbl <CopyAll />
+              {upiDetails.upiId} <CopyComp str={upiDetails.upiId} />
             </TableCell>
           </TableRow>
         </TableBody>

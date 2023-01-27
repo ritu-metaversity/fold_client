@@ -1,5 +1,7 @@
 import {
   apiHandler,
+  ApiResource,
+  ApiServiceInterface,
   apiWithErrorSnackbar,
   apiWithSnackbar,
 } from "../apiService";
@@ -9,6 +11,14 @@ interface ChangePasswordPayload {
   newPassword: string;
   currentPassword: string;
   confirmPassword?: string;
+}
+interface SelfWithdrawPayload {
+  accountHolderName: string;
+  bankName: string;
+  accountType: string;
+  accountNumber: string;
+  ifsc: string;
+  amount: number;
 }
 interface FirstLoginPayload {
   newPassword: string;
@@ -148,5 +158,28 @@ export const userServices = {
       data,
     };
     return await apiWithSnackbar(params);
+  },
+  selfWidthraw: async (data: SelfWithdrawPayload) => {
+    const params = {
+      resource: userResources.SELF_WITHDRAW,
+      data,
+    };
+    return await apiWithSnackbar(params);
+  },
+  selfDeposit: async (data: FormData) => {
+    const params: ApiServiceInterface = {
+      resource: userResources.SELF_DEPOSIT,
+      data,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return await apiWithSnackbar(params);
+  },
+  getPaymentDetail: async () => {
+    const params = {
+      resource: userResources.PAYMENT_DETAILS,
+    };
+    return await apiWithErrorSnackbar(params);
   },
 };
