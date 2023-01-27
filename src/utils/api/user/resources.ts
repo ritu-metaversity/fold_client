@@ -79,4 +79,8 @@ export const userResources: {
     URL: "enduser/self-deposit-app",
     METHOD: "POST",
   },
+  PAYMENT_DETAILS: {
+    URL: "enduser/get-paymnet-detail-app-id-wise",
+    METHOD: "POST",
+  },
 };

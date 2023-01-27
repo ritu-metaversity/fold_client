@@ -176,4 +176,10 @@ export const userServices = {
     };
     return await apiWithSnackbar(params);
   },
+  getPaymentDetail: async () => {
+    const params = {
+      resource: userResources.PAYMENT_DETAILS,
+    };
+    return await apiWithErrorSnackbar(params);
+  },
 };

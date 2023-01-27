@@ -1,3 +1,4 @@
+import { PaymentMethods } from "./PaymentMethods";
 import React, { ChangeEvent, useState } from "react";
 import Card from "./card";
 import { StyledAmountInput, StyledButtonSmall } from "./styledComponents";
@@ -5,25 +6,14 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Button, Typography } from "@mui/material";
 import { colorHex } from "../../utils/constants";
-import {
-  CardContainerContainer,
-  ImageUploadContainer,
-} from "./styledComponents";
+import { ImageUploadContainer } from "./styledComponents";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import BankInfoComponent from "./BankInfoComponent";
-import UPIDetails from "./UPIDetails";
-import QRcodeComponent from "./QRcodeComponent";
+
 import { userServices } from "../../utils/api/user/services";
 
-const paymentArr = ["upi", "bank", "qrcode"];
 const buttonAmountArr = [100, 500, 1000, 5000];
 
 const DepositManually = () => {
-  const [selected, setSelected] = useState("");
-  const handleClick = (id: string) => {
-    setSelected(id);
-  };
-
   const [amount, setAmount] = useState(0);
   const [files, setFiles] = useState<Blob | null>(null);
 
@@ -102,23 +92,13 @@ const DepositManually = () => {
       {amount > 0 && (
         <Box>
           <h2 style={{ color: "white" }}>Pay 10000/-</h2>
-          <Typography my={4}>Pay Manually</Typography>
-          <CardContainerContainer>
-            {paymentArr.map((elem) => (
-              <Card
-                selected={selected === elem}
-                handleClick={() => handleClick(elem)}
-              />
-            ))}
-          </CardContainerContainer>
-          {selected === "bank" && <BankInfoComponent />}
-          {selected === "upi" && <UPIDetails />}
-          {selected === "qrcode" && <QRcodeComponent />}
+          <PaymentMethods />
           <label style={{ width: "100%" }}>
             {files ? (
               <img
                 style={{ maxWidth: "90%", margin: "auto" }}
                 src={URL.createObjectURL(files)}
+                alt="uploaded_img"
               />
             ) : (
               <ImageUploadContainer>
