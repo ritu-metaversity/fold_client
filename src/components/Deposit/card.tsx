@@ -4,13 +4,17 @@ import { CardContainer, CardImg } from "./styledComponents";
 
 interface Props {
   selected?: boolean;
+  details: {
+    logo: string;
+    methodName: string;
+  };
   handleClick?: () => void;
 }
-const Card: FC<Props> = ({ selected, handleClick }) => {
+const Card: FC<Props> = ({ selected, handleClick, details }) => {
   return (
     <CardContainer onClick={handleClick} className={selected ? "selected" : ""}>
-      <CardImg src="assets/images/icon.png" />
-      <Typography textAlign={"center"}>UPI</Typography>
+      <CardImg src={details.logo} />
+      <Typography textAlign={"center"}>{details.methodName}</Typography>
     </CardContainer>
   );
 };
