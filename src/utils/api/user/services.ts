@@ -10,6 +10,14 @@ interface ChangePasswordPayload {
   currentPassword: string;
   confirmPassword?: string;
 }
+interface SelfWithdrawPayload {
+  accountHolderName: string;
+  bankName: string;
+  accountType: string;
+  accountNumber: string;
+  ifsc: string;
+  amount: number;
+}
 interface FirstLoginPayload {
   newPassword: string;
   currentPassword: string;
@@ -145,6 +153,13 @@ export const userServices = {
   changePasswordFirstLogin: async (data: FirstLoginPayload) => {
     const params = {
       resource: userResources.FIRST_LOGIN,
+      data,
+    };
+    return await apiWithSnackbar(params);
+  },
+  selfWidthraw: async (data: SelfWithdrawPayload) => {
+    const params = {
+      resource: userResources.SELF_WITHDRAW,
       data,
     };
     return await apiWithSnackbar(params);

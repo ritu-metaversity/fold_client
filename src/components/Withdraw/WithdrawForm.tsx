@@ -1,13 +1,82 @@
-import { Box, Button, MenuItem, Select, Typography } from "@mui/material";
-import React from "react";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
+import { useFormik } from "formik";
+import React, { useState } from "react";
+import { userServices } from "../../utils/api/user/services";
 import { colorHex } from "../../utils/constants";
 import { LabelText } from "../activityLog/Filter";
+import Loading from "../layout/loading";
 import { WithdrawInput } from "./styledComponent";
-export function WithdrawForm({ }) {
-  
+
+const err = {
+  invalidName:
+    "The Account Name field may only contain alphabetic characters as well as spaces",
+  noName: "The Account Name field is required",
+  noBank: "The Bank Name field is required",
+  noIfsc: "The IFSC field is required",
+  invalidIfsc: "The IFSC field format is invalid",
+  noAccount: "The Account Number field is required",
+  invalidAccount:
+    "The Account Number field may only contain numeric characters",
+  noAmount: "The Amount field is required",
+  invalidAmount: "The Amount field may only contain numeric characters",
+};
+
+export function WithdrawForm({}) {
+  const [loading, setLoading] = useState(false);
+  const { values, handleChange, handleSubmit, errors, resetForm } = useFormik({
+    initialValues: {
+      accountHolderName: "",
+      bankName: "",
+      accountType: "savings",
+      accountNumber: "",
+      ifsc: "",
+      amount: 0,
+    },
+    validate(values) {
+      return {
+        accountHolderName: values.accountHolderName
+          ? values.accountHolderName.match(/^[a-zA-Z ]* $/)
+            ? ""
+            : err.invalidName
+          : err.noName,
+        accountNumber: values.accountNumber
+          ? values.accountNumber.match(/^[0-9 ]*$/)
+            ? ""
+            : err.invalidAccount
+          : err.noAccount,
+        amount: values.amount
+          ? values.amount.toString().match(/^[0-9 ]*$/)
+            ? ""
+            : err.invalidAmount
+          : err.noAmount,
+        bankName: values.accountHolderName ? "" : err.noBank,
+        ifsc: values.ifsc
+          ? values.ifsc.match(/^[A-Z]{4}0[A-Z0-9]{6}$/)
+            ? ""
+            : err.invalidIfsc
+          : err.noIfsc,
+      };
+    },
+    validateOnChange: true,
+    onSubmit: async () => {
+      setLoading(true);
+      const { response } = await userServices.selfWidthraw(values);
+      if (response) {
+        resetForm();
+      }
+      setLoading(false);
+    },
+  });
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Box
           sx={{
             display: "flex",
@@ -17,7 +86,7 @@ export function WithdrawForm({ }) {
             },
             flexWrap: "wrap",
             alignItems: {
-              lg: "flex-end",
+              // lg: "flex-end",
             },
             gap: 1,
             rowGap: 2,
@@ -28,43 +97,93 @@ export function WithdrawForm({ }) {
             <Typography m={1} variant="caption">
               Amount
             </Typography>
-            <WithdrawInput margin="dense" placeholder="Amount" />
+            <WithdrawInput
+              value={values.amount}
+              name="amount"
+              error={Boolean(errors.amount)}
+              helperText={errors.amount}
+              onChange={handleChange}
+              margin="dense"
+              placeholder="Amount"
+            />
           </Box>
           <Box>
             <Typography variant="caption" m={1}>
               Account Number
             </Typography>
-            <WithdrawInput margin="dense" placeholder="Account Number" />
+            <WithdrawInput
+              value={values.accountNumber}
+              name="accountNumber"
+              onChange={handleChange}
+              error={Boolean(errors.accountNumber)}
+              helperText={errors.accountNumber}
+              margin="dense"
+              placeholder="Account Number"
+            />
           </Box>
           <Box>
             <Typography variant="caption" m={1}>
               Account Name
             </Typography>
-            <WithdrawInput margin="dense" placeholder="Account Name" />
+            <WithdrawInput
+              value={values.accountHolderName}
+              name="accountHolderName"
+              onChange={handleChange}
+              error={Boolean(errors.accountHolderName)}
+              helperText={errors.accountHolderName}
+              margin="dense"
+              placeholder="Account Name"
+            />
           </Box>
           <Box>
             <Typography variant="caption" m={1}>
               Bank Name
             </Typography>
-            <WithdrawInput margin="dense" placeholder="Bank Name" />
+            <WithdrawInput
+              value={values.bankName}
+              name="bankName"
+              onChange={handleChange}
+              error={Boolean(errors.bankName)}
+              helperText={errors.bankName}
+              margin="dense"
+              placeholder="Bank Name"
+            />
           </Box>
           <Box>
             <Typography variant="caption" m={1}>
               IFSC
             </Typography>
-            <WithdrawInput margin="dense" placeholder="IFSC Code" />
+            <WithdrawInput
+              value={values.ifsc}
+              name="ifsc"
+              onChange={handleChange}
+              error={Boolean(errors.ifsc)}
+              helperText={errors.ifsc}
+              margin="dense"
+              placeholder="IFSC Code"
+            />
           </Box>
           <Box>
             <Typography variant="caption" m={1}>
               Account Type / Currency
             </Typography>
             <WithdrawInput
-              defaultValue="saving"
+              value={values.accountType}
+              name="accountType"
+              sx={{
+                "& .MuiInputBase-root": {
+                  width: "100%",
+                  borderRadius: 1,
+                  overflow: "hidden",
+                },
+              }}
+              onChange={handleChange}
+              error={Boolean(errors.accountType)}
+              helperText={errors.accountType}
               margin="dense"
               select
-              placeholder="Amount"
             >
-              <MenuItem value="saving" sx={{ fontSize: "0.8rem" }}>
+              <MenuItem value="savings" sx={{ fontSize: "0.8rem" }}>
                 Savings
               </MenuItem>
               <MenuItem value="current">Current</MenuItem>
@@ -73,7 +192,9 @@ export function WithdrawForm({ }) {
           <Box>
             <Button
               color="secondary"
-              // disabled
+              disabled={loading}
+              type="submit"
+              endIcon={loading && <CircularProgress size={"1rem"} />}
               variant="contained"
               sx={{
                 height: 48,

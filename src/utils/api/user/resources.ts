@@ -22,7 +22,7 @@ export const userResources: {
     URL: "enduser/get-user-balance",
     METHOD: "POST",
   },
-  
+
   MAKE_TRANSACTION: {
     URL: "transaction",
     METHOD: "POST",
@@ -69,6 +69,10 @@ export const userResources: {
   },
   FIRST_LOGIN: {
     URL: "user/first-login-cp",
-    METHOD: "POST"
+    METHOD: "POST",
+  },
+  SELF_WITHDRAW: {
+    URL: "enduser/self-withdraw-app",
+    METHOD: "POST",
   },
 };
