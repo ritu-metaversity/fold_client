@@ -18,6 +18,7 @@ const QRcodeComponent = () => {
             Display Name
           </Typography>
           <WithdrawInput
+            fullWidth
             sx={{ width: "100% !important" }}
             placeholder="Display Name"
           />

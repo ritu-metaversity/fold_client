@@ -1,5 +1,7 @@
 import {
   apiHandler,
+  ApiResource,
+  ApiServiceInterface,
   apiWithErrorSnackbar,
   apiWithSnackbar,
 } from "../apiService";
@@ -161,6 +163,16 @@ export const userServices = {
     const params = {
       resource: userResources.SELF_WITHDRAW,
       data,
+    };
+    return await apiWithSnackbar(params);
+  },
+  selfDeposit: async (data: FormData) => {
+    const params: ApiServiceInterface = {
+      resource: userResources.SELF_DEPOSIT,
+      data,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     };
     return await apiWithSnackbar(params);
   },

@@ -75,4 +75,8 @@ export const userResources: {
     URL: "enduser/self-withdraw-app",
     METHOD: "POST",
   },
+  SELF_DEPOSIT: {
+    URL: "enduser/self-deposit-app",
+    METHOD: "POST",
+  },
 };
