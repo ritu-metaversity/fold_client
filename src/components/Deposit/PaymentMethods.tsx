@@ -6,6 +6,7 @@ import UPIDetails from "./UPIDetails";
 import QRcodeComponent from "./QRcodeComponent";
 import { userServices } from "../../utils/api/user/services";
 import Card from "./card";
+import snackBarUtil from "../layout/snackBarUtil";
 
 export interface BankDetailInterface {
   bankName: string;
@@ -43,6 +44,15 @@ export function PaymentMethods() {
       const { response } = await userServices.getPaymentDetail();
       if (response) {
         setPaymentData(response.data);
+        try {
+          if (response?.data?.paymentMethods[0]) {
+            setSelected(response.data.paymentMethods[0]?.methodName);
+          } else {
+            snackBarUtil.error("Sorry no payment Methods Found");
+          }
+        } catch {
+          snackBarUtil.error("Sorry no payment Methods Found");
+        }
       }
     };
     getPaymentData();
@@ -53,7 +63,7 @@ export function PaymentMethods() {
       {" "}
       <Typography my={4}>Pay Manually</Typography>
       <CardContainerContainer>
-        {paymentData?.paymentMethods.map((elem) => (
+        {paymentData?.paymentMethods?.map((elem) => (
           <Card
             selected={selected === elem.methodName}
             details={elem}

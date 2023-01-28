@@ -91,13 +91,15 @@ export const BetSlip: FC<Props> = ({
   };
   console.log(deviceInfo, "hehe");
   const handleSubmit = async () => {
+    if (loading) return;
+    setLoading(true);
     const { response: ipRes } = await utilServices.getIpfy();
     const data = {
       ...betId,
       matchId,
-      userIp: ipRes.ip,
+      userIp: ipRes?.ip,
       deviceInfo: {
-        userIp: ipRes.ip,
+        userIp: ipRes?.ip,
         userAgent: window.navigator.userAgent,
         browser: "Chrome",
         device: "Macintosh",
@@ -108,7 +110,6 @@ export const BetSlip: FC<Props> = ({
         orientation: "landscape",
       },
     };
-    setLoading(true);
 
     const { response } = await eventServices.bet(data);
     setBetId(null);
@@ -263,6 +264,7 @@ export const BetSlip: FC<Props> = ({
       <Button
         color="secondary"
         variant="contained"
+        disabled={loading}
         sx={{ my: 2, color: "text.secondary" }}
         fullWidth
         onClick={handleSubmit}
