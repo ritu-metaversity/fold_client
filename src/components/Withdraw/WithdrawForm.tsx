@@ -11,7 +11,6 @@ import React, { useState } from "react";
 import { userServices } from "../../utils/api/user/services";
 import { colorHex } from "../../utils/constants";
 import { LabelText } from "../activityLog/Filter";
-import Loading from "../layout/loading";
 import { WithdrawInput } from "./styledComponent";
 
 const err = {
@@ -28,7 +27,7 @@ const err = {
   invalidAmount: "The Amount field may only contain numeric characters",
 };
 
-export function WithdrawForm({}) {
+export function WithdrawForm() {
   const [loading, setLoading] = useState(false);
   const { values, handleChange, handleSubmit, errors, resetForm } = useFormik({
     initialValues: {
@@ -42,17 +41,17 @@ export function WithdrawForm({}) {
     validate(values) {
       return {
         accountHolderName: values.accountHolderName
-          ? values.accountHolderName.match(/^[a-zA-Z ]* $/)
+          ? values.accountHolderName.match(/^[a-zA-Z ]*$/)
             ? ""
             : err.invalidName
           : err.noName,
         accountNumber: values.accountNumber
-          ? values.accountNumber.match(/^[0-9 ]*$/)
+          ? values.accountNumber.match(/^[0-9]*$/)
             ? ""
             : err.invalidAccount
           : err.noAccount,
         amount: values.amount
-          ? values.amount.toString().match(/^[0-9 ]*$/)
+          ? values.amount.toString().match(/^[0-9]*$/)
             ? ""
             : err.invalidAmount
           : err.noAmount,
@@ -74,6 +73,7 @@ export function WithdrawForm({}) {
       setLoading(false);
     },
   });
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -86,7 +86,7 @@ export function WithdrawForm({}) {
             },
             flexWrap: "wrap",
             alignItems: {
-              // lg: "flex-end",
+              lg: "flex-end",
             },
             gap: 1,
             rowGap: 2,
@@ -170,22 +170,14 @@ export function WithdrawForm({}) {
             <WithdrawInput
               value={values.accountType}
               name="accountType"
-              sx={{
-                "& .MuiInputBase-root": {
-                  width: "100%",
-                  borderRadius: 1,
-                  overflow: "hidden",
-                },
-              }}
+              sx={{}}
               onChange={handleChange}
               error={Boolean(errors.accountType)}
               helperText={errors.accountType}
               margin="dense"
               select
             >
-              <MenuItem value="savings" sx={{ fontSize: "0.8rem" }}>
-                Savings
-              </MenuItem>
+              <MenuItem value="savings">Savings</MenuItem>
               <MenuItem value="current">Current</MenuItem>
             </WithdrawInput>
           </Box>
@@ -196,9 +188,11 @@ export function WithdrawForm({}) {
               type="submit"
               endIcon={loading && <CircularProgress size={"1rem"} />}
               variant="contained"
+              disableElevation
               sx={{
                 height: 48,
-                my: 1,
+                borderRadius: "8px",
+                my: { xs: 1, lg: 0.65 },
                 color: "white",
                 fontSize: "1.2rem",
                 width: 156,

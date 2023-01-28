@@ -13,7 +13,6 @@ import { Box } from "@mui/system";
 import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { Form } from "react-bootstrap";
 import { colorHex } from "../../utils/constants";
-import { PdfIcon } from "../accountSummary/styledComponents";
 import "../accountSummary/formCheck.css";
 import {
   CategoryTabs,
@@ -206,10 +205,10 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
             Total Bets: 0 Total Amount: 0
           </Grid>
         </Grid>
-        <Box whiteSpace={"nowrap"}>
+        {/* <Box whiteSpace={"nowrap"}>
           <PdfIcon src="/assets/images/pdf.png" />
           <PdfIcon src="/assets/images/xl.png" />
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

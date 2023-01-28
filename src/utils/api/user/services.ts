@@ -1,6 +1,5 @@
 import {
   apiHandler,
-  ApiResource,
   ApiServiceInterface,
   apiWithErrorSnackbar,
   apiWithSnackbar,
