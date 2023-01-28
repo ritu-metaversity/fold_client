@@ -200,15 +200,12 @@ export const BetSlip: FC<Props> = ({
               <IconButton sx={{ bgcolor: "error.main", borderRadius: 0 }}>
                 <SubtractIcon fontSize="small" />
               </IconButton>
-              <Typography px={1}> 2.12 </Typography>
+              <Typography px={1}>{betId.odds} </Typography>
               <IconButton sx={{ bgcolor: "secondary.light", borderRadius: 0 }}>
                 <AddIcon fontSize="small" />
               </IconButton>
             </Box>
           )}
-          {/* <Typography fontSize="0.8rem" fontWeight={700} color="primary.main">
-           71
-          </Typography> */}
         </Box>
       </Box>
       <Box
@@ -243,7 +240,11 @@ export const BetSlip: FC<Props> = ({
               Profit:
             </Typography>
             <Typography textAlign="right" fontSize={"0.9rem"}>
-              {((betId.odds - 1) * betId.stake).toFixed(2)}
+              {betId.isBack
+                ? betId.isFancy
+                  ? (betId.stake * betId.priceValue) / 100
+                  : ((betId.odds - 1) * betId.stake).toFixed(2)
+                : betId.stake}
             </Typography>
           </Box>
         )}

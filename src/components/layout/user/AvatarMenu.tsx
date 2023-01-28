@@ -1,10 +1,22 @@
-import { Button, Divider, Menu, MenuItem, useMediaQuery } from "@mui/material";
+import styled from "@emotion/styled";
+import {
+  Button,
+  Divider,
+  Menu,
+  MenuItem as MuiMenuItem,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
 import { authServices } from "../../../utils/api/auth/services";
 import CustomizedDialogPassword from "./ResetPasswordDailog";
 import CustomizedDialogStack from "./StackDailog";
+
+export const MenuItem = styled(MuiMenuItem)`
+  font-size: 14px;
+  min-height: 42px !important;
+`;
 
 export function AvatarMenu({ anchorEl, open, handleClose }: any) {
   const { setIsSignedIn, isSignedIn, appData, setUser } =
@@ -41,11 +53,11 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         disableScrollLock
         keepMounted
         onClose={handleClose}
-        sx={{
-          width: "100%",
-        }}
+        sx={{}}
         MenuListProps={{
           sx: {
+            fontSize: "0.8rem",
+            width: 170,
             bgcolor: "#17191C",
           },
           // "aria-labelledby": "basic-button",
@@ -54,11 +66,17 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
       >
         {isSignedIn && matches && appData?.selfAllowed && (
           <>
-            <MenuItem disableRipple>
+            <MenuItem disableRipple sx={{ justifyContent: "center" }}>
               <Button
                 variant="contained"
                 color="success"
-                sx={{ mr: 1, color: "white", py: 0.2 }}
+                sx={{
+                  mr: 1,
+                  px: 0.5,
+                  minWidth: "unset",
+                  color: "white",
+                  py: 0.2,
+                }}
                 onClick={() => closeAndNav("/deposit")}
               >
                 Deposit
@@ -67,12 +85,12 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
                 variant="contained"
                 onClick={() => closeAndNav("/withdraw-request")}
                 color="error"
-                sx={{ py: 0.2 }}
+                sx={{ py: 0.2, px: 0.5, minWidth: "unset" }}
               >
-                Withdraw
+                Withdrawal
               </Button>
             </MenuItem>
-            <Divider />
+            <Divider sx={{ borderColor: "gray" }} />
           </>
         )}
         <MenuItem onClick={() => closeAndNav("/profile")}>Profile</MenuItem>
@@ -85,10 +103,9 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         <MenuItem onClick={() => closeAndNav("/report/activity")}>
           Activity Log
         </MenuItem>
-
-        <CustomizedDialogPassword />
         <CustomizedDialogStack />
-        <Divider />
+        <CustomizedDialogPassword />
+        <Divider sx={{ borderColor: "gray" }} />
         <MenuItem onClick={logout}>Log out</MenuItem>
       </Menu>
     </>
