@@ -15,6 +15,12 @@ export const WithdrawInput = styled(TextField)(({ theme }) => ({
   },
   // width: { xs: "100%", lg: 156 },
 
+  "& .MuiInputBase-root": {
+    width: "100%",
+    borderRadius: 8,
+    overflow: "hidden",
+    height: "50px",
+  },
   "& .MuiSelect-select ": {
     fontSize: "0.8rem",
     background: colorHex.bg3,
@@ -22,6 +28,7 @@ export const WithdrawInput = styled(TextField)(({ theme }) => ({
   "& input": {
     fontSize: "0.8rem",
     borderRadius: 8,
+    width: "100%",
     fontWeight: 500,
     background: colorHex.bg3,
   },

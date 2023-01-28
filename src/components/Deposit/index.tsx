@@ -9,6 +9,7 @@ const Deposit = () => {
       <Box
         marginX="auto"
         rowGap={5}
+        position="relative"
         display={"flex"}
         flexDirection="column"
         width={{ xs: "95%" }}

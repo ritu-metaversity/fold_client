@@ -3,8 +3,8 @@ import React from "react";
 import HomeLayout from "../layout/homeLayout";
 import { columns } from "./columns";
 import ActivityTable from "../activityLog/activityLogTable";
-import { AccountContainer } from "../accountSummary/styledComponents";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import { colorHex } from "../../utils/constants";
 
 const Withdraw = () => {
   // const { values, handleChange, handleSubmit, errors } = useFormik({
@@ -18,18 +18,22 @@ const Withdraw = () => {
   // })
   return (
     <HomeLayout>
-      <AccountContainer>
-        <Box sx={{ textAlign: "left", my: 2 }}>
-          <Box mx={2}>
-            {/* <Typography variant="h5" my={2} color="primary.main">
+      <Box
+        sx={{
+          textAlign: "left",
+          py: 2,
+          backgroundColor: colorHex.bg1,
+        }}
+      >
+        <Box mx={2}>
+          {/* <Typography variant="h5" my={2} color="primary.main">
               Normal Withdraw
             </Typography> */}
-            <WithdrawForm />
-          </Box>
-
-          <ActivityTable columns={columns} rows={[]} />
+          <WithdrawForm />
         </Box>
-      </AccountContainer>
+
+        <ActivityTable columns={columns} rows={[]} />
+      </Box>
     </HomeLayout>
   );
 };

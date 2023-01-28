@@ -14,7 +14,6 @@ import {
 import { Box } from "@mui/system";
 import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { colorHex } from "../../utils/constants";
-import { PdfIcon } from "../accountSummary/styledComponents";
 import { CustomizedDatePicker } from "../accountSummary/CustomizedDatePicker";
 import { searchFilters } from ".";
 
@@ -25,23 +24,23 @@ export const LabelText = styled(Typography)(({ theme }) => ({
   marginBlock: 4,
 }));
 
-interface Props { 
+interface Props {
   searchFilters: searchFilters;
   setSearchFilters: Dispatch<SetStateAction<searchFilters>>;
 }
-const Filter = ({searchFilters,setSearchFilters}:Props) => {
+const Filter = ({ searchFilters, setSearchFilters }: Props) => {
   const [toDate, setToDate] = useState(new Date());
   const [type, setType] = useState("login");
-  const [pageSize, setPageSize] = useState< number>(25);
+  const [pageSize, setPageSize] = useState<number>(25);
   const [fromDate, setFromDate] = useState(new Date());
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSearchFilters({...searchFilters,type}) 
-  }
+    setSearchFilters({ ...searchFilters, type });
+  };
   const handlePageSizeChange = (e: SelectChangeEvent<number>) => {
     setPageSize(Number(e.target.value));
-    setSearchFilters({ ...searchFilters, pageSize: Number(e.target.value)});
+    setSearchFilters({ ...searchFilters, pageSize: Number(e.target.value) });
   };
   return (
     <Box p={1} py={{ xs: 1, md: 2, lg: 1 }} px={{ xs: 1, md: 4, lg: 1 }}>
@@ -163,10 +162,10 @@ const Filter = ({searchFilters,setSearchFilters}:Props) => {
           </Select>
           <LabelText>Entries</LabelText>
         </Box>
-        <Box>
+        {/* <Box>
           <PdfIcon src="/assets/images/pdf.png" />
           <PdfIcon src="/assets/images/xl.png" />
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

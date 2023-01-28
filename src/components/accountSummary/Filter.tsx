@@ -14,7 +14,6 @@ import {
 import { Box } from "@mui/system";
 import React, { FC, useState } from "react";
 import { colorHex } from "../../utils/constants";
-import { PdfIcon } from "./styledComponents";
 import { AccountStatementFilter, subtractMonths } from ".";
 
 const LabelText = styled(Typography)(({ theme }) => ({
@@ -96,7 +95,7 @@ const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
             margin="dense"
             size="small"
             value={searchFilters.type + ""}
-            onChange={(e) => 
+            onChange={(e) =>
               setSearchFilters({
                 ...searchFilters,
                 type: Number(e.target.value),
@@ -169,10 +168,10 @@ const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
           </Select>
           <LabelText>Entries</LabelText>
         </Box>
-        <Box>
+        {/* <Box>
           <PdfIcon src="/assets/images/pdf.png" />
           <PdfIcon src="/assets/images/xl.png" />
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );
