@@ -1,0 +1,96 @@
+#soccer_ball, #baseball {
+  /* transition: transform 2s; */
+  /* ease-in-out infinite; */
+  animation: rotateAni 0.8s infinite linear, showAndHide 1.6s  0s infinite linear;
+  transform-origin: 45% 45%;
+}
+#soccer_ball {
+    /* animation: showAndHide 0.8s  1.6s infinite linear; */
+}
+.baseball_strip {
+  /* animation: rotateAni 0.8s infinite linear; */
+}
+#__lottie_element_64{ 
+
+}
+.baseball_strip {
+  /* transform-origin: 45% 45%; */
+
+    transform: scale(300%);
+    translate: 53% 80%;
+
+}
+#dotted_ball {
+    animation: rotateAni 0.8s infinite linear, showAndHide 1.6s  0.8s infinite linear;
+  transform-origin: 45% 45%;
+}
+.loading-ball-container-full{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(36,40,44);
+}
+
+#dotter_ball{
+    /* animation: showAndHide 0.8s  0.8s infinite linear; */
+
+}
+/* #__lottie_element_64{
+    animation: rotateAni 0.8s infinite linear;
+  transform-origin: 45% 45%;
+} */
+
+@keyframes showAndHide {
+    0%{
+        /* opacity: 0; */
+        visibility:none;
+    }
+    0.1% {
+        opacity: 1%
+    }
+    49%{
+        opacity : 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    51%{
+        opacity: 0;
+    }
+    99.9%{
+    opacity: 0;
+}
+    100%{
+        opacity: 1;
+        visibility:visible;
+    }
+}
+
+@keyframes rotateAni {
+  0% {
+    transform: matrix(1, 0, 0, 1, 0, 1) translateY(900px) rotate(0deg);
+  }
+  15% {
+    transform:   translateY(200px) rotate(120deg);
+  }
+  25% {
+    transform: translateY(50px) rotate(170deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(180deg);
+  }
+
+  75% {
+    transform: translateY(50px) rotate(190deg);
+  }
+  85% {
+    transform: translateY(200px) rotate(240deg);
+  }
+
+  100% {
+    transform:
+     translateY(900px) rotate(360deg);
+  }
+}
