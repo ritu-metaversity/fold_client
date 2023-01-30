@@ -2,7 +2,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import { MenuItem , TextField} from "@mui/material";
+import { TextField } from "@mui/material";
 import { colorHex } from "../../../utils/constants";
 import { userServices } from "../../../utils/api/user/services";
 // import { Box } from "@mui/system";
@@ -12,10 +12,11 @@ import { DialogTitleStyledTypo } from "./styledComponents";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { UserContext } from "../../../App";
 import snackBarUtil from "../snackBarUtil";
+import { MenuItem } from "./AvatarMenu";
 
 export default function CustomizedDialogPassword() {
   const [open, setOpen] = React.useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const firstLogin = searchParams.get("first-login");
   const { modal, user, setModal } = React.useContext(UserContext);
   const nav = useNavigate();
@@ -51,8 +52,10 @@ export default function CustomizedDialogPassword() {
         );
         if (response) {
           handleClose();
-          localStorage.clear()
-          if (setModal) { setModal({ login: true }) }
+          localStorage.clear();
+          if (setModal) {
+            setModal({ login: true });
+          }
           snackBarUtil.success("Please login again !! ");
           resetForm();
           nav({ pathname: "", search: "" });
