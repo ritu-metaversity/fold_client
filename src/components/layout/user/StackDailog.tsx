@@ -2,13 +2,13 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import { Grid, MenuItem, TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import { colorHex } from "../../../utils/constants";
 import { userServices } from "../../../utils/api/user/services";
 import { Box } from "@mui/system";
 import { BootstrapDialog, BootstrapDialogTitle } from "../../common/Dailog2";
 import { DialogTitleStyledTypo } from "./styledComponents";
-
+import { MenuItem } from "./AvatarMenu";
 
 
 export default function CustomizedDialogStack() {
