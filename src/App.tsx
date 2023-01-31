@@ -21,7 +21,6 @@ import { sportServices } from "./utils/api/sport/services";
 import { SportInterface } from "./components/layout/Sidebar";
 import "./components/font.css";
 import { authServices } from "./utils/api/auth/services";
-import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 
 interface ModalState {
   login?: boolean;
@@ -90,7 +89,6 @@ function App() {
   setErrorRef = setError;
 
   const getSelfAllowed = async () => {
-    console.log(window.location.host, "host");
     const { response } = await authServices.isSelfAllowed({
       // appUrl: "11hub.atozscore1234.com",
       appUrl: window.location.hostname,

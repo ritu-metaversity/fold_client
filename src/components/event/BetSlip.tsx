@@ -89,7 +89,6 @@ export const BetSlip: FC<Props> = ({
     browser_version: "108.0.0.0",
     orientation: "",
   };
-  console.log(deviceInfo, "hehe");
   const handleSubmit = async () => {
     if (loading) return;
     setLoading(true);
