@@ -30,7 +30,7 @@ const Hero = () => {
       {" "}
       <Carousel
         infiniteLoop
-        autoPlay
+        autoPlay={true}
         interval={3000}
         showArrows={false}
         showThumbs={false}

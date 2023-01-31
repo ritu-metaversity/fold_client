@@ -19,6 +19,12 @@ export function subtractMonths(numOfMonths: number, date = new Date()) {
   return date;
 }
 
+
+export function subtractWeeks(numOfWeek: number, date = new Date()) {
+  date.setDate(date.getDate() - numOfWeek * 7);
+  return date;
+}
+
 export interface AccountStatementFilter extends AccountStatementPayload {
   totalPages: number;
 }

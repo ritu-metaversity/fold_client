@@ -70,7 +70,7 @@ export const UserContext = createContext<UserContextType>({
   setModal: null,
   stakes: defaultStake,
   activeEventList: null,
-  appData: null
+  appData: null,
 });
 
 function App() {
@@ -89,7 +89,6 @@ function App() {
   setErrorRef = setError;
 
   const getSelfAllowed = async () => {
-    console.log(window.location.host, "host");
     const { response } = await authServices.isSelfAllowed({
       // appUrl: "11hub.atozscore1234.com",
       appUrl: window.location.hostname,
@@ -160,6 +159,7 @@ function App() {
           horizontal: "center",
         }}
       >
+        {/* <NewLoading /> */}
         <div className="App">
           <UserContext.Provider
             value={{

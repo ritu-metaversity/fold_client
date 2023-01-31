@@ -6,15 +6,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import PaginationItem from "@mui/material/PaginationItem";
+import Pagination from "@mui/material/Pagination";
+
 import { colorHex } from "../../utils/constants";
-import {
-  Breakpoint,
-  Pagination,
-  PaginationItem,
-  Theme,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Breakpoint, Theme, useMediaQuery, useTheme } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import {

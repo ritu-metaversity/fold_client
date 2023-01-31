@@ -1,4 +1,8 @@
-import { apiWithErrorSnackbar, apiWithSnackbar } from "../apiService";
+import {
+  ApiServiceInterface,
+  apiWithErrorSnackbar,
+  apiWithSnackbar,
+} from "../apiService";
 import { eventResource } from "./resources";
 
 export const eventServices = {
@@ -20,6 +24,16 @@ export const eventServices = {
     const params = {
       resource: eventResource.GET_FANCY_ODDS,
       data: { eventId: marketIds },
+    };
+    return await apiWithErrorSnackbar(params);
+  },
+  newFancy: async (id: string) => {
+    const params: ApiServiceInterface = {
+      resource: {
+        URL: "http://89.39.105.69:9001/fancy/:id",
+        METHOD: "GET",
+      },
+      pathVars: { id: id },
     };
     return await apiWithErrorSnackbar(params);
   },
