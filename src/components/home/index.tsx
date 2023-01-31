@@ -9,13 +9,9 @@ import Hero, { BannerInterface } from "./Hero";
 import Sports from "./Sports";
 import { userServices } from "../../utils/api/user/services";
 import { useEffect, useState } from "react";
-// import { sportsTabList } from "./sportsTabList";
 
 export const homeRightMenu = (
   <>
-    {/* <BoxWithTitle title="New Launched">
-      <BlinkImage src="/assets/lc/ab3.jpg" alt="" />
-    </BoxWithTitle> */}
     <BoxWithTitle title="Our Casino">
       <BlinkImage src="/assets/lc/ab3.jpg" alt="" />
       <BlinkImage src="/assets/lc/abj.jpg" alt="" />
@@ -39,29 +35,24 @@ const Home = () => {
       setSideBanner([]);
     }
   };
+
   useEffect(() => {
     getBannerList();
 
     return () => {};
   }, []);
+
   const homeRightMenu = (
-    <>
-      {/* <BoxWithTitle title="New Launched">
-      <BlinkImage src="/assets/lc/ab3.jpg" alt="" />
-    </BoxWithTitle> */}
-      <BoxWithTitle title="Our Casino">
-        {sideBanner.map((banner) => (
-          <BlinkImage key={banner.name} src={banner.path} alt={banner.name} />
-        ))}
-      </BoxWithTitle>
-    </>
+    <BoxWithTitle title="Our Casino">
+      {sideBanner.map((banner) => (
+        <BlinkImage key={banner.name} src={banner.path} alt={banner.name} />
+      ))}
+    </BoxWithTitle>
   );
   return (
     <HomeLayout sideWidth={250} sideWidthXl={300} rightMenu={homeRightMenu}>
       <Hero />
-
       <ButtonTabs />
-
       <Sports />
     </HomeLayout>
   );

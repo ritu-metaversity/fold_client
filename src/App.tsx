@@ -21,6 +21,7 @@ import { sportServices } from "./utils/api/sport/services";
 import { SportInterface } from "./components/layout/Sidebar";
 import "./components/font.css";
 import { authServices } from "./utils/api/auth/services";
+import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 
 interface ModalState {
   login?: boolean;
@@ -70,7 +71,7 @@ export const UserContext = createContext<UserContextType>({
   setModal: null,
   stakes: defaultStake,
   activeEventList: null,
-  appData: null
+  appData: null,
 });
 
 function App() {
@@ -160,6 +161,7 @@ function App() {
           horizontal: "center",
         }}
       >
+        {/* <NewLoading /> */}
         <div className="App">
           <UserContext.Provider
             value={{
