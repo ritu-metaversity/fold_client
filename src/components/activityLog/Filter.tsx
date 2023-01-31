@@ -16,6 +16,7 @@ import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { colorHex } from "../../utils/constants";
 import { CustomizedDatePicker } from "../accountSummary/CustomizedDatePicker";
 import { searchFilters } from ".";
+import { subtractWeeks } from "../accountSummary";
 
 export const LabelText = styled(Typography)(({ theme }) => ({
   color: "text.secondary",
@@ -32,7 +33,7 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
   const [toDate, setToDate] = useState(new Date());
   const [type, setType] = useState("login");
   const [pageSize, setPageSize] = useState<number>(25);
-  const [fromDate, setFromDate] = useState(new Date());
+  const [fromDate, setFromDate] = useState(subtractWeeks(1));
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -87,11 +88,21 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
         <Grid container rowGap={1}>
           <Grid item xs={6} lg={1.5} textAlign="left" pr={1}>
             <LabelText>From</LabelText>
-            <CustomizedDatePicker value={fromDate} onChange={setFromDate} />
+            <CustomizedDatePicker
+              minDate={new Date(Date.now() - 5184000000)}
+              maxDate={new Date(Date.now() + 24 * 60 * 60 * 1000)}
+              value={fromDate}
+              onChange={setFromDate}
+            />
           </Grid>
           <Grid item xs={6} pr={{ lg: 2 }} lg={1.5} textAlign="left">
             <LabelText>To</LabelText>
-            <CustomizedDatePicker value={toDate} onChange={setToDate} />
+            <CustomizedDatePicker
+              minDate={new Date(Date.now() - 5184000000)}
+              maxDate={new Date(Date.now() + 24 * 60 * 60 * 1000)}
+              value={toDate}
+              onChange={setToDate}
+            />
           </Grid>
           <Grid item xs={12} pr={{ lg: 2 }} lg={2}>
             <LabelText>Type</LabelText>

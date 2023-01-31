@@ -66,7 +66,7 @@ const Event = () => {
 
   const getFancyOdds = async () => {
     if (matchId) {
-      const { response } = await eventServices.fancyOdds(matchId);
+      const { response } = await eventServices.newFancy(matchId);
 
       //showing only part of the data currently
       Object.keys(response).forEach((element) => {

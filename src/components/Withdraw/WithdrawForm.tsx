@@ -86,7 +86,7 @@ export function WithdrawForm() {
             },
             flexWrap: "wrap",
             alignItems: {
-              lg: "flex-end",
+              // lg: "baseline",
             },
             gap: 1,
             rowGap: 2,
@@ -192,7 +192,8 @@ export function WithdrawForm() {
               sx={{
                 height: 48,
                 borderRadius: "8px",
-                my: { xs: 1, lg: 0.65 },
+                mt: "32px",
+                // mb: { xs: 1, lg: 0.65 },
                 color: "white",
                 fontSize: "1.2rem",
                 width: 156,
