@@ -4,10 +4,16 @@ export const HeroImageContainer = styled.div`
   width: 100%;
   aspect-ratio: 4.27753303965;
   overflow: hidden;
+  display: flex;
 `;
 
 export const HeroImage = styled.img`
   width: 100%;
+  height: 100%;
+`;
+
+export const HeroImageHalf = styled.img`
+  width: 50% !important;
   height: 100%;
 `;
 

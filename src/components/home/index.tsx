@@ -9,24 +9,12 @@ import Hero, { BannerInterface } from "./Hero";
 import Sports from "./Sports";
 import { userServices } from "../../utils/api/user/services";
 import { useEffect, useState } from "react";
+import TopCasinoHero from "./TopCasinoHero";
+import { useMediaQuery } from "@mui/material";
 
-export const homeRightMenu = (
-  <>
-    <BoxWithTitle title="Our Casino">
-      <BlinkImage src="/assets/lc/ab3.jpg" alt="" />
-      <BlinkImage src="/assets/lc/abj.jpg" alt="" />
-      <BlinkImage src="/assets/lc/card32.jpg" alt="" />
-      <BlinkImage src="/assets/lc/dt6.jpg" alt="" />
-      <BlinkImage src="/assets/lc/dt20.jpg" alt="" />
-      <BlinkImage src="/assets/lc/dt202.jpg" alt="" />
-      <BlinkImage src="/assets/lc/dum10.jpg" alt="" />
-      <BlinkImage src="/assets/lc/kbc.jpg" alt="" />
-    </BoxWithTitle>
-  </>
-);
 const Home = () => {
   const [sideBanner, setSideBanner] = useState<BannerInterface[]>([]);
-
+  const matches = useMediaQuery("(max-width: ");
   const getBannerList = async () => {
     const { response } = await userServices.bannerList(2);
     if (response?.data?.length) {
@@ -49,9 +37,11 @@ const Home = () => {
       ))}
     </BoxWithTitle>
   );
+
   return (
     <HomeLayout sideWidth={250} sideWidthXl={300} rightMenu={homeRightMenu}>
       <Hero />
+      <TopCasinoHero sideBanner={sideBanner} />
       <ButtonTabs />
       <Sports />
     </HomeLayout>
