@@ -12,6 +12,7 @@ export const utilResources: {
     METHOD: "POST",
   },
   GET_IP_ADDRESS: {
-    URL: "http://api.ipify.org?format=json",
+    URL: "https://api.ipify.org/?format=json",
+    METHOD: "GET",
   },
 };
