@@ -27,52 +27,66 @@ const err = {
   invalidAmount: "The Amount field may only contain numeric characters",
 };
 
-export function WithdrawForm() {
+export function WithdrawForm({
+  getWithdrawList,
+}: {
+  getWithdrawList: () => Promise<void>;
+}) {
   const [loading, setLoading] = useState(false);
-  const { values, handleChange, handleSubmit, errors, resetForm } = useFormik({
-    initialValues: {
-      accountHolderName: "",
-      bankName: "",
-      accountType: "savings",
-      accountNumber: "",
-      ifsc: "",
-      amount: 0,
-    },
-    validate(values) {
-      return {
-        accountHolderName: values.accountHolderName
-          ? values.accountHolderName.match(/^[a-zA-Z ]*$/)
-            ? ""
-            : err.invalidName
-          : err.noName,
-        accountNumber: values.accountNumber
-          ? values.accountNumber.match(/^[0-9]*$/)
-            ? ""
-            : err.invalidAccount
-          : err.noAccount,
-        amount: values.amount
-          ? values.amount.toString().match(/^[0-9]*$/)
-            ? ""
-            : err.invalidAmount
-          : err.noAmount,
-        bankName: values.accountHolderName ? "" : err.noBank,
-        ifsc: values.ifsc
-          ? values.ifsc.match(/^[A-Z]{4}0[A-Z0-9]{6}$/)
-            ? ""
-            : err.invalidIfsc
-          : err.noIfsc,
-      };
-    },
-    validateOnChange: true,
-    onSubmit: async () => {
-      setLoading(true);
-      const { response } = await userServices.selfWidthraw(values);
-      if (response) {
-        resetForm();
-      }
-      setLoading(false);
-    },
-  });
+  const { values, isValid, handleChange, handleSubmit, errors, resetForm } =
+    useFormik({
+      initialValues: {
+        accountHolderName: "",
+        bankName: "",
+        accountType: "savings",
+        accountNumber: "",
+        ifsc: "",
+        amount: 0,
+      },
+      validate: (values) => {
+        const newError = {
+          accountHolderName: values.accountHolderName
+            ? values.accountHolderName.match(/^[a-zA-Z ]*$/)
+              ? undefined
+              : err.invalidName
+            : err.noName,
+          accountNumber: values.accountNumber
+            ? values.accountNumber.match(/^[0-9]*$/)
+              ? undefined
+              : err.invalidAccount
+            : err.noAccount,
+          amount: values.amount
+            ? values.amount.toString().match(/^[0-9]*$/)
+              ? undefined
+              : err.invalidAmount
+            : err.noAmount,
+          bankName: values.bankName ? undefined : err.noBank,
+          ifsc: values.ifsc
+            ? values.ifsc.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/)
+              ? undefined
+              : err.invalidIfsc
+            : err.noIfsc,
+        };
+
+        return Object.fromEntries(
+          Object.entries(newError).filter(([_, v]) => v != null)
+        );
+      },
+      validateOnChange: true,
+
+      onSubmit: async (values) => {
+        console.log(errors, isValid, "form");
+        setLoading(true);
+        console.log("called api");
+        const { response } = await userServices.selfWithdraw(values);
+        if (response) {
+          resetForm();
+          getWithdrawList();
+        }
+        setLoading(false);
+      },
+    });
+  console.log(errors, isValid, "form");
 
   return (
     <>
@@ -192,7 +206,7 @@ export function WithdrawForm() {
               sx={{
                 height: 48,
                 borderRadius: "8px",
-                mt: "32px",
+                mt: "2rem",
                 // mb: { xs: 1, lg: 0.65 },
                 color: "white",
                 fontSize: "1.2rem",
