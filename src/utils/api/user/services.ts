@@ -158,11 +158,12 @@ export const userServices = {
     };
     return await apiWithSnackbar(params);
   },
-  selfWidthraw: async (data: SelfWithdrawPayload) => {
+  selfWithdraw: async (data: SelfWithdrawPayload) => {
     const params = {
       resource: userResources.SELF_WITHDRAW,
       data,
     };
+    console.log(params, "pra");
     return await apiWithSnackbar(params);
   },
   selfDeposit: async (data: FormData) => {
@@ -178,6 +179,18 @@ export const userServices = {
   getPaymentDetail: async () => {
     const params = {
       resource: userResources.PAYMENT_DETAILS,
+    };
+    return await apiWithErrorSnackbar(params);
+  },
+  getWithdrawList: async () => {
+    const params = {
+      resource: userResources.WITHDRAW_LIST,
+    };
+    return await apiWithErrorSnackbar(params);
+  },
+  getDepositList: async () => {
+    const params = {
+      resource: userResources.DEPOSIT_LIST,
     };
     return await apiWithErrorSnackbar(params);
   },

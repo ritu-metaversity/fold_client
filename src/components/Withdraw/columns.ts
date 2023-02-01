@@ -1,46 +1,55 @@
 import { ColumnsInterface } from "../accountSummary/StyledTableHeaderCell";
 
-export type columnIds = "username" | "date" | "ip" | "detail"|"IFSC"|"cur";
+export type columnIds =
+  | "accountNumber"
+  | "accountHolderName"
+  | "amount"
+  | "bankName"
+  | "ifsc"
+  | "time"
+  | "accountType"
+  | "remark"
+  | "status";
 
 export const columns: ColumnsInterface<columnIds>[] = [
   {
-    id: "username",
+    id: "accountNumber",
     label: "Account Number",
   },
   {
-    id: "date",
+    id: "accountHolderName",
     label: "Account Name",
   },
 
   {
-    id: "ip",
+    id: "amount",
     label: "Amount",
     align: "right",
   },
 
   {
-    id: "detail",
+    id: "bankName",
     label: "Bank Name / Address",
     minWidth: 70,
   },
   {
-    id: "IFSC",
+    id: "ifsc",
     label: "IFSC Code",
   },
   {
-    id: "cur",
+    id: "accountType",
     label: "Account Type / Currency",
   },
   {
-    id: "IFSC",
+    id: "time",
     label: "Date",
   },
   {
-    id: "IFSC",
+    id: "remark",
     label: "Remark",
   },
   {
-    id: "IFSC",
+    id: "status",
     label: "Status",
   },
 ];
