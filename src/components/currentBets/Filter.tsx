@@ -28,10 +28,17 @@ const LabelText = styled(Typography)(({ theme }) => ({
 }));
 
 interface Props {
+  totalBet: number;
+  totalStake: number;
   searchFilters: SearchFiltersCurrentBets;
   setSearchFilters: Dispatch<SetStateAction<SearchFiltersCurrentBets>>;
 }
-const Filter = ({ searchFilters, setSearchFilters }: Props) => {
+const Filter = ({
+  searchFilters,
+  setSearchFilters,
+  totalBet,
+  totalStake,
+}: Props) => {
   const [pageSize, setPageSize] = useState<number>(25);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -202,7 +209,7 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
             />
           </Grid>
           <Grid item textAlign={"left"} xs={12} md={4} fontSize={"0.8rem"}>
-            Total Bets: 0 Total Amount: 0
+            Total Bets: {totalBet} Total Amount: {totalStake}
           </Grid>
         </Grid>
         {/* <Box whiteSpace={"nowrap"}>

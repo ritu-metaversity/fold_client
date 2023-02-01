@@ -19,6 +19,8 @@ const betTypes = ["none", "all", "back", "lay"];
 const CurrentBets = () => {
   const matches = useMediaQuery("(min-width:1280px)");
   const [sportsRow, setSportsRow] = useState([]);
+  const [totalBet, setTotalBet] = useState(0);
+  const [totalStake, setTotalStake] = useState(0);
   const [searchFilters, setSearchFilters] = useState<SearchFiltersCurrentBets>({
     type: "all",
     category: "sports",
@@ -35,13 +37,15 @@ const CurrentBets = () => {
       sportType: 1,
     };
     const { response } = await userServices.currentBets(payload);
-    if (response?.data?.dataList) {
+    if (response?.data) {
       setSportsRow(
-        response.data.dataList.map((row: any) => {
+        response.data.dataList?.map((row: any) => {
           row.action = <Form.Check type="checkbox" />;
           return row;
-        })
+        }) || []
       );
+      setTotalBet(response.data.totalBets);
+      setTotalStake(response.data.totalStake);
       setSearchFilters({
         ...searchFilters,
         totalPages: response.data.totalPages,
@@ -50,7 +54,7 @@ const CurrentBets = () => {
   };
   useEffect(() => {
     getList();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchFilters.type, searchFilters.pageSize, searchFilters.index]);
 
   return (
@@ -61,6 +65,8 @@ const CurrentBets = () => {
         <Box minHeight="calc(100vh - 60px)">
           <Filter
             searchFilters={searchFilters}
+            totalBet={totalBet}
+            totalStake={totalStake}
             setSearchFilters={setSearchFilters}
           ></Filter>
           {/* <Box sx={{ display: { xs: "none", lg: "block" } }}> */}
@@ -76,9 +82,9 @@ const CurrentBets = () => {
             count={searchFilters.totalPages}
             siblingCount={0}
             color="secondary"
-            page={searchFilters.index+1}
+            page={searchFilters.index + 1}
             onChange={(e, page) =>
-              setSearchFilters({ ...searchFilters, index: page-1 })
+              setSearchFilters({ ...searchFilters, index: page - 1 })
             }
             renderItem={(item) => (
               <PaginationItem

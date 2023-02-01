@@ -19,6 +19,7 @@ export const utilServices = {
   getIpfy: async () => {
     const params = {
       resource: utilResources.GET_IP_ADDRESS,
+      noAuth: true,
     };
     return await apiHandler(params);
   },

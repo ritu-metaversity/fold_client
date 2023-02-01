@@ -1,6 +1,6 @@
 import { AmountForm } from "./AmountForm";
 import { PaymentMethods } from "./PaymentMethods";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { ImageUploadContainer } from "./styledComponents";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -8,7 +8,10 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { userServices } from "../../utils/api/user/services";
 import Loading from "../layout/loading";
 
-const DepositManually = () => {
+interface Props {
+  getDepositList: () => Promise<void>;
+}
+const DepositManually: FC<Props> = ({ getDepositList }) => {
   const [amount, setAmount] = useState(0);
   const [files, setFiles] = useState<Blob | null>(null);
   const [loading, setLoading] = useState(false);
@@ -23,6 +26,7 @@ const DepositManually = () => {
     if (response) {
       setAmount(0);
       setFiles(null);
+      getDepositList();
     }
     setLoading(false);
   };

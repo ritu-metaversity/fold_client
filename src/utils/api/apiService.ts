@@ -68,8 +68,9 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
       params: filterQuery(params),
       headers: {
         ...headers,
-        "Content-Encoding": "gzip",
-        ...(token && !noAuth ? { Authorization: `Bearer ${token}` } : {}),
+        ...(Boolean(token && !noAuth)
+          ? { Authorization: `Bearer ${token}` }
+          : {}),
       },
     };
   } catch (errors: any) {

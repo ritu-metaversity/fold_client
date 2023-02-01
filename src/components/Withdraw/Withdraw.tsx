@@ -1,10 +1,11 @@
 import { WithdrawForm } from "./WithdrawForm";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeLayout from "../layout/homeLayout";
 import { columns } from "./columns";
 import ActivityTable from "../activityLog/activityLogTable";
 import { Box } from "@mui/material";
 import { colorHex } from "../../utils/constants";
+import { userServices } from "../../utils/api/user/services";
 
 const Withdraw = () => {
   // const { values, handleChange, handleSubmit, errors } = useFormik({
@@ -16,6 +17,23 @@ const Withdraw = () => {
   //     },
 
   // })
+  const [withdrawList, setWithdrawList] = useState([]);
+
+  const getWithdrawList = async () => {
+    const { response } = await userServices.getWithdrawList();
+    console.log(response, "withdraw data");
+    if (response.data) {
+      setWithdrawList(response.data);
+    }
+  };
+  useEffect(() => {
+    getWithdrawList();
+
+    return () => {
+      setWithdrawList([]);
+    };
+  }, []);
+
   return (
     <HomeLayout>
       <Box
@@ -26,13 +44,10 @@ const Withdraw = () => {
         }}
       >
         <Box mx={2}>
-          {/* <Typography variant="h5" my={2} color="primary.main">
-              Normal Withdraw
-            </Typography> */}
-          <WithdrawForm />
+          <WithdrawForm getWithdrawList={getWithdrawList} />
         </Box>
 
-        <ActivityTable columns={columns} rows={[]} />
+        <ActivityTable columns={columns} rows={withdrawList || []} />
       </Box>
     </HomeLayout>
   );
