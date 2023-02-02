@@ -33,6 +33,7 @@ export const eventServices = {
         URL: "http://89.39.105.69:9001/fancy/:id",
         METHOD: "GET",
       },
+      noAuth: true,
       pathVars: { id: id },
     };
     return await apiWithErrorSnackbar(params);
