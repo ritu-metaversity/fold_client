@@ -167,7 +167,7 @@ const Odds = ({
                   ? "odds-down"
                   : ""
               }
-              onClick={() => handleClick(back.price)}
+              onClick={() => index === 0 && handleClick(back.price)}
               bgcolor={colorHex.backArr[index]}
             >
               <ValuesComponent {...back} />
@@ -186,7 +186,7 @@ const Odds = ({
                 : ""
             }
             bgcolor={colorHex.layArr[index]}
-            onClick={() => handleClick2(lay.price)}
+            onClick={() => index === 0 && handleClick2(lay.price)}
           >
             <ValuesComponent {...lay} />
           </Grid>
