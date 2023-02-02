@@ -109,7 +109,7 @@ const Filter = ({
             >
               Sports
             </CategoryTabs>
-            <CategoryTabs
+            {/* <CategoryTabs
               onClick={() =>
                 setSearchFilters({ ...searchFilters, category: "casino" })
               }
@@ -120,7 +120,7 @@ const Filter = ({
               }
             >
               Casino
-            </CategoryTabs>
+            </CategoryTabs> */}
           </CurrentBetCategoryTabsContainer>
         </Grid>
         <Box
@@ -209,7 +209,14 @@ const Filter = ({
             />
           </Grid>
           <Grid item textAlign={"left"} xs={12} md={4} fontSize={"0.8rem"}>
-            Total Bets: {totalBet} Total Amount: {totalStake}
+            Total Bets:
+            <span style={{ color: "green", paddingInline: "4px" }}>
+              {totalBet}
+            </span>
+            {"  "}Total Amount:
+            <span style={{ color: "green", paddingInline: "4px" }}>
+              {totalStake}
+            </span>
           </Grid>
         </Grid>
         {/* <Box whiteSpace={"nowrap"}>

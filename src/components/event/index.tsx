@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { OddsNumberTitle } from './OddsNumberTitle';
-import { OddsNumberTitleTwo } from './OddsNumberTitleTwo';
+import { OddsNumberTitle } from "./OddsNumberTitle";
+import { OddsNumberTitleTwo } from "./OddsNumberTitleTwo";
 import Odds from "./odds";
 import { Box } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import CustomizedAccordions from "./CustomizedAccordian";
 import { Grid, Typography, useMediaQuery } from "@mui/material";
 import OddsOnlyTwo from "./oddsOnlyTwo";
@@ -22,9 +22,15 @@ import { GameHeader } from "./styledComponents";
 import Bookmaker from "./bookmaker";
 import { sportsTabList } from "../home/sportsTabList";
 import PnlModal from "./pnlModal";
-import { BetDetailsInterface, BetsInterface, FancyOddsInterface, FancyPnl, Pnl, ProfitInterface } from './types';
-import { createProfits, transformMatchOdds } from './eventUtils';
-
+import {
+  BetDetailsInterface,
+  BetsInterface,
+  FancyOddsInterface,
+  FancyPnl,
+  Pnl,
+  ProfitObjectInterface,
+} from "./types";
+import { createProfits, transformMatchOdds } from "./eventUtils";
 
 const Event = () => {
   const [bets, setBets] = useState<BetsInterface | null>(null);
@@ -44,11 +50,11 @@ const Event = () => {
   const [fancyPnl, setFancyPnl] = useState<FancyPnl[] | null>(null);
   const [prevFancyOdds, setPrevFancyOdds] = useState<any>();
   const [selectedPnlMarketId, setSelectedPnlMarketId] = useState("");
-  const [profits, setProfits] = useState<{
-    Odds: ProfitInterface[];
-    Bookmaker: ProfitInterface[];
-    Fancy: ProfitInterface[];
-  }>({ Odds: [], Bookmaker: [], Fancy: [] });
+  const [profits, setProfits] = useState<ProfitObjectInterface>({
+    Odds: {},
+    Bookmaker: [],
+    Fancy: [],
+  });
   const nav = useNavigate();
 
   const getBets = async () => {
@@ -150,6 +156,15 @@ const Event = () => {
     });
   }, [betDetails?.stake, pnl, fancyPnl, fancyOdds?.Odds?.marketId]);
 
+  const currentMatch: { date: string; matchName: string; matchId: string } =
+    useMemo(
+      () =>
+        activeEventList
+          ?.reduce((acc: any[], current) => [...acc, ...current.matchList], [])
+          ?.find((item: any) => item.matchId == matchId),
+      [activeEventList]
+    );
+
   if (!matchId) return <></>;
   if (!fancyOdds)
     return (
@@ -157,6 +172,7 @@ const Event = () => {
         <Loading />
       </Box>
     );
+
   const betSlip = (
     <BetSlip
       getBets={getBets}
@@ -207,14 +223,8 @@ const Event = () => {
             )?.color
           }
         >
-          {
-            activeEventList
-              ?.reduce(
-                (acc: any[], current) => [...acc, ...current.matchList],
-                []
-              )
-              ?.find((item: any) => item.matchId == matchId)?.matchName
-          }
+          <span>{currentMatch?.matchName}</span>
+          <span>{currentMatch?.date}</span>
         </GameHeader>
         {bets && <MybetMobile bets={bets}></MybetMobile>}
         <CustomizedDialog2
@@ -223,51 +233,69 @@ const Event = () => {
           handleClose={() => setBetDetails(null)}
         >
           {betSlip}
-          {betDetails?.marketName === "Match Odds"
-            ? profits.Odds?.map((profit) => <BetResult {...profit} />)
-            : betDetails?.marketName === "Bookmaker" &&
-              profits.Bookmaker?.filter(
+          {betDetails?.marketName === "Bookmaker"
+            ? profits.Bookmaker?.filter(
                 (item) => item?.mid === betDetails?.marketId
-              ).map((profit) => <BetResult {...profit} />)}
+              ).map((profit) => <BetResult {...profit} />)
+            : betDetails?.marketName &&
+              profits.Odds[betDetails?.marketName]?.map((profit) => (
+                <BetResult {...profit} />
+              ))}
         </CustomizedDialog2>
 
-        {fancyOdds.Odds ? (
-          <CustomizedAccordions
-            title={
-              <Box flex={1} display="flex" justifyContent={"space-between"}>
-                <Typography fontSize="0.85rem" lineHeight={1} fontWeight={500}>
-                  MATCH_ODDS
-                </Typography>
-                <Typography fontSize="0.85rem" lineHeight={1} fontWeight={700}>
-                  Max: 10k
-                </Typography>
-              </Box>
-            }
-          >
-            <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
-              <OddsNumberTitle />
-              {fancyOdds.Odds?.runners.map((selection: any, index: string) => (
-                <Odds
-                  details={fancyOdds.Odds}
-                  suspended={fancyOdds.Odds?.status !== "OPEN"}
-                  prevValues={prevFancyOdds.Odds?.runners[index]}
-                  values={selection}
-                  profits={profits.Odds?.find(
-                    (profit) => profit.sid == selection.selectionId
-                  )}
-                  setBetId={setBetDetails}
-                  title={
-                    <Typography fontSize={"0.85rem"}>
-                      {selection.name}
+        {fancyOdds.Odds?.map(
+          (singleOdd: any, index1: any) =>
+            Boolean(prevFancyOdds?.Odds[index1]) && (
+              <CustomizedAccordions
+                title={
+                  <Box flex={1} display="flex" justifyContent={"space-between"}>
+                    <Typography
+                      fontSize="0.85rem"
+                      lineHeight={1}
+                      fontWeight={500}
+                    >
+                      {singleOdd.Name}
                     </Typography>
-                  }
-                  marketName={"Match Odds"}
-                />
-              ))}
-            </Box>
-          </CustomizedAccordions>
-        ) : (
-          ""
+                    <Typography
+                      fontSize="0.85rem"
+                      lineHeight={1}
+                      fontWeight={700}
+                    >
+                      Max: 10k
+                    </Typography>
+                  </Box>
+                }
+              >
+                <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
+                  <OddsNumberTitle />
+                  {singleOdd?.runners.map((selection: any, index: string) => (
+                    <Odds
+                      details={singleOdd}
+                      suspended={singleOdd?.status !== "OPEN"}
+                      prevValues={prevFancyOdds.Odds[index1]?.runners[index]}
+                      values={selection}
+                      profits={profits.Odds[singleOdd?.marketId]?.find(
+                        (profit) => {
+                          console.log(
+                            profit.sid,
+                            selection.selectionId,
+                            "profit"
+                          );
+                          return profit.sid == selection.selectionId;
+                        }
+                      )}
+                      setBetId={setBetDetails}
+                      title={
+                        <Typography fontSize={"0.85rem"}>
+                          {selection.name}
+                        </Typography>
+                      }
+                      marketName={singleOdd.Name}
+                    />
+                  ))}
+                </Box>
+              </CustomizedAccordions>
+            )
         )}
 
         {fancyOdds["Bookmaker"] && (
@@ -376,6 +404,9 @@ const Event = () => {
                           )}
                           setBetId={setBetDetails}
                           title={fancyMarket}
+                          showPrice={
+                            !["Fancy3", "OddEven"].includes(fancyMarket)
+                          }
                         />
                       );
                     }

@@ -13,5 +13,5 @@ export const Title = styled(Typography)({
 
 export const BoxWithTitleBox = styled(Box)({
   backgroundColor: "#17191C",
-  padding: 5
+  padding: 5,
 });
