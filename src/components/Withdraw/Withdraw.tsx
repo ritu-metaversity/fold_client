@@ -6,6 +6,7 @@ import ActivityTable from "../activityLog/activityLogTable";
 import { Box } from "@mui/material";
 import { colorHex } from "../../utils/constants";
 import { userServices } from "../../utils/api/user/services";
+import { StatusTypography } from "../Deposit";
 
 const Withdraw = () => {
   // const { values, handleChange, handleSubmit, errors } = useFormik({
@@ -47,7 +48,15 @@ const Withdraw = () => {
           <WithdrawForm getWithdrawList={getWithdrawList} />
         </Box>
 
-        <ActivityTable columns={columns} rows={withdrawList || []} />
+        <ActivityTable
+          columns={columns}
+          rows={
+            withdrawList.map((item: any) => {
+              item.status = <StatusTypography status={item.status} />;
+              return item;
+            }) || []
+          }
+        />
       </Box>
     </HomeLayout>
   );

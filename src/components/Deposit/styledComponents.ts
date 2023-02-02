@@ -16,7 +16,8 @@ export const StyledButtonSmall = styled(Button)(({ theme }) => ({
 }));
 
 export const CardImg = emotionStyled.img`
-  width: 70%;
+  width: 50%;
+
   aspect-ratio: 1/1;
 `;
 
@@ -25,7 +26,11 @@ export const CardContainerContainer = styled(Box)(({ theme }) => ({
   "& .selected": {
     borderColor: theme.palette.primary.main,
   },
+
   width: "max-content",
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+  },
   maxWidth: "100%",
   flexWrap: "wrap",
   padding: "0.5em",
@@ -75,7 +80,11 @@ export const PaymentDetailContainer = emotionStyled.div`
   border: 1px solid gray;
   background: ${colorHex.bg2};
   margin-block: 16px;
+
   padding: 16px;
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
 `;
 
 export const SpacedBetween = emotionStyled.div`
