@@ -75,7 +75,11 @@ export const PaymentDetailContainer = emotionStyled.div`
   border: 1px solid gray;
   background: ${colorHex.bg2};
   margin-block: 16px;
+
   padding: 16px;
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
 `;
 
 export const SpacedBetween = emotionStyled.div`

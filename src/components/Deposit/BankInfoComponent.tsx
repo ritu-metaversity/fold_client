@@ -14,7 +14,12 @@ export const CopyComp = ({ str }: { str: string }) => {
     snackBarUtil.success("Copied to your clipboard !!!");
   };
 
-  return <CopyAll sx={{ cursor: "pointer" }} onClick={() => copy()} />;
+  return (
+    <CopyAll
+      sx={{ cursor: "pointer", fontSize: { xs: "0.9rem", md: "initial" } }}
+      onClick={() => copy()}
+    />
+  );
 };
 const BankInfoComponent: FC<Props> = ({ bankDetails }) => {
   if (!bankDetails) return <></>;
