@@ -1,18 +1,22 @@
+export interface ProfitObjectInterface {
+  Odds: { [x: string]: ProfitInterface[] };
+  Bookmaker: ProfitInterface[];
+  Fancy: ProfitInterface[];
+}
+
 export interface CreateProfitProps {
   fancyOdds: any;
-  pnl: Pnl[]| null;
+  pnl: Pnl[] | null;
   betDetails: BetDetailsInterface | null;
   fancyPnl: FancyPnl[] | null;
-  profits: {
-     Odds: ProfitInterface[];
-    Bookmaker: ProfitInterface[];
-    Fancy: ProfitInterface[];
-  };
-  setProfits: Dispatch<SetStateAction<{
-    Odds: ProfitInterface[];
-    Bookmaker: ProfitInterface[];
-    Fancy: ProfitInterface[];
-  }>>;
+  profits: ProfitObjectInterface;
+  setProfits: Dispatch<
+    SetStateAction<{
+      Odds: ProfitInterface[];
+      Bookmaker: ProfitInterface[];
+      Fancy: ProfitInterface[];
+    }>
+  >;
 }
 
 interface BetsInterface {

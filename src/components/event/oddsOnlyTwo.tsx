@@ -11,6 +11,7 @@ interface Props {
   setMarketId: Dispatch<SetStateAction<string>>;
   prevOdds: FancyOddsInterface;
   setBetId: Dispatch<SetStateAction<BetDetailsInterface | null>>;
+  showPrice?: Boolean;
 }
 const gridProps = {
   item: true,
@@ -36,14 +37,16 @@ const gridProps2 = {
   bgcolor: colorHex.back[1],
 };
 
-const Values = (price: number, size: number) => (
+const Values = (price: number, size: number, showPrice?: Boolean) => (
   <>
     <Typography fontWeight={700} mb={-0.5} fontSize="15px">
       {price || "__"}
     </Typography>
-    <Typography fontWeight={400} fontSize="12px">
-      {price ? size : ""}
-    </Typography>
+    {
+      <Typography fontWeight={400} fontSize="12px">
+        {price && showPrice ? size : ""}
+      </Typography>
+    }
   </>
 );
 
@@ -54,6 +57,7 @@ const OddsOnlyTwo = ({
   prevOdds,
   setMarketId,
   setBetId,
+  showPrice,
 }: Props) => {
   const { isSignedIn, setModal } = useContext(UserContext);
   const handleClick = () => {
@@ -145,9 +149,11 @@ const OddsOnlyTwo = ({
         display="flex"
         position="relative"
         className={
-          "suspended"===odds.gstatus?.toLowerCase()
+          "suspended" === odds.gstatus?.toLowerCase()
             ? "fancy-suspended"
-            : "ball running"===odds.gstatus?.toLowerCase()?"fancy-ball-running fancy-suspended":""
+            : "ball running" === odds.gstatus?.toLowerCase()
+            ? "fancy-ball-running fancy-suspended"
+            : ""
         }
         alignItems={"center"}
         gap={{ xs: "1.2%", md: "2%", lg: "2%" }}
@@ -163,7 +169,7 @@ const OddsOnlyTwo = ({
           }
           onClick={handleClick2}
         >
-          {Values(Number(odds?.l1), odds?.ls1)}
+          {Values(Number(odds?.l1), odds?.ls1, showPrice)}
         </Grid>
         <Grid
           {...gridProps2}
@@ -176,7 +182,7 @@ const OddsOnlyTwo = ({
           }
           onClick={handleClick}
         >
-          {Values(Number(odds?.b1), odds?.bs1)}
+          {Values(Number(odds?.b1), odds?.bs1, showPrice)}
         </Grid>
 
         <Grid
