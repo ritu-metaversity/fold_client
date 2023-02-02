@@ -66,7 +66,7 @@ const Event = () => {
 
   const getFancyOdds = async () => {
     if (matchId) {
-      const { response } = await eventServices.newFancy(matchId);
+      const { response } = await eventServices.fancyOdds(matchId);
 
       //showing only part of the data currently
       Object.keys(response).forEach((element) => {
@@ -121,9 +121,9 @@ const Event = () => {
 
   //odds polling 0.5 sec
   useEffect(() => {
-    const timer = setTimeout(() => getOdds(), 500);
+    const timer = setInterval(() => getOdds(), 500);
     return () => clearInterval(timer);
-  }, [matchId, fancyOdds]);
+  }, [matchId]);
 
   //pnl polling 5 sec
   useEffect(() => {
