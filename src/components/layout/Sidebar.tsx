@@ -99,6 +99,11 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
                         (sItem) => sItem.name === sport.sportName
                       )?.iconClass
                     }
+                    style={{
+                      color: sportsTabList.find(
+                        (sItem) => sItem.name === sport.sportName
+                      )?.color,
+                    }}
                   />
                 }
               </ListItemIcon>

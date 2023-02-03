@@ -238,7 +238,7 @@ const Event = () => {
                 (item) => item?.mid === betDetails?.marketId
               ).map((profit) => <BetResult {...profit} />)
             : betDetails?.marketName &&
-              profits.Odds[betDetails?.marketName]?.map((profit) => (
+              profits.Odds[betDetails?.marketId]?.map((profit) => (
                 <BetResult {...profit} />
               ))}
         </CustomizedDialog2>
