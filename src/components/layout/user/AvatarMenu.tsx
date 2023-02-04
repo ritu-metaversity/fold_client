@@ -19,7 +19,7 @@ export const MenuItem = styled(MuiMenuItem)`
 `;
 
 export function AvatarMenu({ anchorEl, open, handleClose }: any) {
-  const { setIsSignedIn, isSignedIn, appData, setUser } =
+  const { setIsSignedIn, setModal, isSignedIn, appData, setUser } =
     useContext(UserContext);
 
   const nav = useNavigate();
@@ -40,6 +40,9 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         setIsSignedIn(false);
       }
     }
+  };
+  const handleClickOpen = () => {
+    if (setModal) setModal({ changePassword: true });
   };
 
   const matches = useMediaQuery("(max-width : 1280px)");
@@ -104,7 +107,9 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
           Activity Log
         </MenuItem>
         <CustomizedDialogStack />
-        <CustomizedDialogPassword />
+
+        <MenuItem onClick={handleClickOpen}>Change Password</MenuItem>
+        {/* <CustomizedDialogPassword /> */}
         <Divider sx={{ borderColor: "gray" }} />
         <MenuItem onClick={logout}>Log out</MenuItem>
       </Menu>

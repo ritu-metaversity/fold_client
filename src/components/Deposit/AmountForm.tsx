@@ -26,58 +26,65 @@ export function AmountForm({ amount, setAmount }: Props) {
     }
   };
   return (
-    <Box
-      display={"flex"}
-      marginY={2}
-      flexDirection={{
-        xs: "column",
-        md: "row",
-      }}
-      alignItems={{
-        xs: "center",
-        md: "flex-end",
-      }}
-      gap={1}
-      rowGap={5}
-    >
-      <Box
-        width={{
-          xs: "100%",
-          md: "125px",
-        }}
-        textAlign="left"
-      >
-        <Typography variant="caption" textAlign={"left"}>
-          Enter Amount:
+    <>
+      {amount < 100 && amount !== 0 && (
+        <Typography textAlign={"left"} color="error.main">
+          Amount Should be more than 100.
         </Typography>
+      )}
+      <Box
+        display={"flex"}
+        marginY={2}
+        flexDirection={{
+          xs: "column",
+          md: "row",
+        }}
+        alignItems={{
+          xs: "center",
+          md: "flex-end",
+        }}
+        gap={1}
+        rowGap={5}
+      >
         <Box
-          bgcolor={colorHex.bg3}
-          p="0 5px"
-          alignItems="center"
-          borderRadius={"8px"}
-          height={46}
-          display="flex"
+          width={{
+            xs: "100%",
+            md: "125px",
+          }}
+          textAlign="left"
         >
-          <RemoveIcon onClick={handleMinusClick} />
-          <StyledAmountInput
-            type="text"
-            placeholder="Amount"
-            value={amount || ""}
-            onChange={handleChange}
-          />{" "}
-          <AddIcon onClick={handlePlusClick} />
+          <Typography variant="caption" textAlign={"left"}>
+            Enter Amount:
+          </Typography>
+          <Box
+            bgcolor={colorHex.bg3}
+            p="0 5px"
+            alignItems="center"
+            borderRadius={"8px"}
+            height={46}
+            display="flex"
+          >
+            <RemoveIcon onClick={handleMinusClick} />
+            <StyledAmountInput
+              type="text"
+              placeholder="Amount"
+              value={amount || ""}
+              onChange={handleChange}
+            />
+            <AddIcon onClick={handlePlusClick} />
+          </Box>
+        </Box>
+        <Box display="flex">
+          {buttonAmountArr.map((amount) => (
+            <StyledButtonSmall
+              key={`${amount}-button`}
+              onClick={() => setAmount((o) => o + amount)}
+            >
+              +{amount}
+            </StyledButtonSmall>
+          ))}
         </Box>
       </Box>
-      <Box display="flex">
-        {buttonAmountArr.map((amount) => (
-          <StyledButtonSmall
-            key={`${amount}-button`}
-            onClick={() => setAmount((o) => o + amount)}
-          >
-            +{amount}
-          </StyledButtonSmall>
-        ))}
-      </Box>
-    </Box>
+    </>
   );
 }

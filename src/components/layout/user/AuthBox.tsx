@@ -94,14 +94,16 @@ export function AuthBox() {
             marginLeft: { sm: "1rem" },
           }}
         >
-          {appData?.selfAllowed && <LoginButton
-            variant="contained"
-            onClick={() => {
-              setModal && setModal({ register: true });
-            }}
-          >
-            REGISTER
-          </LoginButton>}
+          {appData?.selfAllowed && (
+            <LoginButton
+              variant="contained"
+              onClick={() => {
+                setModal && setModal({ register: true });
+              }}
+            >
+              REGISTER
+            </LoginButton>
+          )}
           <Box
             display={{
               xs: "none",
@@ -117,8 +119,10 @@ export function AuthBox() {
               value={values.userId}
               onChange={handleChange}
             />
-            <Link
-              to=""
+            <a
+              href="https://wa.me/17168156061"
+              target={"_blank"}
+              referrerPolicy="no-referrer"
               style={{
                 display: "block",
                 fontSize: "0.7rem",
@@ -128,7 +132,7 @@ export function AuthBox() {
               }}
             >
               Forgot Password ?
-            </Link>
+            </a>
           </Box>
           <Box
             display={{
@@ -193,13 +197,15 @@ export function AuthBox() {
           handleChange={handleChange}
         />
       </CustomizedDialogs>
-      {appData?.selfAllowed && <CustomizedDialogs
-        title="Register"
-        open={Boolean(modal.register)}
-        handleClose={handleClose}
-      >
-        <RegisterForm />
-      </CustomizedDialogs>}
+      {appData?.selfAllowed && (
+        <CustomizedDialogs
+          title="Register"
+          open={Boolean(modal.register)}
+          handleClose={handleClose}
+        >
+          {<RegisterForm />}
+        </CustomizedDialogs>
+      )}
     </UserContainer>
   );
 }
