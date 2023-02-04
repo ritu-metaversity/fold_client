@@ -72,9 +72,9 @@ const Home = () => {
   return (
     <HomeLayout sideWidth={250} sideWidthXl={300} rightMenu={homeRightMenu}>
       <Hero />
-      <TopCasinoHero sideBanner={sideBanner} />
       <ButtonTabs />
       <Sports />
+      <TopCasinoHero sideBanner={sideBanner} />
     </HomeLayout>
   );
 };

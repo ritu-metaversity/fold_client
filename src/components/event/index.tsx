@@ -223,8 +223,19 @@ const Event = () => {
             )?.color
           }
         >
-          <span>{currentMatch?.matchName}</span>
-          <span>{currentMatch?.date}</span>
+          <Typography
+            fontWeight={500}
+            textOverflow={"ellipsis"}
+            fontSize={{ xs: "0.8rem", lg: "0.9rem" }}
+          >
+            {currentMatch?.matchName}
+          </Typography>
+          <Typography
+            fontWeight={500}
+            fontSize={{ xs: "0.6rem", lg: "0.9rem" }}
+          >
+            {currentMatch?.date}
+          </Typography>
         </GameHeader>
         {bets && <MybetMobile bets={bets}></MybetMobile>}
         <CustomizedDialog2

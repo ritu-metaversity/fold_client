@@ -8,6 +8,14 @@ export const HeroImageContainer = styled.div`
   display: flex;
 `;
 
+export const HeroImageContainerHalf = styled.div`
+  width: 100%;
+  aspect-ratio: 4;
+  overflow: hidden;
+  gap: 8px;
+  display: flex;
+`;
+
 export const HeroImage = styled.img`
   width: 100%;
   height: 100%;

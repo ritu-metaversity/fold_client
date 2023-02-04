@@ -81,6 +81,7 @@ export function StatusTypography({
   return (
     <Typography
       sx={{
+        fontSize: { xs: "0.8rem", lf: "0.9rem" },
         bgcolor: colorHex.bg3,
         borderRadius: 1,
         p: 0.5,
