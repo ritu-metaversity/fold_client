@@ -18,7 +18,6 @@ import { Icon, IconSmall, SidebarHeader } from "./styledComponents";
 import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
 import { ExpandLess, ExpandMore, Menu, Search } from "@mui/icons-material";
 import { colorHex } from "../../utils/constants";
-import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "../home/sportsTabList";
 import { UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
@@ -100,9 +99,11 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
                       )?.iconClass
                     }
                     style={{
-                      color: sportsTabList.find(
-                        (sItem) => sItem.name === sport.sportName
-                      )?.color,
+                      color: matchCollapse[index]
+                        ? "white"
+                        : sportsTabList.find(
+                            (sItem) => sItem.name === sport.sportName
+                          )?.color,
                     }}
                   />
                 }
@@ -287,7 +288,7 @@ const Sidebar = (props: Props) => {
 
 export default Sidebar;
 
-export function SearchTextField(props:TextFieldProps) {
+export function SearchTextField(props: TextFieldProps) {
   return (
     <TextField
       size={"small"}
