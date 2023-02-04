@@ -3,11 +3,7 @@ import React, { FC, useMemo } from "react";
 import { Carousel } from "react-responsive-carousel";
 import BoxWithTitle from "../common/BoxWithTitle";
 import { BannerInterface } from "./Hero";
-import {
-  HeroImageContainer,
-  HeroImageContainerHalf,
-  HeroImageHalf,
-} from "./styledComponents";
+import { HeroImageContainerHalf, HeroImageHalf } from "./styledComponents";
 
 interface Props {
   sideBanner: BannerInterface[];
