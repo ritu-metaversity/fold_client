@@ -8,9 +8,31 @@ interface Props {
   bankDetails?: BankDetailInterface;
 }
 
+function unsecuredCopyToClipboard(text: string) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand("copy");
+  } catch (err) {
+    snackBarUtil.error("Unable to copy to clipboard");
+  }
+  document.body.removeChild(textArea);
+}
+
 export const CopyComp = ({ str }: { str: string }) => {
   const copy = async () => {
-    await window.navigator.clipboard.writeText(str);
+    if (navigator.clipboard) {
+      // If normal copy method available, use it
+      navigator.clipboard.writeText(str);
+    } else {
+      // Otherwise fallback to the above function
+      unsecuredCopyToClipboard(str);
+    }
+
+    // await window.navigator.clipboard.writeText(str);
     snackBarUtil.success("Copied to your clipboard !!!");
   };
 

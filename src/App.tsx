@@ -10,7 +10,7 @@ import React, {
 import "./components/accountSummary/formCheck.css";
 import "./App.css";
 import Layout from "./components/layout";
-import { Alert, Snackbar, ThemeProvider } from "@mui/material";
+import { Alert, Box, Snackbar, ThemeProvider } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { SnackbarUtilsConfigurator } from "./components/layout/snackBarUtil";
 import { SnackbarProvider } from "notistack";
@@ -21,6 +21,7 @@ import { sportServices } from "./utils/api/sport/services";
 import { SportInterface } from "./components/layout/Sidebar";
 import "./components/font.css";
 import { authServices } from "./utils/api/auth/services";
+import CustomizedDialogPassword from "./components/layout/user/ResetPasswordDailog";
 
 interface ModalState {
   login?: boolean;
@@ -175,6 +176,11 @@ function App() {
             }}
           >
             <Layout>
+              {/* {!isSignedIn && ( */}
+              <Box display="none">
+                <CustomizedDialogPassword />
+              </Box>
+              {/* )} */}
               <Pages />
             </Layout>
           </UserContext.Provider>

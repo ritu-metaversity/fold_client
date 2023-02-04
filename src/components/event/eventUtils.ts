@@ -139,7 +139,7 @@ export const createProfits = ({
   } else {
     setProfits({
       Odds: {
-        ...fancyOdds?.Odds.reduce((accu: any, current: any) => {
+        ...(fancyOdds?.Odds?.reduce((accu: any, current: any) => {
           console.log(accu, current, "kdjkf");
           const pnlsOddCurrent = pnl?.find(
             (element) => element?.marketId == current?.marketId
@@ -174,7 +174,7 @@ export const createProfits = ({
             return currentProfit;
           });
           return accu;
-        }, {}),
+        }, {}) || {}),
       },
       Bookmaker: [
         ...fancyOdds?.Bookmaker?.map((element: FancyOddsInterface) => {

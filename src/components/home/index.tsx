@@ -43,7 +43,7 @@ const Home = () => {
       }
       return () => clearInterval(timer);
     }, 3000);
-  }, []);
+  }, [scrollCasinoRef?.current]);
 
   const homeRightMenu = useMemo(
     () => (
