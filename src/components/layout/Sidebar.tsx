@@ -14,7 +14,7 @@ import {
   TextField,
   TextFieldProps,
 } from "@mui/material";
-import { Icon, SidebarHeader } from "./styledComponents";
+import { Icon, IconSmall, SidebarHeader } from "./styledComponents";
 import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
 import { ExpandLess, ExpandMore, Menu, Search } from "@mui/icons-material";
 import { colorHex } from "../../utils/constants";
@@ -180,7 +180,11 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
       }
       {isSignedIn && (
         <Box display={"flex"} alignItems="center" px={1}>
-          {/* <SearchTextField /> */}
+          <IconSmall
+            style={{ marginLeft: 1 }}
+            src={appData?.mobileLogo}
+            alt="logo"
+          />
           <IconButton
             color="inherit"
             aria-label="open drawer"
