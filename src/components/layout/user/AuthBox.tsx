@@ -27,11 +27,11 @@ export function AuthBox() {
     useContext(UserContext);
   const nav = useNavigate();
 
-  const { values, handleChange, handleSubmit } = useFormik({
+  const { values, handleChange, handleSubmit, setFieldValue } = useFormik({
     initialValues: {
       userId: "",
       password: "",
-      checked: "checked",
+      checked: true,
     },
     onSubmit: async () => {
       if (!values.checked) {
@@ -78,6 +78,7 @@ export function AuthBox() {
     setModal && setModal({ login: false, register: false });
   };
 
+  console.log(values, "val");
   return (
     <UserContainer>
       {!isSignedIn && (
@@ -150,13 +151,9 @@ export function AuthBox() {
             />
             <Form.Check
               name="checked"
-              value={values.checked}
-              onChange={(e) => {
-                console.log(e.target.value, "new");
-              }}
-              // onChange={handleChange}
+              checked={values.checked}
+              onChange={handleChange}
               type="checkbox"
-              defaultChecked
               label={
                 <Typography
                   component="span"
