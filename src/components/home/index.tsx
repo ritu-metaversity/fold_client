@@ -48,6 +48,7 @@ const Home = () => {
         <Box
           ref={scrollCasinoRef}
           maxHeight={"calc(100vh - 100px)"}
+          minHeight={"calc(100vh - 100px)"}
           sx={{
             scrollBehavior: "smooth",
             overflowY: "auto",

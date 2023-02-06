@@ -13,14 +13,14 @@ import { ImageSearch } from "@mui/icons-material";
 interface DepositListInterface {
   image: string;
   time: string;
-  status: "Rejected" | "Pending" | "Success";
+  status: "Rejected" | "Pending" | "Approved";
   amount: number;
 }
 
 const colorStatus = {
   Rejected: "error.main",
   Pending: "warning.main",
-  Success: "success.main",
+  Approved: "success.main",
 };
 
 const Deposit = () => {

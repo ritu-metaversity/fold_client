@@ -229,7 +229,7 @@ const Event = () => {
             textTransform="uppercase"
             fontSize={{ xs: "0.8rem", lg: "0.9rem" }}
           >
-            {fancyOdds?.Odds[0] ? `${fancyOdds?.Odds[0]?.Series} > ` : ""}
+            {fancyOdds?.Odds ? `${fancyOdds?.Odds[0]?.Series} > ` : ""}
             {currentMatch?.matchName}
           </Typography>
           <Typography

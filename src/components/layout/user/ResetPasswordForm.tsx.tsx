@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { colorHex } from "../../../utils/constants";
 import { userServices } from "../../../utils/api/user/services";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -10,9 +10,11 @@ import { UserContext } from "../../../App";
 import snackBarUtil from "../snackBarUtil";
 import { authServices } from "../../../utils/api/auth/services";
 import { useFormik } from "formik";
+import Loading from "../loading";
 
 const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
   const [searchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
   const firstLogin = searchParams.get("first-login");
   const { user, setUser, setIsSignedIn, setModal } =
     React.useContext(UserContext);
@@ -49,6 +51,7 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
         snackBarUtil.error("Password does not match.");
         return;
       }
+      setLoading(true);
       if (firstLogin) {
         const newValues = {
           ...values,
@@ -74,11 +77,22 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
           await logout();
         }
       }
+      setLoading(false);
     },
   });
 
   return (
     <form onSubmit={handleSubmit}>
+      {loading && (
+        <Box
+          sx={{ opacity: 0.8, zIndex: 20 }}
+          height={"100%"}
+          position="absolute"
+          width={"100%"}
+        >
+          <Loading />
+        </Box>
+      )}
       <DialogContent
         sx={{ bgcolor: colorHex.bg1, color: "text.secondary" }}
         dividers

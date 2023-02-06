@@ -74,6 +74,7 @@ export const Icon = styled.img`
   padding: 10px;
   cursor: pointer;
   max-width: 250px;
+  aspect-ratio: 2.4;
   @media (max-width: 1280px) {
     display: none;
   }
