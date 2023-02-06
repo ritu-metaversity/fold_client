@@ -66,7 +66,7 @@ export const createProfits = ({
         { pnl: pnlsOdds.pnl3, selectionId: pnlsOdds.selection3 },
       ]
     : [];
-  if (betDetails?.stake) {
+  if (betDetails?.stake != null) {
     const isBack = betDetails?.isBack || false,
       odds = betDetails?.odds || 0,
       stake = betDetails?.stake || 0;

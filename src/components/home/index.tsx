@@ -1,7 +1,4 @@
 import { ButtonTabs } from "./buttonTabs";
-// import React, { FC, PropsWithChildren, useEffect, useState } from "react";
-// import { sportServices } from "../../utils/api/sport/services";
-
 import BoxWithTitle from "../common/BoxWithTitle";
 import HomeLayout from "../layout/homeLayout";
 import { BlinkImage } from "../layout/styledComponents";
@@ -36,9 +33,9 @@ const Home = () => {
         const { scrollTop, offsetHeight, scrollBy, scrollHeight } =
           scrollCasinoRef.current;
         if (scrollTop + offsetHeight + 200 >= scrollHeight) {
-          scrollBy({ top: -scrollTop });
+          scrollCasinoRef.current.scrollBy({ top: -scrollTop });
         } else {
-          scrollBy({ top: 200 });
+          scrollCasinoRef.current.scrollBy({ top: 200 });
         }
       }
       return () => clearInterval(timer);
@@ -51,6 +48,7 @@ const Home = () => {
         <Box
           ref={scrollCasinoRef}
           maxHeight={"calc(100vh - 100px)"}
+          minHeight={"calc(100vh - 100px)"}
           sx={{
             scrollBehavior: "smooth",
             overflowY: "auto",

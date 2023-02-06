@@ -7,18 +7,20 @@ import ActivityTable from "../activityLog/activityLogTable";
 import { columnIds, columns } from "./columns";
 import { IconSmall } from "../layout/styledComponents";
 import { colorHex } from "../../utils/constants";
+import ImageModal from "./ImageModal";
+import { ImageSearch } from "@mui/icons-material";
 
 interface DepositListInterface {
   image: string;
   time: string;
-  status: "Rejected" | "Pending" | "Success";
+  status: "Rejected" | "Pending" | "Approved";
   amount: number;
 }
 
 const colorStatus = {
   Rejected: "error.main",
   Pending: "warning.main",
-  Success: "success.main",
+  Approved: "success.main",
 };
 
 const Deposit = () => {
@@ -30,6 +32,11 @@ const Deposit = () => {
     if (response.data) {
       setDepositList(response.data);
     }
+  };
+  const [imageSelected, setImageSelected] = useState("");
+
+  const handleClose = () => {
+    setImageSelected("");
   };
   useEffect(() => {
     getDepositList();
@@ -51,6 +58,11 @@ const Deposit = () => {
         minHeight={"90vh"}
       >
         <DepositManually getDepositList={getDepositList} />
+        <ImageModal
+          open={Boolean(imageSelected)}
+          src={imageSelected}
+          handleClose={handleClose}
+        />
         <ActivityTable
           columns={columns}
           rows={
@@ -58,9 +70,14 @@ const Deposit = () => {
               const newItem: any = { ...item };
               newItem.status = <StatusTypography status={item.status} />;
               newItem.image = (
-                <a target={"_blank"} href={item.image}>
-                  <img style={{ width: 50, height: 50 }} src={item.image} />
-                </a>
+                // <a target={"_blank"} href={item.image}>
+                <img
+                  onClick={() => setImageSelected(item.image)}
+                  style={{ width: 50, height: 50 }}
+                  src={item.image}
+                  alt="deposit_image"
+                />
+                // </a>
               );
               return newItem;
             }) || []
