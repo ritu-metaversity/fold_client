@@ -21,23 +21,23 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
   const nav = useNavigate();
 
   const logout = async () => {
-    const { response } = await authServices.logout();
-    if (response) {
-      localStorage.clear();
-      nav("/");
-      if (setUser) {
-        setUser(null);
-      }
-      if (setIsSignedIn) {
-        setIsSignedIn(false);
-      }
-      if (setModal) {
-        setModal({ login: true });
-      }
-      snackBarUtil.success("Please login again !! ");
-      resetForm();
-      nav({ pathname: "", search: "" });
+    // const { response } = await authServices.logout();
+    // if (response) {
+    localStorage.clear();
+    nav("/");
+    if (setUser) {
+      setUser(null);
     }
+    if (setIsSignedIn) {
+      setIsSignedIn(false);
+    }
+    if (setModal) {
+      setModal({ login: true });
+    }
+    snackBarUtil.success("Please login again !! ");
+    resetForm();
+    nav({ pathname: "", search: "" });
+    // }
   };
 
   const { values, resetForm, handleChange, handleSubmit } = useFormik({
