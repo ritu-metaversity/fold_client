@@ -1,4 +1,4 @@
-import { LoginForm } from "./LoginForm";
+import LoginForm from "./LoginForm";
 import {
   Box,
   // Button,
@@ -8,11 +8,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import CustomizedDialogs from "../../common/Dailog";
 import { LoginButton, UserContainer } from "../styledComponents";
-// import { Info, InfoOutlined } from '@mui/icons-material';
 import { FaInfo } from "react-icons/fa";
 import { useFormik } from "formik";
 import { authServices } from "../../../utils/api/auth/services";
@@ -24,7 +23,7 @@ import CustomizedDialogPassword from "./ResetPasswordDailog";
 
 export function AuthBox() {
   const theme = useTheme();
-  const { setIsSignedIn,appData, isSignedIn, setUser, modal, setModal } =
+  const { setIsSignedIn, appData, isSignedIn, setUser, modal, setModal } =
     useContext(UserContext);
   const nav = useNavigate();
 
@@ -152,7 +151,10 @@ export function AuthBox() {
             <Form.Check
               name="checked"
               value={values.checked}
-              onChange={handleChange}
+              onChange={(e) => {
+                console.log(e.target.value, "new");
+              }}
+              // onChange={handleChange}
               type="checkbox"
               defaultChecked
               label={
@@ -174,7 +176,7 @@ export function AuthBox() {
           </Box>
           <LoginButton
             variant="contained"
-            type="submit"
+            type={matches ? "reset" : "submit"}
             onClick={() => {
               if (matches) {
                 setModal && setModal({ login: true });
