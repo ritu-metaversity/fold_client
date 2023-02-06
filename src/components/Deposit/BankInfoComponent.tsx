@@ -3,22 +3,35 @@ import React, { FC } from "react";
 import snackBarUtil from "../layout/snackBarUtil";
 import { BankDetailInterface } from "./PaymentMethods";
 import { PaymentDetailContainer, SpacedBetween } from "./styledComponents";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 interface Props {
   bankDetails?: BankDetailInterface;
 }
 
+function unsecuredCopyToClipboard(text: string) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand("copy");
+  } catch (err) {
+    snackBarUtil.error("Unable to copy to clipboard");
+  }
+  document.body.removeChild(textArea);
+}
+
 export const CopyComp = ({ str }: { str: string }) => {
-  const copy = async () => {
-    await window.navigator.clipboard.writeText(str);
-    snackBarUtil.success("Copied to your clipboard !!!");
-  };
+  const copy = () => snackBarUtil.success("Copied to your clipboard !!!");
 
   return (
-    <CopyAll
-      sx={{ cursor: "pointer", fontSize: { xs: "0.9rem", md: "initial" } }}
-      onClick={() => copy()}
-    />
+    <CopyToClipboard text={str} onCopy={() => copy()}>
+      <CopyAll
+        sx={{ cursor: "pointer", fontSize: { xs: "0.9rem", md: "initial" } }}
+      />
+    </CopyToClipboard>
   );
 };
 const BankInfoComponent: FC<Props> = ({ bankDetails }) => {

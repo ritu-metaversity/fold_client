@@ -134,4 +134,8 @@ export const GameHeader = styled(Box)`
   justify-content: space-between;
   align-items: center;
   position: relative;
+  @media (max-width: 1279px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;

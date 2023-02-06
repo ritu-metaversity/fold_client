@@ -72,7 +72,7 @@ const Event = () => {
 
   const getFancyOdds = async () => {
     if (matchId) {
-      const { response } = await eventServices.fancyOdds(matchId);
+      const { response } = await eventServices.newFancy(matchId);
 
       //showing only part of the data currently
       Object.keys(response).forEach((element) => {
@@ -223,8 +223,21 @@ const Event = () => {
             )?.color
           }
         >
-          <span>{currentMatch?.matchName}</span>
-          <span>{currentMatch?.date}</span>
+          <Typography
+            fontWeight={500}
+            textOverflow={"ellipsis"}
+            textTransform="uppercase"
+            fontSize={{ xs: "0.8rem", lg: "0.9rem" }}
+          >
+            {fancyOdds?.Odds ? `${fancyOdds?.Odds[0]?.Series} > ` : ""}
+            {currentMatch?.matchName}
+          </Typography>
+          <Typography
+            fontWeight={500}
+            fontSize={{ xs: "0.6rem", lg: "0.9rem" }}
+          >
+            {currentMatch?.date}
+          </Typography>
         </GameHeader>
         {bets && <MybetMobile bets={bets}></MybetMobile>}
         <CustomizedDialog2

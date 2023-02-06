@@ -64,8 +64,10 @@ export function LoginForm({ handleChange, values, handleSubmit }: Props) {
             value={values.password}
             onChange={handleChange}
           />
-          <Link
-            to=""
+          <a
+            href="https://wa.me/17168156061"
+            target={"_blank"}
+            referrerPolicy="no-referrer"
             style={{
               display: "block",
               fontSize: "0.8rem",
@@ -75,7 +77,7 @@ export function LoginForm({ handleChange, values, handleSubmit }: Props) {
             }}
           >
             Forgot Password ?
-          </Link>
+          </a>
         </Typography>
         <Form.Check
           name="checked"

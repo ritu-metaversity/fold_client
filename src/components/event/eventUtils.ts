@@ -66,7 +66,7 @@ export const createProfits = ({
         { pnl: pnlsOdds.pnl3, selectionId: pnlsOdds.selection3 },
       ]
     : [];
-  if (betDetails?.stake) {
+  if (betDetails?.stake != null) {
     const isBack = betDetails?.isBack || false,
       odds = betDetails?.odds || 0,
       stake = betDetails?.stake || 0;
@@ -139,7 +139,7 @@ export const createProfits = ({
   } else {
     setProfits({
       Odds: {
-        ...fancyOdds?.Odds.reduce((accu: any, current: any) => {
+        ...(fancyOdds?.Odds?.reduce((accu: any, current: any) => {
           console.log(accu, current, "kdjkf");
           const pnlsOddCurrent = pnl?.find(
             (element) => element?.marketId == current?.marketId
@@ -174,7 +174,7 @@ export const createProfits = ({
             return currentProfit;
           });
           return accu;
-        }, {}),
+        }, {}) || {}),
       },
       Bookmaker: [
         ...fancyOdds?.Bookmaker?.map((element: FancyOddsInterface) => {

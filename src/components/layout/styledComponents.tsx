@@ -17,7 +17,9 @@ export const CenterBox = styled(Box)`
 `;
 export const BlinkImage = styled.img`
   width: 100%;
-  margin-block: 3px;
+  aspect-ratio: 12/7;
+  margin-block: 5px;
+  object-fit: cover;
 `;
 export const TopNavLinks = styled(Link)`
   font-weight: 900;
@@ -72,6 +74,7 @@ export const Icon = styled.img`
   padding: 10px;
   cursor: pointer;
   max-width: 250px;
+  aspect-ratio: 2.4;
   @media (max-width: 1280px) {
     display: none;
   }
