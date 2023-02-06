@@ -18,7 +18,7 @@ const Sports = () => {
   const [activeSportList, setActiveSportList] = useState<any>(null);
   const [activeEventList, setActiveEventList] = useState([]);
   useEffect(() => {
-    if (isSignedIn === null) return;
+    // if (isSignedIn === null) return;
     const getList = async () => {
       const { response } = await sportServices.activeSportList();
       if (response?.data) {

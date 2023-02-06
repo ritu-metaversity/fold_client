@@ -86,7 +86,9 @@ const Event = () => {
 
       const Odds = transformMatchOdds(response.Odds);
       if (fancyOdds) {
-        setPrevFancyOdds(fancyOdds);
+        const newFancy = { ...fancyOdds };
+        console.log("ran");
+        setPrevFancyOdds(newFancy);
       } else {
         setPrevFancyOdds({ ...response, Odds });
       }
@@ -127,7 +129,7 @@ const Event = () => {
 
   //odds polling 0.5 sec
   useEffect(() => {
-    const timer = setInterval(() => getOdds(), 500);
+    const timer = setInterval(() => getOdds(), 4000);
     return () => clearInterval(timer);
   }, [matchId]);
 

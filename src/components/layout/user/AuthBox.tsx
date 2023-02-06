@@ -27,7 +27,7 @@ export function AuthBox() {
     useContext(UserContext);
   const nav = useNavigate();
 
-  const { values, handleChange, handleSubmit, setFieldValue } = useFormik({
+  const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       userId: "",
       password: "",
@@ -122,7 +122,7 @@ export function AuthBox() {
             <a
               href="https://wa.me/17168156061"
               target={"_blank"}
-              referrerPolicy="no-referrer"
+              rel="noreferrer"
               style={{
                 display: "block",
                 fontSize: "0.7rem",

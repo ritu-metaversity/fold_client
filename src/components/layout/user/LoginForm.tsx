@@ -67,7 +67,7 @@ function LoginForm({ handleChange, values, handleSubmit }: Props) {
           <a
             href="https://wa.me/17168156061"
             target={"_blank"}
-            referrerPolicy="no-referrer"
+            rel="noreferrer"
             style={{
               display: "block",
               fontSize: "0.8rem",

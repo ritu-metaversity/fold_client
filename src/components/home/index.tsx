@@ -30,7 +30,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       if (scrollCasinoRef?.current) {
-        const { scrollTop, offsetHeight, scrollBy, scrollHeight } =
+        const { scrollTop, offsetHeight, scrollHeight } =
           scrollCasinoRef.current;
         if (scrollTop + offsetHeight + 200 >= scrollHeight) {
           scrollCasinoRef.current.scrollBy({ top: -scrollTop });

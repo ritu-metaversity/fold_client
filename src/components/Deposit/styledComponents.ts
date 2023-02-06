@@ -1,6 +1,5 @@
 import { Box, Button, styled } from "@mui/material";
 import emotionStyled from "@emotion/styled";
-import { style } from "@mui/system";
 import { colorHex } from "../../utils/constants";
 
 
