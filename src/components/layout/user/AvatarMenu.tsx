@@ -10,7 +10,6 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
 import { authServices } from "../../../utils/api/auth/services";
-import CustomizedDialogPassword from "./ResetPasswordDailog";
 import CustomizedDialogStack from "./StackDailog";
 
 export const MenuItem = styled(MuiMenuItem)`

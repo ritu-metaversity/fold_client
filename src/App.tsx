@@ -22,6 +22,7 @@ import { SportInterface } from "./components/layout/Sidebar";
 import "./components/font.css";
 import { authServices } from "./utils/api/auth/services";
 import CustomizedDialogPassword from "./components/layout/user/ResetPasswordDailog";
+import { utilServices } from "./utils/api/util/services";
 
 interface ModalState {
   login?: boolean;
@@ -100,6 +101,17 @@ function App() {
     }
   };
 
+  const validateJwt = async () => {
+    const { response } = await utilServices.validateToken();
+    const user = localStorage.getItem("user");
+    if (response?.status && user) {
+      setUser(JSON.parse(user));
+      setIsSignedIn(true);
+    } else {
+      setUser(null);
+      setIsSignedIn(false);
+    }
+  };
   useEffect(() => {
     const getNewEventOpen = async () => {
       const { response } = await sportServices.leftMenu();
@@ -125,11 +137,7 @@ function App() {
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      setUser(JSON.parse(user));
-      setIsSignedIn(true);
-    } else {
-      setUser(null);
-      setIsSignedIn(false);
+      validateJwt();
     }
     return () => {};
   }, []);

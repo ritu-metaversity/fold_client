@@ -8,20 +8,19 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { colorHex } from "../../../utils/constants";
 
 interface Props {
   values: {
     userId: string;
     password: string;
-    checked: string;
+    checked: boolean;
   };
   handleChange: (e: React.ChangeEvent<any>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export function LoginForm({ handleChange, values, handleSubmit }: Props) {
+function LoginForm({ handleChange, values, handleSubmit }: Props) {
   const theme = useTheme();
   return (
     <Box bgcolor="black" borderRadius={2} p={2} mt={2}>
@@ -60,6 +59,7 @@ export function LoginForm({ handleChange, values, handleSubmit }: Props) {
               mt: -0.3,
             }}
             required
+            type="password"
             name="password"
             value={values.password}
             onChange={handleChange}
@@ -67,7 +67,7 @@ export function LoginForm({ handleChange, values, handleSubmit }: Props) {
           <a
             href="https://wa.me/17168156061"
             target={"_blank"}
-            referrerPolicy="no-referrer"
+            rel="noreferrer"
             style={{
               display: "block",
               fontSize: "0.8rem",
@@ -81,9 +81,8 @@ export function LoginForm({ handleChange, values, handleSubmit }: Props) {
         </Typography>
         <Form.Check
           name="checked"
-          value={values.checked}
           onChange={handleChange}
-          defaultChecked
+          checked={values.checked}
           type="checkbox"
           label={
             <Typography ml={0.5} color="white" variant="caption">
@@ -112,3 +111,5 @@ export function LoginForm({ handleChange, values, handleSubmit }: Props) {
     </Box>
   );
 }
+
+ export default React.memo(LoginForm);

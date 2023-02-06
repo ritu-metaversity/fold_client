@@ -29,7 +29,7 @@ export function AmountForm({ amount, setAmount }: Props) {
     <>
       {amount < 100 && amount !== 0 && (
         <Typography textAlign={"left"} color="error.main">
-          Amount Should be more than 100.
+          Amount Should be more than or equal to 100.
         </Typography>
       )}
       <Box

@@ -4,23 +4,21 @@ import HomeLayout from "../layout/homeLayout";
 import DepositManually from "./DepositManually";
 import { userServices } from "../../utils/api/user/services";
 import ActivityTable from "../activityLog/activityLogTable";
-import { columnIds, columns } from "./columns";
-import { IconSmall } from "../layout/styledComponents";
+import { columns } from "./columns";
 import { colorHex } from "../../utils/constants";
 import ImageModal from "./ImageModal";
-import { ImageSearch } from "@mui/icons-material";
 
 interface DepositListInterface {
   image: string;
   time: string;
-  status: "Rejected" | "Pending" | "Approved";
+  status: "Rejected" | "Pending" | "APPROVED";
   amount: number;
 }
 
 const colorStatus = {
   Rejected: "error.main",
   Pending: "warning.main",
-  Approved: "success.main",
+  APPROVED: "success.main",
 };
 
 const Deposit = () => {
