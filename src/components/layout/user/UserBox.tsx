@@ -7,7 +7,7 @@ import { UserContext } from "../../../App";
 import { UserContainer } from "../styledComponents";
 import { userServices } from "../../../utils/api/user/services";
 
-interface BalanceDataInterface {
+export interface BalanceDataInterface {
   userId: number;
   balance: number;
   message: null | string;
@@ -15,30 +15,15 @@ interface BalanceDataInterface {
 }
 const UserBox = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [balanceData, setBalanceData] = useState<BalanceDataInterface | null>(
-    null
-  );
+
   const open = Boolean(anchorEl);
-  const { user } = useContext(UserContext);
+  const { user, balance: balanceData } = useContext(UserContext);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const getBalance = async () => {
-    const { response } = await userServices.balance();
-    if (response?.data) {
-      setBalanceData(response.data);
-    }
-  };
-  
-  useEffect(() => {
-    getBalance();
-
-    return () => {};
-  }, []);
 
   return (
     <>
@@ -50,7 +35,7 @@ const UserBox = () => {
       >
         <Typography
           my="auto"
-          fontSize={{ xs: "0.65rem",sm:"0.75rem", lg: "0.8rem" }}
+          fontSize={{ xs: "0.65rem", sm: "0.75rem", lg: "0.8rem" }}
           color={{ xs: "white", lg: "text.primary" }}
           textAlign={"center"}
           pl={{ lg: "10px" }}

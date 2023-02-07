@@ -23,6 +23,8 @@ import "./components/font.css";
 import { authServices } from "./utils/api/auth/services";
 import CustomizedDialogPassword from "./components/layout/user/ResetPasswordDailog";
 import { utilServices } from "./utils/api/util/services";
+import { BalanceDataInterface } from "./components/layout/user/UserBox";
+import axios from "axios";
 
 interface ModalState {
   login?: boolean;
@@ -37,8 +39,11 @@ interface UserContextType {
   modal: ModalState;
   user: any;
   stakes: { [x: string]: number };
+  getButtonValue: () => Promise<void>;
   activeEventList: SportInterface[] | null;
   appData: AppDataInterface | null;
+  balance: BalanceDataInterface | null;
+  getBalanceData: () => Promise<void>;
 }
 
 const defaultStake = {
@@ -71,8 +76,11 @@ export const UserContext = createContext<UserContextType>({
   setUser: null,
   setModal: null,
   stakes: defaultStake,
+  getButtonValue: async () => {},
   activeEventList: null,
   appData: null,
+  balance: null,
+  getBalanceData: async () => {},
 });
 
 function App() {
@@ -82,7 +90,16 @@ function App() {
   const [stakes, setButtonValue] = React.useState<{ [x: string]: number }>(
     defaultStake
   );
+  const [balanceData, setBalanceData] = useState<BalanceDataInterface | null>(
+    null
+  );
 
+  const getBalance = async () => {
+    const { response } = await userServices.balance();
+    if (response?.data) {
+      setBalanceData(response.data);
+    }
+  };
   const [error, setError] = useState(false);
   const [activeEventList, setActiveEventList] = useState<SportInterface[]>([]);
   const [appData, setAppData] = useState<AppDataInterface | null>(null);
@@ -143,11 +160,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isSignedIn) getButtonValue();
+    if (isSignedIn) {
+      getButtonValue();
+      getBalance();
+    }
+
     return () => {
       setButtonValue(defaultStake);
     };
   }, [isSignedIn]);
+  // fetch("http://192.168.0.245:8000/group/get-groups-chats");
 
   return (
     <ThemeProvider theme={theme}>
@@ -172,8 +194,11 @@ function App() {
         <div className="App">
           <UserContext.Provider
             value={{
+              balance: balanceData,
+              getBalanceData: getBalance,
               activeEventList,
               stakes,
+              getButtonValue,
               isSignedIn,
               user,
               appData,
