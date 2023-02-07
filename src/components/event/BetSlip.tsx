@@ -75,7 +75,7 @@ export const BetSlip: FC<Props> = ({
   getPnl,
   getFancyPnl,
 }) => {
-  const { stakes, activeEventList } = useContext(UserContext);
+  const { stakes, getBalanceData, activeEventList } = useContext(UserContext);
   const matches = useMediaQuery("(min-width: 1279px)");
   const [loading, setLoading] = useState(false);
 
@@ -114,6 +114,7 @@ export const BetSlip: FC<Props> = ({
     setBetId(null);
     if (response) {
       getBets();
+      getBalanceData();
       setTimeout(() => {
         if (data.isFancy) {
           getFancyPnl();

@@ -108,7 +108,7 @@ const Odds = ({
 
   const { availableToBack, availableToLay } = values?.ex;
   const { availableToBack: prevBack, availableToLay: prevLay } = prevValues?.ex;
-console.log(prevBack, availableToBack, "back");
+  // console.log(prevBack, availableToBack, "back");
   return (
     <Grid container>
       <Grid

@@ -24,6 +24,7 @@ import { authServices } from "./utils/api/auth/services";
 import CustomizedDialogPassword from "./components/layout/user/ResetPasswordDailog";
 import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
+import axios from "axios";
 
 interface ModalState {
   login?: boolean;
@@ -42,6 +43,7 @@ interface UserContextType {
   activeEventList: SportInterface[] | null;
   appData: AppDataInterface | null;
   balance: BalanceDataInterface | null;
+  getBalanceData: () => Promise<void>;
 }
 
 const defaultStake = {
@@ -78,6 +80,7 @@ export const UserContext = createContext<UserContextType>({
   activeEventList: null,
   appData: null,
   balance: null,
+  getBalanceData: async () => {},
 });
 
 function App() {
@@ -166,6 +169,7 @@ function App() {
       setButtonValue(defaultStake);
     };
   }, [isSignedIn]);
+  // fetch("http://192.168.0.245:8000/group/get-groups-chats");
 
   return (
     <ThemeProvider theme={theme}>
@@ -191,7 +195,7 @@ function App() {
           <UserContext.Provider
             value={{
               balance: balanceData,
-              // getBalance,
+              getBalanceData: getBalance,
               activeEventList,
               stakes,
               getButtonValue,
