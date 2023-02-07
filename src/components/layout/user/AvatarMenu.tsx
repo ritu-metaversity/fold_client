@@ -41,7 +41,10 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
     }
   };
   const handleClickOpen = () => {
-    if (setModal) setModal({ changePassword: true });
+    if (setModal) {
+      setModal({ changePassword: true });
+      handleClose();
+    }
   };
 
   const matches = useMediaQuery("(max-width : 1280px)");
@@ -105,7 +108,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         <MenuItem onClick={() => closeAndNav("/report/activity")}>
           Activity Log
         </MenuItem>
-        <CustomizedDialogStack />
+        <CustomizedDialogStack handleMenuClose={handleClose} />
 
         <MenuItem onClick={handleClickOpen}>Change Password</MenuItem>
         {/* <CustomizedDialogPassword /> */}
