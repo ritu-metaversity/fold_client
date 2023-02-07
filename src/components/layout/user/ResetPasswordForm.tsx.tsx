@@ -8,7 +8,6 @@ import { userServices } from "../../../utils/api/user/services";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { UserContext } from "../../../App";
 import snackBarUtil from "../snackBarUtil";
-import { authServices } from "../../../utils/api/auth/services";
 import { useFormik } from "formik";
 import Loading from "../loading";
 

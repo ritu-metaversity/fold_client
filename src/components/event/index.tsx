@@ -86,7 +86,9 @@ const Event = () => {
 
       const Odds = transformMatchOdds(response.Odds);
       if (fancyOdds) {
-        setPrevFancyOdds(fancyOdds);
+        const newFancy = { ...fancyOdds };
+        console.log("ran");
+        setPrevFancyOdds(newFancy);
       } else {
         setPrevFancyOdds({ ...response, Odds });
       }
@@ -256,10 +258,20 @@ const Event = () => {
               ))}
         </CustomizedDialog2>
 
-        {fancyOdds.Odds?.map(
-          (singleOdd: any, index1: any) =>
-            Boolean(prevFancyOdds?.Odds[index1]) && (
+        {fancyOdds.Odds?.map((singleOdd: any, index1: any) => {
+          console.log(
+            Boolean(prevFancyOdds?.Odds[index1]) &&
+              singleOdd.runners?.length > 0,
+            singleOdd.runners?.length,
+            "odd"
+          );
+          if (
+            Boolean(prevFancyOdds?.Odds[index1]) &&
+            singleOdd.runners?.length > 0
+          ) {
+            return (
               <CustomizedAccordions
+                key={"match_odd" + index1}
                 title={
                   <Box flex={1} display="flex" justifyContent={"space-between"}>
                     <Typography
@@ -308,8 +320,11 @@ const Event = () => {
                   ))}
                 </Box>
               </CustomizedAccordions>
-            )
-        )}
+            );
+          } else {
+            return "";
+          }
+        })}
 
         {fancyOdds["Bookmaker"] && (
           <CustomizedAccordions

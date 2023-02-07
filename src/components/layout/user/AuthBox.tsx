@@ -8,6 +8,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import "./auth.css";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomizedDialogs from "../../common/Dailog";
@@ -31,7 +32,7 @@ export function AuthBox() {
     initialValues: {
       userId: "",
       password: "",
-      checked: "checked",
+      checked: true,
     },
     onSubmit: async () => {
       if (!values.checked) {
@@ -67,7 +68,7 @@ export function AuthBox() {
     required: true,
     inputProps: {
       style: {
-        maxWidth: "10rem",
+        maxWidth: "11.5rem",
         padding: "0.2rem 0.8rem",
       },
     },
@@ -78,6 +79,7 @@ export function AuthBox() {
     setModal && setModal({ login: false, register: false });
   };
 
+  console.log(values, "val");
   return (
     <UserContainer>
       {!isSignedIn && (
@@ -121,7 +123,7 @@ export function AuthBox() {
             <a
               href="https://wa.me/17168156061"
               target={"_blank"}
-              referrerPolicy="no-referrer"
+              rel="noreferrer"
               style={{
                 display: "block",
                 fontSize: "0.7rem",
@@ -150,21 +152,18 @@ export function AuthBox() {
             />
             <Form.Check
               name="checked"
-              value={values.checked}
-              onChange={(e) => {
-                console.log(e.target.value, "new");
-              }}
-              // onChange={handleChange}
+              checked={values.checked}
+              onChange={handleChange}
               type="checkbox"
-              defaultChecked
+              className="checkBoxInLogin"
               label={
                 <Typography
                   component="span"
-                  fontSize={"0.65rem"}
+                  fontSize={{ lg: "0.75rem" }}
                   sx={{ verticalAlign: "top" }}
                   my={0}
                 >
-                  I agree terms & conditions.
+                  I agree Terms & Conditions.
                   <Tooltip title="I am at least 18 years of age and I have read, accept and agree to the Terms and Conditions , Responsible Gaming , GamCare, Gambling Therapy">
                     <Box component="span">
                       <FaInfo />

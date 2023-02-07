@@ -23,4 +23,10 @@ export const utilServices = {
     };
     return await apiHandler(params);
   },
+  validateToken: async () => {
+    const params = {
+      resource: utilResources.VALIDATE_JWT,
+    };
+    return await apiHandler(params);
+  },
 };

@@ -75,20 +75,20 @@ export const BetSlip: FC<Props> = ({
   getPnl,
   getFancyPnl,
 }) => {
-  const { stakes, activeEventList } = useContext(UserContext);
+  const { stakes, getBalanceData, activeEventList } = useContext(UserContext);
   const matches = useMediaQuery("(min-width: 1279px)");
   const [loading, setLoading] = useState(false);
 
-  const deviceInfo = {
-    userAgent: window.navigator.userAgent,
-    browser: "",
-    device: window.navigator.mediaDevices,
-    deviceType: getDeviceType(),
-    os: window.navigator.platform,
-    os_version: "windows-10",
-    browser_version: "108.0.0.0",
-    orientation: "",
-  };
+  // const deviceInfo = {
+  //   userAgent: window.navigator.userAgent,
+  //   browser: "",
+  //   device: window.navigator.mediaDevices,
+  //   deviceType: getDeviceType(),
+  //   os: window.navigator.platform,
+  //   os_version: "windows-10",
+  //   browser_version: "108.0.0.0",
+  //   orientation: "",
+  // };
   const handleSubmit = async () => {
     if (loading) return;
     setLoading(true);
@@ -114,6 +114,7 @@ export const BetSlip: FC<Props> = ({
     setBetId(null);
     if (response) {
       getBets();
+      getBalanceData();
       setTimeout(() => {
         if (data.isFancy) {
           getFancyPnl();

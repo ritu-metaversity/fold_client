@@ -29,7 +29,7 @@ interface Props {
   >;
 }
 const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
-  const [toDate, setToDate] = useState(new Date());
+  const [toDate, setToDate] = useState(new Date(Date.now()));
   const [fromDate, setFromDate] = useState(subtractWeeks(1));
   const handleSubmit = () => {
     setSearchFilters({
@@ -85,7 +85,7 @@ const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
           <CustomizedDatePicker
             value={fromDate}
             minDate={new Date(Date.now() - 5184000000)}
-            maxDate={new Date(Date.now() + 24 * 60 * 60 * 1000)}
+            maxDate={new Date()}
             onChange={setFromDate}
           />
         </Grid>
@@ -94,7 +94,7 @@ const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
           <CustomizedDatePicker
             minDate={new Date(Date.now() - 5184000000)}
             value={toDate}
-            maxDate={new Date(Date.now() + 24 * 60 * 60 * 1000)}
+            maxDate={new Date()}
             onChange={setToDate}
           />
         </Grid>

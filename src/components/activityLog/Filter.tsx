@@ -90,7 +90,7 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
             <LabelText>From</LabelText>
             <CustomizedDatePicker
               minDate={new Date(Date.now() - 5184000000)}
-              maxDate={new Date(Date.now() + 24 * 60 * 60 * 1000)}
+              maxDate={new Date()}
               value={fromDate}
               onChange={setFromDate}
             />
@@ -99,7 +99,7 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
             <LabelText>To</LabelText>
             <CustomizedDatePicker
               minDate={new Date(Date.now() - 5184000000)}
-              maxDate={new Date(Date.now() + 24 * 60 * 60 * 1000)}
+              maxDate={new Date()}
               value={toDate}
               onChange={setToDate}
             />
