@@ -140,7 +140,6 @@ export const createProfits = ({
     setProfits({
       Odds: {
         ...(fancyOdds?.Odds?.reduce((accu: any, current: any) => {
-          console.log(accu, current, "kdjkf");
           const pnlsOddCurrent = pnl?.find(
             (element) => element?.marketId == current?.marketId
           );

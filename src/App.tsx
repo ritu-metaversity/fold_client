@@ -24,7 +24,7 @@ import { authServices } from "./utils/api/auth/services";
 import CustomizedDialogPassword from "./components/layout/user/ResetPasswordDailog";
 import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
-import axios from "axios";
+import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 
 interface ModalState {
   login?: boolean;
@@ -155,6 +155,8 @@ function App() {
     const user = localStorage.getItem("user");
     if (user) {
       validateJwt();
+    } else {
+      setIsSignedIn(false);
     }
     return () => {};
   }, []);
@@ -170,7 +172,9 @@ function App() {
     };
   }, [isSignedIn]);
   // fetch("http://192.168.0.245:8000/group/get-groups-chats");
-
+  if (isSignedIn === null) {
+    return <LoadingBallSvg />;
+  }
   return (
     <ThemeProvider theme={theme}>
       <Snackbar

@@ -1,6 +1,7 @@
 import LoginForm from "./LoginForm";
 import {
   Box,
+  CircularProgress,
   // Button,
   TextField,
   Tooltip,
@@ -9,7 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import "./auth.css";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomizedDialogs from "../../common/Dailog";
 import { LoginButton, UserContainer } from "../styledComponents";
@@ -24,6 +25,7 @@ import CustomizedDialogPassword from "./ResetPasswordDailog";
 
 export function AuthBox() {
   const theme = useTheme();
+  const [loading, setLoading] = useState(false);
   const { setIsSignedIn, appData, isSignedIn, setUser, modal, setModal } =
     useContext(UserContext);
   const nav = useNavigate();
@@ -39,10 +41,12 @@ export function AuthBox() {
         snackBarUtil.error("Please agree Terms and Conditions");
         return;
       }
+      setLoading(true);
       const { response } = await authServices.login(values);
       if (response) {
         if (response.passwordtype === "old" && setModal) {
           setModal({ changePassword: true });
+          setLoading(false);
           nav({
             pathname: "/",
             search: "first-login=true",
@@ -55,6 +59,7 @@ export function AuthBox() {
         if (setUser) setUser(response);
         localStorage.setItem("user", JSON.stringify(response));
       }
+      setLoading(false);
     },
   });
   const textFieldProps = {
@@ -174,6 +179,11 @@ export function AuthBox() {
             />
           </Box>
           <LoginButton
+            startIcon={
+              loading ? (
+                <CircularProgress size={"0.8em"} color="error" />
+              ) : undefined
+            }
             variant="contained"
             type={matches ? "reset" : "submit"}
             onClick={() => {
@@ -193,6 +203,7 @@ export function AuthBox() {
         handleClose={handleClose}
       >
         <LoginForm
+          loading={loading}
           values={values}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
