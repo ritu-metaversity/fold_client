@@ -39,47 +39,70 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
     // }
   };
 
-  const { values, resetForm, handleChange, handleSubmit } = useFormik({
-    initialValues: {
-      newPassword: "",
-      confirmPassword: "",
-      currentPassword: "",
-    },
-    onSubmit: async (values) => {
-      if (values.newPassword !== values.confirmPassword) {
-        snackBarUtil.error("Password does not match.");
-        return;
-      }
-      setLoading(true);
-      if (firstLogin) {
-        const newValues = {
-          ...values,
-          oldPassword: values.currentPassword,
-          userid: user.userId,
-          token: user.token,
+  const { values, resetForm, handleChange, handleSubmit, errors, isValid } =
+    useFormik({
+      initialValues: {
+        newPassword: "",
+        confirmPassword: "",
+        currentPassword: "",
+      },
+      validate: async (values) => {
+        const newError = {
+          newPassword:
+            values?.newPassword === ""
+              ? "Please enter new Password"
+              : undefined,
+          confirmPassword:
+            values?.confirmPassword === ""
+              ? "Please enter confirm Password"
+              : values?.confirmPassword !== values?.newPassword
+              ? "New password and confirm Password does not match"
+              : undefined,
+          currentPassword:
+            values?.confirmPassword === ""
+              ? "Please enter Current Password"
+              : undefined,
         };
-        const { response } = await userServices.changePasswordFirstLogin(
-          newValues
+        return Object.fromEntries(
+          Object.entries(newError).filter(([_, v]) => v != null)
         );
-        if (response) {
-          handleClose();
-          localStorage.clear();
-          snackBarUtil.success("Please login again !! ");
-          if (setModal) {
-            setModal({ login: true });
+      },
+      onSubmit: async (values) => {
+        if (values.newPassword !== values.confirmPassword) {
+          snackBarUtil.error("Password does not match.");
+          return;
+        }
+        setLoading(true);
+        if (firstLogin) {
+          const newValues = {
+            ...values,
+            oldPassword: values.currentPassword,
+            userid: user.userId,
+            token: user.token,
+          };
+          const { response } = await userServices.changePasswordFirstLogin(
+            newValues
+          );
+          if (response) {
+            handleClose();
+            localStorage.clear();
+            snackBarUtil.success("Please login again !! ");
+            if (setModal) {
+              setModal({ login: true });
+            }
+          }
+        } else {
+          const { response } = await userServices.changePassword(values);
+          if (response) {
+            handleClose();
+            await logout();
           }
         }
-      } else {
-        const { response } = await userServices.changePassword(values);
-        if (response) {
-          handleClose();
-          await logout();
-        }
-      }
-      setLoading(false);
-    },
-  });
-
+        setLoading(false);
+      },
+    });
+  console.log(errors, "error");
+  console.log(isValid, "valid");
   return (
     <form onSubmit={handleSubmit}>
       {loading && (
@@ -100,8 +123,10 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
           fullWidth
           variant="outlined"
           size="small"
-          required
+          //required
           margin="dense"
+          error={Boolean(errors?.currentPassword)}
+          helperText={errors?.currentPassword}
           label="Old Password"
           name={"currentPassword"}
           value={values.currentPassword}
@@ -114,7 +139,9 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
           fullWidth
           variant="outlined"
           size="small"
-          required
+          //required
+          error={Boolean(errors?.newPassword)}
+          helperText={errors?.newPassword}
           margin="dense"
           label="New Password"
           name={"newPassword"}
@@ -126,9 +153,11 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
         <TextField
           fullWidth
           variant="outlined"
+          error={Boolean(errors?.confirmPassword)}
+          helperText={errors?.confirmPassword}
           size="small"
           margin="dense"
-          required
+          //required
           label="Confirm Password"
           name={"confirmPassword"}
           value={values.confirmPassword}
