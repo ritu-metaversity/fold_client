@@ -19,6 +19,7 @@ import UserBox from "./user/UserBox";
 import { colorHex } from "../../utils/constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import styled from "@emotion/styled";
 export const drawerWidth = 220;
 export const drawerWidthXl = 270;
 
@@ -37,6 +38,16 @@ const linksWithoutSideBar = [
 ];
 
 export const topNavHeight = "1.9rem";
+
+const Circle = styled.div`
+  background-color: var(--text-table-header);
+  height: 8px;
+  width: 8px;
+  border-radius: 8px;
+  top: 7px;
+  right: -16px;
+  margin-block: auto;
+`;
 
 export default function Header(props: Props) {
   const theme = useTheme();
@@ -82,6 +93,7 @@ export default function Header(props: Props) {
         >
           Exchange
         </TopNavLinks>
+        {isSignedIn && <Circle />}
         <TopNavLinks
           style={
             pathname === "/casino"
@@ -95,6 +107,7 @@ export default function Header(props: Props) {
         >
           Live Casino
         </TopNavLinks>
+        {isSignedIn && <Circle />}
         <TopNavLinks
           style={
             pathname === "/virtual-casino"

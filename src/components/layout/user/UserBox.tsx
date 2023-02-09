@@ -56,6 +56,7 @@ const UserBox = () => {
           aria-expanded={open ? "true" : undefined}
           gap={{ xs: 1, lg: 1.5 }}
           p={0.8}
+          sx={{ cursor: "pointer" }}
           fontSize={{ xs: "0.75rem", lg: "0.8rem" }}
           onClick={handleClick}
         >

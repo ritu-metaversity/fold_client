@@ -255,6 +255,7 @@ export const BetSlip: FC<Props> = ({
             <Button
               fullWidth
               color="inherit"
+              sx={{ color: "white" }}
               onClick={() => setBetId({ ...betId, stake: stakes[key] })}
             >
               {stakes[key]}

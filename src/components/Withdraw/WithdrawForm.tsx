@@ -191,8 +191,12 @@ export function WithdrawForm({
               margin="dense"
               select
             >
-              <MenuItem value="savings">Savings</MenuItem>
-              <MenuItem value="current">Current</MenuItem>
+              <MenuItem sx={{ fontSize: "0.8rem" }} value="savings">
+                Savings
+              </MenuItem>
+              <MenuItem sx={{ fontSize: "0.8rem" }} value="current">
+                Current
+              </MenuItem>
             </WithdrawInput>
           </Box>
           <Box>

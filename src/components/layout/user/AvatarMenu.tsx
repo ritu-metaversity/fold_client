@@ -47,18 +47,28 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
     }
   };
 
+
+  const [openStake, setOpenStake] = React.useState(false);
+  const handleStakeOpen = () => {
+    handleClose();
+    setOpenStake(true);
+  };
+
+  const handleStakeClose = () => {
+    setOpenStake(false);
+  };
+
   const matches = useMediaQuery("(max-width : 1280px)");
   return (
     <>
+      <CustomizedDialogStack open={openStake} handleClose={handleStakeClose} />
       <Menu
         id="basic-menu"
         elevation={0}
         anchorEl={anchorEl}
         open={open}
         disableScrollLock
-        keepMounted
         onClose={handleClose}
-        sx={{}}
         MenuListProps={{
           sx: {
             fontSize: "0.8rem",
@@ -108,7 +118,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         <MenuItem onClick={() => closeAndNav("/report/activity")}>
           Activity Log
         </MenuItem>
-        <CustomizedDialogStack handleMenuClose={handleClose} />
+        <MenuItem onClick={handleStakeOpen}>Set Button Value</MenuItem>
 
         <MenuItem onClick={handleClickOpen}>Change Password</MenuItem>
         {/* <CustomizedDialogPassword /> */}

@@ -12,20 +12,12 @@ import { MenuItem } from "./AvatarMenu";
 import { UserContext } from "../../../App";
 
 interface Props {
-  handleMenuClose: () => void;
+  handleClose: () => void;
+  open: boolean;
 }
 
-export default function CustomizedDialogStack({ handleMenuClose }: Props) {
-  const [open, setOpen] = React.useState(false);
+export default function CustomizedDialogStack({ handleClose, open }: Props) {
   const [tab, setTab] = React.useState(false);
-
-  const handleClickOpen = () => {
-    handleMenuClose();
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const { stakes, getButtonValue } = React.useContext(UserContext);
   const [buttonValue, setButtonValue] = React.useState<{ [x: string]: number }>(
@@ -51,6 +43,25 @@ export default function CustomizedDialogStack({ handleMenuClose }: Props) {
   };
 
   React.useEffect(() => {
+    setButtonValue(
+      stakes
+        ? stakes
+        : {
+            stack1: 0,
+            stack2: 0,
+            stack3: 0,
+            stack4: 0,
+            stack5: 0,
+            stack6: 0,
+            stack7: 0,
+            stack8: 0,
+            stack9: 0,
+            stack10: 0,
+          }
+    );
+  }, [stakes]);
+
+  React.useEffect(() => {
     // const getButtonValue = async () => {
     //   const { response } = await userServices.getButtonValue();
     //   if (response?.data) {
@@ -64,14 +75,13 @@ export default function CustomizedDialogStack({ handleMenuClose }: Props) {
   const handleClick = async (e: any) => {
     const { response } = await userServices.updateButtonValue(buttonValue);
     if (response.status) {
-      setOpen(false);
+      handleClose();
       getButtonValue();
     }
   };
 
   return (
     <>
-      <MenuItem onClick={handleClickOpen}>Set Button Value</MenuItem>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -91,7 +101,7 @@ export default function CustomizedDialogStack({ handleMenuClose }: Props) {
             <Button
               sx={{
                 borderRadius: "5px 5px 0px 0px",
-                bgcolor: tab ? colorHex.bg3 : colorHex.bg2,
+                bgcolor: !tab ? colorHex.bg3 : colorHex.bg2,
                 fontWeight: 500,
                 color: "text.secondary",
                 my: 0.5,
