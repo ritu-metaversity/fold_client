@@ -10,7 +10,7 @@ export const AmountInput = styled.input`
     display: none;
   }
   -moz-appearance: textfield;
-  @media (max-width: 1280px) {
+  @media (max-width: 1279px) {
     width: calc(100% - 2px);
     ::-webkit-outer-spin-button,
     ::-webkit-inner-spin-button {
