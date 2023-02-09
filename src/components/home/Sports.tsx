@@ -144,7 +144,7 @@ const Sports = () => {
       </Grid>
       <Box
         id="scrollable-match-list"
-        maxHeight={{ xs: "310px", lg: "60vh" }}
+        maxHeight={{ xs: "310px", lg: "100%" }}
         minHeight={{ lg: "calc(100vh - 440px)" }}
         sx={{
           overflowY: "overlay",

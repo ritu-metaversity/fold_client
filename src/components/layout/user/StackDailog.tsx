@@ -8,7 +8,6 @@ import { userServices } from "../../../utils/api/user/services";
 import { Box } from "@mui/system";
 import { BootstrapDialog, BootstrapDialogTitle } from "../../common/Dailog2";
 import { DialogTitleStyledTypo } from "./styledComponents";
-import { MenuItem } from "./AvatarMenu";
 import { UserContext } from "../../../App";
 
 interface Props {
