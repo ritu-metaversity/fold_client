@@ -70,7 +70,7 @@ const Event = () => {
     // setLoading(false);
   };
 
-  const getFancyOdds = async () => {
+  const getOdds = async () => {
     if (matchId) {
       const { response } = await eventServices.newFancy(matchId);
 
@@ -85,6 +85,8 @@ const Event = () => {
       });
 
       const Odds = transformMatchOdds(response.Odds);
+      console.log("ran2");
+      console.log(fancyOdds);
       if (fancyOdds) {
         const newFancy = { ...fancyOdds };
         console.log("ran");
@@ -95,10 +97,6 @@ const Event = () => {
       setFancyOdds({ ...response, Odds });
     }
   };
-
-  async function getOdds() {
-    getFancyOdds();
-  }
 
   const getPnl = async () => {
     if (!matchId) return;
@@ -131,7 +129,7 @@ const Event = () => {
   useEffect(() => {
     const timer = setInterval(() => getOdds(), 500);
     return () => clearInterval(timer);
-  }, [matchId]);
+  }, [matchId, fancyOdds]);
 
   //pnl polling 5 sec
   useEffect(() => {
@@ -259,12 +257,6 @@ const Event = () => {
         </CustomizedDialog2>
 
         {fancyOdds.Odds?.map((singleOdd: any, index1: any) => {
-          console.log(
-            Boolean(prevFancyOdds?.Odds[index1]) &&
-              singleOdd.runners?.length > 0,
-            singleOdd.runners?.length,
-            "odd"
-          );
           if (
             Boolean(prevFancyOdds?.Odds[index1]) &&
             singleOdd.runners?.length > 0
@@ -300,14 +292,7 @@ const Event = () => {
                       prevValues={prevFancyOdds.Odds[index1]?.runners[index]}
                       values={selection}
                       profits={profits.Odds[singleOdd?.marketId]?.find(
-                        (profit) => {
-                          console.log(
-                            profit.sid,
-                            selection.selectionId,
-                            "profit"
-                          );
-                          return profit.sid == selection.selectionId;
-                        }
+                        (profit) => profit.sid == selection.selectionId
                       )}
                       setBetId={setBetDetails}
                       title={
