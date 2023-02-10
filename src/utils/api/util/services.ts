@@ -1,18 +1,23 @@
 import { ApiServiceInterface, apiHandler } from "../apiService"
 import { utilResources } from "./resource"
 
+interface LoginHistorySearchFilters {
+  type: string;
+  pageSize: number;
+}
+
 export const utilServices = {
-  loginHistory: async () => {
+  loginHistory: async (searchFilters: LoginHistorySearchFilters) => {
     const params: ApiServiceInterface = {
       resource: utilResources.GET_LOGIN_HISTORY,
-      data: { userId: "" },
+      data: { ...searchFilters, userId: "" },
     };
     return await apiHandler(params);
   },
-  passwordHistory: async () => {
+  passwordHistory: async (searchFilters: LoginHistorySearchFilters) => {
     const params: ApiServiceInterface = {
       resource: utilResources.GET_PASSWORD_HISTORY,
-      data: { userId: "" },
+      data: { ...searchFilters, userId: "" },
     };
     return await apiHandler(params);
   },
