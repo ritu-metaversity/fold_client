@@ -5,13 +5,15 @@ import { BlinkImage } from "../layout/styledComponents";
 import Hero, { BannerInterface } from "./Hero";
 import Sports from "./Sports";
 import { userServices } from "../../utils/api/user/services";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import TopCasinoHero from "./TopCasinoHero";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box } from "@mui/material";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
   const [sideBanner, setSideBanner] = useState<BannerInterface[]>([]);
-  const scrollCasinoRef = useRef<HTMLDivElement | null>(null);
   const getBannerList = async () => {
     const { response } = await userServices.bannerList(2);
     if (response?.data?.length) {
@@ -27,59 +29,40 @@ const Home = () => {
     return () => {};
   }, []);
 
-  const isLG = useMediaQuery("(min-width: 1600px)");
-  console.log(isLG, "lg");
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (scrollCasinoRef?.current) {
-        const { scrollTop, offsetHeight, scrollHeight } =
-          scrollCasinoRef.current;
-
-        if (scrollTop + offsetHeight + 20 >= scrollHeight) {
-          scrollCasinoRef.current.scrollBy({ top: -scrollTop });
-        } else {
-          console.log(
-            isLG ? 179 : 150,
-            scrollTop,
-            offsetHeight,
-            scrollHeight,
-            "hgfd"
-          );
-          scrollCasinoRef.current.scrollTo({
-            top: isLG ? scrollTop + 179 : scrollTop + 150,
-            // top: 20000,
-            left: 0,
-          });
-          // scrollCasinoRef.current.scrollBy({
-          //   top: isLG ? 179 : 150,
-          //   left: 0,
-          //   behavior: "smooth",
-          // });
-        }
-      }
-      return () => clearInterval(timer);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [scrollCasinoRef?.current, isLG]);
-
   const homeRightMenu = useMemo(
     () => (
       <BoxWithTitle title="Our Casino">
         <Box
-          ref={scrollCasinoRef}
           maxHeight={"calc(100vh - 135px)"}
           minHeight={"calc(100vh - 135px)"}
           sx={{
             scrollBehavior: "smooth",
-            overflowY: "auto",
             "&::-webkit-scrollbar": {
               width: "0em",
             },
           }}
         >
-          {sideBanner.map((banner) => (
-            <BlinkImage key={banner.name} src={banner.path} alt={banner.name} />
-          ))}
+          <Slider
+            vertical
+            infinite
+            swipeToSlide={true}
+            pauseOnHover={false}
+            pauseOnFocus={false}
+            adaptiveHeight
+            slidesToShow={3}
+            autoplaySpeed={5000}
+            autoplay
+            arrows={false}
+            slidesToScroll={4}
+          >
+            {sideBanner.map((banner) => (
+              <BlinkImage
+                key={banner.name}
+                src={banner.path}
+                alt={banner.name}
+              />
+            ))}
+          </Slider>
         </Box>
       </BoxWithTitle>
     ),

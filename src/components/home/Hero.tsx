@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Carousel } from "react-responsive-carousel";
 import { userServices } from "../../utils/api/user/services";
 import { HeroImage, HeroImageContainer } from "./styledComponents";
-
+import Slider from "react-slick";
 export interface BannerInterface {
   name: string;
   path: string;
@@ -28,21 +27,21 @@ const Hero = () => {
   return (
     <div>
       {" "}
-      <Carousel
-        infiniteLoop
-        autoPlay={true}
-        interval={3000}
-        showArrows={false}
-        showThumbs={false}
-        showIndicators={false}
-        showStatus={false}
+      <Slider
+        infinite
+        swipeToSlide={true}
+        pauseOnHover={false}
+        pauseOnFocus={false}
+        autoplaySpeed={5000}
+        autoplay
+        arrows={false}
       >
         {heroBannerData.map((banner) => (
           <HeroImageContainer key={banner.name + banner.path}>
             <HeroImage src={banner.path} alt={banner.name} />
           </HeroImageContainer>
         ))}
-      </Carousel>
+      </Slider>
     </div>
   );
 };
