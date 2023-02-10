@@ -7,7 +7,7 @@ import Sports from "./Sports";
 import { userServices } from "../../utils/api/user/services";
 import { useEffect, useMemo, useRef, useState } from "react";
 import TopCasinoHero from "./TopCasinoHero";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 
 const Home = () => {
   const [sideBanner, setSideBanner] = useState<BannerInterface[]>([]);
@@ -27,32 +27,51 @@ const Home = () => {
     return () => {};
   }, []);
 
+  const isLG = useMediaQuery("(min-width: 1600px)");
+  console.log(isLG, "lg");
   useEffect(() => {
     const timer = setInterval(() => {
       if (scrollCasinoRef?.current) {
         const { scrollTop, offsetHeight, scrollHeight } =
           scrollCasinoRef.current;
-        if (scrollTop + offsetHeight + 200 >= scrollHeight) {
+
+        if (scrollTop + offsetHeight + 20 >= scrollHeight) {
           scrollCasinoRef.current.scrollBy({ top: -scrollTop });
         } else {
-          scrollCasinoRef.current.scrollBy({ top: 200 });
+          console.log(
+            isLG ? 179 : 150,
+            scrollTop,
+            offsetHeight,
+            scrollHeight,
+            "hgfd"
+          );
+          scrollCasinoRef.current.scrollTo({
+            top: isLG ? scrollTop + 179 : scrollTop + 150,
+            // top: 20000,
+            left: 0,
+          });
+          // scrollCasinoRef.current.scrollBy({
+          //   top: isLG ? 179 : 150,
+          //   left: 0,
+          //   behavior: "smooth",
+          // });
         }
       }
       return () => clearInterval(timer);
-    }, 3000);
-  }, [scrollCasinoRef?.current]);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [scrollCasinoRef?.current, isLG]);
 
   const homeRightMenu = useMemo(
     () => (
       <BoxWithTitle title="Our Casino">
         <Box
           ref={scrollCasinoRef}
-          maxHeight={"calc(100vh - 100px)"}
-          minHeight={"calc(100vh - 100px)"}
+          maxHeight={"calc(100vh - 135px)"}
+          minHeight={"calc(100vh - 135px)"}
           sx={{
             scrollBehavior: "smooth",
             overflowY: "auto",
-            scrollbarWidth: "0px",
             "&::-webkit-scrollbar": {
               width: "0em",
             },
