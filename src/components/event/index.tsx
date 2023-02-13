@@ -32,6 +32,7 @@ import {
 } from "./types";
 import { createProfits, transformMatchOdds } from "./eventUtils";
 import moment from "moment";
+import { create } from "domain";
 
 const Event = () => {
   const [bets, setBets] = useState<BetsInterface | null>(null);
@@ -146,6 +147,18 @@ const Event = () => {
   }, []);
 
   //creating profits
+  useEffect(() => {
+    createProfits({
+      fancyOdds,
+      fancyPnl,
+      betDetails,
+      rechange: true,
+      pnl,
+      profits,
+      setProfits,
+    });
+  }, [betDetails?.marketId]);
+
   useEffect(() => {
     createProfits({
       fancyOdds,

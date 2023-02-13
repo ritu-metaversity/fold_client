@@ -6,6 +6,7 @@ export interface ProfitObjectInterface {
 
 export interface CreateProfitProps {
   fancyOdds: any;
+  rechange?: boolean;
   pnl: Pnl[] | null;
   betDetails: BetDetailsInterface | null;
   fancyPnl: FancyPnl[] | null;

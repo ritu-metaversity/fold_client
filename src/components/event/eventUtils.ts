@@ -23,34 +23,13 @@ export const transformMatchOdds = (odds: any) => {
     });
     return newOdds;
   });
-
-  // const newOdds = {
-  //   ...odds[0],
-  // };
-  // // managing for dynamic no of odds
-
-  // newOdds.runners = odds[0].runners.map((item: any) => {
-  //   item.ex.availableToBack = [
-  //     ...item.ex.availableToBack,
-  //     { price: "", size: "" },
-  //     { price: "", size: "" },
-  //     { price: "", size: "" },
-  //   ].slice(0, 3);
-  //   item.ex.availableToLay = [
-  //     ...item.ex.availableToLay,
-  //     { price: "", size: "" },
-  //     { price: "", size: "" },
-  //     { price: "", size: "" },
-  //   ].slice(0, 3);
-  //   return item;
-  // });
-  // return newOdds;
 };
 
 export const createProfits = ({
   fancyOdds,
   pnl,
   betDetails,
+  rechange,
   fancyPnl,
   profits,
   setProfits,
@@ -66,7 +45,7 @@ export const createProfits = ({
         { pnl: pnlsOdds.pnl3, selectionId: pnlsOdds.selection3 },
       ]
     : [];
-  if (betDetails?.stake != null) {
+  if (betDetails?.stake != null && !rechange) {
     const isBack = betDetails?.isBack || false,
       odds = betDetails?.odds || 0,
       stake = betDetails?.stake || 0;
