@@ -25,8 +25,16 @@ const gridProps1 = {
   // },
   bgcolor: colorHex.back[3],
 };
+const oddBoxes = [
+  <Grid {...gridProps}>No</Grid>,
+  <Grid {...gridProps1}>Yes</Grid>,
+];
 
-export function OddsNumberTitleTwo() {
+const oddBoxes2 = [
+  <Grid {...gridProps1}>Back</Grid>,
+  <Grid {...gridProps}>Lay</Grid>,
+];
+export function OddsNumberTitleTwo({ inverted }: { inverted?: Boolean }) {
   return (
     <Grid container item md={5.8} display={{ xs: "none", lg: "flex" }}>
       <Grid
@@ -50,8 +58,9 @@ export function OddsNumberTitleTwo() {
           lg: "2%",
         }}
       >
-        <Grid {...gridProps}>No</Grid>
-        <Grid {...gridProps1}>Yes</Grid>
+        {inverted ? oddBoxes2 : oddBoxes}
+        {/* <Grid {...gridProps}>No</Grid>
+        <Grid {...gridProps1}>Yes</Grid> */}
       </Grid>
     </Grid>
   );

@@ -31,6 +31,7 @@ import {
   ProfitObjectInterface,
 } from "./types";
 import { createProfits, transformMatchOdds } from "./eventUtils";
+import moment from "moment";
 
 const Event = () => {
   const [bets, setBets] = useState<BetsInterface | null>(null);
@@ -236,7 +237,10 @@ const Event = () => {
             fontWeight={500}
             fontSize={{ xs: "0.6rem", lg: "0.9rem" }}
           >
-            {currentMatch?.date}
+            {moment(fancyOdds?.Odds[0]?.lastMatchTime).format(
+              "DD/MM/YYYY hh:mm:ss"
+            )}
+            {/* {currentMatch?.date} */}
           </Typography>
         </GameHeader>
         {bets && <MybetMobile bets={bets}></MybetMobile>}
@@ -400,8 +404,8 @@ const Event = () => {
                   px={{ xs: 1.5 }}
                   gap={{ md: "3%" }}
                 >
-                  <OddsNumberTitleTwo />
-                  <OddsNumberTitleTwo />
+                  <OddsNumberTitleTwo inverted={fancyMarket === "Fancy3"} />
+                  <OddsNumberTitleTwo inverted={fancyMarket === "Fancy3"} />
 
                   {fancyOdds[fancyMarket].map(
                     (odds: FancyOddsInterface, index: number) => {
@@ -412,6 +416,7 @@ const Event = () => {
                           profit={profits.Fancy.find(
                             (pnl) => pnl.sid === odds.sid
                           )}
+                          inverted={fancyMarket === "Fancy3"}
                           prevOdds={prevFancyOdds[fancyMarket].find(
                             (item: FancyOddsInterface) => item.sid === odds.sid
                           )}

@@ -1,6 +1,10 @@
 import { Grid, Typography } from "@mui/material";
-import React, { Dispatch, SetStateAction, useContext } from "react";
-import { BetDetailsInterface, FancyOddsInterface, ProfitInterface } from "./types";
+import React, { Dispatch, SetStateAction, useContext, useMemo } from "react";
+import {
+  BetDetailsInterface,
+  FancyOddsInterface,
+  ProfitInterface,
+} from "./types";
 import { UserContext } from "../../App";
 import { colorHex } from "../../utils/constants";
 
@@ -12,6 +16,7 @@ interface Props {
   prevOdds: FancyOddsInterface;
   setBetId: Dispatch<SetStateAction<BetDetailsInterface | null>>;
   showPrice?: Boolean;
+  inverted?: Boolean;
 }
 const gridProps = {
   item: true,
@@ -58,6 +63,7 @@ const OddsOnlyTwo = ({
   setMarketId,
   setBetId,
   showPrice,
+  inverted,
 }: Props) => {
   const { isSignedIn, setModal } = useContext(UserContext);
   const handleClick = () => {
@@ -104,6 +110,34 @@ const OddsOnlyTwo = ({
     });
   };
 
+  const oddsBoxes = [
+    <Grid
+      {...gridProps}
+      className={
+        prevOdds?.l1 < odds?.l1
+          ? "odds-up"
+          : prevOdds?.l1 > odds?.l1
+          ? "odds-down"
+          : ""
+      }
+      onClick={handleClick2}
+    >
+      {Values(Number(odds?.l1), odds?.ls1, showPrice)}
+    </Grid>,
+    <Grid
+      {...gridProps2}
+      className={
+        prevOdds?.b1 < odds?.b1
+          ? "odds-up"
+          : prevOdds?.b1 > odds?.b1
+          ? "odds-down"
+          : ""
+      }
+      onClick={handleClick}
+    >
+      {Values(Number(odds?.b1), odds?.bs1, showPrice)}
+    </Grid>,
+  ];
   return (
     <Grid
       container
@@ -158,33 +192,7 @@ const OddsOnlyTwo = ({
         alignItems={"center"}
         gap={{ xs: "1.2%", md: "2%", lg: "2%" }}
       >
-        <Grid
-          {...gridProps}
-          className={
-            prevOdds?.l1 < odds?.l1
-              ? "odds-up"
-              : prevOdds?.l1 > odds?.l1
-              ? "odds-down"
-              : ""
-          }
-          onClick={handleClick2}
-        >
-          {Values(Number(odds?.l1), odds?.ls1, showPrice)}
-        </Grid>
-        <Grid
-          {...gridProps2}
-          className={
-            prevOdds?.b1 < odds?.b1
-              ? "odds-up"
-              : prevOdds?.b1 > odds?.b1
-              ? "odds-down"
-              : ""
-          }
-          onClick={handleClick}
-        >
-          {Values(Number(odds?.b1), odds?.bs1, showPrice)}
-        </Grid>
-
+        {inverted ? oddsBoxes.reverse() : oddsBoxes}
         <Grid
           item
           xs={3.5}

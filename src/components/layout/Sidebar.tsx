@@ -212,7 +212,7 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
             <ListItemButton onClick={() => handleClick(0)}>
               <ListItemText
                 primaryTypographyProps={{ fontSize: "0.9rem" }}
-                primary={"Exchange"}
+                primary={"ALL SPORT"}
               />
               {open[0] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
