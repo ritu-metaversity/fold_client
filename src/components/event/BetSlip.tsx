@@ -76,7 +76,7 @@ export const BetSlip: FC<Props> = ({
   getFancyPnl,
 }) => {
   const { stakes, getBalanceData, activeEventList } = useContext(UserContext);
-  const matches = useMediaQuery("(min-width: 1279px)");
+  const matches = useMediaQuery("(min-width: 1280px)");
   const [loading, setLoading] = useState(false);
 
   // const deviceInfo = {
@@ -255,6 +255,7 @@ export const BetSlip: FC<Props> = ({
             <Button
               fullWidth
               color="inherit"
+              sx={{ color: "white" }}
               onClick={() => setBetId({ ...betId, stake: stakes[key] })}
             >
               {stakes[key]}

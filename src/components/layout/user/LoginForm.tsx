@@ -6,7 +6,7 @@ import {
   useTheme,
   // useThemeProps,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { colorHex } from "../../../utils/constants";
 import Loading from "../loading";
@@ -20,10 +20,20 @@ interface Props {
   };
   handleChange: (e: React.ChangeEvent<any>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  reset: () => void;
 }
 
-function LoginForm({ handleChange, values, handleSubmit, loading }: Props) {
+function LoginForm({
+  handleChange,
+  values,
+  handleSubmit,
+  loading,
+  reset,
+}: Props) {
   const theme = useTheme();
+  useEffect(() => {
+    return () => reset();
+  }, []);
   return (
     <Box position="relative">
       {loading && (

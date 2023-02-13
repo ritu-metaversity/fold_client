@@ -16,14 +16,25 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { utilServices } from "../../utils/api/util/services";
 import { BootstrapTooltip } from "../accountSummary/StatementPopUp";
+import { subtractWeeks } from "../accountSummary";
+import moment from "moment";
+import Loading from "../layout/loading";
 
-export type searchFilters = { type: string; pageSize: number; };
+export type searchFilters = {
+  type: string;
+  pageSize: number;
+  toDate: string;
+  fromDate: string;
+};
 
 const Activity = () => {
   const matches = useMediaQuery("(min-width:1280px)");
+  const [loading, setLoading] = useState(false);
   const [searchFilters, setSearchFilters] = useState<searchFilters>({
     type: "login",
     pageSize: 25,
+    toDate: moment().format("DD-MM-YYYY"),
+    fromDate: moment().subtract(1, "week").format("DD-MM-YYYY"),
   });
   const [rows, setRows] = useState<any[]>([]);
   const [originalRows, setOriginalRows] = useState<any[]>([]);
@@ -33,7 +44,7 @@ const Activity = () => {
   useEffect(() => {
     if (isSignedIn === false) nav("/");
     return () => {};
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSignedIn]);
 
   const [page, setPage] = useState(1);
@@ -45,10 +56,11 @@ const Activity = () => {
 
   useEffect(() => {
     const getList = async () => {
+      setLoading(true);
       if (searchFilters.type === "login") {
-        const { response } = await utilServices.loginHistory();
+        const { response } = await utilServices.loginHistory(searchFilters);
         if (response?.data) {
-          setOriginalRows(response.data)
+          setOriginalRows(response.data);
           setRows(
             response.data.map((row: any, index: number) => {
               const newRow: any = { ...row };
@@ -66,11 +78,11 @@ const Activity = () => {
               );
               return newRow;
             })
-          )
-          setPage(1)
+          );
+          setPage(1);
         }
       } else if (searchFilters.type === "password") {
-        const { response } = await utilServices.passwordHistory();
+        const { response } = await utilServices.passwordHistory(searchFilters);
         if (response?.data) {
           setOriginalRows(response.data);
           setRows(
@@ -105,18 +117,18 @@ const Activity = () => {
             })
           );
           setPage(1);
-
         }
       }
+      setLoading(false);
     };
     getList();
-  }, [searchFilters.type]);
+  }, [searchFilters]);
 
   return (
     <>
       <AccountContainer>
         <CustomizedDialog2
-          open={open>=0}
+          open={open >= 0}
           handleClose={handleClose}
           title="IP Detail"
         >
@@ -142,7 +154,16 @@ const Activity = () => {
           </Grid>
         </CustomizedDialog2>
         {!matches && <Announcement />}
-
+        {loading && (
+          <Box
+            sx={{ opacity: 0.8, zIndex: 20 }}
+            height={"100%"}
+            position="absolute"
+            width={"100%"}
+          >
+            <Loading />
+          </Box>
+        )}
         <Box minHeight="calc(100vh - 60px)">
           <Filter
             searchFilters={searchFilters}
@@ -150,7 +171,10 @@ const Activity = () => {
           ></Filter>
           <Box sx={{ display: { xs: "none", lg: "block" } }}>
             <ActivityTable
-              rows={rows.slice((page-1) * searchFilters.pageSize, page * searchFilters.pageSize)}
+              rows={rows.slice(
+                (page - 1) * searchFilters.pageSize,
+                page * searchFilters.pageSize
+              )}
               columns={
                 searchFilters.type === "login"
                   ? columns.filter((i) => i.id !== "detail")
@@ -163,43 +187,48 @@ const Activity = () => {
             sx={{ display: { xs: "block", lg: "none" } }}
             fontSize="0.75rem"
           >
-            {rows.slice((page-1) * searchFilters.pageSize, page * searchFilters.pageSize).map((row) => (
-              <>
-                <Box
-                  py={{ xs: 0.5, md: 2, lg: 1 }}
-                  key={`${searchFilters.type} - ${row.id}`}
-                  px={{ xs: 1, md: 4, lg: 1 }}
-                >
-                  {columns
-                    .filter((item) =>
-                      searchFilters.type === "login"
-                        ? item.id !== "detail"
-                        : true
-                    )
-                    .map((column) => (
-                      <Box py={0.3}>
-                        <StyledLabel>{column.label}</StyledLabel>
-                        <Box
-                          display="inline-block"
-                          maxWidth={"calc(100% - 130px)"}
-                          component="span"
-                        >
-                          {row[column.id]}{" "}
+            {rows
+              .slice(
+                (page - 1) * searchFilters.pageSize,
+                page * searchFilters.pageSize
+              )
+              .map((row) => (
+                <>
+                  <Box
+                    py={{ xs: 0.5, md: 2, lg: 1 }}
+                    key={`${searchFilters.type} - ${row.id}`}
+                    px={{ xs: 1, md: 4, lg: 1 }}
+                  >
+                    {columns
+                      .filter((item) =>
+                        searchFilters.type === "login"
+                          ? item.id !== "detail"
+                          : true
+                      )
+                      .map((column) => (
+                        <Box py={0.3}>
+                          <StyledLabel>{column.label}</StyledLabel>
+                          <Box
+                            display="inline-block"
+                            maxWidth={"calc(100% - 130px)"}
+                            component="span"
+                          >
+                            {row[column.id]}{" "}
+                          </Box>
                         </Box>
-                      </Box>
-                    ))}
-                </Box>
-                <Divider />
-              </>
-            ))}
+                      ))}
+                  </Box>
+                  <Divider />
+                </>
+              ))}
           </Box>
 
           <Pagination
-            count={Math.ceil(rows.length/searchFilters.pageSize)}
+            count={Math.ceil(rows.length / searchFilters.pageSize)}
             siblingCount={0}
             color="secondary"
-            page={page }
-            onChange={(e,page)=>setPage(page)}
+            page={page}
+            onChange={(e, page) => setPage(page)}
             renderItem={(item) => (
               <PaginationItem
                 slots={{

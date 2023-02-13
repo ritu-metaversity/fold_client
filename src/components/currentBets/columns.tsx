@@ -8,10 +8,9 @@ export const columnSports: ColumnsInterface<any>[] = [
   },
   {
     id: "eventName",
-    label: "event",
+    label: "Event Name",
     minWidth: 70,
   },
-
   {
     id: "marketname",
     label: "Market Name",
@@ -40,7 +39,7 @@ export const columnSports: ColumnsInterface<any>[] = [
   {
     id: "action",
     label: "Action",
-    align: "right"
+    align: "right",
   },
 ];
 
