@@ -1,9 +1,9 @@
 import { useMediaQuery } from "@mui/material";
 import React, { FC, useMemo } from "react";
-import { Carousel } from "react-responsive-carousel";
 import BoxWithTitle from "../common/BoxWithTitle";
 import { BannerInterface } from "./Hero";
 import { HeroImageContainerHalf, HeroImageHalf } from "./styledComponents";
+import Slider from "react-slick";
 
 interface Props {
   sideBanner: BannerInterface[];
@@ -31,10 +31,12 @@ const TopCasinoHero: FC<Props> = ({ sideBanner }) => {
           const b1 = sideBanner[i];
           const b2 = sideBanner[i + 1];
           images.push(
-            <HeroImageContainerHalf key={b1.name + b2.name}>
-              <HeroImageHalf src={b1.path} alt={b1.name} />
-              <HeroImageHalf src={b2.path} alt={b2.name} />
-            </HeroImageContainerHalf>
+            <div>
+              <HeroImageContainerHalf key={b1.name + b2.name}>
+                <HeroImageHalf src={b1.path} alt={b1.name} />
+                <HeroImageHalf src={b2.path} alt={b2.name} />
+              </HeroImageContainerHalf>
+            </div>
           );
         }
         return images;
@@ -48,22 +50,25 @@ const TopCasinoHero: FC<Props> = ({ sideBanner }) => {
   }
   return (
     <BoxWithTitle title="Our Casino">
-      <Carousel
-        infiniteLoop
-        autoPlay
-        interval={3000}
-        showArrows={false}
-        showThumbs={false}
-        showIndicators={false}
-        showStatus={false}
+      <Slider
+        infinite
+        swipeToSlide={true}
+        pauseOnHover={false}
+        pauseOnFocus={false}
+        slidesToShow={1}
+        autoplaySpeed={5000}
+        adaptiveHeight
+        autoplay
+        arrows={false}
+        slidesToScroll={1}
       >
         {/* {sideBanner.map((banner) => (
-          <HeroImageContainer key={banner.name + banner.path}>
-            <HeroImageHalf src={banner.path} alt={banner.name} />
-          </HeroImageContainer>
+          // <HeroImageContainer key={banner.name + banner.path}>
+          <HeroImageHalf src={banner.path} alt={banner.name} />
+          // </HeroImageContainer>
         ))} */}
         {images}
-      </Carousel>
+      </Slider>
     </BoxWithTitle>
   );
 };

@@ -8,8 +8,11 @@
   text-align: center;
 }
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 } 
+html{
+ scroll-behavior: smooth;
+}
 
 /* Track */
 ::-webkit-scrollbar-track {

@@ -29,7 +29,7 @@ export interface AccountStatementFilter extends AccountStatementPayload {
   totalPages: number;
 }
 const Account = () => {
-  const matches = useMediaQuery("(min-width:1280px)");
+  const matches = useMediaQuery("(min-width: 1280px)");
   const { isSignedIn } = useContext(UserContext);
   const [rows, setRows] = useState([]);
   const nav = useNavigate();

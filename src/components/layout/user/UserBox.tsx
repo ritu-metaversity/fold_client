@@ -2,10 +2,9 @@ import { AvatarMenu } from "./AvatarMenu";
 import { KeyboardArrowDownOutlined } from "@mui/icons-material";
 import { Avatar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../../../App";
 import { UserContainer } from "../styledComponents";
-import { userServices } from "../../../utils/api/user/services";
 
 export interface BalanceDataInterface {
   userId: number;
@@ -56,6 +55,7 @@ const UserBox = () => {
           aria-expanded={open ? "true" : undefined}
           gap={{ xs: 1, lg: 1.5 }}
           p={0.8}
+          sx={{ cursor: "pointer" }}
           fontSize={{ xs: "0.75rem", lg: "0.8rem" }}
           onClick={handleClick}
         >

@@ -46,6 +46,7 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
         confirmPassword: "",
         currentPassword: "",
       },
+      validateOnChange: false,
       validate: async (values) => {
         const newError = {
           newPassword:
@@ -59,7 +60,7 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
               ? "New password and confirm Password does not match"
               : undefined,
           currentPassword:
-            values?.confirmPassword === ""
+            values?.currentPassword === ""
               ? "Please enter Current Password"
               : undefined,
         };
@@ -133,7 +134,8 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
           onChange={handleChange}
           //  onChange={ChangeHandlerFunction}
           type={"password"}
-          sx={{ bgcolor: colorHex.bg6, fontSize: "0.8rem", p: 0 }}
+          InputProps={{ sx: { bgcolor: colorHex.bg6 } }}
+          sx={{ fontSize: "0.8rem", p: 0 }}
         />
         <TextField
           fullWidth
@@ -147,8 +149,9 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
           name={"newPassword"}
           value={values.newPassword}
           onChange={handleChange}
+          InputProps={{ sx: { bgcolor: colorHex.bg6 } }}
           type={"password"}
-          sx={{ bgcolor: colorHex.bg6, fontSize: "0.8rem", p: 0 }}
+          sx={{ fontSize: "0.8rem", p: 0 }}
         />{" "}
         <TextField
           fullWidth
@@ -162,8 +165,9 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
           name={"confirmPassword"}
           value={values.confirmPassword}
           onChange={handleChange}
+          InputProps={{ sx: { bgcolor: colorHex.bg6 } }}
           type={"password"}
-          sx={{ bgcolor: colorHex.bg6, fontSize: "0.8rem", p: 0 }}
+          sx={{ fontSize: "0.8rem", p: 0 }}
         />
       </DialogContent>
       <DialogActions>

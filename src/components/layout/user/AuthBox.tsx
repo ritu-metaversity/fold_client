@@ -30,7 +30,7 @@ export function AuthBox() {
     useContext(UserContext);
   const nav = useNavigate();
 
-  const { values, handleChange, handleSubmit } = useFormik({
+  const { values, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: {
       userId: "",
       password: "",
@@ -79,7 +79,7 @@ export function AuthBox() {
     },
     onChange: handleChange,
   };
-  const matches = useMediaQuery("(max-width:1280px)");
+  const matches = useMediaQuery("(max-width:1279px)");
   const handleClose = () => {
     setModal && setModal({ login: false, register: false });
   };
@@ -185,6 +185,12 @@ export function AuthBox() {
               ) : undefined
             }
             variant="contained"
+            sx={{
+              cursor:
+                !matches && (values.userId === "" || values.password === "")
+                  ? "not-allowed !important"
+                  : "",
+            }}
             type={matches ? "reset" : "submit"}
             onClick={() => {
               if (matches) {
@@ -205,6 +211,7 @@ export function AuthBox() {
         <LoginForm
           loading={loading}
           values={values}
+          reset={resetForm}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
         />

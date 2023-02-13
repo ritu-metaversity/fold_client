@@ -11,7 +11,6 @@ import "./components/accountSummary/formCheck.css";
 import "./App.css";
 import Layout from "./components/layout";
 import { Alert, Box, Snackbar, ThemeProvider } from "@mui/material";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { SnackbarUtilsConfigurator } from "./components/layout/snackBarUtil";
 import { SnackbarProvider } from "notistack";
 import Pages from "./components/pages";

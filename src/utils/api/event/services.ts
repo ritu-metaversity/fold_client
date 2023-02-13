@@ -31,6 +31,7 @@ export const eventServices = {
     const params: ApiServiceInterface = {
       resource: {
         URL: "http://89.39.105.69:9001/fancy/:id",
+        // URL: "http://192.168.0.89:9000/fancy/:id",
         METHOD: "GET",
       },
       noAuth: true,
