@@ -31,6 +31,7 @@ export const columns: ColumnsInterface<columnIds>[] = [
     id: "bankName",
     label: "Bank Name / Address",
     minWidth: 70,
+    align: "center",
   },
   {
     id: "ifsc",

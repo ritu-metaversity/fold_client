@@ -1,7 +1,29 @@
 import { Box, Button, styled } from "@mui/material";
 import emotionStyled from "@emotion/styled";
-import { style } from "@mui/system";
 import { colorHex } from "../../utils/constants";
+
+
+
+export const ImageContainer = emotionStyled.div`
+  max-width: 100%;
+  height: 100%;
+  margin: auto;
+  text-align: center;
+  overflow: hidden;
+`;
+
+export const ZoomingImage = emotionStyled.img`
+  max-width: 100%;
+  max-height: 100%;
+  // aspect-ratio: 1;
+  // margin: auto;
+`;
+
+export const ImageThumb = emotionStyled.img`
+  max-width: 40px;
+  max-height: 40px;
+`;
+
 
 export const StyledButtonSmall = styled(Button)(({ theme }) => ({
   boxShadow: "0 0 8px #16191C !important",

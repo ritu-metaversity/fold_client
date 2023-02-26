@@ -14,11 +14,10 @@ import {
   TextField,
   TextFieldProps,
 } from "@mui/material";
-import { Icon, SidebarHeader } from "./styledComponents";
+import { Icon, IconSmall, SidebarHeader } from "./styledComponents";
 import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
 import { ExpandLess, ExpandMore, Menu, Search } from "@mui/icons-material";
 import { colorHex } from "../../utils/constants";
-import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "../home/sportsTabList";
 import { UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
@@ -99,6 +98,13 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
                         (sItem) => sItem.name === sport.sportName
                       )?.iconClass
                     }
+                    style={{
+                      color: matchCollapse[index]
+                        ? "white"
+                        : sportsTabList.find(
+                            (sItem) => sItem.name === sport.sportName
+                          )?.color,
+                    }}
                   />
                 }
               </ListItemIcon>
@@ -175,7 +181,11 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
       }
       {isSignedIn && (
         <Box display={"flex"} alignItems="center" px={1}>
-          {/* <SearchTextField /> */}
+          <IconSmall
+            style={{ marginLeft: 1 }}
+            src={appData?.mobileLogo}
+            alt="logo"
+          />
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -202,7 +212,7 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
             <ListItemButton onClick={() => handleClick(0)}>
               <ListItemText
                 primaryTypographyProps={{ fontSize: "0.9rem" }}
-                primary={"Exchange"}
+                primary={"ALL SPORT"}
               />
               {open[0] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
@@ -278,7 +288,7 @@ const Sidebar = (props: Props) => {
 
 export default Sidebar;
 
-export function SearchTextField(props:TextFieldProps) {
+export function SearchTextField(props: TextFieldProps) {
   return (
     <TextField
       size={"small"}

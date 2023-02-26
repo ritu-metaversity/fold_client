@@ -17,7 +17,9 @@ export const CenterBox = styled(Box)`
 `;
 export const BlinkImage = styled.img`
   width: 100%;
-  margin-block: 3px;
+  aspect-ratio: 12/7;
+  margin-block: 5px;
+  object-fit: cover;
 `;
 export const TopNavLinks = styled(Link)`
   font-weight: 900;
@@ -45,7 +47,7 @@ export const AnnouncementBox = styled(Box)`
   background-color: rgba(112, 49, 86, 0.4);
   padding: 10px;
   height: 2.2rem;
-  @media (max-width: 1280px) {
+  @media (max-width: 1279px) {
     padding-block: 2px;
     border-radius: 5px;
     margin: 5px;
@@ -62,7 +64,7 @@ export const SpeakerIcon = styled.img`
   margin-right: -10px;
   // margin-top: -0.5em;
   text-align: right;
-  @media (max-width: 1280px) {
+  @media (max-width: 1279px) {
     width: 20px;
     margin-top: 0em;
   }
@@ -72,7 +74,8 @@ export const Icon = styled.img`
   padding: 10px;
   cursor: pointer;
   max-width: 250px;
-  @media (max-width: 1280px) {
+  aspect-ratio: 2.4;
+  @media (max-width: 1279px) {
     display: none;
   }
   width: 100%;

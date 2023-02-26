@@ -17,6 +17,7 @@ import { colorHex } from "../../utils/constants";
 import { CustomizedDatePicker } from "../accountSummary/CustomizedDatePicker";
 import { searchFilters } from ".";
 import { subtractWeeks } from "../accountSummary";
+import moment from "moment";
 
 export const LabelText = styled(Typography)(({ theme }) => ({
   color: "text.secondary",
@@ -37,7 +38,12 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSearchFilters({ ...searchFilters, type });
+    setSearchFilters({
+      ...searchFilters,
+      type,
+      toDate: moment(toDate).format("DD-MM-YYYY"),
+      fromDate: moment(fromDate).format("DD-MM-YYYY"),
+    });
   };
   const handlePageSizeChange = (e: SelectChangeEvent<number>) => {
     setPageSize(Number(e.target.value));
@@ -90,7 +96,7 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
             <LabelText>From</LabelText>
             <CustomizedDatePicker
               minDate={new Date(Date.now() - 5184000000)}
-              maxDate={new Date(Date.now() + 24 * 60 * 60 * 1000)}
+              maxDate={new Date()}
               value={fromDate}
               onChange={setFromDate}
             />
@@ -99,7 +105,7 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
             <LabelText>To</LabelText>
             <CustomizedDatePicker
               minDate={new Date(Date.now() - 5184000000)}
-              maxDate={new Date(Date.now() + 24 * 60 * 60 * 1000)}
+              maxDate={new Date()}
               value={toDate}
               onChange={setToDate}
             />

@@ -4,21 +4,21 @@ import HomeLayout from "../layout/homeLayout";
 import DepositManually from "./DepositManually";
 import { userServices } from "../../utils/api/user/services";
 import ActivityTable from "../activityLog/activityLogTable";
-import { columnIds, columns } from "./columns";
-import { IconSmall } from "../layout/styledComponents";
+import { columns } from "./columns";
 import { colorHex } from "../../utils/constants";
+import ImageModal from "./ImageModal";
 
 interface DepositListInterface {
   image: string;
   time: string;
-  status: "Rejected" | "Pending" | "Success";
+  status: "Rejected" | "Pending" | "APPROVED";
   amount: number;
 }
 
 const colorStatus = {
   Rejected: "error.main",
   Pending: "warning.main",
-  Success: "success.main",
+  APPROVED: "success.main",
 };
 
 const Deposit = () => {
@@ -30,6 +30,11 @@ const Deposit = () => {
     if (response.data) {
       setDepositList(response.data);
     }
+  };
+  const [imageSelected, setImageSelected] = useState("");
+
+  const handleClose = () => {
+    setImageSelected("");
   };
   useEffect(() => {
     getDepositList();
@@ -51,6 +56,11 @@ const Deposit = () => {
         minHeight={"90vh"}
       >
         <DepositManually getDepositList={getDepositList} />
+        <ImageModal
+          open={Boolean(imageSelected)}
+          src={imageSelected}
+          handleClose={handleClose}
+        />
         <ActivityTable
           columns={columns}
           rows={
@@ -58,9 +68,14 @@ const Deposit = () => {
               const newItem: any = { ...item };
               newItem.status = <StatusTypography status={item.status} />;
               newItem.image = (
-                <a target={"_blank"} href={item.image}>
-                  <img style={{ width: 50, height: 50 }} src={item.image} />
-                </a>
+                // <a target={"_blank"} href={item.image}>
+                <img
+                  onClick={() => setImageSelected(item.image)}
+                  style={{ width: 50, height: 50 }}
+                  src={item.image}
+                  alt="deposit_image"
+                />
+                // </a>
               );
               return newItem;
             }) || []
@@ -81,6 +96,7 @@ export function StatusTypography({
   return (
     <Typography
       sx={{
+        fontSize: { xs: "0.8rem", lf: "0.9rem" },
         bgcolor: colorHex.bg3,
         borderRadius: 1,
         p: 0.5,

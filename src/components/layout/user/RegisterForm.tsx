@@ -8,9 +8,8 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useFormik } from "formik";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { UserContext } from "../../../App";
 import { colorHex } from "../../../utils/constants";
 import { userServices } from "../../../utils/api/user/services";
 
@@ -18,11 +17,15 @@ import phoneCodes from "../../../utils/phoneCodes.json";
 import Loading from "../loading";
 import snackBarUtil from "../snackBarUtil";
 
-export function RegisterForm() {
-  const { setModal } = useContext(UserContext);
-  const matches = useMediaQuery("(max-width: 580px)");
-  const matchesForModal = useMediaQuery("max-width: 1279px");
+interface RegisterInterface {
+  username?: string;
+  password?: string;
+}
 
+export function RegisterForm() {
+  const [newCredAfterRegister, setNewCredAfterRegister] =
+    useState<RegisterInterface | null>(null);
+  const matches = useMediaQuery("(max-width: 580px)");
   const [loading, setLoading] = useState(false);
 
   const { values, handleChange, handleSubmit } = useFormik({
@@ -31,7 +34,7 @@ export function RegisterForm() {
       password: "",
       confirmPassword: "",
       mobile: "",
-      checked: "checked",
+      checked: true,
       appUrl: window.location.hostname || "atozscore.com",
     },
 
@@ -48,18 +51,42 @@ export function RegisterForm() {
       setLoading(true);
       const { response } = await userServices.register(values);
       if (response) {
-        if (setModal) {
-          if (matchesForModal) {
-            setModal({ login: true });
-          } else {
-            setModal({ register: false });
-          }
-        }
+        setNewCredAfterRegister(response);
       }
       setLoading(false);
     },
   });
-
+  if (newCredAfterRegister) {
+    return (
+      <>
+        <Grid
+          container
+          bgcolor={colorHex.bg3}
+          my={2}
+          py={2}
+          px={2}
+          borderRadius={1}
+          rowGap={6}
+        >
+          <Grid item xs={6}>
+            Username:
+          </Grid>
+          <Grid item xs={6}>
+            {newCredAfterRegister?.username}
+          </Grid>
+          <Grid item xs={6}>
+            Password:
+          </Grid>
+          <Grid item xs={6}>
+            {newCredAfterRegister?.password}
+          </Grid>
+        </Grid>
+        <Typography color="error.main">
+          Please save these details and login with this username and password.
+        </Typography>
+      </>
+    );
+  }
   return (
     <Box position="relative">
       {loading && (
@@ -141,13 +168,9 @@ export function RegisterForm() {
                 </TextField>
                 <TextField
                   margin="dense"
-                  sx={{
-                    flex: 1,
-                  }}
+                  sx={{ flex: 1 }}
                   InputProps={{
-                    sx: {
-                      bgcolor: colorHex.bg4,
-                    },
+                    sx: { bgcolor: colorHex.bg4 },
                   }}
                   type="number"
                   size={matches ? "small" : "medium"}
@@ -165,9 +188,7 @@ export function RegisterForm() {
                 size={matches ? "small" : "medium"}
                 margin="dense"
                 InputProps={{
-                  sx: {
-                    bgcolor: colorHex.bg4,
-                  },
+                  sx: { bgcolor: colorHex.bg4 },
                 }}
                 required
                 name="password"
@@ -185,9 +206,7 @@ export function RegisterForm() {
                 margin="dense"
                 type="password"
                 InputProps={{
-                  sx: {
-                    bgcolor: colorHex.bg4,
-                  },
+                  sx: { bgcolor: colorHex.bg4 },
                 }}
                 required
                 name="confirmPassword"
@@ -198,8 +217,7 @@ export function RegisterForm() {
             <Grid item xs={12}>
               <Form.Check
                 name="checked"
-                value={values.checked}
-                defaultChecked
+                checked={values.checked}
                 onChange={handleChange}
                 type="checkbox"
                 label={
@@ -213,9 +231,7 @@ export function RegisterForm() {
             </Grid>
 
             <Button
-              sx={{
-                p: 2.5,
-              }}
+              sx={{ p: 2.5 }}
               variant="contained"
               color="secondary"
               type="submit"

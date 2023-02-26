@@ -15,4 +15,8 @@ export const utilResources: {
     URL: "https://api.ipify.org/?format=json",
     METHOD: "GET",
   },
+  VALIDATE_JWT: {
+    URL: "util/validate-jwt-token",
+    METHOD: "POST",
+  },
 };

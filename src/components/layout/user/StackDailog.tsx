@@ -8,33 +8,32 @@ import { userServices } from "../../../utils/api/user/services";
 import { Box } from "@mui/system";
 import { BootstrapDialog, BootstrapDialogTitle } from "../../common/Dailog2";
 import { DialogTitleStyledTypo } from "./styledComponents";
-import { MenuItem } from "./AvatarMenu";
+import { UserContext } from "../../../App";
 
+interface Props {
+  handleClose: () => void;
+  open: boolean;
+}
 
-export default function CustomizedDialogStack() {
-  const [open, setOpen] = React.useState(false);
+export default function CustomizedDialogStack({ handleClose, open }: Props) {
   const [tab, setTab] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  const { stakes, getButtonValue } = React.useContext(UserContext);
   const [buttonValue, setButtonValue] = React.useState<{ [x: string]: number }>(
-    {
-      stack1: 0,
-      stack2: 0,
-      stack3: 0,
-      stack4: 0,
-      stack5: 0,
-      stack6: 0,
-      stack7: 0,
-      stack8: 0,
-      stack9: 0,
-      stack10: 0,
-    }
+    stakes
+      ? stakes
+      : {
+          stack1: 0,
+          stack2: 0,
+          stack3: 0,
+          stack4: 0,
+          stack5: 0,
+          stack6: 0,
+          stack7: 0,
+          stack8: 0,
+          stack9: 0,
+          stack10: 0,
+        }
   );
 
   const handleChange = (e: any) => {
@@ -43,23 +42,45 @@ export default function CustomizedDialogStack() {
   };
 
   React.useEffect(() => {
-    const getButtonValue = async () => {
-      const { response } = await userServices.getButtonValue();
-      if (response?.data) {
-        setButtonValue(response.data);
-      }
-    };
+    setButtonValue(
+      stakes
+        ? stakes
+        : {
+            stack1: 0,
+            stack2: 0,
+            stack3: 0,
+            stack4: 0,
+            stack5: 0,
+            stack6: 0,
+            stack7: 0,
+            stack8: 0,
+            stack9: 0,
+            stack10: 0,
+          }
+    );
+  }, [stakes]);
+
+  React.useEffect(() => {
+    // const getButtonValue = async () => {
+    //   const { response } = await userServices.getButtonValue();
+    //   if (response?.data) {
+    //     setButtonValue(response.data);
+    //   }
+    // };
     getButtonValue();
     return () => {};
   }, []);
 
   const handleClick = async (e: any) => {
-    await userServices.updateButtonValue(buttonValue);
+    const { response } = await userServices.updateButtonValue(buttonValue);
+    if (response.status) {
+      handleClose();
+      getButtonValue();
+    }
   };
 
   return (
     <>
-      <MenuItem onClick={handleClickOpen}>Set Button Value</MenuItem>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -69,9 +90,7 @@ export default function CustomizedDialogStack() {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          <DialogTitleStyledTypo >
-            Set Button Value
-          </DialogTitleStyledTypo>
+          <DialogTitleStyledTypo>Set Button Value</DialogTitleStyledTypo>
         </BootstrapDialogTitle>
         <DialogContent
           sx={{ bgcolor: colorHex.bg1, color: "text.secondary" }}
@@ -81,9 +100,9 @@ export default function CustomizedDialogStack() {
             <Button
               sx={{
                 borderRadius: "5px 5px 0px 0px",
-                bgcolor: tab ? colorHex.bg3 : colorHex.bg2,
+                bgcolor: !tab ? colorHex.bg3 : colorHex.bg2,
                 fontWeight: 500,
-                color:"text.secondary",
+                color: "text.secondary",
                 my: 0.5,
                 p: "8px 16px",
                 fontSize: "0.8rem",
@@ -160,7 +179,7 @@ export default function CustomizedDialogStack() {
             color="secondary"
             variant="contained"
             onClick={handleClick}
-            sx={{ color: "white"}}
+            sx={{ color: "white" }}
           >
             Submit
           </Button>

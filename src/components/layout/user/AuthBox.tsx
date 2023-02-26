@@ -1,6 +1,7 @@
-import { LoginForm } from "./LoginForm";
+import LoginForm from "./LoginForm";
 import {
   Box,
+  CircularProgress,
   // Button,
   TextField,
   Tooltip,
@@ -8,11 +9,11 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import "./auth.css";
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CustomizedDialogs from "../../common/Dailog";
 import { LoginButton, UserContainer } from "../styledComponents";
-// import { Info, InfoOutlined } from '@mui/icons-material';
 import { FaInfo } from "react-icons/fa";
 import { useFormik } from "formik";
 import { authServices } from "../../../utils/api/auth/services";
@@ -24,25 +25,28 @@ import CustomizedDialogPassword from "./ResetPasswordDailog";
 
 export function AuthBox() {
   const theme = useTheme();
-  const { setIsSignedIn,appData, isSignedIn, setUser, modal, setModal } =
+  const [loading, setLoading] = useState(false);
+  const { setIsSignedIn, appData, isSignedIn, setUser, modal, setModal } =
     useContext(UserContext);
   const nav = useNavigate();
 
-  const { values, handleChange, handleSubmit } = useFormik({
+  const { values, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: {
       userId: "",
       password: "",
-      checked: "checked",
+      checked: true,
     },
     onSubmit: async () => {
       if (!values.checked) {
         snackBarUtil.error("Please agree Terms and Conditions");
         return;
       }
+      setLoading(true);
       const { response } = await authServices.login(values);
       if (response) {
         if (response.passwordtype === "old" && setModal) {
           setModal({ changePassword: true });
+          setLoading(false);
           nav({
             pathname: "/",
             search: "first-login=true",
@@ -55,6 +59,7 @@ export function AuthBox() {
         if (setUser) setUser(response);
         localStorage.setItem("user", JSON.stringify(response));
       }
+      setLoading(false);
     },
   });
   const textFieldProps = {
@@ -68,17 +73,18 @@ export function AuthBox() {
     required: true,
     inputProps: {
       style: {
-        maxWidth: "10rem",
+        maxWidth: "11.5rem",
         padding: "0.2rem 0.8rem",
       },
     },
     onChange: handleChange,
   };
-  const matches = useMediaQuery("(max-width:1280px)");
+  const matches = useMediaQuery("(max-width:1279px)");
   const handleClose = () => {
     setModal && setModal({ login: false, register: false });
   };
 
+  console.log(values, "val");
   return (
     <UserContainer>
       {!isSignedIn && (
@@ -94,14 +100,16 @@ export function AuthBox() {
             marginLeft: { sm: "1rem" },
           }}
         >
-          {appData?.selfAllowed && <LoginButton
-            variant="contained"
-            onClick={() => {
-              setModal && setModal({ register: true });
-            }}
-          >
-            REGISTER
-          </LoginButton>}
+          {appData?.selfAllowed && (
+            <LoginButton
+              variant="contained"
+              onClick={() => {
+                setModal && setModal({ register: true });
+              }}
+            >
+              REGISTER
+            </LoginButton>
+          )}
           <Box
             display={{
               xs: "none",
@@ -117,8 +125,10 @@ export function AuthBox() {
               value={values.userId}
               onChange={handleChange}
             />
-            <Link
-              to=""
+            <a
+              href="https://wa.me/17168156061"
+              target={"_blank"}
+              rel="noreferrer"
               style={{
                 display: "block",
                 fontSize: "0.7rem",
@@ -128,7 +138,7 @@ export function AuthBox() {
               }}
             >
               Forgot Password ?
-            </Link>
+            </a>
           </Box>
           <Box
             display={{
@@ -147,18 +157,18 @@ export function AuthBox() {
             />
             <Form.Check
               name="checked"
-              value={values.checked}
+              checked={values.checked}
               onChange={handleChange}
               type="checkbox"
-              defaultChecked
+              className="checkBoxInLogin"
               label={
                 <Typography
                   component="span"
-                  fontSize={"0.65rem"}
+                  fontSize={{ lg: "0.75rem" }}
                   sx={{ verticalAlign: "top" }}
                   my={0}
                 >
-                  I agree terms & conditions.
+                  I agree Terms & Conditions.
                   <Tooltip title="I am at least 18 years of age and I have read, accept and agree to the Terms and Conditions , Responsible Gaming , GamCare, Gambling Therapy">
                     <Box component="span">
                       <FaInfo />
@@ -169,8 +179,19 @@ export function AuthBox() {
             />
           </Box>
           <LoginButton
+            startIcon={
+              loading ? (
+                <CircularProgress size={"0.8em"} color="error" />
+              ) : undefined
+            }
             variant="contained"
-            type="submit"
+            sx={{
+              cursor:
+                !matches && (values.userId === "" || values.password === "")
+                  ? "not-allowed !important"
+                  : "",
+            }}
+            type={matches ? "reset" : "submit"}
             onClick={() => {
               if (matches) {
                 setModal && setModal({ login: true });
@@ -188,18 +209,22 @@ export function AuthBox() {
         handleClose={handleClose}
       >
         <LoginForm
+          loading={loading}
           values={values}
+          reset={resetForm}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
         />
       </CustomizedDialogs>
-      {appData?.selfAllowed && <CustomizedDialogs
-        title="Register"
-        open={Boolean(modal.register)}
-        handleClose={handleClose}
-      >
-        <RegisterForm />
-      </CustomizedDialogs>}
+      {appData?.selfAllowed && (
+        <CustomizedDialogs
+          title="Register"
+          open={Boolean(modal.register)}
+          handleClose={handleClose}
+        >
+          {<RegisterForm />}
+        </CustomizedDialogs>
+      )}
     </UserContainer>
   );
 }

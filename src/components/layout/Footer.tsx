@@ -10,7 +10,7 @@ const Footer = () => {
               <b>24X7 Support</b>
             </div>
             <div className="text-center w-100">
-              <span className="phones" >
+              <span className="phones">
                 +447403777777 /+447411114111 /+447380173801 /+447377773777{" "}
               </span>
             </div>
@@ -239,7 +239,7 @@ const Footer = () => {
               Curaçao under the registration number 148532, with address at
               Heelsumstraat 51, Vredenberg, Willemstad, P.O. box Orionweg 5 C,
               Curaçao. The transactions are processed by GIT Operations N.V.
-              which owns and operates the website wolf777.com.
+              which owns and operates the website atozscore.com.
             </span>
           </div>
         </div>

@@ -75,20 +75,20 @@ export const BetSlip: FC<Props> = ({
   getPnl,
   getFancyPnl,
 }) => {
-  const { stakes, activeEventList } = useContext(UserContext);
-  const matches = useMediaQuery("(min-width: 1279px)");
+  const { stakes, getBalanceData, activeEventList } = useContext(UserContext);
+  const matches = useMediaQuery("(min-width: 1280px)");
   const [loading, setLoading] = useState(false);
 
-  const deviceInfo = {
-    userAgent: window.navigator.userAgent,
-    browser: "",
-    device: window.navigator.mediaDevices,
-    deviceType: getDeviceType(),
-    os: window.navigator.platform,
-    os_version: "windows-10",
-    browser_version: "108.0.0.0",
-    orientation: "",
-  };
+  // const deviceInfo = {
+  //   userAgent: window.navigator.userAgent,
+  //   browser: "",
+  //   device: window.navigator.mediaDevices,
+  //   deviceType: getDeviceType(),
+  //   os: window.navigator.platform,
+  //   os_version: "windows-10",
+  //   browser_version: "108.0.0.0",
+  //   orientation: "",
+  // };
   const handleSubmit = async () => {
     if (loading) return;
     setLoading(true);
@@ -114,6 +114,7 @@ export const BetSlip: FC<Props> = ({
     setBetId(null);
     if (response) {
       getBets();
+      getBalanceData();
       setTimeout(() => {
         if (data.isFancy) {
           getFancyPnl();
@@ -166,25 +167,47 @@ export const BetSlip: FC<Props> = ({
       )}
       {matches && <TitleStyled>Bet Slip</TitleStyled>}
       <Box p={0.5}>
-        <Box display="flex" fontSize="0.8rem" justifyContent={"space-between"}>
-          <Typography fontSize="0.8rem">{<>{getMatchName}</>}</Typography>
-          <Close
-            sx={{ cursor: "pointer" }}
-            fontSize="small"
-            onClick={() => setBetId(null)}
-          />
+        <Box
+          display="flex"
+          fontSize={{ xs: "0.9rem", lg: "0.8rem" }}
+          justifyContent={"space-between"}
+        >
+          <Typography fontSize={{ xs: "0.9rem", lg: "0.8rem" }}>
+            {<>{getMatchName}</>}
+          </Typography>
+          {matches && (
+            <Close
+              sx={{ cursor: "pointer" }}
+              fontSize="small"
+              onClick={() => setBetId(null)}
+            />
+          )}
         </Box>
-        <Typography fontSize="0.8rem">{betId.marketName}</Typography>
+        <Typography fontSize={{ xs: "0.9rem", lg: "0.8rem" }}>
+          {betId.marketName}
+        </Typography>
         <Box
           display="flex"
           my="0.8rem"
           justifyContent={"space-between"}
           alignItems="center"
         >
-          <Typography fontSize="0.8rem" fontWeight={700} color="primary.main">
+          <Typography
+            fontSize={{ xs: "0.9rem", lg: "0.8rem" }}
+            fontWeight={700}
+            color="primary.main"
+          >
             {betId.name}
           </Typography>
-          {matches ? (
+          {betId.isFancy || betId.marketName === "Bookmaker" ? (
+            <Typography
+              fontSize={{ xs: "0.9rem", lg: "0.8rem" }}
+              fontWeight={700}
+              color="primary.main"
+            >
+              {betId.odds}
+            </Typography>
+          ) : matches ? (
             <TextField
               type={"number"}
               size="small"
@@ -254,6 +277,7 @@ export const BetSlip: FC<Props> = ({
             <Button
               fullWidth
               color="inherit"
+              sx={{ color: "white" }}
               onClick={() => setBetId({ ...betId, stake: stakes[key] })}
             >
               {stakes[key]}
@@ -265,7 +289,7 @@ export const BetSlip: FC<Props> = ({
         color="secondary"
         variant="contained"
         disabled={loading}
-        sx={{ my: 2, color: "text.secondary" }}
+        sx={{ my: 2, color: betId?.stake ? "white" : "text.secondary" }}
         fullWidth
         onClick={handleSubmit}
       >

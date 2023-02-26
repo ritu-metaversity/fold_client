@@ -10,7 +10,6 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
 import { authServices } from "../../../utils/api/auth/services";
-import CustomizedDialogPassword from "./ResetPasswordDailog";
 import CustomizedDialogStack from "./StackDailog";
 
 export const MenuItem = styled(MuiMenuItem)`
@@ -19,7 +18,7 @@ export const MenuItem = styled(MuiMenuItem)`
 `;
 
 export function AvatarMenu({ anchorEl, open, handleClose }: any) {
-  const { setIsSignedIn, isSignedIn, appData, setUser } =
+  const { setIsSignedIn, setModal, isSignedIn, appData, setUser } =
     useContext(UserContext);
 
   const nav = useNavigate();
@@ -41,19 +40,35 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
       }
     }
   };
+  const handleClickOpen = () => {
+    if (setModal) {
+      setModal({ changePassword: true });
+      handleClose();
+    }
+  };
+
+
+  const [openStake, setOpenStake] = React.useState(false);
+  const handleStakeOpen = () => {
+    handleClose();
+    setOpenStake(true);
+  };
+
+  const handleStakeClose = () => {
+    setOpenStake(false);
+  };
 
   const matches = useMediaQuery("(max-width : 1280px)");
   return (
     <>
+      <CustomizedDialogStack open={openStake} handleClose={handleStakeClose} />
       <Menu
         id="basic-menu"
         elevation={0}
         anchorEl={anchorEl}
         open={open}
         disableScrollLock
-        keepMounted
         onClose={handleClose}
-        sx={{}}
         MenuListProps={{
           sx: {
             fontSize: "0.8rem",
@@ -103,8 +118,10 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         <MenuItem onClick={() => closeAndNav("/report/activity")}>
           Activity Log
         </MenuItem>
-        <CustomizedDialogStack />
-        <CustomizedDialogPassword />
+        <MenuItem onClick={handleStakeOpen}>Set Button Value</MenuItem>
+
+        <MenuItem onClick={handleClickOpen}>Change Password</MenuItem>
+        {/* <CustomizedDialogPassword /> */}
         <Divider sx={{ borderColor: "gray" }} />
         <MenuItem onClick={logout}>Log out</MenuItem>
       </Menu>

@@ -43,7 +43,7 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
         </Box>
       )}
       <AmountForm amount={amount} setAmount={setAmount} />
-      {amount > 0 && (
+      {amount >= 100 && (
         <Box maxWidth={{ md: 500 }} m={{ md: "auto" }}>
           <h2 style={{ color: "white" }}>Pay {amount}/-</h2>
           <PaymentMethods />

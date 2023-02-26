@@ -96,7 +96,7 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
         if (localStorage.getItem("token")) {
           localStorage.clear();
           snackBarUtil.error("Session changed. Please login again!");
-          // window.location.replace("/");
+          window.location.replace("/");
         }
       } else {
         if (errorRef && setErrorRef) {
@@ -109,9 +109,17 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
         if (errorRef && setErrorRef) {
           setErrorRef(false);
         }
-        result["response"] = response.data;
+        console.log(response, "response");
+        if (response.data?.status === false) {
+          result["error"] = response.data;
+        } else {
+          result["response"] = response.data;
+        }
       }
     });
+  
+  console.log(result, "res");
+  
 
   return result;
 };
