@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wolf-client
+  labels:
+    name: wolf-client
+spec:
+  progressDeadlineSeconds: 1800
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wolf-client
+  template:
+    metadata:
+      labels:
+        app: wolf-client
+    spec:
+      containers:
+      - name: wolf-client
+        image: gcr.io/ssweb-prod-project/result-setter-service:git_commit_id
+        resources:
+          requests:
+            memory: "500Mi"  # 500 mb
+            cpu: "500m" # 0.5 cores
+          limits:
+            memory: "1000Mi"
+            cpu: "1000m"
+      restartPolicy: Always
