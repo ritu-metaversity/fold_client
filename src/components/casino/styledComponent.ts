@@ -10,9 +10,9 @@ export const StyledComing = styled.div`
 `;
 
 export const StyledGameThumb = styled.img`
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
-  aspect-ratio: 1.8778;
+  /* aspect-ratio: 1.8778; */
   object-fit: cover;
 `;
 export const CasinoIcon = styled.img`
