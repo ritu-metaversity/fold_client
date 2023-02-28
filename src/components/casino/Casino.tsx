@@ -1,4 +1,12 @@
-import { styled, Tab, Tabs, tabClasses, Grid, IconButton } from "@mui/material";
+import {
+  styled,
+  Tab,
+  Tabs,
+  tabClasses,
+  Grid,
+  IconButton,
+  useMediaQuery,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import HomeLayout from "../layout/homeLayout";
@@ -23,6 +31,7 @@ const StyledTab = styled(Tab)(({ theme }) => ({
 
 const Casino = () => {
   const [value, setValue] = useState("1");
+  const matches = useMediaQuery("(max-width: 1279px)");
   return (
     <HomeLayout>
       <Tabs
@@ -42,7 +51,7 @@ const Casino = () => {
         TabIndicatorProps={{ sx: { display: "none" } }}
         sx={{
           position: "sticky",
-          top: 80,
+          top: matches ? 50 : 80,
           paddingY: "0.8rem",
           backgroundColor: colorHex.bg6,
         }}
@@ -73,7 +82,7 @@ const Casino = () => {
           {GameInfoList.map((item) => (
             <Box
               width={{
-                xs: "calc(100% - 10px)",
+                xs: "calc(50% - 10px)",
                 sm: "calc(50% - 10px)",
                 md: "calc(25% - 10px)",
                 lg: "calc(20% - 10px)",
