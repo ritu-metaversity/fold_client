@@ -69,91 +69,120 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
       setModal({ login: true });
     }
   };
-  const exchangeList = useMemo(
+  const matchList = useMemo(
     () =>
-      activeEventList?.map((sport, index) => (
-        <>
-          {" "}
-          <ListItem
-            sx={{
-              p: 0,
-              gap: 0,
-              bgcolor: matchCollapse[index]
-                ? sportsTabList.find((sItem) => sItem.name === sport.sportName)
-                    ?.color
-                : "",
-            }}
-            key={sport.sportId + sport.totalMatch}
-            disablePadding
-          >
+      activeEventList?.map((sport, index) =>
+        sport.matchList.map((match) => (
+          <ListItem key={sport.sportId + "-" + match.matchId} disablePadding>
             <ListItemButton
-              onClick={() => handleClickSport(index)}
-              sx={{ color: matchCollapse[index] ? "white" : "text.secondary" }}
+              onClick={() =>
+                isSignedIn
+                  ? nav(`/sports/details/?match-id=${match.matchId}`)
+                  : openLoginModal()
+              }
+              sx={{ color: "text.secondary" }}
             >
-              <ListItemIcon sx={{ minWidth: 30 }}>
-                {
-                  <i
-                    className={
-                      sportsTabList.find(
-                        (sItem) => sItem.name === sport.sportName
-                      )?.iconClass
-                    }
-                    style={{
-                      color: matchCollapse[index]
-                        ? "white"
-                        : sportsTabList.find(
-                            (sItem) => sItem.name === sport.sportName
-                          )?.color,
-                    }}
-                  />
-                }
-              </ListItemIcon>
               <ListItemText
                 primaryTypographyProps={{
                   sx: {
                     fontSize: "0.8rem",
                   },
                 }}
-                primary={`${sport.sportName} ( ${sport.totalMatch} )`}
+                primary={`${match.matchName} ( ${match.date})`}
               />
-              {matchCollapse[index] ? (
-                <ExpandLess fontSize="small" />
-              ) : (
-                <ExpandMore fontSize="small" />
-              )}
             </ListItemButton>
           </ListItem>
-          <Collapse in={matchCollapse[index]}>
-            {sport.matchList.map((match) => (
-              <ListItem
-                key={sport.sportId + "-" + match.matchId}
-                disablePadding
-              >
-                <ListItemButton
-                  onClick={() =>
-                    isSignedIn
-                      ? nav(`/sports/details/?match-id=${match.matchId}`)
-                      : openLoginModal()
-                  }
-                  sx={{ color: "text.secondary" }}
-                >
-                  <ListItemText
-                    primaryTypographyProps={{
-                      sx: {
-                        fontSize: "0.8rem",
-                      },
-                    }}
-                    primary={`${match.matchName} ( ${match.date})`}
-                  />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </Collapse>
-        </>
-      )),
+        ))
+      ) || [],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [activeEventList, matchCollapse, isSignedIn]
+    [activeEventList, isSignedIn]
   );
+  // const exchangeList = useMemo(
+  //   () =>
+  //     activeEventList?.map((sport, index) => (
+  //       <>
+  //         {" "}
+  //         <ListItem
+  //           sx={{
+  //             p: 0,
+  //             gap: 0,
+  //             bgcolor: matchCollapse[index]
+  //               ? sportsTabList.find((sItem) => sItem.name === sport.sportName)
+  //                   ?.color
+  //               : "",
+  //           }}
+  //           key={sport.sportId + sport.totalMatch}
+  //           disablePadding
+  //         >
+  //           <ListItemButton
+  //             onClick={() => handleClickSport(index)}
+  //             sx={{ color: matchCollapse[index] ? "white" : "text.secondary" }}
+  //           >
+  //             <ListItemIcon sx={{ minWidth: 30 }}>
+  //               {
+  //                 <i
+  //                   className={
+  //                     sportsTabList.find(
+  //                       (sItem) => sItem.name === sport.sportName
+  //                     )?.iconClass
+  //                   }
+  //                   style={{
+  //                     color: matchCollapse[index]
+  //                       ? "white"
+  //                       : sportsTabList.find(
+  //                           (sItem) => sItem.name === sport.sportName
+  //                         )?.color,
+  //                   }}
+  //                 />
+  //               }
+  //             </ListItemIcon>
+  //             <ListItemText
+  //               primaryTypographyProps={{
+  //                 sx: {
+  //                   fontSize: "0.8rem",
+  //                 },
+  //               }}
+  //               primary={`${sport.sportName} ( ${sport.totalMatch} )`}
+  //             />
+  //             {matchCollapse[index] ? (
+  //               <ExpandLess fontSize="small" />
+  //             ) : (
+  //               <ExpandMore fontSize="small" />
+  //             )}
+  //           </ListItemButton>
+  //         </ListItem>
+  //         <Collapse in={matchCollapse[index]}>
+  //           {/* {sport.matchList.map((match) => (
+  //             <ListItem
+  //               key={sport.sportId + "-" + match.matchId}
+  //               disablePadding
+  //             >
+  //               <ListItemButton
+  //                 onClick={() =>
+  //                   isSignedIn
+  //                     ? nav(`/sports/details/?match-id=${match.matchId}`)
+  //                     : openLoginModal()
+  //                 }
+  //                 sx={{ color: "text.secondary" }}
+  //               >
+  //                 <ListItemText
+  //                   primaryTypographyProps={{
+  //                     sx: {
+  //                       fontSize: "0.8rem",
+  //                     },
+  //                   }}
+  //                   primary={`${match.matchName} ( ${match.date})`}
+  //                 />
+  //               </ListItemButton>
+  //             </ListItem>
+  //           ))} */}
+  //           {matchList[index]}
+  //         </Collapse>
+  //       </>
+  //     )),
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   [activeEventList, matchCollapse, isSignedIn]
+  // );
 
   const nav = useNavigate();
 
@@ -217,7 +246,93 @@ const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
               {open[0] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
           </SidebarHeader>
-          <Collapse in={open[0]}>{exchangeList}</Collapse>
+          <Collapse in={open[0]}>
+            {activeEventList?.map((sport, index) => (
+              <>
+                {" "}
+                <ListItem
+                  sx={{
+                    p: 0,
+                    gap: 0,
+                    bgcolor: matchCollapse[index]
+                      ? sportsTabList.find(
+                          (sItem) => sItem.name === sport.sportName
+                        )?.color
+                      : "",
+                  }}
+                  key={sport.sportId + sport.totalMatch}
+                  disablePadding
+                >
+                  <ListItemButton
+                    onClick={() => handleClickSport(index)}
+                    sx={{
+                      color: matchCollapse[index] ? "white" : "text.secondary",
+                    }}
+                  >
+                    <ListItemIcon sx={{ minWidth: 30 }}>
+                      {
+                        <i
+                          className={
+                            sportsTabList.find(
+                              (sItem) => sItem.name === sport.sportName
+                            )?.iconClass
+                          }
+                          style={{
+                            color: matchCollapse[index]
+                              ? "white"
+                              : sportsTabList.find(
+                                  (sItem) => sItem.name === sport.sportName
+                                )?.color,
+                          }}
+                        />
+                      }
+                    </ListItemIcon>
+                    <ListItemText
+                      primaryTypographyProps={{
+                        sx: {
+                          fontSize: "0.8rem",
+                        },
+                      }}
+                      primary={`${sport.sportName} ( ${sport.totalMatch} )`}
+                    />
+                    {matchCollapse[index] ? (
+                      <ExpandLess fontSize="small" />
+                    ) : (
+                      <ExpandMore fontSize="small" />
+                    )}
+                  </ListItemButton>
+                </ListItem>
+                <Collapse in={matchCollapse[index]}>
+                  {/* {sport.matchList.map((match) => (
+              <ListItem
+                key={sport.sportId + "-" + match.matchId}
+                disablePadding
+              >
+                <ListItemButton
+                  onClick={() =>
+                    isSignedIn
+                      ? nav(`/sports/details/?match-id=${match.matchId}`)
+                      : openLoginModal()
+                  }
+                  sx={{ color: "text.secondary" }}
+                >
+                  <ListItemText
+                    primaryTypographyProps={{
+                      sx: {
+                        fontSize: "0.8rem",
+                      },
+                    }}
+                    primary={`${match.matchName} ( ${match.date})`}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))} */}
+                  {matchList[index]}
+                </Collapse>
+              </>
+            ))}
+            {/* {exchangeList} */}
+          </Collapse>
         </List>
       </Box>
     </Box>

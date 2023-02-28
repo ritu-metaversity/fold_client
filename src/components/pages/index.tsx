@@ -1,6 +1,7 @@
 import { Box } from "@mui/system";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import CasinoGame from "../casino/game/CasinoGame";
 import Loading from "../layout/loading";
 import Withdraw from "../Withdraw/Withdraw";
 
@@ -32,10 +33,11 @@ const Pages = () => {
             <Route path="currentbets" element={<CurrentBets />} />
           </Route>
           <Route path="/casino" element={<Casino />} />
+          <Route path="/casino/:id" element={<CasinoGame />} />
           <Route path="/virtual-casino" element={<Casino />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/deposit" element={<Deposit />} />
-          <Route path="/withdraw-request" element={<Withdraw/>} />
+          <Route path="/withdraw-request" element={<Withdraw />} />
         </Routes>
       </Suspense>
     </div>
