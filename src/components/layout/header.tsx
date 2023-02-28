@@ -60,7 +60,7 @@ export default function Header(props: Props) {
   };
 
   const { pathname } = useLocation();
-  const { isSignedIn, appData } = React.useContext(UserContext);
+  const { isSignedIn, appData, setModal } = React.useContext(UserContext);
   const matches = useMediaQuery("(min-width:1280px)");
   const drawerWidthLocal = notShowSidebar ? 0 : drawerWidth;
   const drawerWidthXlLocal = notShowSidebar ? 0 : drawerWidthXl;
@@ -95,6 +95,12 @@ export default function Header(props: Props) {
         </TopNavLinks>
         {isSignedIn && <Circle />}
         <TopNavLinks
+          onClick={(e) => {
+            if (!isSignedIn) {
+              e.preventDefault();
+              setModal && setModal({ login: true });
+            }
+          }}
           style={
             pathname === "/casino"
               ? {
