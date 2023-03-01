@@ -1,20 +1,24 @@
 // import { Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import Marquee from "react-fast-marquee";
-import { AnnouncementBox, SpeakerIcon } from "./styledComponents";
+import { UserContext } from "../../App";
+import {
+  AnnouncementBox,
+  SpeakerIcon,
+  UserContainer,
+} from "./styledComponents";
 export function Announcement() {
+  const { announcement } = useContext(UserContext);
   return (
     <AnnouncementBox>
-      <Marquee gradient={false} speed={100}
-        style={{ overflow: "hidden", color: "white", fontSize:"0.8rem" }}
+      <Marquee
+        gradient={false}
+        speed={100}
+        style={{ overflow: "hidden", color: "white", fontSize: "0.8rem" }}
       >
-        ball lottery started play now and grab your coupons
+        {announcement}
       </Marquee>
-        <SpeakerIcon
-          alt=""
-          
-          src={"/assets/images/speaker.svg"}
-        />
+      <SpeakerIcon alt="" src={"/assets/images/speaker.svg"} />
     </AnnouncementBox>
   );
 }

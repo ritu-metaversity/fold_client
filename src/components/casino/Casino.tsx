@@ -8,12 +8,14 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HomeLayout from "../layout/homeLayout";
 import GameInfoList from "./gameInfo.json";
 import { CasinoIcon, StyledGameThumb } from "./styledComponent";
 import { colorHex } from "../../utils/constants";
 import { Link } from "react-router-dom";
+import { casinoService } from "../../utils/api/casino/service";
+import { UserContext } from "../../App";
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: "20px",
@@ -29,8 +31,50 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   },
 }));
 
+export interface CasinoList {
+  gameId: number;
+  gameCode: string;
+  gameName: string;
+  imageUrl: string;
+}
 const Casino = () => {
   const [value, setValue] = useState("1");
+  const [casinoTypes, setCasinoTypes] = useState<
+    {
+      id: number;
+      logo: string;
+      name: string;
+    }[]
+  >([]);
+  const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
+
+  const { setCasinoId } = useContext(UserContext);
+  const getCasinoList = async () => {
+    const { response } = await casinoService.getCasinoListByType(Number(value));
+    if (response) {
+      setCasinoList(response.data || []);
+    }
+  };
+
+  useEffect(() => {
+    getCasinoList();
+  }, [value]);
+
+  useEffect(() => {
+    const getCasinoTypes = async () => {
+      const { response } = await casinoService.getCasinoTypes();
+      if (response) {
+        setCasinoTypes(response?.data || []);
+        if (response.data[0]) {
+          setValue(response.data[0].id);
+          getCasinoList();
+        }
+      }
+    };
+    getCasinoTypes();
+    return () => {};
+  }, []);
+
   const matches = useMediaQuery("(max-width: 1279px)");
   return (
     <HomeLayout>
@@ -56,15 +100,20 @@ const Casino = () => {
           backgroundColor: colorHex.bg6,
         }}
         value={value}
-        onChange={(e, value) => setValue(value)}
+        onChange={(e, value) => {
+          setValue(value);
+          setCasinoId && setCasinoId(value);
+        }}
       >
-        <StyledTab
-          icon={<CasinoIcon src="/assets/images/casino.png" />}
-          iconPosition="start"
-          value="1"
-          label="Our Casino"
-        />
-        <StyledTab
+        {casinoTypes.map((item) => (
+          <StyledTab
+            icon={<CasinoIcon src={item.logo} />}
+            iconPosition="start"
+            value={item.id}
+            label={item.name}
+          />
+        ))}
+        {/* <StyledTab
           icon={<CasinoIcon src="/assets/images/casino.png" />}
           iconPosition="start"
           value="2"
@@ -75,11 +124,11 @@ const Casino = () => {
           iconPosition="start"
           value="3"
           label="Our Virtual"
-        />
+        /> */}
       </Tabs>
       <Box bgcolor={colorHex.bg1}>
         <Box m={"10px"} display={"flex"} flexWrap="wrap" gap={"10px"}>
-          {GameInfoList.map((item) => (
+          {casinoList.map((item) => (
             <Box
               width={{
                 xs: "calc(50% - 10px)",
@@ -90,8 +139,8 @@ const Casino = () => {
               }}
               m="auto"
             >
-              <Link to={"/casino/" + item.data__game_id}>
-                <StyledGameThumb src={item.data__thumb} alt="thumb" />{" "}
+              <Link to={"/casino/" + item.gameId}>
+                <StyledGameThumb src={item.imageUrl} alt="thumb" />{" "}
               </Link>
             </Box>
           ))}

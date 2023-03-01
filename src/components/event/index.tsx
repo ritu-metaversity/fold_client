@@ -87,11 +87,8 @@ const Event = () => {
       });
 
       const Odds = transformMatchOdds(response.Odds);
-      console.log("ran2");
-      console.log(fancyOdds);
       if (fancyOdds) {
         const newFancy = { ...fancyOdds };
-        console.log("ran");
         setPrevFancyOdds(newFancy);
       } else {
         setPrevFancyOdds({ ...response, Odds });

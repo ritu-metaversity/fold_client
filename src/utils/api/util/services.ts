@@ -34,4 +34,10 @@ export const utilServices = {
     };
     return await apiHandler(params);
   },
+  marqueeMessage: async () => {
+    const params = {
+      resource: utilResources.MARQUEE_MESSAGE,
+    };
+    return await apiHandler(params);
+  },
 };

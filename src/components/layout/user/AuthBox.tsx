@@ -84,7 +84,6 @@ export function AuthBox() {
     setModal && setModal({ login: false, register: false });
   };
 
-  console.log(values, "val");
   return (
     <UserContainer>
       {!isSignedIn && (
