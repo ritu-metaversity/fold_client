@@ -75,9 +75,7 @@ export function WithdrawForm({
       validateOnChange: true,
 
       onSubmit: async (values) => {
-        console.log(errors, isValid, "form");
         setLoading(true);
-        console.log("called api");
         const { response } = await userServices.selfWithdraw(values);
         if (response) {
           resetForm();
@@ -86,7 +84,6 @@ export function WithdrawForm({
         setLoading(false);
       },
     });
-  console.log(errors, isValid, "form");
 
   return (
     <>

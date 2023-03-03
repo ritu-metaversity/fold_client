@@ -24,6 +24,7 @@ import CustomizedDialogPassword from "./components/layout/user/ResetPasswordDail
 import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
+import { utilResources } from "./utils/api/util/resource";
 
 interface ModalState {
   login?: boolean;
@@ -42,6 +43,9 @@ interface UserContextType {
   activeEventList: SportInterface[] | null;
   appData: AppDataInterface | null;
   balance: BalanceDataInterface | null;
+  announcement: string;
+  casinoId: number;
+  setCasinoId?: Dispatch<SetStateAction<number>>;
   getBalanceData: () => Promise<void>;
 }
 
@@ -79,13 +83,17 @@ export const UserContext = createContext<UserContextType>({
   activeEventList: null,
   appData: null,
   balance: null,
+  announcement: "",
+  casinoId: 1,
   getBalanceData: async () => {},
 });
 
 function App() {
   const [isSignedIn, setIsSignedIn] = useState<null | boolean>(null);
   const [user, setUser] = useState(null);
+  const [announcement, setAnnouncement] = useState("");
   const [modal, setModal] = useState<ModalState>({ login: false });
+  const [casinoId, setCasinoId] = useState<number>(1);
   const [stakes, setButtonValue] = React.useState<{ [x: string]: number }>(
     defaultStake
   );
@@ -128,6 +136,7 @@ function App() {
       setIsSignedIn(false);
     }
   };
+
   useEffect(() => {
     const getNewEventOpen = async () => {
       const { response } = await sportServices.leftMenu();
@@ -139,6 +148,13 @@ function App() {
         setActiveEventList([]);
       }
     };
+    const getAnnouncement = async () => {
+      const { response } = await utilServices.marqueeMessage();
+      if (response) {
+        setAnnouncement(response.message);
+      }
+    };
+    getAnnouncement();
     getSelfAllowed();
     getNewEventOpen();
   }, []);
@@ -203,6 +219,9 @@ function App() {
               stakes,
               getButtonValue,
               isSignedIn,
+              announcement,
+              casinoId,
+              setCasinoId,
               user,
               appData,
               modal,

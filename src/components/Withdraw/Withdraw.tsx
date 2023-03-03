@@ -22,7 +22,6 @@ const Withdraw = () => {
 
   const getWithdrawList = async () => {
     const { response } = await userServices.getWithdrawList();
-    console.log(response, "withdraw data");
     if (response.data) {
       setWithdrawList(response.data);
     }

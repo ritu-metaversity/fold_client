@@ -102,8 +102,6 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
         setLoading(false);
       },
     });
-  console.log(errors, "error");
-  console.log(isValid, "valid");
   return (
     <form onSubmit={handleSubmit}>
       {loading && (
