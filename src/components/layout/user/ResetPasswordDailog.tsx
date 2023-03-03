@@ -23,7 +23,6 @@ function CustomizedDialogPassword() {
   const handleClose = () => {
     searchParams.delete("first-login");
     setSearchParams(searchParams);
-    console.log("ran");
     setOpen(false);
     // if (setModal) setModal((prev) => ({ ...prev, changePassword: false }));
   };

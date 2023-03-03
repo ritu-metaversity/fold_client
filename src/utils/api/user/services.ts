@@ -163,7 +163,6 @@ export const userServices = {
       resource: userResources.SELF_WITHDRAW,
       data,
     };
-    console.log(params, "pra");
     return await apiWithSnackbar(params);
   },
   selfDeposit: async (data: FormData) => {

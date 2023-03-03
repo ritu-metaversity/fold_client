@@ -109,7 +109,6 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
         if (errorRef && setErrorRef) {
           setErrorRef(false);
         }
-        console.log(response, "response");
         if (response.data?.status === false) {
           result["error"] = response.data;
         } else {
@@ -117,10 +116,6 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
         }
       }
     });
-  
-  console.log(result, "res");
-  
-
   return result;
 };
 

@@ -19,4 +19,8 @@ export const utilResources: {
     URL: "util/validate-jwt-token",
     METHOD: "POST",
   },
+  MARQUEE_MESSAGE: {
+    URL: "enduser/get-user-message",
+    METHOD: "POST",
+  },
 };

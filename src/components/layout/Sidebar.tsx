@@ -1,26 +1,15 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import { Drawers } from "./SideBarDrawer";
+import React, { useContext } from "react";
 
 import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import {
-  Box,
-  Collapse,
-  IconButton,
-  InputAdornment,
-  TextField,
-  TextFieldProps,
-} from "@mui/material";
-import { Icon, IconSmall, SidebarHeader } from "./styledComponents";
+
+import { Box, InputAdornment, TextField, TextFieldProps } from "@mui/material";
 import { drawerWidth, drawerWidthXl, topNavHeight } from "./header";
-import { ExpandLess, ExpandMore, Menu, Search } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
 import { colorHex } from "../../utils/constants";
-import { sportsTabList } from "../home/sportsTabList";
 import { UserContext } from "../../App";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import SideBarCasino from "./SideBarCasino";
 
 interface Props extends React.PropsWithChildren {
   /**
@@ -43,308 +32,13 @@ export interface SportInterface {
   }[];
 }
 
-const Drawers = ({ handleDrawerToggle }: { handleDrawerToggle: any }) => {
-  const [open, setOpen] = useState([true, false, false, false, false]);
-  const [matchCollapse, setMatchCollapse] = useState<boolean[]>([]);
-  const { isSignedIn, setModal, appData, activeEventList } =
-    useContext(UserContext);
-
-  const handleClick = (index: number) => {
-    const openList = [...open];
-    openList[index] = !open[index];
-    setOpen(openList);
-  };
-  const handleClickSport = (index: number) => {
-    const openList = [...matchCollapse];
-    openList[index] = !matchCollapse[index];
-    setMatchCollapse(openList);
-  };
-
-  useEffect(() => {
-    if (activeEventList)
-      setMatchCollapse(activeEventList.map((i: any) => (i ? false : false)));
-  }, [activeEventList]);
-  const openLoginModal = () => {
-    if (setModal) {
-      setModal({ login: true });
-    }
-  };
-  const matchList = useMemo(
-    () =>
-      activeEventList?.map((sport, index) =>
-        sport.matchList.map((match) => (
-          <ListItem key={sport.sportId + "-" + match.matchId} disablePadding>
-            <ListItemButton
-              onClick={() =>
-                isSignedIn
-                  ? nav(`/sports/details/?match-id=${match.matchId}`)
-                  : openLoginModal()
-              }
-              sx={{ color: "text.secondary" }}
-            >
-              <ListItemText
-                primaryTypographyProps={{
-                  sx: {
-                    fontSize: "0.8rem",
-                  },
-                }}
-                primary={`${match.matchName} ( ${match.date})`}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))
-      ) || [],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [activeEventList, isSignedIn]
-  );
-  // const exchangeList = useMemo(
-  //   () =>
-  //     activeEventList?.map((sport, index) => (
-  //       <>
-  //         {" "}
-  //         <ListItem
-  //           sx={{
-  //             p: 0,
-  //             gap: 0,
-  //             bgcolor: matchCollapse[index]
-  //               ? sportsTabList.find((sItem) => sItem.name === sport.sportName)
-  //                   ?.color
-  //               : "",
-  //           }}
-  //           key={sport.sportId + sport.totalMatch}
-  //           disablePadding
-  //         >
-  //           <ListItemButton
-  //             onClick={() => handleClickSport(index)}
-  //             sx={{ color: matchCollapse[index] ? "white" : "text.secondary" }}
-  //           >
-  //             <ListItemIcon sx={{ minWidth: 30 }}>
-  //               {
-  //                 <i
-  //                   className={
-  //                     sportsTabList.find(
-  //                       (sItem) => sItem.name === sport.sportName
-  //                     )?.iconClass
-  //                   }
-  //                   style={{
-  //                     color: matchCollapse[index]
-  //                       ? "white"
-  //                       : sportsTabList.find(
-  //                           (sItem) => sItem.name === sport.sportName
-  //                         )?.color,
-  //                   }}
-  //                 />
-  //               }
-  //             </ListItemIcon>
-  //             <ListItemText
-  //               primaryTypographyProps={{
-  //                 sx: {
-  //                   fontSize: "0.8rem",
-  //                 },
-  //               }}
-  //               primary={`${sport.sportName} ( ${sport.totalMatch} )`}
-  //             />
-  //             {matchCollapse[index] ? (
-  //               <ExpandLess fontSize="small" />
-  //             ) : (
-  //               <ExpandMore fontSize="small" />
-  //             )}
-  //           </ListItemButton>
-  //         </ListItem>
-  //         <Collapse in={matchCollapse[index]}>
-  //           {/* {sport.matchList.map((match) => (
-  //             <ListItem
-  //               key={sport.sportId + "-" + match.matchId}
-  //               disablePadding
-  //             >
-  //               <ListItemButton
-  //                 onClick={() =>
-  //                   isSignedIn
-  //                     ? nav(`/sports/details/?match-id=${match.matchId}`)
-  //                     : openLoginModal()
-  //                 }
-  //                 sx={{ color: "text.secondary" }}
-  //               >
-  //                 <ListItemText
-  //                   primaryTypographyProps={{
-  //                     sx: {
-  //                       fontSize: "0.8rem",
-  //                     },
-  //                   }}
-  //                   primary={`${match.matchName} ( ${match.date})`}
-  //                 />
-  //               </ListItemButton>
-  //             </ListItem>
-  //           ))} */}
-  //           {matchList[index]}
-  //         </Collapse>
-  //       </>
-  //     )),
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   [activeEventList, matchCollapse, isSignedIn]
-  // );
-
-  const nav = useNavigate();
-
-  return (
-    <Box
-      // p={{ lg: 1 }}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-        minHeight: "100vh",
-        bgcolor: {
-          xs: colorHex.bg3,
-          lg: isSignedIn ? colorHex.bg3 : colorHex.bg6,
-        },
-      }}
-    >
-      {
-        <Icon
-          onClick={() => nav("/")}
-          src={appData?.mobileLogo}
-          // src="/assets/images/icon.png"
-          alt="ico"
-        />
-      }
-      {isSignedIn && (
-        <Box display={"flex"} alignItems="center" px={1}>
-          <IconSmall
-            style={{ marginLeft: 1 }}
-            src={appData?.mobileLogo}
-            alt="logo"
-          />
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerToggle}
-            sx={{ pt: 1, ml: "auto", display: { lg: "none" } }}
-          >
-            <Menu fontSize="large" />
-          </IconButton>
-        </Box>
-      )}
-      <Box
-        sx={{
-          bgcolor: { lg: colorHex.bg7 },
-          overflow: "auto",
-          height: "100%",
-          position: "relative",
-          maxHeight: "calc(100vh - 180px)",
-        }}
-      >
-        <List sx={{ p: 0, m: 0 }}>
-          <SidebarHeader
-            sx={{ borderBottom: "1px solid " + colorHex.borderLine }}
-          >
-            <ListItemButton onClick={() => handleClick(0)}>
-              <ListItemText
-                primaryTypographyProps={{ fontSize: "0.9rem" }}
-                primary={"ALL SPORT"}
-              />
-              {open[0] ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-          </SidebarHeader>
-          <Collapse in={open[0]}>
-            {activeEventList?.map((sport, index) => (
-              <>
-                {" "}
-                <ListItem
-                  sx={{
-                    p: 0,
-                    gap: 0,
-                    bgcolor: matchCollapse[index]
-                      ? sportsTabList.find(
-                          (sItem) => sItem.name === sport.sportName
-                        )?.color
-                      : "",
-                  }}
-                  key={sport.sportId + sport.totalMatch}
-                  disablePadding
-                >
-                  <ListItemButton
-                    onClick={() => handleClickSport(index)}
-                    sx={{
-                      color: matchCollapse[index] ? "white" : "text.secondary",
-                    }}
-                  >
-                    <ListItemIcon sx={{ minWidth: 30 }}>
-                      {
-                        <i
-                          className={
-                            sportsTabList.find(
-                              (sItem) => sItem.name === sport.sportName
-                            )?.iconClass
-                          }
-                          style={{
-                            color: matchCollapse[index]
-                              ? "white"
-                              : sportsTabList.find(
-                                  (sItem) => sItem.name === sport.sportName
-                                )?.color,
-                          }}
-                        />
-                      }
-                    </ListItemIcon>
-                    <ListItemText
-                      primaryTypographyProps={{
-                        sx: {
-                          fontSize: "0.8rem",
-                        },
-                      }}
-                      primary={`${sport.sportName} ( ${sport.totalMatch} )`}
-                    />
-                    {matchCollapse[index] ? (
-                      <ExpandLess fontSize="small" />
-                    ) : (
-                      <ExpandMore fontSize="small" />
-                    )}
-                  </ListItemButton>
-                </ListItem>
-                <Collapse in={matchCollapse[index]}>
-                  {/* {sport.matchList.map((match) => (
-              <ListItem
-                key={sport.sportId + "-" + match.matchId}
-                disablePadding
-              >
-                <ListItemButton
-                  onClick={() =>
-                    isSignedIn
-                      ? nav(`/sports/details/?match-id=${match.matchId}`)
-                      : openLoginModal()
-                  }
-                  sx={{ color: "text.secondary" }}
-                >
-                  <ListItemText
-                    primaryTypographyProps={{
-                      sx: {
-                        fontSize: "0.8rem",
-                      },
-                    }}
-                    primary={`${match.matchName} ( ${match.date})`}
-                  />
-                </ListItemButton>
-              </ListItem>
-            ))} */}
-                  {matchList[index]}
-                </Collapse>
-              </>
-            ))}
-            {/* {exchangeList} */}
-          </Collapse>
-        </List>
-      </Box>
-    </Box>
-  );
-};
-
 const Sidebar = (props: Props) => {
   const { window } = props;
+  const { pathname } = useLocation();
   const { isSignedIn } = useContext(UserContext);
   const container =
     window !== undefined ? () => window().document.body : undefined;
-
+  console.log(pathname.split("/")[1] === "casino", pathname);
   return (
     <Box
       component="nav"
@@ -378,7 +72,11 @@ const Sidebar = (props: Props) => {
         }}
       >
         {/* {drawer} */}
-        <Drawers handleDrawerToggle={props.handleDrawerToggle} />
+        {pathname.split("/")[1] === "casino" ? (
+          <SideBarCasino handleDrawerToggle={props.handleDrawerToggle} />
+        ) : (
+          <Drawers handleDrawerToggle={props.handleDrawerToggle} />
+        )}
       </Drawer>
       <Drawer
         variant="permanent"
@@ -394,7 +92,11 @@ const Sidebar = (props: Props) => {
         }}
         open
       >
-        <Drawers handleDrawerToggle={props.handleDrawerToggle} />
+        {pathname.split("/")[1] === "casino" ? (
+          <SideBarCasino handleDrawerToggle={props.handleDrawerToggle} />
+        ) : (
+          <Drawers handleDrawerToggle={props.handleDrawerToggle} />
+        )}
         {/* {drawer} */}
       </Drawer>
     </Box>
@@ -410,14 +112,9 @@ export function SearchTextField(props: TextFieldProps) {
       placeholder="Search"
       sx={{
         fontSize: "0.8rem",
-        "& fieldset": {
-          border: "none",
-        },
+        "& fieldset": { border: "none" },
         flex: 1,
-        m: {
-          sx: 1,
-          lg: 0,
-        },
+        m: { sx: 1, lg: 0 },
       }}
       fullWidth
       InputProps={{
