@@ -177,7 +177,7 @@ function App() {
 
   useEffect(() => {
     const time = setInterval(() => {
-      getButtonValue();
+      getBalance();
     }, 1000);
     return () => clearInterval(time);
   }, []);
