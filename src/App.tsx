@@ -24,7 +24,6 @@ import CustomizedDialogPassword from "./components/layout/user/ResetPasswordDail
 import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
-import { utilResources } from "./utils/api/util/resource";
 
 interface ModalState {
   login?: boolean;
@@ -174,6 +173,13 @@ function App() {
       setIsSignedIn(false);
     }
     return () => {};
+  }, []);
+
+  useEffect(() => {
+    const time = setInterval(() => {
+      getButtonValue();
+    }, 1000);
+    return () => clearInterval(time);
   }, []);
 
   useEffect(() => {
