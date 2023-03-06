@@ -144,6 +144,19 @@ export const userServices = {
     };
     return await apiWithErrorSnackbar(params);
   },
+  accountStatementDetails: async (data: {
+    betType: number;
+    marketId: string;
+  }) => {
+    const params = {
+      resource: userResources.ACCOUNT_STATEMENT_DETAIL,
+      data: {
+        userId: "",
+        ...data,
+      },
+    };
+    return await apiWithErrorSnackbar(params);
+  },
   bannerList: async (type: number) => {
     const params = {
       resource: userResources.BANNER_LIST,

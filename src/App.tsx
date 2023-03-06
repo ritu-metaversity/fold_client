@@ -24,7 +24,6 @@ import CustomizedDialogPassword from "./components/layout/user/ResetPasswordDail
 import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
-import { utilResources } from "./utils/api/util/resource";
 
 interface ModalState {
   login?: boolean;
@@ -93,7 +92,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [announcement, setAnnouncement] = useState("");
   const [modal, setModal] = useState<ModalState>({ login: false });
-  const [casinoId, setCasinoId] = useState<number>(1);
+  const [casinoId, setCasinoId] = useState<number>(323334);
   const [stakes, setButtonValue] = React.useState<{ [x: string]: number }>(
     defaultStake
   );
@@ -174,6 +173,13 @@ function App() {
       setIsSignedIn(false);
     }
     return () => {};
+  }, []);
+
+  useEffect(() => {
+    const time = setInterval(() => {
+      getBalance();
+    }, 1000);
+    return () => clearInterval(time);
   }, []);
 
   useEffect(() => {

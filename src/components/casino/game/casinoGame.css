@@ -1,1 +1,26 @@
 .toggleable-list-title{display: none;}
+
+.mobile_if {
+    height: calc(100vh - 220px);
+}
+
+.desktop_if{
+    height: calc(100vh);
+    /* height: 2000px; */
+       margin-top: -9rem;
+
+}
+@media (min-width: 900px) {
+   .desktop_if{
+       margin-top: -8.5rem;
+    height: calc(100vh - 1rem);
+    }
+    
+}
+@media (min-width: 1024px) {
+   .desktop_if{
+       margin-top: -6.9rem;
+    height: calc(100vh - 3rem);
+    }
+    
+}
