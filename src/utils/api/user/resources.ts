@@ -59,6 +59,10 @@ export const userResources: {
     URL: "enduser/account-statement",
     METHOD: "POST",
   },
+  ACCOUNT_STATEMENT_DETAIL: {
+    URL: "bets/search-bet-market-and-user",
+    METHOD: "POST",
+  },
   PNL_BOOK: {
     URL: "enduser/user-fancy-book",
     METHOD: "POST",

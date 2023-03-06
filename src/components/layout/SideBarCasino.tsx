@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -11,6 +17,7 @@ import { UserContext } from "../../App";
 import { colorHex } from "../../utils/constants";
 import { casinoService } from "../../utils/api/casino/service";
 import { CasinoList } from "../casino/Casino";
+import Loading from "./loading";
 
 const SideBarCasino = ({
   handleDrawerToggle,
@@ -22,23 +29,30 @@ const SideBarCasino = ({
 
   const { pathname } = useLocation();
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
-
+  const [loading, setLoading] = useState(false);
   const handleClick = () => {
     setOpen((o) => !o);
   };
 
-  const getCasinoList = async () => {
+  const getCasinoList = useCallback(async () => {
+    if (!isSignedIn) return;
+    if (loading) return;
+    console.log("in side");
+    setLoading(true);
     const { response } = await casinoService.getCasinoListByType(
       Number(casinoId)
     );
     if (response) {
       setCasinoList(response.data || []);
+    } else {
+      setCasinoList([]);
     }
-  };
+    setLoading(false);
+  }, [isSignedIn, casinoId]);
 
   useEffect(() => {
     getCasinoList();
-  }, [casinoId]);
+  }, [getCasinoList]);
 
   const openLoginModal = () => {
     if (setModal) {

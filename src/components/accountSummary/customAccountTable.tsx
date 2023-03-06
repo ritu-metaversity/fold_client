@@ -50,23 +50,23 @@ export default function AccountTable({
   columns,
   rows,
 }: Props) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState("");
   const handleClose = () => {
-    setOpen(false);
+    setOpen("");
   };
-  const handleRowClick = () => {
-    setOpen(true);
+  const handleRowClick = (id: string) => {
+    setOpen(id);
   };
   const breakpoints = useWidth();
   return (
     <>
       <CustomizedDialog2
         maxWidth={breakpoints}
-        open={open}
+        open={Boolean(open)}
         handleClose={handleClose}
         title=" Result"
       >
-        <StatementPopUp />
+        {open && <StatementPopUp marketId={open} />}
       </CustomizedDialog2>
       <TableContainer
         component={Paper}
@@ -101,7 +101,7 @@ export default function AccountTable({
             {rows.map((row) => (
               <TableRow
                 key={row.index + row.date}
-                onClick={handleRowClick}
+                onClick={() => handleRowClick(row.marketid)}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 {columns.map(({ id, align }) => (
