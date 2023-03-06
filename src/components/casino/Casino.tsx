@@ -37,8 +37,9 @@ export interface CasinoList {
   gameName: string;
   imageUrl: string;
 }
+
 const Casino = () => {
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState("323334");
   const [casinoTypes, setCasinoTypes] = useState<
     {
       id: number;
@@ -46,6 +47,7 @@ const Casino = () => {
       name: string;
     }[]
   >([]);
+
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
 
   const { setCasinoId } = useContext(UserContext);

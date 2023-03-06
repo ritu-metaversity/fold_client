@@ -78,9 +78,9 @@ const CasinoGame = () => {
         <>
           <Box
             right={5}
-            top={130}
+            top={95}
             width={340}
-            height={30}
+            height={70}
             position="absolute"
             bgcolor="#0f2327"
           ></Box>

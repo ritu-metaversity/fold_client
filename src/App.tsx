@@ -93,7 +93,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [announcement, setAnnouncement] = useState("");
   const [modal, setModal] = useState<ModalState>({ login: false });
-  const [casinoId, setCasinoId] = useState<number>(1);
+  const [casinoId, setCasinoId] = useState<number>(323334);
   const [stakes, setButtonValue] = React.useState<{ [x: string]: number }>(
     defaultStake
   );
