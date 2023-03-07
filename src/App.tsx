@@ -181,7 +181,7 @@ function App() {
       getBalance();
     }, 1000);
     return () => clearInterval(time);
-  }, []);
+  }, [isSignedIn]);
 
   useEffect(() => {
     if (isSignedIn) {
