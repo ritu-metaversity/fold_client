@@ -21,33 +21,38 @@ const CasinoGame = () => {
 
   return (
     <HomeLayout>
-      <Box mt={{ lg: 5 }} height="100%">
+      <Box mt={{ lg: 5 }} height="calc(100vh - 110px)">
         {matches ? (
           <>
-            <Box
-              right={10}
+            {/* <Box
+              right={0}
               top={0}
               width={100}
-              height={44}
+              height={50}
               position="absolute"
-              zIndex={999999 + 1}
+              // zIndex={999999 + 1}
               bgcolor="#0f2327"
             ></Box>
             <Box
               left={10}
               top={0}
               width={50}
-              zIndex={999999 + 1}
+              // zIndex={999999 + 1}
               height={44}
               position="absolute"
               bgcolor="#0f2327"
-            ></Box>
+            ></Box> */}
             <iframe
               src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
               height="calc(100vh - 100px)"
               className="mobile_if"
               width="100%"
               title="mobile"
+              allowFullScreen={true}
+              // webkitAllowFullScreen="true"
+              // mozAllowFullScreen="true"
+              // oAllowFullScreen="true"
+              // msAllowFullScreen="true"
             ></iframe>
           </>
         ) : (

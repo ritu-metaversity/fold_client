@@ -90,42 +90,43 @@ const Casino = () => {
   const matches = useMediaQuery("(max-width: 1279px)");
   return (
     <HomeLayout>
-      <Tabs
-        variant="scrollable"
-        scrollButtons={true}
-        TabScrollButtonProps={{
-          sx: {
-            opacity: "1 !important",
-            bgcolor: colorHex.bg2,
-            borderRadius: "50%",
-            width: "40px",
-            margin: "auto",
-            height: "40px",
-            marginRight: "10px",
-          },
-        }}
-        TabIndicatorProps={{ sx: { display: "none" } }}
-        sx={{
-          position: "sticky",
-          top: matches ? 50 : 80,
-          paddingY: "0.8rem",
-          backgroundColor: colorHex.bg6,
-        }}
-        value={value}
-        onChange={(e, value) => {
-          setValue(value);
-          if (setCasinoId) setCasinoId(value);
-        }}
-      >
-        {casinoTypes.map((item) => (
-          <StyledTab
-            icon={<CasinoIcon src={item.logo} />}
-            iconPosition="start"
-            value={item.id}
-            label={item.name}
-          />
-        ))}
-        {/* <StyledTab
+      {casinoTypes?.length > 0 && (
+        <Tabs
+          variant="scrollable"
+          scrollButtons={true}
+          TabScrollButtonProps={{
+            sx: {
+              opacity: "1 !important",
+              bgcolor: colorHex.bg2,
+              borderRadius: "50%",
+              width: "40px",
+              margin: "auto",
+              height: "40px",
+              marginRight: "10px",
+            },
+          }}
+          TabIndicatorProps={{ sx: { display: "none" } }}
+          sx={{
+            position: "sticky",
+            top: matches ? 50 : 80,
+            paddingY: "0.8rem",
+            backgroundColor: colorHex.bg6,
+          }}
+          value={value}
+          onChange={(e, value) => {
+            setValue(value);
+            if (setCasinoId) setCasinoId(value);
+          }}
+        >
+          {casinoTypes.map((item) => (
+            <StyledTab
+              icon={<CasinoIcon src={item.logo} />}
+              iconPosition="start"
+              value={item.id}
+              label={item.name}
+            />
+          ))}
+          {/* <StyledTab
           icon={<CasinoIcon src="/assets/images/casino.png" />}
           iconPosition="start"
           value="2"
@@ -137,11 +138,17 @@ const Casino = () => {
           value="3"
           label="Our Virtual"
         /> */}
-      </Tabs>
+        </Tabs>
+      )}
       <Box bgcolor={colorHex.bg1}>
         <Box m={"10px"} display={"flex"} flexWrap="wrap" gap={"10px"}>
           {!(casinoList?.length > 0) && (
-            <Typography textAlign={"center"} flex={1}>
+            <Typography
+              textAlign={"center"}
+              sx={{ verticalAlign: "center" }}
+              // height={"50vh"}
+              flex={1}
+            >
               NO Casino Found
             </Typography>
           )}
