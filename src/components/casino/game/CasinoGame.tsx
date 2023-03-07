@@ -26,16 +26,18 @@ const CasinoGame = () => {
           <>
             <Box
               right={10}
-              top={100}
+              top={0}
               width={100}
               height={44}
               position="absolute"
+              zIndex={999999 + 1}
               bgcolor="#0f2327"
             ></Box>
             <Box
               left={10}
-              top={100}
+              top={0}
               width={50}
+              zIndex={999999 + 1}
               height={44}
               position="absolute"
               bgcolor="#0f2327"

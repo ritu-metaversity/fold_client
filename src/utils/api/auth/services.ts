@@ -4,6 +4,7 @@ import { authResourcs as authResources } from "./resources";
 interface LoginPayload {
   userId: string;
   password: string;
+  appUrl: string;
   // userIp: string;
   // userType: string;
   // type: string;
