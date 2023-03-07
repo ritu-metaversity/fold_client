@@ -1,7 +1,7 @@
 .toggleable-list-title{display: none;}
 
 .mobile_if {
-    height: calc(100vh - 100px);
+    height: calc(100vh - 220px);
 }
 
 .desktop_if{

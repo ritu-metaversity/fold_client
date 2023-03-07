@@ -1,5 +1,5 @@
 import { Drawers } from "./SideBarDrawer";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 
 import Drawer from "@mui/material/Drawer";
 
@@ -38,7 +38,11 @@ const Sidebar = (props: Props) => {
   const { isSignedIn } = useContext(UserContext);
   const container =
     window !== undefined ? () => window().document.body : undefined;
-  console.log(pathname.split("/")[1] === "casino", pathname);
+
+  const sideBar = useMemo(
+    () => <SideBarCasino handleDrawerToggle={props.handleDrawerToggle} />,
+    [props.handleDrawerToggle]
+  );
   return (
     <Box
       component="nav"
@@ -73,7 +77,7 @@ const Sidebar = (props: Props) => {
       >
         {/* {drawer} */}
         {pathname.split("/")[1] === "casino" ? (
-          <SideBarCasino handleDrawerToggle={props.handleDrawerToggle} />
+          <>{sideBar}</>
         ) : (
           <Drawers handleDrawerToggle={props.handleDrawerToggle} />
         )}
@@ -93,7 +97,7 @@ const Sidebar = (props: Props) => {
         open
       >
         {pathname.split("/")[1] === "casino" ? (
-          <SideBarCasino handleDrawerToggle={props.handleDrawerToggle} />
+          <>{sideBar}</>
         ) : (
           <Drawers handleDrawerToggle={props.handleDrawerToggle} />
         )}
@@ -103,7 +107,7 @@ const Sidebar = (props: Props) => {
   );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);
 
 export function SearchTextField(props: TextFieldProps) {
   return (
