@@ -14,13 +14,14 @@ import {
   TooltipProps,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyledTableCell,
   StyledTableHeaderCell,
 } from "./StyledTableHeaderCell";
 import { colorHex } from "../../utils/constants";
 import { Form } from "react-bootstrap";
+import { userServices } from "../../utils/api/user/services";
 
 type columnsIdType =
   | "nation"
@@ -37,9 +38,11 @@ interface ResultColumnsInterface {
   align?: "right" | "left";
   minWidth?: number;
 }
-export const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} arrow classes={{ popper: className }} />
-))(({ theme }) => ({
+export const BootstrapTooltip = styled(
+  ({ className, ...props }: TooltipProps) => (
+    <Tooltip {...props} arrow classes={{ popper: className }} />
+  )
+)(({ theme }) => ({
   [`& .${tooltipClasses.arrow}`]: {
     color: theme.palette.common.black,
   },
@@ -150,16 +153,77 @@ const ResultRows = [
   },
 ];
 
-export function StatementPopUp() {
+interface Props {
+  marketId: string;
+}
 
-  const [checked, setChecked] = useState("");
+interface RowInterface {
+  nation: Element;
+  rate: number;
+  bhav: number;
+  amount: number;
+  win: 0;
+  date: string;
+  ip: string;
+  browser: Element;
+  type: string;
+}
+
+export function StatementPopUp({ marketId }: Props) {
+  const [betType, setbetType] = useState(1);
+  const [ResultRows, setResultRows] = useState<RowInterface[]>([]);
+  const [data, setData] = useState<any>();
+  const getDetails = async () => {
+    const { response } = await userServices.accountStatementDetails({
+      marketId,
+      betType,
+    });
+    if (response.data) {
+      let newRow = response.data.betList.map((item: any) => ({
+        nation: (
+          <label>
+            <Form.Check
+              type="checkbox"
+              color="black"
+              style={{ display: "inline", marginRight: 4 }}
+            />
+            {item.selectionname}
+          </label>
+        ),
+        rate: item.pricevalue,
+        bhav: item.odds,
+        amount: item.stack,
+        win: item.pnl,
+        date: item.matchedtime,
+        ip: item.ipAddress,
+        browser: (
+          <BootstrapTooltip enterTouchDelay={1} title={item.deviceInfo}>
+            <Box sx={{ textDecoration: "underline", cursor: "pointer" }}>
+              Detail
+            </Box>
+          </BootstrapTooltip>
+        ),
+        type: item.isback ? "back" : "lay",
+      }));
+
+      setResultRows(newRow);
+      setData(response.data);
+    }
+  };
+
+  useEffect(() => {
+    getDetails();
+
+    return () => {};
+  }, [betType, marketId]);
+
   return (
     <Box fontSize={"0.75rem"} lineHeight="2">
       <Box>{`Cricket -> Test Matches -> Pakistan v England -> oddeven`}</Box>
       <Box display={"flex"} justifyContent="space-between">
         <span style={{ flex: 1 }}>Winner: 1</span>
         <span style={{ flex: 1, textAlign: "right" }}>
-          Game Time: 09/12/2022 10:30:00
+          Game Time: {data?.betList[0]?.matchedtime}
         </span>
       </Box>
 
@@ -167,9 +231,14 @@ export function StatementPopUp() {
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
-        onChange={(e:any,value:string)=>setChecked(value)}
+        onChange={(e: any, value: string) => setbetType(Number(value))}
       >
-        {["all", "back", "lay", "deleted"].map((value) => (
+        {[
+          { val: 1, name: "all" },
+          { val: 2, name: "back" },
+          { val: 3, name: "lay" },
+          { val: 4, name: "deleted" },
+        ].map((value) => (
           <FormControlLabel
             slotProps={{
               typography: {
@@ -177,9 +246,16 @@ export function StatementPopUp() {
                 fontSize: "0.8rem",
               },
             }}
-            value={value}
-            control={<Form.Check checked={value===checked} onChange={(e:any)=>setChecked(value)} style={{ paddingInline: 10 }} type="radio" />}
-            label={value}
+            value={value.val}
+            control={
+              <Form.Check
+                checked={value.val === betType}
+                onChange={(e: any) => setbetType(value.val)}
+                style={{ paddingInline: 10 }}
+                type="radio"
+              />
+            }
+            label={value.name}
           />
         ))}
       </RadioGroup>
@@ -187,14 +263,22 @@ export function StatementPopUp() {
         <Typography component={"span"} fontSize="inherit">
           Total Bets:
         </Typography>
-        <Typography component={"span"} fontSize="inherit" color="#39ff39">
-          1
+        <Typography
+          component={"span"}
+          fontSize="inherit"
+          color={data?.totalBets >= 0 ? "green" : "red"}
+        >
+          {data?.totalBets}
         </Typography>
         <Typography component={"span"} fontSize="inherit">
           Total Wins:
         </Typography>
-        <Typography component={"span"} fontSize="inherit" color="#39ff39">
-          98
+        <Typography
+          component={"span"}
+          fontSize="inherit"
+          color={data?.totalStake >= 0 ? "green" : "red"}
+        >
+          {data?.totalStake}
         </Typography>
       </Box>
       <TableContainer
@@ -250,12 +334,19 @@ export function StatementPopUp() {
                 }}
               >
                 {resultColumns.map(({ id, align }) => (
-                  <StyledTableCell align={align}>{row[id]}</StyledTableCell>
+                  <StyledTableCell align={align}>
+                    <>{row[id]}</>
+                  </StyledTableCell>
                 ))}
               </TableRow>
             ))}
           </TableBody>
         </Table>
+        {!(ResultRows.length > 0) && (
+          <Typography width="100%" textAlign="center">
+            No Records Found
+          </Typography>
+        )}
       </TableContainer>
     </Box>
   );
