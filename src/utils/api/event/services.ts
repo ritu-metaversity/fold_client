@@ -1,4 +1,5 @@
 import {
+  apiHandler,
   ApiServiceInterface,
   apiWithErrorSnackbar,
   apiWithSnackbar,
@@ -37,7 +38,7 @@ export const eventServices = {
       noAuth: true,
       pathVars: { id: id },
     };
-    return await apiWithErrorSnackbar(params);
+    return await apiHandler(params);
   },
   bet: async (data: any) => {
     const params = {
