@@ -24,7 +24,9 @@ const Sports = () => {
       if (response?.data) {
         const data = [...response.data];
         const data1 = data.map((item) => {
-          const sport = sportsTabList.find((i) => i.name === item.sportName);
+          const sport = sportsTabList.find(
+            (i) => i.name.toLowerCase() === item.sportName.toLowerCase()
+          );
           return { ...sport, ...item };
         });
         setActiveSportList(data1);

@@ -101,6 +101,7 @@ function App() {
   );
 
   const getBalance = async () => {
+    if (!isSignedIn) return;
     const { response } = await userServices.balance();
     if (response?.data) {
       setBalanceData(response.data);
@@ -180,7 +181,7 @@ function App() {
       getBalance();
     }, 1000);
     return () => clearInterval(time);
-  }, []);
+  }, [isSignedIn]);
 
   useEffect(() => {
     if (isSignedIn) {

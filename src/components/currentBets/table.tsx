@@ -47,6 +47,15 @@ export default function CurrentBetTable({ columns, rows }: Props) {
               ))}
             </TableRow>
           </TableHead>
+          {!(rows?.length > 0) && (
+            <StyledTableCell
+              colSpan={columns?.length}
+              sx={{ margin: "auto", textAlign: "center" }}
+              width="100%"
+            >
+              No Records Found
+            </StyledTableCell>
+          )}
           <TableBody>
             {rows.map((row) => (
               <TableRow

@@ -1,7 +1,6 @@
 import {
-  apiHandler,
   ApiServiceInterface,
-  apiWithErrorSnackbar,
+  apiHandler,
   apiWithSnackbar,
 } from "../apiService";
 import { userResources } from "./resources";
@@ -135,14 +134,14 @@ export const userServices = {
       resource: userResources.CURRENT_BETS,
       data,
     };
-    return await apiWithErrorSnackbar(params);
+    return await apiHandler(params);
   },
   accountStatement: async (data: AccountStatementPayload) => {
     const params = {
       resource: userResources.ACCOUNT_STATEMENT,
       data,
     };
-    return await apiWithErrorSnackbar(params);
+    return await apiHandler(params);
   },
   accountStatementDetails: async (data: {
     betType: number;
@@ -155,7 +154,7 @@ export const userServices = {
         ...data,
       },
     };
-    return await apiWithErrorSnackbar(params);
+    return await apiHandler(params);
   },
   bannerList: async (type: number) => {
     const params = {
@@ -192,18 +191,18 @@ export const userServices = {
     const params = {
       resource: userResources.PAYMENT_DETAILS,
     };
-    return await apiWithErrorSnackbar(params);
+    return await apiHandler(params);
   },
   getWithdrawList: async () => {
     const params = {
       resource: userResources.WITHDRAW_LIST,
     };
-    return await apiWithErrorSnackbar(params);
+    return await apiHandler(params);
   },
   getDepositList: async () => {
     const params = {
       resource: userResources.DEPOSIT_LIST,
     };
-    return await apiWithErrorSnackbar(params);
+    return await apiHandler(params);
   },
 };
