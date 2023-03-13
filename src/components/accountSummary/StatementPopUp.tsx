@@ -14,7 +14,7 @@ import {
   TooltipProps,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   StyledTableCell,
   StyledTableHeaderCell,
@@ -174,7 +174,8 @@ export function StatementPopUp({ marketId, remark }: Props) {
   const [betType, setbetType] = useState(1);
   const [ResultRows, setResultRows] = useState<RowInterface[]>([]);
   const [data, setData] = useState<any>();
-  const getDetails = async () => {
+
+  const getDetails = useCallback(async () => {
     const { response } = await userServices.accountStatementDetails({
       marketId,
       betType,
@@ -194,7 +195,7 @@ export function StatementPopUp({ marketId, remark }: Props) {
         rate: item.pricevalue,
         bhav: item.odds,
         amount: item.stack,
-        win: item.pnl,
+        win: item.netpnl,
         date: item.matchedtime,
         ip: item.ipAddress,
         browser: (
@@ -210,13 +211,11 @@ export function StatementPopUp({ marketId, remark }: Props) {
       setResultRows(newRow);
       setData(response.data);
     }
-  };
+  }, [betType, marketId]);
 
   useEffect(() => {
     getDetails();
-
-    return () => {};
-  }, [betType, marketId]);
+  }, [getDetails]);
 
   return (
     <Box fontSize={"0.75rem"} lineHeight="2">
@@ -279,7 +278,9 @@ export function StatementPopUp({ marketId, remark }: Props) {
           fontSize="inherit"
           color={data?.totalStake >= 0 ? "green" : "red"}
         >
-          {data?.totalStake}
+          {ResultRows.reduce((accu, item) => {
+            return accu + item.win;
+          }, 0)}
         </Typography>
       </Box>
       <TableContainer
