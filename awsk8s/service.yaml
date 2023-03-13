@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wolf-client
+  labels:
+    service: wolf-client
+spec:
+  type: LoadBalancer
+  selector:
+    app: wolf-client
+  ports:
+    - port: 80
