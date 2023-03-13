@@ -66,7 +66,12 @@ export default function AccountTable({
         handleClose={handleClose}
         title=" Result"
       >
-        {open && <StatementPopUp marketId={open} />}
+        {open && (
+          <StatementPopUp
+            marketId={open}
+            remark={rows.find((item) => item.marketid === open)?.remark}
+          />
+        )}
       </CustomizedDialog2>
       <TableContainer
         component={Paper}
