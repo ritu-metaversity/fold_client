@@ -222,7 +222,7 @@ export function StatementPopUp({ marketId, remark }: Props) {
     <Box fontSize={"0.75rem"} lineHeight="2">
       <Box>{remark}</Box>
       <Box display={"flex"} justifyContent="space-between">
-        <span style={{ flex: 1 }}>Winner: {data?.result}</span>
+        <span style={{ flex: 1 }}>{/* Winner: {data?.result} */}</span>
         <span style={{ flex: 1, textAlign: "right" }}>
           Game Time: {data?.betList[0]?.matchedtime}
         </span>
