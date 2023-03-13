@@ -154,6 +154,7 @@ const ResultRows = [
 ];
 
 interface Props {
+  remark: string;
   marketId: string;
 }
 
@@ -169,7 +170,7 @@ interface RowInterface {
   type: string;
 }
 
-export function StatementPopUp({ marketId }: Props) {
+export function StatementPopUp({ marketId, remark }: Props) {
   const [betType, setbetType] = useState(1);
   const [ResultRows, setResultRows] = useState<RowInterface[]>([]);
   const [data, setData] = useState<any>();
@@ -219,9 +220,9 @@ export function StatementPopUp({ marketId }: Props) {
 
   return (
     <Box fontSize={"0.75rem"} lineHeight="2">
-      <Box>{`Cricket -> Test Matches -> Pakistan v England -> oddeven`}</Box>
+      <Box>{remark}</Box>
       <Box display={"flex"} justifyContent="space-between">
-        <span style={{ flex: 1 }}>Winner: 1</span>
+        <span style={{ flex: 1 }}>Winner: {data?.result}</span>
         <span style={{ flex: 1, textAlign: "right" }}>
           Game Time: {data?.betList[0]?.matchedtime}
         </span>
