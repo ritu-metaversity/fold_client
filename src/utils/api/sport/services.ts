@@ -47,4 +47,12 @@ export const sportServices = {
     };
     return apiHandler(params);
   },
+  newActiveEvent: (sportId: number) => {
+    const params = {
+      resource: sportsResourses.GET_NEW_ACTIVE_MATCH,
+      pathVars: { sportId },
+    };
+    console.log(params, "pars");
+    return apiHandler(params);
+  },
 };

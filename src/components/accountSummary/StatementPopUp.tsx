@@ -14,7 +14,7 @@ import {
   TooltipProps,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   StyledTableCell,
   StyledTableHeaderCell,
@@ -154,6 +154,7 @@ const ResultRows = [
 ];
 
 interface Props {
+  remark: string;
   marketId: string;
 }
 
@@ -169,11 +170,12 @@ interface RowInterface {
   type: string;
 }
 
-export function StatementPopUp({ marketId }: Props) {
+export function StatementPopUp({ marketId, remark }: Props) {
   const [betType, setbetType] = useState(1);
   const [ResultRows, setResultRows] = useState<RowInterface[]>([]);
   const [data, setData] = useState<any>();
-  const getDetails = async () => {
+
+  const getDetails = useCallback(async () => {
     const { response } = await userServices.accountStatementDetails({
       marketId,
       betType,
@@ -193,7 +195,7 @@ export function StatementPopUp({ marketId }: Props) {
         rate: item.pricevalue,
         bhav: item.odds,
         amount: item.stack,
-        win: item.pnl,
+        win: item.netpnl,
         date: item.matchedtime,
         ip: item.ipAddress,
         browser: (
@@ -209,19 +211,17 @@ export function StatementPopUp({ marketId }: Props) {
       setResultRows(newRow);
       setData(response.data);
     }
-  };
+  }, [betType, marketId]);
 
   useEffect(() => {
     getDetails();
-
-    return () => {};
-  }, [betType, marketId]);
+  }, [getDetails]);
 
   return (
     <Box fontSize={"0.75rem"} lineHeight="2">
-      <Box>{`Cricket -> Test Matches -> Pakistan v England -> oddeven`}</Box>
+      <Box>{remark}</Box>
       <Box display={"flex"} justifyContent="space-between">
-        <span style={{ flex: 1 }}>Winner: 1</span>
+        <span style={{ flex: 1 }}>{/* Winner: {data?.result} */}</span>
         <span style={{ flex: 1, textAlign: "right" }}>
           Game Time: {data?.betList[0]?.matchedtime}
         </span>
@@ -278,7 +278,9 @@ export function StatementPopUp({ marketId }: Props) {
           fontSize="inherit"
           color={data?.totalStake >= 0 ? "green" : "red"}
         >
-          {data?.totalStake}
+          {ResultRows.reduce((accu, item) => {
+            return accu + item.win;
+          }, 0)}
         </Typography>
       </Box>
       <TableContainer
