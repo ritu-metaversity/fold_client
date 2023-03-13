@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
-// import { grey } from "@mui/material/colors";
 import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "./sportsTabList";
 import { ScrollableTabsButtonVisible } from "./ScrollableTabsButtonVisible";
@@ -51,28 +50,26 @@ const Sports = () => {
   }, [isSignedIn]);
 
   useEffect(() => {
-    const getNewEvent = async () => {
-      if (!activeSportList) return;
-      const { sportId } = activeSportList[value];
-      if (!sportId) return;
-      setLoading(true);
-      const { response } = await sportServices.activeEventFromSport(sportId);
+    // const getNewEvent = async () => {
+    //   if (!activeSportList) return;
+    //   const { sportId } = activeSportList[value];
+    //   if (!sportId) return;
+    //   setLoading(true);
+    //   const { response } = await sportServices.newActiveEvent(sportId);
 
-      if (response?.data?.length) {
-        setActiveEventList(response.data);
-      } else {
-        setActiveEventList([]);
-      }
-      setLoading(false);
-    };
+    //   if (response?.data?.length) {
+    //     setActiveEventList(response.data);
+    //   } else {
+    //     setActiveEventList([]);
+    //   }
+    //   setLoading(false);
+    // };
     const getNewEventOpen = async () => {
       if (!activeSportList) return;
       const { sportId } = activeSportList[value];
       if (!sportId) return;
       setLoading(true);
-      const { response } = await sportServices.activeEventFromSportOpen(
-        sportId
-      );
+      const { response } = await sportServices.newActiveEvent(sportId);
 
       if (response?.data?.length) {
         setActiveEventList(response.data);
@@ -82,12 +79,12 @@ const Sports = () => {
       setLoading(false);
     };
 
-    if (isSignedIn) {
-      getNewEvent();
-    } else {
-      getNewEventOpen();
-    }
-  }, [value, isSignedIn, activeSportList]);
+    // if (isSignedIn) {
+    // getNewEvent();
+    // } else {
+    getNewEventOpen();
+    // }
+  }, [value, activeSportList]);
 
   if (!(activeSportList?.length > 0)) {
     return <div></div>;

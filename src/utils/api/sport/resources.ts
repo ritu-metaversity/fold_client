@@ -29,4 +29,8 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     URL: "/enduser/left-menu-data-open",
     METHOD: "POST",
   },
+  GET_NEW_ACTIVE_MATCH: {
+    URL: process.env.REACT_APP_EVENT_URL || "",
+    METHOD: "GET",
+  },
 };
