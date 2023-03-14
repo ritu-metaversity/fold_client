@@ -49,10 +49,6 @@ const CasinoGame = () => {
               width="100%"
               title="mobile"
               allowFullScreen={true}
-              // webkitAllowFullScreen="true"
-              // mozAllowFullScreen="true"
-              // oAllowFullScreen="true"
-              // msAllowFullScreen="true"
             ></iframe>
           </>
         ) : (

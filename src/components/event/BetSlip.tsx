@@ -78,7 +78,15 @@ export const BetSlip: FC<Props> = ({
   const { stakes, getBalanceData, activeEventList } = useContext(UserContext);
   const matches = useMediaQuery("(min-width: 1280px)");
   const [loading, setLoading] = useState(false);
+  const [userIp, setUserIp] = useState("");
 
+  useEffect(() => {
+    const getIpy = async () => {
+      const { response: ipRes } = await utilServices.getIpfy();
+      setUserIp(ipRes.ip);
+    };
+    getIpy();
+  }, []);
   // const deviceInfo = {
   //   userAgent: window.navigator.userAgent,
   //   browser: "",
@@ -92,13 +100,11 @@ export const BetSlip: FC<Props> = ({
   const handleSubmit = async () => {
     if (loading) return;
     setLoading(true);
-    const { response: ipRes } = await utilServices.getIpfy();
     const data = {
       ...betId,
       matchId,
-      userIp: ipRes?.ip,
+      userIp,
       deviceInfo: {
-        userIp: ipRes?.ip,
         userAgent: window.navigator.userAgent,
         browser: "Chrome",
         device: "Macintosh",

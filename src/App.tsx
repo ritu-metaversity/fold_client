@@ -179,7 +179,7 @@ function App() {
   useEffect(() => {
     const time = setInterval(() => {
       getBalance();
-    }, 1000);
+    }, 5000);
     return () => clearInterval(time);
   }, [isSignedIn]);
 

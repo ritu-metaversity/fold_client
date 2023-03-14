@@ -128,6 +128,9 @@ abbr[title] {
   -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
   box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
 }
+.react-date-picker__inputGroup__input {
+  outline:none;
+}
 
 @media only screen and (min-width: 320px) and (max-width: 1279px) {
   .react-date-picker__wrapper {
