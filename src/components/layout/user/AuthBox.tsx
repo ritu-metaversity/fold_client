@@ -35,8 +35,8 @@ export function AuthBox() {
       userId: "",
       password: "",
       checked: true,
-      // appUrl: "atozscore.com",
-      appUrl: window.location.hostname,
+      appUrl: "atozscore.com",
+      // appUrl: window.location.hostname,
     },
     onSubmit: async () => {
       if (!values.checked) {

@@ -1,5 +1,5 @@
 export interface SearchFiltersCurrentBets {
-  category: "sports" | "casino";
+  category: 1 | 2;
   status: "matched" | "deleted";
   type: "all" | "back" | "lay";
   pageSize: number;
