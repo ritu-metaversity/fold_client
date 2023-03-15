@@ -243,16 +243,20 @@ const Event = () => {
             {fancyOdds?.Odds ? `${fancyOdds?.Odds[0]?.Series} > ` : ""}
             {currentMatch?.matchName}
           </Typography>
+
           <Typography
             fontWeight={500}
             fontSize={{ xs: "0.6rem", lg: "0.9rem" }}
           >
-            {moment(fancyOdds?.Odds[0]?.lastMatchTime).format(
-              "DD/MM/YYYY hh:mm:ss"
-            )}
-            {/* {currentMatch?.date} */}
+            {fancyOdds?.Odds[0]?.eventTime}
           </Typography>
         </GameHeader>
+        <Typography fontWeight={500} width="100%" fontSize={{ xs: "0.6rem" }}>
+          LastMatched{" "}
+          {moment(fancyOdds?.Odds[0]?.lastMatchTime).format(
+            "DD/MM/YYYY hh:mm:ss"
+          )}
+        </Typography>
         {bets && <MybetMobile bets={bets}></MybetMobile>}
         <CustomizedDialog2
           title="Bet Slip"
