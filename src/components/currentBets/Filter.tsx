@@ -99,28 +99,28 @@ const Filter = ({
           <CurrentBetCategoryTabsContainer item xs={12}>
             <CategoryTabs
               onClick={() =>
-                setSearchFilters({ ...searchFilters, category: "sports" })
+                setSearchFilters({ ...searchFilters, category: 1 })
               }
               sx={
-                searchFilters.category === "sports"
+                searchFilters.category === 1
                   ? { borderBottom: "2px solid #AAAFB5 ", fontWeight: "600" }
                   : {}
               }
             >
               Sports
             </CategoryTabs>
-            {/* <CategoryTabs
+            <CategoryTabs
               onClick={() =>
-                setSearchFilters({ ...searchFilters, category: "casino" })
+                setSearchFilters({ ...searchFilters, category: 2 })
               }
               sx={
-                searchFilters.category === "casino"
+                searchFilters.category === 2
                   ? { borderBottom: "2px solid #AAAFB5", fontWeight: "600" }
                   : {}
               }
             >
               Casino
-            </CategoryTabs> */}
+            </CategoryTabs>
           </CurrentBetCategoryTabsContainer>
         </Grid>
         <Box

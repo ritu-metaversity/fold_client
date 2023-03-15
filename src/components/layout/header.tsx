@@ -72,7 +72,7 @@ export default function Header(props: Props) {
         width={"100vw"}
         id="top-nav"
         sx={{
-          height: topNavHeight,
+          height: { sx: 0, lg: topNavHeight },
           position: "fixed",
           bgcolor: "#3c444b",
           top: 0,
@@ -156,7 +156,7 @@ export default function Header(props: Props) {
         elevation={0}
         sx={{
           flexWrap: "wrap",
-          alignItems: notShowSidebar ? "center" : "",
+          alignItems: notShowSidebar || !matches ? "center" : "",
           width: {
             lg: `calc(100% - ${drawerWidthLocal}px)`,
             xl: `calc(100% - ${drawerWidthXlLocal}px)`,
@@ -170,25 +170,9 @@ export default function Header(props: Props) {
           },
         }}
       >
-        {/* <Toolbar
-          className="toolbar-padding"
-          sx={{
-            gap: 1,
-            alignItems: !notShowSidebar ? "flex-start" : "center",
-            pt: { lg: 2 },
-            [theme.breakpoints.down("lg")]: {
-              bgcolor: colorHex.bg3,
-              height: !isSignedIn ? 50 : undefined,
-              
-            },
-            maxHeight: 50,
-          }}
-        > */}
         <IconButton
           color="inherit"
           aria-label="open drawer"
-          // edge="start"
-
           onClick={notShowSidebar ? () => nav("/") : handleDrawerToggle}
           sx={{
             "&:hover": { bgcolor: "transparent" },
@@ -199,7 +183,7 @@ export default function Header(props: Props) {
           }}
         >
           {notShowSidebar ? (
-            <HomeRoundedIcon sx={{ fontSize: "2rem", mt: 1.5 }} />
+            <HomeRoundedIcon sx={{ fontSize: "2rem" }} />
           ) : (
             <MenuIcon sx={{ fontSize: "2rem" }} />
           )}
@@ -209,7 +193,6 @@ export default function Header(props: Props) {
             <Icon
               onClick={() => nav("/")}
               src={appData?.mobileLogo}
-              // src="/assets/images/icon.png"
               alt="ico"
             />
           </Box>
@@ -217,8 +200,6 @@ export default function Header(props: Props) {
         <IconSmall onClick={() => nav("/")} src={appData?.logo} />
         {matches && <Announcement />}
         {isSignedIn ? <UserBox /> : <AuthBox />}
-        {/* </Toolbar>  */}
-        {/* <Divider sx={{ p: 0, borderBottomWidth: 2 }} /> */}
       </StyledAppBar>
       {!notShowSidebar && (
         <Sidebar

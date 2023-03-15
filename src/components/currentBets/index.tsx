@@ -23,7 +23,7 @@ const CurrentBets = () => {
   const [totalStake, setTotalStake] = useState(0);
   const [searchFilters, setSearchFilters] = useState<SearchFiltersCurrentBets>({
     type: "all",
-    category: "sports",
+    category: 1,
     status: "matched",
     pageSize: 25,
     totalPages: 1,
@@ -34,7 +34,7 @@ const CurrentBets = () => {
       betType: betTypes.indexOf(searchFilters.type),
       noOfRecords: searchFilters.pageSize,
       index: searchFilters.index,
-      sportType: 1,
+      sportType: searchFilters.category,
     };
     const { response } = await userServices.currentBets(payload);
     if (response?.data) {
@@ -55,7 +55,12 @@ const CurrentBets = () => {
   useEffect(() => {
     getList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchFilters.type, searchFilters.pageSize, searchFilters.index]);
+  }, [
+    searchFilters.type,
+    searchFilters.pageSize,
+    searchFilters.index,
+    searchFilters.category,
+  ]);
 
   return (
     <>
@@ -71,10 +76,8 @@ const CurrentBets = () => {
           ></Filter>
           {/* <Box sx={{ display: { xs: "none", lg: "block" } }}> */}
           <CurrentBetTable
-            rows={searchFilters.category === "sports" ? sportsRow : []}
-            columns={
-              searchFilters.category === "casino" ? columnCasino : columnSports
-            }
+            rows={sportsRow}
+            columns={searchFilters.category === 2 ? columnCasino : columnSports}
           />
         </Box>
         {sportsRow.length > 0 && (
