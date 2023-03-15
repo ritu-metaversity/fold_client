@@ -17,6 +17,9 @@ export interface MatchInterface {
   drawLay: number | null;
   inPlay: boolean;
   bm: boolean;
+  F: boolean;
+  GM: boolean;
+  SM: boolean;
 }
 
 interface Props {
@@ -154,7 +157,10 @@ const Match = ({ matches }: Props) => {
           whiteSpace="nowrap"
           sx={{ wordSpacing: "0.2rem" }}
         >
-          F1 F {matches.bm && "BM"}
+          {matches.bm && "BM   "}
+          {matches.GM && "GM   "}
+          {matches.SM && "SM   "}
+          {matches.F && "F   "}
         </Box>
       </Grid>
       <Grid
