@@ -1,0 +1,23 @@
+.matchbet-detail th{
+    font-size: 14px !important;
+    padding: 4px;
+}
+.matchbet-detail th:first-child{
+    padding-left: 0px;
+}
+.matchbet-detail th:nth-child(2){
+    padding-right: 2px;
+}
+.matchbet-detail th:nth-child(3){
+    padding-right: 2px;
+}
+.matchbet-detail td{
+    font-size: 12px;
+    padding: 4px;
+}
+tr.matchbet-detail th {
+    border: 1px solid #aaa;
+}
+tr.matchbet-detail td {
+    border-bottom: 1px solid #aaa;
+}

@@ -1,0 +1,34 @@
+.div-figure {
+    width: 31.33% !important;
+    overflow: hidden;
+    margin-right: 1% !important;
+    margin-left: 1% !important;
+    padding: 0;
+    max-width: 31.33%;
+    float: left;
+    box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    background: #000;
+}
+.m-b-30 {
+    margin-bottom: 30px;
+}
+.div-figure {
+    width: 31.33% !important;
+    overflow: hidden;
+    margin-right: 1% !important;
+    margin-left: 1% !important;
+    padding: 0;
+    max-width: 31.33%;
+    float: left;
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: #000;
+}
+
+.div-figure img {
+    transition: all 0.5s linear;
+    transform: scale3d(1, 1, 1);
+}
+
+.div-figure img:hover {
+    transform: scale3d(1.1, 1.1, 1);
+}

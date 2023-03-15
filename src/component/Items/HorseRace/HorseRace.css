@@ -1,0 +1,84 @@
+nav-tabs {
+    display: block;
+    border-bottom: 0;
+}
+.nav-tabs .nav-item {
+    display: table-cell;
+    /* width: 1%; */
+}
+.nav-tabs .nav-item {
+    margin-bottom: -1px;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    background-color: var(--theme2-bg);
+    border-color: transparent;
+    color: var(--secondary-color);
+}
+.nav-tabs .nav-link {
+    border-radius: 0;
+    color: var(--site-color);
+    background-color: var(--grey-bg);
+    border-right: 1px solid var(--theme2-bg);
+    border: 0;
+}
+.coupon-card {
+    margin-bottom: 16px;
+    border-radius: 0 0 2px 2px;
+}   
+.table {
+    margin-bottom: 0 !important;
+}
+.coupon-table {
+    margin-bottom: 0;
+}
+.coupon-table tr td:first-child {
+    padding-left: 15px;
+    vertical-align: middle;
+    padding-right: 15px;
+}
+.coupon-table tr td {
+    padding: 0;
+    vertical-align: middle;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}
+.text-dark {
+    color: #343a40!important;
+}
+.horse-time-detail {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 12px 13px 10px 12px;
+}
+.horse-time-detail Link {
+    display: flex;
+}
+.horse-time-detail span {
+    background: #2c3e50 !important;
+    color: #fff !important;
+    padding: 5px 10px !important;
+    border-radius: 4px !important;
+    margin-right: 5px !important;
+    margin-bottom: 5px !important;
+    cursor: pointer !important;
+    position: relative !important;
+}
+
+.fade {
+    transition: opacity .15s linear;
+}
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+.table {
+    width: 100%;
+    /* max-width: 100%; */
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+table {
+    border-collapse: collapse;
+}

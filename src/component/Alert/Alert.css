@@ -1,0 +1,15 @@
+.alert-messege {
+    position: absolute;
+    top: 7px;
+    /* height: 120px; */
+    width: 100%;
+    z-index: 999;
+}
+.error-mes {
+    font-size: 15px;
+    margin-left: -8px;
+}
+.fade.alert-messege.alert.alert-danger.show p i {
+    width: 4px;
+    font-size: 14px;
+}

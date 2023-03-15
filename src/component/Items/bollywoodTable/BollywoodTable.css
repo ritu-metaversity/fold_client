@@ -1,0 +1,19 @@
+.row.row5 {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+.bollywood-tbl .div-figure {
+    padding: 0;
+}
+.featured-box1 {
+    background-image: url(https://dzm0kbaskt4pv.cloudfront.net/img/bcasino/bollywood-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center -80px;
+}
+.featured-box1 {
+    padding-top: 5px;
+    max-width: 85% !important;
+    /* -ms-flex: 0 0 85% !important; */
+    flex: 0 0 85% !important;
+}

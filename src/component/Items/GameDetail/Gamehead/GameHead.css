@@ -1,0 +1,23 @@
+a.nav-link  {
+background: none !important;
+}
+.tv-icon {
+    color: #fff;
+    position: absolute;
+    right: 10px;
+    top: 100px;
+    font-size: 18px;
+}
+.mb-0, .my-0 {
+    margin-bottom: 0!important;
+}
+a.nav-link.nav2 {
+    border-right: 1px solid #fff !important;
+}
+a.nav-link {
+    border-right: none !important;
+}
+.active2{
+    border-top: 2px solid #fff !important; 
+    transition: 0.1s;
+}
