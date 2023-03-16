@@ -24,7 +24,7 @@ const CasinoGame = () => {
       <Box mt={{ lg: 5 }} height="calc(100vh - 110px)">
         {matches ? (
           <>
-            {/* <Box
+            <Box
               right={0}
               top={0}
               width={100}
@@ -41,7 +41,7 @@ const CasinoGame = () => {
               height={44}
               position="absolute"
               bgcolor="#0f2327"
-            ></Box> */}
+            ></Box>
             <iframe
               src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
               height="calc(100vh - 100px)"
