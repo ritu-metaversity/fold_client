@@ -58,6 +58,11 @@ export interface FancyOddsInterface {
   l1: number;
   ls1: number;
   gstatus: string;
+  maxBetRate: number;
+  minBetRate: number;
+  betDelay: number;
+  maxBet: number;
+  minBet: number;
 }
 
 export interface ProfitInterface {
