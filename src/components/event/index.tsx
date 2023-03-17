@@ -34,6 +34,35 @@ import { createProfits, transformMatchOdds } from "./eventUtils";
 import moment from "moment";
 import { create } from "domain";
 
+
+export const dharmParivartan = (str: string | number) => {
+  console.log(str, typeof str);
+  if (["string", "number"].includes(typeof str)) {
+    const newstr = str
+      .toString()
+      ?.split("")
+      .reverse()
+      .join("")
+      .replace("00000", "L")
+      .replace("000", "K")
+      ?.split("")
+      .reverse()
+      .join("");
+    console.log(newstr);
+    return str
+      ?.toString()
+      ?.split("")
+      .reverse()
+      .join("")
+      .replace("00000", "L")
+      .replace("000", "K")
+      ?.split("")
+      .reverse()
+      .join("");
+  }
+  return str;
+};
+
 const Event = () => {
   const [bets, setBets] = useState<BetsInterface | null>(null);
   // const [betId, setBetId] = useState(0);
@@ -48,6 +77,7 @@ const Event = () => {
   const matchId = searchParams.get("match-id");
   // const [markets, setMarkets] = useState<MarketInterface[]>([]);
   const [fancyOdds, setFancyOdds] = useState<any>();
+  const [fancyOddsSlower, setFancyOddsSlower] = useState<any>({});
   const [pnl, setPnl] = useState<Pnl[] | null>(null);
   const [fancyPnl, setFancyPnl] = useState<FancyPnl[] | null>(null);
   const [prevFancyOdds, setPrevFancyOdds] = useState<any>();
@@ -71,6 +101,17 @@ const Event = () => {
     }
     // setLoading(false);
   };
+  useEffect(() => {
+    const getActiveFancyOdds = async () => {
+      if (matchId) {
+        const { response } = await eventServices.newFancySlower(matchId || "");
+        if (response) {
+          setFancyOddsSlower(response);
+        }
+      }
+    };
+    getActiveFancyOdds();
+  }, [matchId]);
 
   const getOdds = async () => {
     if (matchId) {
@@ -84,6 +125,16 @@ const Event = () => {
           )
         )
           response[element] = [];
+        else {
+          response[element] = response[element].map(
+            (single: any, index: number) => ({
+              ...(fancyOddsSlower[element]
+                ? fancyOddsSlower[element][index] || {}
+                : {}),
+              ...single,
+            })
+          );
+        }
       });
 
       const Odds = transformMatchOdds(response.Odds);
@@ -248,14 +299,15 @@ const Event = () => {
             fontWeight={500}
             fontSize={{ xs: "0.6rem", lg: "0.9rem" }}
           >
-            {fancyOdds?.Odds[0]?.eventTime}
+            {fancyOdds?.Odds && fancyOdds?.Odds[0]?.eventTime}
           </Typography>
         </GameHeader>
         <Typography fontWeight={500} width="100%" fontSize={{ xs: "0.6rem" }}>
           LastMatched{" "}
-          {moment(fancyOdds?.Odds[0]?.lastMatchTime).format(
-            "DD/MM/YYYY hh:mm:ss"
-          )}
+          {fancyOdds?.Odds &&
+            moment(fancyOdds?.Odds[0]?.lastMatchTime).format(
+              "DD/MM/YYYY hh:mm:ss"
+            )}
         </Typography>
         {bets && <MybetMobile bets={bets}></MybetMobile>}
         <CustomizedDialog2
@@ -296,7 +348,8 @@ const Event = () => {
                       lineHeight={1}
                       fontWeight={700}
                     >
-                      Max: 10k
+                      Max: {`${dharmParivartan(singleOdd.maxBet)}  `}
+                      Min: {dharmParivartan(singleOdd.minBet)}
                     </Typography>
                   </Box>
                 }
@@ -337,7 +390,9 @@ const Event = () => {
                   Bookmaker
                 </Typography>
                 <Typography fontSize="0.85rem" fontWeight={700}>
-                  Min:100 Max:10L
+                  Max:{" "}
+                  {`${dharmParivartan(fancyOdds["Bookmaker"][0]?.maxBet)} `}
+                  Min: {dharmParivartan(fancyOdds["Bookmaker"][0]?.minBet)}
                 </Typography>
               </Box>
             }
@@ -373,7 +428,9 @@ const Event = () => {
                     Bookmaker Toss
                   </Typography>
                   <Typography fontSize="0.85rem" fontWeight={700}>
-                    Min:100 Max:10L
+                    Max:{" "}
+                    {`${dharmParivartan(fancyOdds["Bookmaker"][0].maxBet)}  `}
+                    Min: {dharmParivartan(fancyOdds["Bookmaker"][0].minBet)}
                   </Typography>
                 </Box>
               }
