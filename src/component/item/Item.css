@@ -1,9 +1,7 @@
 .tab-content>.active {
     display: block;
 }
-/* .tab-content>.tab-pane {
-    display: none;
-} */
+
 .coupon-card {
     margin-bottom: 16px;
     border-radius: 0 0 2px 2px;
@@ -130,15 +128,7 @@
     font-size: 14px;
     word-wrap: break-word;
 }
-.table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-}
-table {
-    border-collapse: collapse;
-}
+
 .coupon-table button {
     width: 100%;
     min-width: 40px;
@@ -151,14 +141,12 @@ table {
     border: 0;
     font-size: 14px;
     font-weight: bold;
-    cursor: pointer;
+    cursor: pointer; 
 }
 .button, select {
     text-transform: none;
 }
 
-.element.style {
-}
 .table {
     margin-bottom: 0 !important;
 }
@@ -174,9 +162,7 @@ table {
 table {
     border-collapse: collapse;
 }
-*, ::after, ::before {
-    box-sizing: border-box;
-}
+
 user agent stylesheet
 table {
     display: table;
@@ -233,7 +219,7 @@ table {
     word-wrap: break-word;
 }
 .game-icons {
-    float: left;
+    float: right;
     width: 20%;
     text-align: right;
 }
@@ -439,6 +425,19 @@ table {
     width: 100%;
     padding: 4px 15px;
 }
-
-
+.lodder{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 77vh;
+}
+.lodder i{
+    font-size: 32px;
+    font-weight: 800;
+}
+.game-head{
+    display: flex;
+    flex-direction: column;
+}
 

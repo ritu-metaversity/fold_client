@@ -3,22 +3,47 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { GameAPI } from "../../apis/gameAPI";
+import axios from "axios";
 
 function Item({ gameIdForItemPage, sportId}) {
   let urldtaa = window.location.pathname;
   const history = useHistory();
   const [gameName, setGameName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
   let url = urldtaa.slice(1);
 
 
-  console.log(sportId?.id)
+
+  // console.log(sportId?.id)
+
+  // useEffect(() => {
+  //   if (gameIdForItemPage != null ) {
+  //     GameAPI.Active_Match_Sport_Wise({
+  //       sportId: gameIdForItemPage === "" || gameIdForItemPage === undefined ? "4" : gameIdForItemPage,
+  //     }).then((res) => {
+  //       setGameName(res.data.data);
+  //       setIsLoading(false)
+  //     });
+  //   }
+  // }, [gameIdForItemPage]);
+
+  // const handleData = (id) => {
+  //   history.push(`/gamedetail/${id}`);
+  // };
+
+  if(gameIdForItemPage === "" || gameIdForItemPage === undefined){
+    gameIdForItemPage=4
+  }
+
+
 
   useEffect(() => {
     if (gameIdForItemPage != null ) {
-      GameAPI.Active_Match_Sport_Wise({
-        sportId: gameIdForItemPage === "" || gameIdForItemPage === undefined ? "4" : gameIdForItemPage,
-      }).then((res) => {
-        setGameName(res);
+      axios.get(`http://43.205.50.127:9000/active_match/${gameIdForItemPage}`)
+        .then((res) => {
+        setGameName(res.data.data);
+        setIsLoading(false)
       });
     }
   }, [gameIdForItemPage]);
@@ -30,147 +55,8 @@ function Item({ gameIdForItemPage, sportId}) {
 
   return (
     <div>
-      {/* <div className="desk-top-view">
-        <ul
-          role="tablist"
-          id="home-events"
-          className={url === "home" || url === "" || url === "Home" ? "d-none" : "nav nav-tabs"}>
-          <li className="nav-item " style={{ background: "#2c3e50" }}>
-            <a href="/" data-toggle="tab" className="nav-link active">
-              {url === "home" || url === "" || url === "Home" ? "" : url}
-            </a>
-          </li>
-        </ul>
-
-        <div className="tab-content">
-          <div className="tab-pane active">
-            <div className="coupon-card coupon-card-first">
-              <div className="card-content" style={{ overflow: "scroll" }}>
-                <table className="table coupon-table">
-                  <thead>
-                    <tr>
-                      <th style={{ width: "63%" }}>Game</th>
-                      <th colSpan="2">1</th>
-                      <th colSpan="2">X</th>
-                      <th colSpan="2">2</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                    gameName?.length!==0 &&
-                      gameName?.map((item) => {
-
-                          return (
-                            <tr key={item.matchId}>
-                              <td>
-                                <div
-                                  className="game-name"
-                                  onClick={() => handleData(item?.matchId)}>
-                                  <Link className="text-dark">
-                                    {item.matchName} /
-                                    {moment(item.openDate).format(
-                                      "MMM DD YYYY h:mm a"
-                                    )}
-                                  </Link>
-                                </div>
-                                <div className="game-icons">
-                                  <span className="game-icon">
-                                    <span
-                                      className={
-                                        item.inPlay === false ? "" : "active"
-                                      }></span>
-                                  </span>
-                                  <span className="game-icon">
-                                    <i className="fas fa-tv v-m icon-tv"></i>
-                                  </span>
-                                  <span className="game-icon">
-                                    <img
-                                      src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/front/img/icons/ic_fancy.png"
-                                      alt=""
-                                      className="fancy-icon"
-                                    />
-                                  </span>
-                                  <span className="game-icon">
-                                    <img
-                                      src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/front/img/icons/ic_bm.png"
-                                      alt=""
-                                      className={
-                                        item.bm ? "bookmaker-icon" : "d-none"
-                                      }
-                                    />
-                                  </span>
-                                  <span className="game-icon">
-                                    <img
-                                      src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/front/img/icons/ic_vir.png"
-                                      alt=""
-                                      className="ic-card"
-                                    />
-                                  </span>
-                                </div>
-                              </td>
-                              <td>
-                                <button className="back">
-                                  <span className="odd">
-                                    {item.team1Back === 0
-                                      ? "0"
-                                      : item.team1Back}
-                                  </span>
-                                </button>
-                              </td>
-                              <td>
-                                <button className="lay">
-                                  <span className="odd">
-                                    {item.team1Lay === 0 ? "0" : item.team1Lay}
-                                  </span>
-                                </button>
-                              </td>
-                              <td>
-                                <button className="back">
-                                  <span className="odd">
-                                    {item.drawBack === 0 ? "0" : item.drawBack}
-                                  </span>
-                                </button>
-                              </td>
-                              <td>
-                                <button className="lay">
-                                  <span className="odd">
-                                    {item.drawLay === 0 ? "0" : item.drawLay}
-                                  </span>
-                                </button>
-                              </td>
-                              <td>
-                                <button className="back">
-                                  <span className="odd">
-                                    {item.team2Back === 0
-                                      ? "0"
-                                      : item.team2Back}
-                                  </span>
-                                </button>
-                              </td>
-                              <td>
-                                <button className="lay">
-                                  <span className="odd">
-                                    {item.team2Lay === 0 ? "0" : item.team2Lay}
-                                  </span>
-                                </button>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      {/* mobile view */}
-      {/* -------------------------- */}
-      {/* -------------------------- */}
-      {/* -------------------------- */}
-
-      <div className="mob-view-item">
+      {
+        isLoading?<p className="lodder"><i className="fa fa-spinner fa-spin"></i></p>:<div className="">
         <div data-v-0a31b3b9="" className="tab-pane container pl-0 pr-0">
           <div
             data-v-0a31b3b9=""
@@ -191,7 +77,7 @@ function Item({ gameIdForItemPage, sportId}) {
                         key={id}
                         onClick={() => handleData(item?.matchId)}>
                         <div className="row row5">
-                          <div className="col-8">
+                          <div className="col-8 game-head">
                             <p className="mb-0 game-name">
                               <Link to="/gamedetail">
                                 <strong>{item.matchName}</strong>
@@ -284,6 +170,8 @@ function Item({ gameIdForItemPage, sportId}) {
           </div>
         </div>
       </div>
+      }
+      
     </div>
   );
 }

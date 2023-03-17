@@ -1,0 +1,49 @@
+.stack-value {
+    display: flex;
+    align-items: center;
+    margin-left: -10px;
+    margin-top: 2px;
+}
+
+.stack-value p {
+    font-size: 13px;
+    margin-top: 16px;
+    margin-left: 0px;
+}
+.stack-value p:first-child {
+    padding-left: 2px;
+}
+.stack-value p:nth-child(2){
+    padding-left: 9px;
+}
+.p-l{
+    padding-left: 0px !important;
+}
+.cback{
+    color: #0088cc;
+}
+.remark-name{
+    font-size: 14px;
+    font-weight: 400 !important;
+}
+.s-table th{
+    border: none !important;
+    font-size: 14px;
+   
+}
+.s-table{
+    background: #2c3e50;
+    color: #fff;
+}
+.bet-details td {
+    font-size: 14px;
+}
+.nation-name{
+    padding-right: 85px !important;
+}
+.rate{
+    padding-right: 12px !important;
+}
+th.text-left.date {
+    padding-right: 110px;
+}

@@ -11,7 +11,6 @@ function MatchBet() {
     GameAPI.Match_Bet_List({
       matchId: id,
     }).then((Item) => {
-      console.log(Item);
       setMatchBet(Item);
     });
   }, [id]);
@@ -37,18 +36,28 @@ function MatchBet() {
                 </tr>
               </thead>
               <tbody>
-                {matchBet?.data &&
-                  Object.keys(matchBet?.data).map((key) => {
-                    {
-                      matchBet?.data[key].map((item) => {
-                        <tr className="matchbet-detail">
-                          <td className="text-center">{item?.nation}</td>
-                          <td className="text-center">{item?.priveValue}</td>
-                          <td className="text-center">{item?.amount}</td>
-                        </tr>
-                      });
-                    }
-                  })}
+            
+ { matchBet?.data&&
+                    Object.keys(matchBet?.data).map((key) => (
+                      <>
+                        {console.log(key)}
+                        {matchBet?.data[key].map((item) => (
+                          <>
+                            <tr>
+                            {console.log(item)}
+                            <td>{item?.nation}</td>
+                            <td>{item?.rate}</td>
+                        
+                            <td>{item?.amount}</td>
+                            
+                          </tr>
+                           
+                          </>
+                        ))}
+                      </>
+                    ))}
+
+                     
               </tbody>
             </table>
           </div>

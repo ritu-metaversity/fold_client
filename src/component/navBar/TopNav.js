@@ -4,33 +4,8 @@ import { GameAPI } from "../../apis/gameAPI";
 
 function TopNav(props) {
   const [Active, setActive] = useState(4);
-  const [activeForId, setActiveForId] = useState("");
   const [activeSport, setActiveSport] = useState([]);
-  const [SportImages, setSportImages] = useState([]);
 
-  // const handleShowSingleSport = (id) => {
-  //   setToggle(id);
-  // };
-
-  // const sportImages = [
-  //   {
-  //     image:
-  //       "https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/4.png",
-  //   },
-  //   {
-  //     image:
-  //       "https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png",
-  //   },
-
-  //   {
-  //     image:
-  //       "https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/59.png",
-  //   },
-  // ];
-
-  // sportImages.map((item) => {
-  //   console.log(item);
-  // });
 
   useEffect(() => {
     GameAPI.ACTIVE_SPORT_LIST().then((res) => {
@@ -40,9 +15,7 @@ function TopNav(props) {
 
   const handleClick = (val) => {
     props.gameId(val);
-    setActiveForId(val);
     setActive(val);
-    console.log(val);
   };
 
   return (
@@ -75,9 +48,9 @@ function TopNav(props) {
 
       <div className="sports active">
         <ul className="nav nav-tabs game-nav-bar">
-          {activeSport.map((res) => {
+          {activeSport.map((res, id) => {
               return (
-                <li className="nav-item text-center">
+                <li className="nav-item text-center" key={id}>
                   <a
                     data-toggle="tab"
                     href="#1"
@@ -87,7 +60,10 @@ function TopNav(props) {
                     onClick={() => handleClick(res.sportId)}>
                     <div>
                       {
-                        res.sportId===4?<img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/4.png" alt="" />:res.sportId===1?<img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/59.png" alt="" />:<img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png" alt="" />
+                        res.sportId===4?<img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/4.png"
+                         alt="" />:res.sportId===1?
+                        <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/59.png" alt="" />:
+                        <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png" alt="" />
                       }
                       
                     </div>
@@ -95,7 +71,6 @@ function TopNav(props) {
                   </a>
                 </li>
               );
-            console.log(res);
           })}
 
           {/* <li  className="nav-item text-center" >

@@ -5,12 +5,6 @@ function SignOut() {
     localStorage.clear();
     const history = useHistory("")
     history.push("./login")
-
-    return (
-        <div>
-    
-        </div>
-      )
 }
 
 export default SignOut

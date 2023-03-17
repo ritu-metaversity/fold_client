@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Modal from "react-bootstrap/Modal";
 import NavBar from "../../navBar/NavBar";
 import "./AaccountStatement.css";
 import dayjs from "dayjs";
 import { DatePicker } from "antd";
 import moment from "moment";
 import { UserAPI } from "../../../apis/UserAPI";
+import SearchBet from "./SearchBet";
 const dateFormat = "YYYY-MM-DD";
 
 function AaccountStatement() {
@@ -21,13 +23,10 @@ function AaccountStatement() {
   const [dataListLength, setDataListLength] = useState();
   const [pageLength, setPageLength] = useState(0);
   const [pagination, setPagination] = useState(0);
-
-
-
-  // const inInd = curr.toLocaleTimeString([], {
-  //   hour: "2-digit",
-  //   minute: "2-digit",
-  // });
+  const [isLoading, setIsLoading] = useState(true);
+  const [showModals, setShowModals] = useState(false);
+  const [remark, setRemark] = useState();
+  const [MarketId, setMarketId] = useState();
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
@@ -45,7 +44,15 @@ function AaccountStatement() {
     setIndexValue(e.target.value);
   };
 
-  useEffect(()=>{
+  const handleCloseModal = () => setShowModals(false);
+  const handleShow = (e, remark, marketId) => {
+    e.preventDefault();
+    setShowModals(true);
+    setRemark(remark);
+    setMarketId(marketId);
+  };
+
+  useEffect(() => {
     UserAPI.Account_Statement({
       noOfRecords: 100,
       index: 0,
@@ -53,12 +60,13 @@ function AaccountStatement() {
       toDate: time,
       type: 1,
     }).then((res) => {
+      setIsLoading(false);
       setPageLength(res.totalPages);
       setDataList(res.dataList);
       setDataListLength(res.dataList.length);
     });
-  // eslint-disable-next-line
-  },[])
+    // eslint-disable-next-line
+  }, []);
 
   const submit = () => {
     if (startDate === "") {
@@ -78,6 +86,7 @@ function AaccountStatement() {
       toDate: endDate,
       type: type,
     }).then((res) => {
+      setIsLoading(false);
       setPageLength(res.totalPages);
       setDataList(res.dataList);
       setDataListLength(res.dataList.length);
@@ -86,227 +95,42 @@ function AaccountStatement() {
 
   const result = [];
   for (var i = 0; i < pageLength; i++) {
-    result[i]=i;
-  }
-  
-
-  const handlePagenation =(val)=>{
-    setPagination(val)
+    result[i] = i;
   }
 
-  const decrement = ()=>{
-    if(pageLength>0){
-      setPagination(pageLength-1)
+  const handlePagenation = (val) => {
+    setPagination(val);
+  };
 
+  const decrement = () => {
+    if (pageLength > 0) {
+      setPagination(pageLength - 1);
     }
-  }
+  };
 
-  const increment = ()=>{
-    setPagination(pageLength+1)
-  }
-
+  const increment = () => {
+    setPagination(pageLength + 1);
+  };
 
   useEffect(() => {
-    if(pageLength>0){
-    UserAPI.Account_Statement({
-      noOfRecords: IndexValue,
-      index: pagination,
-      fromDate: startDate,
-      toDate: endDate,
-      type: type,
-    }).then((res) => {
-
-      setDataList(res.dataList);
-    });
-  }
-  // eslint-disable-next-line
+    if (pageLength > 0) {
+      UserAPI.Account_Statement({
+        noOfRecords: IndexValue,
+        index: pagination,
+        fromDate: startDate,
+        toDate: endDate,
+        type: type,
+      }).then((res) => {
+        setIsLoading(false);
+        setDataList(res.dataList);
+      });
+    }
+    // eslint-disable-next-line
   }, [pagination]);
   return (
     <div>
       <NavBar />
-      {/* <div className="main">
-        <div className="container-fluid container-fluid-5">
-          <div className="row row5">
-            <div className="sidebar col-md-2">
-              <SideBar />
-            </div>
-            <div className="col-md-10 report-main-content m-t-5 desk-top-view">
-              <div className="card">
-                <div className="card-header">
-                  <h4 className="mb-0">Account Statement</h4>
-                </div>
-                <div className="card-body container-fluid container-fluid-5 ">
-                  <div className="row row5">
-                    <div className="col-2">
-                      <div className="form-group mb-0">
-                        <div
-                          className="mx-datepicker"
-                          style={{ width: "auto" }}>
-                          <div className="mx-input-wrapper">
-                            <DatePicker
-                              defaultValue={dayjs}
-                              format={dateFormat}
-                              onChange={StartDateValue}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-2">
-                      <div className="form-group mb-0">
-                        <div
-                          className="mx-datepicker"
-                          not-before="Tue Jan 10 2023 05:30:00 GMT+0530 (India Standard Time)"
-                          not-after="Fri Feb 10 2023 05:30:00 GMT+0530 (India Standard Time)"
-                          style={{ width: "auto" }}>
-                          <div className="mx-input-wrapper">
-                            <DatePicker
-                              defaultValue={dayjs()}
-                              onChange={EndDateValue}
-                              format={dateFormat}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-2">
-                      <div className="form-group mb-0">
-                        <select
-                          name="reportType"
-                          className="custom-select"
-                          onChange={getOptionValue}>
-                          <option value="1">All</option>
-                          <option value="2">Deposit/Withdraw Report</option>
-                          <option value="3">Game Report</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="col-1">
-                      <button
-                        className="btn btn-primary btn-block"
-                        onClick={submit}>
-                        Submit
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="row row5 mt-2">
-                    <div className="col-12 account-statement-tbl">
-                      <div className="table-responsive">
-                        <table
-                          role="table"
-                          aria-busy="false"
-                          aria-colcount="6"
-                          className="table b-table table-striped table-bordered"
-                          id="__BVID__104">
-                          <thead>
-                            <tr role="row">
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="1"
-                                className="text-center">
-                                Date
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="2"
-                                className="text-right">
-                                Sr no
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="3"
-                                className="text-right">
-                                Credit
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="4"
-                                className="text-right">
-                                Debit
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="5"
-                                className="text-right">
-                                Balance
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="6"
-                                className="text-center">
-                                Remark
-                              </th>
-                            </tr>
-                            {show ? (
-                              <tr role="row">
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="1"
-                                  className="text-center">
-                                  {startDate} {inInd}
-                                </th>
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="2"
-                                  className="text-right">
-                                  1
-                                </th>
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="3"
-                                  className="text-right text-success">
-                                  0
-                                </th>
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="4"
-                                  className="text-right">
-                                  -
-                                </th>
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="5"
-                                  className="text-right text-success">
-                                  0
-                                </th>
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="6"
-                                  className="text-center">
-                                  Opening Balance
-                                </th>
-                              </tr>
-                            ) : (
-                              ""
-                            )}
-                          </thead>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row row5 mt-2">
-                    <div className="col-12"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <Footer /> */}
+      
 
       <div className="report-container wrapper">
         <div className="card">
@@ -441,14 +265,14 @@ function AaccountStatement() {
                           role="columnheader"
                           scope="col"
                           aria-colindex="1"
-                          className="text-center">
+                          className="text-left">
                           Date
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="2"
-                          className="text-right">
+                          className="text-left">
                           Sr no
                         </th>
                         <th
@@ -476,7 +300,7 @@ function AaccountStatement() {
                           role="columnheader"
                           scope="col"
                           aria-colindex="6"
-                          className="text-center">
+                          className="text-left">
                           Remark
                         </th>
                       </tr>
@@ -485,15 +309,16 @@ function AaccountStatement() {
                       {dataList?.length > 0 &&
                         dataList.map((item) => {
                           return (
-                            <tr role="row" >
-                              <td
-                                aria-colindex="1"
-                                className="text-center">
+                            <tr
+                              role="row"
+                              key={item.sno + item.sno}
+                              onClick={(e) =>
+                                handleShow(e, item.remark, item.marketid)
+                              }>
+                              <td aria-colindex="1" className="text-left">
                                 {moment(item.date).format("YYYY-MM-DD h:mm")}
                               </td>
-                              <td
-                                aria-colindex="2"
-                                className="text-right">
+                              <td aria-colindex="2" className="text-left">
                                 {item.sno}
                               </td>
                               <td
@@ -511,14 +336,29 @@ function AaccountStatement() {
                                 className="text-right text-success">
                                 {item.pts}
                               </td>
-                              <td
-                                aria-colindex="6"
-                                className="text-lift">
+                              <td aria-colindex="6" className="text-lift">
                                 {item.remark}
                               </td>
                             </tr>
                           );
                         })}
+
+                      <Modal
+                        show={showModals}
+                        className={``}
+                        onHide={handleCloseModal}
+                        style={{
+                          marginTop: "12px",
+                          marginInline: "2%",
+                          width: "95%",
+                        }}>
+                        <Modal.Header closeButton closeVariant="white">
+                          <Modal.Title>Result</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <SearchBet MarketId={MarketId} remark={remark} />
+                        </Modal.Body>
+                      </Modal>
                     </tbody>
                     <tbody>
                       <tr
@@ -549,15 +389,22 @@ function AaccountStatement() {
                         <span className="sr-only">Previous</span>
                       </button>
                     </li>
-                    {result?.length && result.map((item, id)=>{
-                      return(
-                      <li key={item+id} className="page-item" onClick={()=>handlePagenation(id)}>
-                      <button className="page-link" href="#" aria-label="Previous">
-                        {item}
-                      </button>
-                    </li>
-                    )
-                    })}
+                    {result?.length &&
+                      result.map((item, id) => {
+                        return (
+                          <li
+                            key={item + id}
+                            className="page-item"
+                            onClick={() => handlePagenation(id)}>
+                            <button
+                              className="page-link"
+                              href="#"
+                              aria-label="Previous">
+                              {item}
+                            </button>
+                          </li>
+                        );
+                      })}
                     <li className="page-item" onClick={increment}>
                       <button className="page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>

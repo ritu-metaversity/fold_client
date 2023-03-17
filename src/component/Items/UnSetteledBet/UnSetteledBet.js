@@ -1,9 +1,7 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { UserAPI } from "../../../apis/UserAPI";
-import Footer from "../../footer/Footer";
 import NavBar from "../../navBar/NavBar";
-import SideBar from "../../sidebar/SideBar";
 import "../AaccountStatement/AaccountStatement.css";
 
 function UnSetteledBet() {
@@ -13,14 +11,12 @@ function UnSetteledBet() {
   const [ListLength, setListLength] = useState("");
   const [pageLength, setPageLength] = useState(0);
   const [pagination, setPagination] = useState(0);
-  const [betValue, setBetValue] = useState(1);
+  const [betValue, setBetValue] = useState(0);
 
-
-  console.log(betValue);
 
   useEffect(() => {
     UserAPI.Unsetteled_bet({
-      noOfRecords: 5,
+      noOfRecords: 100,
       index: 0,
       sportType: 1,
       betType: 1,
@@ -77,159 +73,7 @@ function UnSetteledBet() {
   return (
     <div>
       <NavBar />
-      {/* <div className="main">
-        <div className="container-fluid container-fluid-5">
-          <div className="row row5">
-            <div className="sidebar col-md-2">
-              <SideBar />
-            </div>
-
-            <div className="col-md-10 report-main-content m-t-5 desk-top-view">
-              <div className="card">
-                <div className="card-header">
-                  <h4 className="mb-0">Un-Setteled Bet</h4>
-                </div>
-                <div className="card-body container-fluid container-fluid-5 unsetteledbet">
-                  <div className="row row5">
-                    <div className="col-12">
-                      <div
-                        id="match_unmatched_delete"
-                        role="radiogroup"
-                        tabIndex="-1">
-                        <div className="custom-control custom-control-inline custom-radio">
-                          <input
-                            id="matched"
-                            type="radio"
-                            checked
-                            name="match_unmatched_delete"
-                            autocomplete="off"
-                            value="1"
-                            className="custom-control-input"
-                          />{" "}
-                          <label
-                            for="matched"
-                            className="custom-control-label control-label1">
-                            <span>Matched</span>
-                          </label>
-                        </div>
-                        <div className="custom-control custom-control-inline custom-radio">
-                          <input
-                            id="deleteed"
-                            type="radio"
-                            name="match_unmatched_delete"
-                            autocomplete="off"
-                            value="3"
-                            className="custom-control-input"
-                          />{" "}
-                          <label
-                            for="deleteed"
-                            className="custom-control-label control-label1">
-                            <span>Deleted</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="row row5 mt-2">
-                    <div className="col-12">
-                      <div className="table-responsive">
-                        <table
-                          role="table"
-                          aria-busy="false"
-                          aria-colcount="10"
-                          className="table b-table table-bordered"
-                          id="__BVID__96">
-                          <thead className="">
-                            <tr role="row" className="">
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="1"
-                                className="text-right">
-                                No
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="2"
-                                className="text-center">
-                                Event Name
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="3"
-                                className="text-center">
-                                Nation
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="4"
-                                className="text-center">
-                                Event Type
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="5"
-                                className="text-center">
-                                Market Name
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="6"
-                                className="text-center">
-                                Side
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="7"
-                                className="text-center">
-                                Rate
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="8"
-                                className="text-right">
-                                Amount
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="9"
-                                className="text-center">
-                                Place Date
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="10"
-                                className="">
-                                Match Date
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody></tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row row5 mt-2">
-                    <div className="col-12"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <Footer /> */}
-
+      
       <div className="report-container wrapper">
         <div className="card">
           <div className="card-header">
@@ -246,14 +90,14 @@ function UnSetteledBet() {
                     <input
                       id="matched"
                       type="radio"
-                      checked
+                      defaultChecked
                       name="match_unmatched_delete"
-                      autocomplete="off"
+                      autoComplete="off"
                       value="1"
                       className="custom-control-input"
                     />{" "}
                     <label
-                      for="matched"
+                      htmlFor="matched"
                       className="custom-control-label control-label1">
                       <span>Matched</span>
                     </label>
@@ -268,7 +112,7 @@ function UnSetteledBet() {
                       className="custom-control-input"
                     />
                     <label
-                      for="deleteed"
+                      htmlFor="deleteed"
                       className="custom-control-label control-label1">
                       <span>Deleted</span>
                     </label>
@@ -282,59 +126,59 @@ function UnSetteledBet() {
                 <div className="form-group mb-0" style={{ marginTop: "12px" }}>
                   <div className="row row5 mt-2">
                     <div className="col-12">
-                      <div className="form-group mb-0">
+                      <div className="form-group mb-0" style={{marginLeft: "42px",marginTop: "12px"}}>
                         <div
                           id="match_unmatched_delete"
                           role="radiogroup"
-                          tabindex="-1">
-                          <div class="custom-control custom-control-inline custom-radio">
+                          tabIndex="-1">
+                          <div className="custom-control custom-control-inline custom-radio">
                             <input
                               id="all"
                               type="radio"
                               name="match"
-                              autocomplete="off"
-                              class="custom-control-input"
+                              autoComplete="off"
+                              className="custom-control-input"
                               onChange={(e)=>setBetValue(e.target.value)}
                               value="1"
-                              checked
+                              // checked
                              
                             />{" "}
                             <label
-                              for="all"
-                              class="custom-control-label control-label1">
+                              htmlFor="all"
+                              className="custom-control-label control-label1">
                               <span>All</span>
                             </label>
                           </div>
-                          <div class="custom-control custom-control-inline custom-radio">
+                          <div className="custom-control custom-control-inline custom-radio">
                             <input
                               id="Back"
                               type="radio"
                               name="match"
-                              autocomplete="off"
-                              class="custom-control-input"
+                              autoComplete="off"
+                              className="custom-control-input"
                               onChange={(e)=>setBetValue(e.target.value)}
                               value="2"
                             />
                             <label
-                              for="Back"
-                              class="custom-control-label control-label1">
+                              htmlFor="Back"
+                              className="custom-control-label control-label1">
                               <span>Back</span>
                             </label>
                           </div>
-                          <div class="custom-control custom-control-inline custom-radio">
+                          <div className="custom-control custom-control-inline custom-radio">
                             <input
                               id="Lay"
                               type="radio"
                               name="match"
-                              autocomplete="off"
-                              class="custom-control-input"
+                              autoComplete="off"
+                              className="custom-control-input"
                               onChange={(e)=>setBetValue(e.target.value)}
                               value="3"
                             />
                             {/* <input type="radio"/> */}
                             <label
-                              for="Lay"
-                              class="custom-control-label control-label1">
+                              htmlFor="Lay"
+                              className="custom-control-label control-label1">
                               <span>Lay</span>
                             </label>
                           </div>
@@ -407,21 +251,21 @@ function UnSetteledBet() {
                             role="columnheader"
                             scope="col"
                             aria-colindex="1"
-                            className="text-right">
+                            className="text-left">
                             Sport Name
                           </th>
                           <th
                             role="columnheader"
                             scope="col"
                             aria-colindex="2"
-                            className="text-center">
+                            className="text-left">
                             Event Name
                           </th>
                           <th
                             role="columnheader"
                             scope="col"
                             aria-colindex="3"
-                            className="text-center">
+                            className="text-left">
                             Market Name
                           </th>
 
@@ -429,14 +273,14 @@ function UnSetteledBet() {
                             role="columnheader"
                             scope="col"
                             aria-colindex="5"
-                            className="text-center">
+                            className="text-left">
                             Nation
                           </th>
                           <th
                             role="columnheader"
                             scope="col"
                             aria-colindex="6"
-                            className="text-center">
+                            className="text-left">
                             User Rate
                           </th>
 
@@ -444,7 +288,7 @@ function UnSetteledBet() {
                             role="columnheader"
                             scope="col"
                             aria-colindex="8"
-                            className="text-right">
+                            className="text-left">
                             Amount
                           </th>
                           <th
@@ -465,15 +309,14 @@ function UnSetteledBet() {
                       </thead>
                       <tbody className="">
                         {DataList?.length > 0 &&
-                          DataList.map((item) => {
-                            console.log(item.isback)
+                          DataList.map((item, id) => {
                             return (
-                              <tr role="row" className={`${item.isback===true?"back":item.isback===false?"lay":""}`}>
+                              <tr role="row" key={item.pnl+id} className={`${item.isback===true?"back":item.isback===false?"lay":""}`}>
                                 <td
                                   role="columnheader"
 
                                   aria-colindex="1"
-                                  className="text-left "
+                                  className="text-left"
                                   style={{
                                     // border:"5px solid "
                                   }}
@@ -483,26 +326,26 @@ function UnSetteledBet() {
                                 <td
                                   role="columnheader"
                                   aria-colindex="2"
-                                  className="text-center">
+                                  className="text-left">
                                   {item.eventName}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="3"
-                                  className="text-center">
+                                  className="text-left">
                                   {item.marketname}
                                 </td>
 
                                 <td
                                   role="columnheader"
                                   aria-colindex="5"
-                                  className="text-center">
+                                  className="text-left">
                                   {item.nation}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="6"
-                                  className="text-center">
+                                  className="text-left">
                                   {item.rate}
                                 </td>
 
@@ -521,7 +364,7 @@ function UnSetteledBet() {
                                 <td
                                   role="columnheader"
                                   aria-colindex="10"
-                                  className="">
+                                  className="text-left">
                                   {moment(item.time).format("YYYY-MM-DD")}
                                 </td>
                               </tr>
@@ -561,7 +404,7 @@ function UnSetteledBet() {
                       result.map((item, id) => {
                         return (
                           <li
-                            className="page-item"
+                            className="page-item" key={id+id}
                             onClick={() => handleClick(id)}>
                             <button className="page-link">{item}</button>
                           </li>

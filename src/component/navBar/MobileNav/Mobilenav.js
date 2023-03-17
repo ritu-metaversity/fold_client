@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import "../Nav.css";
 
 function Mobilenav() {
-  const [ActiveNavbar, setActiveNavBar] = useState(1);
+let {pathname}=useLocation()
+ 
+  const [Active, setActive] = useState(1);
 
-
-  const handleClick = (val) => {
-    setActiveNavBar(val);
+  const handleClick = (val, e) => {
+    setActive(val);
   };
 
 
   return (
     <>
       <ul className="nav nav-tabs game-nav-bar">
-          <li
-          
-              className={`nav-item ${ActiveNavbar === 1 ? "active2" : ""}`}
-              >
+          <li className={`nav-item ${Active === 1 ? "active2" : null}`}>
               <Link
                 data-toggle="tab"
                 to="/m/In-play"
@@ -26,10 +25,7 @@ function Mobilenav() {
                 In-play
               </Link>
             </li>
-            <li
-           
-              className={`nav-item ${ActiveNavbar === 2 ? "active2" : ""}`}
-              >
+            <li className={`nav-item ${Active === 2 ? "active2" : null}`}>
               <Link
                 data-toggle="tab"
                 to="/m/Sports"
@@ -38,10 +34,7 @@ function Mobilenav() {
                 Sports
               </Link>
             </li>
-            <li
-              
-              className={`nav-item ${ActiveNavbar === 3 ? "active2" : ""}`}
-              >
+            <li className={`nav-item ${Active === 3 ? "active2" : null}`}>
               <Link
                 data-toggle="tab"
                 to="/m/slot"
@@ -52,7 +45,7 @@ function Mobilenav() {
             </li>
             <li
               
-              className={`nav-item ${ActiveNavbar === 4 ? "active2" : ""}`}
+              className={`nav-item ${Active === 4 ? "active2" : null}`}
              >
               <Link
                 data-toggle="tab"

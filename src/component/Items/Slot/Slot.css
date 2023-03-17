@@ -8,6 +8,7 @@
 }
 
 .casinoicons img {
+    margin-bottom: 9px;
     width: 130px;
     height: auto;
 }
@@ -67,7 +68,6 @@ div#casino {
     background: #a7a9ab57;
 }
 
-@media screen and (max-width: 800px) {
     .casinoicons {
         position: relative;
         box-shadow: 0 25px 8px -8px;
@@ -76,9 +76,24 @@ div#casino {
         width: 100%;
         cursor: pointer;
     }
-}
 
 .casino-main {
     height: 77vh;
     overflow: scroll;
+}
+
+.mob-view{
+    display: none;
+}
+
+
+@media screen and (max-width: 500px) {
+    .mob-view{
+        display: block;
+    }
+    .desk-view{
+        display: none;
+    }
+    
+    
 }

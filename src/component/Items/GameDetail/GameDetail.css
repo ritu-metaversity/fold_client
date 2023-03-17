@@ -564,4 +564,6 @@ p.no-found {
     text-align: center;
 }
 
-
+.btn-fancy{
+    text-align: center !important;
+}

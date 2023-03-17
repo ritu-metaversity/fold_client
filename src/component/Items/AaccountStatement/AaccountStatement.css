@@ -64,9 +64,10 @@
     padding-top: 3px;
     padding-bottom: 3px;
 }
-.card-header h4{
+.card-header h4 {
     font-weight: 600;
-    padding: 9px;
+    font-size: 20px;
+    padding: 1px;
 }
 .btn-block {
     display: block;

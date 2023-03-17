@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../apis/gameAPI";
 import Mobilenav from "../../navBar/MobileNav/Mobilenav";
 import NavBar from "../../navBar/NavBar";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./Slot.css";
 
 const Slot = () => {
@@ -10,6 +11,7 @@ const Slot = () => {
   const [casinoListId, setCasinoListId] = useState(323334);
   const [casinoData, setCasinoData] = useState("");
   const [casinoName, setCasinoName] = useState("Indian Casino");
+  const [isLoading, setIsLoading]=useState(true)
 
   useEffect(() => {
     GameAPI.CASINO_TYPES().then((res) => {
@@ -28,14 +30,21 @@ const Slot = () => {
       id: casinoListId,
     }).then((res) => {
       setCasinoData(res);
+      setIsLoading(false)
     });
   }, [casinoListId]);
+
+  const history = useHistory();
+  const handleData = (id) => {
+    history.push(`/casino/${id}`);
+  };
 
   return (
     <>
       <NavBar />
       <Mobilenav />
-      <div className="tab-content">
+      {
+        isLoading?<p className="lodder"><i className="fa fa-spinner fa-spin"></i></p>:<div className="tab-content">
         <div id="live-casino" className="tab-pane live-casino">
           <div className="container-fluid">
             <div className="row">
@@ -47,8 +56,10 @@ const Slot = () => {
                         key={item.id}
                         className={`nav-item ${
                           ActiveClass === item.id ? "active2" : ""
-                        }`}
-                        onClick={() => handleClick(item.id, item.name)}>
+                        }`
+                        
+                      }
+                        onClick={() => handleClick(item.id, item.name, item.gameId)}>
                         <a
                           data-toggle="tab"
                           href="#casino"
@@ -78,9 +89,9 @@ const Slot = () => {
                           {casinoData?.length > 0 &&
                             casinoData.map((item) => {
                               return (
-                                <div key={item.gameId} className="col-6 text-center">
-                                  <div className="casinoicons">
-                                    <a href="/m/casino/superover" className="">
+                                <div key={item.gameId} className="col-6 text-center" onClick={()=>handleData(item.gameId)}>
+                                  <div className="casinoicons" >
+                                    <a  className="">
                                       <img
                                         src={item.imageUrl}
                                         className="img-fluid"
@@ -121,6 +132,7 @@ const Slot = () => {
           </div>
         </div>
       </div>
+      }
     </>
   );
 };

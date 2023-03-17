@@ -32,7 +32,6 @@ function ChangeBtnValue() {
     });
   };
   const handleInput = (e) => {
-    // console.log(e.target.value)
     let inputValue = e.target.value;
     let inputName = e.target.name;
     setUpdateStack((prev) => ({ ...prev, [inputName]: inputValue }));
@@ -40,7 +39,8 @@ function ChangeBtnValue() {
  
   setTimeout(() => {
     setTimeOut(1)
-  }, 7000)
+    setMessageShow(false)
+  }, 15000)
   
 
   return (
@@ -351,21 +351,17 @@ function ChangeBtnValue() {
                   </div>
                 </div>
               </div>
-              <div class="row row5 mb-1">
+              <div className="row row5 mb-1">
               <div className="col-6">
               {getKey?.length &&
                 getKey.map((item) => {
                   return (
-                    // <div className="row row5 mb-1">
-
-                    
-                      <div className="form-group mb-0">
+                      <div className="form-group mb-0" key={item}>
                         <input
                           placeholder="Button Value"
                           value={item}
                           maxLength="7"
                           className="form-control"
-                          // onChange={changeButtonValue}
                         />
                       </div>
                     
@@ -377,27 +373,21 @@ function ChangeBtnValue() {
                 {getStackValue
                 ? Object.keys(getStackValue).map((key, index) => {
                     return (
-                      
-                        <div className="form-group mb-0">
+                        <div className="form-group mb-0" key={key+index}>
                           <input
                             name={key}
+                            type="number"
                             text="number"
                             value={updateStack[key]}
                             onChange={handleInput}
                             className="form-control"
                           />
                         </div>
-                     
                     );
                   })
                 : ""}
                  </div>
               </div>
-
-              
-              
-
-              
 
               <div className="row row5 mt-2">
                 <div className="col-12">

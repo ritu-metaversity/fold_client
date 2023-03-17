@@ -11,8 +11,6 @@ function Login() {
   const [StatusVal, setStatusVal] = useState(true);
 
   const handleLogin = () => {
-    history.push("/");
-
     AuthorAPI.Login({
       userId: user,
       password: password,
@@ -24,7 +22,7 @@ function Login() {
       setStatusVal(res.status);
       const uId = res.userId;
       localStorage.setItem("UserId", uId);
-      if (res.token !==" " && user === res.userId) {
+      if (res.token !=="" && user === res.userId) {
         history.push("/home");
       }
       const pType = res.passwordtype;

@@ -28,7 +28,7 @@ import SlotGame from "./component/Items/SlotGame/SlotGame";
 // import VirtualSports from "./component/Items/VirtualSport/VirtualSports";
 import Home from './component/Home/Home';
 
-import CricketCasino from "./component/Items/CricketCasino/CricketCasino";
+// import CricketCasino from "./component/Items/CricketCasino/CricketCasino";
 import AaccountStatement from "./component/Items/AaccountStatement/AaccountStatement";
 import ProfitLoss from "./component/Items/ProfitLoss/ProfitLoss";
 import BetHistory from "./component/Items/BetHistory/BetHistory";
@@ -38,6 +38,7 @@ import ChangePassword from "./component/Items/ChangePassword/ChangePassword";
 import SignOut from "./component/singnout/SignOut";
 import GameHead from "./component/Items/GameDetail/Gamehead/GameHead";
 import Slot from "./component/Items/Slot/Slot";
+import Casino from "./component/Items/Casino/Casino";
 
 
 
@@ -59,51 +60,7 @@ function App() {
             <Route exact path="/Home">
               <Home />
             </Route>
-          {/* <Route exact path="/livcasino">
-            <LiveCasino />
-          </Route>
-          <Route exact path="/slotgame">
-            <SlotGame />
-          </Route>
-          <Route exact path="/race">
-            <Race />
-          </Route>
-          <Route exact path="/horserace">
-            <HorseRace />
-          </Route>
-          <Route exact path="/dtlist">
-            <DtList />
-          </Route>
-          <Route exact path="/sportcasino">
-            <SportCasino />
-          </Route>
-          <Route exact path="/andarbahar">
-            <AndarBahar />
-          </Route>
-          <Route exact path="/bollywoodtable">
-            <BollywoodTable />
-          </Route>
-          <Route exact path="/binary">
-            <Binary />
-          </Route>
-          <Route exact path="/casinowar">
-            <CasinoWar />
-          </Route>
-          <Route exact path="/lottery">
-            <Lottery />
-          </Route>
-          <Route exact path="/worlilist">
-            <Worlilist />
-          </Route>
-          <Route exact path="/cardjud">
-            <Cardjud />
-          </Route>
-          <Route exact path="/virtualsports">
-            <VirtualSports />
-          </Route>
-          <Route exact path="/cricketcasino">
-            <CricketCasino />
-          </Route> */}
+          
 
 
 
@@ -163,6 +120,10 @@ function App() {
 
           <Route exact path="/gamedetail/:id">
             <GameHead  />
+          </Route>
+
+          <Route exact path="/casino/:id">
+            <Casino/>
           </Route>
 
 

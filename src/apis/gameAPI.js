@@ -15,7 +15,7 @@ export const GameAPI = {
             signal: cancel ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal : undefined,
         })
      
-      return response.data.data
+      return response
     },  
 
     Place_Bet :
