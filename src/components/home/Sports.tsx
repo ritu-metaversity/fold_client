@@ -79,11 +79,13 @@ const Sports = () => {
       setLoading(false);
     };
 
-    // if (isSignedIn) {
-    // getNewEvent();
-    // } else {
+
     getNewEventOpen();
-    // }
+    const time = setInterval(() => {
+      getNewEventOpen();
+    }, 60000);
+
+    return () => clearInterval(time);
   }, [value, activeSportList]);
 
   if (!(activeSportList?.length > 0)) {
