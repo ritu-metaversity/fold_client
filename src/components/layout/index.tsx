@@ -3,6 +3,7 @@ import Header, { drawerWidth, drawerWidthXl } from "./header";
 import { FC, PropsWithChildren } from "react";
 import { Box, Toolbar } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { Outlet } from "react-router-dom";
 
 export const StyledMain = styled(Box)(({ theme }) => ({
   flexGrow: 1,
@@ -28,8 +29,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
     <div>
       <Header></Header>
       <Toolbar />
-
-      {children}
+      <Outlet />
       {/* <Footer/> */}
     </div>
   );
