@@ -39,6 +39,8 @@ import SignOut from "./component/singnout/SignOut";
 import GameHead from "./component/Items/GameDetail/Gamehead/GameHead";
 import Slot from "./component/Items/Slot/Slot";
 import Casino from "./component/Items/Casino/Casino";
+import Deposit from "./component/Items/Deposit/Deposit";
+import Withdraw from "./component/Items/Withdrow/Withdraw";
 
 
 
@@ -106,15 +108,13 @@ function App() {
           <Home id="2" />
           </Route>
 
-          {/* <Route exact path="/accountstatement">
-            <AaccountStatement />
+         
+          <Route exact path="/deposit">
+            <Deposit/>
           </Route>
-          <Route exact path="/profitloss">
-            <ProfitLoss />
+          <Route exact path="/withdraw">
+            <Withdraw/>
           </Route>
-          <Route exact path="/bethistory">
-            <BetHistory />
-          </Route> */}
 
 
 

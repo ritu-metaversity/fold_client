@@ -10,6 +10,7 @@ const NavBar = (props) => {
   // eslint-disable-next-line
   const [userdetail, setUserDetail] = useState(localStorage.getItem("UserId"));
   const [userMessage, setUserMessage] = useState("");
+  const [status, setStatus] = useState(false);
 
   function toggle(e) {
     e.preventDefault();
@@ -28,6 +29,14 @@ const NavBar = (props) => {
     }
   }
 
+
+  useEffect(()=>{
+    UserAPI.Self_By_App_Url({
+      appUrl: "atozscore.com"
+    }).then((res)=>{
+      setStatus(res.data.selfAllowed)
+    })
+  },[])
 
 
   // eslint-disable-next-line
@@ -146,6 +155,16 @@ const NavBar = (props) => {
                           to="/home"
                           className="dropdown-item router-link-exact-active router-link-active">
                           Home
+                        </Link>
+                        <Link
+                          to="/deposit"
+                          className={`dropdown-item router-link-exact-active router-link-active ${status?"":"d-none"}`}>
+                          Deposit
+                        </Link>
+                        <Link
+                          to="/withdraw"
+                          className={`dropdown-item router-link-exact-active router-link-active ${status?"":"d-none"}`}>
+                          Withdraw
                         </Link>
                         <Link
                           to="/m/reports/accountstatement"

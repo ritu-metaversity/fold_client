@@ -6,8 +6,8 @@ import { AuthorAPI } from "../../apis/AuthorAPI";
 
 function Login() {
   const history = useHistory();
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("1111111");
+  const [user, setUser] = useState("sumana6748");
   const [StatusVal, setStatusVal] = useState(true);
 
   const handleLogin = () => {

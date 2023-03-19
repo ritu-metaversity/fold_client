@@ -9,8 +9,8 @@ export const AuthorAPI = {
         data: {
             userId: userId,
             password: password,
-            appUrl: "atozscore.com"
-            // appUrl: window.location.hostname
+            // appUrl: "atozscore.com"
+            appUrl: window.location.hostname
         },
         signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
       })

@@ -40,7 +40,7 @@ function Item({ gameIdForItemPage, sportId}) {
 
   useEffect(() => {
     if (gameIdForItemPage != null ) {
-      axios.get(`http://43.205.50.127:9000/active_match/${gameIdForItemPage}`)
+      axios.get(`http://43.205.50.127:9000/betfair_api/active_match/${gameIdForItemPage}`)
         .then((res) => {
         setGameName(res.data.data);
         setIsLoading(false)
