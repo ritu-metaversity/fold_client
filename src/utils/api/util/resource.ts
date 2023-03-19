@@ -24,19 +24,19 @@ export const utilResources: {
     METHOD: "POST",
   },
   FOOTER_IMAGESS: {
-    URL: "http://192.168.0.184:80/admin-new-apis/api/admin/getData",
+    URL: "api/admin/getData",
     METHOD: "POST",
   },
   ABOUT_US: {
-    URL: "http://192.168.0.184:80/admin-new-apis/app/getAboutUs",
+    URL: "app/getAboutUs",
     METHOD: "POST",
   },
   TERM_CONDITION: {
-    URL: "http://192.168.0.184:80/admin-new-apis/app/getTermAndCondition",
+    URL: "app/getTermAndCondition",
     METHOD: "POST",
   },
   RESPONSIBLE: {
-    URL: "http://192.168.0.184:80/admin-new-apis/app/getResponsibleGaming",
+    URL: "app/getResponsibleGaming",
     METHOD: "POST",
   },
 };
