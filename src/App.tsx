@@ -3,6 +3,7 @@ import React, {
   createContext,
   Dispatch,
   SetStateAction,
+  useCallback,
   useEffect,
   useState,
 } from "react";
@@ -25,6 +26,7 @@ import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 import IndexForTerms from "./components/terms";
+import { useLocation } from "react-router-dom";
 
 interface ModalState {
   login?: boolean;
@@ -126,7 +128,7 @@ function App() {
     }
   };
 
-  const validateJwt = async () => {
+  const validateJwt = useCallback(async () => {
     const { response } = await utilServices.validateToken();
     const user = localStorage.getItem("user");
     if (response?.status && user) {
@@ -136,7 +138,7 @@ function App() {
       setUser(null);
       setIsSignedIn(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     const getNewEventOpen = async () => {
@@ -167,15 +169,22 @@ function App() {
     }
   };
 
+  const { pathname } = useLocation();
   useEffect(() => {
     const user = localStorage.getItem("user");
+    let timer: ReturnType<typeof setInterval>;
     if (user) {
-      validateJwt();
+      if (
+        ["welcome", "sign-in", "sign-up"].every((i) => !pathname.includes(i))
+      ) {
+        validateJwt();
+        timer = setInterval(() => validateJwt(), 1000);
+      }
     } else {
       setIsSignedIn(false);
     }
-    return () => {};
-  }, []);
+    return () => clearInterval(timer);
+  }, [pathname, validateJwt]);
 
   useEffect(() => {
     const time = setInterval(() => {
