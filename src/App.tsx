@@ -24,6 +24,7 @@ import CustomizedDialogPassword from "./components/layout/user/ResetPasswordDail
 import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
+import IndexForTerms from "./components/terms";
 
 interface ModalState {
   login?: boolean;
@@ -237,14 +238,11 @@ function App() {
               setUser,
             }}
           >
-            <Layout>
-              {/* {!isSignedIn && ( */}
-              <Box display="none">
-                <CustomizedDialogPassword />
-              </Box>
-              {/* )} */}
-              <Pages />
-            </Layout>
+            <Box display="none">
+              <CustomizedDialogPassword />
+            </Box>
+            <Pages />
+            <IndexForTerms />
           </UserContext.Provider>
         </div>
         <SnackbarUtilsConfigurator />

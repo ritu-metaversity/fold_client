@@ -1,87 +1,124 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { utilServices } from "../../utils/api/util/services";
 import "./footer.css";
+
+interface FooterImageInterface {
+  id: string;
+  appUrl: string;
+  support: string;
+  mobileNo: string;
+  s_whatsapp: {
+    icon: string;
+    link: string;
+  };
+  s_telegram: {
+    icon: string;
+    link: string;
+  };
+  s_youtube: {
+    icon: string;
+    link: string;
+  };
+  s_facebook: {
+    icon: string;
+    link: string;
+  };
+  s_twitter: {
+    icon: string;
+    link: string;
+  };
+  s_instagram: {
+    icon: string;
+    link: string;
+  };
+  u_paytm: string;
+  u_googlePay: string;
+  u_phonePe: string;
+  u_upi: string;
+}
+
 const Footer = () => {
+  const [footerData, setFooterData] = useState<FooterImageInterface | null>(
+    null
+  );
+
+  useEffect(() => {
+    const getFooterData = async () => {
+      const { response } = await utilServices.footerImages();
+      if (response) {
+        setFooterData(response.data);
+      }
+    };
+    getFooterData();
+  }, []);
+
   return (
     <div>
       <footer className="footer">
         <div className="support">
           <div>
             <div className="w-100 text-center">
-              <b>24X7 Support</b>
+              <b>{footerData?.support}</b>
             </div>
             <div className="text-center w-100">
-              <span className="phones">
-                +447403777777 /+447411114111 /+447380173801 /+447377773777{" "}
-              </span>
+              <span className="phones">{footerData?.mobileNo}</span>
             </div>
           </div>
           <div className="footer-social">
-            <a
-              href="https://wa.me/+447380173801"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                alt=""
-                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/whatsapp.png"
-              />
-            </a>
-            <a
-              href="https://www.facebook.com/wolf777exchange"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                alt=""
-                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/facebook.png"
-              />
-            </a>
-            <a
-              href=" https://www.instagram.com/wolf777exchange"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                alt=""
-                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/instagram.png"
-              />
-            </a>
-            <a
-              href="https://t.me/wolf777_official"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                alt=""
-                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/telegram.png"
-              />
-            </a>
-            <a
-              href="https://www.twitter.com/wolf777exchange"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                alt=""
-                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/twitter.png"
-              />
-            </a>
-            <a
-              href="https://www.youtube.com/channel/UC8-Cc6t61DhtbyPGIGDXJbg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                alt=""
-                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/youtube.png"
-              />
-            </a>{" "}
-            <a href="https://wolfcfd.com" target="_blank" rel="noreferrer">
-              <img
-                alt=""
-                src="https://sitethemedata.com/v89/static/front/img/home-banners/social/news.png"
-              />
-            </a>
+            {footerData?.s_whatsapp && (
+              <a
+                href={footerData?.s_whatsapp?.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img alt="" src={footerData?.s_whatsapp?.icon} />
+              </a>
+            )}
+            {footerData?.s_facebook && (
+              <a
+                href={footerData?.s_facebook?.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img alt="" src={footerData?.s_facebook?.icon} />
+              </a>
+            )}
+            {footerData?.s_instagram && (
+              <a
+                href={footerData?.s_instagram?.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img alt="" src={footerData?.s_instagram?.icon} />
+              </a>
+            )}
+            {footerData?.s_telegram && (
+              <a
+                href={footerData?.s_telegram?.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img alt="" src={footerData?.s_telegram?.icon} />
+              </a>
+            )}
+            {footerData?.s_twitter && (
+              <a
+                href={footerData?.s_twitter?.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img alt="" src={footerData?.s_twitter?.icon} />
+              </a>
+            )}
+            {footerData?.s_youtube && (
+              <a
+                href={footerData?.s_youtube?.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img alt="" src={footerData?.s_youtube?.icon} />
+              </a>
+            )}
           </div>
         </div>
         <div className="footer-menu">
@@ -159,78 +196,42 @@ const Footer = () => {
           </div>{" "}
           <div className="payments">
             <ul>
-              <li>
-                <a href="/">
+              {footerData?.u_googlePay && (
+                <li>
                   <img
-                    src="https://sitethemedata.com/v89/static/front/img/upi_logos_new/bhim.png"
+                    src={footerData?.u_googlePay}
                     alt="effect"
                     className="img-fluid"
                   />
-                </a>
-              </li>
-              <li>
-                <a href="/">
+                </li>
+              )}
+              {footerData?.u_paytm && (
+                <li>
                   <img
-                    src="https://sitethemedata.com/v89/static/front/img/upi_logos_new/upi.png"
+                    src={footerData?.u_paytm}
                     alt="effect"
                     className="img-fluid"
                   />
-                </a>
-              </li>{" "}
-              <li>
-                <a href="/">
+                </li>
+              )}
+              {footerData?.u_phonePe && (
+                <li>
                   <img
-                    src="https://sitethemedata.com/v89/static/front/img/upi_logos_new/imps.png"
+                    src={footerData?.u_phonePe}
                     alt="effect"
                     className="img-fluid"
                   />
-                </a>
-              </li>{" "}
-              <li>
-                <a href="/">
+                </li>
+              )}
+              {footerData?.u_upi && (
+                <li>
                   <img
-                    src="https://sitethemedata.com/v89/static/front/img/upi_logos_new/paytm.png"
+                    src={footerData?.u_upi}
                     alt="effect"
                     className="img-fluid"
                   />
-                </a>
-              </li>{" "}
-              <li>
-                <a href="/">
-                  <img
-                    src="https://sitethemedata.com/v89/static/front/img/upi_logos_new/airtel.png"
-                    alt="effect"
-                    className="img-fluid"
-                  />
-                </a>
-              </li>{" "}
-              <li>
-                <a href="/">
-                  <img
-                    src="https://sitethemedata.com/v89/static/front/img/upi_logos_new/phonepe.png"
-                    alt="effect"
-                    className="img-fluid"
-                  />
-                </a>
-              </li>{" "}
-              <li>
-                <a href="/">
-                  <img
-                    src="https://sitethemedata.com/v89/static/front/img/upi_logos_new/net-banking.png"
-                    alt="effect"
-                    className="img-fluid"
-                  />
-                </a>
-              </li>{" "}
-              <li>
-                <a href="/">
-                  <img
-                    src="https://sitethemedata.com/v89/static/front/img/upi_logos_new/debit-card.png"
-                    alt="effect"
-                    className="img-fluid"
-                  />
-                </a>
-              </li>
+                </li>
+              )}
             </ul>
           </div>{" "}
           <div className="footer-bottom">
