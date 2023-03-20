@@ -94,9 +94,10 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
         }
       } else if (error.response?.status === 401) {
         if (localStorage.getItem("token")) {
-          // localStorage.clear();
-          snackBarUtil.error("Session changed. Please login again!");
-          // window.location.replace("/");
+          localStorage.clear();
+          // snackBarUtil.error("Session changed. Please login again!");
+          window.location.replace("/");
+          result.error = {};
         }
       } else {
         if (errorRef && setErrorRef) {
@@ -126,7 +127,7 @@ const apiSnackbarNotifications: (
     const { message } = args.error;
     if (typeof message === "object") {
       message?.forEach((message) => snackBarUtil.error(message));
-    } else {
+    } else if (typeof message === "string") {
       snackBarUtil.error(message);
     }
   } else if (typeof args?.response?.message === "string") {
