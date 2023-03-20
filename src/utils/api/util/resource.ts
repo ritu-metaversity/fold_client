@@ -23,4 +23,20 @@ export const utilResources: {
     URL: "enduser/get-user-message",
     METHOD: "POST",
   },
+  FOOTER_IMAGESS: {
+    URL: "api/admin/getData",
+    METHOD: "POST",
+  },
+  ABOUT_US: {
+    URL: "app/getAboutUs",
+    METHOD: "POST",
+  },
+  TERM_CONDITION: {
+    URL: "app/getTermAndCondition",
+    METHOD: "POST",
+  },
+  RESPONSIBLE: {
+    URL: "app/getResponsibleGaming",
+    METHOD: "POST",
+  },
 };

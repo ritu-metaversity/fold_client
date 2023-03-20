@@ -2,6 +2,7 @@ import { Box } from "@mui/system";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import CasinoGame from "../casino/game/CasinoGame";
+import Layout from "../layout";
 import Loading from "../layout/loading";
 import Withdraw from "../Withdraw/Withdraw";
 
@@ -25,19 +26,21 @@ const Pages = () => {
         }
       >
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/sports/details/" element={<Event />} />
-          <Route path="/report">
-            <Route path="accountstatement" element={<Account />} />
-            <Route path="activity" element={<Activity />} />
-            <Route path="currentbets" element={<CurrentBets />} />
+          <Route path="" element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/sports/details/" element={<Event />} />
+            <Route path="/report">
+              <Route path="accountstatement" element={<Account />} />
+              <Route path="activity" element={<Activity />} />
+              <Route path="currentbets" element={<CurrentBets />} />
+            </Route>
+            <Route path="/casino" element={<Casino />} />
+            <Route path="/casino/:id" element={<CasinoGame />} />
+            <Route path="/virtual-casino" element={<Casino />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/deposit" element={<Deposit />} />
+            <Route path="/withdraw-request" element={<Withdraw />} />
           </Route>
-          <Route path="/casino" element={<Casino />} />
-          <Route path="/casino/:id" element={<CasinoGame />} />
-          <Route path="/virtual-casino" element={<Casino />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/deposit" element={<Deposit />} />
-          <Route path="/withdraw-request" element={<Withdraw />} />
         </Routes>
       </Suspense>
     </div>
