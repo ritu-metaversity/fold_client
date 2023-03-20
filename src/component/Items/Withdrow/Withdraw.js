@@ -1,8 +1,7 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { UserAPI } from "../../../apis/UserAPI";
-import Mobilenav from "../../navBar/MobileNav/Mobilenav";
-import NavBar from "../../navBar/NavBar";
+import NavBar from '../../navBar/NavBar'
 import "./Withdraw.css";
 
 const Withdraw = () => {
@@ -50,8 +49,7 @@ const Withdraw = () => {
 
   return (
     <>
-      <NavBar />
-      <Mobilenav />
+    <NavBar/>
       <div className="wrapper">
         <div className="card-body container-fluid container-fluid-5">
           <div className="main-account-containor">
@@ -64,12 +62,6 @@ const Withdraw = () => {
                 onChange={(e) => setAmount(e.target.value)}
               />
             </div>
-
-            {/* <div className="mx-input-wrapper account-field">
-              <label className="account-lable">Amount</label>
-              <br />
-              <input type="number" className="account-input"/>
-            </div> */}
             <div className="mx-input-wrapper account-field">
               <label className="account-lable">Account Number</label>
               <br />
@@ -219,7 +211,7 @@ const Withdraw = () => {
                             </td>
                             <td
                               aria-colindex="3"
-                              className="text-right withdraw-data">
+                              className="text-right ">
                               {item.amount}
                             </td>
                             <td
@@ -250,7 +242,7 @@ const Withdraw = () => {
                             </td>
                             <td
                               aria-colindex="6"
-                              className="text-lift withdraw-data">
+                              className={`text-left ${item.status==="Pending"?"pending":item.status==="Approved"?"approved":"rejected"}`}>
                               {item.status}
                             </td>
                           </tr>

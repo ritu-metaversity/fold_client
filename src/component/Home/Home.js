@@ -6,7 +6,6 @@ import NavBar from "../navBar/NavBar";
 import TopNav from "../navBar/TopNav";
 
 function Home(urldtaa) {
-
 const [activeSport, setActiveSport]=useState("");
 const [sportId, setSportId]=useState("");
 

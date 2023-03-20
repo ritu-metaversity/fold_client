@@ -73,43 +73,7 @@ function TopNav(props) {
               );
           })}
 
-          {/* <li  className="nav-item text-center" >
-            <a
-              
-              data-toggle="tab"
-              href="#2"
-              className={`nav-link nav1 ${Active === 2?"active":null}`}
-              onClick={()=>handleClick(2)}
-              >
-              <div >
-                <img
-                  
-                  src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png"
-                  alt=""
-                />
-              </div>
-              <div >Tennis</div>
-            </a>
-          </li> */}
-          {/* <li  className="nav-item text-center" >
-            <a
-              
-              data-toggle="tab"
-              href="#4"
-              className={`nav-link nav1 ${Active ===4?"active":null}`}
-              onClick={()=>handleClick(4)}
-             
-              >
-              <div >
-                <img
-                  
-                  src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/4.png"
-                  alt=""
-                />
-              </div>
-              <div >Cricket</div>
-            </a>
-          </li> */}
+          
           {/* <li  className="nav-item text-center" >
             <a
               

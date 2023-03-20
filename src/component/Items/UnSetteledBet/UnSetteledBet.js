@@ -140,7 +140,7 @@ function UnSetteledBet() {
                               className="custom-control-input"
                               onChange={(e)=>setBetValue(e.target.value)}
                               value="1"
-                              // checked
+                              defaultChecked
                              
                             />{" "}
                             <label

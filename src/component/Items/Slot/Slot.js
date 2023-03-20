@@ -19,10 +19,11 @@ const Slot = () => {
     });
   }, []);
 
-  const handleClick = (id, name) => {
+  const handleClick = (id, name, e) => {
     setCasinoListId(id);
     setActiveClass(id);
     setCasinoName(name)
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -43,6 +44,7 @@ const Slot = () => {
     <>
       <NavBar />
       <Mobilenav />
+      
       {
         isLoading?<p className="lodder"><i className="fa fa-spinner fa-spin"></i></p>:<div className="tab-content">
         <div id="live-casino" className="tab-pane live-casino">
@@ -59,7 +61,7 @@ const Slot = () => {
                         }`
                         
                       }
-                        onClick={() => handleClick(item.id, item.name, item.gameId)}>
+                        onClick={(e) => handleClick(item.id, item.name, item.gameId, e)}>
                         <a
                           data-toggle="tab"
                           href="#casino"
@@ -89,7 +91,7 @@ const Slot = () => {
                           {casinoData?.length > 0 &&
                             casinoData.map((item) => {
                               return (
-                                <div key={item.gameId} className="col-6 text-center" onClick={()=>handleData(item.gameId)}>
+                                <div key={item.gameId} className="coll-6 text-center" onClick={()=>handleData(item.gameId)}>
                                   <div className="casinoicons" >
                                     <a  className="">
                                       <img
@@ -100,7 +102,6 @@ const Slot = () => {
                                       <div className="casino-name">
                                         {item.gameName}
                                       </div>
-                                      {/* <div className="new-launch-casino">New Launch</div> */}
                                     </a>
                                   </div>
                                 </div>
@@ -108,9 +109,7 @@ const Slot = () => {
                             })}
                         </div>
                         <div
-                          className={`row row5 mt-2 ${
-                            casinoData === null ? "" : "dis-none"
-                          }`}
+                          className={`row row5 mt-2 ${casinoData === null ? "" : "dis-none"}`}
                           style={{ borderTop: "2px solid #000" }}>
                           <div
                             style={{

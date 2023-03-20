@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AuthorAPI } from "../../apis/AuthorAPI";
+
 
 const NavBar = (props) => {
   const [close, setClose] = useState(false);
@@ -29,11 +32,23 @@ const NavBar = (props) => {
     }
   }
 
+  let urldtaa = window.location.pathname;
+  const history = useHistory();
+  let url = urldtaa.slice(1);
+
 
   useEffect(()=>{
-    UserAPI.Self_By_App_Url({
-      appUrl: "atozscore.com"
-    }).then((res)=>{
+    AuthorAPI.VALIDATE_JWT().then((res)=>{
+    }).catch((error)=>{
+      console.log(error.response.status);
+      if(error.response.status===401){
+        history.push('./login')
+      }
+    })
+  }, [url])
+
+  useEffect(()=>{
+    UserAPI.Self_By_App_Url().then((res)=>{
       setStatus(res.data.selfAllowed)
     })
   },[])
@@ -58,10 +73,11 @@ const NavBar = (props) => {
   const token = localStorage.getItem("token")
 
   useEffect(() => {
+    if(token !==""){
     UserAPI.User_Balance().then((res) => {
       setUserbalance(res.data.balance);
-    // console.log(res.data.balance)
     });
+  }
   }, [token]);
 
 
@@ -237,7 +253,7 @@ const NavBar = (props) => {
                               className="custom-control-label"></label>
                           </div>
                         </Link>
-                        <Link to="/m/rules" className="dropdown-item">
+                        <Link to="/" className="dropdown-item">
                           Rules
                         </Link>{" "}
                         <Link

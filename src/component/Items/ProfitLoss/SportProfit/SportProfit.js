@@ -25,23 +25,14 @@ function SportProfit() {
   const [SportData, setSportData] = useState();
   const [DataList, setDataList] = useState();
 
-//   const DateValue = (date, dateString) => {
-//     setStartDate(dateString);
-//   };
-
-console.log(SportId==="")
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
-    console.log(dateString);
   };
   const EndDateValue = (date, dateString) => {
     setEndDate(dateString);
   };
 
-//   const handleSportId = (val) => {
-//     setSportId(val);
-//     console.log(val);
-//   };
+
 
   const getOptionValue = (e) => {
     setMatchId(e.target.value);
@@ -74,9 +65,11 @@ console.log(SportId==="")
       toDate: "",
       userId: "",
     }).then((res) => {
-      setPLValue(res.data);
+      setPLValue(res.data.market);
+    
     });
   }, []);
+  
 
   const getIndexValues = (e) => {
     setIndexValue(e.target.value);
@@ -102,6 +95,7 @@ console.log(SportId==="")
       userId: "",
       totalPages: 2,
     }).then((res) => {
+      setPLValue(res.data.market);
       setDataList(res.data.length);
     });
   };

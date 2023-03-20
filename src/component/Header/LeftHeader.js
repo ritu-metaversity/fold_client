@@ -1,7 +1,7 @@
 import {React, useState} from 'react'
 import Footer from '../footer/Footer'
 import Item from '../item/Item'
-import NavBar from '../navBar/NavBar'
+// import NavBar from '../navBar/NavBar'
 import SideBar from '../sidebar/SideBar'
 // import axios from 'axios'
 
@@ -42,7 +42,7 @@ function LeftHeader(props) {
 
     return (
         <div>
-            <NavBar sendDataFn={sendData}  />
+            {/* <NavBar sendDataFn={sendData}  /> */}
             <div className="main">
                 <div className="container-fluid container-fluid-5">
                     <div className="row row5">

@@ -12,28 +12,26 @@ function GameHead() {
   const handleClick = (val) => {
     setActiveNavBar(val);
   };
-
   return (
     <>
       <NavBar />
-
       <div >
         <ul className="nav nav-tabs ">
           <li className={`nav-item ${ActiveNavbar === 1 ? "active2" : ""}`}>
-            <Link
+            <a
               data-toggle="tab"
               className="nav-link nav2"
               onClick={() => handleClick(1)}>
               Odds
-            </Link>
+            </a>
           </li>
           <li className={`nav-item ${ActiveNavbar === 2 ? "active2" : ""}`}>
-            <Link
+            <a
               data-toggle="tab"
               className="nav-link"
               onClick={() => handleClick(2)}>
               Matched Bet (0)
-            </Link>
+            </a>
           </li>
         </ul>
         <div className="tv-icon">
@@ -42,7 +40,6 @@ function GameHead() {
           </p>
         </div>
       </div>
-
       {ActiveNavbar === 1 ? <GameDetail /> : <MatchBet />}
     </>
   );

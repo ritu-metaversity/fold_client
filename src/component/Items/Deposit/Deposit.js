@@ -1,7 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { UserAPI } from "../../../apis/UserAPI";
-import Mobilenav from "../../navBar/MobileNav/Mobilenav";
 import NavBar from "../../navBar/NavBar";
 import "./Deposit.css";
 import PayManually from "./PayManually";
@@ -10,6 +9,7 @@ import Modal from "react-bootstrap/Modal";
 const Deposit = () => {
   const [paymentListDetails, setPaymentListDetails] = useState({});
   const [showModals, setShowModals] = useState(false);
+  const [modalImg, setModalImg] = useState("");
 
   const UpdateDetails = (vl) => {
     if (vl === true) {
@@ -25,15 +25,16 @@ const Deposit = () => {
   }, []);
 
   const handleCloseModal = () => setShowModals(false);
-  const handleShow = (e) => {
+  const handleShow = (e,img) => {
     e.preventDefault();
     setShowModals(true);
+    setModalImg(img)
   };
 
   return (
     <>
       <NavBar />
-      <Mobilenav />
+      {/* <Mobilenav /> */}
       <div className="wrapper main-conatiner">
         <PayManually UpdateDetails={UpdateDetails} />
 
@@ -69,7 +70,7 @@ const Deposit = () => {
                       role="columnheader"
                       scope="col"
                       aria-colindex="3"
-                      className="text-left">
+                      className="text-left withdraw-data">
                       Data
                     </th>
                     <th
@@ -91,12 +92,12 @@ const Deposit = () => {
                         </td>
                         <td aria-colindex="2" className="text-left">
                           <img
+                          onClick={(e) => handleShow(e, item.image)}
                             src={item.image}
                             className="screenshot"
-                            onClick={(e) => handleShow(e)}
+                            
                           />
-                        </td>
-                        <Modal
+                          <Modal
                           show={showModals}
                           onHide={handleCloseModal}
                           centered
@@ -107,17 +108,16 @@ const Deposit = () => {
                           }}>
                           <Modal.Body>
                             {" "}
-                            <img src={item.image} width="250px" />
+                            <img src={modalImg} width="100%" />
                           </Modal.Body>
                         </Modal>
-
+                        </td>
                         <td aria-colindex="3" className="text-left">
-                          {moment(item.time).format("MM Do YYYY, h:mm")}
-                          {/* { moment().formet("mm dd yyyy hh mm")}  */}
+                          {moment(item.time).format("YYYY-MM-DD, h:mm:ss")}
                         </td>
                         <td
                           aria-colindex="4"
-                          className="text-right text-danger">
+                          className={`text-right ${item.status==="Pending"?"pending":item.status==="Approved"?"approved":"rejected"}`}>
                           {item.status}
                         </td>
                       </tr>

@@ -18,7 +18,6 @@ const Casino = () => {
         width="100%"
         title="mobile"
         allowFullScreen={true}></iframe>
-
       <iframe
         src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
         className="desktop_if"

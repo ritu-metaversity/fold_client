@@ -14,6 +14,7 @@ const PayManually = (props) => {
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);
+  const [active, setActive] = useState(0);
 
   const [files, setFiles] = useState(null);
   // const [files, setPayment handlePaymentDetails] = useState("");
@@ -35,8 +36,9 @@ const PayManually = (props) => {
     });
   }, []);
 
-  const handlePaymentDetails = (vl) => {
+  const handlePaymentDetails = (vl, id) => {
     setPaymentMode(vl);
+    setActive(id)
   };
 
   const handleSubmit = () => {
@@ -140,8 +142,8 @@ const PayManually = (props) => {
                     <>
                       <Col
                         key={item.methodName + id}
-                        onClick={() => handlePaymentDetails(item.methodName)}>
-                        <div className="css-1502y4u">
+                        onClick={() => handlePaymentDetails(item.methodName, id)}>
+                        <div className={`css-1502y4u ${active===id?"active3":""} `}>
                           <img
                             src={item.logo}
                             className="css-37vfbv"

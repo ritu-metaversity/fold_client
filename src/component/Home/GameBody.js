@@ -18,7 +18,7 @@ function GameBody() {
         <TopNav />
         <Item />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

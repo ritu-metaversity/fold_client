@@ -2,18 +2,28 @@ import { React, useEffect, useState } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { GameAPI } from "../../apis/gameAPI";
 import axios from "axios";
+import { AuthorAPI } from "../../apis/AuthorAPI";
 
 function Item({ gameIdForItemPage, sportId}) {
   let urldtaa = window.location.pathname;
   const history = useHistory();
   const [gameName, setGameName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  // const [JWTStatus, setJWTStatus] = useState();
 
   let url = urldtaa.slice(1);
 
 
+  useEffect(()=>{
+    AuthorAPI.VALIDATE_JWT().then((res)=>{
+    }).catch((error)=>{
+      console.log(error.response.status);
+      if(error.response.status===401){
+        history.push('./login')
+      }
+    })
+  }, [url])
 
   // console.log(sportId?.id)
 
@@ -153,7 +163,7 @@ function Item({ gameIdForItemPage, sportId}) {
                               <Link to="/" className="btn-back">
                                 {item.team2Back === 0 ? "0" : item.team2Back}
                               </Link>
-                              <Link href="/" className="btn-lay">
+                              <Link to="/" className="btn-lay">
                                 {item.team2Lay === 0 ? "0" : item.team2Lay}
                               </Link>
                             </div>

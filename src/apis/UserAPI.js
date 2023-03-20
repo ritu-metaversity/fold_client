@@ -122,13 +122,12 @@ export const UserAPI = {
     return response.data;
   },
 
-  Self_By_App_Url: async function ({ appUrl }, cancel = false) {
+  Self_By_App_Url: async function (cancel = false) {
     const response = await api.request({
       url: `/login/is-self-by-app-url`,
       method: "POST",
       data: {
-        appUrl: appUrl,
-        // appUrl: window.location.hostname
+        appUrl: window.location.hostname
       },
 
       signal: cancel

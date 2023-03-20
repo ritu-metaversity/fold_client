@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import "./Placebet.css";
 import { GameAPI } from "../../apis/gameAPI";
-import { message } from "antd";
 import axios from "axios";
 
 function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchId, marketId, selectionId, MarketName, placeTime, isFancy, toss,data }) {
@@ -25,7 +24,6 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
     })
   },[]);
 
-  console.log(userIP)
 
   const handleSubmit = ()=>{
     GameAPI.PLACE_BET({
@@ -55,7 +53,7 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
     }).then((res)=>{
       setStatus(res.data.status);
       data({
-        status:res.data.status,
+        status:true,
         message:res.data.message
       })
     }).catch((error)=>{

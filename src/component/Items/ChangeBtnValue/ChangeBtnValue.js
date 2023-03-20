@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../AaccountStatement/AaccountStatement.css";
-import NavBar from "../../navBar/NavBar";
 import { GameAPI } from "../../../apis/gameAPI";
 import AlertBtn from "../../Alert/AlertBtn";
+import NavBar from '../../navBar/NavBar'
 
 function ChangeBtnValue() {
   // eslint-disable-next-line
@@ -45,7 +45,7 @@ function ChangeBtnValue() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar/>
       <div className="main">
         {/* <div className="container-fluid container-fluid-5 ">
           <div className="row row5">

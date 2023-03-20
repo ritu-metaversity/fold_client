@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import NavBar from "../../navBar/NavBar";
-import SideBar from "../../sidebar/SideBar";
+// import SideBar from "../../sidebar/SideBar";
 import "../AaccountStatement/AaccountStatement.css";
 import AlertBtn from "../../Alert/AlertBtn";
 import {AuthorAPI} from '../../../apis/AuthorAPI'
@@ -49,6 +49,7 @@ function ChangePassword() {
         token: Token,
         oldPassword:currPassword
       }).then((res)=>{
+        setMessege(res.data.message)
         if(res.data.status===true){
           setStatus("success")
 

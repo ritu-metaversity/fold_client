@@ -36,28 +36,20 @@ function MatchBet() {
                 </tr>
               </thead>
               <tbody>
-            
- { matchBet?.data&&
-                    Object.keys(matchBet?.data).map((key) => (
-                      <>
-                        {console.log(key)}
-                        {matchBet?.data[key].map((item) => (
-                          <>
-                            <tr>
-                            {console.log(item)}
+                {matchBet?.data &&
+                  Object.keys(matchBet?.data).map((key) => (
+                    <>
+                      {matchBet?.data[key].map((item, id)=> (
+                        
+                          <tr key={id}>
                             <td>{item?.nation}</td>
                             <td>{item?.rate}</td>
-                        
-                            <td>{item?.amount}</td>
-                            
-                          </tr>
-                           
-                          </>
-                        ))}
-                      </>
-                    ))}
 
-                     
+                            <td>{item?.amount}</td>
+                          </tr>
+                      ))}
+                    </>
+                  ))}
               </tbody>
             </table>
           </div>

@@ -261,19 +261,20 @@ function AaccountStatement() {
                     id="__BVID__104">
                     <thead>
                       <tr role="row">
-                        <th
-                          role="columnheader"
-                          scope="col"
-                          aria-colindex="1"
-                          className="text-left">
-                          Date
-                        </th>
+                       
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="2"
                           className="text-left">
                           Sr no
+                        </th>
+                        <th
+                          role="columnheader"
+                          scope="col"
+                          aria-colindex="1"
+                          className="text-left">
+                          Date
                         </th>
                         <th
                           role="columnheader"
@@ -315,11 +316,12 @@ function AaccountStatement() {
                               onClick={(e) =>
                                 handleShow(e, item.remark, item.marketid)
                               }>
-                              <td aria-colindex="1" className="text-left">
-                                {moment(item.date).format("YYYY-MM-DD h:mm")}
-                              </td>
+                              
                               <td aria-colindex="2" className="text-left">
                                 {item.sno}
+                              </td>
+                              <td aria-colindex="1" className="text-left">
+                                {moment(item.date).format("YYYY-MM-DD h:mm")}
                               </td>
                               <td
                                 aria-colindex="3"

@@ -3,12 +3,12 @@ import NavBar from '../../NavBar'
 import SideBar from '../../SideBar'
 import '../../Items/CasinoWar.css'
 import Bet from '../../Items/Bet'
-import './aaa.css'
+// import './aaa.css'
 
 function aaa() {
   return (
     <div>
-        <NavBar/>
+        {/* <NavBar/> */}
       <div class="main">
    <div class="container-fluid container-fluid-5">
       <div class="row row5">

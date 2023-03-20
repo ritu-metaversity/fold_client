@@ -10,25 +10,8 @@ import "../src/component/navBar/TopNav.css";
 import "../src/component/NewLunch.css";
 import Login from "./component/login/Login";
 import { BrowserRouter, Route, Switch} from "react-router-dom";
-
-// import LiveCasino from "./component/Items/LiveCasino/LiveCasino";
 import SlotGame from "./component/Items/SlotGame/SlotGame";
-// import Race from "./component/Items/Race/Race";
-// import HorseRace from "./component/Items/HorseRace/HorseRace";
-
-// import DtList from "./component/Items/DtList/DtList";
-// import SportCasino from "./component/Items/SportCasino/SportCasino";
-// import AndarBahar from "./component/Items/andarBahar/AndarBahar";
-// import BollywoodTable from "./component/Items/bollywoodTable/BollywoodTable";
-// import Binary from "./component/Items/Binary/Binary";
-// import CasinoWar from "./component/Items/casinoWar/CasinoWar";
-// import Lottery from "./component/Items/Lottery/Lottery";
-// import Worlilist from "./component/Items/WorList/Worlilist";
-// import Cardjud from "./component/Items/CardJud/Cardjud";
-// import VirtualSports from "./component/Items/VirtualSport/VirtualSports";
 import Home from './component/Home/Home';
-
-// import CricketCasino from "./component/Items/CricketCasino/CricketCasino";
 import AaccountStatement from "./component/Items/AaccountStatement/AaccountStatement";
 import ProfitLoss from "./component/Items/ProfitLoss/ProfitLoss";
 import BetHistory from "./component/Items/BetHistory/BetHistory";
@@ -41,20 +24,23 @@ import Slot from "./component/Items/Slot/Slot";
 import Casino from "./component/Items/Casino/Casino";
 import Deposit from "./component/Items/Deposit/Deposit";
 import Withdraw from "./component/Items/Withdrow/Withdraw";
+import Register from "./component/Register/Register";
+import NavBar from "./component/navBar/NavBar";
+import Mobilenav from "./component/navBar/MobileNav/Mobilenav";
 
 
 
 function App() {
 
+  
+
   return (
 
-    
-
-    // <Modals/>
     <BrowserRouter>
       <div className="App">
         <Switch>
           <Route exact path="/login" component={Login} />
+          <Route exact path="/Register" component={Register} />
           
             <Route exact path="/">
               <Home />
