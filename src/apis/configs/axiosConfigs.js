@@ -2,7 +2,7 @@ import axios from "axios";
 
 const token =  localStorage.getItem("token");
 export const api = axios.create({
-    baseURL: "http://api.a2zscore.com/admin-new-apis",
+    baseURL: "http://api.247365.exchange/admin-new-apis",
     headers: {
         'Authorization': 'Bearer ' + token,
     },

@@ -3,7 +3,7 @@ import "../ProfitLoss.css";
 // import "../AaccountStatement/AaccountStatement.css";
 import "../../AaccountStatement/AaccountStatement.css";
 import moment from "moment";
-import { DatePicker, Tabs } from "antd";
+import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import { UserAPI } from "../../../../apis/UserAPI";
 import { GameAPI } from "../../../../apis/gameAPI";
@@ -27,13 +27,11 @@ function CasinoProfit() {
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
-    console.log(dateString);
   };
   const EndDateValue = (date, dateString) => {
     setEndDate(dateString);
   };
   const getOptionValue1 = (e) => {
-    console.log(e.target.value)
     setSportId(e.target.value);
   };
   const getOptionValue = (e) => {
@@ -46,36 +44,32 @@ function CasinoProfit() {
     });
   }, []);
 
-console.log(SportId!=="");
-
   useEffect(() => {
     if(SportId !== "") {
-      console.log("seconf api hit")
 
       GameAPI.CASINO_LIST_BY_TYPE({
         id: SportId,
       }).then((res) => {
-        console.log(res,"currs res skkkrrrr")
         setCasinoList(res);
       });
     }
   }, [SportId]);
 
-
-
   useEffect(() => {
-    console.log("first hit")
     UserAPI.Profit_Loss({
       sportId: SportId,
       matchId: "",
+      pageNumber:0,
       fromDate: startDate,
       toDate: endDate,
       userId: "",
+      pageSize:1,
+      index:0
     }).then((res) => {
-      setPLValue(res.data);
+      setPLValue(res.data.market);
       setCasinoDataList(res.data.length);
     });
-  }, []);
+  }, [SportId, startDate, endDate]);
 
   const getIndexValues = (e) => {
     setIndexValue(e.target.value);
@@ -92,16 +86,17 @@ console.log(SportId!=="");
     }
 
     UserAPI.Profit_Loss({
-      noOfRecords: IndexValue,
       index: 1,
+      pageNumber:1,
       toDate: endDate,
       fromDate: startDate,
-      sportId: MatchId,
-      matchId: SportId,
+      sportId: SportId,
+      matchId: MatchId,
       userId: "",
-      totalPages: 2,
+      pageSize: 2,
     }).then((res) => {
-        setPLValue(res.data);
+      console.log(res)
+        setPLValue(res.data.market);
         setCasinoDataList(res.data.length);
     });
   };
@@ -116,8 +111,6 @@ console.log(SportId!=="");
                 <div className="form-group mb-0">
                   <div
                     className="mx-datepicker"
-                    not-before="Sun Jan 15 2023 05:30:00 GMT+0530 (India Standard Time)"
-                    not-after="Wed Feb 15 2023 05:30:00 GMT+0530 (India Standard Time)"
                     style={{ width: "auto" }}>
                     <div className="mx-input-wrapper">
                       <DatePicker

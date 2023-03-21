@@ -23,7 +23,6 @@ function AaccountStatement() {
   const [dataListLength, setDataListLength] = useState();
   const [pageLength, setPageLength] = useState(0);
   const [pagination, setPagination] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
   const [showModals, setShowModals] = useState(false);
   const [remark, setRemark] = useState();
   const [MarketId, setMarketId] = useState();
@@ -60,7 +59,6 @@ function AaccountStatement() {
       toDate: time,
       type: 1,
     }).then((res) => {
-      setIsLoading(false);
       setPageLength(res.totalPages);
       setDataList(res.dataList);
       setDataListLength(res.dataList.length);
@@ -86,7 +84,6 @@ function AaccountStatement() {
       toDate: endDate,
       type: type,
     }).then((res) => {
-      setIsLoading(false);
       setPageLength(res.totalPages);
       setDataList(res.dataList);
       setDataListLength(res.dataList.length);
@@ -121,7 +118,6 @@ function AaccountStatement() {
         toDate: endDate,
         type: type,
       }).then((res) => {
-        setIsLoading(false);
         setDataList(res.dataList);
       });
     }
@@ -137,7 +133,7 @@ function AaccountStatement() {
           <div className="card-header">
             <h4 className="mb-0">Account Statement</h4>
           </div>
-          <div className="card-body container-fluid container-fluid-5">
+          <div className="card-body statement container-fluid container-fluid-5">
             <div className="row row5">
               <div className="col-6">
                 <div className="form-group mb-0">

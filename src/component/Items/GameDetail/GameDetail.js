@@ -34,16 +34,28 @@ function GameDetail({ getStackValue }) {
   const [messege, setMessege] = useState();
   const [timeOut, setTimeOut] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [maxmin, setMaxmin] = useState([]);
 
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
   const mid = Gameid.slice(12);
 
+
+  // useEffect(()=>{
+  //   const token = localStorage.getItem("token");
+  //   axios.get(`http://43.205.50.127:9000/betfair_api/fancy/${id}`, {
+  //     headers: {Authorization: `Bearer ${token}`}
+  //   }).then((res)=>{
+  //     setMaxmin(res.data.Odds);
+  //   })
+  // }, [])
+  
+
   useEffect(() => {
     const time = setInterval(() => {
       // http://43.205.50.127:9000/fancy/32183024 // NEW API
       // http://89.39.105.69:9001/fancy/${id} //Old Api
-      axios.get(`http://43.205.50.127:9000/betfair_api/fancy/${id}`).then((res) => {
+      axios.get(`http://89.39.105.69:9001/fancy/${id}`).then((res) => {
         if (fancyOdds) {
           const oldOdds = { ...fancyOdds };
           setPreviousState(oldOdds);
@@ -132,6 +144,15 @@ function GameDetail({ getStackValue }) {
           {status === 400
             ? timeOut !== 1 && <AlertBtn color="danger" val={messege} />
             : ""}
+
+
+            {/* {
+              maxmin?.length && maxmin.map((items)=>{
+                console.log(items)
+              })
+            } */}
+
+
           <div className="tab-content">
             <div id="odds" className="tab-pane ">
               <div className="match-title">
@@ -165,7 +186,11 @@ function GameDetail({ getStackValue }) {
                             }`}>
                             <div className="table-header">
                               <div className="float-left country-name box-6 min-max">
-                                <b>
+                              <b>
+                                  Min:
+                                  <span>{item.minBet}</span>
+                                </b>
+                                <b style={{marginLeft:"6px"}}>
                                   Max:
                                   <span>{item.maxBet}</span>
                                 </b>

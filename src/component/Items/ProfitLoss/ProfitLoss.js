@@ -28,7 +28,7 @@ function ProfitLoss() {
     <div className="card-header">
           <h4 className="mb-0">Profit Loss</h4>
         </div>
-    <Tabs defaultActiveKey="1" items={items} onClick={onChange} />;
+    <Tabs defaultActiveKey="1" items={items} onClick={onChange} />
     </>
   );
 }

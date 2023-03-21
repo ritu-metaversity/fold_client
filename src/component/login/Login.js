@@ -93,7 +93,7 @@ function Login() {
                   <i className="ml-2 fas fa-sign-in-alt"></i>
                 </button>
               </div>
-              <div className="form-group mb-0">
+              <div className="form-group mb-0" style={{marginTop: "12px"}}>
                 <Link
                   type="submit"
                   className="btn btn-primary btn-block"

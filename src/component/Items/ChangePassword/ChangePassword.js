@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import NavBar from "../../navBar/NavBar";
-// import SideBar from "../../sidebar/SideBar";
 import "../AaccountStatement/AaccountStatement.css";
 import AlertBtn from "../../Alert/AlertBtn";
 import {AuthorAPI} from '../../../apis/AuthorAPI'
@@ -37,9 +36,6 @@ function ChangePassword() {
       setColor("danger")
       setMessege("New Password and Password Confirmation should be")
     }
-
-
-
     if(passType==="old"){
       AuthorAPI.FIRST_LOGIN({
         currentPassword: currPassword,
@@ -49,31 +45,22 @@ function ChangePassword() {
         token: Token,
         oldPassword:currPassword
       }).then((res)=>{
-        setMessege(res.data.message)
-        if(res.data.status===true){
-          setStatus("success")
-
-        }
-        else{
-          setStatus("danger")
-        }
+        // setMessege(res.data.message)
+        setColor("success");
+        setMessege("Password Updated");
+        setShowError(true)
+       
       }).catch((err)=>{
         console.log(err)
       })
-
     }else{
       AuthorAPI.Change_Passwords({
         currentPassword: currPassword,
         newPassword : newPasswords
       }).then((res)=>{
-        console.log(res);
-        setMessege(res.data.message)
-        if(res.data.status===true){
-          setStatus("success")
-        }
-        else{
-          setStatus("danger")
-        }
+        setShowError(true);
+        setColor("success");
+        setMessege("Password Updated");
       }).catch((err)=>{
         console.log(err)
       })
@@ -81,7 +68,7 @@ function ChangePassword() {
   }
   setTimeout(() => {
     setTimeOut(1)
-  }, 7000)
+  }, 15000)
   return (
     <div>
         
@@ -89,47 +76,7 @@ function ChangePassword() {
         {
          ShowError?timeOut !== 1 && <AlertBtn status={status} color={color} className="change-passwords" val={message}/>:""
         }
-        
-      {/* <div className="main">
-        <div className="container-fluid container-fluid-5">
-          <div className="row row5">
-            <div className="sidebar col-md-2">
-              <SideBar />
-            </div>
-            <div className="col-md-10 report-main-content m-t-5 desk-top-view">
-              <div className="card">
-                <div className="card-header">
-                  <h4 className="mb-0">Change Password</h4>
-                </div>
-                <div className="card-body container-fluid container-fluid-5">
-                  <div className="row row5 mt-2">
-                    <div className="col-4">
-                      <div className="form-group">
-                        <label>Current Password</label>{" "}
-                        <input type="password" required className="form-control" onChange={(e)=>setCurrPassword(e.target.value)}/>
-                      </div>
-                      <div className="form-group">
-                        <label>New Password</label>{" "}
-                        <input type="password" required className="form-control"  onChange={(e)=>setNewpasswords(e.target.value)}/>
-                      </div>
-                      <div className="form-group">
-                        <label>Confirm New Password</label>{" "}
-                        <input type="password" required className="form-control" onChange={(e)=>setConformPassword(e.target.value)}/>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row row5 mt-2">
-                    <div className="col-12">
-                      <button className="btn btn-primary" onClick={handleClick}>Change Password</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-      <div className="report-container wrapper">
+        <div className="report-container wrapper">
         
         <div className="card">
           <div className="card-header">

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { AuthorAPI } from "../../apis/AuthorAPI";
+// import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+// import { AuthorAPI } from "../../apis/AuthorAPI";
 
 
 const NavBar = (props) => {
@@ -32,20 +32,21 @@ const NavBar = (props) => {
     }
   }
 
-  let urldtaa = window.location.pathname;
-  const history = useHistory();
-  let url = urldtaa.slice(1);
+  // let urldtaa = window.location.pathname;
+  // const history = useHistory();
+  // let url = urldtaa.slice(1);
+  
 
 
-  useEffect(()=>{
-    AuthorAPI.VALIDATE_JWT().then((res)=>{
-    }).catch((error)=>{
-      console.log(error.response.status);
-      if(error.response.status===401){
-        history.push('./login')
-      }
-    })
-  }, [url])
+  // useEffect(()=>{
+  //   AuthorAPI.VALIDATE_JWT().then((res)=>{
+  //   }).catch((error)=>{
+  //     console.log(error.response.status);
+  //     if(error.response.status===401){
+  //       history.push('./login')
+  //     }
+  //   })
+  // }, [url])
 
   useEffect(()=>{
     UserAPI.Self_By_App_Url().then((res)=>{

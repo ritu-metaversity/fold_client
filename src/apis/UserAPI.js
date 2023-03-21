@@ -72,30 +72,21 @@ export const UserAPI = {
   },
 
   Profit_Loss: async function (
-    {
-      noOfRecords,
-      index,
-      fromDate,
-      sportId,
-      matchId,
-      toDate,
-      userId,
-      totalPages,
-    },
+    { pageSize, index, fromDate, sportId, matchId, toDate, userId, pageNumber },
     cancel = false
   ) {
     const response = await api.request({
       url: `/report/profit-loss-match-wise`,
       method: "POST",
       data: {
-        noOfRecords: noOfRecords,
+        pageSize: pageSize,
         index: index,
         fromDate: fromDate,
         sportId: sportId,
         matchId: matchId,
         toDate: toDate,
         userId: userId,
-        totalPages: totalPages,
+        pageNumber: pageNumber,
       },
       signal: cancel
         ? cancelApiObject[this.get.name].handleRequestCancellation().signal
@@ -127,7 +118,7 @@ export const UserAPI = {
       url: `/login/is-self-by-app-url`,
       method: "POST",
       data: {
-        appUrl: window.location.hostname
+        appUrl: window.location.hostname,
       },
 
       signal: cancel
@@ -151,14 +142,13 @@ export const UserAPI = {
     return response.data;
   },
 
-
-  Self_Deposit_App: async function ({data},cancel = false) {
+  Self_Deposit_App: async function ({ data }, cancel = false) {
     const response = await api.request({
       url: `/enduser/self-deposit-app
       `,
       method: "POST",
       data,
-      headers:{"Content-Type":"multipart/form-data"},
+      headers: { "Content-Type": "multipart/form-data" },
       signal: cancel
         ? cancelApiObject[this.get.name].handleRequestCancellation().signal
         : undefined,
@@ -167,20 +157,21 @@ export const UserAPI = {
     return response.data;
   },
 
-  // {"accountHolderName":"adsfa","bankName":"bbb","accountType":"ssssss","accountNumber":"2345234234","ifsc":"iiifsd","amount":"1000"}
-
-  Self_Withdraw_App: async function ({accountHolderName, bankName, accountType,accountNumber, ifsc, amount},cancel = false) {
+  Self_Withdraw_App: async function (
+    { accountHolderName, bankName, accountType, accountNumber, ifsc, amount },
+    cancel = false
+  ) {
     const response = await api.request({
       url: `/enduser/self-withdraw-app
       `,
       method: "POST",
-      data:{
-        accountHolderName:accountHolderName,
+      data: {
+        accountHolderName: accountHolderName,
         bankName: bankName,
-        accountType:accountType,
+        accountType: accountType,
         accountNumber: accountNumber,
         ifsc: ifsc,
-        amount:amount
+        amount: amount,
       },
 
       signal: cancel
@@ -195,7 +186,6 @@ export const UserAPI = {
     const response = await api.request({
       url: `/enduser/withdraw-request-client`,
       method: "POST",
-     
 
       signal: cancel
         ? cancelApiObject[this.get.name].handleRequestCancellation().signal
@@ -209,7 +199,6 @@ export const UserAPI = {
     const response = await api.request({
       url: `/enduser/depsosit-request-client`,
       method: "POST",
-     
 
       signal: cancel
         ? cancelApiObject[this.get.name].handleRequestCancellation().signal
@@ -218,10 +207,6 @@ export const UserAPI = {
 
     return response.data;
   },
-
-
-
-
 };
 
 const cancelApiObject = defineCancelApiObject(UserAPI);

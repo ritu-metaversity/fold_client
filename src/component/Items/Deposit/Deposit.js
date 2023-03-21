@@ -35,7 +35,7 @@ const Deposit = () => {
     <>
       <NavBar />
       {/* <Mobilenav /> */}
-      <div className="wrapper main-conatiner">
+      <div className="wrapper main-conatiner deposit">
         <PayManually UpdateDetails={UpdateDetails} />
 
         <div className="row row5 mt-2">
@@ -85,8 +85,8 @@ const Deposit = () => {
 
                 <tbody>
                   {paymentListDetails?.data &&
-                    paymentListDetails?.data.map((item) => (
-                      <tr role="row">
+                    paymentListDetails?.data.map((item, id) => (
+                      <tr role="row" key={id}>
                         <td aria-colindex="1" className="text-left">
                           {item.amount}
                         </td>
@@ -95,6 +95,7 @@ const Deposit = () => {
                           onClick={(e) => handleShow(e, item.image)}
                             src={item.image}
                             className="screenshot"
+                            alt="screenshort-images"
                             
                           />
                           <Modal
@@ -108,7 +109,7 @@ const Deposit = () => {
                           }}>
                           <Modal.Body>
                             {" "}
-                            <img src={modalImg} width="100%" />
+                            <img src={modalImg} width="100%" alt="screen-short"/>
                           </Modal.Body>
                         </Modal>
                         </td>

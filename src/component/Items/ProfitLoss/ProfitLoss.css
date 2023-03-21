@@ -7,3 +7,10 @@
 .ant-tabs-nav-wrap {
     margin-left: 12px;
 }
+.statement1{
+    height: 70vh;
+    overflow: scroll;
+}
+.statement1::-webkit-scrollbar{
+    display: none;
+}

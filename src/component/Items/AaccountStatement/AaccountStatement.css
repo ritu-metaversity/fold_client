@@ -355,3 +355,14 @@ ul.pagination {
     width: 100%;
 }
 
+.statement{
+    height: 85vh;
+    overflow: scroll;
+}
+.statement::-webkit-scrollbar{
+    display: none;
+}
+.record-delete{
+    background-color: #ddd;
+    padding: 12px;
+}

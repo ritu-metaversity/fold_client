@@ -1,7 +1,8 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { UserAPI } from "../../../apis/UserAPI";
-import NavBar from '../../navBar/NavBar'
+import AlertBtn from "../../Alert/AlertBtn";
+import NavBar from "../../navBar/NavBar";
 import "./Withdraw.css";
 
 const Withdraw = () => {
@@ -14,43 +15,56 @@ const Withdraw = () => {
   const [accountHolderName, setAccountHolderName] = useState("");
   const [withdrawReq, setWithdrawReq] = useState();
   const [dataLength, setDataLength] = useState();
-
+  const [errorAlert, setErrorAlert] = useState(false);
+  const [message, setMessage] = useState("")
 
   const handleClick = () => {
-    UserAPI.Self_Withdraw_App({
-      accountHolderName: accountHolderName,
-      bankName: bankName,
-      accountType: accountType,
-      amount: amount,
-      ifsc: ifsc,
-      accountNumber: accountNumber,
-    }).then((res) => {
-      if (res.status === true) {
-        setTabledataShow(true);
-      }
-      UserAPI.Withdraw_Request().then((res) => {
-        setWithdrawReq(res.data);
-        setDataLength(res.data.length)
-  
+    if (amount > 999 && amount <= 1000000) {
+      UserAPI.Self_Withdraw_App({
+        accountHolderName: accountHolderName,
+        bankName: bankName,
+        accountType: accountType,
+        amount: amount,
+        ifsc: ifsc,
+        accountNumber: accountNumber,
+      }).then((res) => {
+        if (res.status === true) {
+          setTabledataShow(true);
+        }
+        UserAPI.Withdraw_Request().then((res) => {
+          setWithdrawReq(res.data);
+          setDataLength(res.data.length);
+        });
       });
-      console.log(res);
-    });
+    } else if(amount===""){
+      setErrorAlert(true)
+      setMessage("Amount not be null");
+    }
+    else if(amount<999){
+      setErrorAlert(true)
+      setMessage("Amount is not less then 1000")
+    }
+    else if(amount>10000000){
+      setErrorAlert(true)
+      setMessage("Amount is not greater than 10000000")
+    }
+    else{
+      setErrorAlert(false)
+    }
   };
 
   useEffect(() => {
     UserAPI.Withdraw_Request().then((res) => {
       setWithdrawReq(res.data);
-      setDataLength(res.data.length)
-
+      setDataLength(res.data.length);
     });
   }, []);
 
-  console.log(withdrawReq);
-
   return (
     <>
-    <NavBar/>
-      <div className="wrapper">
+      <NavBar />
+      {errorAlert ? <AlertBtn color="danger" val={message}/> : ""}
+      <div className="wrapper withdraw">
         <div className="card-body container-fluid container-fluid-5">
           <div className="main-account-containor">
             <div className="mx-input-wrapper account-field">
@@ -194,11 +208,11 @@ const Withdraw = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className={`${dataLength===0?"d-none":""}`}>
+                  <tbody className={`${dataLength === 0 ? "d-none" : ""}`}>
                     {withdrawReq?.length &&
-                      withdrawReq.map((item) => {
+                      withdrawReq.map((item, id) => {
                         return (
-                          <tr role="row">
+                          <tr role="row" key={id}>
                             <td
                               aria-colindex="1"
                               className="text-left withdraw-data">
@@ -209,9 +223,7 @@ const Withdraw = () => {
                               className="text-left withdraw-data">
                               {item.accountHolderName}
                             </td>
-                            <td
-                              aria-colindex="3"
-                              className="text-right ">
+                            <td aria-colindex="3" className="text-right ">
                               {item.amount}
                             </td>
                             <td
@@ -229,20 +241,24 @@ const Withdraw = () => {
                               className="text-lift withdraw-data">
                               {item.accountType}
                             </td>
-                            <td
-                              aria-colindex="6"
-                              className="text-lift">
-                                {moment(item.time).format("YYYY-MM-DD h:mm:s")}
+                            <td aria-colindex="6" className="text-lift">
+                              {moment(item.time).format("YYYY-MM-DD h:mm:s")}
                               {}
                             </td>
                             <td
                               aria-colindex="6"
                               className="text-lift withdraw-data">
-                                {item.remark}
+                              {item.remark}
                             </td>
                             <td
                               aria-colindex="6"
-                              className={`text-left ${item.status==="Pending"?"pending":item.status==="Approved"?"approved":"rejected"}`}>
+                              className={`text-left ${
+                                item.status === "Pending"
+                                  ? "pending"
+                                  : item.status === "Approved"
+                                  ? "approved"
+                                  : "rejected"
+                              }`}>
                               {item.status}
                             </td>
                           </tr>
@@ -250,7 +266,9 @@ const Withdraw = () => {
                       })}
                   </tbody>
                   <tbody>
-                    <tr role="row" className={`${dataLength===0?"":"d-none"}`}>
+                    <tr
+                      role="row"
+                      className={`${dataLength === 0 ? "" : "d-none"}`}>
                       <td
                         aria-colindex="1"
                         colSpan="9"

@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useEffect} from "react";
 import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -25,17 +25,31 @@ import Casino from "./component/Items/Casino/Casino";
 import Deposit from "./component/Items/Deposit/Deposit";
 import Withdraw from "./component/Items/Withdrow/Withdraw";
 import Register from "./component/Register/Register";
-import NavBar from "./component/navBar/NavBar";
-import Mobilenav from "./component/navBar/MobileNav/Mobilenav";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AuthorAPI } from "./apis/AuthorAPI";
 
 
 
 function App() {
 
+  const history = useHistory("")
+
+
+  useEffect(()=>{
+    setInterval(()=>{
+      AuthorAPI.VALIDATE_JWT().then((res)=>{
+      }).catch((error)=>{
+        console.log(error.response.status);
+        // if(error.response.status===401){
+        //   localStorage.clear();
+        //   history.push("./login")
+        // }
+      })
+    }, 2000)
+   
+  },[])
   
-
   return (
-
     <BrowserRouter>
       <div className="App">
         <Switch>

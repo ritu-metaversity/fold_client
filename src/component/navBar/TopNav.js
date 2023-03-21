@@ -20,32 +20,6 @@ function TopNav(props) {
 
   return (
     <div>
-      {/* <div className="desk-view-topNav">
-        <ul role="tablist" id="home-events" className="nav nav-tabs">
-          {NavList.map((myList, id) => {
-            return (
-              <li
-                className="nav-item"
-                key={id}
-                onClick={() => handleShowSingleSport(id)}>
-                <Link
-                  to="/home"
-                  data-toggle="tab"
-                  key={id}
-                  className={toggle === id ? "nav-link1 active1" : "nav-link1"}>
-                  {myList}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div> */}
-
-      {/* Mobile view TopNav Bar */}
-      {/* --------------------------------------- */}
-      {/* --------------------------------------- */}
-      {/* --------------------------------------- */}
-
       <div className="sports active">
         <ul className="nav nav-tabs game-nav-bar">
           {activeSport.map((res, id) => {
@@ -62,7 +36,7 @@ function TopNav(props) {
                       {
                         res.sportId===4?<img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/4.png"
                          alt="" />:res.sportId===1?
-                        <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/59.png" alt="" />:
+                        <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/1.png" alt="" />:
                         <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png" alt="" />
                       }
                       

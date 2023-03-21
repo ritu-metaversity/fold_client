@@ -139,7 +139,7 @@ const PayManually = (props) => {
               {payMethods?.length &&
                 payMethods?.map((item, id) => {
                   return (
-                    <>
+                    
                       <Col
                         key={item.methodName + id}
                         onClick={() => handlePaymentDetails(item.methodName, id)}>
@@ -152,7 +152,6 @@ const PayManually = (props) => {
                           <p className="Typography-root ">{item.methodName}</p>
                         </div>
                       </Col>
-                    </>
                   );
                 })}
             </Row>
@@ -314,23 +313,12 @@ const PayManually = (props) => {
                           allDatataa?.qrCode &&
                           allDatataa?.qrCode?.displayName
                         }
+                        readOnly
                         type="text"
                       />
                     </div>
                   </Col>
                 </Row>
-                {/* <Row>
-                  <Col>
-                    <div className="">
-                      <button className="download">
-                        <p className="Typography-root text-right">
-                          <i class="fa fa-download" aria-hidden="true"></i> QR
-                          Code
-                        </p>
-                      </button>
-                    </div>
-                  </Col>
-                </Row> */}
               </Col>
             </Row>
           </Container>
@@ -347,7 +335,7 @@ const PayManually = (props) => {
                 <label className="images-section">
                   {!files && (
                     <div className="image-text">
-                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      <i className="fa fa-plus" aria-hidden="true"></i>
                       <p>Click here to upload payment screenshot</p>
                     </div>
                   )}
@@ -363,6 +351,7 @@ const PayManually = (props) => {
                     onChange={(e) =>
                       e.target.files && setFiles(e.target.files[0])
                     }
+                    readOnly
                     type="file"
                     style={{ display: "none" }}
                   />

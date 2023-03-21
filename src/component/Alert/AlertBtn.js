@@ -14,7 +14,6 @@ function AlertBtn(props) {
             setShowHide(true);
         }
     }
-    console.log(props.val);
     return(
     <>
     {

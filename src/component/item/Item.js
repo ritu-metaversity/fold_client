@@ -3,27 +3,14 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
-import { AuthorAPI } from "../../apis/AuthorAPI";
+// import { AuthorAPI } from "../../apis/AuthorAPI";
 
 function Item({ gameIdForItemPage, sportId}) {
-  let urldtaa = window.location.pathname;
+  // let urldtaa = window.location.pathname;
   const history = useHistory();
   const [gameName, setGameName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  // const [JWTStatus, setJWTStatus] = useState();
-
-  let url = urldtaa.slice(1);
-
-
-  useEffect(()=>{
-    AuthorAPI.VALIDATE_JWT().then((res)=>{
-    }).catch((error)=>{
-      console.log(error.response.status);
-      if(error.response.status===401){
-        history.push('./login')
-      }
-    })
-  }, [url])
+ 
 
   // console.log(sportId?.id)
 
@@ -49,8 +36,9 @@ function Item({ gameIdForItemPage, sportId}) {
 
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     if (gameIdForItemPage != null ) {
-      axios.get(`http://43.205.50.127:9000/betfair_api/active_match/${gameIdForItemPage}`)
+      axios.get(`http://43.205.50.127:9000/betfair_api/active_match/${gameIdForItemPage}`, token)
         .then((res) => {
         setGameName(res.data.data);
         setIsLoading(false)
@@ -181,7 +169,6 @@ function Item({ gameIdForItemPage, sportId}) {
         </div>
       </div>
       }
-      
     </div>
   );
 }

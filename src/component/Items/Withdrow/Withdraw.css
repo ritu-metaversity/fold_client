@@ -39,3 +39,11 @@
         width: 165%;
     }
 } */
+
+.withdraw{
+    height: 89vh;
+    overflow: scroll;
+}
+.withdraw::-webkit-scrollbar {
+    display: none;
+  }
