@@ -51,8 +51,8 @@ export const sportServices = {
     const params = {
       resource: sportsResourses.GET_NEW_ACTIVE_MATCH,
       pathVars: { sportId },
+      betfair: true,
     };
-    console.log(params, "pars");
     return apiHandler(params);
   },
 };

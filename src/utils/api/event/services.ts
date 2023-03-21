@@ -44,10 +44,10 @@ export const eventServices = {
     const params: ApiServiceInterface = {
       resource: {
         // URL: "http://89.39.105.69:9001/fancy/:id",
-        URL: "http://43.205.50.127:9000/betfair_api/fancy/:id",
+        URL: "fancy/:id",
         METHOD: "GET",
       },
-      noAuth: true,
+      betfair: true,
       pathVars: { id: id },
     };
     return await apiHandler(params);
