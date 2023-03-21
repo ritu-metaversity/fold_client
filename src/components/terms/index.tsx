@@ -1,6 +1,5 @@
-import { Box } from "@mui/material";
 import React, { useContext } from "react";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { UserContext } from "../../App";
 import Aboutus from "./aboutus";
 import ResponsibleGaming from "./responsibleGaming";
@@ -20,7 +19,9 @@ const IndexForTerms = () => {
 
 const NewLayout = () => {
   const { appData } = useContext(UserContext);
-  return (
+  const { pathname } = useLocation();
+  console.log(pathname);
+  return !["", "/"].includes(pathname) ? (
     <div className="about-us-container">
       <div className="container">
         <div className="text-center logo">
@@ -29,6 +30,8 @@ const NewLayout = () => {
         <Outlet />
       </div>
     </div>
+  ) : (
+    <></>
   );
 };
 
