@@ -31,6 +31,7 @@ import { eventServices } from "../../utils/api/event/services";
 import Loading from "../layout/loading";
 import { BetDetailsInterface } from "./types";
 import { utilServices } from "../../utils/api/util/services";
+import moment from "moment";
 
 interface Props {
   getBets: () => void;
@@ -102,6 +103,7 @@ export const BetSlip: FC<Props> = ({
     setLoading(true);
     const data = {
       ...betId,
+      placeTime: moment(betId?.placeTime).format("YYYY-MM-DD hh:mm:ss.SSS"),
       matchId,
       userIp,
       deviceInfo: {

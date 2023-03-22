@@ -34,7 +34,7 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     METHOD: "POST",
   },
   GET_NEW_ACTIVE_MATCH: {
-    URL: process.env.REACT_APP_EVENT_URL || "",
+    URL: "active_match/:sportId",
     METHOD: "GET",
   },
 };

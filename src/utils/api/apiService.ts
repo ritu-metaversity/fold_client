@@ -16,6 +16,7 @@ export interface ApiServiceInterface {
   pathVars?: Query;
   data?: any;
   noAuth?: boolean;
+  betfair?: boolean;
   headers?: AxiosRequestHeaders;
 }
 
@@ -46,6 +47,7 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
   headers = {},
   pathVars = {},
   noAuth = false,
+  betfair = false,
 }) => {
   const { METHOD, URL } = resource;
   const token = localStorage.getItem("token");
@@ -57,7 +59,11 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
     if (url) url = url.replace(":" + key, pathVars[key].toString());
   });
   let config;
-  const baseURL = url.includes("http") ? "" : process.env.REACT_APP_API_URL;
+  const baseURL = url.includes("http")
+    ? ""
+    : betfair
+    ? process.env.REACT_APP_BETFAIR_URL
+    : process.env.REACT_APP_API_URL;
 
   try {
     config = {

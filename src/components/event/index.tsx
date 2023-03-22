@@ -382,7 +382,9 @@ const Event = () => {
           }
         })}
 
-        {fancyOdds["Bookmaker"] && (
+        {fancyOdds["Bookmaker"].find(
+          (i: FancyOddsInterface) => i.t !== "TOSS"
+        ) && (
           <CustomizedAccordions
             title={
               <Box flex={1} display="flex" justifyContent={"space-between"}>
