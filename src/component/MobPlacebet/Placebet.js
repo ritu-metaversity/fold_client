@@ -184,7 +184,7 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
                           ) : (
                             <b>
                               {spanValueName === e.name
-                                ? (parseFloat(getBetValu).toFixed(2) <= 1
+                                ? -(parseFloat(getBetValu).toFixed(2) <= 1
                                     ? updated * 1 - updated
                                     : updated * parseFloat(getBetValu - updated)
                                   ).toFixed(2)
@@ -210,7 +210,7 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
                                     ? updated * 1 - updated
                                     : updated * parseFloat(getBetValu - updated)
                                   ).toFixed(2)}`
-                                : `${updated === "00" ? "0" : updated}.00`}
+                                : `${updated === "00" ? "0" : (updated)}.00`}
                             </b>
                           )}
                         </span>

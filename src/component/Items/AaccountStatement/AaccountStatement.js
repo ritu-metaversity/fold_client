@@ -29,7 +29,6 @@ function AaccountStatement() {
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
-    console.log(dateString);
   };
 
   const EndDateValue = (date, dateString) => {

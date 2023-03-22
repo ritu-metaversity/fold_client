@@ -10,7 +10,7 @@ import Modal from "react-bootstrap/Modal";
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
   const [UpiDetail, setUpiDetail] = useState();
-  const [Bitvalue, setBitValue] = useState(0);
+  const [Bitvalue, setBitValue] = useState();
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);

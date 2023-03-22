@@ -17,7 +17,6 @@ function BetHistory() {
     hour: "2-digit",
     minute: "2-digit",
   });
-  console.log(inInd)
   const DateValue = (date, dateString) => {
     setStartDate(dateString);
   };

@@ -1,4 +1,4 @@
-import {React, useEffect} from "react";
+import { React, useEffect, useState } from "react";
 import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,11 +7,10 @@ import "../src/component/login/Login.css";
 import "./component/sidebar/sidebar.css";
 import "../src/component/navBar/TopNav.css";
 
-import "../src/component/NewLunch.css";
 import Login from "./component/login/Login";
-import { BrowserRouter, Route, Switch} from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import SlotGame from "./component/Items/SlotGame/SlotGame";
-import Home from './component/Home/Home';
+import Home from "./component/Home/Home";
 import AaccountStatement from "./component/Items/AaccountStatement/AaccountStatement";
 import ProfitLoss from "./component/Items/ProfitLoss/ProfitLoss";
 import BetHistory from "./component/Items/BetHistory/BetHistory";
@@ -25,118 +24,55 @@ import Casino from "./component/Items/Casino/Casino";
 import Deposit from "./component/Items/Deposit/Deposit";
 import Withdraw from "./component/Items/Withdrow/Withdraw";
 import Register from "./component/Register/Register";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Redirect, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { AuthorAPI } from "./apis/AuthorAPI";
 
-
-
 function App() {
+  const history = useHistory("");
+  const [errMsg, setErrorMsg] =  useState()
 
-  const history = useHistory("")
+  const token = localStorage.getItem("token")
 
+  useEffect(() => {
+    setInterval(() => {
+      if(token !=="" || token !== null || token !== undefined){
+      AuthorAPI.VALIDATE_JWT()
+        .then((res) => {})
+        .catch((error) => {
+          setErrorMsg(error.response.status);
+          // localStorage.clear();
+          // if (error.response.status === 401) {
+          //   history.push("/login");
+          // }
+        });
+      }
+    }, 2000);
+  }, []);
 
-  useEffect(()=>{
-    setInterval(()=>{
-      AuthorAPI.VALIDATE_JWT().then((res)=>{
-      }).catch((error)=>{
-        console.log(error.response.status);
-        // if(error.response.status===401){
-        //   localStorage.clear();
-        //   history.push("./login")
-        // }
-      })
-    }, 2000)
-   
-  },[])
-  
   return (
     <BrowserRouter>
       <div className="App">
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/Register" component={Register} />
-          
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/Home">
-              <Home />
-            </Route>
-          
-
-
-
-
-          <Route exact path="/Cricket">
-            <Home id="4"/>
+          <Route exact path="/">
+            <Home />
           </Route>
-          <Route exact path="/Tennis">
-            <Home id="2" />
+          <Route exact path="/Home">
+            <Home />
           </Route>
-          <Route exact path="/Football">
-          <Home id="3" />
-          </Route>
-          <Route exact path="/TableTennis">
-          <Home id="1" />
-          </Route>
-          <Route exact path="/Kabaddi">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Basketball">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Volleyball">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Baccarat">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/HorseRacing">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Teenpatti">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Poker">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Lucky7">
-          <Home id="2" />
-          </Route>
-
-          <Route exact path="/32Cards">
-          <Home id="2" />
-          </Route>
-
-         
           <Route exact path="/deposit">
-            <Deposit/>
+            <Deposit />
           </Route>
           <Route exact path="/withdraw">
-            <Withdraw/>
+            <Withdraw />
           </Route>
-
-
-
           <Route exact path="/gamedetail/:id">
-            <GameHead  />
+            <GameHead />
           </Route>
-
           <Route exact path="/casino/:id">
-            <Casino/>
+            <Casino />
           </Route>
-
-
-          {/* <Route exact path="/unsetteledbet">
-            <UnSetteledBet />
-          </Route>
-          <Route exact path="/changebtnvalue">
-            <ChangeBtnValue />
-          </Route>
-          <Route exact path="/changepassword">
-            <ChangePassword />
-          </Route> */}
-          
           <Route exact path="/m/reports/accountstatement">
             <AaccountStatement />
           </Route>
@@ -155,9 +91,6 @@ function App() {
           <Route exact path="/m/setting/changepassword">
             <ChangePassword />
           </Route>
-
-
-
           <Route exact path="/m/sports">
             <Home />
           </Route>
@@ -165,17 +98,14 @@ function App() {
             <Home />
           </Route>
           <Route exact path="/m/slot">
-            <Slot/>
+            <Slot />
           </Route>
           <Route exact path="/m/others">
             <Home />
           </Route>
-          
-
           <Route exact path="/SignOut">
-            <SignOut/>
+            <SignOut />
           </Route>
-
         </Switch>
       </div>
     </BrowserRouter>

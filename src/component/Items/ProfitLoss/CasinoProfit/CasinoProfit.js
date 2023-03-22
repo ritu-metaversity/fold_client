@@ -258,7 +258,7 @@ function CasinoProfit() {
                       {PLValue?.length &&
                         PLValue.map((res) => {
                           return (
-                            <tr role="row">
+                            <tr role="row" key={res.matchName}>
                               <td aria-colindex="2" className="text-left">
                                 {res.matchName}
                               </td>
@@ -266,11 +266,6 @@ function CasinoProfit() {
                                 {parseFloat(res.pnl).toFixed(2)}
                               </td>
 
-                              {/* <td
-                            aria-colindex="3"
-                            className="text-right text-success">
-                            {parseFloat(res.uplineAmount).toFixed(2)}
-                          </td> */}
                               <td
                                 aria-colindex="5"
                                 className="text-right text-success">

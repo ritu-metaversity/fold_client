@@ -547,8 +547,6 @@
         background-color: #ffc01a !important;
     }
 }
-
-
 .fancy-market .suspended:after {
     width: 46%;
     content: "suspended";
@@ -566,4 +564,62 @@ p.no-found {
 
 .btn-fancy{
     text-align: center !important;
+}
+.info-block {
+    position: relative;
+}
+
+.min-max-info {
+    position: absolute;
+    right: 0px;
+    background-color: #f1f5f8;
+    padding: 6px 14px;
+    z-index: 1000;
+    font-size: 12px;
+    box-shadow: 0 0 5px #999;
+    top: 17px;
+}
+.accordion-item:last-of-type {
+    border-bottom-right-radius: unset;
+    border-bottom-left-radius: unset;
+}
+
+.accordion-item:first-of-type {
+    border-top-left-radius: unset;
+    border-top-right-radius: unset;
+}
+.accordion-button::after {
+    flex-shrink: 0;
+    display: none !important;
+}
+.accordion-item {
+    background-color: unset;
+    border: none;
+}
+.accordion-button:not(.collapsed) {
+    color: unset;
+    background-color: unset;
+    box-shadow: unset;
+}
+.accordion-item:first-of-type .accordion-button {
+    border-top-left-radius: unset;
+    border-top-right-radius: unset;
+}
+.accordion-item:last-of-type .accordion-button.collapsed {
+    border-bottom-right-radius: unset;
+    border-bottom-left-radius: unset;
+    outline: unset;
+}
+.accordion-button:focus {
+    z-index: 3;
+    border-color: unset;
+    outline: 0;
+    box-shadow: unset;
+}
+.accordion-button {
+    margin-left: 26px;
+    
+}
+.accordion {
+    --bs-accordion-body-padding-x: none;
 }
