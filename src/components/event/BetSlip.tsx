@@ -76,18 +76,11 @@ export const BetSlip: FC<Props> = ({
   getPnl,
   getFancyPnl,
 }) => {
-  const { stakes, getBalanceData, activeEventList } = useContext(UserContext);
+  const { stakes, getBalanceData, userIp, activeEventList } =
+    useContext(UserContext);
   const matches = useMediaQuery("(min-width: 1280px)");
   const [loading, setLoading] = useState(false);
-  const [userIp, setUserIp] = useState("");
 
-  useEffect(() => {
-    const getIpy = async () => {
-      const { response: ipRes } = await utilServices.getIpfy();
-      setUserIp(ipRes.ip);
-    };
-    getIpy();
-  }, []);
   // const deviceInfo = {
   //   userAgent: window.navigator.userAgent,
   //   browser: "",
@@ -273,7 +266,10 @@ export const BetSlip: FC<Props> = ({
               {betId.isBack
                 ? betId.isFancy
                   ? (betId.stake * betId.priceValue) / 100
-                  : ((betId.odds - 1) * betId.stake).toFixed(2)
+                  : (betId.marketName === "Bookmaker"
+                      ? (betId.odds * betId.stake) / 100
+                      : (betId.odds - 1) * betId.stake
+                    ).toFixed(2)
                 : betId.stake}
             </Typography>
           </Box>
