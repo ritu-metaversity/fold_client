@@ -7,6 +7,7 @@ import {
 } from "./types";
 import { UserContext } from "../../App";
 import { colorHex } from "../../utils/constants";
+import { dharmParivartan } from ".";
 
 interface Props {
   title: any | string;
@@ -207,7 +208,8 @@ const OddsOnlyTwo = ({
             fontWeight={700}
             textAlign="right"
           >
-            Min:100 Max:10L
+            Min:{dharmParivartan(odds.minBet)} Max:
+            {dharmParivartan(odds.maxBet)}
           </Typography>{" "}
         </Grid>
       </Grid>

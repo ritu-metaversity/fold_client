@@ -51,8 +51,9 @@ const Withdraw = () => {
           columns={columns}
           rows={
             withdrawList.map((item: any) => {
-              item.status = <StatusTypography status={item.status} />;
-              return item;
+             const newItem: any = { ...item };
+             newItem.status = <StatusTypography status={item.status} />;
+             return newItem;
             }) || []
           }
         />

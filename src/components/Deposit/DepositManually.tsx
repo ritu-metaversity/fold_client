@@ -7,6 +7,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import { userServices } from "../../utils/api/user/services";
 import Loading from "../layout/loading";
+import snackBarUtil from "../layout/snackBarUtil";
 
 interface Props {
   getDepositList: () => Promise<void>;
@@ -17,6 +18,9 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
+    if (files?.size && files?.size / (1024 * 1024) > 6) {
+      return snackBarUtil.error("File should not be bigger than 6mb !!!");
+    }
     const data = new FormData();
     data.append("amount", amount.toString());
 
@@ -30,6 +34,7 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
     }
     setLoading(false);
   };
+  console.log(files, "file");
   return (
     <>
       {loading && (

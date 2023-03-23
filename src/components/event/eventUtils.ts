@@ -70,7 +70,8 @@ export const createProfits = ({
         if (odd.sid == betDetails?.selectionId) {
           Bookmaker.push({
             title: odd.nation,
-            value: (current?.pnl || 0) + (isBack ? 1 : -1) * (odds - 1) * stake,
+            value:
+              (current?.pnl || 0) + ((isBack ? 1 : -1) * odds * stake) / 100,
             sid: odd.sid,
             mid: odd.mid,
           });

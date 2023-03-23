@@ -40,4 +40,32 @@ export const utilServices = {
     };
     return await apiHandler(params);
   },
+  footerImages: async () => {
+    const params = {
+      resource: utilResources.FOOTER_IMAGESS,
+      data: { appUrl: window.location.hostname },
+    };
+    return await apiHandler(params);
+  },
+  aboutUs: async () => {
+    const params = {
+      resource: utilResources.ABOUT_US,
+      data: { appUrl: window.location.hostname },
+    };
+    return await apiHandler(params);
+  },
+  termCondition: async () => {
+    const params = {
+      resource: utilResources.TERM_CONDITION,
+      data: { appUrl: window.location.hostname },
+    };
+    return await apiHandler(params);
+  },
+  responsibleGaming: async () => {
+    const params = {
+      resource: utilResources.RESPONSIBLE,
+      data: { appUrl: window.location.hostname },
+    };
+    return await apiHandler(params);
+  },
 };

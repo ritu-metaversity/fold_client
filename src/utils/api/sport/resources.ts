@@ -13,6 +13,10 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     URL: "/enduser/active-match-sport-wise",
     METHOD: "POST",
   },
+  GET_EVENT_FROM_SPORTS_ANISH: {
+    URL: "/enduser/active-match-sport-wise-open",
+    METHOD: "POST",
+  },
   GET_EVENT_FROM_SPORTS_OPEN: {
     URL: "/enduser/active-match-sport-wise-open",
     METHOD: "POST",
@@ -30,7 +34,7 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     METHOD: "POST",
   },
   GET_NEW_ACTIVE_MATCH: {
-    URL: process.env.REACT_APP_EVENT_URL || "",
+    URL: "active_match/:sportId",
     METHOD: "GET",
   },
 };
