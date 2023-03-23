@@ -3,6 +3,7 @@ import React, {
   createContext,
   Dispatch,
   SetStateAction,
+  useCallback,
   useEffect,
   useState,
 } from "react";
@@ -25,6 +26,7 @@ import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 import IndexForTerms from "./components/terms";
+import { useLocation } from "react-router-dom";
 
 interface ModalState {
   login?: boolean;
@@ -47,6 +49,7 @@ interface UserContextType {
   casinoId: number;
   setCasinoId?: Dispatch<SetStateAction<number>>;
   getBalanceData: () => Promise<void>;
+  userIp: string;
 }
 
 const defaultStake = {
@@ -86,6 +89,7 @@ export const UserContext = createContext<UserContextType>({
   announcement: "",
   casinoId: 1,
   getBalanceData: async () => {},
+  userIp: "",
 });
 
 function App() {
@@ -100,6 +104,15 @@ function App() {
   const [balanceData, setBalanceData] = useState<BalanceDataInterface | null>(
     null
   );
+  const [userIp, setUserIp] = useState("");
+
+  useEffect(() => {
+    const getIpy = async () => {
+      const { response: ipRes } = await utilServices.getIpfy();
+      setUserIp(ipRes.ip);
+    };
+    getIpy();
+  }, [isSignedIn]);
 
   const getBalance = async () => {
     if (!isSignedIn) return;
@@ -126,17 +139,18 @@ function App() {
     }
   };
 
-  const validateJwt = async () => {
+  const validateJwt = useCallback(async () => {
     const { response } = await utilServices.validateToken();
     const user = localStorage.getItem("user");
     if (response?.status && user) {
       setUser(JSON.parse(user));
       setIsSignedIn(true);
     } else {
+      localStorage.clear();
       setUser(null);
       setIsSignedIn(false);
     }
-  };
+  }, [isSignedIn]);
 
   useEffect(() => {
     const getNewEventOpen = async () => {
@@ -167,15 +181,25 @@ function App() {
     }
   };
 
+  const { pathname } = useLocation();
+
   useEffect(() => {
     const user = localStorage.getItem("user");
+    let timer: ReturnType<typeof setInterval>;
     if (user) {
-      validateJwt();
+      if (
+        ["sign-in", "sign-up", "responsible-gaming"].every(
+          (i) => !pathname.includes(i)
+        )
+      ) {
+        validateJwt();
+        timer = setInterval(() => validateJwt(), 1000);
+      }
     } else {
       setIsSignedIn(false);
     }
-    return () => {};
-  }, []);
+    return () => clearInterval(timer);
+  }, [pathname, validateJwt]);
 
   useEffect(() => {
     const time = setInterval(() => {
@@ -194,6 +218,7 @@ function App() {
       setButtonValue(defaultStake);
     };
   }, [isSignedIn]);
+
   // fetch("http://192.168.0.245:8000/group/get-groups-chats");
   if (isSignedIn === null) {
     return <LoadingBallSvg />;
@@ -225,6 +250,7 @@ function App() {
               getBalanceData: getBalance,
               activeEventList,
               stakes,
+              userIp,
               getButtonValue,
               isSignedIn,
               announcement,

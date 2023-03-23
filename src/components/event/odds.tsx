@@ -66,6 +66,9 @@ const Odds = ({
         return;
       }
     }
+    if (!(odds > 0)) {
+      return;
+    }
     setBetId({
       isFancy: false,
       isBack: true,
@@ -86,6 +89,9 @@ const Odds = ({
         setModal({ login: true });
         return;
       }
+    }
+    if (!(odds > 0)) {
+      return;
     }
     setBetId({
       isFancy: false,

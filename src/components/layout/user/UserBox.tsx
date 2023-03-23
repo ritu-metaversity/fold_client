@@ -2,7 +2,7 @@ import { AvatarMenu } from "./AvatarMenu";
 import { KeyboardArrowDownOutlined } from "@mui/icons-material";
 import { Avatar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../../../App";
 import { UserContainer } from "../styledComponents";
 
@@ -14,14 +14,17 @@ export interface BalanceDataInterface {
 }
 const UserBox = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  const open = Boolean(anchorEl);
+  const [open, setOpen] = useState(false);
   const { user, balance: balanceData } = useContext(UserContext);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
+    setOpen(true);
   };
   const handleClose = () => {
-    setAnchorEl(null);
+    setOpen(false);
+    setTimeout(() => {
+      setAnchorEl(null);
+    }, 500);
   };
 
   return (
