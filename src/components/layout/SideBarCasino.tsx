@@ -17,7 +17,6 @@ import { UserContext } from "../../App";
 import { colorHex } from "../../utils/constants";
 import { casinoService } from "../../utils/api/casino/service";
 import { CasinoList } from "../casino/Casino";
-import Loading from "./loading";
 
 const SideBarCasino = ({
   handleDrawerToggle,
@@ -37,7 +36,6 @@ const SideBarCasino = ({
   const getCasinoList = useCallback(async () => {
     if (!isSignedIn) return;
     if (loading) return;
-    console.log("in side");
     setLoading(true);
     const { response } = await casinoService.getCasinoListByType(
       Number(casinoId)

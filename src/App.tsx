@@ -10,7 +10,6 @@ import React, {
 
 import "./components/accountSummary/formCheck.css";
 import "./App.css";
-import Layout from "./components/layout";
 import { Alert, Box, Snackbar, ThemeProvider } from "@mui/material";
 import { SnackbarUtilsConfigurator } from "./components/layout/snackBarUtil";
 import { SnackbarProvider } from "notistack";
@@ -26,7 +25,7 @@ import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 import IndexForTerms from "./components/terms";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface ModalState {
   login?: boolean;
@@ -73,6 +72,7 @@ interface AppDataInterface {
 
 export let setErrorRef: any;
 export let errorRef: any;
+export let logoutRef: () => Promise<void>;
 
 export const UserContext = createContext<UserContextType>({
   isSignedIn: null,
@@ -114,13 +114,14 @@ function App() {
     getIpy();
   }, [isSignedIn]);
 
-  const getBalance = async () => {
+  const getBalance = useCallback(async () => {
     if (!isSignedIn) return;
     const { response } = await userServices.balance();
     if (response?.data) {
       setBalanceData(response.data);
     }
-  };
+  }, [isSignedIn]);
+
   const [error, setError] = useState(false);
   const [activeEventList, setActiveEventList] = useState<SportInterface[]>([]);
   const [appData, setAppData] = useState<AppDataInterface | null>(null);
@@ -138,6 +139,18 @@ function App() {
       setAppData(response.data);
     }
   };
+  const nav = useNavigate();
+  const logout = useCallback(async () => {
+    const { response } = await authServices.logout();
+    // if (response) {
+    nav("/");
+    setUser(null);
+    setIsSignedIn(false);
+    // }
+    localStorage.clear();
+  }, []);
+
+  logoutRef = logout;
 
   const validateJwt = useCallback(async () => {
     const { response } = await utilServices.validateToken();
@@ -146,11 +159,12 @@ function App() {
       setUser(JSON.parse(user));
       setIsSignedIn(true);
     } else {
-      localStorage.clear();
+      // localStorage.clear();
+      logout();
       setUser(null);
       setIsSignedIn(false);
     }
-  }, [isSignedIn]);
+  }, [logout]);
 
   useEffect(() => {
     const getNewEventOpen = async () => {
@@ -199,14 +213,14 @@ function App() {
       setIsSignedIn(false);
     }
     return () => clearInterval(timer);
-  }, [pathname, validateJwt]);
+  }, [pathname, validateJwt, isSignedIn]);
 
   useEffect(() => {
     const time = setInterval(() => {
       getBalance();
     }, 5000);
     return () => clearInterval(time);
-  }, [isSignedIn]);
+  }, [isSignedIn, getBalance]);
 
   useEffect(() => {
     if (isSignedIn) {
@@ -217,7 +231,7 @@ function App() {
     return () => {
       setButtonValue(defaultStake);
     };
-  }, [isSignedIn]);
+  }, [isSignedIn, getBalance]);
 
   // fetch("http://192.168.0.245:8000/group/get-groups-chats");
   if (isSignedIn === null) {

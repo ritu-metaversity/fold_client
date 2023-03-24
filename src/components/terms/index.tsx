@@ -20,7 +20,6 @@ const IndexForTerms = () => {
 const NewLayout = () => {
   const { appData } = useContext(UserContext);
   const { pathname } = useLocation();
-  console.log(pathname);
   return !["", "/"].includes(pathname) ? (
     <div className="about-us-container">
       <div className="container">

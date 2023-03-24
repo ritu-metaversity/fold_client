@@ -12,6 +12,7 @@ export const sportsTabList = [
   {
     name: "Football",
     color: "#03B37F",
+    iconClass: "d-icon icon-62",
   },
   {
     name: "Tennis",

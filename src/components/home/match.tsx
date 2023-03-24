@@ -166,6 +166,7 @@ const Match = ({ matches }: Props) => {
       <Grid
         container
         xs={12}
+        item
         lg={5.4}
         maxWidth={{ lg: 356, xl: 700 }}
         ml={{

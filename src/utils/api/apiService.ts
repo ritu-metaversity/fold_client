@@ -1,6 +1,7 @@
 import axios, { AxiosRequestHeaders } from "axios";
-import { errorRef, setErrorRef } from "../../App";
+import { errorRef, logoutRef, setErrorRef } from "../../App";
 import snackBarUtil from "../../components/layout/snackBarUtil";
+import { authResourcs } from "./auth/resources";
 
 export interface ApiResource {
   URL: string;
@@ -92,25 +93,6 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
 ) => {
   let result: any = {};
   await apiService(args)
-    .catch((error) => {
-      result["error"] = error.response?.data;
-      if (error.code === "ERR_NETWORK") {
-        if (!errorRef) {
-          setErrorRef(true);
-        }
-      } else if (error.response?.status === 401) {
-        if (localStorage.getItem("token")) {
-          localStorage.clear();
-          // snackBarUtil.error("Session changed. Please login again!");
-          window.location.replace("/");
-          result.error = {};
-        }
-      } else {
-        if (errorRef && setErrorRef) {
-          setErrorRef(false);
-        }
-      }
-    })
     .then((response) => {
       if (response) {
         if (errorRef && setErrorRef) {
@@ -122,7 +104,31 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
           result["response"] = response.data;
         }
       }
+    })
+    .catch((error) => {
+      result["error"] = error.response?.data;
+      if (error.code === "ERR_NETWORK") {
+        if (!errorRef) {
+          setErrorRef(true);
+        }
+      } else if (error.response?.status === 401) {
+        if (localStorage.getItem("token")) {
+          if (args.resource.URL !== authResourcs.LOGOUT?.URL) {
+            console.log(args.resource.URL, authResourcs.LOGOUT?.URL);
+            logoutRef();
+          }
+          // localStorage.clear();
+          // snackBarUtil.error("Session changed. Please login again!");
+          // window.location.replace("/");
+          result.error = {};
+        }
+      } else {
+        if (errorRef && setErrorRef) {
+          setErrorRef(false);
+        }
+      }
     });
+
   return result;
 };
 
