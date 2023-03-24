@@ -3,7 +3,6 @@ import "./GameDetail.css";
 import Modal from "react-bootstrap/Modal";
 import Placebet from "../../MobPlacebet/Placebet";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import moment from "moment";
 import AlertBtn from "../../Alert/AlertBtn";
 import Accordion from "react-bootstrap/Accordion";

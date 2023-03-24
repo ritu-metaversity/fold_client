@@ -40,10 +40,10 @@ function App() {
         .then((res) => {})
         .catch((error) => {
           setErrorMsg(error.response.status);
-          // localStorage.clear();
-          // if (error.response.status === 401) {
-          //   history.push("/login");
-          // }
+          localStorage.clear();
+          if (error.response.status === 401) {
+            history.push("/login");
+          }
         });
       }
     }, 2000);

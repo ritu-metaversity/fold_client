@@ -70,8 +70,8 @@ export const AuthorAPI = {
       return response.data
     },
 
-    VALIDATE_JWT: async function (cancel = false) {
-      const response = await api.request({
+    VALIDATE_JWT: function (cancel = false) {
+      const response = api.request({
         url: `/util/validate-jwt-token`,
         method: "POST",
 
