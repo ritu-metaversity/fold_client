@@ -156,8 +156,7 @@ export const Drawers = ({
           </SidebarHeader>
           <Collapse in={open[0]}>
             {activeEventList?.map((sport, index) => (
-              <>
-                {" "}
+              <React.Fragment key={sport.sportId + index}>
                 <ListItem
                   sx={{
                     p: 0,
@@ -217,7 +216,7 @@ export const Drawers = ({
                 <Collapse in={matchCollapse[index]}>
                   {matchList[index]}
                 </Collapse>
-              </>
+              </React.Fragment>
             ))}
           </Collapse>
         </List>

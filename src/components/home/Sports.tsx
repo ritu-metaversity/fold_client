@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 import { sportServices } from "../../utils/api/sport/services";
 import { sportsTabList } from "./sportsTabList";
 import { ScrollableTabsButtonVisible } from "./ScrollableTabsButtonVisible";
-import Match from "./match";
+import Match, { MatchInterface } from "./match";
 import { UserContext } from "../../App";
 import "./miniScrollbar.css";
 import Loading from "../layout/loading";
@@ -15,7 +15,7 @@ const Sports = () => {
   const { isSignedIn } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [activeSportList, setActiveSportList] = useState<any>(null);
-  const [activeEventList, setActiveEventList] = useState([]);
+  const [activeEventList, setActiveEventList] = useState<MatchInterface[]>([]);
   useEffect(() => {
     // if (isSignedIn === null) return;
     const getList = async () => {
@@ -79,7 +79,6 @@ const Sports = () => {
       setLoading(false);
     };
 
-
     getNewEventOpen();
     const time = setInterval(() => {
       getNewEventOpen();
@@ -123,6 +122,7 @@ const Sports = () => {
         </Grid>
         <Grid
           container
+          item
           lg={5.4}
           maxWidth={{ lg: 356, xl: 700 }}
           ml={{
@@ -158,7 +158,9 @@ const Sports = () => {
             <Loading />
           </Box>
         ) : activeEventList.length > 0 ? (
-          activeEventList.map((item) => <Match matches={item} />)
+          activeEventList.map((item) => (
+            <Match key={"sportlist" + item?.matchId} matches={item} />
+          ))
         ) : (
           <BoxWithTitleBox>No Data Found</BoxWithTitleBox>
         )}

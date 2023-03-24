@@ -38,23 +38,10 @@ import {
 } from "./types";
 import { createProfits, transformMatchOdds } from "./eventUtils";
 import moment from "moment";
-import { create } from "domain";
 import Marquee from "react-fast-marquee";
 
 export const dharmParivartan = (str: string | number) => {
-  console.log(str, typeof str);
   if (["string", "number"].includes(typeof str)) {
-    const newstr = str
-      .toString()
-      ?.split("")
-      .reverse()
-      .join("")
-      .replace("00000", "L")
-      .replace("000", "K")
-      ?.split("")
-      .reverse()
-      .join("");
-    console.log(newstr);
     return str
       ?.toString()
       ?.split("")
@@ -193,7 +180,7 @@ const Event = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       getPnl();
-      getFancyPnl();
+      // getFancyPnl();
       getBets();
     }, 5000);
     return () => clearInterval(timer);

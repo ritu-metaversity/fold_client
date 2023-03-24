@@ -34,7 +34,6 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
     }
     setLoading(false);
   };
-  console.log(files, "file");
   return (
     <>
       {loading && (

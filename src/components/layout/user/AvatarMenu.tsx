@@ -79,9 +79,14 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         }} // transitionDuration={500}
         // TransitionComponent={Collapse}
       >
-        {isSignedIn && matches && appData?.selfAllowed && (
-          <>
-            <MenuItem disableRipple sx={{ justifyContent: "center" }}>
+        {isSignedIn &&
+          matches &&
+          appData?.selfAllowed && [
+            <MenuItem
+              key="avatarmenuitem1"
+              disableRipple
+              sx={{ justifyContent: "center" }}
+            >
               <Button
                 variant="contained"
                 color="success"
@@ -104,10 +109,9 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
               >
                 Withdrawal
               </Button>
-            </MenuItem>
-            <Divider sx={{ borderColor: "gray" }} />
-          </>
-        )}
+            </MenuItem>,
+            <Divider key="avatarmenuitem2" sx={{ borderColor: "gray" }} />,
+          ]}
         <MenuItem onClick={() => closeAndNav("/profile")}>Profile</MenuItem>
         <MenuItem onClick={() => closeAndNav("/report/accountstatement")}>
           Account Statement
@@ -121,7 +125,6 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         <MenuItem onClick={handleStakeOpen}>Set Button Value</MenuItem>
 
         <MenuItem onClick={handleClickOpen}>Change Password</MenuItem>
-        {/* <CustomizedDialogPassword /> */}
         <Divider sx={{ borderColor: "gray" }} />
         <MenuItem onClick={logout}>Log out</MenuItem>
       </Menu>
