@@ -10,12 +10,8 @@ function ChangePassword() {
   const[newPasswords, setNewpasswords] = useState("");
   const[conformPassword, setConformPassword] = useState("");
   const[ShowError, setShowError] = useState(false);
-  const[status, setStatus] = useState("");
   const [message, setMessege] = useState('')
   const [color, setColor] = useState('');
-  const [timeOut, setTimeOut] = useState(null)
-
-
   const passType =  localStorage.getItem("Password-type");
   const userId = localStorage.getItem("UserId");
   const Token = localStorage.getItem("token");
@@ -28,14 +24,22 @@ function ChangePassword() {
     setColor("danger")
     setMessege("Current Password is required")
     }else if(newPasswords===""){
+
       setShowError(true)
       setColor("danger")
       setMessege("New Password is required")
-    }else if(conformPassword===""|| newPasswords !== currPassword){
+    }else if(newPasswords !== currPassword){
+
       setShowError(true)
       setColor("danger")
-      setMessege("New Password and Password Confirmation should be")
+      setMessege("New Password and Password Confirmation should be same")
     }
+    else{
+      setShowError(false)
+    }
+
+  if(conformPassword!=="" &&  newPasswords !==""){
+    if(newPasswords === conformPassword){
     if(passType==="old"){
       AuthorAPI.FIRST_LOGIN({
         currentPassword: currPassword,
@@ -45,10 +49,11 @@ function ChangePassword() {
         token: Token,
         oldPassword:currPassword
       }).then((res)=>{
+        console.log(res)
         // setMessege(res.data.message)
         setColor("success");
         setMessege("Password Updated");
-        setShowError(true)
+        setShowError(true);
        
       }).catch((err)=>{
         console.log(err)
@@ -58,24 +63,34 @@ function ChangePassword() {
         currentPassword: currPassword,
         newPassword : newPasswords
       }).then((res)=>{
+        // console.log(res.message)
+
+        if(res.status===false){
+          setShowError(true);
+          setColor("danger");
+          setMessege(res.message)
+        }else{
         setShowError(true);
         setColor("success");
-        setMessege("Password Updated");
-      }).catch((err)=>{
-        console.log(err)
+        setMessege(res.message);
+      }
       })
     }
   }
-  setTimeout(() => {
-    setTimeOut(1)
-  }, 15000)
+  }
+}
+
+  const popupClose=(vl)=>{
+    setShowError(vl)
+  }
   return (
     <div>
         
       <NavBar />
         {
-         ShowError?timeOut !== 1 && <AlertBtn status={status} color={color} className="change-passwords" val={message}/>:""
-        }
+          ShowError===true?
+          <AlertBtn color={color} className="change-passwords"  popupClose={popupClose} val={message}/>:""
+        } 
         <div className="report-container wrapper">
         
         <div className="card">

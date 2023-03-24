@@ -10,7 +10,7 @@ import Modal from "react-bootstrap/Modal";
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
   const [UpiDetail, setUpiDetail] = useState();
-  const [Bitvalue, setBitValue] = useState();
+  const [Bitvalue, setBitValue] = useState(0);
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);
@@ -27,6 +27,8 @@ const PayManually = (props) => {
   };
   const handleStaticAmount = (vl) => {
     setBitValue(Bitvalue + vl);
+    console.log(vl)
+    console.log(Bitvalue + vl)
   };
   useEffect(() => {
     UserAPI.Get_Payment_Detail_By_Id().then((res) => {
@@ -103,7 +105,7 @@ const PayManually = (props) => {
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
-                value="2000"
+                value="500"
                 onClick={() => handleStaticAmount(500)}>
                 +500
               </button>
@@ -111,7 +113,7 @@ const PayManually = (props) => {
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
-                value="300"
+                value="1000"
                 onClick={() => handleStaticAmount(1000)}>
                 +1000
               </button>
@@ -119,7 +121,7 @@ const PayManually = (props) => {
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
-                value="300"
+                value="5000"
                 onClick={() => handleStaticAmount(5000)}>
                 +5000
               </button>

@@ -65,7 +65,6 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
     })
   }
 
-  // console.log(message);
 
   useEffect(() => {
     GameAPI.Place_Bet().then((res)=>{

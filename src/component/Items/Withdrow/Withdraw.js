@@ -16,10 +16,44 @@ const Withdraw = () => {
   const [withdrawReq, setWithdrawReq] = useState();
   const [dataLength, setDataLength] = useState();
   const [errorAlert, setErrorAlert] = useState(false);
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState({})
+  const [errors, setErrors] = useState({});
+
+
+
+  const validateForm =()=>{
+    let error = {};
+
+    if(amount === ""){
+      setErrorAlert(true)
+      error= "Amount is required"
+    }
+    if(bankName === ""){
+      setErrorAlert(true)
+      error = "Bank name is required"
+    }
+
+    if(ifsc ===""){
+      setErrorAlert(true)
+      error = 'IFSC Code is required'
+    }
+    if(accountHolderName === ""){
+      setErrorAlert(true)
+      error = "Account Name is required"
+    }
+    if(accountNumber === ""){
+      setErrorAlert(true)
+      error = "Account Number is required"
+    }
+
+    setMessage(error)
+
+    return Object.keys(error).length === 0;
+
+  }
 
   const handleClick = () => {
-    if (amount > 999 && amount <= 1000000) {
+    if (validateForm()) {
       UserAPI.Self_Withdraw_App({
         accountHolderName: accountHolderName,
         bankName: bankName,
@@ -28,29 +62,23 @@ const Withdraw = () => {
         ifsc: ifsc,
         accountNumber: accountNumber,
       }).then((res) => {
+        console.log(res)
         if (res.status === true) {
           setTabledataShow(true);
         }
         UserAPI.Withdraw_Request().then((res) => {
+          console.log(res)
           setWithdrawReq(res.data);
           setDataLength(res.data.length);
         });
+      }).catch((error)=>{
+      setErrorAlert(true)
+        setMessage(error.response.data.message)
       });
-    } else if(amount===""){
-      setErrorAlert(true)
-      setMessage("Amount not be null");
     }
-    else if(amount<999){
-      setErrorAlert(true)
-      setMessage("Amount is not less then 1000")
-    }
-    else if(amount>10000000){
-      setErrorAlert(true)
-      setMessage("Amount is not greater than 10000000")
-    }
-    else{
-      setErrorAlert(false)
-    }
+    // else{
+    //   setErrorAlert(false)
+    // }
   };
 
   useEffect(() => {
@@ -60,10 +88,29 @@ const Withdraw = () => {
     });
   }, []);
 
+  const popupClose=(vl)=>{
+    setErrorAlert(vl)
+    // console.log(vl)
+  }
+
+
+//   invalidName:
+//   "The Account Name field may only contain alphabetic characters as well as spaces",
+// noName: "The Account Name field is required",
+// noBank: "The Bank Name field is required",
+// noIfsc: "The IFSC field is required",
+// invalidIfsc: "The IFSC field format is invalid",
+// noAccount: "The Account Number field is required",
+// invalidAccount:
+//   "The Account Number field may only contain numeric characters",
+// noAmount: "The Amount field is required",
+// invalidAmount: "The Amount field may only contain numeric characters",
+
+
   return (
     <>
       <NavBar />
-      {errorAlert ? <AlertBtn color="danger" val={message}/> : ""}
+      {errorAlert ? <AlertBtn color="danger"  popupClose={popupClose}  val={message}/> : ""}
       <div className="wrapper withdraw">
         <div className="card-body container-fluid container-fluid-5">
           <div className="main-account-containor">

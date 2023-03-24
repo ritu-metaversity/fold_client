@@ -42,6 +42,10 @@ function ChangeBtnValue() {
     setMessageShow(false)
   }, 15000)
   
+  const popupClose=(vl)=>{
+    setMessageShow(vl)
+    // console.log(vl)
+  }
 
   return (
     <div>
@@ -49,7 +53,7 @@ function ChangeBtnValue() {
       <div className="main">
         <div className="report-container wrapper">
           {
-            MessageShow?timeOut !== 1 && <AlertBtn color={color} val="Successfully updated!" style={{width: "50px"}}/>:""
+            MessageShow?<AlertBtn color={color}  popupClose={popupClose} val="Successfully updated!" style={{width: "50px"}}/>:""
           }
           <div className="card">
             <div className="card-header">

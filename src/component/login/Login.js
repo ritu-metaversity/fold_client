@@ -9,28 +9,48 @@ function Login() {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
   const [StatusVal, setStatusVal] = useState(true);
+  const [message, setMessage]= useState("")
+ 
+
+ 
 
   const handleLogin = () => {
-    AuthorAPI.Login({
-      userId: user,
-      password: password,
-    }).then((res) => {
-      const token = res.token;
-      axios.defaults.headers.common["Authorization"] = token;
-      localStorage.setItem("token", token);
-      console.log(token)
-      setStatusVal(res.status);
-      const uId = res.userId;
-      localStorage.setItem("UserId", uId);
-      if (res.token !=="" && user === res.userId) {
-        history.push("/home");
-      }
-      const pType = res.passwordtype;
-      localStorage.setItem("Password-type", pType)
-      if (pType === "old") {
-        history.push("/m/setting/changepassword");
-      }
-    });
+
+    if(password === "" && user ===""){
+      setMessage("password: length must be between 4 and 30")
+    }
+
+
+
+    if (password !== "" && user !== "") {
+      AuthorAPI.Login({
+        userId: user,
+        password: password,
+      }).then((res) => {
+        const token = res.token;
+        axios.defaults.headers.common["Authorization"] = token;
+        localStorage.setItem("token", token);
+        setStatusVal(res.status);
+        // console.log(StatusVal)
+        setMessage("Invalid Username or password")
+        const uId = res.userId;
+        localStorage.setItem("UserId", uId);
+        if (res.token !== "" && user === res.userId) {
+          history.push("/home");
+        }
+        const pType = res.passwordtype;
+        localStorage.setItem("Password-type", pType);
+        if (pType === "old") {
+          history.push("/m/setting/changepassword");
+        }
+      });
+    }
+  };
+
+  
+  const popupClose = (vl) => {
+    setStatusVal(vl);
+    // console.log(vl)
   };
 
   return (
@@ -38,7 +58,11 @@ function Login() {
       <div className="wrapper">
         {StatusVal === false ? (
           <div className="alertBtn">
-            <AlertBtn val="Invalid Username or password" />
+            <AlertBtn
+              color="danger"
+              popupClose={popupClose}
+              val={message}
+            />
           </div>
         ) : (
           ""
@@ -93,12 +117,11 @@ function Login() {
                   <i className="ml-2 fas fa-sign-in-alt"></i>
                 </button>
               </div>
-              <div className="form-group mb-0" style={{marginTop: "12px"}}>
+              <div className="form-group mb-0" style={{ marginTop: "12px" }}>
                 <Link
                   type="submit"
                   className="btn btn-primary btn-block"
-                  to='./Register'
-                  >
+                  to="./Register">
                   Register
                   <i className="ml-2 fas fa-sign-in-alt"></i>
                 </Link>

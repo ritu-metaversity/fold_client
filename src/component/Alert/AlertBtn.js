@@ -1,12 +1,15 @@
-import {React, useState} from 'react'
+import {React, useEffect, useState} from 'react'
 import Alert from 'react-bootstrap/Alert';
 import './Alert.css'
 
 function AlertBtn(props) {
 
     const [showHide, setShowHide]=useState(true)
+    // const [showTime, setShowTime]=useState(true)
 
     const handleClick = ()=>{
+        // setShowTime(false)
+        props.popupClose(false)
         if(showHide===true){
             setShowHide(false)
         }
@@ -14,7 +17,14 @@ function AlertBtn(props) {
             setShowHide(true);
         }
     }
-    return(
+    useEffect(()=>{
+          setTimeout(() => {
+            props.popupClose(false)
+
+  }, 15000)
+  
+    },[props.val])
+        return(
     <>
     {
         showHide?<Alert variant={props.color} className="alert-messege">

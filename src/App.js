@@ -33,21 +33,21 @@ function App() {
 
   const token = localStorage.getItem("token")
 
-  useEffect(() => {
-    setInterval(() => {
-      if(token !=="" || token !== null || token !== undefined){
-      AuthorAPI.VALIDATE_JWT()
-        .then((res) => {})
-        .catch((error) => {
-          setErrorMsg(error.response.status);
-          localStorage.clear();
-          if (error.response.status === 401) {
-            history.push("/login");
-          }
-        });
-      }
-    }, 2000);
-  }, []);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     if(token !=="" || token !== null || token !== undefined){
+  //     AuthorAPI.VALIDATE_JWT()
+  //       .then((res) => {console.log(res)})
+  //       .catch((error) => {
+  //         setErrorMsg(error.response.status);
+  //         localStorage.clear();
+  //         if (error.response.status === 401) {
+  //           history.push("/login");
+  //         }
+  //       });
+  //     }
+  //   }, 2000);
+  // }, []);
 
   return (
     <BrowserRouter>

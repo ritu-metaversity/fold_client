@@ -37,6 +37,7 @@ function GameDetail({ getStackValue }) {
   const [maxBet, setMaxBet] = useState();
   const [minOdd, setMinOdds] = useState();
   const [mFancyOdds, setMFancyOdds] = useState();
+  const [errorMsg, setErrorMsg] = useState(false)
   // const [showColleps, setShowColleps] = useState(false);
 
   const Gameid = window.location.pathname;
@@ -143,12 +144,24 @@ function GameDetail({ getStackValue }) {
 
   const data = (vl) => {
     setStatus(vl.status);
+    // if(vl.status==false){
+    //   setErrorMsg(true)
+    // }else{
+    //   setErrorMsg(false)
+    // }
     setMessege(vl.message);
   };
 
   setTimeout(() => {
     setTimeOut(1);
   }, 15000);
+
+  const popupClose=(vl)=>{
+    setErrorMsg(vl)
+  }
+
+
+  // console.log(errorMsg)
 
   // const handlecollaps = (e) => {
   //   e.preventDefault();
@@ -168,10 +181,10 @@ function GameDetail({ getStackValue }) {
       ) : (
         <div className="wrapper">
           {status === true
-            ? timeOut !== 1 && <AlertBtn color="success" val={messege} />
+            ?<AlertBtn color="success" val={messege} popupClose={popupClose} />
             : ""}
           {status === 400
-            ? timeOut !== 1 && <AlertBtn color="danger" val={messege} />
+            ? <AlertBtn color="danger" val={messege} popupClose={popupClose} />
             : ""}
 
           <div className="tab-content">

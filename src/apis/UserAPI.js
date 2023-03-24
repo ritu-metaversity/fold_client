@@ -2,6 +2,9 @@ import { api } from "./configs/axiosConfigs";
 import { defineCancelApiObject } from "./configs/axiosUtils";
 
 export const UserAPI = {
+
+// User Balance Api
+
   User_Balance: async function (cancel = false) {
     const response = await api.request({
       url: "/enduser/get-user-balance",
@@ -15,6 +18,8 @@ export const UserAPI = {
     return response.data;
   },
 
+  // User Message API
+
   User_Message: async function (cancel = false) {
     const response = await api.request({
       url: "/enduser/get-user-message",
@@ -27,6 +32,8 @@ export const UserAPI = {
 
     return response.data.message;
   },
+
+  // Accountstatement API
 
   Account_Statement: async function (
     { noOfRecords, index, fromDate, toDate, type },
@@ -50,6 +57,8 @@ export const UserAPI = {
     return response.data.data;
   },
 
+  // Unsetteled bet  Api
+
   Unsetteled_bet: async function (
     { noOfRecords, index, sportType, betType },
     cancel = false
@@ -70,6 +79,8 @@ export const UserAPI = {
 
     return response.data;
   },
+
+  //Profit Loss Api
 
   Profit_Loss: async function (
     { pageSize, index, fromDate, sportId, matchId, toDate, userId, pageNumber },
@@ -96,6 +107,8 @@ export const UserAPI = {
     return response.data;
   },
 
+  // Bet Search Api
+
   Bet_Search: async function ({ marketId, userId, betType }, cancel = false) {
     const response = await api.request({
       url: `/bets/search-bet-market-and-user`,
@@ -112,6 +125,9 @@ export const UserAPI = {
 
     return response.data;
   },
+
+
+  
 
   Self_By_App_Url: async function (cancel = false) {
     const response = await api.request({
