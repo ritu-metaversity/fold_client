@@ -180,7 +180,7 @@ const Event = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       getPnl();
-      // getFancyPnl();
+       getFancyPnl();
       getBets();
     }, 5000);
     return () => clearInterval(timer);
