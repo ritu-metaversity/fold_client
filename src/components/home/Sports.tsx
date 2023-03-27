@@ -64,11 +64,11 @@ const Sports = () => {
     //   }
     //   setLoading(false);
     // };
-    const getNewEventOpen = async () => {
+    const getNewEventOpen = async (useLoading?: boolean) => {
       if (!activeSportList) return;
       const { sportId } = activeSportList[value];
       if (!sportId) return;
-      setLoading(true);
+      useLoading && setLoading(true);
       const { response } = await sportServices.newActiveEvent(sportId);
 
       if (response?.data?.length) {
@@ -76,12 +76,12 @@ const Sports = () => {
       } else {
         setActiveEventList([]);
       }
-      setLoading(false);
+      useLoading && setLoading(false);
     };
 
-    getNewEventOpen();
+    getNewEventOpen(true);
     const time = setInterval(() => {
-      getNewEventOpen();
+      getNewEventOpen(false);
     }, 60000);
 
     return () => clearInterval(time);
