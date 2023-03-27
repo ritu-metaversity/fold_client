@@ -1,15 +1,14 @@
 import { MarketCollapse } from "./MarketCollapse";
-import { Collapse } from "@mui/material";
+import { Collapse, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-
 import "./rules.css";
+import { FaChevronDown } from "react-icons/fa";
+import { HiPlusCircle, HiMinusCircle } from "react-icons/hi";
 
 const data = [
   {
-    name: "football",
+    name: "Football",
     rules: [
       {
         name: "match odds ",
@@ -30,7 +29,7 @@ const data = [
     ],
   },
   {
-    name: "football",
+    name: "Football",
     rules: [
       {
         name: "match odds ",
@@ -39,7 +38,7 @@ const data = [
     ],
   },
   {
-    name: "football",
+    name: "Football",
     rules: [
       {
         name: "match odds ",
@@ -48,7 +47,7 @@ const data = [
     ],
   },
   {
-    name: "football",
+    name: "Football",
     rules: [
       {
         name: "match odds ",
@@ -57,7 +56,7 @@ const data = [
     ],
   },
   {
-    name: "football",
+    name: "Football",
     rules: [
       {
         name: "match odds ",
@@ -76,6 +75,13 @@ const Faq = () => {
   console.log(open, "open");
   return (
     <>
+      <div className="britishdiv">
+        <img className="britishimg" src="/assets/images/british.png" alt="" />
+        <Typography color="white" fontSize="15px">
+          English
+        </Typography>
+        <FaChevronDown size={"13px"} />
+      </div>
       {data.map((sport, index) => (
         <React.Fragment key={sport.name + index}>
           <p
@@ -92,9 +98,9 @@ const Faq = () => {
             style={{ cursor: "pointer" }}
           >
             {open[index] ? (
-              <RemoveCircleIcon className="iconForCollapse" />
+              <HiMinusCircle className="iconForCollapse" />
             ) : (
-              <AddCircleIcon className="iconForCollapse" />
+              <HiPlusCircle className="iconForCollapse" />
             )}
             {sport.name}
           </p>

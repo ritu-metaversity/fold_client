@@ -1,6 +1,7 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { colorHex } from "../../utils/constants";
 import React from "react";
+import { dharmParivartan } from ".";
 
 const gridProps = {
   item: true,
@@ -24,7 +25,12 @@ const gridProps2 = {
   bgcolor: colorHex.back[3],
 };
 
-export function OddsNumberTitle() {
+interface Props {
+  singleOdd: any;
+}
+
+export function OddsNumberTitle({ singleOdd }: Props) {
+  const { minBet, maxBet, betDelay } = singleOdd;
   return (
     <Grid container display={{ xs: "none", lg: "flex" }}>
       <Grid
@@ -43,7 +49,18 @@ export function OddsNumberTitle() {
         alignItems={"center"}
         gap="1%"
       >
-        <Grid item xs={3.9}></Grid>
+        <Grid item xs={3.9}>
+          <Typography
+            fontSize="0.75rem"
+            lineHeight={1}
+            color="text.secondary"
+            fontWeight={700}
+          >
+            Max: {`${dharmParivartan(maxBet)}  `}
+            Min:{`${dharmParivartan(minBet)}  `}
+            Bet Delay: {betDelay}
+          </Typography>
+        </Grid>
         <Grid {...gridProps2}>Back</Grid>
         <Grid {...gridProps}>Lay</Grid>
       </Grid>
