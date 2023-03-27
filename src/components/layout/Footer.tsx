@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { utilServices } from "../../utils/api/util/services";
+import CustomizedDialog2 from "../common/Dailog2";
+import Faq from "./rules/Faq";
 import "./footer.css";
 
 interface FooterImageInterface {
@@ -41,6 +43,7 @@ const Footer = () => {
   const [footerData, setFooterData] = useState<FooterImageInterface | null>(
     null
   );
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const getFooterData = async () => {
@@ -54,6 +57,13 @@ const Footer = () => {
 
   return (
     <div>
+      <CustomizedDialog2
+        title="Rules"
+        open={open}
+        handleClose={() => setOpen(false)}
+      >
+        <Faq />
+      </CustomizedDialog2>
       <footer className="footer">
         <div className="support">
           <div>
@@ -130,6 +140,16 @@ const Footer = () => {
             </li>{" "}
             <li>
               <a
+                href="#"
+                className=""
+                onClick={() => setOpen(true)}
+                rel="noreferrer"
+              >
+                Rules
+              </a>
+            </li>
+            <li>
+              <a
                 href="/terms-and-conditions"
                 className=""
                 target="_blank"
@@ -137,7 +157,7 @@ const Footer = () => {
               >
                 Terms and Conditions
               </a>
-            </li>{" "}
+            </li>
             <li>
               <a
                 href="/responsible-gaming"
