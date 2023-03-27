@@ -21,7 +21,7 @@ const CasinoGame = () => {
 
   return (
     <HomeLayout>
-      <Box mt={{ lg: 5 }} height="calc(100vh - 110px)">
+      <Box mt={{ lg: 0 }} height="calc(100vh - 110px)">
         {matches ? (
           <>
             <Box
