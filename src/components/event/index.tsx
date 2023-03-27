@@ -192,13 +192,13 @@ const Event = () => {
 
   //creating profits
   useEffect(() => {
+    console.log("ran");
     createProfits({
       fancyOdds,
       fancyPnl,
       betDetails,
       rechange: true,
       pnl,
-      profits,
       setProfits,
     });
   }, [betDetails?.marketId]);
@@ -209,7 +209,6 @@ const Event = () => {
       fancyPnl,
       betDetails,
       pnl,
-      profits,
       setProfits,
     });
   }, [betDetails?.stake, pnl, fancyPnl, fancyOdds?.Odds?.marketId]);

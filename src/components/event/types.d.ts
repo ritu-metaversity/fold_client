@@ -10,7 +10,6 @@ export interface CreateProfitProps {
   pnl: Pnl[] | null;
   betDetails: BetDetailsInterface | null;
   fancyPnl: FancyPnl[] | null;
-  profits: ProfitObjectInterface;
   setProfits: Dispatch<
     SetStateAction<{
       Odds: ProfitInterface[];

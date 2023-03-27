@@ -112,15 +112,12 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
           setErrorRef(true);
         }
       } else if (error.response?.status === 401) {
+        result.error = {};
+
         if (localStorage.getItem("token")) {
-          if (args.resource.URL !== authResourcs.LOGOUT?.URL) {
-            console.log(args.resource.URL, authResourcs.LOGOUT?.URL);
-            logoutRef();
-          }
-          // localStorage.clear();
+          localStorage.clear();
           // snackBarUtil.error("Session changed. Please login again!");
-          // window.location.replace("/");
-          result.error = {};
+          window.location.replace("/");
         }
       } else {
         if (errorRef && setErrorRef) {
@@ -166,6 +163,7 @@ const apiWithSnackbar: (
   arg: ApiServiceInterface
 ) => Promise<ApiResponse> = async (args) => {
   const result = await apiHandler(args);
+  console.log(result, "res");
   return apiSnackbarNotifications(result);
 };
 export { apiService, apiHandler, apiWithErrorSnackbar, apiWithSnackbar };
