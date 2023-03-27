@@ -453,7 +453,7 @@ const Event = () => {
                 title={
                   <Box flex={1} display="flex" justifyContent={"space-between"}>
                     <Typography fontSize="0.85rem" fontWeight={500}>
-                      Bookmaker Toss
+                      Toss
                     </Typography>
                     <Typography fontSize="0.85rem" fontWeight={700}>
                       Max:{" "}
