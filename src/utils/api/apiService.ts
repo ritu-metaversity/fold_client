@@ -113,13 +113,9 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
         }
       } else if (error.response?.status === 401) {
         if (localStorage.getItem("token")) {
-          if (args.resource.URL !== authResourcs.LOGOUT?.URL) {
-            console.log(args.resource.URL, authResourcs.LOGOUT?.URL);
-            logoutRef();
-          }
-          // localStorage.clear();
+          localStorage.clear();
           // snackBarUtil.error("Session changed. Please login again!");
-          // window.location.replace("/");
+          window.location.replace("/");
           result.error = {};
         }
       } else {
