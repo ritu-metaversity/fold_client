@@ -4,6 +4,7 @@ import "./MatchBet.css";
 
 function MatchBet() {
   const [matchBet, setMatchBet] = useState("");
+  const [matchLength, setMatchLength] = useState();
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
 
@@ -12,12 +13,9 @@ function MatchBet() {
       matchId: id,
     }).then((Item) => {
       setMatchBet(Item);
+      setMatchLength(Object.keys(Item.data)?.length)
     });
   }, [id]);
-
-  //  Object.keys(MatchBet?.data && MatchBet?.data.map((res)=>{
-  //   console.log(res)
-  //  }))
 
   return (
     <>
@@ -27,7 +25,7 @@ function MatchBet() {
             data-v-4a9e4d9c=""
             className="table-responsive"
             style={{ backgroundColor: "#fff" }}>
-            <table className="table table-bordered">
+            <table className={`table table-bordered ${matchLength===0?"d-none":""}`}>
               <thead>
                 <tr className="matchbet-detail">
                   <th className="box-6">Nation</th>
@@ -39,8 +37,7 @@ function MatchBet() {
                 {matchBet?.data &&
                   Object.keys(matchBet?.data).map((key) => (
                     <>
-                      {matchBet?.data[key].map((item, id)=> (
-                        
+                      {matchBet?.data[key].map((item, id)=> (  
                           <tr key={id}>
                             <td>{item?.nation}</td>
                             <td>{item?.rate}</td>
@@ -52,6 +49,14 @@ function MatchBet() {
                   ))}
               </tbody>
             </table>
+            <div className={`${matchLength===0?"":"d-none"}`}>
+                  
+                    <p colspan="4" class="text-center no-real">
+                      No real-time records found
+                    </p>
+                  
+                
+            </div>
           </div>
         </div>
       </div>

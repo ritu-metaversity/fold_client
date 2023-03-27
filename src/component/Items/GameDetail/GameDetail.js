@@ -29,14 +29,16 @@ function GameDetail({ getStackValue }) {
   const [FancyActive, setFancyActive] = useState(1);
   const [PlaceDate, setPlaceDate] = useState();
   const [fancy, setFancy] = useState();
+  // eslint-disable-next-line
   const [toss, setToss] = useState();
   const [status, setStatus] = useState();
   const [messege, setMessege] = useState();
-  const [timeOut, setTimeOut] = useState(null);
+  // const [timeOut, setTimeOut] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [maxBet, setMaxBet] = useState();
   const [minOdd, setMinOdds] = useState();
   const [mFancyOdds, setMFancyOdds] = useState();
+  // eslint-disable-next-line
   const [errorMsg, setErrorMsg] = useState(false)
   // const [showColleps, setShowColleps] = useState(false);
 
@@ -55,6 +57,7 @@ function GameDetail({ getStackValue }) {
         setMaxBet(res.data.Bookmaker[0]);
         setMinOdds(res.data);
       });
+      // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -74,7 +77,7 @@ function GameDetail({ getStackValue }) {
         var matchData = res.data.Odds[0];
         setETime(matchData);
         setMatchDelatil(matchData.runners);
-      }); // eslint-disable-next-lineF
+      }); // eslint-disable-next-line
     }, 1000);
     return () => clearInterval(time);
   }, [id, fancyOdds]);
@@ -152,9 +155,9 @@ function GameDetail({ getStackValue }) {
     setMessege(vl.message);
   };
 
-  setTimeout(() => {
-    setTimeOut(1);
-  }, 15000);
+  // setTimeout(() => {
+  //   setTimeOut(1);
+  // }, 15000);
 
   const popupClose=(vl)=>{
     setErrorMsg(vl)
@@ -404,7 +407,7 @@ function GameDetail({ getStackValue }) {
                     })}
                     <div></div>
                   </div>
-                  <div>
+                  <div className={`${fancyOdds.Bookmaker.length===0?"d-none":""}`}>
                     <div className="market-title mt-1">
                       Bookmaker
                       <p className="float-right mb-0">
@@ -564,6 +567,7 @@ function GameDetail({ getStackValue }) {
                                 FancyActive === id ? "active" : ""
                               }`}
                               onClick={() => handleGameName(item, id)}>
+                                {/* eslint-disable-next-line */}
                               <a data-toggle="tab" className="nav-link">
                                 {item}
                               </a>
@@ -607,6 +611,7 @@ function GameDetail({ getStackValue }) {
                                               <Accordion>
                                                 <Accordion.Item eventKey={id}>
                                                   <Accordion.Header>
+                                                  {/* eslint-disable-next-line */}
                                                   <a
                                                 data-toggle="collapse"
                                                 data-target="/min-max-info355"

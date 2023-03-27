@@ -32,44 +32,12 @@ const NavBar = (props) => {
     }
   }
 
-  // let urldtaa = window.location.pathname;
-  // const history = useHistory();
-  // let url = urldtaa.slice(1);
-  
-
-
-  // useEffect(()=>{
-  //   AuthorAPI.VALIDATE_JWT().then((res)=>{
-  //   }).catch((error)=>{
-  //     console.log(error.response.status);
-  //     if(error.response.status===401){
-  //       history.push('./login')
-  //     }
-  //   })
-  // }, [url])
 
   useEffect(()=>{
     UserAPI.Self_By_App_Url().then((res)=>{
       setStatus(res.data.selfAllowed)
     })
   },[])
-
-
-  // eslint-disable-next-line
-
-  // const TopNavList = [
-  //   "Home",
-  //   "Cricket",
-  //   "Tennis",
-  //   "Football",
-  //   "Kabaddi",
-  //   "Basketball",
-  //   "Volleyball",
-  //   "Baccarat",
-  //   "32 Cards",
-  //   "TeenPatti",
-  //   "Lucky 7",
-  // ];
 
   const token = localStorage.getItem("token")
 

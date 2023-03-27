@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect} from "react";
 import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,6 +9,7 @@ import "../src/component/navBar/TopNav.css";
 
 import Login from "./component/login/Login";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+// eslint-disable-next-line
 import SlotGame from "./component/Items/SlotGame/SlotGame";
 import Home from "./component/Home/Home";
 import AaccountStatement from "./component/Items/AaccountStatement/AaccountStatement";
@@ -24,30 +25,31 @@ import Casino from "./component/Items/Casino/Casino";
 import Deposit from "./component/Items/Deposit/Deposit";
 import Withdraw from "./component/Items/Withdrow/Withdraw";
 import Register from "./component/Register/Register";
-import { Redirect, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+} from "react-router-dom/cjs/react-router-dom.min";
 import { AuthorAPI } from "./apis/AuthorAPI";
 
 function App() {
   const history = useHistory("");
-  const [errMsg, setErrorMsg] =  useState()
 
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     if(token !=="" || token !== null || token !== undefined){
-  //     AuthorAPI.VALIDATE_JWT()
-  //       .then((res) => {console.log(res)})
-  //       .catch((error) => {
-  //         setErrorMsg(error.response.status);
-  //         localStorage.clear();
-  //         if (error.response.status === 401) {
-  //           history.push("/login");
-  //         }
-  //       });
-  //     }
-  //   }, 2000);
-  // }, []);
+  useEffect(() => {
+    setInterval(() => {
+        AuthorAPI.VALIDATE_JWT()
+          .then()
+          .catch((error) => {
+            if(token !== null){
+            if (error.response.status === 401) {
+              localStorage.clear();
+              history.push("/login");
+            }
+          }
+          });
+    }, 1500);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <BrowserRouter>

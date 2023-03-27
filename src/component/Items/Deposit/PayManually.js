@@ -49,8 +49,6 @@ const PayManually = (props) => {
     data.append("amount", Bitvalue.toString());
     data.append("image", files || "");
 
-    console.log(data);
-
     UserAPI.Self_Deposit_App({ data }).then((res) => {
       props.UpdateDetails(true);
     });
@@ -81,6 +79,7 @@ const PayManually = (props) => {
               placeholder="Enter Amount"
               className="priceinput"
               value={Bitvalue}
+              // defaultValue={Bitvalue}
             />
             <button
               className="stakeactionminus priceminus btn"
@@ -280,6 +279,7 @@ const PayManually = (props) => {
                     }
                     style={{ width: "150px" }}
                     onClick={(e) => handleShow(e)}
+                    alt="QR-Code"
                   />
                 </div>
               </Col>
@@ -301,6 +301,7 @@ const PayManually = (props) => {
                       allDatataa?.qrCode?.qrCodeImage
                     }
                     className="modals-image"
+                    alt="QR-code"
                   />
                 </Modal.Body>
               </Modal>

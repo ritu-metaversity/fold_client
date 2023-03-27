@@ -17,39 +17,34 @@ const Withdraw = () => {
   const [dataLength, setDataLength] = useState();
   const [errorAlert, setErrorAlert] = useState(false);
   const [message, setMessage] = useState({})
-  const [errors, setErrors] = useState({});
-
-
 
   const validateForm =()=>{
     let error = {};
 
     if(amount === ""){
       setErrorAlert(true)
-      error= "Amount is required"
+      error= "The Amount field is required"
     }
     if(bankName === ""){
       setErrorAlert(true)
-      error = "Bank name is required"
+      error = "The Bank Name field is required"
     }
 
     if(ifsc ===""){
       setErrorAlert(true)
-      error = 'IFSC Code is required'
+      error = 'The IFSC field is required'
     }
     if(accountHolderName === ""){
       setErrorAlert(true)
-      error = "Account Name is required"
+      error = "The Account Name field is required"
     }
     if(accountNumber === ""){
       setErrorAlert(true)
-      error = "Account Number is required"
+      error = "The Account Number field is required"
     }
 
     setMessage(error)
-
     return Object.keys(error).length === 0;
-
   }
 
   const handleClick = () => {
@@ -76,9 +71,6 @@ const Withdraw = () => {
         setMessage(error.response.data.message)
       });
     }
-    // else{
-    //   setErrorAlert(false)
-    // }
   };
 
   useEffect(() => {
@@ -90,23 +82,7 @@ const Withdraw = () => {
 
   const popupClose=(vl)=>{
     setErrorAlert(vl)
-    // console.log(vl)
   }
-
-
-//   invalidName:
-//   "The Account Name field may only contain alphabetic characters as well as spaces",
-// noName: "The Account Name field is required",
-// noBank: "The Bank Name field is required",
-// noIfsc: "The IFSC field is required",
-// invalidIfsc: "The IFSC field format is invalid",
-// noAccount: "The Account Number field is required",
-// invalidAccount:
-//   "The Account Number field may only contain numeric characters",
-// noAmount: "The Amount field is required",
-// invalidAmount: "The Amount field may only contain numeric characters",
-
-
   return (
     <>
       <NavBar />
