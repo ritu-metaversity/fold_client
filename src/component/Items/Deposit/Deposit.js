@@ -118,7 +118,7 @@ const Deposit = () => {
                         </td>
                         <td
                           aria-colindex="4"
-                          className={`text-right ${item.status==="Pending"?"pending":item.status==="Approved"?"approved":"rejected"}`}>
+                          className={`text-right ${item.status==="Pending"?"pending":item.status==="APPROVED"?"approved":"rejected"}`}>
                           {item.status}
                         </td>
                       </tr>

@@ -33,14 +33,12 @@ function GameDetail({ getStackValue }) {
   const [toss, setToss] = useState();
   const [status, setStatus] = useState();
   const [messege, setMessege] = useState();
-  // const [timeOut, setTimeOut] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [maxBet, setMaxBet] = useState();
   const [minOdd, setMinOdds] = useState();
   const [mFancyOdds, setMFancyOdds] = useState();
   // eslint-disable-next-line
   const [errorMsg, setErrorMsg] = useState(false)
-  // const [showColleps, setShowColleps] = useState(false);
 
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
@@ -595,9 +593,6 @@ function GameDetail({ getStackValue }) {
                                 </div>
                               </div>
                               {fancyOdds[currentFancy]?.map((item, id) => {
-                                // console.log(item)
-                                // console.log(mFancyOdds[currentFancy][id].maxBet);
-
                                 return (
                                   <div className="table-body" key={item + id}>
                                     <div className="fancy-tripple">

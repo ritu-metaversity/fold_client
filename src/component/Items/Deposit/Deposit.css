@@ -195,3 +195,7 @@ css-pw8cd7 .selected {
 .deposit::-webkit-scrollbar {
     display: none;
   }
+
+.approved {
+    color: #66bb6a;
+}

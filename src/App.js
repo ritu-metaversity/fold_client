@@ -26,7 +26,7 @@ import Deposit from "./component/Items/Deposit/Deposit";
 import Withdraw from "./component/Items/Withdrow/Withdraw";
 import Register from "./component/Register/Register";
 import {
-  useHistory,
+  useHistory
 } from "react-router-dom/cjs/react-router-dom.min";
 import { AuthorAPI } from "./apis/AuthorAPI";
 

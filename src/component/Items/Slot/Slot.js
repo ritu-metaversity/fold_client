@@ -44,7 +44,6 @@ const Slot = () => {
     <>
       <NavBar />
       <Mobilenav />
-      
       {
         isLoading?<p className="lodder"><i className="fa fa-spinner fa-spin"></i></p>:<div className="tab-content">
         <div id="live-casino" className="tab-pane live-casino">
@@ -59,7 +58,6 @@ const Slot = () => {
                         className={`nav-item ${
                           ActiveClass === item.id ? "active2" : ""
                         }`
-                        
                       }
                         onClick={(e) => handleClick(item.id, item.name, item.gameId, e)}>
                         <a
