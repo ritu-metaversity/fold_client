@@ -13,7 +13,7 @@ export function Announcement() {
     <AnnouncementBox>
       <Marquee
         gradient={false}
-        speed={100}
+        speed={50}
         style={{ overflow: "hidden", color: "white", fontSize: "0.8rem" }}
       >
         {announcement}

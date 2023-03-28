@@ -276,7 +276,7 @@ const Event = () => {
                 ))}
               </Box>
             </CustomizedAccordions>
-            <Marquee gradient={false}>
+            <Marquee speed={50} gradient={false}>
               <Typography fontSize="0.7rem" color="error.main">
                 {singleOdd.display_message}
               </Typography>
@@ -436,7 +436,7 @@ const Event = () => {
                 )}
               </Box>
             </CustomizedAccordions>
-            <Marquee gradient={false}>
+            <Marquee speed={50} gradient={false}>
               <Typography fontSize="0.7rem" color="error.main">
                 {
                   fancyOdds["Bookmaker"]?.find(
@@ -496,7 +496,7 @@ const Event = () => {
                   )}
                 </Box>
               </CustomizedAccordions>
-              <Marquee gradient={false}>
+              <Marquee speed={50} gradient={false}>
                 <Typography fontSize="0.7rem" color="error.main">
                   {
                     fancyOdds["Bookmaker"]?.find(
