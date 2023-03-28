@@ -96,62 +96,7 @@ const resultColumns: ResultColumnsInterface[] = [
     label: "Browser Details",
   },
 ];
-const ResultRows = [
-  {
-    nation: (
-      <label>
-        <Form.Check
-          type="checkbox"
-          color="black"
-          style={{ display: "inline", marginRight: 4 }}
-        />
-        1st inn 10 over odd run bhav PAK(PAK vs ENG)adv - ODD
-      </label>
-    ),
-    rate: 0.34,
-    bhav: 0.34,
-    amount: 0.43,
-    win: 0,
-    date: "07/12/2022 12:14:59",
-    ip: "115.246.121.179",
-    browser: (
-      <BootstrapTooltip
-        enterTouchDelay={1}
-        title="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
-      >
-        <Box sx={{ textDecoration: "underline", cursor: "pointer" }}>
-          Detail
-        </Box>
-      </BootstrapTooltip>
-    ),
-    type: "back",
-  },
-  {
-    nation: (
-      <label>
-        <Form.Check
-          type="checkbox"
-          style={{ display: "inline", marginRight: 4 }}
-        />
-        1st inn 10 over odd run bhav PAK(PAK vs ENG)adv - ODD
-      </label>
-    ),
-    rate: 0.34,
-    bhav: 0.34,
-    amount: 0.43,
-    win: 0,
-    date: "07/12/2022 17:14:59",
-    ip: "115.246.121.179",
-    browser: (
-      <BootstrapTooltip title="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36">
-        <Box sx={{ textDecoration: "underline", cursor: "pointer" }}>
-          Detail
-        </Box>
-      </BootstrapTooltip>
-    ),
-    type: "lay",
-  },
-];
+
 
 interface Props {
   remark: string;

@@ -3,10 +3,7 @@ import { utilServices } from "../../utils/api/util/services";
 import CustomizedDialog2 from "../common/Dailog2";
 import Faq from "./rules/Faq";
 import "./footer.css";
-import CustomizedDialog3WOPadding from "../event/Dailog3withNoPadding";
-import CustomizedDialogs from "../common/Dailog";
-import CustomizedDialogStack from "./user/StackDailog";
-import { Box, Button, DialogActions, DialogContent } from "@mui/material";
+import { Box, Button, DialogActions } from "@mui/material";
 
 interface FooterImageInterface {
   id: string;

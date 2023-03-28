@@ -33,57 +33,56 @@ export function WithdrawForm({
   getWithdrawList: () => Promise<void>;
 }) {
   const [loading, setLoading] = useState(false);
-  const { values, isValid, handleChange, handleSubmit, errors, resetForm } =
-    useFormik({
-      initialValues: {
-        accountHolderName: "",
-        bankName: "",
-        accountType: "savings",
-        accountNumber: "",
-        ifsc: "",
-        amount: 0,
-      },
-      validate: (values) => {
-        const newError = {
-          accountHolderName: values.accountHolderName
-            ? values.accountHolderName.match(/^[a-zA-Z ]*$/)
-              ? undefined
-              : err.invalidName
-            : err.noName,
-          accountNumber: values.accountNumber
-            ? values.accountNumber.match(/^[0-9]*$/)
-              ? undefined
-              : err.invalidAccount
-            : err.noAccount,
-          amount: values.amount
-            ? values.amount.toString().match(/^[0-9]*$/)
-              ? undefined
-              : err.invalidAmount
-            : err.noAmount,
-          bankName: values.bankName ? undefined : err.noBank,
-          ifsc: values.ifsc
-            ? values.ifsc.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/)
-              ? undefined
-              : err.invalidIfsc
-            : err.noIfsc,
-        };
+  const { values, handleChange, handleSubmit, errors, resetForm } = useFormik({
+    initialValues: {
+      accountHolderName: "",
+      bankName: "",
+      accountType: "savings",
+      accountNumber: "",
+      ifsc: "",
+      amount: 0,
+    },
+    validate: (values) => {
+      const newError = {
+        accountHolderName: values.accountHolderName
+          ? values.accountHolderName.match(/^[a-zA-Z ]*$/)
+            ? undefined
+            : err.invalidName
+          : err.noName,
+        accountNumber: values.accountNumber
+          ? values.accountNumber.match(/^[0-9]*$/)
+            ? undefined
+            : err.invalidAccount
+          : err.noAccount,
+        amount: values.amount
+          ? values.amount.toString().match(/^[0-9]*$/)
+            ? undefined
+            : err.invalidAmount
+          : err.noAmount,
+        bankName: values.bankName ? undefined : err.noBank,
+        ifsc: values.ifsc
+          ? values.ifsc.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/)
+            ? undefined
+            : err.invalidIfsc
+          : err.noIfsc,
+      };
 
-        return Object.fromEntries(
-          Object.entries(newError).filter(([_, v]) => v != null)
-        );
-      },
-      validateOnChange: true,
+      return Object.fromEntries(
+        Object.entries(newError).filter(([_, v]) => v != null)
+      );
+    },
+    validateOnChange: true,
 
-      onSubmit: async (values) => {
-        setLoading(true);
-        const { response } = await userServices.selfWithdraw(values);
-        if (response) {
-          resetForm();
-          getWithdrawList();
-        }
-        setLoading(false);
-      },
-    });
+    onSubmit: async (values) => {
+      setLoading(true);
+      const { response } = await userServices.selfWithdraw(values);
+      if (response) {
+        resetForm();
+        getWithdrawList();
+      }
+      setLoading(false);
+    },
+  });
 
   return (
     <>

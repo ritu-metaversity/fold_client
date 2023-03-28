@@ -16,7 +16,6 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { utilServices } from "../../utils/api/util/services";
 import { BootstrapTooltip } from "../accountSummary/StatementPopUp";
-import { subtractWeeks } from "../accountSummary";
 import moment from "moment";
 import Loading from "../layout/loading";
 

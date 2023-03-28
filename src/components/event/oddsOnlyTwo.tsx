@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import React, { Dispatch, SetStateAction, useContext, useMemo } from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
 import {
   BetDetailsInterface,
   FancyOddsInterface,
