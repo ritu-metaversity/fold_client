@@ -366,3 +366,33 @@ ul.pagination {
     background-color: #ddd;
     padding: 12px;
 }
+
+
+@media screen and (min-width: 700px) and (max-width: 1600px) {
+    .custom-radio .custom-control-input:checked~.custom-control-label::before {
+        background-color: #007bff;
+        margin-left: -19px;
+        margin-top: -6px;
+    }
+    .custom-control-label::after {
+        position: absolute;
+        top: -9%;
+        left: -19px;
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        content: "";
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 50% 50%;
+    }
+    label::before {
+        border-radius: 50%;
+        margin-left: -20px;
+        margin-top: -5px;
+    }
+    label.custom-control-label.control-label1 {
+        margin-left: 11px;
+    }
+    
+}
