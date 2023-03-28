@@ -1,7 +1,6 @@
 import axios, { AxiosRequestHeaders } from "axios";
-import { errorRef, logoutRef, setErrorRef } from "../../App";
+import { errorRef, setErrorRef } from "../../App";
 import snackBarUtil from "../../components/layout/snackBarUtil";
-import { authResourcs } from "./auth/resources";
 
 export interface ApiResource {
   URL: string;

@@ -7,7 +7,19 @@ padding: 5px;
     padding:6px;
 }
 .iconForCollapse{
-    font-size: 13px;
+    font-size: 14px;
     margin-right: 4px;
     margin-left: 4px;
 }
+.britishimg{
+    height: 20px;
+    margin-inline: 4px;
+}
+
+.britishdiv {
+    width: 100%;
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+}
+

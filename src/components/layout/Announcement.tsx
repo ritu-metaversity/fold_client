@@ -2,18 +2,14 @@
 import React, { useContext } from "react";
 import Marquee from "react-fast-marquee";
 import { UserContext } from "../../App";
-import {
-  AnnouncementBox,
-  SpeakerIcon,
-  UserContainer,
-} from "./styledComponents";
+import { AnnouncementBox, SpeakerIcon } from "./styledComponents";
 export function Announcement() {
   const { announcement } = useContext(UserContext);
   return (
     <AnnouncementBox>
       <Marquee
         gradient={false}
-        speed={100}
+        speed={50}
         style={{ overflow: "hidden", color: "white", fontSize: "0.8rem" }}
       >
         {announcement}

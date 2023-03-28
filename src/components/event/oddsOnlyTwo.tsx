@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import React, { Dispatch, SetStateAction, useContext, useMemo } from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
 import {
   BetDetailsInterface,
   FancyOddsInterface,
@@ -145,6 +145,7 @@ const OddsOnlyTwo = ({
       item
       xs={12}
       md={5.8}
+      py={0.4}
       borderBottom="1px solid rgba(60,68,75)"
     >
       <Grid

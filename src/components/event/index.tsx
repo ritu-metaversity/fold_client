@@ -245,15 +245,17 @@ const Event = () => {
                     fontSize="0.85rem"
                     lineHeight={1}
                     fontWeight={700}
+                    display={{ lg: "none" }}
                   >
                     Max: {`${dharmParivartan(singleOdd.maxBet)}  `}
-                    Min: {dharmParivartan(singleOdd.minBet)}
+                    Min:{`${dharmParivartan(singleOdd.minBet)}  `}
+                    Bet Delay: {singleOdd.betDelay}
                   </Typography>
                 </Box>
               }
             >
               <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
-                <OddsNumberTitle />
+                <OddsNumberTitle singleOdd={singleOdd} />
                 {singleOdd?.runners.map((selection: any, index: string) => (
                   <Odds
                     details={singleOdd}
@@ -274,7 +276,7 @@ const Event = () => {
                 ))}
               </Box>
             </CustomizedAccordions>
-            <Marquee gradient={false}>
+            <Marquee speed={50} gradient={false}>
               <Typography fontSize="0.7rem" color="error.main">
                 {singleOdd.display_message}
               </Typography>
@@ -401,16 +403,22 @@ const Event = () => {
                   <Typography fontSize="0.85rem" fontWeight={500}>
                     Bookmaker
                   </Typography>
-                  <Typography fontSize="0.85rem" fontWeight={700}>
+                  <Typography
+                    fontSize="0.85rem"
+                    display={{ lg: "none" }}
+                    fontWeight={700}
+                  >
                     Max:{" "}
                     {`${dharmParivartan(fancyOdds["Bookmaker"][0]?.maxBet)} `}
-                    Min: {dharmParivartan(fancyOdds["Bookmaker"][0]?.minBet)}
+                    Min:{" "}
+                    {`${dharmParivartan(fancyOdds["Bookmaker"][0].minBet)}  `}
+                    Bet Delay: {fancyOdds["Bookmaker"][0]?.betDelay}
                   </Typography>
                 </Box>
               }
             >
               <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
-                <OddsNumberTitle />
+                <OddsNumberTitle singleOdd={fancyOdds["Bookmaker"][0]} />
                 {fancyOdds["Bookmaker"]?.map(
                   (odds: FancyOddsInterface, index: string) =>
                     odds.t !== "TOSS" && (
@@ -428,7 +436,7 @@ const Event = () => {
                 )}
               </Box>
             </CustomizedAccordions>
-            <Marquee gradient={false}>
+            <Marquee speed={50} gradient={false}>
               <Typography fontSize="0.7rem" color="error.main">
                 {
                   fancyOdds["Bookmaker"]?.find(
@@ -455,16 +463,22 @@ const Event = () => {
                     <Typography fontSize="0.85rem" fontWeight={500}>
                       Toss
                     </Typography>
-                    <Typography fontSize="0.85rem" fontWeight={700}>
+                    <Typography
+                      fontSize="0.85rem"
+                      display={{ lg: "none" }}
+                      fontWeight={700}
+                    >
                       Max:{" "}
                       {`${dharmParivartan(fancyOdds["Bookmaker"][0].maxBet)}  `}
-                      Min: {dharmParivartan(fancyOdds["Bookmaker"][0].minBet)}
+                      Min:{" "}
+                      {`${dharmParivartan(fancyOdds["Bookmaker"][0].minBet)}  `}
+                      Bet Delay: {fancyOdds["Bookmaker"][0].betDelay}
                     </Typography>
                   </Box>
                 }
               >
                 <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
-                  <OddsNumberTitle />
+                  <OddsNumberTitle singleOdd={fancyOdds["Bookmaker"][0]} />
                   {fancyOdds["Bookmaker"]?.map(
                     (odds: FancyOddsInterface, index: string) =>
                       odds.t === "TOSS" && (
@@ -482,7 +496,7 @@ const Event = () => {
                   )}
                 </Box>
               </CustomizedAccordions>
-              <Marquee gradient={false}>
+              <Marquee speed={50} gradient={false}>
                 <Typography fontSize="0.7rem" color="error.main">
                   {
                     fancyOdds["Bookmaker"]?.find(
@@ -503,6 +517,13 @@ const Event = () => {
                   <Box flex={1} display="flex" justifyContent={"space-between"}>
                     <Typography fontSize="0.85rem" fontWeight={500}>
                       {fancyMarket}
+                    </Typography>
+                    <Typography
+                      fontSize="0.85rem"
+                      lineHeight={1}
+                      fontWeight={700}
+                    >
+                      Bet Delay: {fancyOdds[fancyMarket][0].betDelay}
                     </Typography>
                   </Box>
                 }

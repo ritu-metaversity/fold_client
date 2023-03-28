@@ -1,7 +1,6 @@
 import { Collapse } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import { HiPlusCircle, HiMinusCircle } from "react-icons/hi";
 
 interface Props {
   markets: {
@@ -30,9 +29,9 @@ export function MarketCollapse({ markets }: Props) {
             }}
           >
             {open[index] ? (
-              <RemoveCircleIcon className="iconForCollapse" />
+              <HiMinusCircle className="iconForCollapse" />
             ) : (
-              <AddCircleIcon className="iconForCollapse" />
+              <HiPlusCircle className="iconForCollapse" />
             )}
             {market.name}
           </p>
