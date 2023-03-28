@@ -3,6 +3,10 @@ import { utilServices } from "../../utils/api/util/services";
 import CustomizedDialog2 from "../common/Dailog2";
 import Faq from "./rules/Faq";
 import "./footer.css";
+import CustomizedDialog3WOPadding from "../event/Dailog3withNoPadding";
+import CustomizedDialogs from "../common/Dailog";
+import CustomizedDialogStack from "./user/StackDailog";
+import { Box, Button, DialogActions, DialogContent } from "@mui/material";
 
 interface FooterImageInterface {
   id: string;
@@ -59,10 +63,22 @@ const Footer = () => {
     <div>
       <CustomizedDialog2
         title="Rules"
+        maxWidth="md"
         open={open}
         handleClose={() => setOpen(false)}
       >
         <Faq />
+        <DialogActions>
+          <Box className="modal-footer-rules">
+            <Button
+              onClick={() => setOpen(false)}
+              variant="contained"
+              color="error"
+            >
+              Close
+            </Button>
+          </Box>
+        </DialogActions>
       </CustomizedDialog2>
       <footer className="footer">
         <div className="support">
