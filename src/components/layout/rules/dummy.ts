@@ -1483,16 +1483,6 @@ Bets will be void if the match is abandoned. Extra-time and penalty shootouts do
                                                         H Zazai Sixes 1 sixes per game
                                                     </div></div>`,
       },
-      {
-        name: "khado",
-        rule: `<div data-parent="#eventaccordion8" id="event8game2" class="card-body collapse show" style=""><div class="rule-text">
-                                                        Only First inning valid for T20 and one day matches.
-                                                    </div><div class="rule-text">
-                                                        Same will be work like Lambi. If match abandoned or over reduced, all bets will be deleted.
-                                                    </div><div class="rule-text">
-                                                        You can choose your own value in this event.
-                                                    </div></div>`,
-      },
     ],
   },
   {
