@@ -122,9 +122,11 @@ const Event = () => {
           response[element] = [];
         else {
           response[element] = response[element].map(
-            (single: any, index: number) => ({
+            (single: FancyOddsInterface, index: number) => ({
               ...(fancyOddsSlower[element]
-                ? fancyOddsSlower[element][index] || {}
+                ? fancyOddsSlower[element].find(
+                    (odd: FancyOddsInterface) => odd.sid === single.sid
+                  ) || {}
                 : {}),
               ...single,
             })
