@@ -51,7 +51,7 @@ export function OddsNumberTitle({ singleOdd }: Props) {
       >
         <Grid item xs={3.9}>
           <Typography
-            fontSize="0.75rem"
+            fontSize="0.7rem"
             lineHeight={1}
             color="text.secondary"
             fontWeight={700}

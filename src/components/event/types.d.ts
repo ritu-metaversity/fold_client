@@ -62,6 +62,7 @@ export interface FancyOddsInterface {
   betDelay: number;
   maxBet: number;
   minBet: number;
+  display_message: string | null;
 }
 
 export interface ProfitInterface {
