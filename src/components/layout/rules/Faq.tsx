@@ -5,66 +5,9 @@ import React, { useEffect, useState } from "react";
 import "./rules.css";
 import { FaChevronDown } from "react-icons/fa";
 import { HiPlusCircle, HiMinusCircle } from "react-icons/hi";
+import { data } from "./dummy";
 
-const data = [
-  {
-    name: "Football",
-    rules: [
-      {
-        name: "match odds ",
-        rule: "<p>asdfasdfasdfasdfasdfasdfasdas </p>",
-      },
-      {
-        name: "match odds ",
-        rule: "<p>asdfasdfasdfasdfasdfasdfasdas </p>",
-      },
-      {
-        name: "match odds ",
-        rule: "<p>asdfasdfasdfasdfasdfasdfasdas </p>",
-      },
-      {
-        name: "match odds ",
-        rule: "<p>asdfasdfasdfasdfasdfasdfasdas </p>",
-      },
-    ],
-  },
-  {
-    name: "Football",
-    rules: [
-      {
-        name: "match odds ",
-        rule: "<p>asdfasdfasdfasdfasdfasdfasdas </p>",
-      },
-    ],
-  },
-  {
-    name: "Football",
-    rules: [
-      {
-        name: "match odds ",
-        rule: "<p>asdfasdfasdfasdfasdfasdfasdas </p>",
-      },
-    ],
-  },
-  {
-    name: "Football",
-    rules: [
-      {
-        name: "match odds ",
-        rule: "<p>asdfasdfasdfasdfasdfasdfasdas </p>",
-      },
-    ],
-  },
-  {
-    name: "Football",
-    rules: [
-      {
-        name: "match odds ",
-        rule: "<p>asdfasdfasdfasdfasdfasdfasdas </p>",
-      },
-    ],
-  },
-];
+
 
 const Faq = () => {
   const [open, setOpen] = useState<boolean[]>([]);
