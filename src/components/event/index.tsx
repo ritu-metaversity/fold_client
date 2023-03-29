@@ -39,6 +39,8 @@ import {
 import { createProfits, transformMatchOdds } from "./eventUtils";
 import moment from "moment";
 import Marquee from "react-fast-marquee";
+import Socket from "./socket";
+import { socket } from "../../utils/socket/socket";
 
 export const dharmParivartan = (str: string | number) => {
   if (["string", "number"].includes(typeof str)) {
@@ -81,6 +83,57 @@ const Event = () => {
     Fancy: [],
   });
   const nav = useNavigate();
+
+  //socket
+  useEffect(() => {
+    console.log("asdfasdf");
+    // no-op if the socket is already connected
+    socket.connect();
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  const eventId = searchParams.get("match-id");
+  useEffect(() => {
+    socket.on("OddsUpdated", (response) => {
+      console.log(response, "socket");
+      Object.keys(response).forEach((element) => {
+        if (
+          !["Fancy2", "Fancy3", "Odds", "Bookmaker", "OddEven"].includes(
+            element
+          )
+        )
+          response[element] = [];
+        else {
+          response[element] = response[element].map(
+            (single: any, index: number) => ({
+              ...(fancyOddsSlower[element]
+                ? fancyOddsSlower[element][index] || {}
+                : {}),
+              ...single,
+            })
+          );
+        }
+      });
+
+      const Odds = transformMatchOdds(response.Odds);
+      if (fancyOdds) {
+        const newFancy = { ...fancyOdds };
+        setPrevFancyOdds(newFancy);
+      } else {
+        setPrevFancyOdds({ ...response, Odds });
+      }
+      setFancyOdds({ ...response, Odds });
+    });
+
+    socket.emit("JoinRoom", {
+      eventId,
+    });
+  }, []);
+
+  //socket
 
   const getBets = async () => {
     if (!matchId || isSignedIn === false) {
@@ -171,10 +224,10 @@ const Event = () => {
   }, [isSignedIn, matchId]);
 
   //odds polling 0.5 sec
-  useEffect(() => {
-    const timer = setInterval(() => getOdds(), 500);
-    return () => clearInterval(timer);
-  }, [matchId, fancyOdds]);
+  // useEffect(() => {
+  //   const timer = setInterval(() => getOdds(), 500);
+  //   return () => clearInterval(timer);
+  // }, [matchId, fancyOdds]);
 
   //pnl polling 5 sec
   useEffect(() => {
