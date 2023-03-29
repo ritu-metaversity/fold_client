@@ -34,11 +34,7 @@
 .pending{
     color: #ffa726;
 }
-/* @media screen and (max-width: 500px) {
-    .select-type{
-        width: 165%;
-    }
-} */
+
 
 .withdraw{
     height: 89vh;
@@ -47,3 +43,37 @@
 .withdraw::-webkit-scrollbar {
     display: none;
   }
+
+
+  @media screen and (min-width: 850px) and (max-width: 2000px) {
+    .wrapper.withdraw {
+        margin-inline: 21px;
+    }
+    select.custom-select.select-type {
+        width: 160%;
+    }
+    button.btn.btn-primary.btn-block.btn-sm.btn-w {
+        margin-left: 50px;
+        margin-top: 22px;
+    }
+    .main-account-containor {
+        width: 97%;
+    }
+    .withdrow-table {
+        width: 98%;
+        margin: auto;
+    }
+    .card-header {
+        background: #2c3e50 !important;
+        color: #fff;
+        border-radius: unset !important;
+    }
+    .card-header {
+        padding-top: 8px;
+        padding-bottom: 7px;
+    }
+    .wit{
+        padding-left: 10px;
+        margin-bottom: 15px;
+    }
+}

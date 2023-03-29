@@ -35,16 +35,8 @@ const Register = () => {
       mobile: mobileNumber,
     }).then((res) => {
       setUserId(res.username);
-    //   setShowModals(false)
       setUserPassword(res.password);
-    //   if (res.token !=="") {
-    //     history.push("/login");
-    //   }
-    //   const pType = res.passwordtype;
-    //   localStorage.setItem("Password-type", pType)
-    //   if (pType === "old") {
-    //     history.push("/m/setting/changepassword");
-    //   }
+  
     }).catch((error)=>{
         setStatusCode(error.response.status)
         setErrorMsg(error.response.data.message)
@@ -134,7 +126,7 @@ const Register = () => {
                 className="text-danger error-msg"
                 style={{ display: "none" }}></span>
             </div>
-            <div className="form-group mb-0">
+            <div className="form-group mb-0" >
               <button
                 type="submit"
                 className="btn btn-primary btn-block"
@@ -143,7 +135,7 @@ const Register = () => {
                 <i className="ml-2 fas fa-sign-in-alt"></i>
               </button>
             </div>
-            <div className="form-group mb-0">
+            <div className="form-group mb-0" style={{ marginTop: "12px" }}>
               <Link
                 type="submit"
                 to='/login'

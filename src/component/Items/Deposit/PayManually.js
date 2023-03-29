@@ -91,7 +91,7 @@ const PayManually = (props) => {
             </button>
           </div>
         </div>
-        <div className="col-6">
+        <div className="col-6 deposit-value">
           <div className="row price-values">
             <div className="col-3 price-data">
               <button

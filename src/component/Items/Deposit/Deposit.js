@@ -35,6 +35,7 @@ const Deposit = () => {
     <>
       <NavBar />
       {/* <Mobilenav /> */}
+      <><div class="card-header wit"><h4 class="mb-0">Deposite</h4></div>
       <div className="wrapper main-conatiner deposit">
         <PayManually UpdateDetails={UpdateDetails} />
 
@@ -56,28 +57,28 @@ const Deposit = () => {
                       role="columnheader"
                       scope="col"
                       aria-colindex="1"
-                      className="text-left">
+                      className="text-left deposit-data">
                       Amount
                     </th>
                     <th
                       role="columnheader"
                       scope="col"
                       aria-colindex="2"
-                      className="text-left">
+                      className="text-center  deposit-data">
                       Image
                     </th>
                     <th
                       role="columnheader"
                       scope="col"
                       aria-colindex="3"
-                      className="text-left withdraw-data">
+                      className="text-left deposit-data withdraw-data">
                       Data
                     </th>
                     <th
                       role="columnheader"
                       scope="col"
                       aria-colindex="4"
-                      className="text-right">
+                      className="text-right deposit-data">
                       Status
                     </th>
                   </tr>
@@ -90,7 +91,7 @@ const Deposit = () => {
                         <td aria-colindex="1" className="text-left">
                           {item.amount}
                         </td>
-                        <td aria-colindex="2" className="text-left">
+                        <td aria-colindex="2" className="text-center">
                           <img
                           onClick={(e) => handleShow(e, item.image)}
                             src={item.image}
@@ -129,6 +130,7 @@ const Deposit = () => {
           </div>
         </div>
       </div>
+      </>
     </>
   );
 };

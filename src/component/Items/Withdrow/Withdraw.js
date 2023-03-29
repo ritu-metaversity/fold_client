@@ -87,7 +87,11 @@ const Withdraw = () => {
     <>
       <NavBar />
       {errorAlert ? <AlertBtn color="danger"  popupClose={popupClose}  val={message}/> : ""}
+      <>
+      <div class="card-header wit"><h4 class="mb-0">Withdraw</h4></div>
+      
       <div className="wrapper withdraw">
+      
         <div className="card-body container-fluid container-fluid-5">
           <div className="main-account-containor">
             <div className="mx-input-wrapper account-field">
@@ -157,7 +161,7 @@ const Withdraw = () => {
 
           <div className="row row5 mt-2">
             <div className="col-12">
-              <div className="table-responsive">
+              <div className="table-responsive withdrow-table">
                 <table
                   role="table"
                   aria-busy="false"
@@ -278,7 +282,7 @@ const Withdraw = () => {
                               className={`text-left ${
                                 item.status === "Pending"
                                   ? "pending"
-                                  : item.status === "Approved"
+                                  : item.status === "APPROVED"
                                   ? "approved"
                                   : "rejected"
                               }`}>
@@ -306,6 +310,7 @@ const Withdraw = () => {
           </div>
         </div>
       </div>
+      </>
     </>
   );
 };

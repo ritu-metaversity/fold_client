@@ -80,7 +80,7 @@ function UnSetteledBet() {
             <h4 className="mb-0">Un-Setteled Bet</h4>
           </div>
           <div className="card-body container-fluid container-fluid-5 unsetteledbet">
-            <div className="row row5">
+            <div className="row row5 acc-stat">
               <div className="col-12 text-center">
                 <div
                   id="match_unmatched_delete"
@@ -124,7 +124,7 @@ function UnSetteledBet() {
             </div>
             <div className={`${deleteVal === "2" ? "d-none" : ""}`}>
               <div
-                className={`row row5 mt-2 ${
+                className={`row row5 mt-2 acc-stat ${
                   ListLength === 0 ? "dis-none" : ""
                 }`}>
                 <div className="col-6">
@@ -225,7 +225,7 @@ function UnSetteledBet() {
                   </div>
                 </div>
               </div>
-              <div className="row row5 mt-2">
+              <div className="row row5 mt-2 acc-stat">
                 <div className="col-12">
                   <button
                     className="btn btn-primary btn-block btn-sm"
@@ -234,10 +234,10 @@ function UnSetteledBet() {
                   </button>
                 </div>
               </div>
-              <div className="row row5 mt-2">
+              <div className="row row5 mt-2 ">
                 <div className="row row5 mt-2">
                   <div className="col-12">
-                    <div className="table-responsive">
+                    <div className="table-responsive acc-stat">
                       <table
                         role="table"
                         aria-busy="false"
@@ -250,21 +250,21 @@ function UnSetteledBet() {
                               role="columnheader"
                               scope="col"
                               aria-colindex="1"
-                              className="text-left">
+                              className="text-left bg-color">
                               Sport Name
                             </th>
                             <th
                               role="columnheader"
                               scope="col"
                               aria-colindex="2"
-                              className="text-left">
+                              className="text-left bg-color">
                               Event Name
                             </th>
                             <th
                               role="columnheader"
                               scope="col"
                               aria-colindex="3"
-                              className="text-left">
+                              className="text-left bg-color">
                               Market Name
                             </th>
 
@@ -272,14 +272,14 @@ function UnSetteledBet() {
                               role="columnheader"
                               scope="col"
                               aria-colindex="5"
-                              className="text-left">
+                              className="text-left bg-color">
                               Nation
                             </th>
                             <th
                               role="columnheader"
                               scope="col"
                               aria-colindex="6"
-                              className="text-left">
+                              className="text-left bg-color">
                               User Rate
                             </th>
 
@@ -287,21 +287,21 @@ function UnSetteledBet() {
                               role="columnheader"
                               scope="col"
                               aria-colindex="8"
-                              className="text-left">
+                              className="text-left bg-color">
                               Amount
                             </th>
                             <th
                               role="columnheader"
                               scope="col"
                               aria-colindex="9"
-                              className="text-center">
+                              className="text- bg-color">
                               Place Date
                             </th>
                             <th
                               role="columnheader"
                               scope="col"
                               aria-colindex="10"
-                              className="">
+                              className=" bg-color">
                               Match Date
                             </th>
                           </tr>
@@ -382,7 +382,7 @@ function UnSetteledBet() {
                         <tbody>
                           <tr
                             role="row"
-                            className={`b-table-empty-row 
+                            className={`b-table-empty-row  acc-stat
                           ${ListLength === 0 ? "" : "dis-none"}`}>
                             <td colSpan="6" role="cell">
                               <div role="alert" aria-live="polite">
@@ -398,7 +398,7 @@ function UnSetteledBet() {
                   </div>
                 </div>
               </div>
-              <div className="row row5 mt-2">
+              <div className="row row5 mt-2 acc-stat">
                 <div className="col-12">
                   <nav aria-label="Page navigation example">
                     <ul className="pagination">
@@ -431,7 +431,7 @@ function UnSetteledBet() {
               </div>
             </div>
             <div className={`row row5 mt-2 ${deleteVal==="2"?"":"d-none"}`}>
-              <div className="col-12">
+              <div className="col-12 ">
                 <p className="text-center record-delete">No Records Found</p>
               </div>
             </div>

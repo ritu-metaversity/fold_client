@@ -106,7 +106,7 @@ function CasinoProfit() {
       <div className="report-container Mobile-view-topNav">
         <div className="card">
           <div className="card-body container-fluid container-fluid-5">
-            <div className="row row5">
+            <div className="row row5 acc-stat">
               <div className="col-6">
                 <div className="form-group mb-0">
                   <div
@@ -127,7 +127,7 @@ function CasinoProfit() {
                   </div>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-6 text-right">
                 <div className="form-group mb-0">
                   <div
                     className="mx-datepicker"
@@ -150,7 +150,7 @@ function CasinoProfit() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2" style={{ marginInline: "-7px" }}>
+            <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div className="form-group mb-0">
                   <select
@@ -182,7 +182,7 @@ function CasinoProfit() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2" style={{ marginInline: "-7px" }}>
+            <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div
                   id="account-statement_length"
@@ -211,7 +211,7 @@ function CasinoProfit() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2">
+            <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <button
                   className="btn btn-primary btn-block btn-sm"
@@ -235,21 +235,21 @@ function CasinoProfit() {
                           role="columnheader"
                           scope="col"
                           aria-colindex="2"
-                          className="text-left">
+                          className="text-left bg-color">
                           Match Name
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="1"
-                          className="text-left">
+                          className="text-left bg-color">
                           Pnl
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="4"
-                          className="text-left">
+                          className="text-left bg-color">
                           Commssion Mila
                         </th>
                       </tr>

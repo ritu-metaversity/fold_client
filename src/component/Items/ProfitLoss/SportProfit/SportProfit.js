@@ -21,7 +21,7 @@ function SportProfit() {
   const [MatchId, setMatchId] = useState();
   const [SportList, setSportList] = useState();
   const [SportData, setSportData] = useState();
-  const [SportDataLength, setSportDataLength] = useState();
+  // const [SportDataLength, setSportDataLength] = useState();
   const [DataList, setDataList] = useState();
 
   const StartDateValue = (date, dateString) => {
@@ -108,7 +108,7 @@ function SportProfit() {
       <div className="report-container statement1">
         <div className="card">
           <div className="card-body container-fluid container-fluid-5">
-            <div className="row row5">
+            <div className="row row5 acc-stat">
               <div className="col-6">
                 <div className="form-group mb-0">
                   <div
@@ -129,7 +129,7 @@ function SportProfit() {
                   </div>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-6 text-right">
                 <div className="form-group mb-0">
                   <div
                     className="mx-datepicker"
@@ -151,7 +151,7 @@ function SportProfit() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2" style={{ marginInline: "-7px" }}>
+            <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div className="form-group mb-0">
                   <select
@@ -186,7 +186,7 @@ function SportProfit() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2" style={{ marginInline: "-7px" }}>
+            <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div
                   id="account-statement_length"
@@ -215,7 +215,7 @@ function SportProfit() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2">
+            <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <button
                   className="btn btn-primary btn-block btn-sm"
@@ -234,26 +234,26 @@ function SportProfit() {
                     className="table b-table table-bordered"
                     id="__BVID__104">
                     <thead>
-                      <tr role="row">
+                      <tr role="row ">
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="2"
-                          className="text-left">
+                          className="text-left bg-color">
                           Match Name
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="1"
-                          className="text-left">
+                          className="text-left bg-color">
                           Pnl
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="4"
-                          className="text-left">
+                          className="text-left bg-color">
                           Commssion Mila
                         </th>
                       </tr>

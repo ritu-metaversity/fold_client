@@ -121,7 +121,7 @@ function Login() {
                 <Link
                   type="submit"
                   className="btn btn-primary btn-block"
-                  to="./Register">
+                  to="/Register">
                   Register
                   <i className="ml-2 fas fa-sign-in-alt"></i>
                 </Link>

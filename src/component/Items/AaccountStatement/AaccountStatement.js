@@ -133,7 +133,7 @@ function AaccountStatement() {
             <h4 className="mb-0">Account Statement</h4>
           </div>
           <div className="card-body statement container-fluid container-fluid-5">
-            <div className="row row5">
+            <div className="row row5 acc-stat">
               <div className="col-6">
                 <div className="form-group mb-0">
                   <div className="mx-datepicker" style={{ width: "auto" }}>
@@ -154,7 +154,7 @@ function AaccountStatement() {
                   </div>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-6 text-right">
                 <div className="form-group mb-0">
                   <div className="mx-datepicker" style={{ width: "auto" }}>
                     <div className="mx-input-wrapper">
@@ -174,7 +174,7 @@ function AaccountStatement() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2">
+            <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <div className="form-group mb-0">
                   <select
@@ -189,7 +189,7 @@ function AaccountStatement() {
               </div>
             </div>
 
-            <div className="row row5 mt-2" style={{ marginInline: "-7px" }}>
+            <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div
                   id="account-statement_length"
@@ -218,24 +218,8 @@ function AaccountStatement() {
                 </div>
               </div>
 
-              {/* <div className="col-6">
-                <div
-                  id="account-statement_filter"
-                  className="dataTables_filter">
-                  <label style={{ fontSize: "14px" }}>
-                    Search:
-                    <input
-                      type="search"
-                      placeholder="Type to Search"
-                      aria-controls="account-statement"
-                      className="form-control form-control-sm"
-                      style={{ fontSize: "14px" }}
-                    />
-                  </label>
-                </div>
-              </div> */}
             </div>
-            <div className="row row5 mt-2">
+            <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <button
                   className="btn btn-primary btn-block btn-sm"
@@ -256,47 +240,46 @@ function AaccountStatement() {
                     id="__BVID__104">
                     <thead>
                       <tr role="row">
-                       
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="2"
-                          className="text-left">
+                          className="text-left bg-color">
                           Sr no
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="1"
-                          className="text-left">
+                          className="text-left bg-color">
                           Date
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="3"
-                          className="text-right">
+                          className="text-right bg-color">
                           Credit
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="4"
-                          className="text-right">
+                          className="text-right bg-color">
                           Debit
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="5"
-                          className="text-right">
+                          className="text-right bg-color">
                           Balance
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="6"
-                          className="text-left">
+                          className="text-left bg-color">
                           Remark
                         </th>
                       </tr>
@@ -376,7 +359,7 @@ function AaccountStatement() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2">
+            <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">

@@ -60,7 +60,7 @@ function ChangeBtnValue() {
               <h4 className="mb-0">Change Button Values</h4>
             </div>
             <div className="card-body container-fluid container-fluid-5 button-value">
-              <div className="row row5 mb-1">
+              <div className="row row5 mb-1 acc-stat">
                 <div className="col-6">
                   <div className="button-title">
                     <span>
@@ -76,7 +76,7 @@ function ChangeBtnValue() {
                   </div>
                 </div>
               </div>
-              <div className="row row5 mb-1">
+              <div className="row row5 mb-1 acc-stat">
               <div className="col-6">
               {getKey?.length &&
                 getKey.map((item) => {
@@ -86,7 +86,7 @@ function ChangeBtnValue() {
                           placeholder="Button Value"
                           value={item}
                           maxLength="7"
-                          className="form-control"
+                          className="form-control chbtn"
                           readOnly
                         />
                       </div>
@@ -104,7 +104,7 @@ function ChangeBtnValue() {
                             text="number"
                             value={updateStack[key]}
                             onChange={handleInput}
-                            className="form-control"
+                            className="form-control chbtn"
                           />
                         </div>
                     );
@@ -113,7 +113,7 @@ function ChangeBtnValue() {
                  </div>
               </div>
 
-              <div className="row row5 mt-2">
+              <div className="row row5 mt-2 acc-stat">
                 <div className="col-12">
                   <button
                     className="btn btn-primary btn-block btn-sm"

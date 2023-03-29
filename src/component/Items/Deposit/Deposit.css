@@ -124,7 +124,6 @@ css-pw8cd7 .selected {
     background-color: #2c3d50;
     color: #fff;
     margin-top: -9px;
-    width: 100%;
     margin-left: -10px;
     border-radius: 5px 5px 0px 0px;
 }
@@ -173,11 +172,6 @@ css-pw8cd7 .selected {
         margin-top: 17px;
     }
 
-    .head-deposit {
-
-        width: 107%;
-
-    }
 
 }
 
@@ -198,4 +192,36 @@ css-pw8cd7 .selected {
 
 .approved {
     color: #66bb6a;
+}
+
+
+@media screen and (min-width: 850px) and (max-width: 2000px) {
+    .wrapper.main-conatiner.deposit {
+        margin-inline: 35px;
+    }
+    button.stakeactionminus.priceminus.btn {
+        border-radius: unset;
+    }
+    .col-3.price-data {
+        margin-left: 6px;
+        width: 23%;
+    }
+    .paymethods {
+        width: 32%;
+    }
+    .images-section img {
+        width: 100%;
+    }
+    button.btn.btn-primary.btn-block.btn-sm.deposit-button {
+        width: 30%;
+        margin: auto;
+    }
+    table#__BVID__104 {
+        width: 50%;
+        margin: auto;
+    }
+    .head-deposit {
+        width: unset;
+    }
+    
 }

@@ -91,7 +91,7 @@ const Slot = () => {
                               return (
                                 <div key={item.gameId} className="coll-6 text-center" onClick={()=>handleData(item.gameId)}>
                                   <div className="casinoicons" >
-                                    <a  className="">
+                                    <a href="/">
                                       <img
                                         src={item.imageUrl}
                                         className="img-fluid"

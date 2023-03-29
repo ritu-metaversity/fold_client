@@ -97,13 +97,13 @@ function ChangePassword() {
             <h4 className="mb-0">Change Password</h4>
           </div>
           <div className="card-body container-fluid container-fluid-5">
-            <div className="row row5 mt-2">
+            <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <div className="form-group">
                   <label>Current Password</label>{" "}
                   <input
                     type="password"
-                    className="form-control"
+                    className="form-control chbtn"
                     style={{ borderBottom: "1px solid #2c3d50" }}
                     onChange={(e) => setCurrPassword(e.target.value)}
                   />
@@ -112,7 +112,7 @@ function ChangePassword() {
                   <label>New Password</label>{" "}
                   <input
                     type="password"
-                    className="form-control"
+                    className="form-control chbtn"
                     style={{ borderBottom: "1px solid #2c3d50" }}
                     onChange={(e) => setNewpasswords(e.target.value)}
                   />
@@ -121,14 +121,14 @@ function ChangePassword() {
                   <label>Confirm New Password</label>{" "}
                   <input
                     type="password"
-                    className="form-control"
+                    className="form-control chbtn"
                     style={{ borderBottom: "1px solid #2c3d50" }}
                     onChange={(e) => setConformPassword(e.target.value)}
                   />
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2">
+            <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <button
                   className="btn btn-primary btn-block btn-sm"
