@@ -95,42 +95,44 @@ const Event = () => {
     };
   }, []);
 
+  const oddFromSocket = (response: any) => {
+    console.log(response, "socket");
+    Object.keys(response).forEach((element) => {
+      if (
+        !["Fancy2", "Fancy3", "Odds", "Bookmaker", "OddEven"].includes(element)
+      )
+        response[element] = [];
+      else {
+        response[element] = response[element].map(
+          (single: any, index: number) => ({
+            ...(fancyOddsSlower[element]
+              ? fancyOddsSlower[element][index] || {}
+              : {}),
+            ...single,
+          })
+        );
+      }
+    });
+    const Odds = transformMatchOdds(response.Odds);
+    if (fancyOdds) {
+      const newFancy = { ...fancyOdds };
+      setPrevFancyOdds(newFancy);
+    } else {
+      setPrevFancyOdds({ ...response, Odds });
+    }
+    setFancyOdds({ ...response, Odds });
+  };
   const eventId = searchParams.get("match-id");
   useEffect(() => {
-    socket.on("OddsUpdated", (response) => {
-      console.log(response, "socket");
-      Object.keys(response).forEach((element) => {
-        if (
-          !["Fancy2", "Fancy3", "Odds", "Bookmaker", "OddEven"].includes(
-            element
-          )
-        )
-          response[element] = [];
-        else {
-          response[element] = response[element].map(
-            (single: any, index: number) => ({
-              ...(fancyOddsSlower[element]
-                ? fancyOddsSlower[element][index] || {}
-                : {}),
-              ...single,
-            })
-          );
-        }
-      });
-
-      const Odds = transformMatchOdds(response.Odds);
-      if (fancyOdds) {
-        const newFancy = { ...fancyOdds };
-        setPrevFancyOdds(newFancy);
-      } else {
-        setPrevFancyOdds({ ...response, Odds });
-      }
-      setFancyOdds({ ...response, Odds });
-    });
-
-    socket.emit("JoinRoom", {
-      eventId,
-    });
+    socket.on("OddsUpdated", oddFromSocket);
+    socket.on("JoinedSuccessfully", () => {});
+    setInterval(
+      () =>
+        socket.emit("JoinRoom", {
+          eventId,
+        }),
+      1000
+    );
   }, []);
 
   //socket
