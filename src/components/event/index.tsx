@@ -113,27 +113,37 @@ const Event = () => {
         );
       }
     });
-    const Odds = transformMatchOdds(response.Odds);
-    if (fancyOdds) {
-      const newFancy = { ...fancyOdds };
-      setPrevFancyOdds(newFancy);
-    } else {
-      setPrevFancyOdds({ ...response, Odds });
-    }
-    setFancyOdds({ ...response, Odds });
+    setFancyOdds((fancyOdds: any) => {
+      const Odds = transformMatchOdds(response.Odds);
+      if (fancyOdds) {
+        const newFancy = { ...fancyOdds };
+        setPrevFancyOdds(newFancy);
+      } else {
+        setPrevFancyOdds({ ...response, Odds });
+      }
+      return { ...response, Odds };
+    });
   };
   const eventId = searchParams.get("match-id");
-  useEffect(() => {
-    socket.on("OddsUpdated", oddFromSocket);
-    socket.on("JoinedSuccessfully", () => {});
-    setInterval(
-      () =>
-        socket.emit("JoinRoom", {
-          eventId,
-        }),
-      1000
-    );
-  }, []);
+
+useEffect(() => {
+  console.log("something else is wrong");
+}, [prevFancyOdds]);
+
+useEffect(() => {
+  socket.on("OddsUpdated", oddFromSocket);
+  socket.on("JoinedSuccessfully", () => {});
+  let timer = setInterval(
+    () =>
+      socket.emit("JoinRoom", {
+        eventId,
+      }),
+    1000
+  );
+  return () => {
+    clearInterval(timer);
+  };
+}, []);
 
   //socket
 
