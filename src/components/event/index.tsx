@@ -2,6 +2,9 @@
 import { OddsNumberTitle } from "./OddsNumberTitle";
 import { OddsNumberTitleTwo } from "./OddsNumberTitleTwo";
 import Odds from "./odds";
+
+import useWebSocket from "react-use-websocket";
+
 import { Box } from "@mui/system";
 import React, {
   useCallback,
@@ -82,18 +85,29 @@ const Event = () => {
   });
   const nav = useNavigate();
 
+  const { lastMessage } = useWebSocket(
+    `ws://3.7.84.132:8082/chat/${matchId}/${localStorage.getItem("token")}`
+  );
+
+  useEffect(() => {
+    console.log(lastMessage, "ankit2");
+    if (lastMessage?.data && JSON.parse(lastMessage?.data)?.data)
+      setBets(JSON.parse(lastMessage?.data).data);
+  }, [lastMessage]);
+
   const getBets = async () => {
-    if (!matchId || isSignedIn === false) {
-      nav("/");
-      return;
-    }
-    // setLoading(true);
-    const { response } = await userServices.betListByMatch(matchId);
-    if (response?.data) {
-      setBets(response.data);
-    }
+    // if (!matchId || isSignedIn === false) {
+    //   nav("/");
+    //   return;
+    // }
+    // // setLoading(true);
+    // const { response } = await userServices.betListByMatch(matchId);
+    // if (response?.data) {
+    //   setBets(response.data);
+    // }
     // setLoading(false);
   };
+
   useEffect(() => {
     const getActiveFancyOdds = async () => {
       if (matchId) {
