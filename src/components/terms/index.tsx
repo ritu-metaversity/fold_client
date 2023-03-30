@@ -27,7 +27,7 @@ const IndexForTerms = () => {
 const ThrowToLogin = () => {
   const nav = useNavigate();
   useEffect(() => {
-    nav("/");
+    // nav("/");
   }, []);
 
   return <></>;
