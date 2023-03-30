@@ -25,7 +25,7 @@ import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 import IndexForTerms from "./components/terms";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 interface ModalState {
   login?: boolean;
@@ -72,7 +72,6 @@ interface AppDataInterface {
 
 export let setErrorRef: any;
 export let errorRef: any;
-export let logoutRef: () => Promise<void>;
 
 export const UserContext = createContext<UserContextType>({
   isSignedIn: null,
@@ -139,18 +138,6 @@ function App() {
       setAppData(response.data);
     }
   };
-  const nav = useNavigate();
-  const logout = useCallback(async () => {
-    const { response } = await authServices.logout();
-    // if (response) {
-    nav("/");
-    setUser(null);
-    setIsSignedIn(false);
-    // }
-    localStorage.clear();
-  }, []);
-
-  logoutRef = logout;
 
   const validateJwt = useCallback(async () => {
     const { response } = await utilServices.validateToken();

@@ -75,7 +75,7 @@ const Bookmaker = ({
         return;
       }
     }
-    if (!odds) return;
+    if (!Boolean(Number(odds))) return;
     setBetId({
       isFancy: false,
       isBack: true,
@@ -98,8 +98,7 @@ const Bookmaker = ({
         return;
       }
     }
-    if (!odds) return;
-
+    if (!Boolean(Number(odds))) return;
     setBetId({
       isFancy: false,
       isBack: false,

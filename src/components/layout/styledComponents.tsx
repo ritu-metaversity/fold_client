@@ -86,7 +86,7 @@ export const IconSmall = styled.img`
   aspect-ratio: 1;
   cursor: pointer;
   margin-left: -10px;
-  margin-bottom: -10px;
+  /* margin-bottom: -10px; */
   @media (min-width: 768px) {
     width: 120px;
     height: 50px;
