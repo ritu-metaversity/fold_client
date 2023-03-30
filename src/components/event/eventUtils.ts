@@ -12,7 +12,7 @@ export const transformMatchOdds = (odds: any) => {
   }
 
   return odds.map((newOdds: any) => {
-    newOdds.runners = newOdds.runners.map((item: any) => {
+    newOdds.runners = newOdds.runners?.map((item: any) => {
       item.ex.availableToBack = [
         ...item.ex.availableToBack,
         { price: "", size: "" },

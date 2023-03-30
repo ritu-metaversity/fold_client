@@ -42,6 +42,8 @@ import {
 import { createProfits, transformMatchOdds } from "./eventUtils";
 import moment from "moment";
 import Marquee from "react-fast-marquee";
+import Socket from "./socket";
+import { socket } from "../../utils/socket/socket";
 
 export const dharmParivartan = (str: string | number) => {
   if (["string", "number"].includes(typeof str)) {
@@ -83,7 +85,6 @@ const Event = () => {
     Bookmaker: [],
     Fancy: [],
   });
-  const nav = useNavigate();
 
   const { lastMessage } = useWebSocket(
     `ws://3.7.84.132:8082/chat/${matchId}/${localStorage.getItem("token")}`
@@ -94,6 +95,69 @@ const Event = () => {
     if (lastMessage?.data && JSON.parse(lastMessage?.data)?.data)
       setBets(JSON.parse(lastMessage?.data).data);
   }, [lastMessage]);
+
+  //socket
+  useEffect(() => {
+    console.log("asdfasdf");
+    // no-op if the socket is already connected
+    socket.connect();
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  const oddFromSocket = (response: any) => {
+    console.log(response, "socket");
+    Object.keys(response).forEach((element) => {
+      if (
+        !["Fancy2", "Fancy3", "Odds", "Bookmaker", "OddEven"].includes(element)
+      )
+        response[element] = [];
+      else {
+        response[element] = response[element].map(
+          (single: any, index: number) => ({
+            ...(fancyOddsSlower[element]
+              ? fancyOddsSlower[element][index] || {}
+              : {}),
+            ...single,
+          })
+        );
+      }
+    });
+    setFancyOdds((fancyOdds: any) => {
+      const Odds = transformMatchOdds(response.Odds);
+      if (fancyOdds) {
+        const newFancy = { ...fancyOdds };
+        setPrevFancyOdds(newFancy);
+      } else {
+        setPrevFancyOdds({ ...response, Odds });
+      }
+      return { ...response, Odds };
+    });
+  };
+  const eventId = searchParams.get("match-id");
+
+  useEffect(() => {
+    console.log("something else is wrong");
+  }, [prevFancyOdds]);
+
+  useEffect(() => {
+    socket.on("OddsUpdated", oddFromSocket);
+    socket.on("JoinedSuccessfully", () => {});
+    let timer = setInterval(
+      () =>
+        socket.emit("JoinRoom", {
+          eventId,
+        }),
+      1000
+    );
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  //socket
 
   const getBets = async () => {
     // if (!matchId || isSignedIn === false) {
@@ -187,10 +251,10 @@ const Event = () => {
   }, [isSignedIn, matchId]);
 
   //odds polling 0.5 sec
-  useEffect(() => {
-    const timer = setInterval(() => getOdds(), 500);
-    return () => clearInterval(timer);
-  }, [matchId, fancyOdds]);
+  // useEffect(() => {
+  //   const timer = setInterval(() => getOdds(), 500);
+  //   return () => clearInterval(timer);
+  // }, [matchId, fancyOdds]);
 
   //pnl polling 5 sec
   useEffect(() => {
