@@ -352,9 +352,9 @@ const Event = () => {
                     fontWeight={700}
                     display={{ lg: "none" }}
                   >
-                    Max: {`${dharmParivartan(singleOdd.maxBet)}  `}
-                    Min:{`${dharmParivartan(singleOdd.minBet)}  `}
-                    Bet Delay: {singleOdd.betDelay}
+                    Max: {dharmParivartan(singleOdd.maxBet)}
+                    {`  Min`}:{dharmParivartan(singleOdd.minBet)}
+                    {`  Bet Delay`}: {singleOdd.betDelay}
                   </Typography>
                 </Box>
               }
@@ -412,9 +412,9 @@ const Event = () => {
                   display={{ lg: "none" }}
                   fontWeight={700}
                 >
-                  Max: {`${dharmParivartan(BookmakerOdds[0].maxBet)}  `}
-                  Min: {`${dharmParivartan(BookmakerOdds[0].minBet)}  `}
-                  Bet Delay: {BookmakerOdds[0].betDelay}
+                  Max: {dharmParivartan(BookmakerOdds[0].maxBet)}
+                  {`   Min`}: {dharmParivartan(BookmakerOdds[0].minBet)}
+                  {`   Bet Delay`}: {BookmakerOdds[0].betDelay}
                 </Typography>
               </Box>
             }
