@@ -19,11 +19,10 @@ const Slot = () => {
     });
   }, []);
 
-  const handleClick = (id, name, e) => {
+  const handleClick = (id, name,) => {
     setCasinoListId(id);
     setActiveClass(id);
     setCasinoName(name)
-    e.preventDefault();
   };
 
   useEffect(() => {
@@ -36,7 +35,8 @@ const Slot = () => {
   }, [casinoListId]);
 
   const history = useHistory();
-  const handleData = (id) => {
+  const handleData = (id, e) => {
+    e.preventDefault();
     history.push(`/casino/${id}`);
   };
 
@@ -59,7 +59,7 @@ const Slot = () => {
                           ActiveClass === item.id ? "active2" : ""
                         }`
                       }
-                        onClick={(e) => handleClick(item.id, item.name, item.gameId, e)}>
+                        onClick={() => handleClick(item.id, item.name, item.gameId)}>
                         <a
                           data-toggle="tab"
                           href="#casino"
@@ -89,7 +89,7 @@ const Slot = () => {
                           {casinoData?.length > 0 &&
                             casinoData.map((item) => {
                               return (
-                                <div key={item.gameId} className="coll-6 text-center" onClick={()=>handleData(item.gameId)}>
+                                <div key={item.gameId} className="coll-6 text-center" onClick={(e)=>handleData(item.gameId, e)}>
                                   <div className="casinoicons" >
                                     <a href="/">
                                       <img

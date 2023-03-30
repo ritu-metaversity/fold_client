@@ -13,3 +13,10 @@
     width: 4px;
     font-size: 14px;
 }
+@media screen and (min-width: 800px) and (max-width: 3000px) {
+    .alert-messege{
+        width: 50%;
+        left: 22%;
+    }
+}
+

@@ -35,7 +35,7 @@ const Deposit = () => {
     <>
       <NavBar />
       {/* <Mobilenav /> */}
-      <><div class="card-header wit"><h4 class="mb-0">Deposite</h4></div>
+      <><div className="card-header wit"><h4 className="mb-0">Deposite</h4></div>
       <div className="wrapper main-conatiner deposit">
         <PayManually UpdateDetails={UpdateDetails} />
 

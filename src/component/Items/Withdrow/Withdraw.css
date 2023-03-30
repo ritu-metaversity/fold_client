@@ -58,6 +58,7 @@
     }
     .main-account-containor {
         width: 97%;
+        justify-content: center;
     }
     .withdrow-table {
         width: 98%;

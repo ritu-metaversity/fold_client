@@ -21,22 +21,32 @@ const Withdraw = () => {
   const validateForm =()=>{
     let error = {};
 
+    var letters = /^[A-Za-z]+$/;
+
     if(amount === ""){
       setErrorAlert(true)
       error= "The Amount field is required"
     }
+    
     if(bankName === ""){
       setErrorAlert(true)
       error = "The Bank Name field is required"
+    }else if(!letters.test(bankName)){
+      setErrorAlert(true)
+      error = "Invaild Bank Name"
     }
 
     if(ifsc ===""){
       setErrorAlert(true)
       error = 'The IFSC field is required'
     }
+
     if(accountHolderName === ""){
       setErrorAlert(true)
       error = "The Account Name field is required"
+    }else if(!letters.test(accountHolderName)){
+      setErrorAlert(true)
+      error = "Invaild Name"
     }
     if(accountNumber === ""){
       setErrorAlert(true)
@@ -88,7 +98,7 @@ const Withdraw = () => {
       <NavBar />
       {errorAlert ? <AlertBtn color="danger"  popupClose={popupClose}  val={message}/> : ""}
       <>
-      <div class="card-header wit"><h4 class="mb-0">Withdraw</h4></div>
+      <div className="card-header wit"><h4 className="mb-0">Withdraw</h4></div>
       
       <div className="wrapper withdraw">
       
