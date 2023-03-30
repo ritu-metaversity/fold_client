@@ -24,15 +24,15 @@ const IndexForTerms = () => {
   );
 };
 
-const ThrowToLogin = () => {
+export const ThrowToLogin = () => {
   const nav = useNavigate();
   useEffect(() => {
-    // nav("/");
+    nav("/");
   }, []);
 
   return <></>;
 };
-const NewLayout = () => {
+export const NewLayout = () => {
   const { appData } = useContext(UserContext);
   const { pathname } = useLocation();
   return !["", "/"].includes(pathname) ? (

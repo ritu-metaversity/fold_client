@@ -90,7 +90,9 @@ const Event = () => {
   });
   const nav = useNavigate();
   const { lastMessage } = useWebSocket(
-    `ws://3.7.84.132:8082/chat/${matchId}/${localStorage.getItem("token")}`
+    `${
+      process.env.REACT_APP_ANKIT_SOCKET_BET
+    }/chat/${matchId}/${localStorage.getItem("token")}`
   );
 
   useEffect(() => {
