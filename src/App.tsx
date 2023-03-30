@@ -155,16 +155,11 @@ function App() {
   const validateJwt = useCallback(async () => {
     const { response } = await utilServices.validateToken();
     const user = localStorage.getItem("user");
-    if (response?.status && user) {
+    if (response?.status && user && !isSignedIn) {
       setUser(JSON.parse(user));
       setIsSignedIn(true);
-    } else {
-      // localStorage.clear();
-      logout();
-      setUser(null);
-      setIsSignedIn(false);
     }
-  }, [logout]);
+  }, [isSignedIn]);
 
   useEffect(() => {
     const getNewEventOpen = async () => {
