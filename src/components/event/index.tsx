@@ -90,7 +90,9 @@ const Event = () => {
   });
   const nav = useNavigate();
   const { lastMessage } = useWebSocket(
-    `ws://3.7.84.132:8082/chat/${matchId}/${localStorage.getItem("token")}`
+    `${
+      process.env.REACT_APP_ANKIT_SOCKET_BET
+    }/chat/${matchId}/${localStorage.getItem("token")}`
   );
 
   useEffect(() => {
@@ -352,9 +354,9 @@ const Event = () => {
                     fontWeight={700}
                     display={{ lg: "none" }}
                   >
-                    Max: {`${dharmParivartan(singleOdd.maxBet)}  `}
-                    Min:{`${dharmParivartan(singleOdd.minBet)}  `}
-                    Bet Delay: {singleOdd.betDelay}
+                    Max: {dharmParivartan(singleOdd.maxBet)}
+                    {`  Min`}:{dharmParivartan(singleOdd.minBet)}
+                    {`  Bet Delay`}: {singleOdd.betDelay}
                   </Typography>
                 </Box>
               }
@@ -412,9 +414,9 @@ const Event = () => {
                   display={{ lg: "none" }}
                   fontWeight={700}
                 >
-                  Max: {`${dharmParivartan(BookmakerOdds[0].maxBet)}  `}
-                  Min: {`${dharmParivartan(BookmakerOdds[0].minBet)}  `}
-                  Bet Delay: {BookmakerOdds[0].betDelay}
+                  Max: {dharmParivartan(BookmakerOdds[0].maxBet)}
+                  {`   Min`}: {dharmParivartan(BookmakerOdds[0].minBet)}
+                  {`   Bet Delay`}: {BookmakerOdds[0].betDelay}
                 </Typography>
               </Box>
             }

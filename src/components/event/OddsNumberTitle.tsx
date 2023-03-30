@@ -56,9 +56,9 @@ export function OddsNumberTitle({ singleOdd }: Props) {
             color="text.secondary"
             fontWeight={700}
           >
-            Max: {`${dharmParivartan(maxBet)}  `}
-            Min:{`${dharmParivartan(minBet)}  `}
-            Bet Delay: {betDelay}
+            Max: {dharmParivartan(maxBet)}
+            {`   Min`}:{dharmParivartan(minBet)}
+            {`   Bet Delay`}: {betDelay}
           </Typography>
         </Grid>
         <Grid {...gridProps2}>Back</Grid>

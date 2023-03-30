@@ -24,7 +24,6 @@ import CustomizedDialogPassword from "./components/layout/user/ResetPasswordDail
 import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
-import IndexForTerms from "./components/terms";
 import { useLocation } from "react-router-dom";
 
 interface ModalState {
@@ -183,11 +182,7 @@ function App() {
     const user = localStorage.getItem("user");
     let timer: ReturnType<typeof setInterval>;
     if (user) {
-      if (
-        ["sign-in", "sign-up", "responsible-gaming"].every(
-          (i) => !pathname.includes(i)
-        )
-      ) {
+      if (["sign-in", "sign-up"].every((i) => !pathname.includes(i))) {
         validateJwt();
         timer = setInterval(() => validateJwt(), 1000);
       }
@@ -264,7 +259,6 @@ function App() {
               <CustomizedDialogPassword />
             </Box>
             <Pages />
-            <IndexForTerms />
           </UserContext.Provider>
         </div>
         <SnackbarUtilsConfigurator />

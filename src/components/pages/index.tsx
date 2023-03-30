@@ -4,7 +4,14 @@ import { Route, Routes } from "react-router-dom";
 import CasinoGame from "../casino/game/CasinoGame";
 import Layout from "../layout";
 import Loading from "../layout/loading";
+import { NewLayout, ThrowToLogin } from "../terms";
+import Aboutus from "../terms/aboutus";
+import ResponsibleGaming from "../terms/responsibleGaming";
+import Terms from "../terms/terms";
 import Withdraw from "../Withdraw/Withdraw";
+// import Aboutus from "./aboutus";
+// import ResponsibleGaming from "./responsibleGaming";
+// import Terms from "./terms";
 
 const Account = React.lazy(() => import("../accountSummary"));
 const Activity = React.lazy(() => import("../activityLog"));
@@ -40,6 +47,12 @@ const Pages = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/deposit" element={<Deposit />} />
             <Route path="/withdraw-request" element={<Withdraw />} />
+          </Route>
+          <Route path="" element={<NewLayout />}>
+            <Route path="terms-and-conditions" element={<Terms />} />
+            <Route path="responsible-gaming" element={<ResponsibleGaming />} />
+            <Route path="about-us" element={<Aboutus />} />
+            <Route path="*" element={<ThrowToLogin />} />
           </Route>
         </Routes>
       </Suspense>
