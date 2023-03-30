@@ -1,5 +1,11 @@
-import React, { useContext } from "react";
-import { Outlet, Route, Routes, useLocation } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import {
+  Outlet,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { UserContext } from "../../App";
 import Aboutus from "./aboutus";
 import ResponsibleGaming from "./responsibleGaming";
@@ -12,11 +18,20 @@ const IndexForTerms = () => {
         <Route path="terms-and-conditions" element={<Terms />} />
         <Route path="about-us" element={<Aboutus />} />
         <Route path="responsible-gaming" element={<ResponsibleGaming />} />
+        <Route path="*" element={<ThrowToLogin />} />
       </Route>
     </Routes>
   );
 };
 
+const ThrowToLogin = () => {
+  const nav = useNavigate();
+  useEffect(() => {
+    nav("/");
+  }, []);
+
+  return <></>;
+};
 const NewLayout = () => {
   const { appData } = useContext(UserContext);
   const { pathname } = useLocation();
