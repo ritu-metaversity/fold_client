@@ -44,7 +44,7 @@ import moment from "moment";
 import Marquee from "react-fast-marquee";
 import { socket } from "../../utils/socket/socket";
 
-const anish_socket_actve = true;
+const anish_socket_actve = false;
 const ankit_socket_actve = true;
 
 export const dharmParivartan = (str: string | number) => {
@@ -138,10 +138,16 @@ const Event = () => {
       return { ...response, Odds };
     });
   };
+
+  const oddFromSocketSlower = (response: any) => {
+    if (response) {
+      setFancyOddsSlower(response);
+    }
+  };
   const eventId = searchParams.get("match-id");
 
   useEffect(() => {
-    socket.on("OddsUpdated", oddFromSocket);
+    socket.on("OddsUpdated", oddFromSocketSlower);
     socket.on("JoinedSuccessfully", () => {
       setOddSocketConnected(true);
     });
@@ -162,8 +168,8 @@ const Event = () => {
   }, [oddSocketConnected]);
 
   useEffect(() => {
-    oddSocketConnected &&  setOddSocketConnected(false)
-},[matchId])
+    oddSocketConnected && setOddSocketConnected(false);
+  }, [matchId]);
   //socket
 
   const getBets = async () => {
@@ -181,20 +187,20 @@ const Event = () => {
     // setLoading(false);
   };
 
-  useEffect(() => {
-    const getActiveFancyOdds = async () => {
-      if (anish_socket_actve) return;
-      if (matchId) {
-        const { response } = await eventServices.newFancySlower(matchId || "");
-        if (response) {
-          setFancyOddsSlower(response);
-        }
-      }
-    };
-    getActiveFancyOdds();
-    const timer = setInterval(() => getActiveFancyOdds(), 10000);
-    return () => clearInterval(timer);
-  }, [matchId]);
+  // useEffect(() => {
+  //   const getActiveFancyOdds = async () => {
+  //     if (anish_socket_actve) return;
+  //     if (matchId) {
+  //       const { response } = await eventServices.newFancySlower(matchId || "");
+  //       if (response) {
+  //         setFancyOddsSlower(response);
+  //       }
+  //     }
+  //   };
+  //   getActiveFancyOdds();
+  //   const timer = setInterval(() => getActiveFancyOdds(), 10000);
+  //   return () => clearInterval(timer);
+  // }, [matchId]);
 
   const getOdds = async () => {
     if (anish_socket_actve) return;
@@ -211,10 +217,18 @@ const Event = () => {
           response[element] = [];
         else {
           response[element] = response[element].map(
-            (single: FancyOddsInterface, index: number) => ({
+            (
+              single: FancyOddsInterface & { marketId: string },
+              index: number
+            ) => ({
               ...(fancyOddsSlower[element]
                 ? fancyOddsSlower[element].find(
-                    (odd: FancyOddsInterface) => odd.sid === single.sid
+                    (odd: FancyOddsInterface & { marketId: string }) =>
+                      odd.sid
+                        ? odd.sid === single.sid
+                        : odd.marketId
+                        ? odd.marketId === single.marketId
+                        : false
                   ) || {}
                 : {}),
               ...single,
