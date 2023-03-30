@@ -2,6 +2,9 @@
 import { OddsNumberTitle } from "./OddsNumberTitle";
 import { OddsNumberTitleTwo } from "./OddsNumberTitleTwo";
 import Odds from "./odds";
+
+import useWebSocket from "react-use-websocket";
+
 import { Box } from "@mui/system";
 import React, {
   useCallback,
@@ -39,6 +42,10 @@ import {
 import { createProfits, transformMatchOdds } from "./eventUtils";
 import moment from "moment";
 import Marquee from "react-fast-marquee";
+import { socket } from "../../utils/socket/socket";
+
+const anish_socket_actve = false;
+const ankit_socket_actve = true;
 
 export const dharmParivartan = (str: string | number) => {
   if (["string", "number"].includes(typeof str)) {
@@ -75,14 +82,99 @@ const Event = () => {
   const [fancyPnl, setFancyPnl] = useState<FancyPnl[] | null>(null);
   const [prevFancyOdds, setPrevFancyOdds] = useState<any>();
   const [selectedPnlMarketId, setSelectedPnlMarketId] = useState("");
+  const [oddSocketConnected, setOddSocketConnected] = useState(false);
   const [profits, setProfits] = useState<ProfitObjectInterface>({
     Odds: {},
     Bookmaker: [],
     Fancy: [],
   });
   const nav = useNavigate();
+  const { lastMessage } = useWebSocket(
+    `ws://3.7.84.132:8082/chat/${matchId}/${localStorage.getItem("token")}`
+  );
+
+  useEffect(() => {
+    console.log(lastMessage, "ankit2");
+    if (lastMessage?.data && JSON.parse(lastMessage?.data)?.data)
+      setBets(JSON.parse(lastMessage?.data).data);
+  }, [lastMessage]);
+
+  //socket
+  useEffect(() => {
+    // no-op if the socket is already connected
+    socket.connect();
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  const oddFromSocket = (response: any) => {
+    console.log(response, "socket");
+    Object.keys(response).forEach((element) => {
+      if (
+        !["Fancy2", "Fancy3", "Odds", "Bookmaker", "OddEven"].includes(element)
+      )
+        response[element] = [];
+      else {
+        response[element] = response[element].map(
+          (single: any, index: number) => ({
+            ...(fancyOddsSlower[element]
+              ? fancyOddsSlower[element][index] || {}
+              : {}),
+            ...single,
+          })
+        );
+      }
+    });
+    setFancyOdds((fancyOdds: any) => {
+      const Odds = transformMatchOdds(response.Odds);
+      if (fancyOdds) {
+        const newFancy = { ...fancyOdds };
+        setPrevFancyOdds(newFancy);
+      } else {
+        setPrevFancyOdds({ ...response, Odds });
+      }
+      return { ...response, Odds };
+    });
+  };
+
+  const oddFromSocketSlower = (response: any) => {
+    if (response) {
+      setFancyOddsSlower(response);
+    }
+  };
+  const eventId = searchParams.get("match-id");
+
+  useEffect(() => {
+    socket.on("OddsUpdated", oddFromSocketSlower);
+    socket.on("JoinedSuccessfully", () => {
+      setOddSocketConnected(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    let timer = setInterval(
+      () =>
+        !oddSocketConnected &&
+        socket.emit("JoinRoom", {
+          eventId,
+        }),
+      1000
+    );
+    return () => {
+      clearInterval(timer);
+    };
+  }, [oddSocketConnected]);
+
+  useEffect(() => {
+    oddSocketConnected && setOddSocketConnected(false);
+  }, [matchId]);
+  //socket
 
   const getBets = async () => {
+    if (ankit_socket_actve) return;
+
     if (!matchId || isSignedIn === false) {
       nav("/");
       return;
@@ -94,21 +186,24 @@ const Event = () => {
     }
     // setLoading(false);
   };
-  useEffect(() => {
-    const getActiveFancyOdds = async () => {
-      if (matchId) {
-        const { response } = await eventServices.newFancySlower(matchId || "");
-        if (response) {
-          setFancyOddsSlower(response);
-        }
-      }
-    };
-    getActiveFancyOdds();
-    const timer = setInterval(() => getActiveFancyOdds(), 10000);
-    return () => clearInterval(timer);
-  }, [matchId]);
+
+  // useEffect(() => {
+  //   const getActiveFancyOdds = async () => {
+  //     if (anish_socket_actve) return;
+  //     if (matchId) {
+  //       const { response } = await eventServices.newFancySlower(matchId || "");
+  //       if (response) {
+  //         setFancyOddsSlower(response);
+  //       }
+  //     }
+  //   };
+  //   getActiveFancyOdds();
+  //   const timer = setInterval(() => getActiveFancyOdds(), 10000);
+  //   return () => clearInterval(timer);
+  // }, [matchId]);
 
   const getOdds = async () => {
+    if (anish_socket_actve) return;
     if (matchId) {
       const { response } = await eventServices.newFancy(matchId);
 
@@ -122,10 +217,18 @@ const Event = () => {
           response[element] = [];
         else {
           response[element] = response[element].map(
-            (single: FancyOddsInterface, index: number) => ({
+            (
+              single: FancyOddsInterface & { marketId: string },
+              index: number
+            ) => ({
               ...(fancyOddsSlower[element]
                 ? fancyOddsSlower[element].find(
-                    (odd: FancyOddsInterface) => odd.sid === single.sid
+                    (odd: FancyOddsInterface & { marketId: string }) =>
+                      odd.sid
+                        ? odd.sid === single.sid
+                        : odd.marketId
+                        ? odd.marketId === single.marketId
+                        : false
                   ) || {}
                 : {}),
               ...single,
@@ -172,7 +275,7 @@ const Event = () => {
     };
   }, [isSignedIn, matchId]);
 
-  //odds polling 0.5 sec
+  // odds polling 0.5 sec
   useEffect(() => {
     const timer = setInterval(() => getOdds(), 500);
     return () => clearInterval(timer);
