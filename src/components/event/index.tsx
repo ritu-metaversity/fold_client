@@ -122,9 +122,11 @@ const Event = () => {
           response[element] = [];
         else {
           response[element] = response[element].map(
-            (single: any, index: number) => ({
+            (single: FancyOddsInterface, index: number) => ({
               ...(fancyOddsSlower[element]
-                ? fancyOddsSlower[element][index] || {}
+                ? fancyOddsSlower[element].find(
+                    (odd: FancyOddsInterface) => odd.sid === single.sid
+                  ) || {}
                 : {}),
               ...single,
             })
@@ -276,16 +278,73 @@ const Event = () => {
                 ))}
               </Box>
             </CustomizedAccordions>
-            <Marquee speed={50} gradient={false}>
-              <Typography fontSize="0.7rem" color="error.main">
-                {singleOdd.display_message}
-              </Typography>
-            </Marquee>
+            {singleOdd.display_message && (
+              <Marquee speed={50} gradient={false}>
+                <Typography fontSize="0.7rem" color="error.main">
+                  {singleOdd.display_message}
+                </Typography>
+              </Marquee>
+            )}
           </>
         );
       } else {
         return "";
       }
+    },
+    [prevFancyOdds, profits]
+  );
+
+  const bookmakerMapCallback = useCallback(
+    (BookmakerOdds: FancyOddsInterface[], type: "toss" | undefined) => {
+      return (
+        <>
+          <CustomizedAccordions
+            title={
+              <Box flex={1} display="flex" justifyContent={"space-between"}>
+                <Typography fontSize="0.85rem" fontWeight={500}>
+                  {type ? "Toss" : "Bookmaker"}
+                </Typography>
+                <Typography
+                  fontSize="0.85rem"
+                  display={{ lg: "none" }}
+                  fontWeight={700}
+                >
+                  Max: {`${dharmParivartan(BookmakerOdds[0].maxBet)}  `}
+                  Min: {`${dharmParivartan(BookmakerOdds[0].minBet)}  `}
+                  Bet Delay: {BookmakerOdds[0].betDelay}
+                </Typography>
+              </Box>
+            }
+          >
+            <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
+              <OddsNumberTitle singleOdd={BookmakerOdds[0]} />
+              {BookmakerOdds?.map((odds: FancyOddsInterface, index) => (
+                <Bookmaker
+                  suspended={odds?.gstatus === "SUSPENDED"}
+                  prevValues={
+                    prevFancyOdds["Bookmaker"].filter(
+                      (odds: any) => odds.t === BookmakerOdds[0].t
+                    )[index]
+                  }
+                  values={odds}
+                  profits={profits.Bookmaker?.find(
+                    (profit) => profit?.sid === odds.sid
+                  )}
+                  marketName={"Bookmaker"}
+                  setBetId={setBetDetails}
+                />
+              ))}
+            </Box>
+          </CustomizedAccordions>
+          {BookmakerOdds[0]?.display_message && (
+            <Marquee speed={50} gradient={false}>
+              <Typography fontSize="0.7rem" color="error.main">
+                {BookmakerOdds[0]?.display_message}
+              </Typography>
+            </Marquee>
+          )}
+        </>
+      );
     },
     [prevFancyOdds, profits]
   );
@@ -395,58 +454,13 @@ const Event = () => {
 
         {fancyOdds["Bookmaker"].find(
           (i: FancyOddsInterface) => i.t !== "TOSS"
-        ) && (
-          <>
-            <CustomizedAccordions
-              title={
-                <Box flex={1} display="flex" justifyContent={"space-between"}>
-                  <Typography fontSize="0.85rem" fontWeight={500}>
-                    Bookmaker
-                  </Typography>
-                  <Typography
-                    fontSize="0.85rem"
-                    display={{ lg: "none" }}
-                    fontWeight={700}
-                  >
-                    Max:{" "}
-                    {`${dharmParivartan(fancyOdds["Bookmaker"][0]?.maxBet)} `}
-                    Min:{" "}
-                    {`${dharmParivartan(fancyOdds["Bookmaker"][0].minBet)}  `}
-                    Bet Delay: {fancyOdds["Bookmaker"][0]?.betDelay}
-                  </Typography>
-                </Box>
-              }
-            >
-              <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
-                <OddsNumberTitle singleOdd={fancyOdds["Bookmaker"][0]} />
-                {fancyOdds["Bookmaker"]?.map(
-                  (odds: FancyOddsInterface, index: string) =>
-                    odds.t !== "TOSS" && (
-                      <Bookmaker
-                        suspended={odds?.gstatus === "SUSPENDED"}
-                        prevValues={prevFancyOdds["Bookmaker"][index]}
-                        values={odds}
-                        profits={profits.Bookmaker?.find(
-                          (profit) => profit?.sid == odds.sid
-                        )}
-                        marketName={"Bookmaker"}
-                        setBetId={setBetDetails}
-                      />
-                    )
-                )}
-              </Box>
-            </CustomizedAccordions>
-            <Marquee speed={50} gradient={false}>
-              <Typography fontSize="0.7rem" color="error.main">
-                {
-                  fancyOdds["Bookmaker"]?.find(
-                    (i: FancyOddsInterface) => i.t !== "TOSS"
-                  )?.display_message
-                }
-              </Typography>
-            </Marquee>
-          </>
-        )}
+        ) &&
+          bookmakerMapCallback(
+            fancyOdds.Bookmaker.filter(
+              (odd: FancyOddsInterface) => odd.t !== "TOSS"
+            ),
+            undefined
+          )}
 
         {fancyOdds.Odds?.filter((i: any) => i.Name !== "Match Odds").map(
           matchOddMapCallback
@@ -455,57 +469,12 @@ const Event = () => {
         {fancyOdds["Bookmaker"] &&
           fancyOdds.Bookmaker.find(
             (odd: FancyOddsInterface) => odd.t === "TOSS"
-          ) && (
-            <>
-              <CustomizedAccordions
-                title={
-                  <Box flex={1} display="flex" justifyContent={"space-between"}>
-                    <Typography fontSize="0.85rem" fontWeight={500}>
-                      Toss
-                    </Typography>
-                    <Typography
-                      fontSize="0.85rem"
-                      display={{ lg: "none" }}
-                      fontWeight={700}
-                    >
-                      Max:{" "}
-                      {`${dharmParivartan(fancyOdds["Bookmaker"][0].maxBet)}  `}
-                      Min:{" "}
-                      {`${dharmParivartan(fancyOdds["Bookmaker"][0].minBet)}  `}
-                      Bet Delay: {fancyOdds["Bookmaker"][0].betDelay}
-                    </Typography>
-                  </Box>
-                }
-              >
-                <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
-                  <OddsNumberTitle singleOdd={fancyOdds["Bookmaker"][0]} />
-                  {fancyOdds["Bookmaker"]?.map(
-                    (odds: FancyOddsInterface, index: string) =>
-                      odds.t === "TOSS" && (
-                        <Bookmaker
-                          suspended={odds?.gstatus === "SUSPENDED"}
-                          prevValues={prevFancyOdds["Bookmaker"][index]}
-                          values={odds}
-                          profits={profits.Bookmaker?.find(
-                            (profit) => profit?.sid === odds.sid
-                          )}
-                          marketName={"Bookmaker"}
-                          setBetId={setBetDetails}
-                        />
-                      )
-                  )}
-                </Box>
-              </CustomizedAccordions>
-              <Marquee speed={50} gradient={false}>
-                <Typography fontSize="0.7rem" color="error.main">
-                  {
-                    fancyOdds["Bookmaker"]?.find(
-                      (i: FancyOddsInterface) => i.t === "TOSS"
-                    )?.display_message
-                  }
-                </Typography>
-              </Marquee>
-            </>
+          ) &&
+          bookmakerMapCallback(
+            fancyOdds.Bookmaker.filter(
+              (odd: FancyOddsInterface) => odd.t === "TOSS"
+            ),
+            "toss"
           )}
         {/* accordians for fancy with values */}
         {Object.keys(fancyOdds).map((fancyMarket: any) => {
