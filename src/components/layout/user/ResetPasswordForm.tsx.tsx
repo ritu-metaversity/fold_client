@@ -39,69 +39,66 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
     // }
   };
 
-  const { values, resetForm, handleChange, handleSubmit, errors, isValid } =
-    useFormik({
-      initialValues: {
-        newPassword: "",
-        confirmPassword: "",
-        currentPassword: "",
-      },
-      validateOnChange: false,
-      validate: async (values) => {
-        const newError = {
-          newPassword:
-            values?.newPassword === ""
-              ? "Please enter new Password"
-              : undefined,
-          confirmPassword:
-            values?.confirmPassword === ""
-              ? "Please enter confirm Password"
-              : values?.confirmPassword !== values?.newPassword
-              ? "New password and confirm Password does not match"
-              : undefined,
-          currentPassword:
-            values?.currentPassword === ""
-              ? "Please enter Current Password"
-              : undefined,
+  const { values, resetForm, handleChange, handleSubmit, errors } = useFormik({
+    initialValues: {
+      newPassword: "",
+      confirmPassword: "",
+      currentPassword: "",
+    },
+    validateOnChange: false,
+    validate: async (values) => {
+      const newError = {
+        newPassword:
+          values?.newPassword === "" ? "Please enter new Password" : undefined,
+        confirmPassword:
+          values?.confirmPassword === ""
+            ? "Please enter confirm Password"
+            : values?.confirmPassword !== values?.newPassword
+            ? "New password and confirm Password does not match"
+            : undefined,
+        currentPassword:
+          values?.currentPassword === ""
+            ? "Please enter Current Password"
+            : undefined,
+      };
+      return Object.fromEntries(
+        Object.entries(newError).filter(([_, v]) => v != null)
+      );
+    },
+    onSubmit: async (values) => {
+      if (values.newPassword !== values.confirmPassword) {
+        snackBarUtil.error("Password does not match.");
+        return;
+      }
+      setLoading(true);
+      if (firstLogin) {
+        const newValues = {
+          ...values,
+          oldPassword: values.currentPassword,
+          userid: user.userId,
+          token: user.token,
         };
-        return Object.fromEntries(
-          Object.entries(newError).filter(([_, v]) => v != null)
+        const { response } = await userServices.changePasswordFirstLogin(
+          newValues
         );
-      },
-      onSubmit: async (values) => {
-        if (values.newPassword !== values.confirmPassword) {
-          snackBarUtil.error("Password does not match.");
-          return;
-        }
-        setLoading(true);
-        if (firstLogin) {
-          const newValues = {
-            ...values,
-            oldPassword: values.currentPassword,
-            userid: user.userId,
-            token: user.token,
-          };
-          const { response } = await userServices.changePasswordFirstLogin(
-            newValues
-          );
-          if (response) {
-            handleClose();
-            localStorage.clear();
-            snackBarUtil.success("Please login again !! ");
-            if (setModal) {
-              setModal({ login: true });
-            }
-          }
-        } else {
-          const { response } = await userServices.changePassword(values);
-          if (response) {
-            handleClose();
-            await logout();
+        if (response) {
+          handleClose();
+          localStorage.clear();
+          snackBarUtil.success("Please login again !! ");
+          if (setModal) {
+            setModal({ login: true });
           }
         }
-        setLoading(false);
-      },
-    });
+      } else {
+        const { response } = await userServices.changePassword(values);
+        if (response) {
+          handleClose();
+          await logout();
+        }
+      }
+      setLoading(false);
+    },
+  });
   return (
     <form onSubmit={handleSubmit}>
       {loading && (
