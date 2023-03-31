@@ -351,7 +351,7 @@ const Event = () => {
     (singleOdd: any, index1: any) => {
       if (
         Boolean(prevFancyOdds?.Odds[index1]) &&
-        singleOdd.runners?.length < 0
+        singleOdd.runners?.length > 0
       ) {
         return (
           <>
