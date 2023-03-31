@@ -14,7 +14,7 @@ import React, {
   useState,
 } from "react";
 import CustomizedAccordions from "./CustomizedAccordian";
-import { Grid, Typography, useMediaQuery } from "@mui/material";
+import { Grid, Switch, Typography, useMediaQuery } from "@mui/material";
 import OddsOnlyTwo from "./oddsOnlyTwo";
 import HomeLayout from "../layout/homeLayout";
 import { BetSlip } from "./BetSlip";
@@ -75,6 +75,7 @@ const Event = () => {
 
   const matches = useMediaQuery("(min-width : 1280px)");
   const matchId = searchParams.get("match-id");
+  const sportId = searchParams.get("sport-id");
   // const [markets, setMarkets] = useState<MarketInterface[]>([]);
   const [fancyOdds, setFancyOdds] = useState<any>();
   const [fancyOddsSlower, setFancyOddsSlower] = useState<any>({});
@@ -83,12 +84,22 @@ const Event = () => {
   const [prevFancyOdds, setPrevFancyOdds] = useState<any>();
   const [selectedPnlMarketId, setSelectedPnlMarketId] = useState("");
   const [oddSocketConnected, setOddSocketConnected] = useState(false);
+
+  const [showScore, setShowScore] = useState(true);
+
   const [profits, setProfits] = useState<ProfitObjectInterface>({
     Odds: {},
     Bookmaker: [],
     Fancy: [],
   });
   const nav = useNavigate();
+
+  const handleShowScoreChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setShowScore(event.target.checked);
+  };
+
   const { lastMessage } = useWebSocket(
     `${
       process.env.REACT_APP_ANKIT_SOCKET_BET
@@ -529,13 +540,30 @@ const Event = () => {
             {fancyOdds?.Odds && fancyOdds?.Odds[0]?.eventTime}
           </Typography>
         </GameHeader>
-        <Typography fontWeight={500} width="100%" fontSize={{ xs: "0.6rem" }}>
+        <Typography
+          fontWeight={500}
+          width="100%"
+          fontSize={{ xs: "0.6rem", position: "relative" }}
+        >
           LastMatched{" "}
           {fancyOdds?.Odds &&
             moment(fancyOdds?.Odds[0]?.lastMatchTime).format(
               "DD/MM/YYYY hh:mm:ss"
             )}
+          <Switch
+            onChange={handleShowScoreChange}
+            checked={showScore}
+            sx={{ position: "absolute", right: 0, top: -10 }}
+          />
         </Typography>
+        {showScore && (
+          <iframe
+            width="100%"
+            height="200px"
+            title="score-iframe"
+            src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
+          />
+        )}
         {bets && <MybetMobile bets={bets}></MybetMobile>}
         <CustomizedDialog2
           title="Bet Slip"

@@ -24,6 +24,7 @@ export interface MatchInterface {
 
 interface Props {
   matches: MatchInterface;
+  sportId: string;
 }
 
 const buttonGridProps = {
@@ -79,7 +80,7 @@ const ButtonPropps = {
   },
 };
 
-const Match = ({ matches }: Props) => {
+const Match = ({ matches, sportId }: Props) => {
   const navigate = useNavigate();
   const { isSignedIn, setModal } = useContext(UserContext);
   const openLoginModal = () => {
@@ -92,7 +93,9 @@ const Match = ({ matches }: Props) => {
       container
       onClick={() =>
         isSignedIn
-          ? navigate(`/sports/details/?match-id=${matches.matchId}`)
+          ? navigate(
+              `/sports/details/?match-id=${matches.matchId}&sport-id=${sportId}`
+            )
           : openLoginModal()
       }
       bgcolor={{ xs: colorHex.bg2, lg: colorHex.bg1 }}

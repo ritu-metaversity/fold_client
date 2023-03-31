@@ -159,7 +159,11 @@ const Sports = () => {
           </Box>
         ) : activeEventList.length > 0 ? (
           activeEventList.map((item) => (
-            <Match key={"sportlist" + item?.matchId} matches={item} />
+            <Match
+              key={"sportlist" + item?.matchId}
+              sportId={activeSportList[value]?.sportId?.toString()}
+              matches={item}
+            />
           ))
         ) : (
           <BoxWithTitleBox>No Data Found</BoxWithTitleBox>

@@ -18,6 +18,7 @@ export interface ApiServiceInterface {
   noAuth?: boolean;
   betfair?: boolean;
   headers?: AxiosRequestHeaders;
+  customToken?: string;
 }
 
 interface Error {
@@ -48,6 +49,7 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
   pathVars = {},
   noAuth = false,
   betfair = false,
+  customToken,
 }) => {
   const { METHOD, URL } = resource;
   const token = localStorage.getItem("token");
@@ -75,7 +77,7 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
       headers: {
         ...headers,
         ...(Boolean(token && !noAuth)
-          ? { Authorization: `Bearer ${token}` }
+          ? { Authorization: `Bearer ${customToken || token}` }
           : {}),
       },
     };

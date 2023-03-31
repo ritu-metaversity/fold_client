@@ -55,7 +55,9 @@ export const Drawers = ({
             <ListItemButton
               onClick={() =>
                 isSignedIn
-                  ? nav(`/sports/details/?match-id=${match.matchId}`)
+                  ? nav(
+                      `/sports/details/?match-id=${match.matchId}&sport-id=${sport.sportId}`
+                    )
                   : openLoginModal()
               }
               sx={{
