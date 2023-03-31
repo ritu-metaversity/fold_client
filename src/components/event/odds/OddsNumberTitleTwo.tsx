@@ -1,7 +1,6 @@
-import { Grid } from '@mui/material';
-import React from 'react'
-import { colorHex } from "../../utils/constants";
-
+import { Grid } from "@mui/material";
+import React from "react";
+import { colorHex } from "../../../utils/constants";
 
 const gridProps = {
   item: true,
@@ -65,4 +64,3 @@ export function OddsNumberTitleTwo({ inverted }: { inverted?: Boolean }) {
     </Grid>
   );
 }
-  

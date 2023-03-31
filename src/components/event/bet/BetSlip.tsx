@@ -19,17 +19,17 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { UserContext } from "../../App";
-import { colorHex } from "../../utils/constants";
+import { UserContext } from "../../../App";
+import { colorHex } from "../../../utils/constants";
 import {
   AmountInput,
   AmountInputBGBack,
   AmountInputBGLay,
   TitleStyled,
-} from "./styledComponents";
-import { eventServices } from "../../utils/api/event/services";
-import Loading from "../layout/loading";
-import { BetDetailsInterface } from "./types";
+} from "../styledComponents";
+import { eventServices } from "../../../utils/api/event/services";
+import Loading from "../../layout/loading";
+import { BetDetailsInterface } from "../types";
 import moment from "moment";
 
 interface Props {

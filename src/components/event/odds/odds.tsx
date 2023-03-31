@@ -1,21 +1,18 @@
 import { Grid, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import {
-  BetDetailsInterface,
-  FancyOddsInterface,
-  ProfitInterface,
-} from "./types";
-import { UserContext } from "../../App";
-import { colorHex } from "../../utils/constants";
-import "./animation.css";
-
+import { BetDetailsInterface, ProfitInterface } from "../types";
+import { UserContext } from "../../../App";
+import { colorHex } from "../../../utils/constants";
+import "../animation.css";
 interface Props {
-  values: FancyOddsInterface;
+  title: any | string;
+  values: any;
   suspended?: boolean;
-  prevValues: FancyOddsInterface;
+  prevValues: any;
+  details: any;
+  profits?: ProfitInterface;
   marketName?: string;
   setBetId: Dispatch<SetStateAction<BetDetailsInterface | null>>;
-  profits?: ProfitInterface;
 }
 
 const gridProps = {
@@ -40,32 +37,26 @@ const gridProps2 = {
   },
 };
 
-const ValuesComponent = ({
-  price,
-  size,
-  suspended,
-}: {
-  price: number;
-  size: number;
-  suspended: boolean;
-}) => (
+const ValuesComponent = ({ price, size }: { price: number; size: number }) => (
   <>
     <Typography fontWeight={700} mb={"-0.3rem"} fontSize="0.96rem">
-      {(!suspended && price) || "__"}
+      {price || "__"}
     </Typography>
     <Typography fontWeight={400} fontSize="0.75rem">
-      {!suspended && price ? size : ""}
+      {price ? size : ""}
     </Typography>
   </>
 );
 
-const Bookmaker = ({
+const Odds = ({
+  details,
+  title,
   setBetId,
   suspended,
+  profits,
   values,
   marketName,
   prevValues,
-  profits,
 }: Props) => {
   const { isSignedIn, setModal } = useContext(UserContext);
   const handleClick = (odds: number) => {
@@ -75,20 +66,21 @@ const Bookmaker = ({
         return;
       }
     }
-    if (!Boolean(Number(odds))) return;
+    if (!(odds > 0)) {
+      return;
+    }
     setBetId({
       isFancy: false,
       isBack: true,
       odds,
       stake: 0,
-      name: values.nation,
+      name: values.name,
       marketName,
-      selectionId: Number(values.sid),
+      selectionId: values.selectionId,
       priceValue: odds,
       placeTime: new Date(),
-      marketId: values.mid,
+      marketId: details.marketId,
       matchId: "",
-      t: values.t,
     });
   };
   const handleClick2 = (odds: number) => {
@@ -98,47 +90,31 @@ const Bookmaker = ({
         return;
       }
     }
-    if (!Boolean(Number(odds))) return;
+    if (!(odds > 0)) {
+      return;
+    }
     setBetId({
       isFancy: false,
       isBack: false,
-      selectionId: values.sid,
+      selectionId: values.selectionId,
       odds,
-      name: values.nation,
+      name: values.name,
       marketName,
       stake: 0,
       priceValue: odds,
       placeTime: new Date(),
-      marketId: values.mid,
+      marketId: details.marketId,
       matchId: "",
-      t: values.t,
     });
   };
 
-  if (!(values && prevValues)) {
+  if (!(values?.ex && prevValues?.ex)) {
     return <></>;
   }
-  const availableToBack = [
-      { price: values.b1, size: values.bs1 },
-      { price: "", size: "" },
-      { price: "", size: "" },
-    ],
-    availableToLay = [
-      { price: values.l1, size: values.ls1 },
-      { price: "", size: "" },
-      { price: "", size: "" },
-    ],
-    prevBack = [
-      { price: prevValues.b1, size: prevValues.bs1 },
-      { price: "", size: "" },
-      { price: "", size: "" },
-    ],
-    prevLay = [
-      { price: prevValues.l1, size: prevValues.ls1 },
-      { price: "", size: "" },
-      { price: "", size: "" },
-    ];
 
+  const { availableToBack, availableToLay } = values?.ex;
+  const { availableToBack: prevBack, availableToLay: prevLay } = prevValues?.ex;
+  // console.log(prevBack, availableToBack, "back");
   return (
     <Grid container>
       <Grid
@@ -146,13 +122,15 @@ const Bookmaker = ({
         textAlign={"start"}
         xs={12}
         lg={6.6}
-        maxWidth={{ lg: "unset" }}
         flex={{ lg: 1 }}
+        maxWidth={{ lg: "unset" }}
         display="flex"
-        justifyContent="space-between"
+        justifyContent={"space-between"}
         alignItems={"center"}
       >
-        <Typography fontSize={"0.85rem"}>{values.nation}</Typography>
+        <Typography color="text.secondary" fontSize={"0.8rem"}>
+          {title}
+        </Typography>
         {profits && (
           <Typography
             color={profits?.value >= 0 ? "green" : "red"}
@@ -195,10 +173,10 @@ const Bookmaker = ({
                   ? "odds-down"
                   : ""
               }
-              onClick={() => handleClick(back.price)}
+              onClick={() => index === 0 && handleClick(back.price)}
               bgcolor={colorHex.backArr[index]}
             >
-              <ValuesComponent suspended={suspended} {...back} />
+              <ValuesComponent {...back} />
             </Grid>
           ))
           .reverse()}
@@ -214,9 +192,9 @@ const Bookmaker = ({
                 : ""
             }
             bgcolor={colorHex.layArr[index]}
-            onClick={() => handleClick2(lay.price)}
+            onClick={() => index === 0 && handleClick2(lay.price)}
           >
-            <ValuesComponent suspended={suspended} {...lay} />
+            <ValuesComponent {...lay} />
           </Grid>
         ))}
       </Grid>
@@ -224,4 +202,4 @@ const Bookmaker = ({
   );
 };
 
-export default Bookmaker;
+export default Odds;

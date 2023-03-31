@@ -1,10 +1,10 @@
-import { ChevronLeft, ChevronRight, } from "@mui/icons-material";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Box, IconButton, Tab, Tabs } from "@mui/material";
 import React, { FC, useMemo, useState } from "react";
-import { colorHex } from "../../utils/constants";
-import CustomizedDialog2 from "./Dailog3withNoPadding";
+import { colorHex } from "../../../utils/constants";
+import CustomizedDialog2 from "../Dailog3withNoPadding";
 import { getMyBets } from "./MyBet";
-import { BetAlert, TitleStyled } from "./styledComponents";
+import { BetAlert, TitleStyled } from "../styledComponents";
 
 interface Props {
   bets: {
@@ -17,9 +17,9 @@ const MybetMobile: FC<Props> = ({ bets }) => {
   const [counter, setCounter] = useState(0);
   const betCount = useMemo(() => {
     let count = 0;
-    Object.keys(bets).forEach(key => count += bets[key].length)
+    Object.keys(bets).forEach((key) => (count += bets[key].length));
     return count;
-  }, [bets])
+  }, [bets]);
   const handleClose = () => {
     setOpen(false);
   };
@@ -50,15 +50,21 @@ const MybetMobile: FC<Props> = ({ bets }) => {
             </IconButton>
             <Tabs
               textColor="inherit"
-              TabIndicatorProps={{sx:{backgroundColor: "white", color: "white"}}}
-              sx={{ flex: 1, mt:-1 }}
+              TabIndicatorProps={{
+                sx: { backgroundColor: "white", color: "white" },
+              }}
+              sx={{ flex: 1, mt: -1 }}
               value={counter}
               onChange={(e, value) => {
                 setCounter(value);
               }}
             >
               {Object.keys(bets).map((item) => (
-                <Tab key={"mybet-tab" + item} sx={{mb:-0.5}} label={`${item} (${bets[item]?.length})`} />
+                <Tab
+                  key={"mybet-tab" + item}
+                  sx={{ mb: -0.5 }}
+                  label={`${item} (${bets[item]?.length})`}
+                />
               ))}
             </Tabs>
             <IconButton sx={{ bgcolor: colorHex.bg2 }} onClick={rightClick}>

@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
-import { colorHex } from "../../utils/constants";
+import { colorHex } from "../../../utils/constants";
 import React from "react";
-import { dharmParivartan } from ".";
+import { dharmParivartan } from "..";
 
 const gridProps = {
   item: true,
