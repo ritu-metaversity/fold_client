@@ -43,6 +43,7 @@ import { createProfits, transformMatchOdds } from "./eventUtils";
 import moment from "moment";
 import Marquee from "react-fast-marquee";
 import { socket } from "../../utils/socket/socket";
+import ScoreboardIcon from "@mui/icons-material/Scoreboard";
 
 const anish_socket_actve = false;
 const ankit_socket_actve = true;
@@ -557,16 +558,22 @@ const Event = () => {
             moment(fancyOdds?.Odds[0]?.lastMatchTime).format(
               "DD/MM/YYYY hh:mm:ss"
             )}
-          <Switch
-            onChange={handleShowScoreChange}
-            checked={showScore}
-            sx={{ position: "absolute", right: 0, top: -10 }}
-          />{" "}
-          <Switch
-            onChange={handleShowLiveChange}
-            checked={showLive}
-            sx={{ position: "absolute", left: 0, top: -10 }}
-          />
+          <Box
+            display="flex"
+            alignItems={"center"}
+            sx={{ position: "absolute", right: 0, top: "-1.2em" }}
+          >
+            <ScoreboardIcon className="icon-medium" />
+            <Switch onChange={handleShowScoreChange} checked={showScore} />{" "}
+          </Box>
+          <Box
+            display="flex"
+            alignItems={"center"}
+            sx={{ position: "absolute", left: 0, top: "-1.2em" }}
+          >
+            <i className="icon-tv d-icon icon-medium"></i>
+            <Switch onChange={handleShowLiveChange} checked={showLive} />
+          </Box>
         </Typography>
         {showScore && (
           <iframe

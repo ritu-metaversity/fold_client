@@ -97,6 +97,9 @@ pointer-events: none;
     aspect-ratio: 16/9;
     /* height: 400px; */
 }
+.icon-medium {
+    font-size: 25px;
+}
 /*@media (max-width: 480px) {
     .live-iframe{
     height: 200px;
