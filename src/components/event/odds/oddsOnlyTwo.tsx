@@ -4,10 +4,10 @@ import {
   BetDetailsInterface,
   FancyOddsInterface,
   ProfitInterface,
-} from "./types";
-import { UserContext } from "../../App";
-import { colorHex } from "../../utils/constants";
-import { dharmParivartan } from ".";
+} from "../types";
+import { UserContext } from "../../../App";
+import { colorHex } from "../../../utils/constants";
+import { dharmParivartan } from "..";
 
 interface Props {
   title: any | string;

@@ -91,3 +91,14 @@
 cursor: not-allowed;
 pointer-events: none;
 }
+
+
+ .live-iframe{
+    aspect-ratio: 16/9;
+    /* height: 400px; */
+}
+/*@media (max-width: 480px) {
+    .live-iframe{
+    height: 200px;
+}
+} */

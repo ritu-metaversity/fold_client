@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { OddsNumberTitle } from "./OddsNumberTitle";
-import { OddsNumberTitleTwo } from "./OddsNumberTitleTwo";
-import Odds from "./odds";
+import { OddsNumberTitle } from "./odds/OddsNumberTitle";
+import { OddsNumberTitleTwo } from "./odds/OddsNumberTitleTwo";
+import Odds from "./odds/odds";
 
 import useWebSocket from "react-use-websocket";
 
@@ -14,21 +14,21 @@ import React, {
   useState,
 } from "react";
 import CustomizedAccordions from "./CustomizedAccordian";
-import { Grid, Typography, useMediaQuery } from "@mui/material";
-import OddsOnlyTwo from "./oddsOnlyTwo";
+import { Grid, Switch, Typography, useMediaQuery } from "@mui/material";
+import OddsOnlyTwo from "./odds/oddsOnlyTwo";
 import HomeLayout from "../layout/homeLayout";
-import { BetSlip } from "./BetSlip";
+import { BetSlip } from "./bet/BetSlip";
 import { colorHex } from "../../utils/constants";
-import MyBet from "./MyBet";
+import MyBet from "./bet/MyBet";
 import { userServices } from "../../utils/api/user/services";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { UserContext } from "../../App";
 import { eventServices } from "../../utils/api/event/services";
 import Loading from "../layout/loading";
-import MybetMobile from "./MybetMobile";
+import MybetMobile from "./bet/MybetMobile";
 import CustomizedDialog2 from "../common/Dailog2";
 import { GameHeader } from "./styledComponents";
-import Bookmaker from "./bookmaker";
+import Bookmaker from "./odds/bookmaker";
 import { sportsTabList } from "../home/sportsTabList";
 import PnlModal from "./pnlModal";
 import {
@@ -75,6 +75,7 @@ const Event = () => {
 
   const matches = useMediaQuery("(min-width : 1280px)");
   const matchId = searchParams.get("match-id");
+  const sportId = searchParams.get("sport-id");
   // const [markets, setMarkets] = useState<MarketInterface[]>([]);
   const [fancyOdds, setFancyOdds] = useState<any>();
   const [fancyOddsSlower, setFancyOddsSlower] = useState<any>({});
@@ -83,12 +84,29 @@ const Event = () => {
   const [prevFancyOdds, setPrevFancyOdds] = useState<any>();
   const [selectedPnlMarketId, setSelectedPnlMarketId] = useState("");
   const [oddSocketConnected, setOddSocketConnected] = useState(false);
+
+  const [showLive, setShowLive] = useState(false);
+  const [showScore, setShowScore] = useState(true);
+
   const [profits, setProfits] = useState<ProfitObjectInterface>({
     Odds: {},
     Bookmaker: [],
     Fancy: [],
   });
   const nav = useNavigate();
+
+  const handleShowScoreChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setShowScore(event.target.checked);
+    if (showLive) setShowLive(false);
+  };
+
+  const handleShowLiveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setShowLive(event.target.checked);
+    if (showScore) setShowScore(false);
+  };
+
   const { lastMessage } = useWebSocket(
     `${
       process.env.REACT_APP_ANKIT_SOCKET_BET
@@ -333,7 +351,7 @@ const Event = () => {
     (singleOdd: any, index1: any) => {
       if (
         Boolean(prevFancyOdds?.Odds[index1]) &&
-        singleOdd.runners?.length > 0
+        singleOdd.runners?.length < 0
       ) {
         return (
           <>
@@ -529,13 +547,44 @@ const Event = () => {
             {fancyOdds?.Odds && fancyOdds?.Odds[0]?.eventTime}
           </Typography>
         </GameHeader>
-        <Typography fontWeight={500} width="100%" fontSize={{ xs: "0.6rem" }}>
+        <Typography
+          fontWeight={500}
+          width="100%"
+          fontSize={{ xs: "0.6rem", position: "relative" }}
+        >
           LastMatched{" "}
           {fancyOdds?.Odds &&
             moment(fancyOdds?.Odds[0]?.lastMatchTime).format(
               "DD/MM/YYYY hh:mm:ss"
             )}
+          <Switch
+            onChange={handleShowScoreChange}
+            checked={showScore}
+            sx={{ position: "absolute", right: 0, top: -10 }}
+          />{" "}
+          <Switch
+            onChange={handleShowLiveChange}
+            checked={showLive}
+            sx={{ position: "absolute", left: 0, top: -10 }}
+          />
         </Typography>
+        {showScore && (
+          <iframe
+            width="100%"
+            height="200px"
+            title="score-iframe"
+            src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
+          />
+        )}
+        {showLive && (
+          <iframe
+            width="100%"
+            className="live-iframe"
+            title="score-iframe"
+            src={`http://13.233.57.150/test.php?ChannelId=1029`}
+          />
+        )}
+
         {bets && <MybetMobile bets={bets}></MybetMobile>}
         <CustomizedDialog2
           title="Bet Slip"

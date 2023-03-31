@@ -1,6 +1,4 @@
-import {
-  ArrowBackIosNewSharp,
-} from "@mui/icons-material";
+import { ArrowBackIosNewSharp } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -8,8 +6,8 @@ import {
   Grid,
 } from "@mui/material";
 import React, { FC, useState } from "react";
-import { colorHex } from "../../utils/constants";
-import { AccordianSummaryTitle, TitleStyled } from "./styledComponents";
+import { colorHex } from "../../../utils/constants";
+import { AccordianSummaryTitle, TitleStyled } from "../styledComponents";
 
 interface Props {
   bets: {
@@ -78,14 +76,12 @@ export const getMyBets = (betList: any[]) =>
       py={1.5}
       my={1}
       fontSize="0.8rem"
-      borderLeft={`5px solid ${
-        bet.back? colorHex.back[1] : colorHex.lay[1]
-      } `}
+      borderLeft={`5px solid ${bet.back ? colorHex.back[1] : colorHex.lay[1]} `}
     >
       <Grid item xs={6} textAlign="left">
         {bet.nation}
       </Grid>
-      <Grid item xs={3} textAlign="center" >
+      <Grid item xs={3} textAlign="center">
         {bet.rate}
       </Grid>
       <Grid item xs={3} textAlign="right">
@@ -93,6 +89,5 @@ export const getMyBets = (betList: any[]) =>
       </Grid>
     </Grid>
   ));
-
 
 export default MyBet;
