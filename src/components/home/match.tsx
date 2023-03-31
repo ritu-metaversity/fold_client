@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 import { colorHex } from "../../utils/constants";
@@ -20,6 +20,7 @@ export interface MatchInterface {
   F: boolean;
   GM: boolean;
   SM: boolean;
+  channelId: string;
 }
 
 interface Props {
@@ -88,6 +89,11 @@ const Match = ({ matches, sportId }: Props) => {
       setModal({ login: true });
     }
   };
+  const isChannelAvailable = useMemo(
+    () =>
+      matches.channelId && matches.channelId.toString() !== "0" ? true : false,
+    [matches.channelId]
+  );
   return (
     <Grid
       container
@@ -164,6 +170,7 @@ const Match = ({ matches, sportId }: Props) => {
           {matches.GM && "GM   "}
           {matches.SM && "SM   "}
           {matches.F && "F   "}
+          {isChannelAvailable && <i className="icon-tv d-icon "></i>}
         </Box>
       </Grid>
       <Grid
@@ -212,4 +219,4 @@ const Match = ({ matches, sportId }: Props) => {
   );
 };
 
-export default Match;
+export default React.memo(Match);

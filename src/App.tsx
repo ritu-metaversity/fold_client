@@ -13,18 +13,20 @@ import "./App.css";
 import { Alert, Box, Snackbar, ThemeProvider } from "@mui/material";
 import { SnackbarUtilsConfigurator } from "./components/layout/snackBarUtil";
 import { SnackbarProvider } from "notistack";
-import Pages from "./components/pages";
 import { userServices } from "./utils/api/user/services";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { sportServices } from "./utils/api/sport/services";
 import { SportInterface } from "./components/layout/Sidebar";
 import "./components/font.css";
 import { authServices } from "./utils/api/auth/services";
-import CustomizedDialogPassword from "./components/layout/user/ResetPasswordDailog";
 import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 import { useLocation } from "react-router-dom";
+
+const Pages = React.lazy(() => import("./components/pages"));
+const CustomizedDialogPassword = React.lazy(() => import("./components/pages"));
+
 
 interface ModalState {
   login?: boolean;

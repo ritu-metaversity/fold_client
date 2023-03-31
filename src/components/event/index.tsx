@@ -43,6 +43,9 @@ import { createProfits, transformMatchOdds } from "./eventUtils";
 import moment from "moment";
 import Marquee from "react-fast-marquee";
 import { socket } from "../../utils/socket/socket";
+import ScoreboardIcon from "@mui/icons-material/Scoreboard";
+import { sportServices } from "../../utils/api/sport/services";
+import LiveScoreTv from "./liveScoreTv";
 
 const anish_socket_actve = false;
 const ankit_socket_actve = true;
@@ -94,18 +97,6 @@ const Event = () => {
     Fancy: [],
   });
   const nav = useNavigate();
-
-  const handleShowScoreChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setShowScore(event.target.checked);
-    if (showLive) setShowLive(false);
-  };
-
-  const handleShowLiveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setShowLive(event.target.checked);
-    if (showScore) setShowScore(false);
-  };
 
   const { lastMessage } = useWebSocket(
     `${
@@ -547,44 +538,15 @@ const Event = () => {
             {fancyOdds?.Odds && fancyOdds?.Odds[0]?.eventTime}
           </Typography>
         </GameHeader>
-        <Typography
-          fontWeight={500}
-          width="100%"
-          fontSize={{ xs: "0.6rem", position: "relative" }}
-        >
-          LastMatched{" "}
-          {fancyOdds?.Odds &&
+
+        <LiveScoreTv
+          lastMatchedTime={
+            fancyOdds?.Odds &&
             moment(fancyOdds?.Odds[0]?.lastMatchTime).format(
               "DD/MM/YYYY hh:mm:ss"
-            )}
-          <Switch
-            onChange={handleShowScoreChange}
-            checked={showScore}
-            sx={{ position: "absolute", right: 0, top: -10 }}
-          />{" "}
-          <Switch
-            onChange={handleShowLiveChange}
-            checked={showLive}
-            sx={{ position: "absolute", left: 0, top: -10 }}
-          />
-        </Typography>
-        {showScore && (
-          <iframe
-            width="100%"
-            height="200px"
-            title="score-iframe"
-            src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
-          />
-        )}
-        {showLive && (
-          <iframe
-            width="100%"
-            className="live-iframe"
-            title="score-iframe"
-            src={`http://13.233.57.150/test.php?ChannelId=1029`}
-          />
-        )}
-
+            )
+          }
+        />
         {bets && <MybetMobile bets={bets}></MybetMobile>}
         <CustomizedDialog2
           title="Bet Slip"

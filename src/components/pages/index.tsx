@@ -1,19 +1,21 @@
 import { Box } from "@mui/system";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import CasinoGame from "../casino/game/CasinoGame";
 import Layout from "../layout";
 import Loading from "../layout/loading";
 import { NewLayout, ThrowToLogin } from "../terms";
-import Aboutus from "../terms/aboutus";
-import ResponsibleGaming from "../terms/responsibleGaming";
-import Terms from "../terms/terms";
-import Withdraw from "../Withdraw/Withdraw";
 // import Aboutus from "./aboutus";
 // import ResponsibleGaming from "./responsibleGaming";
 // import Terms from "./terms";
 
 const Account = React.lazy(() => import("../accountSummary"));
+const Terms = React.lazy(() => import("../terms/terms"));
+const ResponsibleGaming = React.lazy(
+  () => import("../terms/responsibleGaming")
+);
+const Aboutus = React.lazy(() => import("../terms/aboutus"));
+const CasinoGame = React.lazy(() => import("../casino/game/CasinoGame"));
+const Withdraw = React.lazy(() => import("../Withdraw/Withdraw"));
 const Activity = React.lazy(() => import("../activityLog"));
 const Casino = React.lazy(() => import("../casino/Casino"));
 const CurrentBets = React.lazy(() => import("../currentBets"));
