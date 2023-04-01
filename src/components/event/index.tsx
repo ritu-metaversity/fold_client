@@ -578,11 +578,11 @@ const Event = () => {
             undefined
           )}
 
-        {fancyOdds.Odds?.filter((i: any) => i.Name !== "Match Odds").map(
-          matchOddMapCallback
-        )}
+        {fancyOdds.Odds?.filter(
+          (i: any) => !["Match Odds", "Tied Match"].includes(i.Name)
+        ).map(matchOddMapCallback)}
 
-        {fancyOdds["Bookmaker"] &&
+        {/* {fancyOdds["Bookmaker"] &&
           fancyOdds.Bookmaker.find(
             (odd: FancyOddsInterface) => odd.t === "TOSS"
           ) &&
@@ -591,7 +591,7 @@ const Event = () => {
               (odd: FancyOddsInterface) => odd.t === "TOSS"
             ),
             "toss"
-          )}
+          )} */}
         {/* accordians for fancy with values */}
         {Object.keys(fancyOdds).map((fancyMarket: any) => {
           if (["Odds", "Bookmaker"].includes(fancyMarket)) return <></>;
