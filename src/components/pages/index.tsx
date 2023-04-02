@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "../layout";
 import Loading from "../layout/loading";
@@ -25,6 +25,9 @@ const Profile = React.lazy(() => import("../profile/Profile"));
 const Deposit = React.lazy(() => import("../Deposit/index"));
 
 const Pages = () => {
+  useEffect(() => {
+    console.log("Ran page");
+  }, []);
   return (
     <div>
       <Suspense

@@ -3,7 +3,6 @@ import { OddsNumberTitle } from "./odds/OddsNumberTitle";
 import { OddsNumberTitleTwo } from "./odds/OddsNumberTitleTwo";
 import Odds from "./odds/odds";
 
-import useWebSocket from "react-use-websocket";
 
 import { Box } from "@mui/system";
 import React, {
@@ -14,18 +13,16 @@ import React, {
   useState,
 } from "react";
 import CustomizedAccordions from "./CustomizedAccordian";
-import { Grid, Switch, Typography, useMediaQuery } from "@mui/material";
+import { Grid, Typography, useMediaQuery } from "@mui/material";
 import OddsOnlyTwo from "./odds/oddsOnlyTwo";
 import HomeLayout from "../layout/homeLayout";
 import { BetSlip } from "./bet/BetSlip";
 import { colorHex } from "../../utils/constants";
-import MyBet from "./bet/MyBet";
 import { userServices } from "../../utils/api/user/services";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { UserContext } from "../../App";
 import { eventServices } from "../../utils/api/event/services";
 import Loading from "../layout/loading";
-import MybetMobile from "./bet/MybetMobile";
 import CustomizedDialog2 from "../common/Dailog2";
 import { GameHeader } from "./styledComponents";
 import Bookmaker from "./odds/bookmaker";
@@ -33,7 +30,6 @@ import { sportsTabList } from "../home/sportsTabList";
 import PnlModal from "./pnlModal";
 import {
   BetDetailsInterface,
-  BetsInterface,
   FancyOddsInterface,
   FancyPnl,
   Pnl,
@@ -43,9 +39,8 @@ import { createProfits, transformMatchOdds } from "./eventUtils";
 import moment from "moment";
 import Marquee from "react-fast-marquee";
 import { socket } from "../../utils/socket/socket";
-import ScoreboardIcon from "@mui/icons-material/Scoreboard";
-import { sportServices } from "../../utils/api/sport/services";
 import LiveScoreTv from "./liveScoreTv";
+import MyBetWrapper from "./bet/MyBetWrapper";
 
 const anish_socket_actve = false;
 const ankit_socket_actve = true;
@@ -67,7 +62,6 @@ export const dharmParivartan = (str: string | number) => {
 };
 
 const Event = () => {
-  const [bets, setBets] = useState<BetsInterface | null>(null);
   // const [betId, setBetId] = useState(0);
   const [betDetails, setBetDetails] = useState<BetDetailsInterface | null>(
     null
@@ -78,7 +72,6 @@ const Event = () => {
 
   const matches = useMediaQuery("(min-width : 1280px)");
   const matchId = searchParams.get("match-id");
-  const sportId = searchParams.get("sport-id");
   // const [markets, setMarkets] = useState<MarketInterface[]>([]);
   const [fancyOdds, setFancyOdds] = useState<any>();
   const [fancyOddsSlower, setFancyOddsSlower] = useState<any>({});
@@ -88,27 +81,12 @@ const Event = () => {
   const [selectedPnlMarketId, setSelectedPnlMarketId] = useState("");
   const [oddSocketConnected, setOddSocketConnected] = useState(false);
 
-  const [showLive, setShowLive] = useState(false);
-  const [showScore, setShowScore] = useState(true);
-
   const [profits, setProfits] = useState<ProfitObjectInterface>({
     Odds: {},
     Bookmaker: [],
     Fancy: [],
   });
   const nav = useNavigate();
-
-  const { lastMessage } = useWebSocket(
-    `${
-      process.env.REACT_APP_ANKIT_SOCKET_BET
-    }/chat/${matchId}/${localStorage.getItem("token")}`
-  );
-
-  useEffect(() => {
-    console.log(lastMessage, "ankit2");
-    if (lastMessage?.data && JSON.parse(lastMessage?.data)?.data)
-      setBets(JSON.parse(lastMessage?.data).data);
-  }, [lastMessage]);
 
   //socket
   useEffect(() => {
@@ -193,7 +171,7 @@ const Event = () => {
     // setLoading(true);
     const { response } = await userServices.betListByMatch(matchId);
     if (response?.data) {
-      setBets(response.data);
+      // setBets(response.data);
     }
     // setLoading(false);
   };
@@ -274,7 +252,9 @@ const Event = () => {
       setFancyPnl(response.data);
     }
   };
-
+  useEffect(() => {
+    console.log("Ran evetns");
+  }, []);
   useEffect(() => {
     getBets();
     getPnl();
@@ -308,7 +288,6 @@ const Event = () => {
 
   //creating profits
   useEffect(() => {
-    console.log("ran");
     createProfits({
       fancyOdds,
       fancyPnl,
@@ -504,7 +483,7 @@ const Event = () => {
             height={"100%"}
           >
             {betSlip}
-            {bets && <MyBet bets={bets} />}
+            {matches && <MyBetWrapper />}
           </Box>
         }
       >
@@ -538,7 +517,7 @@ const Event = () => {
             {fancyOdds?.Odds && fancyOdds?.Odds[0]?.eventTime}
           </Typography>
         </GameHeader>
-
+        {!matches && <MyBetWrapper />}
         <LiveScoreTv
           lastMatchedTime={
             fancyOdds?.Odds &&
@@ -547,7 +526,6 @@ const Event = () => {
             )
           }
         />
-        {bets && <MybetMobile bets={bets}></MybetMobile>}
         <CustomizedDialog2
           title="Bet Slip"
           open={Boolean(betDetails) && !matches}
