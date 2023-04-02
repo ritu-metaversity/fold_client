@@ -23,10 +23,10 @@ import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 import { useLocation } from "react-router-dom";
-
 const Pages = React.lazy(() => import("./components/pages"));
-const CustomizedDialogPassword = React.lazy(() => import("./components/pages"));
-
+const CustomizedDialogPassword = React.lazy(
+  () => import("./components/layout/user/ResetPasswordDailog")
+);
 
 interface ModalState {
   login?: boolean;
@@ -179,7 +179,9 @@ function App() {
   };
 
   const { pathname } = useLocation();
-
+  useEffect(() => {
+    console.log("Ran app");
+  }, []);
   useEffect(() => {
     const user = localStorage.getItem("user");
     let timer: ReturnType<typeof setInterval>;
@@ -257,6 +259,8 @@ function App() {
               setUser,
             }}
           >
+            <NewRules />
+
             <Box display="none">
               <CustomizedDialogPassword />
             </Box>
@@ -268,4 +272,11 @@ function App() {
     </ThemeProvider>
   );
 }
+
+export const NewRules = () => {
+  useEffect(() => {
+    console.log("Ran new");
+  }, []);
+  return <></>;
+};
 export default App;

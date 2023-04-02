@@ -71,16 +71,14 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
           <ScoreboardIcon className="icon-medium" />
           <Switch onChange={handleShowScoreChange} checked={showScore} />{" "}
         </Box>
-        {isChannelAvailable && (
-          <Box
-            display="flex"
-            alignItems={"center"}
-            sx={{ position: "absolute", left: 0, top: "-1.2em" }}
-          >
-            <i className="icon-tv d-icon icon-medium"></i>
-            <Switch onChange={handleShowLiveChange} checked={showLive} />
-          </Box>
-        )}
+        <Box
+          display="flex"
+          alignItems={"center"}
+          sx={{ position: "absolute", left: 0, top: "-1.2em" }}
+        >
+          <i className="icon-tv d-icon icon-medium"></i>
+          <Switch onChange={handleShowLiveChange} checked={showLive} />
+        </Box>
       </Typography>
       {showScore && (
         <iframe
@@ -90,12 +88,13 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
           src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
         />
       )}
-      {isChannelAvailable && showLive && (
+      {showLive && (
         <iframe
           width="100%"
           className="live-iframe"
           title="score-iframe"
-          src={`http://13.233.57.150/test.php?ChannelId=${channelId}`}
+          src={`https://luckybet.one/?eventId=${matchId}`}
+          //src={`http://13.233.57.150/test.php?ChannelId=${channelId}`}
         />
       )}
     </>

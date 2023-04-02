@@ -17,13 +17,11 @@ if (process.env.NODE_ENV === "production") {
   console.debug = () => {};
 }
 root.render(
-  // <React.StrictMode>
   <BrowserRouter>
     <Suspense fallback={<LoadingBallSvg />}>
       <App />
     </Suspense>
   </BrowserRouter>
-  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -273,7 +273,7 @@ const Footer = () => {
               Curaçao under the registration number 148532, with address at
               Heelsumstraat 51, Vredenberg, Willemstad, P.O. box Orionweg 5 C,
               Curaçao. The transactions are processed by GIT Operations N.V.
-              which owns and operates the website atozscore.com.
+              which owns and operates the website {window.location.hostname}.
             </span>
           </div>
         </div>
