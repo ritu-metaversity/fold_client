@@ -5,6 +5,7 @@ import { GameAPI } from "../../apis/gameAPI";
 function TopNav(props) {
   const [Active, setActive] = useState(4);
   const [activeSport, setActiveSport] = useState([]);
+  // const [SportIdList, setSportIdList] = useState(4);
 
 
   useEffect(() => {
@@ -17,6 +18,7 @@ function TopNav(props) {
     props.gameId(val);
     setActive(val);
   };
+
 
   return (
     <div>

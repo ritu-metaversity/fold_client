@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
-// import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-// import { AuthorAPI } from "../../apis/AuthorAPI";
 
 
-const NavBar = (props) => {
+const NavBar = ({gameIdForItemPage, props}) => {
   const [close, setClose] = useState(false);
   const [droup, setDrop] = useState(false);
   const [userbalance, setUserbalance] = useState();
@@ -14,6 +12,9 @@ const NavBar = (props) => {
   const [userdetail, setUserDetail] = useState(localStorage.getItem("UserId"));
   const [userMessage, setUserMessage] = useState("");
   const [status, setStatus] = useState(false);
+  const [error, setError] = useState(false);
+
+
 
   function toggle(e) {
     e.preventDefault();
@@ -45,6 +46,8 @@ const NavBar = (props) => {
     if(token !==""){
     UserAPI.User_Balance().then((res) => {
       setUserbalance(res.data.balance);
+    }).catch((error)=>{
+      setError(true)
     });
   }
   }, [token]);
@@ -101,9 +104,9 @@ const NavBar = (props) => {
                 <div className="col-6 text-right bal-expo">
                   <p className={`mb-0 ${!balanceShow ? "d-none" : ""}`}>
                     <i className="fas fa-landmark mr-1"></i>{" "}
-                    <b>{userbalance===""?"0.00":userbalance}</b>
+                    <b>{error?"0.00": userbalance===""?"0.00":userbalance}</b>
                   </p>
-                  <div className="">
+                  <div className="exp">
                     <span className={`mr-1 ${!expShow ? "d-none" : ""}`}>
                       <u >Exp:0</u>
                     </span>

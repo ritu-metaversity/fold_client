@@ -107,6 +107,13 @@ function AaccountStatement() {
   const increment = () => {
     setPagination(pageLength + 1);
   };
+  const decrementByFirst = ()=>{
+    setPageLength(0)
+  }
+
+  const incrementByLast = ()=>{
+    setPagination(pageLength)
+  }
 
   useEffect(() => {
     if (pageLength > 0) {
@@ -125,7 +132,6 @@ function AaccountStatement() {
   return (
     <div>
       <NavBar />
-      
 
       <div className="report-container wrapper">
         <div className="card">
@@ -189,7 +195,9 @@ function AaccountStatement() {
               </div>
             </div>
 
-            <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>
+            <div
+              className="row row5 mt-2 acc-stat"
+              style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div
                   id="account-statement_length"
@@ -217,7 +225,6 @@ function AaccountStatement() {
                   </label>
                 </div>
               </div>
-
             </div>
             <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
@@ -294,7 +301,6 @@ function AaccountStatement() {
                               onClick={(e) =>
                                 handleShow(e, item.remark, item.marketid)
                               }>
-                              
                               <td aria-colindex="2" className="text-left">
                                 {item.sno}
                               </td>
@@ -363,32 +369,45 @@ function AaccountStatement() {
               <div className="col-12">
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">
-                    <li className="page-item" onClick={decrement}>
+                    <li className="page-item" onClick={decrementByFirst}>
                       <button className="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span className="sr-only">Previous</span>
+                        <span aria-hidden="true">First</span>
                       </button>
                     </li>
-                    {result?.length &&
+                    <li className="page-item" onClick={decrement}>
+                      <button className="page-link" aria-label="Previous">
+                        <span aria-hidden="true">Prev</span>
+                      </button>
+                    </li>
+                    <li
+                      className="page-item ">
+                      <button className="plink act">
+                        <span aria-hidden="true" className="num">0</span>
+                      </button>
+                    </li>
+                    {result?.length > 0 &&
                       result.map((item, id) => {
                         return (
                           <li
                             key={item + id}
-                            className="page-item"
+                            className="page-item act"
                             onClick={() => handlePagenation(id)}>
-                            <button
-                              className="page-link"
-                              href="#"
-                              aria-label="Previous">
-                              {item}
+                            <button className="page-link">
+                              <span aria-hidden="true">
+                                {item === "" ? 0 : item}
+                              </span>
                             </button>
                           </li>
                         );
                       })}
                     <li className="page-item" onClick={increment}>
-                      <button className="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span className="sr-only">Next</span>
+                      <button className="page-link" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                      </button>
+                    </li>
+                    <li className="page-item" onClick={incrementByLast}>
+                      <button className="page-link" aria-label="Next">
+                        <span aria-hidden="true">Last</span>
                       </button>
                     </li>
                   </ul>

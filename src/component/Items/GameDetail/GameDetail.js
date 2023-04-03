@@ -6,12 +6,12 @@ import axios from "axios";
 import moment from "moment";
 import AlertBtn from "../../Alert/AlertBtn";
 import Accordion from "react-bootstrap/Accordion";
+import { socket } from "./socket";
 
-function GameDetail({ getStackValue }) {
+function GameDetail({ getStackValue, SportId}) {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD h:mm:ss");
-
   const [showModals, setShowModals] = useState(false);
   const [currentFancy, setCurrentFancy] = useState("Fancy2");
   const [matchodd, setMatchodd] = useState([]);
@@ -35,32 +35,45 @@ function GameDetail({ getStackValue }) {
   const [messege, setMessege] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [maxBet, setMaxBet] = useState();
-  const [minOdd, setMinOdds] = useState();
+  const [minBet, setMinBet] = useState();
   const [mFancyOdds, setMFancyOdds] = useState();
   // eslint-disable-next-line
-  const [errorMsg, setErrorMsg] = useState(false)
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [sId, setSid]=useState(SportId);
+  const [OddSocketConnected, setOddSocketConnected] = useState(false);
 
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
   const mid = Gameid.slice(12);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios
-      .get(`http://43.205.50.127:9000/betfair_api/fancy/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setMFancyOdds(res.data);
-        setMaxBet(res.data.Bookmaker[0]);
-        setMinOdds(res.data);
-      });
-      // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   if(SportId===""){
+  //     setSid(4)
+  //   }else{
+  //     setSid(SportId)
+  //   }
+  //   const token = localStorage.getItem("token");
+  //   axios
+  //     .get(`http://43.205.50.127:9000/betfair_api/fancy/${id}`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //     .then((res) => {
+  //       setMFancyOdds(res.data);
+  //       setMaxBet(res.data.Bookmaker[0]);
+  //       setMinBet(res.data);
+  //     });
+  //   // eslint-disable-next-line
+  // }, []);
+
+
 
   useEffect(() => {
+    if(SportId===""){
+          setSid(4)
+        }else{
+          setSid(SportId)
+        }
     const time = setInterval(() => {
-      // http://89.39.105.69:9001/fancy/${id} //Old Api
       axios.get(`http://89.39.105.69:9001/fancy/${id}`).then((res) => {
         if (fancyOdds) {
           const oldOdds = { ...fancyOdds };
@@ -80,11 +93,47 @@ function GameDetail({ getStackValue }) {
     return () => clearInterval(time);
   }, [id, fancyOdds]);
 
+
+
+
+
+
+  const oddFromSocketSlower = (res) => {
+    if (res) {
+      setMFancyOdds(res);
+      setMaxBet(res.Bookmaker[0]);
+            setMinBet(res);
+    }
+  };
+  useEffect(() => {
+    socket.on("OddsUpdated", oddFromSocketSlower);
+    socket.on("JoinedSuccessfully", () => {
+      setOddSocketConnected(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    let timer = setInterval(
+      () =>
+        !OddSocketConnected &&
+        socket.emit("JoinRoom", {
+          eventId:id,
+        }),
+      1000
+    );
+    return () => {
+      clearInterval(timer);
+    };
+  }, [OddSocketConnected]);
+
+  useEffect(() => {
+    OddSocketConnected && setOddSocketConnected(false);
+  }, [id]);
+
   const handleGameName = (item, id) => {
     setCurrentFancy(item);
     setFancyActive(id);
   };
-
   const handleSpanValueBack = (
     vll1,
     id,
@@ -109,15 +158,12 @@ function GameDetail({ getStackValue }) {
     setToss(Toss);
     setStatus(false);
   };
-
   const handleCloseModal = () => setShowModals(false);
   const handleShow = (e) => {
     e.preventDefault();
     setShowModals(true);
   };
-
   const [matchDetail, setMatchDelatil] = useState("");
-
   const handleSpanValueGay = (
     val1,
     id,
@@ -142,37 +188,18 @@ function GameDetail({ getStackValue }) {
     setToss(Toss);
     setStatus(false);
   };
-
   const data = (vl) => {
     setStatus(vl.status);
-    // if(vl.status==false){
-    //   setErrorMsg(true)
-    // }else{
-    //   setErrorMsg(false)
-    // }
     setMessege(vl.message);
   };
-
-  // setTimeout(() => {
-  //   setTimeOut(1);
-  // }, 15000);
-
-  const popupClose=(vl)=>{
-    setErrorMsg(vl)
-  }
+  const popupClose = (vl) => {
+    setErrorMsg(vl);
+  };
 
 
-  // console.log(errorMsg)
-
-  // const handlecollaps = (e) => {
-  //   e.preventDefault();
-  //   if (showColleps === false) {
-  //     setShowColleps(true);
-  //   } else {
-  //     setShowColleps(false);
-  //   }
-  // };
-
+if(!minBet || !mFancyOdds ||!maxBet) {
+  return<></>
+}
   return (
     <div>
       {isLoading ? (
@@ -181,12 +208,16 @@ function GameDetail({ getStackValue }) {
         </p>
       ) : (
         <div className="wrapper">
-          {status === true
-            ?<AlertBtn color="success" val={messege} popupClose={popupClose} />
-            : ""}
-          {status === 400
-            ? <AlertBtn color="danger" val={messege} popupClose={popupClose} />
-            : ""}
+          {status === true ? (
+            <AlertBtn color="success" val={messege} popupClose={popupClose} />
+          ) : (
+            ""
+          )}
+          {status === 400 ? (
+            <AlertBtn color="danger" val={messege} popupClose={popupClose} />
+          ) : (
+            ""
+          )}
 
           <div className="tab-content">
             <div id="odds" className="tab-pane ">
@@ -201,6 +232,19 @@ function GameDetail({ getStackValue }) {
                 <p className="no-found">No real-time records found</p>
               ) : (
                 <>
+                  <div id="scoreboard-box">
+                    <div className="scorecard scorecard-mobile">
+                      <div className="score-inner">
+                        <iframe
+                          src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sId}/${id}`}
+                          width="100%"
+                          className="score-card"
+                          title="scorecord"
+                          allowFullScreen={true}></iframe>
+                      </div>
+                    </div>
+                  </div>
+
                   <div>
                     {matchodd.map((item, id1) => {
                       // console.log(item)
@@ -223,11 +267,11 @@ function GameDetail({ getStackValue }) {
                               <div className="float-left country-name box-6 min-max">
                                 <b>
                                   Min:
-                                  <span>{minOdd?.Odds[id1]?.minBet}</span>
+                                  <span>{minBet?.Odds[id1]?.minBet}</span>
                                 </b>
                                 <b style={{ marginLeft: "6px" }}>
                                   Max:
-                                  <span>{minOdd?.Odds[id1]?.maxBet}</span>
+                                  <span>{minBet?.Odds[id1]?.maxBet}</span>
                                 </b>
                               </div>
                               <div className="back box-1 float-left text-center">
@@ -405,7 +449,10 @@ function GameDetail({ getStackValue }) {
                     })}
                     <div></div>
                   </div>
-                  <div className={`${fancyOdds.Bookmaker.length===0?"d-none":""}`}>
+                  <div
+                    className={`${
+                      fancyOdds.Bookmaker.length === 0 ? "d-none" : ""
+                    }`}>
                     <div className="market-title mt-1">
                       Bookmaker
                       <p className="float-right mb-0">
@@ -465,7 +512,7 @@ function GameDetail({ getStackValue }) {
 
                                 <div
                                   className={`box-1 back float-left back-1  text-center ${
-                                    bookmaker.b1 !==
+                                    bookmaker?.b1 !==
                                     previousState.Bookmaker[id].b1
                                       ? "blink"
                                       : ""
@@ -565,7 +612,7 @@ function GameDetail({ getStackValue }) {
                                 FancyActive === id ? "active" : ""
                               }`}
                               onClick={() => handleGameName(item, id)}>
-                                {/* eslint-disable-next-line */}
+                              {/* eslint-disable-next-line */}
                               <a data-toggle="tab" className="nav-link">
                                 {item}
                               </a>
@@ -599,52 +646,55 @@ function GameDetail({ getStackValue }) {
                                       <div data-title="" className="table-row">
                                         <div className="float-left country-name box-4">
                                           <span>
-                                            <b style={{fontSize:"10px"}}>{item?.nation}</b>
+                                            <b style={{ fontSize: "10px" }}>
+                                              {item?.nation}
+                                            </b>
                                           </span>
                                           <div className="float-right">
                                             <div className="info-block">
                                               <Accordion>
                                                 <Accordion.Item eventKey={id}>
                                                   <Accordion.Header>
-                                                  {/* eslint-disable-next-line */}
-                                                  <a
-                                                data-toggle="collapse"
-                                                data-target="/min-max-info355"
-                                                aria-expanded="false"
-                                                className="info-icon collapsed"
-                                                // onClick={(e) =>
-                                                //   handlecollaps(e)
-                                                // }
-                                                >
-                                                <i className="fas fa-info-circle m-l-10"></i>
-                                              </a>
+                                                    {/* eslint-disable-next-line */}
+                                                    <a
+                                                      data-toggle="collapse"
+                                                      data-target="/min-max-info355"
+                                                      aria-expanded="false"
+                                                      className="info-icon collapsed"
+                                                      // onClick={(e) =>
+                                                      //   handlecollaps(e)
+                                                      // }
+                                                    >
+                                                      <i className="fas fa-info-circle m-l-10"></i>
+                                                    </a>
                                                   </Accordion.Header>
                                                   <Accordion.Body>
-                                                  <div
-                                                id="min-max-info355"
-                                                className="min-max-info">
-                                                <span>
-                                                  <b>Min:</b>
-                                                  <br />
-                                                  {
-                                                    mFancyOdds[currentFancy][id]
-                                                      .minBet
-                                                  }
-                                                </span>{" "}
-                                                <span>
-                                                  <b>Max:</b>
-                                                  <br />
-                                                  {
-                                                    mFancyOdds[currentFancy][id]
-                                                      .maxBet
-                                                  }
-                                                </span>
-                                              </div>
+                                                    <div
+                                                      id="min-max-info355"
+                                                      className="min-max-info">
+                                                      <span>
+                                                        <b>Min:</b>
+                                                        <br />
+                                                        {
+                                                          mFancyOdds[
+                                                            currentFancy
+                                                          ][id]?.minBet
+                                                        }
+                                                      </span>
+                                                      <br/>
+                                                      <span>
+                                                        <b>Max:</b>
+                                                        <br />
+                                                        {
+                                                          mFancyOdds[
+                                                            currentFancy
+                                                          ][id]?.maxBet
+                                                        }
+                                                      </span>
+                                                    </div>
                                                   </Accordion.Body>
                                                 </Accordion.Item>
-                                               
                                               </Accordion>
-                                              
                                             </div>
                                           </div>
                                           <p>

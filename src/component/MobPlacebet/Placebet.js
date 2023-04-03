@@ -11,7 +11,7 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
   const [odds, setOdds]=useState(spanValueRate);
   // eslint-disable-next-line
   const [name, setName]=useState(spanValueName);
-  const [status, setStatus]=useState("");
+  // const [status, setStatus]=useState("");
 
   const [getBetValu, setgetBetValu] = useState(spanValueRate);
   const handleClick = (event) => {
@@ -51,7 +51,7 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
            "orientation": "landscape"
         }      
     }).then((res)=>{
-      setStatus(res.data.status);
+      // setStatus(res.data.status);
       data({
         status:true,
         message:res.data.message

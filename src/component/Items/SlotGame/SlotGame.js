@@ -3,13 +3,11 @@ import './SlotGame.css'
 import SideBar from '../../sidebar/SideBar'
 import {Link} from 'react-router-dom'
 import Footer from '../../footer/Footer'
-import NavBar from '../../navBar/NavBar'
 
 
 function SlotGame() {
     return (
         <>
-        <NavBar/>
         <div className="main">
             <div className="container-fluid container-fluid-5">
                 <div className="row row5">

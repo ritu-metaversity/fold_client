@@ -3,7 +3,7 @@ import { AuthorAPI } from "../../apis/AuthorAPI";
 import RegisterModals from "./RegisterModals";
 import Modal from "react-bootstrap/Modal";
 import AlertBtn from "../Alert/AlertBtn";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -20,7 +20,6 @@ const Register = () => {
   const [StatusCode, setStatusCode] = useState();
   const [timeOut, setTimeOut] = useState(null);
 
-//   const history = useHistory();
 
 
 

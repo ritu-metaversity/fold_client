@@ -6,35 +6,19 @@ import axios from "axios";
 // import { AuthorAPI } from "../../apis/AuthorAPI";
 
 function Item({ gameIdForItemPage, sportId}) {
-  // let urldtaa = window.location.pathname;
   const history = useHistory();
   const [gameName, setGameName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
- 
+//  console.log(gameIdForItemPage,"idmmmm")
 
-  // console.log(sportId?.id)
-
-  // useEffect(() => {
-  //   if (gameIdForItemPage != null ) {
-  //     GameAPI.Active_Match_Sport_Wise({
-  //       sportId: gameIdForItemPage === "" || gameIdForItemPage === undefined ? "4" : gameIdForItemPage,
-  //     }).then((res) => {
-  //       setGameName(res.data.data);
-  //       setIsLoading(false)
-  //     });
-  //   }
-  // }, [gameIdForItemPage]);
-
-  // const handleData = (id) => {
-  //   history.push(`/gamedetail/${id}`);
-  // };
 
   if(gameIdForItemPage === "" || gameIdForItemPage === undefined){
     gameIdForItemPage=4
   }
 
+  
 
-
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (gameIdForItemPage != null ) {
@@ -50,20 +34,18 @@ function Item({ gameIdForItemPage, sportId}) {
     history.push(`/gamedetail/${id}`);
   };
 
-
   return (
     <div>
       {
         isLoading?<p className="lodder"><i className="fa fa-spinner fa-spin"></i></p>:<div className="">
-        <div data-v-0a31b3b9="" className="tab-pane container pl-0 pr-0">
+        <div  className="tab-pane container pl-0 pr-0">
           <div
-            data-v-0a31b3b9=""
             className="game-listing-container"
             style={{
               maxHeight: "calc((100vh - 184px))",
               overflowX: "auto",
             }}>
-            <div data-v-0a31b3b9="">
+            <div >
               <div className="">
                 {gameName.length === 0 ? (
                   <p className="no-found">No real-time records found</p>

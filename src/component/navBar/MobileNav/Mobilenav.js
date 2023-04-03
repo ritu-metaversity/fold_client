@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import "../Nav.css";
 
 function Mobilenav() {
-let {pathname}=useLocation()
  
   const [Active, setActive] = useState(1);
 

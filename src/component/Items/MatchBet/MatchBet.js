@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../apis/gameAPI";
 import "./MatchBet.css";
+import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
+
 
 function MatchBet() {
-  const [matchBet, setMatchBet] = useState("");
+  const [matchBet, setMatchBet] = useState([]);
   const [matchLength, setMatchLength] = useState();
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
@@ -16,6 +18,18 @@ function MatchBet() {
       setMatchLength(Object.keys(Item.data)?.length);
     });
   }, [id]);
+
+  const { lastMessage } = useWebSocket(
+    `ws://13.233.248.48:8082/chat/${id}/${localStorage.getItem("token")}`,
+    { shouldReconnect: (event) => true }
+  );
+  
+  useEffect(() => {
+    if (lastMessage?.data && JSON.parse(lastMessage?.data)?.data){
+      setMatchBet(JSON.parse(lastMessage?.data))
+      console.log(JSON.parse(lastMessage?.data).data)
+    }
+  }, [lastMessage]);
 
   return (
     <>
@@ -45,7 +59,7 @@ function MatchBet() {
                           <td>{item?.nation}</td>
                           <td>{item?.rate}</td>
 
-                          <td>{item?.amount}</td>
+                          <td className="text-right">{item?.amount}</td>
                         </tr>
                       ))}
                     </>

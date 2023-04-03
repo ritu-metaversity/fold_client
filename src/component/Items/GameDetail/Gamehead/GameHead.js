@@ -1,37 +1,38 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import NavBar from "../../../navBar/NavBar";
 import "../../../navBar/TopNav.css";
 import MatchBet from "../../MatchBet/MatchBet";
 import GameDetail from "../GameDetail";
 import "./GameHead.css";
+import NavBar from "../../../navBar/NavBar";
 
-function GameHead() {
+function GameHead({SportId}) {
   const [ActiveNavbar, setActiveNavBar] = useState(1);
-
   const handleClick = (val) => {
     setActiveNavBar(val);
+    
   };
+  console.log(SportId)
+
   return (
     <>
-      <NavBar />
+    <NavBar/>
       <div >
         <ul className="nav nav-tabs ">
           <li className={`nav-item ${ActiveNavbar === 1 ? "active2" : ""}`}>
-            <a
+            <button
               data-toggle="tab"
-              className="nav-link nav2"
+              className="nav-link nav2 nav-btn"
               onClick={() => handleClick(1)}>
               Odds
-            </a>
+            </button>
           </li>
           <li className={`nav-item ${ActiveNavbar === 2 ? "active2" : ""}`}>
-            <a
+            <button
               data-toggle="tab"
-              className="nav-link"
+              className="nav-link nav-btn"
               onClick={() => handleClick(2)}>
               Matched Bet (0)
-            </a>
+            </button>
           </li>
         </ul>
         <div className="tv-icon">
@@ -40,7 +41,7 @@ function GameHead() {
           </p>
         </div>
       </div>
-      {ActiveNavbar === 1 ? <GameDetail /> : <MatchBet />}
+      {ActiveNavbar === 1 ? <GameDetail SportId={SportId}/> : <MatchBet />}
     </>
   );
 }

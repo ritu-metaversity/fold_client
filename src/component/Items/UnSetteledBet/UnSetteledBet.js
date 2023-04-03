@@ -54,6 +54,13 @@ function UnSetteledBet() {
   const decerement = () => {
     setPagination(pageLength - 1);
   };
+  const incrementByLast = ()=>{
+    setPagination(pageLength)
+  }
+
+  const decrementByFirst=()=>{
+    setPagination(1)
+  }
 
   useEffect(() => {
     if (ListLength > 0) {
@@ -398,7 +405,60 @@ function UnSetteledBet() {
                   </div>
                 </div>
               </div>
+
+
               <div className="row row5 mt-2 acc-stat">
+              <div className="col-12">
+                <nav aria-label="Page navigation example">
+                  <ul className="pagination">
+                    <li className="page-item" onClick={decrementByFirst}>
+                      <button className="page-link" aria-label="Previous">
+                        <span aria-hidden="true">First</span>
+                      </button>
+                    </li>
+                    <li className="page-item" onClick={decerement}>
+                      <button className="page-link" aria-label="Previous">
+                        <span aria-hidden="true">Prev</span>
+                      </button>
+                    </li>
+                    {/* <li
+                      className="page-item ">
+                      <button className="plink act">
+                        <span aria-hidden="true" className="num">0</span>
+                      </button>
+                    </li> */}
+                    {result?.length  &&
+                      result.map((item, id) => {
+                        return (
+                          <li
+                            key={item + id}
+                            className="page-item "
+                            onClick={() => handleClick(id)}>
+                            <button className="plink act">
+                              <span aria-hidden="true" className="num">
+                                {item === "" ? 0 : item}
+                              </span>
+                            </button>
+                          </li>
+                        );
+                      })}
+                    <li className="page-item" onClick={increment}>
+                      <button className="page-link" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                      </button>
+                    </li>
+                    <li className="page-item" onClick={incrementByLast}>
+                      <button className="page-link" aria-label="Next">
+                        <span aria-hidden="true">Last</span>
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+
+
+              {/* <div className="row row5 mt-2 acc-stat">
                 <div className="col-12">
                   <nav aria-label="Page navigation example">
                     <ul className="pagination">
@@ -428,7 +488,7 @@ function UnSetteledBet() {
                     </ul>
                   </nav>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className={`row row5 mt-2 ${deleteVal==="2"?"":"d-none"}`}>
               <div className="col-12 ">

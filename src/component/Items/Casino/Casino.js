@@ -1,6 +1,6 @@
 import React from "react";
 import Mobilenav from "../../navBar/MobileNav/Mobilenav";
-import NavBar from "../../navBar/NavBar";
+// import NavBar from "../../navBar/NavBar";
 import "./Casino.css";
 
 const Casino = () => {
@@ -10,7 +10,7 @@ const Casino = () => {
   const id = Gameid.slice(8);
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Mobilenav />
       <iframe
         src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}

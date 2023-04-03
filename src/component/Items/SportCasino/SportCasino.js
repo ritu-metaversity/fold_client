@@ -3,12 +3,10 @@ import SideBar from '../../sidebar/SideBar'
 import "../LiveCasino/LiveCasino.css";
 import "../DtList/DtList.css";
 import Footer from "../../footer/Footer";
-import NavBar from "../../navBar/NavBar";
 
 function SportCasino() {
   return (
     <div>
-      <NavBar/>
       <div className="main">
         <div className="container-fluid container-fluid-5">
           <div className="row row5">

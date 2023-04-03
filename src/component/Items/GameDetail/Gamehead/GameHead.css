@@ -5,7 +5,7 @@ background: none !important;
     color: #fff;
     position: absolute;
     right: 10px;
-    top: 100px;
+    top: 112px;
     font-size: 18px;
 }
 .mb-0, .my-0 {
@@ -20,4 +20,10 @@ a.nav-link {
 .active2{
     border-top: 2px solid #fff !important; 
     transition: 0.1s;
+}
+.nav-btn{
+    text-decoration: none !important;
+    background: none !important;
+    border: unset !important;
+    outline: unset !important;
 }
