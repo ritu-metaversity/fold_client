@@ -1,0 +1,423 @@
+.markets {
+  text-align: left;
+    color: #0f2327;
+    font-size: 12px;
+}
+.markets .header {
+  margin-bottom: 5px;
+}
+.markets .header .apl-icon-custom-play {
+  color: #1d7f1e;
+  position: relative;
+  top: -5px;
+}
+.markets .header time {
+  float: right;
+  font-size: 12px;
+  margin-top: 6px;
+}
+.markets .header .start-time time {
+  display: block;
+  text-align: right;
+  line-height: 48px;
+}
+.markets .clear {
+  clear: both;
+}
+.markets .start-time.opens-in-count-down-container {
+  margin-top: 5px !important;
+}
+.markets .in-play-content {
+  margin-left: 5px;
+}
+.markets .opens-in-count-down {
+  display: inline-block;
+  color: #0f2327;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.markets .opens-in-count-down i {
+  margin-right: 5px;
+}
+.markets .favourites h1 {
+  position: relative;
+}
+.markets .favourites .header h3 {
+  float: left;
+}
+.markets .favourites .header .apl-icon-custom-play {
+  top: 0;
+  margin-right: 5px;
+}
+.markets .favourites .start-time time {
+  color: #a0a0a0;
+  float: right;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.markets .favourites .opens-in-count-down {
+  clear: right;
+  float: right;
+}
+apl-line-market > div {
+  margin-bottom: 8px !important;
+}
+apl-line-market > div .market-listing-table {
+  margin-bottom: 0 !important;
+}
+apl-line-market > div .market-listing-table thead > tr th.market-name {
+  text-align: left;
+  padding-left: 2px !important;
+}
+apl-line-market > div .market-listing-table i.apl-icon-custom-ladder {
+  color: #000;
+  cursor: pointer;
+  padding: 5px;
+}
+apl-line-market > div .market-listing-table i.apl-icon-custom-ladder.open {
+  color: #344e6b;
+}
+apl-line-market > div .market-listing-table i.apl-icon-custom-ladder.disabled {
+  color: #a29ca2;
+  cursor: default;
+}
+apl-line-market > div .market-listing-table tbody > tr td.market-name {
+  font-weight: bold;
+  padding: 0;
+  vertical-align: top;
+  border-right: none !important;
+}
+apl-line-market > div .market-listing-table tbody > tr td.market-name .event-name,
+apl-line-market > div .market-listing-table tbody > tr td.market-name .selection-pnl {
+  padding-right: 35px;
+}
+apl-line-market > div .market-listing-table tbody > tr td.market-name:first-child {
+  position: relative;
+}
+apl-line-market > div .market-listing-table tbody > tr td.market-name:first-child i.apl-icon-custom-ladder {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-50%, -50%);
+}
+apl-line-market > div .market-listing-table tbody > tr td.market-name .container {
+  display: flex;
+  min-height: 42px;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4px 8px;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container {
+  position: relative;
+  width: 376px;
+  padding: 0;
+}
+.ng-scope table {
+  width:100%;
+}
+._align-center{
+text-align: center;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container {
+  width: 376px;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container table {
+  margin-bottom: 0 !important;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container table tbody > tr > td {
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container table tbody > tr > td.stacked-rows {
+  border-bottom: 1px solid #ddd;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container table tbody > tr > td:last-child {
+  border-right: none;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container table tbody > tr > td.odds-placeholder {
+  width: 126px;
+  background: #f9f7f9;
+  color: #565457;
+  text-align: left;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container table tbody > tr > td.odds-placeholder .max-liability {
+  font-size: 11px;
+  display: block;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container table tbody > tr > td.odds-placeholder .max-liability:first-child {
+  margin-bottom: 3px;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container table tbody > tr > td.back:active,
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container table tbody > tr > td.lay:active {
+  box-shadow: none;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container table tbody > tr > td.back:hover {
+  background-color: #f2f9ff;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .odds-container table tbody > tr > td.lay:hover {
+  background-color: #fef7f9;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .ball-running-overlay {
+  background: #fff;
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+}
+apl-line-market > div .market-listing-table tbody > tr td.main-container .ball-running-overlay span {
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+apl-line-market > div .market-listing-table tbody > tr:hover .ball-running-overlay {
+  transition: background ease 0.5s;
+  background: #eee !important;
+}
+apl-line-market > div .ladder-component-container {
+  display: block;
+  overflow: hidden;
+  transition: max-height 0.3s linear, opacity 0.3s linear;
+  max-height: 0;
+  opacity: 0;
+}
+apl-line-market > div .ladder-component-container.visible {
+  max-height: 200px;
+  opacity: 1;
+}
+apl-line-market .-status.suspended {
+  box-sizing: content-box;
+}
+apl-line-market-ladder {
+  color: #0f2327;
+}
+apl-line-market-ladder .ladder-container {
+  position: relative;
+  display: inline-block;
+  float: right;
+  width: 378px;
+  background-color: #fff;
+  border: 1px solid #dddcdc;
+  border-top: none;
+  transition: all 3s ease-in-out;
+  text-align: center;
+  max-height: 198px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+apl-line-market-ladder .ladder-container div.row {
+  display: block;
+  position: relative;
+  border-bottom: 1px solid #dddcdc;
+}
+apl-line-market-ladder .ladder-container div.row div.col {
+  display: inline-block;
+  position: relative;
+  width: calc(50% - 2px);
+  padding: 5px;
+}
+apl-line-market-ladder .ladder-container div.row div.col:last-child {
+  border-left: 1px solid #dddcdc;
+}
+apl-line-market-ladder .ladder-container .ladder-header {
+  background-color: #f6f6f6;
+  font-weight: bold;
+}
+apl-line-market-ladder .ladder-container .ladder-loader {
+  position: relative;
+  height: 100px;
+}
+apl-line-market-ladder .ladder-container .ladder-loader .circular {
+  position: relative;
+  width: auto;
+  height: 30%;
+  top: 35%;
+  bottom: auto;
+  left: auto;
+  right: auto;
+}
+ .match-centre {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+ .match-centre .event-header {
+  position: relative;
+}
+ .match-centre .event-header h1 {
+  background-color: #09262b;
+  border-bottom: none;
+  color: #fff;
+  margin: 10px 0 0;
+  text-indent: 10px;
+}
+ .match-centre .event-header h1 .apl-icon-custom-play {
+  color: #fff;
+  float: left;
+  margin-top: 10px;
+  top: 0;
+}
+ .match-centre .event-header .match-stats-body-button {
+  position: absolute;
+  top: 20px;
+  right: 16px;
+  color: #fff;
+  cursor: pointer;
+}
+ .match-centre .match-centre-header,
+ .match-centre .match-centre-body {
+  border: 1px solid #ddd;
+  display: flex;
+  padding: 0 10px;
+}
+ .match-centre .match-centre-header > div,
+ .match-centre .match-centre-body > div {
+  flex: 1;
+  width: 50%;
+}
+ .match-centre .match-centre-header > div:last-child,
+ .match-centre .match-centre-body > div:last-child {
+  margin-left: 10px;
+}
+ .match-centre .match-centre-header table,
+ .match-centre .match-centre-body table {
+  border-collapse: collapse;
+}
+ .match-centre .match-centre-header {
+  border-width: 0 1px;
+  padding-top: 10px;
+}
+ .match-centre .match-centre-header .toss h2 {
+  color: #0f2327;
+}
+ .match-centre .match-centre-header .toss p {
+  margin: -6px 0 6px !important;
+  font-weight: bold;
+}
+ .match-centre .match-centre-header table {
+  margin-bottom: 6px;
+}
+ .match-centre .match-centre-header table th:not(:last-child),
+ .match-centre .match-centre-header table td:not(:last-child) {
+  border-right: 1px solid #ddd;
+}
+ .match-centre .match-centre-body {
+  border-width: 0 1px;
+  padding-bottom: 10px;
+  min-height: 165px;
+}
+ .match-centre .match-centre-body .over p,
+ .match-centre .match-centre-body .over .over-detail {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+}
+ .match-centre .match-centre-body .over p {
+  cursor: default;
+  width: 99.9%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+ .match-centre .match-centre-body .over .over-detail {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin-bottom: 6px;
+}
+ .match-centre .match-centre-body .over .over-detail > div {
+  line-height: 20px;
+}
+ .match-centre .match-centre-body .over .over-detail .balls {
+  flex-grow: 1;
+  margin: 0 0 6px 5px;
+}
+ .match-centre .match-centre-body .over .over-detail .balls li {
+  display: inline-block;
+  font-weight: bold;
+}
+ .match-centre .match-centre-body .over .over-detail .runs-score {
+  display: flex;
+}
+ .match-centre .match-centre-body .over .over-detail .runs-score div {
+  padding: 0 5px 0 0;
+  line-height: 20px;
+}
+ .match-centre .match-centre-body .over .over-detail .runs-score div::before {
+  content: '|';
+  color: #ddd;
+  padding: 0 5px 0 0;
+}
+ .match-centre .match-centre-body .over .ball {
+  color: #fff;
+  font-weight: bold;
+  border-radius: 14px;
+  min-width: 21px;
+  min-height: 20px;
+  text-align: center;
+  padding: 1px 4.5px;
+  margin: 0 2px;
+  font-size: 10px;
+}
+ .match-centre .match-centre-body .over .ball.INFIELDBOUNDARY_0 {
+  background-color: #999;
+  border: 1px solid #999;
+}
+ .match-centre .match-centre-body .over .ball.INFIELDBOUNDARY_1,
+ .match-centre .match-centre-body .over .ball.INFIELDBOUNDARY_2,
+ .match-centre .match-centre-body .over .ball.INFIELDBOUNDARY_3,
+ .match-centre .match-centre-body .over .ball.INFIELDBOUNDARY_5 {
+  background-color: #48a23c;
+  border: 1px solid #48a23c;
+}
+ .match-centre .match-centre-body .over .ball.INFIELDBOUNDARY_4 {
+  background-color: #2d90d4;
+  border: 1px solid #2d90d4;
+}
+ .match-centre .match-centre-body .over .ball.INFIELDBOUNDARY_6 {
+  background-color: #601c78;
+  border: 1px solid #601c78;
+}
+ .match-centre .match-centre-body .over .ball.WICKET {
+  background-color: #c9362b;
+  border: 1px solid #c9362b;
+}
+ .match-centre .match-centre-body .over .ball.NOBALL,
+ .match-centre .match-centre-body .over .ball.WIDE,
+ .match-centre .match-centre-body .over .ball.BYE,
+ .match-centre .match-centre-body .over .ball.LEGBYE {
+  background-color: #c2ad7b;
+  border: 1px solid #c2ad7b;
+}
+ .match-centre .match-centre-body table {
+  margin-bottom: 0;
+}
+ .match-centre .match-centre-body table td:first-child {
+  width: 40%;
+}
+ .match-centre .match-centre-body .row-highlight td {
+  background-color: #9fe0eb;
+}
+ .match-centre .match-centre-body .row-highlight td:first-child {
+  text-transform: uppercase;
+}
+
+@media (max-width: 500px) {
+  .match-centre-body{
+    flex-direction: column;
+  } 
+   .match-centre-header{
+    flex-direction: column;
+  }
+
+   .match-centre .match-centre-header > div,
+ .match-centre .match-centre-body > div {
+  flex: 1;
+  width: 100%;
+}
+  
+}
