@@ -556,9 +556,9 @@ const Event = () => {
             undefined
           )}
 
-        {fancyOdds.Odds?.filter(
-          (i: any) => !["Match Odds", "Tied Match"].includes(i.Name)
-        ).map(matchOddMapCallback)}
+        {/* {fancyOdds.Odds?.filter(
+          (i: any) => !["Match Odds"].includes(i.Name)
+        ).map(matchOddMapCallback)} */}
 
         {/* {fancyOdds["Bookmaker"] &&
           fancyOdds.Bookmaker.find(
