@@ -15,8 +15,8 @@ function TopNav(props) {
   }, []);
 
   const handleClick = (val) => {
-    props.gameId(val);
     setActive(val);
+    props.gameId(val);
   };
 
 

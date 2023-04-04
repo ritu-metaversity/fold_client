@@ -14,7 +14,7 @@ function GameDetail({ getStackValue, SportId}) {
   const pTime = moment(curr).format("YYYY-MM-DD h:mm:ss");
   const [showModals, setShowModals] = useState(false);
   const [currentFancy, setCurrentFancy] = useState("Fancy2");
-  const [matchodd, setMatchodd] = useState([]);
+  const [matchodd, setMatchodd] = useState({});
   const [gameName, setGameName] = useState("");
   const [fancyOdds, setFancyOdds] = useState("");
   const [eTime, setETime] = useState("");
@@ -41,6 +41,8 @@ function GameDetail({ getStackValue, SportId}) {
   const [errorMsg, setErrorMsg] = useState(false);
   const [sId, setSid]=useState(SportId);
   const [OddSocketConnected, setOddSocketConnected] = useState(false);
+  const [matchDetail, setMatchDelatil] = useState("");
+
 
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
@@ -66,51 +68,44 @@ function GameDetail({ getStackValue, SportId}) {
   // }, []);
 
 
-
-  useEffect(() => {
+  useEffect(()=>{
     if(SportId===""){
-          setSid(4)
-        }else{
-          setSid(SportId)
-        }
-    const time = setInterval(() => {
-      axios.get(`http://89.39.105.69:9001/fancy/${id}`).then((res) => {
-        if (fancyOdds) {
-          const oldOdds = { ...fancyOdds };
-          setPreviousState(oldOdds);
-        } else {
-          setPreviousState(res.data);
-        }
-        setIsLoading(false);
-        setFancyOdds(res.data);
-        setGameName(Object.keys(res.data));
-        setMatchodd(res.data.Odds);
-        var matchData = res.data.Odds[0];
-        setETime(matchData);
-        setMatchDelatil(matchData.runners);
-      }); // eslint-disable-next-line
-    }, 1000);
-    return () => clearInterval(time);
-  }, [id, fancyOdds]);
-
-
-
-
-
+      setSid(4)
+    }else{
+      setSid(SportId)
+    }
+  }, [sId])
 
   const oddFromSocketSlower = (res) => {
     if (res) {
+      if (fancyOdds) {
+        const oldOdds = { ...fancyOdds};
+        setPreviousState(oldOdds);
+      } else {
+        setPreviousState(res);
+      }
       setMFancyOdds(res);
       setMaxBet(res.Bookmaker[0]);
-            setMinBet(res);
+      setMinBet(res);
+      setIsLoading(false);
+      setFancyOdds(res);
+      setGameName(Object.keys(res));
+      setMatchodd(res.Odds);
+      var matchData = res.Odds[0];
+      setETime(matchData);
+      setMatchDelatil(matchData.runners);
     }
   };
+  
   useEffect(() => {
     socket.on("OddsUpdated", oddFromSocketSlower);
     socket.on("JoinedSuccessfully", () => {
       setOddSocketConnected(true);
     });
   }, []);
+
+ 
+
 
   useEffect(() => {
     let timer = setInterval(
@@ -124,11 +119,39 @@ function GameDetail({ getStackValue, SportId}) {
     return () => {
       clearInterval(timer);
     };
-  }, [OddSocketConnected]);
+  }, [OddSocketConnected, id, matchodd,  fancyOdds]);
 
   useEffect(() => {
     OddSocketConnected && setOddSocketConnected(false);
   }, [id]);
+
+
+
+  // useEffect(() => {
+   
+  //   const time = setInterval(() => {
+  //     axios.get(`http://89.39.105.69:9001/fancy/${id}`).then((res) => {
+  //       if (fancyOdds) {
+  //         const oldOdds = { ...fancyOdds };
+  //         setPreviousState(oldOdds);
+  //       } else {
+  //         setPreviousState(res.data);
+  //       }
+  //       setIsLoading(false);
+  //       setFancyOdds(res.data);
+  //       setGameName(Object.keys(res.data));
+  //       setMatchodd(res.data.Odds);
+  //       var matchData = res.data.Odds[0];
+  //       setETime(matchData);
+  //       setMatchDelatil(matchData.runners);
+  //     });
+  //   }, 1000);
+  //   return () => clearInterval(time);
+  // }, [id, matchodd,  fancyOdds]);
+
+  // console.log(fancyOdds, "fancyOdds");
+
+
 
   const handleGameName = (item, id) => {
     setCurrentFancy(item);
@@ -163,7 +186,6 @@ function GameDetail({ getStackValue, SportId}) {
     e.preventDefault();
     setShowModals(true);
   };
-  const [matchDetail, setMatchDelatil] = useState("");
   const handleSpanValueGay = (
     val1,
     id,
@@ -197,11 +219,11 @@ function GameDetail({ getStackValue, SportId}) {
   };
 
 
-if(!minBet || !mFancyOdds ||!maxBet) {
-  return<></>
-}
+// if(!minBet || !mFancyOdds ||!maxBet) {
+//   return<></>
+// }
   return (
-    <div>
+    <div className="main-div">
       {isLoading ? (
         <p className="lodder">
           <i className="fa fa-spinner fa-spin"></i>
@@ -246,14 +268,15 @@ if(!minBet || !mFancyOdds ||!maxBet) {
                   </div>
 
                   <div>
-                    {matchodd.map((item, id1) => {
-                      // console.log(item)
+                    {matchodd?.map((item, id1) => {
                       return (
                         <div key={item + id1}>
                           <div
-                            className={`market-title mt-1 ${
+                            className={`market-title mt-1
+                            ${
                               item.runners.length === 0 ? "d-none" : ""
-                            }`}>
+                            }
+                            `}>
                             {item.Name}
                             <p className="float-right mb-0">
                               <i className="fas fa-info-circle"></i>
@@ -309,7 +332,7 @@ if(!minBet || !mFancyOdds ||!maxBet) {
 
                                       {event.ex.availableToBack?.length &&
                                         event.ex.availableToBack.map(
-                                          (e, id) => {
+                                          (e, id) => { 
                                             return (
                                               <div
                                                 key={e.size + e.price + id}
@@ -676,6 +699,7 @@ if(!minBet || !mFancyOdds ||!maxBet) {
                                                         <b>Min:</b>
                                                         <br />
                                                         {
+                                                          
                                                           mFancyOdds[
                                                             currentFancy
                                                           ][id]?.minBet

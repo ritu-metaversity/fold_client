@@ -20,6 +20,7 @@ function AlertBtn(props) {
       props.popupClose(false);
     }, 15000);
   }, [props.val]);
+  
   return (
     <>
       {showHide ? (

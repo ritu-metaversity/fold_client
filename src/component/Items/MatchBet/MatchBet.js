@@ -1,35 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { GameAPI } from "../../../apis/gameAPI";
+// import { GameAPI } from "../../../apis/gameAPI";
 import "./MatchBet.css";
 import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 
 
-function MatchBet() {
+function MatchBet(props) {
   const [matchBet, setMatchBet] = useState([]);
-  const [matchLength, setMatchLength] = useState();
+  // const [matchLength, setMatchLength] = useState();
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
 
-  useEffect(() => {
-    GameAPI.Match_Bet_List({
-      matchId: id,
-    }).then((Item) => {
-      setMatchBet(Item);
-      setMatchLength(Object.keys(Item.data)?.length);
-    });
-  }, [id]);
+  // useEffect(() => {
+  //   GameAPI.Match_Bet_List({
+  //     matchId: id,
+  //   }).then((Item) => {
+  //     setMatchBet(Item);
+  //     setMatchLength(Object.keys(Item.data)?.length);
+  //   });
+  // }, [id]);
 
+  
   const { lastMessage } = useWebSocket(
     `ws://13.233.248.48:8082/chat/${id}/${localStorage.getItem("token")}`,
     { shouldReconnect: (event) => true }
   );
-  
-  useEffect(() => {
-    if (lastMessage?.data && JSON.parse(lastMessage?.data)?.data){
-      setMatchBet(JSON.parse(lastMessage?.data))
-      console.log(JSON.parse(lastMessage?.data).data)
-    }
-  }, [lastMessage]);
+
+
+  useEffect(()=>{
+      if (lastMessage?.data && JSON.parse(lastMessage?.data)?.data){
+        setMatchBet(JSON.parse(lastMessage?.data))
+        const bets  = JSON.parse(lastMessage?.data)?.data
+        const vals = Object.values(bets);
+        let noOfBets = 0;
+        for (let val of vals ){
+          // console.log(vals)
+          noOfBets+=(val.length)
+        }
+        props.setMatchLength(noOfBets)
+      }
+  }, [lastMessage])
 
   return (
     <>
@@ -40,9 +49,12 @@ function MatchBet() {
             className="table-responsive"
             style={{ backgroundColor: "#fff" }}>
             <table
-              className={`table table-bordered ${
-                matchLength === 0 ? "d-none" : ""
-              }`}>
+              className={`table table-bordered 
+              ${
+                props.matchLength === 0 ? "d-none" : ""
+              }
+              `}
+              >
               <thead>
                 <tr className="matchbet-detail">
                   <th className="box-6">Nation</th>
@@ -54,19 +66,21 @@ function MatchBet() {
                 {matchBet?.data &&
                   Object.keys(matchBet?.data).map((key) => (
                     <>
-                      {matchBet?.data[key].map((item, id) => (
+                      {matchBet?.data[key].map((item, id) => {  
+                        // console.log(item?.length);
+                        return(
                         <tr key={id}>
                           <td>{item?.nation}</td>
                           <td>{item?.rate}</td>
 
                           <td className="text-right">{item?.amount}</td>
                         </tr>
-                      ))}
+                      )})}
                     </>
                   ))}
               </tbody>
             </table>
-            <div className={`${matchLength === 0 ? "" : "d-none"}`}>
+            <div className={`${props.matchLength === 0 ? "" : "d-none"}`}>
               <p colSpan="4" className="text-center no-real">
                 No real-time records found
               </p>

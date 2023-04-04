@@ -566,7 +566,8 @@
 
 .score-card {
     height: 290px;
-    margin-bottom: -13px
+    margin-bottom: -3px;
+    background-color: #567e2f;
 }
 
 .sr-simcrick-pitch__content.ng-scope {
@@ -662,12 +663,12 @@ p.team-name.col-6.text-right {
 }
 
 .box-1.lay.float-left.text-center.blink {
-    animation: blinking 200ms !important;
+    animation: blinking 100ms !important;
     background-color: #ffc01a !important;
 }
 
 .blink {
-    animation: blinking 200ms !important;
+    animation: blinking 100ms !important;
     background-color: #ffc01a !important;
 }
 
@@ -741,25 +742,31 @@ p.no-found {
     border-top-left-radius: unset;
     border-top-right-radius: unset;
 }
-
 .accordion-item:last-of-type .accordion-button.collapsed {
     border-bottom-right-radius: unset;
     border-bottom-left-radius: unset;
     outline: unset;
 }
-
 .accordion-button:focus {
     z-index: 3;
     border-color: unset;
     outline: 0;
     box-shadow: unset;
 }
-
 .accordion-button {
     margin-left: 26px;
 
 }
-
 .accordion {
     --bs-accordion-body-padding-x: none;
+}
+.main-div {
+    overflow: scroll;
+    height: 85vh;
+}
+.main-div::-webkit-scrollbar{
+    display: none;
+}
+.sr-simcrick-pitch__content.ng-scope {
+    padding: 0px 0px !important;
 }

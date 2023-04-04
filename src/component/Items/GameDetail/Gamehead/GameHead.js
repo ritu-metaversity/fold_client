@@ -5,13 +5,14 @@ import GameDetail from "../GameDetail";
 import "./GameHead.css";
 import NavBar from "../../../navBar/NavBar";
 
-function GameHead({SportId}) {
+function GameHead({SportId, matchLength}) {
   const [ActiveNavbar, setActiveNavBar] = useState(1);
+  const [betLength, setBetlenght] = useState(0)
   const handleClick = (val) => {
     setActiveNavBar(val);
     
   };
-  console.log(SportId)
+  // console.log(matchLength)
 
   return (
     <>
@@ -31,7 +32,7 @@ function GameHead({SportId}) {
               data-toggle="tab"
               className="nav-link nav-btn"
               onClick={() => handleClick(2)}>
-              Matched Bet (0)
+              Matched Bet ({betLength})
             </button>
           </li>
         </ul>
@@ -41,7 +42,12 @@ function GameHead({SportId}) {
           </p>
         </div>
       </div>
-      {ActiveNavbar === 1 ? <GameDetail SportId={SportId}/> : <MatchBet />}
+      <div style={{display:ActiveNavbar===1?"block":"none"}}>
+        <GameDetail SportId={SportId}/> : 
+      </div>
+      <div style={{display:ActiveNavbar===2?"block":"none"}}>
+        <MatchBet matchLength={betLength} setMatchLength = {setBetlenght}/>
+      </div>
     </>
   );
 }

@@ -42,7 +42,7 @@ const Slot = () => {
 
   return (
     <>
-      {/* <NavBar /> */}
+      <NavBar />
       <Mobilenav />
       {
         isLoading?<p className="lodder"><i className="fa fa-spinner fa-spin"></i></p>:<div className="tab-content">

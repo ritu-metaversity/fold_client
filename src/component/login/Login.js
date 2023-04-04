@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import AlertBtn from "../Alert/AlertBtn";
 import { AuthorAPI } from "../../apis/AuthorAPI";
@@ -11,36 +11,9 @@ function Login() {
   const [StatusVal, setStatusVal] = useState(true);
   const [message, setMessage]= useState("")
  
-
-
-  const [Error, setError]= useState()
-  
-    const token = localStorage.getItem("token");
-  
-    useEffect(() => {
-      const time = setInterval(() => {
-          AuthorAPI.VALIDATE_JWT()
-            .then()
-            .catch((error) => {
-              setError(error.response.status)
-              // if(token !== null){  
-              if (error.response.status === 401) {
-                localStorage.clear();
-                history.push("/login");
-              }
-            // }
-            });
-      }, 2000);
-      if(token === null){
-        clearInterval(time)
-      }
-    }, [Error]);
-
-  
-
   const handleLogin = () => {
 
-    history.push('/')
+    // history.push('/')
 
     if(password === "" && user ===""){
       setMessage("password: length must be between 4 and 30")

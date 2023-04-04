@@ -1,4 +1,4 @@
-import { React, useEffect, useState} from "react";
+import { React, useEffect, useState } from "react";
 import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -25,47 +25,49 @@ import Casino from "./component/Items/Casino/Casino";
 import Deposit from "./component/Items/Deposit/Deposit";
 import Withdraw from "./component/Items/Withdrow/Withdraw";
 import Register from "./component/Register/Register";
-import {useHistory} from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { AuthorAPI } from "./apis/AuthorAPI";
-// import NavBar from "./component/navBar/NavBar";
 
 function App() {
-  const [ SportId ,setSportId]=useState("")
-  const history = useHistory("");
-  const [Error, setError]= useState()
+  const [SportId, setSportId] = useState("");
+  const history = useHistory();
   const token = localStorage.getItem("token");
+
   useEffect(() => {
-    setInterval(() => {
-        AuthorAPI.VALIDATE_JWT()
-          .then()
-          .catch((error) => {
-            setError(error.response.status)
-            if(token !== null){  
+    const time = setInterval(() => {
+      if(localStorage.getItem("token"))
+      AuthorAPI.VALIDATE_JWT()
+        .then()
+        .catch((error) => {
+          if (token !== null) {
             if (error.response.status === 401) {
               localStorage.clear();
               history.push("/login");
+              window.location.reload();
             }
           }
-          });
+        });
+        
     }, 2000);
-  }, [Error]);
+    return ()=>clearInterval(time)
+  }, []);
 
-const idddd=(id)=>{
-  setSportId(id)
-}
+
+  const idddd = (id) => {
+    setSportId(id);
+  };
+
   return (
     <BrowserRouter>
-    {/* <NavBar/> */}
       <div className="App">
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/Register" component={Register} />
-            {/* <NavBar gameIdForItemPage={gameIdForItemPage}/> */}
           <Route exact path="/">
-            <Home  />
+            <Login />
           </Route>
           <Route exact path="/Home">
-            <Home  idddd={idddd}/>
+            <Home idddd={idddd} />
           </Route>
           <Route exact path="/deposit">
             <Deposit />
@@ -74,7 +76,7 @@ const idddd=(id)=>{
             <Withdraw />
           </Route>
           <Route exact path="/gamedetail/:id">
-            <GameHead SportId={SportId}/>
+            <GameHead SportId={SportId} />
           </Route>
           <Route exact path="/casino/:id">
             <Casino />
