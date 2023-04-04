@@ -43,13 +43,12 @@ const NavBar = ({gameIdForItemPage, props}) => {
   const token = localStorage.getItem("token")
 
   useEffect(() => {
-    if(token !==""){
+    if(localStorage.getItem("token"))
     UserAPI.User_Balance().then((res) => {
       setUserbalance(res.data.balance);
     }).catch((error)=>{
       setError(true)
     });
-  }
   }, [token]);
 
 
