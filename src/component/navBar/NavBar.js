@@ -4,7 +4,7 @@ import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
 
 
-const NavBar = ({gameIdForItemPage, props}) => {
+const NavBar = () => {
   const [close, setClose] = useState(false);
   const [droup, setDrop] = useState(false);
   const [userbalance, setUserbalance] = useState();

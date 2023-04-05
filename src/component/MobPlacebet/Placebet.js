@@ -18,11 +18,13 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
     setUpdated(event.target.value);
   };
 
+
   useEffect(()=>{
     axios.get("https://geolocation-db.com/json/").then((res)=>{
       setUserIP(res.data.IPv4)
     })
   },[]);
+
 
 
   const handleSubmit = ()=>{
@@ -71,8 +73,6 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
       setStackVal(res);
     })
   }, []);
-
-
 
 
   return (
@@ -136,9 +136,9 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
                     {colorName === "back"
                       ? (parseFloat(getBetValu).toFixed(2) <= 1
                           ? updated * 1 - updated
-                          : updated * parseFloat(getBetValu) - updated
-                        ).toFixed(2)
-                      : updated}
+                          : updated * parseFloat(getBetValu).toFixed(2) - updated
+                        )
+                      : (updated * parseFloat(getBetValu).toFixed(2) - updated).toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -205,11 +205,11 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
                           ) : (
                             <b>
                               {spanValueName === e.name
-                                ? ` -${(parseFloat(getBetValu).toFixed(2) <= 1
+                                ? ` ${parseFloat(getBetValu).toFixed(2) <= 1
                                     ? updated * 1 - updated
-                                    : updated * parseFloat(getBetValu - updated)
-                                  ).toFixed(2)}`
-                                : `${updated === "00" ? "0" : (updated)}.00`}
+                                    : - (parseFloat(updated).toFixed(2))
+                                  }`
+                                : (updated * parseFloat(getBetValu).toFixed(2) - updated).toFixed(2)}
                             </b>
                           )}
                         </span>

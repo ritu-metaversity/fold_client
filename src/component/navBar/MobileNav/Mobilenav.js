@@ -50,7 +50,7 @@ function Mobilenav() {
               <Link
                 data-toggle="tab"
                 to="/m/Others"
-                className="nav-link navlink1"
+                className="nav-link"
                 >
                 Others
               </Link>

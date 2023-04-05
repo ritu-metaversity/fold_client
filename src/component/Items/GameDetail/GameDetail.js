@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./GameDetail.css";
 import Modal from "react-bootstrap/Modal";
 import Placebet from "../../MobPlacebet/Placebet";
-import axios from "axios";
+// import axios from "axios";
 import moment from "moment";
 import AlertBtn from "../../Alert/AlertBtn";
 import Accordion from "react-bootstrap/Accordion";
@@ -297,12 +297,13 @@ function GameDetail({ getStackValue, SportId}) {
                                   <span>{minBet?.Odds[id1]?.maxBet}</span>
                                 </b>
                               </div>
-                              <div className="back box-1 float-left text-center">
+                              <div className="back box-1 box-7 float-left text-center">
                                 <b>BACK</b>
                               </div>
-                              <div className="lay box-1 float-left text-center">
+                              <div className="lay box-1 box-7 float-left text-center">
                                 <b>LAY</b>
                               </div>
+                              
                             </div>
                             <div data-title="OPEN" className="table-body">
                               {item.runners?.length &&
@@ -312,7 +313,7 @@ function GameDetail({ getStackValue, SportId}) {
                                       data-title="ACTIVE"
                                       className="table-row"
                                       key={event + index}>
-                                      <div className="float-left country-name box-4">
+                                      <div className="float-left country-name box-4 box-8">
                                         <span
                                           className="team-name"
                                           style={{
@@ -336,9 +337,9 @@ function GameDetail({ getStackValue, SportId}) {
                                             return (
                                               <div
                                                 key={e.size + e.price + id}
-                                                className={`box-1 back1 float-left back-1 text-center ${
+                                                className={`box-1 box-7 back1 float-left back-1 text-center ${id===1?"back2":""} ${
                                                   id === 0 || id === 1
-                                                    ? "d-none"
+                                                    ? "ds-none"
                                                     : ""
                                                 }  ${
                                                   e.price !==
@@ -384,9 +385,9 @@ function GameDetail({ getStackValue, SportId}) {
                                           return (
                                             <div
                                               key={e.size + e.price + id}
-                                              className={`box-1 lay float-left text-center ${
+                                              className={`box-1 box-7 lay float-left text-center  ${
                                                 id === 1 || id === 2
-                                                  ? "d-none"
+                                                  ? "ds-none"
                                                   : ""
                                               } ${
                                                 e.price !==

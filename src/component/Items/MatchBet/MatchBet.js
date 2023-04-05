@@ -66,8 +66,7 @@ function MatchBet(props) {
                 {matchBet?.data &&
                   Object.keys(matchBet?.data).map((key) => (
                     <>
-                      {matchBet?.data[key].map((item, id) => {  
-                        // console.log(item?.length);
+                      {matchBet?.data[key].map((item, id) => { 
                         return(
                         <tr key={id}>
                           <td>{item?.nation}</td>
