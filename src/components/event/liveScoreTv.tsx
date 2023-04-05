@@ -5,7 +5,6 @@ import { useSearchParams } from "react-router-dom";
 import { sportServices } from "../../utils/api/sport/services";
 import ScoreboardIcon from "@mui/icons-material/Scoreboard";
 import { MatchInterface } from "../home/match";
-import ScoreComponent from "./scoreComponent";
 
 const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
   const [searchParams] = useSearchParams();
@@ -82,14 +81,15 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
         </Box>
       </Typography>
       {showScore && (
-        <ScoreComponent />
+        // <ScoreComponent />
 
-        // <iframe
-        //   width="100%"
-        //   height="200px"
-        //   title="score-iframe"
-        //   src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
-        // />
+        <iframe
+          width="100%"
+          height="200px"
+          title="score-iframe"
+          src={`http://15.207.182.173:3050/event/${matchId}`}
+          // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
+        />
       )}
       {showLive && (
         <iframe
