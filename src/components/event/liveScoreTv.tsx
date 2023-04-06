@@ -1,6 +1,6 @@
 import { Switch, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { sportServices } from "../../utils/api/sport/services";
 import ScoreboardIcon from "@mui/icons-material/Scoreboard";
@@ -13,6 +13,7 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
   const sportId = searchParams.get("sport-id");
   const [showLive, setShowLive] = useState(false);
   const [showScore, setShowScore] = useState(true);
+  const [showScore2, setShowScore2] = useState(false);
   const [activeEventList, setActiveEventList] = useState<MatchInterface[]>([]);
 
   const handleShowScoreChange = (
@@ -20,11 +21,20 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
   ) => {
     setShowScore(event.target.checked);
     if (showLive) setShowLive(false);
+    if (showScore2) setShowScore2(false);
+  };
+  const handleShowScore2Change = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setShowScore2(event.target.checked);
+    if (showLive) setShowLive(false);
+    if (showScore) setShowScore(false);
   };
 
   const handleShowLiveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShowLive(event.target.checked);
     if (showScore) setShowScore(false);
+    if (showScore2) setShowScore2(false);
   };
 
   const getNewEventOpen = useCallback(async () => {
@@ -44,17 +54,17 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
     return () => {};
   }, [getNewEventOpen]);
 
-  const channelId = useMemo(
-    () =>
-      activeEventList.find((event) => event.matchId.toString() === matchId)
-        ?.channelId,
-    [activeEventList, matchId]
-  );
+  // const channelId = useMemo(
+  //   () =>
+  //     activeEventList.find((event) => event.matchId.toString() === matchId)
+  //       ?.channelId,
+  //   [activeEventList, matchId]
+  // );
 
-  const isChannelAvailable = useMemo(
-    () => (channelId && channelId.toString() !== "0" ? true : false),
-    [channelId]
-  );
+  // const isChannelAvailable = useMemo(
+  //   () => (channelId && channelId.toString() !== "0" ? true : false),
+  //   [channelId]
+  // );
   return (
     <>
       <Typography
@@ -63,6 +73,14 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
         fontSize={{ xs: "0.6rem", position: "relative" }}
       >
         LastMatched {lastMatchedTime}
+        <Box
+          display="flex"
+          alignItems={"center"}
+          sx={{ position: "absolute", right: 80, top: "-1.2em" }}
+        >
+          <ScoreboardIcon className="icon-medium" />
+          <Switch onChange={handleShowScore2Change} checked={showScore2} />{" "}
+        </Box>
         <Box
           display="flex"
           alignItems={"center"}
@@ -81,11 +99,23 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
         </Box>
       </Typography>
       {showScore && (
+        // <ScoreComponent />
+
         <iframe
           width="100%"
           height="200px"
           title="score-iframe"
+          // src={`http://15.207.182.173:3050/event/${matchId}`}
           src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
+        />
+      )}
+      {showScore2 && (
+        <iframe
+          width="100%"
+          height="300px"
+          title="score-iframe score-iframe2"
+          src={`http://15.207.182.173:3050/event/${matchId}`}
+          // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
         />
       )}
       {showLive && (
