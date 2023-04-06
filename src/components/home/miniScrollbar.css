@@ -1,9 +1,19 @@
-#scrollable-match-list::-webkit-scrollbar {
-  width: 2px;
+#scrollable-match-list-mobile::-webkit-scrollbar {
+  width:2px;
   padding: 0px;
 }
-#scrollable-match-list::-webkit-scrollbar-track {
+
+#scrollable-match-list-mobile::-webkit-scrollbar-track {
   background-color: transparent;
   width: 0px;
 }
 
+#scrollable-match-list-desktop::-webkit-scrollbar {
+  width:10px;
+  padding: 0px;
+}
+
+#scrollable-match-list-desktop::-webkit-scrollbar-track {
+  background-color: transparent;
+  width: 0px;
+}
