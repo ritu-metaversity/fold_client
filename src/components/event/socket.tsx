@@ -24,6 +24,7 @@ const Socket = () => {
       eventId,
     });
   }, []);
+
   return <div>Socket</div>;
 };
 

@@ -121,6 +121,15 @@ const Profile = () => {
           <Grid item xs={12}>
             <Divider sx={{ borderColor: "white", borderWidth: "1px" }} />
           </Grid>
+          <Grid textAlign={"right"} xs={5.8} item>
+            Total Balance:
+          </Grid>
+          <Grid textAlign={"left"} xs={5.8} item>
+            {profileData?.exposure + profileData?.balance}
+          </Grid>
+          <Grid item xs={12}>
+            <Divider sx={{ borderColor: "white", borderWidth: "1px" }} />
+          </Grid>
         </Grid>
       </Box>
     </HomeLayout>

@@ -41,6 +41,7 @@ import Marquee from "react-fast-marquee";
 import { socket } from "../../utils/socket/socket";
 import LiveScoreTv from "./liveScoreTv";
 import MyBetWrapper from "./bet/MyBetWrapper";
+import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 
 const anish_socket_actve = false;
 const ankit_socket_actve = true;
@@ -191,6 +192,38 @@ const Event = () => {
   //   return () => clearInterval(timer);
   // }, [matchId]);
 
+  const { lastMessage: oddsPnlLastMessage } = useWebSocket(
+    `${
+      process.env.REACT_APP_ANKIT_SOCKET_BET
+    }/enduserodd/${matchId}/${localStorage.getItem("token")}`,
+    { shouldReconnect: (event: CloseEvent) => true }
+  );
+
+  useEffect(() => {
+    if (
+      oddsPnlLastMessage?.data &&
+      JSON.parse(oddsPnlLastMessage?.data)?.data &&
+      ankit_socket_actve
+    )
+      setPnl(JSON.parse(oddsPnlLastMessage?.data).data);
+  }, [oddsPnlLastMessage]);
+
+  const { lastMessage: fancyPnlLastMessage } = useWebSocket(
+    `${
+      process.env.REACT_APP_ANKIT_SOCKET_BET
+    }/enduserfancy/${matchId}/${localStorage.getItem("token")}`,
+    { shouldReconnect: (event: CloseEvent) => true }
+  );
+
+  useEffect(() => {
+    if (
+      fancyPnlLastMessage?.data &&
+      JSON.parse(fancyPnlLastMessage?.data)?.data &&
+      ankit_socket_actve
+    )
+      setFancyPnl(JSON.parse(fancyPnlLastMessage?.data).data);
+  }, [fancyPnlLastMessage]);
+
   const getOdds = async () => {
     if (anish_socket_actve) return;
     if (matchId) {
@@ -238,7 +271,7 @@ const Event = () => {
   };
 
   const getPnl = async () => {
-    if (!matchId) return;
+    if (!matchId || ankit_socket_actve) return;
     const { response } = await userServices.pnlByMatch(matchId);
     if (response?.data?.length) {
       setPnl(response.data);
@@ -246,7 +279,7 @@ const Event = () => {
   };
 
   const getFancyPnl = async () => {
-    if (!matchId) return;
+    if (!matchId || ankit_socket_actve) return;
     const { response } = await userServices.fancyPnlByMatch(matchId);
     if (response?.data) {
       setFancyPnl(response.data);

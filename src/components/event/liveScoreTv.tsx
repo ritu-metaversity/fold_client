@@ -1,6 +1,6 @@
 import { Switch, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { sportServices } from "../../utils/api/sport/services";
 import ScoreboardIcon from "@mui/icons-material/Scoreboard";
@@ -54,17 +54,17 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
     return () => {};
   }, [getNewEventOpen]);
 
-  const channelId = useMemo(
-    () =>
-      activeEventList.find((event) => event.matchId.toString() === matchId)
-        ?.channelId,
-    [activeEventList, matchId]
-  );
+  // const channelId = useMemo(
+  //   () =>
+  //     activeEventList.find((event) => event.matchId.toString() === matchId)
+  //       ?.channelId,
+  //   [activeEventList, matchId]
+  // );
 
-  const isChannelAvailable = useMemo(
-    () => (channelId && channelId.toString() !== "0" ? true : false),
-    [channelId]
-  );
+  // const isChannelAvailable = useMemo(
+  //   () => (channelId && channelId.toString() !== "0" ? true : false),
+  //   [channelId]
+  // );
   return (
     <>
       <Typography
