@@ -81,6 +81,8 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
         </Box>
       </Typography>
       {showScore && (
+        // <ScoreComponent />
+
         <iframe
           width="100%"
           height="200px"
