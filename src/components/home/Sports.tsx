@@ -9,6 +9,7 @@ import { UserContext } from "../../App";
 import "./miniScrollbar.css";
 import Loading from "../layout/loading";
 import { BoxWithTitleBox } from "../common/styledComponents";
+import { isMobile } from "react-device-detect";
 
 const Sports = () => {
   const [value, setValue] = React.useState(0);
@@ -144,7 +145,11 @@ const Sports = () => {
         </Grid>
       </Grid>
       <Box
-        id="scrollable-match-list"
+        id={
+          isMobile
+            ? "scrollable-match-list-mobile"
+            : "scrollable-match-list-desktop"
+        }
         maxHeight={{ xs: "310px", lg: "100%" }}
         minHeight={{ lg: "calc(100vh - 440px)" }}
         sx={{
