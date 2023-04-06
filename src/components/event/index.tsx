@@ -285,9 +285,7 @@ const Event = () => {
       setFancyPnl(response.data);
     }
   };
-  useEffect(() => {
-    console.log("Ran evetns");
-  }, []);
+
   useEffect(() => {
     getBets();
     getPnl();
@@ -339,7 +337,7 @@ const Event = () => {
       pnl,
       setProfits,
     });
-  }, [betDetails?.stake, pnl, fancyPnl, fancyOdds?.Odds?.marketId]);
+  }, [betDetails?.stake, pnl, fancyPnl, fancyOdds?.Odds[0]?.marketId]);
 
   const currentMatch: { date: string; matchName: string; matchId: string } =
     useMemo(
