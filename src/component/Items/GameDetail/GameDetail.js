@@ -387,7 +387,7 @@ function GameDetail({ getStackValue, SportId}) {
                                         event?.ex?.availableToLay.map((e, id) => {
                                           return (
                                             <div
-                                              key={e.size + e.price + id}
+                                              key={e?.size + e?.price + id}
                                               className={`box-1 box-7 lay float-left text-center  ${
                                                 id === 1 || id === 2
                                                   ? "ds-none"

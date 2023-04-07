@@ -101,7 +101,7 @@ const NavBar = () => {
                 </div>
                 <div className="col-6 text-right bal-expo">
                   <p className={`mb-0 ${!balanceShow ? "d-none" : ""}`}>
-                    <i className="fas fa-landmark mr-1"></i>{" "}
+                    <i className="fas fa-landmark mr-1"></i>
                     <b>{error?"0.00": userbalance===""?"0.00":userbalance}</b>
                   </p>
                   <div className="exp">
@@ -121,7 +121,7 @@ const NavBar = () => {
                       aria-labelledby="example-modal-sizes-title-lg">
                       <Modal.Header closeButton closeVariant="white">
                         <Modal.Title id="example-modal-sizes-title-lg">
-                          My Market{" "}
+                          My Market
                           <i className="fas fa-sync-alt ml-1 resetbtn"></i>
                         </Modal.Title>
                       </Modal.Header>
@@ -156,32 +156,32 @@ const NavBar = () => {
                           to="/m/reports/accountstatement"
                           className="dropdown-item">
                           Account Statement
-                        </Link>{" "}
+                        </Link>
                         <Link
                           to="/m/reports/profitloss"
                           className="dropdown-item">
                           Profit Loss Report
-                        </Link>{" "}
+                        </Link>
                         <Link
                           to="/m/reports/bethistory"
                           className="dropdown-item">
                           Bet History
-                        </Link>{" "}
+                        </Link>
                         <Link
                           to="/m/reports/unsetteledbet"
                           className="dropdown-item">
                           Unsetteled Bet
-                        </Link>{" "}
+                        </Link>
                         {/* <Link
                           
                           className="dropdown-item">
                           Casino Report History
-                        </Link>{" "} */}
+                        </Link> */}
                         <Link
                           to="/m/setting/changebtnvalue"
                           className="dropdown-item">
                           Set Button Values
-                        </Link>{" "}
+                        </Link>
                         <Link
                           to="/m/setting/changepassword"
                           className="dropdown-item">
@@ -200,7 +200,7 @@ const NavBar = () => {
                               className={
                                 balanceShow ? "custom-control-input" : ""
                               }
-                            />{" "}
+                            />
                             <label
                               htmlFor="customCheck"
                               className="custom-control-label"></label>
@@ -217,15 +217,15 @@ const NavBar = () => {
                               defaultChecked
                               id="customCheck1"
                               className={expShow ? "custom-control-input" : ""}
-                            />{" "}
+                            />
                             <label
                               htmlFor="customCheck1"
                               className="custom-control-label"></label>
                           </div>
                         </Link>
-                        <Link  className="dropdown-item">
+                        <Link to='/home' className="dropdown-item">
                           Rules
-                        </Link>{" "}
+                        </Link>
                         <Link
                           to="/SignOut"
                           className="dropdown-item mt-2 text-danger">

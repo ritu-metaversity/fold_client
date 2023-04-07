@@ -15,7 +15,6 @@ function Item({ gameIdForItemPage, sportId}) {
   if(gameIdForItemPage === "" || gameIdForItemPage === undefined){
     gameIdForItemPage=4
   }
-
   
   useEffect(() => {
     const token = localStorage.getItem("token");
