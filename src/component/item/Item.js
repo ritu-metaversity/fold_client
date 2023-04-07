@@ -17,8 +17,6 @@ function Item({ gameIdForItemPage, sportId}) {
   }
 
   
-
-  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (gameIdForItemPage != null ) {

@@ -46,8 +46,7 @@ function App() {
               window.location.reload();
             }
           }
-        });
-        
+        });  
     }, 2000);
     return ()=>clearInterval(time)
   }, []);
@@ -56,7 +55,6 @@ function App() {
   const idddd = (id) => {
     setSportId(id);
   };
-
   return (
     <BrowserRouter>
       <div className="App">

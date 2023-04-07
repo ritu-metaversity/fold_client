@@ -248,12 +248,12 @@ function GameDetail({ getStackValue, SportId}) {
             <div id="odds" className="tab-pane ">
               <div className="match-title">
                 <span className="match-name">
-                  {matchDetail?.length && matchDetail[0].name} v{" "}
-                  {matchDetail?.length && matchDetail[1].name}
+                  {matchDetail?.length && matchDetail[0]?.name} v{" "}
+                  {matchDetail?.length && matchDetail[1]?.name}
                 </span>{" "}
                 <span className="float-right">{eTime?.eventTime}</span>
               </div>
-              {matchDetail.length === 0 || matchDetail.length === "" ? (
+              {matchDetail?.length === 0 || matchDetail?.length === "" ? (
                 <p className="no-found">No real-time records found</p>
               ) : (
                 <>
@@ -309,8 +309,8 @@ function GameDetail({ getStackValue, SportId}) {
                               
                             </div>
                             <div data-title="OPEN" className="table-body">
-                              {item.runners?.length &&
-                                item.runners.map((event, index) => {
+                              {item?.runners?.length &&
+                                item?.runners.map((event, index) => {
                                   return (
                                     <div
                                       data-title="ACTIVE"
@@ -323,7 +323,7 @@ function GameDetail({ getStackValue, SportId}) {
                                             fontSize: "14px",
                                             fontWeight: "300",
                                           }}>
-                                          <b>{event.name}</b>
+                                          <b>{event?.name}</b>
                                         </span>
                                         <p>
                                           <span
@@ -371,20 +371,20 @@ function GameDetail({ getStackValue, SportId}) {
                                                         "false"
                                                       )
                                                     }>
-                                                    {e.price}
+                                                    {e?.price}
                                                   </span>{" "}
                                                   <span className="d-block">
                                                     {e.size === ""
                                                       ? "0.0"
-                                                      : e.size}
+                                                      : e?.size}
                                                   </span>
                                                 </button>
                                               </div>
                                             );
                                           }
                                         )}
-                                      {event.ex.availableToLay?.length &&
-                                        event.ex.availableToLay.map((e, id) => {
+                                      {event?.ex?.availableToLay?.length &&
+                                        event?.ex?.availableToLay.map((e, id) => {
                                           return (
                                             <div
                                               key={e.size + e.price + id}
@@ -478,7 +478,7 @@ function GameDetail({ getStackValue, SportId}) {
                   </div>
                   <div
                     className={`${
-                      fancyOdds.Bookmaker.length === 0 ? "d-none" : ""
+                      fancyOdds?.Bookmaker?.length === 0 ? "d-none" : ""
                     }`}>
                     <div className="market-title mt-1">
                       Bookmaker
@@ -501,8 +501,8 @@ function GameDetail({ getStackValue, SportId}) {
                         </div>
                       </div>
                       <div className="table-body">
-                        {fancyOdds.Bookmaker?.length &&
-                          fancyOdds.Bookmaker.map((bookmaker, id) => {
+                        {fancyOdds?.Bookmaker?.length &&
+                          fancyOdds?.Bookmaker.map((bookmaker, id) => {
                             return (
                               <div
                                 key={bookmaker + id}
@@ -514,7 +514,7 @@ function GameDetail({ getStackValue, SportId}) {
                                 } ${bookmaker.t === "TOSS" ? "d-none" : ""}`}>
                                 <div className="float-left country-name box-4">
                                   <span className="team-name">
-                                    <b>{bookmaker.nation}</b>
+                                    <b>{bookmaker?.nation}</b>
                                   </span>
                                   <p>
                                     <span
@@ -540,7 +540,7 @@ function GameDetail({ getStackValue, SportId}) {
                                 <div
                                   className={`box-1 back float-left back-1  text-center ${
                                     bookmaker?.b1 !==
-                                    previousState.Bookmaker[id].b1
+                                    previousState?.Bookmaker[id]?.b1
                                       ? "blink"
                                       : ""
                                   }`}>
@@ -564,17 +564,17 @@ function GameDetail({ getStackValue, SportId}) {
                                       {bookmaker.b1}
                                     </span>
                                     <span className="d-block">
-                                      {bookmaker.bs1 === ""
+                                      {bookmaker?.bs1 === ""
                                         ? "0.0"
-                                        : bookmaker.bs1}
+                                        : bookmaker?.bs1}
                                     </span>
                                   </button>
                                 </div>
 
                                 <div
                                   className={`box-1 lay float-left text-center ${
-                                    bookmaker.l1 !==
-                                    previousState.Bookmaker[id].l1
+                                    bookmaker?.l1 !==
+                                    previousState?.Bookmaker[id]?.l1
                                       ? "blink"
                                       : ""
                                   }`}>
@@ -818,7 +818,3 @@ function GameDetail({ getStackValue, SportId}) {
 }
 
 export default GameDetail;
-
-// Bookmaker Blick code:
-
-// ${bookmaker.l1 !==previousState.Bookmaker[id].l1? "blink":""}
