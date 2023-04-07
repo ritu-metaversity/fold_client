@@ -100,7 +100,7 @@ function SideBar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-link">
+              <Link  className="nav-link">
                 <span>Casino Queen</span>
               </Link>
             </li>

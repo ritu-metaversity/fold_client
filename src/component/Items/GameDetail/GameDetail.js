@@ -74,6 +74,7 @@ function GameDetail({ getStackValue, SportId}) {
     }else{
       setSid(SportId)
     }
+    // eslint-disable-next-line
   }, [sId])
 
   const oddFromSocketSlower = (res) => {
@@ -102,6 +103,7 @@ function GameDetail({ getStackValue, SportId}) {
     socket.on("JoinedSuccessfully", () => {
       setOddSocketConnected(true);
     });
+    // eslint-disable-next-line
   }, []);
 
  
@@ -123,6 +125,7 @@ function GameDetail({ getStackValue, SportId}) {
 
   useEffect(() => {
     OddSocketConnected && setOddSocketConnected(false);
+    // eslint-disable-next-line
   }, [id]);
 
 

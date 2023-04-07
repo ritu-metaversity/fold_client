@@ -17,14 +17,14 @@ function SlotGame() {
                     <div  className="col-md-10 featured-box">
                         <div >
                             <ul  role="tablist" className="nav nav-tabs m-b-20">
-                                <li  className="nav-item show"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>NEWLY RELEASED GAMES</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>HOT GAMES</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SLOTS</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>TABLE GAMES</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SHOOTING GAMES</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>Instant WIN</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SCRATCH CARD</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>PUSH GAMING</Link></li>
+                                <li  className="nav-item show"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>NEWLY RELEASED GAMES</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>HOT GAMES</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SLOTS</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>TABLE GAMES</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SHOOTING GAMES</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>Instant WIN</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SCRATCH CARD</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>PUSH GAMING</Link></li>
                             </ul>
                             <div  className="tab-content">
                                 <div  id="newGame" className="tab-pane show">

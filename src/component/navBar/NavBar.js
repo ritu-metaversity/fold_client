@@ -83,7 +83,6 @@ const NavBar = () => {
   return (
     <>
       <div className="wrapper">
-
         <div className="">
           <header className="header">
             <div className="container-fluid">
@@ -173,11 +172,11 @@ const NavBar = () => {
                           className="dropdown-item">
                           Unsetteled Bet
                         </Link>{" "}
-                        <Link
-                          to="/"
+                        {/* <Link
+                          
                           className="dropdown-item">
                           Casino Report History
-                        </Link>{" "}
+                        </Link>{" "} */}
                         <Link
                           to="/m/setting/changebtnvalue"
                           className="dropdown-item">
@@ -189,7 +188,7 @@ const NavBar = () => {
                           Change Password
                         </Link>
                         <Link
-                          to="/"
+                          
                           className="dropdown-item"
                           onClick={balanceHideShow}>
                           Balance
@@ -208,7 +207,7 @@ const NavBar = () => {
                           </div>
                         </Link>
                         <Link
-                          to="/"
+                          
                           className="dropdown-item"
                           onClick={expHideShow}>
                           Exposure
@@ -224,7 +223,7 @@ const NavBar = () => {
                               className="custom-control-label"></label>
                           </div>
                         </Link>
-                        <Link to="/" className="dropdown-item">
+                        <Link  className="dropdown-item">
                           Rules
                         </Link>{" "}
                         <Link
@@ -249,7 +248,7 @@ const NavBar = () => {
                             : "search_input search_input-hover"
                         }
                       />
-                      <Link to="/" className="search_icon" onClick={droupMenu}>
+                      <Link  className="search_icon" onClick={droupMenu}>
                         <i
                           className={
                             !droup ? "fas fa-search" : "fas fa-times"

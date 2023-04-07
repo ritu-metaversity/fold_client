@@ -114,26 +114,26 @@ function Item({ gameIdForItemPage, sportId}) {
                         <div className="row row5">
                           <div className="col-12">
                             <div className="text-center game-col game-home">
-                              <Link to="/" className="btn-back">
+                              <Link  className="btn-back">
                                 {item.team1Back === 0 ? "0" : item.team1Back}
                               </Link>
-                              <Link to="/" className="btn-lay">
+                              <Link  className="btn-lay">
                                 {item.team1Lay === 0 ? "0" : item.team1Lay}
                               </Link>
                             </div>
                             <div className="text-center game-col game-home">
-                              <Link to="/" className="btn-back">
+                              <Link  className="btn-back">
                                 {item.drawBack === 0 ? "0" : item.drawBack}
                               </Link>
-                              <Link to="/" className="btn-lay">
+                              <Link  className="btn-lay">
                                 {item.drawLay === 0 ? "0" : item.drawLay}
                               </Link>
                             </div>
                             <div className="text-center game-col game-home">
-                              <Link to="/" className="btn-back">
+                              <Link  className="btn-back">
                                 {item.team2Back === 0 ? "0" : item.team2Back}
                               </Link>
-                              <Link to="/" className="btn-lay">
+                              <Link  className="btn-lay">
                                 {item.team2Lay === 0 ? "0" : item.team2Lay}
                               </Link>
                             </div>
