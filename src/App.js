@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,28 +7,11 @@ import "../src/component/login/Login.css";
 import "./component/sidebar/sidebar.css";
 import "../src/component/navBar/TopNav.css";
 
-import "../src/component/NewLunch.css";
 import Login from "./component/login/Login";
-import { BrowserRouter, Route, Switch} from "react-router-dom";
-
-// import LiveCasino from "./component/Items/LiveCasino/LiveCasino";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+// eslint-disable-next-line
 import SlotGame from "./component/Items/SlotGame/SlotGame";
-// import Race from "./component/Items/Race/Race";
-// import HorseRace from "./component/Items/HorseRace/HorseRace";
-
-// import DtList from "./component/Items/DtList/DtList";
-// import SportCasino from "./component/Items/SportCasino/SportCasino";
-// import AndarBahar from "./component/Items/andarBahar/AndarBahar";
-// import BollywoodTable from "./component/Items/bollywoodTable/BollywoodTable";
-// import Binary from "./component/Items/Binary/Binary";
-// import CasinoWar from "./component/Items/casinoWar/CasinoWar";
-// import Lottery from "./component/Items/Lottery/Lottery";
-// import Worlilist from "./component/Items/WorList/Worlilist";
-// import Cardjud from "./component/Items/CardJud/Cardjud";
-// import VirtualSports from "./component/Items/VirtualSport/VirtualSports";
-import Home from './component/Home/Home';
-
-// import CricketCasino from "./component/Items/CricketCasino/CricketCasino";
+import Home from "./component/Home/Home";
 import AaccountStatement from "./component/Items/AaccountStatement/AaccountStatement";
 import ProfitLoss from "./component/Items/ProfitLoss/ProfitLoss";
 import BetHistory from "./component/Items/BetHistory/BetHistory";
@@ -41,102 +24,62 @@ import Slot from "./component/Items/Slot/Slot";
 import Casino from "./component/Items/Casino/Casino";
 import Deposit from "./component/Items/Deposit/Deposit";
 import Withdraw from "./component/Items/Withdrow/Withdraw";
-
-
+import Register from "./component/Register/Register";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AuthorAPI } from "./apis/AuthorAPI";
 
 function App() {
+  const [SportId, setSportId] = useState("");
+  const history = useHistory();
+  const token = localStorage.getItem("token");
 
+  useEffect(() => {
+    const time = setInterval(() => {
+      if(localStorage.getItem("token"))
+      AuthorAPI.VALIDATE_JWT()
+        .then()
+        .catch((error) => {
+          if (token !== null){
+            if (error.response.status === 401) {
+              localStorage.clear();
+              history.push("/login");
+              window.location.reload();
+            }
+          }
+        });  
+    }, 2000);
+    return ()=>clearInterval(time)
+    // eslint-disable-next-line
+  }, []);
+
+
+  const idddd = (id) => {
+    setSportId(id);
+  };
   return (
-
-    
-
-    // <Modals/>
     <BrowserRouter>
       <div className="App">
         <Switch>
           <Route exact path="/login" component={Login} />
-          
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/Home">
-              <Home />
-            </Route>
-          
-
-
-
-
-          <Route exact path="/Cricket">
-            <Home id="4"/>
+          <Route exact path="/Register" component={Register} />
+          <Route exact path="/">
+            <Login />
           </Route>
-          <Route exact path="/Tennis">
-            <Home id="2" />
+          <Route exact path="/Home">
+            <Home idddd={idddd} />
           </Route>
-          <Route exact path="/Football">
-          <Home id="3" />
-          </Route>
-          <Route exact path="/TableTennis">
-          <Home id="1" />
-          </Route>
-          <Route exact path="/Kabaddi">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Basketball">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Volleyball">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Baccarat">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/HorseRacing">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Teenpatti">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Poker">
-          <Home id="2" />
-          </Route>
-          <Route exact path="/Lucky7">
-          <Home id="2" />
-          </Route>
-
-          <Route exact path="/32Cards">
-          <Home id="2" />
-          </Route>
-
-         
           <Route exact path="/deposit">
-            <Deposit/>
+            <Deposit />
           </Route>
           <Route exact path="/withdraw">
-            <Withdraw/>
+            <Withdraw />
           </Route>
-
-
-
           <Route exact path="/gamedetail/:id">
-            <GameHead  />
+            <GameHead SportId={SportId} />
           </Route>
-
           <Route exact path="/casino/:id">
-            <Casino/>
+            <Casino />
           </Route>
-
-
-          {/* <Route exact path="/unsetteledbet">
-            <UnSetteledBet />
-          </Route>
-          <Route exact path="/changebtnvalue">
-            <ChangeBtnValue />
-          </Route>
-          <Route exact path="/changepassword">
-            <ChangePassword />
-          </Route> */}
-          
           <Route exact path="/m/reports/accountstatement">
             <AaccountStatement />
           </Route>
@@ -155,9 +98,6 @@ function App() {
           <Route exact path="/m/setting/changepassword">
             <ChangePassword />
           </Route>
-
-
-
           <Route exact path="/m/sports">
             <Home />
           </Route>
@@ -165,17 +105,14 @@ function App() {
             <Home />
           </Route>
           <Route exact path="/m/slot">
-            <Slot/>
+            <Slot />
           </Route>
           <Route exact path="/m/others">
             <Home />
           </Route>
-          
-
           <Route exact path="/SignOut">
-            <SignOut/>
+            <SignOut />
           </Route>
-
         </Switch>
       </div>
     </BrowserRouter>

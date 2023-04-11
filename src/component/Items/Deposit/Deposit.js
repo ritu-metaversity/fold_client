@@ -1,7 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { UserAPI } from "../../../apis/UserAPI";
-import Mobilenav from "../../navBar/MobileNav/Mobilenav";
 import NavBar from "../../navBar/NavBar";
 import "./Deposit.css";
 import PayManually from "./PayManually";
@@ -10,6 +9,7 @@ import Modal from "react-bootstrap/Modal";
 const Deposit = () => {
   const [paymentListDetails, setPaymentListDetails] = useState({});
   const [showModals, setShowModals] = useState(false);
+  const [modalImg, setModalImg] = useState("");
 
   const UpdateDetails = (vl) => {
     if (vl === true) {
@@ -25,16 +25,18 @@ const Deposit = () => {
   }, []);
 
   const handleCloseModal = () => setShowModals(false);
-  const handleShow = (e) => {
+  const handleShow = (e,img) => {
     e.preventDefault();
     setShowModals(true);
+    setModalImg(img)
   };
 
   return (
     <>
       <NavBar />
-      <Mobilenav />
-      <div className="wrapper main-conatiner">
+      {/* <Mobilenav /> */}
+      <><div className="card-header wit"><h4 className="mb-0">Deposite</h4></div>
+      <div className="wrapper main-conatiner deposit">
         <PayManually UpdateDetails={UpdateDetails} />
 
         <div className="row row5 mt-2">
@@ -55,28 +57,28 @@ const Deposit = () => {
                       role="columnheader"
                       scope="col"
                       aria-colindex="1"
-                      className="text-left">
+                      className="text-left deposit-data">
                       Amount
                     </th>
                     <th
                       role="columnheader"
                       scope="col"
                       aria-colindex="2"
-                      className="text-left">
+                      className="text-center  deposit-data">
                       Image
                     </th>
                     <th
                       role="columnheader"
                       scope="col"
                       aria-colindex="3"
-                      className="text-left">
+                      className="text-left deposit-data withdraw-data">
                       Data
                     </th>
                     <th
                       role="columnheader"
                       scope="col"
                       aria-colindex="4"
-                      className="text-right">
+                      className="text-right deposit-data">
                       Status
                     </th>
                   </tr>
@@ -84,19 +86,20 @@ const Deposit = () => {
 
                 <tbody>
                   {paymentListDetails?.data &&
-                    paymentListDetails?.data.map((item) => (
-                      <tr role="row">
+                    paymentListDetails?.data.map((item, id) => (
+                      <tr role="row" key={id}>
                         <td aria-colindex="1" className="text-left">
                           {item.amount}
                         </td>
-                        <td aria-colindex="2" className="text-left">
+                        <td aria-colindex="2" className="text-center">
                           <img
+                          onClick={(e) => handleShow(e, item.image)}
                             src={item.image}
                             className="screenshot"
-                            onClick={(e) => handleShow(e)}
+                            alt="screenshort-images"
+                            
                           />
-                        </td>
-                        <Modal
+                          <Modal
                           show={showModals}
                           onHide={handleCloseModal}
                           centered
@@ -107,17 +110,16 @@ const Deposit = () => {
                           }}>
                           <Modal.Body>
                             {" "}
-                            <img src={item.image} width="250px" />
+                            <img src={modalImg} width="100%" alt="screen-short"/>
                           </Modal.Body>
                         </Modal>
-
+                        </td>
                         <td aria-colindex="3" className="text-left">
-                          {moment(item.time).format("MM Do YYYY, h:mm")}
-                          {/* { moment().formet("mm dd yyyy hh mm")}  */}
+                          {moment(item.time).format("YYYY-MM-DD, h:mm:ss")}
                         </td>
                         <td
                           aria-colindex="4"
-                          className="text-right text-danger">
+                          className={`text-right ${item.status==="Pending"?"pending":item.status==="APPROVED"?"approved":"rejected"}`}>
                           {item.status}
                         </td>
                       </tr>
@@ -128,6 +130,7 @@ const Deposit = () => {
           </div>
         </div>
       </div>
+      </>
     </>
   );
 };

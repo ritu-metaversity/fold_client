@@ -23,14 +23,12 @@ function AaccountStatement() {
   const [dataListLength, setDataListLength] = useState();
   const [pageLength, setPageLength] = useState(0);
   const [pagination, setPagination] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
   const [showModals, setShowModals] = useState(false);
   const [remark, setRemark] = useState();
   const [MarketId, setMarketId] = useState();
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
-    console.log(dateString);
   };
 
   const EndDateValue = (date, dateString) => {
@@ -44,13 +42,9 @@ function AaccountStatement() {
     setIndexValue(e.target.value);
   };
 
-  const handleCloseModal = () => setShowModals(false);
-  const handleShow = (e, remark, marketId) => {
-    e.preventDefault();
-    setShowModals(true);
-    setRemark(remark);
-    setMarketId(marketId);
-  };
+
+
+  // console.log(MarketId);
 
   useEffect(() => {
     UserAPI.Account_Statement({
@@ -60,13 +54,21 @@ function AaccountStatement() {
       toDate: time,
       type: 1,
     }).then((res) => {
-      setIsLoading(false);
+      // console.log(res)
       setPageLength(res.totalPages);
       setDataList(res.dataList);
       setDataListLength(res.dataList.length);
     });
     // eslint-disable-next-line
   }, []);
+
+  const handleCloseModal = () => setShowModals(false);
+  const handleShow = (e, remark, marketId) => {
+    e.preventDefault();
+    setShowModals(true);
+    setRemark(remark);
+    setMarketId(marketId);
+  };
 
   const submit = () => {
     if (startDate === "") {
@@ -86,7 +88,6 @@ function AaccountStatement() {
       toDate: endDate,
       type: type,
     }).then((res) => {
-      setIsLoading(false);
       setPageLength(res.totalPages);
       setDataList(res.dataList);
       setDataListLength(res.dataList.length);
@@ -111,6 +112,13 @@ function AaccountStatement() {
   const increment = () => {
     setPagination(pageLength + 1);
   };
+  const decrementByFirst = ()=>{
+    setPageLength(0)
+  }
+
+  const incrementByLast = ()=>{
+    setPagination(pageLength)
+  }
 
   useEffect(() => {
     if (pageLength > 0) {
@@ -121,7 +129,6 @@ function AaccountStatement() {
         toDate: endDate,
         type: type,
       }).then((res) => {
-        setIsLoading(false);
         setDataList(res.dataList);
       });
     }
@@ -130,15 +137,14 @@ function AaccountStatement() {
   return (
     <div>
       <NavBar />
-      
 
       <div className="report-container wrapper">
         <div className="card">
           <div className="card-header">
             <h4 className="mb-0">Account Statement</h4>
           </div>
-          <div className="card-body container-fluid container-fluid-5">
-            <div className="row row5">
+          <div className="card-body statement container-fluid container-fluid-5">
+            <div className="row row5 acc-stat">
               <div className="col-6">
                 <div className="form-group mb-0">
                   <div className="mx-datepicker" style={{ width: "auto" }}>
@@ -159,7 +165,7 @@ function AaccountStatement() {
                   </div>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-6 text-right">
                 <div className="form-group mb-0">
                   <div className="mx-datepicker" style={{ width: "auto" }}>
                     <div className="mx-input-wrapper">
@@ -179,7 +185,7 @@ function AaccountStatement() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2">
+            <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <div className="form-group mb-0">
                   <select
@@ -194,7 +200,9 @@ function AaccountStatement() {
               </div>
             </div>
 
-            <div className="row row5 mt-2" style={{ marginInline: "-7px" }}>
+            <div
+              className="row row5 mt-2 acc-stat"
+              style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div
                   id="account-statement_length"
@@ -222,25 +230,8 @@ function AaccountStatement() {
                   </label>
                 </div>
               </div>
-
-              {/* <div className="col-6">
-                <div
-                  id="account-statement_filter"
-                  className="dataTables_filter">
-                  <label style={{ fontSize: "14px" }}>
-                    Search:
-                    <input
-                      type="search"
-                      placeholder="Type to Search"
-                      aria-controls="account-statement"
-                      className="form-control form-control-sm"
-                      style={{ fontSize: "14px" }}
-                    />
-                  </label>
-                </div>
-              </div> */}
             </div>
-            <div className="row row5 mt-2">
+            <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <button
                   className="btn btn-primary btn-block btn-sm"
@@ -264,43 +255,43 @@ function AaccountStatement() {
                         <th
                           role="columnheader"
                           scope="col"
-                          aria-colindex="1"
-                          className="text-left">
-                          Date
-                        </th>
-                        <th
-                          role="columnheader"
-                          scope="col"
                           aria-colindex="2"
-                          className="text-left">
+                          className="text-left bg-color">
                           Sr no
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
+                          aria-colindex="1"
+                          className="text-left bg-color">
+                          Date
+                        </th>
+                        <th
+                          role="columnheader"
+                          scope="col"
                           aria-colindex="3"
-                          className="text-right">
+                          className="text-right bg-color">
                           Credit
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="4"
-                          className="text-right">
+                          className="text-right bg-color">
                           Debit
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="5"
-                          className="text-right">
+                          className="text-right bg-color">
                           Balance
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="6"
-                          className="text-left">
+                          className="text-left bg-color">
                           Remark
                         </th>
                       </tr>
@@ -315,11 +306,11 @@ function AaccountStatement() {
                               onClick={(e) =>
                                 handleShow(e, item.remark, item.marketid)
                               }>
-                              <td aria-colindex="1" className="text-left">
-                                {moment(item.date).format("YYYY-MM-DD h:mm")}
-                              </td>
                               <td aria-colindex="2" className="text-left">
                                 {item.sno}
+                              </td>
+                              <td aria-colindex="1" className="text-left">
+                                {moment(item.date).format("YYYY-MM-DD h:mm")}
                               </td>
                               <td
                                 aria-colindex="3"
@@ -379,36 +370,49 @@ function AaccountStatement() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2">
+            <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">
-                    <li className="page-item" onClick={decrement}>
+                    <li className="page-item" onClick={decrementByFirst}>
                       <button className="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span className="sr-only">Previous</span>
+                        <span aria-hidden="true">First</span>
                       </button>
                     </li>
-                    {result?.length &&
+                    <li className="page-item" onClick={decrement}>
+                      <button className="page-link" aria-label="Previous">
+                        <span aria-hidden="true">Prev</span>
+                      </button>
+                    </li>
+                    {/* <li
+                      className="page-item ">
+                      <button className="plink act">
+                        <span aria-hidden="true" className="num">0</span>
+                      </button>
+                    </li> */}
+                    {result?.length > 0 &&
                       result.map((item, id) => {
                         return (
                           <li
                             key={item + id}
-                            className="page-item"
+                            className="page-item act"
                             onClick={() => handlePagenation(id)}>
-                            <button
-                              className="page-link"
-                              href="#"
-                              aria-label="Previous">
-                              {item}
+                            <button className="page-link act">
+                              <span aria-hidden="true" className="num">
+                                {item === "" ? 0 : item}
+                              </span>
                             </button>
                           </li>
                         );
                       })}
                     <li className="page-item" onClick={increment}>
-                      <button className="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span className="sr-only">Next</span>
+                      <button className="page-link" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                      </button>
+                    </li>
+                    <li className="page-item" onClick={incrementByLast}>
+                      <button className="page-link" aria-label="Next">
+                        <span aria-hidden="true">Last</span>
                       </button>
                     </li>
                   </ul>

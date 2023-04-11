@@ -21,3 +21,9 @@ tr.matchbet-detail th {
 tr.matchbet-detail td {
     border-bottom: 1px solid #aaa;
 }
+p.text-center.no-real {
+    background: #ccc;
+    padding: 10px;
+    color: #000;
+    font-size: 13px;
+}

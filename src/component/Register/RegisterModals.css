@@ -1,0 +1,10 @@
+.user-id {
+    display: flex;
+    justify-content: space-between;
+}
+.user{
+    margin-bottom: 30px;
+}
+.rotateBtn{
+    rotate: 180deg;
+}

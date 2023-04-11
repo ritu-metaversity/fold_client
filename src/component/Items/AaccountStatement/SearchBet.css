@@ -47,3 +47,9 @@
 th.text-left.date {
     padding-right: 110px;
 }
+.danger{
+    color: #b71e2d !important;
+}
+.success{
+    color: #169733 !important;
+}

@@ -6,10 +6,6 @@ const SearchBet = (props) => {
   const [betValue, setBetValue] = useState(1);
   const [betListData, setBetListData] = useState();
 
-  //   console.log(props.MarketId, "MarketIdMarketIdMarketId");
-  //   console.log(props.remark, "remarkremarkremarkremark");
-
-  console.log(betValue);
 
   useEffect(() => {
     UserAPI.Bet_Search({
@@ -18,11 +14,10 @@ const SearchBet = (props) => {
       betType: betValue,
     }).then((res) => {
       setBetListData(res.data);
-      console.log(res.data.betList);
     });
+    // eslint-disable-next-line
   }, [betValue]);
 
-  // console.log(betList.totalStake)
 
   return (
     <div>
@@ -165,9 +160,9 @@ const SearchBet = (props) => {
                           </tr>
                         </thead>
                         <tbody>
-                          {betListData?.betList?.map((item) => {
+                          {betListData?.betList?.map((item, id) => {
                             return (
-                              <tr role="row" className={`bet-details ${item.isback===true?"back":"lay"} `}>
+                              <tr role="row" key={id} className={`bet-details ${item.isback===true?"back":"lay"} `}>
                                 <td  className="text-left">
                                   {item.marketname}
                                 </td>

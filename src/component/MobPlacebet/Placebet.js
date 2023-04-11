@@ -1,10 +1,9 @@
 import { React, useEffect, useState } from "react";
 import "./Placebet.css";
 import { GameAPI } from "../../apis/gameAPI";
-import { message } from "antd";
 import axios from "axios";
 
-function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchId, marketId, selectionId, MarketName, placeTime, isFancy, toss,data }) {
+function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchId, marketId, selectionId, MarketName, placeTime, isFancy,data, priceValue }) {
   const [updated, setUpdated] = useState("");
   const [StackVal, setStackVal] = useState("");
   const [userIP, setUserIP] = useState("");
@@ -12,12 +11,13 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
   const [odds, setOdds]=useState(spanValueRate);
   // eslint-disable-next-line
   const [name, setName]=useState(spanValueName);
-  const [status, setStatus]=useState("");
+  // const [status, setStatus]=useState("");
 
   const [getBetValu, setgetBetValu] = useState(spanValueRate);
   const handleClick = (event) => {
     setUpdated(event.target.value);
   };
+
 
   useEffect(()=>{
     axios.get("https://geolocation-db.com/json/").then((res)=>{
@@ -25,7 +25,7 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
     })
   },[]);
 
-  console.log(userIP)
+
 
   const handleSubmit = ()=>{
     GameAPI.PLACE_BET({
@@ -33,15 +33,14 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
         "isFancy": isFancy,
         "isBack": colorName ==="back" ? true:false,
         "odds": odds,
-        "stake": updated,
+        "stake": parseInt(updated),
         "name": name, 
         "marketName": MarketName,
-        "selectionId": selectionId,
-        "priceValue": odds, 
+        "selectionId": parseInt(selectionId),
+        "priceValue": isFancy===false? odds : priceValue, 
         "placeTime": placeTime,
         "marketId":marketId===""?selectionId:marketId,
         "matchId": matchId,
-        "t":toss===""?"":toss, 
         "deviceInfo": {
            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
            "browser": "Chrome",
@@ -53,9 +52,9 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
            "orientation": "landscape"
         }      
     }).then((res)=>{
-      setStatus(res.data.status);
+      // setStatus(res.data.status);
       data({
-        status:res.data.status,
+        status:true,
         message:res.data.message
       })
     }).catch((error)=>{
@@ -67,16 +66,12 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
     })
   }
 
-  // console.log(message);
 
   useEffect(() => {
     GameAPI.Place_Bet().then((res)=>{
       setStackVal(res);
     })
   }, []);
-
-
-
 
   return (
     <>
@@ -139,9 +134,9 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
                     {colorName === "back"
                       ? (parseFloat(getBetValu).toFixed(2) <= 1
                           ? updated * 1 - updated
-                          : updated * parseFloat(getBetValu) - updated
-                        ).toFixed(2)
-                      : updated}
+                          : updated * parseFloat(getBetValu).toFixed(2) - updated
+                        )
+                      : (updated * parseFloat(getBetValu).toFixed(2) - updated).toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -162,7 +157,7 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
 
               {matchDetail.map((e) => {
                 return (
-                  <div className={`row row5 mt-2 ${isFancy==="true"?"fancy-none":""}`} key={e.selectionId+e.selectionId}>
+                  <div className={`row row5 mt-2 ${isFancy===true?"fancy-none":""}`} key={e.selectionId+e.selectionId}>
                     <div className="col-4">
                       <span>{e.name}</span>
                     </div>
@@ -186,10 +181,10 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
                           ) : (
                             <b>
                               {spanValueName === e.name
-                                ? (getBetValu.toFixed(2) <= 1
-                                    ? updated * 1 - updated
-                                    : updated * getBetValu - updated
-                                  ).toFixed(2)
+                                ? (parseFloat(getBetValu).toFixed(2) <= 1
+                                ? updated * 1 - updated
+                                : updated * parseFloat(getBetValu) - updated
+                              ).toFixed(2)
                                 : `-${updated === "00" ? "0" : updated}.00`}
                             </b>
                           )}
@@ -208,11 +203,11 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
                           ) : (
                             <b>
                               {spanValueName === e.name
-                                ? ` -${(getBetValu.toFixed(2) <= 1
+                                ? ` ${parseFloat(getBetValu).toFixed(2) <= 1
                                     ? updated * 1 - updated
-                                    : updated * getBetValu - updated
-                                  ).toFixed(2)}`
-                                : `${updated === "00" ? "0" : updated}.00`}
+                                    : - (parseFloat(updated).toFixed(2))
+                                  }`
+                                : (updated * parseFloat(getBetValu).toFixed(2) - updated).toFixed(2)}
                             </b>
                           )}
                         </span>

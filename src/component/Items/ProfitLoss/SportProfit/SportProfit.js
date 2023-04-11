@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import  { React,  useEffect, useState } from "react";
 import "../ProfitLoss.css";
-// import "../AaccountStatement/AaccountStatement.css";
 import "../../AaccountStatement/AaccountStatement.css";
 import moment from "moment";
-import { DatePicker, Tabs } from "antd";
+import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import { UserAPI } from "../../../../apis/UserAPI";
 import { GameAPI } from "../../../../apis/gameAPI";
@@ -11,7 +10,6 @@ import { GameAPI } from "../../../../apis/gameAPI";
 const dateFormat = "YYYY-MM-DD";
 function SportProfit() {
   const [show, setShow] = useState(false);
-
   var curr = new Date();
   const timeBefore = moment(curr).subtract(14, "days").format("YYYY-MM-DD");
   const time = moment(curr).format("YYYY-MM-DD");
@@ -19,29 +17,21 @@ function SportProfit() {
   const [endDate, setEndDate] = useState(time);
   const [IndexValue, setIndexValue] = useState(5);
   const [PLValue, setPLValue] = useState();
-  const [SportId, setSportId] = useState("");
+  const [SportId, setSportId] = useState(4);
   const [MatchId, setMatchId] = useState();
   const [SportList, setSportList] = useState();
   const [SportData, setSportData] = useState();
+  // const [SportDataLength, setSportDataLength] = useState();
   const [DataList, setDataList] = useState();
 
-//   const DateValue = (date, dateString) => {
-//     setStartDate(dateString);
-//   };
-
-console.log(SportId==="")
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
-    console.log(dateString);
   };
   const EndDateValue = (date, dateString) => {
     setEndDate(dateString);
   };
 
-//   const handleSportId = (val) => {
-//     setSportId(val);
-//     console.log(val);
-//   };
+
 
   const getOptionValue = (e) => {
     setMatchId(e.target.value);
@@ -49,6 +39,9 @@ console.log(SportId==="")
   const getOptionValue1 = (e) => {
     setSportId(e.target.value);
   };
+
+
+  // const UserId = localStorage.getItem("UserId")
 
   useEffect(() => {
     GameAPI.ACTIVE_SPORT_LIST().then((res) => {
@@ -58,25 +51,29 @@ console.log(SportId==="")
 
   useEffect(() => {
     if (SportId !== "") {
-        console.log("rituuutututu")
       GameAPI.Active_Match_Sport_Wise({ sportId: SportId }).then((res) => {
         setSportData(res.data.data);
-
       });
     }
   }, [SportId]);
 
   useEffect(() => {
     UserAPI.Profit_Loss({
-      sportId: MatchId,
+      sportId: SportId,
       matchId: "",
       fromDate: "",
       toDate: "",
       userId: "",
+      index:0,
+      pageNumber:1,
+      pageSize:2,
     }).then((res) => {
-      setPLValue(res.data);
+      setPLValue(res.data.market);
+      // setDataList(res.data.market.length);
+    
     });
-  }, []);
+  }, [SportId]);
+  
 
   const getIndexValues = (e) => {
     setIndexValue(e.target.value);
@@ -93,31 +90,29 @@ console.log(SportId==="")
     }
 
     UserAPI.Profit_Loss({
-      noOfRecords: IndexValue,
-      index: 1,
+      index: IndexValue,
+      pageNumber:2,
       toDate: endDate,
       fromDate: startDate,
-      sportId: MatchId,
-      matchId: SportId,
+      sportId: SportId,
+      matchId: MatchId,
       userId: "",
-      totalPages: 2,
+      pageSize: 2
     }).then((res) => {
-      setDataList(res.data.length);
+      setPLValue(res.data.market);
+      setDataList(res.data.market.length);
     });
   };
-
   return (
     <div>
-      <div className="report-container Mobile-view-topNav">
+      <div className="report-container statement1">
         <div className="card">
           <div className="card-body container-fluid container-fluid-5">
-            <div className="row row5">
+            <div className="row row5 acc-stat">
               <div className="col-6">
                 <div className="form-group mb-0">
                   <div
                     className="mx-datepicker"
-                    not-before="Sun Jan 15 2023 05:30:00 GMT+0530 (India Standard Time)"
-                    not-after="Wed Feb 15 2023 05:30:00 GMT+0530 (India Standard Time)"
                     style={{ width: "auto" }}>
                     <div className="mx-input-wrapper">
                       <DatePicker
@@ -134,12 +129,11 @@ console.log(SportId==="")
                   </div>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-6 text-right">
                 <div className="form-group mb-0">
                   <div
                     className="mx-datepicker"
-                    not-before="Sun Jan 15 2023 05:30:00 GMT+0530 (India Standard Time)"
-                    not-after="Wed Feb 15 2023 05:30:00 GMT+0530 (India Standard Time)"
+
                     style={{ width: "auto" }}>
                     <div className="mx-input-wrapper">
                       <DatePicker
@@ -157,7 +151,7 @@ console.log(SportId==="")
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2" style={{ marginInline: "-7px" }}>
+            <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div className="form-group mb-0">
                   <select
@@ -174,7 +168,6 @@ console.log(SportId==="")
                   </select>
                 </div>
               </div>
-
               <div className="col-6">
                 <div className="form-group mb-0">
                   <select
@@ -193,7 +186,7 @@ console.log(SportId==="")
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2" style={{ marginInline: "-7px" }}>
+            <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div
                   id="account-statement_length"
@@ -222,7 +215,7 @@ console.log(SportId==="")
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2">
+            <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <button
                   className="btn btn-primary btn-block btn-sm"
@@ -246,31 +239,30 @@ console.log(SportId==="")
                           role="columnheader"
                           scope="col"
                           aria-colindex="2"
-                          className="text-left">
+                          className="text-left bg-color">
                           Match Name
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="1"
-                          className="text-left">
+                          className="text-left bg-color">
                           Pnl
                         </th>
-
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="4"
-                          className="text-left">
+                          className="text-left bg-color">
                           Commssion Mila
                         </th>
                       </tr>
                     </thead>
-                    <tbody className={`${DataList === 0?"dis-none":""}`}>
+                    <tbody className={`${DataList === 0|| DataList === null ?"dis-none":""}`}>
                       {PLValue?.length &&
                         PLValue.map((res) => {
                           return (
-                            <tr role="row">
+                            <tr role="row" key={res.matchName}>
                               <td aria-colindex="2" className="text-left">
                                 {res.matchName}
                               </td>
@@ -283,14 +275,14 @@ console.log(SportId==="")
                                 {res.commssionMila}
                               </td>
                             </tr>
-                          );
+                          )
                         })}
                     </tbody>
                     <tbody>
                     <tr
                       role="row"
                       className={`b-table-empty-row ${
-                        DataList === 0 ? "" : "dis-none"
+                        DataList === null ||DataList===0  ? "" : "dis-none"
                       }`}>
                       <td colSpan="6" role="cell">
                         <div role="alert" aria-live="polite">

@@ -1,12 +1,12 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { UserAPI } from "../../../apis/UserAPI";
-import Mobilenav from "../../navBar/MobileNav/Mobilenav";
+import AlertBtn from "../../Alert/AlertBtn";
 import NavBar from "../../navBar/NavBar";
 import "./Withdraw.css";
 
 const Withdraw = () => {
-  const [tableDatashow, setTabledataShow] = useState(false);
+  // const [tableDatashow, setTabledataShow] = useState(false);
   const [amount, setAmount] = useState();
   const [bankName, setBankName] = useState("");
   const [accountType, setAccountType] = useState("Saving");
@@ -15,44 +15,97 @@ const Withdraw = () => {
   const [accountHolderName, setAccountHolderName] = useState("");
   const [withdrawReq, setWithdrawReq] = useState();
   const [dataLength, setDataLength] = useState();
+  const [errorAlert, setErrorAlert] = useState(false);
+  const [message, setMessage] = useState({})
 
+  const validateForm =()=>{
+    let error = {};
+
+    var letters = /^[A-Za-z]+$/;
+
+    if(amount === ""){
+      setErrorAlert(true)
+      error= "The Amount field is required"
+    }
+    
+    if(bankName === ""){
+      setErrorAlert(true)
+      error = "The Bank Name field is required"
+    }else if(!letters.test(bankName)){
+      setErrorAlert(true)
+      error = "Invaild Bank Name"
+    }
+
+    if(ifsc ===""){
+      setErrorAlert(true)
+      error = 'The IFSC field is required'
+    }
+
+    if(accountHolderName === ""){
+      setErrorAlert(true)
+      error = "The Account Name field is required"
+    }else if(!letters.test(accountHolderName)){
+      setErrorAlert(true)
+      error = "Invaild Name"
+    }
+    if(accountNumber === ""){
+      setErrorAlert(true)
+      error = "The Account Number field is required"
+    }
+
+    setMessage(error)
+    return Object.keys(error).length === 0;
+  }
 
   const handleClick = () => {
-    UserAPI.Self_Withdraw_App({
-      accountHolderName: accountHolderName,
-      bankName: bankName,
-      accountType: accountType,
-      amount: amount,
-      ifsc: ifsc,
-      accountNumber: accountNumber,
-    }).then((res) => {
-      if (res.status === true) {
-        setTabledataShow(true);
-      }
-      UserAPI.Withdraw_Request().then((res) => {
-        setWithdrawReq(res.data);
-        setDataLength(res.data.length)
-  
+    if (validateForm()) {
+      UserAPI.Self_Withdraw_App({
+        accountHolderName: accountHolderName,
+        bankName: bankName,
+        accountType: accountType,
+        amount: amount,
+        ifsc: ifsc,
+        accountNumber: accountNumber,
+      }).then((res) => {
+        UserAPI.Withdraw_Request().then((res) => {
+          console.log(res)
+          setWithdrawReq(res.data);
+          setDataLength(res.data.length);
+      
+        });
+        if(res.status === true){
+          setAmount("");
+          setBankName("");
+          setAccountNumber("");
+          setIFSC("");
+          setAccountHolderName("");
+        }
+      }).catch((error)=>{
+      setErrorAlert(true)
+        setMessage(error.response.data.message)
       });
-      console.log(res);
-    });
+    }
   };
 
   useEffect(() => {
     UserAPI.Withdraw_Request().then((res) => {
       setWithdrawReq(res.data);
-      setDataLength(res.data.length)
-
+      setDataLength(res.data.length);
     });
   }, []);
 
-  console.log(withdrawReq);
-
+  const popupClose=(vl)=>{
+    setErrorAlert(vl)
+  }
   return (
     <>
       <NavBar />
-      <Mobilenav />
-      <div className="wrapper">
+      {errorAlert ? <AlertBtn color="danger"  popupClose={popupClose}  val={message}/> : ""}
+      <>
+      <div className="card-header wit"><h4 className="mb-0">Withdraw</h4></div>
+      
+      <div className="wrapper withdraw">
+      
         <div className="card-body container-fluid container-fluid-5">
           <div className="main-account-containor">
             <div className="mx-input-wrapper account-field">
@@ -61,21 +114,17 @@ const Withdraw = () => {
               <input
                 type="number"
                 className="account-input"
+                value={amount}
                 onChange={(e) => setAmount(e.target.value)}
               />
             </div>
-
-            {/* <div className="mx-input-wrapper account-field">
-              <label className="account-lable">Amount</label>
-              <br />
-              <input type="number" className="account-input"/>
-            </div> */}
             <div className="mx-input-wrapper account-field">
               <label className="account-lable">Account Number</label>
               <br />
               <input
                 type="number"
                 className="account-input"
+                value={accountNumber}
                 onChange={(e) => setAccountNumber(e.target.value)}
               />
             </div>
@@ -85,6 +134,7 @@ const Withdraw = () => {
               <input
                 type="text"
                 className="account-input"
+               value={accountHolderName}
                 onChange={(e) => setAccountHolderName(e.target.value)}
               />
             </div>
@@ -94,6 +144,7 @@ const Withdraw = () => {
               <input
                 type="type"
                 className="account-input"
+                value={bankName}
                 onChange={(e) => setBankName(e.target.value)}
               />
             </div>
@@ -103,6 +154,7 @@ const Withdraw = () => {
               <input
                 type="type"
                 className="account-input"
+                value={ifsc}
                 onChange={(e) => setIFSC(e.target.value)}
               />
             </div>
@@ -128,7 +180,7 @@ const Withdraw = () => {
 
           <div className="row row5 mt-2">
             <div className="col-12">
-              <div className="table-responsive">
+              <div className="table-responsive withdrow-table">
                 <table
                   role="table"
                   aria-busy="false"
@@ -202,11 +254,11 @@ const Withdraw = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className={`${dataLength===0?"d-none":""}`}>
+                  <tbody className={`${dataLength === 0 ? "d-none" : ""}`}>
                     {withdrawReq?.length &&
-                      withdrawReq.map((item) => {
+                      withdrawReq.map((item, id) => {
                         return (
-                          <tr role="row">
+                          <tr role="row" key={id}>
                             <td
                               aria-colindex="1"
                               className="text-left withdraw-data">
@@ -217,9 +269,7 @@ const Withdraw = () => {
                               className="text-left withdraw-data">
                               {item.accountHolderName}
                             </td>
-                            <td
-                              aria-colindex="3"
-                              className="text-right withdraw-data">
+                            <td aria-colindex="3" className="text-right ">
                               {item.amount}
                             </td>
                             <td
@@ -237,20 +287,24 @@ const Withdraw = () => {
                               className="text-lift withdraw-data">
                               {item.accountType}
                             </td>
-                            <td
-                              aria-colindex="6"
-                              className="text-lift">
-                                {moment(item.time).format("YYYY-MM-DD h:mm:s")}
+                            <td aria-colindex="6" className="text-lift">
+                              {moment(item.time).format("YYYY-MM-DD h:mm:s")}
                               {}
                             </td>
                             <td
                               aria-colindex="6"
                               className="text-lift withdraw-data">
-                                {item.remark}
+                              {item.remark}
                             </td>
                             <td
                               aria-colindex="6"
-                              className="text-lift withdraw-data">
+                              className={`text-left ${
+                                item.status === "Pending"
+                                  ? "pending"
+                                  : item.status === "APPROVED"
+                                  ? "approved"
+                                  : "rejected"
+                              }`}>
                               {item.status}
                             </td>
                           </tr>
@@ -258,7 +312,9 @@ const Withdraw = () => {
                       })}
                   </tbody>
                   <tbody>
-                    <tr role="row" className={`${dataLength===0?"":"d-none"}`}>
+                    <tr
+                      role="row"
+                      className={`${dataLength === 0 ? "" : "d-none"}`}>
                       <td
                         aria-colindex="1"
                         colSpan="9"
@@ -273,6 +329,7 @@ const Withdraw = () => {
           </div>
         </div>
       </div>
+      </>
     </>
   );
 };

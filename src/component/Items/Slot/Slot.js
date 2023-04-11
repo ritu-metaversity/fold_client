@@ -11,7 +11,7 @@ const Slot = () => {
   const [casinoListId, setCasinoListId] = useState(323334);
   const [casinoData, setCasinoData] = useState("");
   const [casinoName, setCasinoName] = useState("Indian Casino");
-  const [isLoading, setIsLoading]=useState(true)
+  const [isLoading, setIsLoading]=useState(true);
 
   useEffect(() => {
     GameAPI.CASINO_TYPES().then((res) => {
@@ -19,23 +19,25 @@ const Slot = () => {
     });
   }, []);
 
-  const handleClick = (id, name) => {
+  const handleClick = (id, name, e) => {
     setCasinoListId(id);
     setActiveClass(id);
-    setCasinoName(name)
+    setCasinoName(name);
+    // e.preventDefault();
   };
 
   useEffect(() => {
     GameAPI.CASINO_LIST_BY_TYPE({
       id: casinoListId,
     }).then((res) => {
-      setCasinoData(res);
+      setCasinoData(res); 
       setIsLoading(false)
     });
   }, [casinoListId]);
 
   const history = useHistory();
-  const handleData = (id) => {
+  const handleData = (id, e) => {
+    e.preventDefault();
     history.push(`/casino/${id}`);
   };
 
@@ -57,9 +59,8 @@ const Slot = () => {
                         className={`nav-item ${
                           ActiveClass === item.id ? "active2" : ""
                         }`
-                        
                       }
-                        onClick={() => handleClick(item.id, item.name, item.gameId)}>
+                        onClick={(e) => handleClick(item.id, item.name, item.gameId, e)}>
                         <a
                           data-toggle="tab"
                           href="#casino"
@@ -89,9 +90,9 @@ const Slot = () => {
                           {casinoData?.length > 0 &&
                             casinoData.map((item) => {
                               return (
-                                <div key={item.gameId} className="col-6 text-center" onClick={()=>handleData(item.gameId)}>
+                                <div key={item.gameId} className="coll-6 text-center" onClick={(e)=>handleData(item.gameId, e)}>
                                   <div className="casinoicons" >
-                                    <a  className="">
+                                    <a href="/">
                                       <img
                                         src={item.imageUrl}
                                         className="img-fluid"
@@ -100,7 +101,6 @@ const Slot = () => {
                                       <div className="casino-name">
                                         {item.gameName}
                                       </div>
-                                      {/* <div className="new-launch-casino">New Launch</div> */}
                                     </a>
                                   </div>
                                 </div>
@@ -108,9 +108,7 @@ const Slot = () => {
                             })}
                         </div>
                         <div
-                          className={`row row5 mt-2 ${
-                            casinoData === null ? "" : "dis-none"
-                          }`}
+                          className={`row row5 mt-2 ${casinoData === null ? "" : "dis-none"}`}
                           style={{ borderTop: "2px solid #000" }}>
                           <div
                             style={{

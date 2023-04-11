@@ -1,10 +1,12 @@
 import { React, useState, useEffect } from "react";
 import "../item/Item.css";
 import { GameAPI } from "../../apis/gameAPI";
+import { Link } from "react-router-dom";
 
 function TopNav(props) {
   const [Active, setActive] = useState(4);
   const [activeSport, setActiveSport] = useState([]);
+  // const [SportIdList, setSportIdList] = useState(4);
 
 
   useEffect(() => {
@@ -14,46 +16,19 @@ function TopNav(props) {
   }, []);
 
   const handleClick = (val) => {
-    props.gameId(val);
     setActive(val);
+    props.gameId(val);
   };
-
   return (
     <div>
-      {/* <div className="desk-view-topNav">
-        <ul role="tablist" id="home-events" className="nav nav-tabs">
-          {NavList.map((myList, id) => {
-            return (
-              <li
-                className="nav-item"
-                key={id}
-                onClick={() => handleShowSingleSport(id)}>
-                <Link
-                  to="/home"
-                  data-toggle="tab"
-                  key={id}
-                  className={toggle === id ? "nav-link1 active1" : "nav-link1"}>
-                  {myList}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div> */}
-
-      {/* Mobile view TopNav Bar */}
-      {/* --------------------------------------- */}
-      {/* --------------------------------------- */}
-      {/* --------------------------------------- */}
-
       <div className="sports active">
         <ul className="nav nav-tabs game-nav-bar">
           {activeSport.map((res, id) => {
               return (
                 <li className="nav-item text-center" key={id}>
-                  <a
+                  <Link
                     data-toggle="tab"
-                    href="#1"
+                    // to=''
                     className={`nav-link nav1 ${
                       Active === res.sportId ? "active" : null
                     }`}
@@ -62,54 +37,17 @@ function TopNav(props) {
                       {
                         res.sportId===4?<img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/4.png"
                          alt="" />:res.sportId===1?
-                        <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/59.png" alt="" />:
+                        <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/1.png" alt="" />:
                         <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png" alt="" />
                       }
-                      
                     </div>
                     <div>{res.sportName}</div>
-                  </a>
+                  </Link>
                 </li>
               );
           })}
 
-          {/* <li  className="nav-item text-center" >
-            <a
-              
-              data-toggle="tab"
-              href="#2"
-              className={`nav-link nav1 ${Active === 2?"active":null}`}
-              onClick={()=>handleClick(2)}
-              >
-              <div >
-                <img
-                  
-                  src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png"
-                  alt=""
-                />
-              </div>
-              <div >Tennis</div>
-            </a>
-          </li> */}
-          {/* <li  className="nav-item text-center" >
-            <a
-              
-              data-toggle="tab"
-              href="#4"
-              className={`nav-link nav1 ${Active ===4?"active":null}`}
-              onClick={()=>handleClick(4)}
-             
-              >
-              <div >
-                <img
-                  
-                  src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/4.png"
-                  alt=""
-                />
-              </div>
-              <div >Cricket</div>
-            </a>
-          </li> */}
+
           {/* <li  className="nav-item text-center" >
             <a
               

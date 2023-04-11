@@ -425,12 +425,13 @@ table {
     width: 100%;
     padding: 4px 15px;
 }
-.lodder{
+.lodder {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 77vh;
+    height: 83vh;
+    background: #00000038;
 }
 .lodder i{
     font-size: 32px;

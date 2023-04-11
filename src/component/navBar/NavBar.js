@@ -3,14 +3,18 @@ import { Link } from "react-router-dom";
 import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
 
-const NavBar = (props) => {
+
+const NavBar = () => {
   const [close, setClose] = useState(false);
   const [droup, setDrop] = useState(false);
-  const [userbalance, setUserbalance] = useState();
+  const [userbalance, setUserbalance] = useState("0.00");
   // eslint-disable-next-line
   const [userdetail, setUserDetail] = useState(localStorage.getItem("UserId"));
   const [userMessage, setUserMessage] = useState("");
   const [status, setStatus] = useState(false);
+  const [error, setError] = useState(false);
+
+  
 
   function toggle(e) {
     e.preventDefault();
@@ -28,41 +32,37 @@ const NavBar = (props) => {
       setDrop(false);
     }
   }
-
-
   useEffect(()=>{
-    UserAPI.Self_By_App_Url({
-      appUrl: "atozscore.com"
-    }).then((res)=>{
+    UserAPI.Self_By_App_Url().then((res)=>{
       setStatus(res.data.selfAllowed)
     })
   },[])
 
-
-  // eslint-disable-next-line
-
-  // const TopNavList = [
-  //   "Home",
-  //   "Cricket",
-  //   "Tennis",
-  //   "Football",
-  //   "Kabaddi",
-  //   "Basketball",
-  //   "Volleyball",
-  //   "Baccarat",
-  //   "32 Cards",
-  //   "TeenPatti",
-  //   "Lucky 7",
-  // ];
-
   const token = localStorage.getItem("token")
 
   useEffect(() => {
-    UserAPI.User_Balance().then((res) => {
-      setUserbalance(res.data.balance);
-    // console.log(res.data.balance)
-    });
-  }, [token]);
+    setInterval(() => {
+     
+    }, 1000)
+  }, []);
+
+  useEffect(() => {
+    const time = setInterval(() => {
+      if(token !== null){
+        UserAPI.User_Balance().then((res) => {
+          setUserbalance(res.data.balance);
+        }).catch((error)=>{
+          setError(true)
+        })
+      }
+    }, 1000);
+    return ()=>clearInterval(time)
+    // eslint-disable-next-line
+  }, []);
+
+ 
+  
+  // console.log(userbalance);
 
 
   useEffect(() => {
@@ -96,7 +96,6 @@ const NavBar = (props) => {
   return (
     <>
       <div className="wrapper">
-
         <div className="">
           <header className="header">
             <div className="container-fluid">
@@ -115,10 +114,10 @@ const NavBar = (props) => {
                 </div>
                 <div className="col-6 text-right bal-expo">
                   <p className={`mb-0 ${!balanceShow ? "d-none" : ""}`}>
-                    <i className="fas fa-landmark mr-1"></i>{" "}
-                    <b>{userbalance===""?"0.00":userbalance}</b>
+                    <i className="fas fa-landmark mr-1"></i>
+                    <b>{error? "0.00": userbalance===""?"0.00":userbalance}</b>
                   </p>
-                  <div className="">
+                  <div className="exp">
                     <span className={`mr-1 ${!expShow ? "d-none" : ""}`}>
                       <u >Exp:0</u>
                     </span>
@@ -135,7 +134,7 @@ const NavBar = (props) => {
                       aria-labelledby="example-modal-sizes-title-lg">
                       <Modal.Header closeButton closeVariant="white">
                         <Modal.Title id="example-modal-sizes-title-lg">
-                          My Market{" "}
+                          My Market
                           <i className="fas fa-sync-alt ml-1 resetbtn"></i>
                         </Modal.Title>
                       </Modal.Header>
@@ -170,39 +169,38 @@ const NavBar = (props) => {
                           to="/m/reports/accountstatement"
                           className="dropdown-item">
                           Account Statement
-                        </Link>{" "}
+                        </Link>
                         <Link
                           to="/m/reports/profitloss"
                           className="dropdown-item">
                           Profit Loss Report
-                        </Link>{" "}
+                        </Link>
                         <Link
                           to="/m/reports/bethistory"
                           className="dropdown-item">
                           Bet History
-                        </Link>{" "}
+                        </Link>
                         <Link
                           to="/m/reports/unsetteledbet"
                           className="dropdown-item">
                           Unsetteled Bet
-                        </Link>{" "}
-                        <Link
-                          to="/"
+                        </Link>
+                        {/* <Link
+                          to=""
                           className="dropdown-item">
                           Casino Report History
-                        </Link>{" "}
+                        </Link> */}
                         <Link
                           to="/m/setting/changebtnvalue"
                           className="dropdown-item">
                           Set Button Values
-                        </Link>{" "}
+                        </Link>
                         <Link
                           to="/m/setting/changepassword"
                           className="dropdown-item">
                           Change Password
                         </Link>
                         <Link
-                          to="/"
                           className="dropdown-item"
                           onClick={balanceHideShow}>
                           Balance
@@ -214,14 +212,13 @@ const NavBar = (props) => {
                               className={
                                 balanceShow ? "custom-control-input" : ""
                               }
-                            />{" "}
+                            />
                             <label
                               htmlFor="customCheck"
                               className="custom-control-label"></label>
                           </div>
                         </Link>
                         <Link
-                          to="/"
                           className="dropdown-item"
                           onClick={expHideShow}>
                           Exposure
@@ -231,15 +228,15 @@ const NavBar = (props) => {
                               defaultChecked
                               id="customCheck1"
                               className={expShow ? "custom-control-input" : ""}
-                            />{" "}
+                            />
                             <label
                               htmlFor="customCheck1"
                               className="custom-control-label"></label>
                           </div>
                         </Link>
-                        <Link to="/m/rules" className="dropdown-item">
+                        <Link to='/home' className="dropdown-item">
                           Rules
-                        </Link>{" "}
+                        </Link>
                         <Link
                           to="/SignOut"
                           className="dropdown-item mt-2 text-danger">
@@ -262,7 +259,7 @@ const NavBar = (props) => {
                             : "search_input search_input-hover"
                         }
                       />
-                      <Link to="/" className="search_icon" onClick={droupMenu}>
+                      <Link  className="search_icon" onClick={droupMenu}>
                         <i
                           className={
                             !droup ? "fas fa-search" : "fas fa-times"

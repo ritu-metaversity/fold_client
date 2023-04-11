@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import "../Nav.css";
 
 function Mobilenav() {
-let {pathname}=useLocation()
  
   const [Active, setActive] = useState(1);
 
   const handleClick = (val, e) => {
+    e.preventDefault();
     setActive(val);
   };
 
@@ -16,42 +15,43 @@ let {pathname}=useLocation()
   return (
     <>
       <ul className="nav nav-tabs game-nav-bar">
-          <li className={`nav-item ${Active === 1 ? "active2" : null}`}>
+          <li className={`nav-item ${Active === 1 ? "active2" : null}`} onClick={(e) => handleClick(1, e)}>
               <Link
                 data-toggle="tab"
                 to="/m/In-play"
                 className="nav-link navlink1"
-                onClick={() => handleClick(1)}>
+                >
                 In-play
               </Link>
             </li>
-            <li className={`nav-item ${Active === 2 ? "active2" : null}`}>
+            <li className={`nav-item ${Active === 2 ? "active2" : null}`} onClick={(e) => handleClick(2, e)}>
               <Link
                 data-toggle="tab"
                 to="/m/Sports"
                 className="nav-link navlink1"
-                onClick={() => handleClick(2)}>
+                >
                 Sports
               </Link>
             </li>
-            <li className={`nav-item ${Active === 3 ? "active2" : null}`}>
+            <li className={`nav-item ${Active === 3 ? "active2" : null}`} onClick={(e) => handleClick(3, e)}>
               <Link
                 data-toggle="tab"
                 to="/m/slot"
                 className="nav-link navlink1"
-                onClick={() => handleClick(3)}>
+                >
                 Casino+Slot
               </Link>
             </li>
             <li
               
               className={`nav-item ${Active === 4 ? "active2" : null}`}
+              onClick={(e) => handleClick(4, e)}
              >
               <Link
                 data-toggle="tab"
                 to="/m/Others"
-                className="nav-link navlink1"
-                onClick={() => handleClick(4)}>
+                className="nav-link"
+                >
                 Others
               </Link>
             </li>

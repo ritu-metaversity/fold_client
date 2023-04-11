@@ -14,9 +14,9 @@ const PayManually = (props) => {
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);
+  const [active, setActive] = useState(0);
 
   const [files, setFiles] = useState(null);
-  // const [files, setPayment handlePaymentDetails] = useState("");
 
   const increment = () => {
     setBitValue(Bitvalue + 10);
@@ -26,6 +26,7 @@ const PayManually = (props) => {
   };
   const handleStaticAmount = (vl) => {
     setBitValue(Bitvalue + vl);
+    console.log(Bitvalue + vl)
   };
   useEffect(() => {
     UserAPI.Get_Payment_Detail_By_Id().then((res) => {
@@ -35,20 +36,24 @@ const PayManually = (props) => {
     });
   }, []);
 
-  const handlePaymentDetails = (vl) => {
+  const handlePaymentDetails = (vl, id) => {
     setPaymentMode(vl);
+    setActive(id)
   };
 
   const handleSubmit = () => {
     const data = new FormData();
-
     data.append("amount", Bitvalue.toString());
     data.append("image", files || "");
-
-    console.log(data);
-
     UserAPI.Self_Deposit_App({ data }).then((res) => {
       props.UpdateDetails(true);
+      console.log(res.status)
+      if(res.status === true){
+        setBitValue(0);
+        setFiles(null);
+        setPaymentMode("UPI");
+        setActive(0)
+      }
     });
   };
 
@@ -88,7 +93,7 @@ const PayManually = (props) => {
             </button>
           </div>
         </div>
-        <div className="col-6">
+        <div className="col-6 deposit-value">
           <div className="row price-values">
             <div className="col-3 price-data">
               <button
@@ -101,7 +106,7 @@ const PayManually = (props) => {
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
-                value="2000"
+                value="500"
                 onClick={() => handleStaticAmount(500)}>
                 +500
               </button>
@@ -109,7 +114,7 @@ const PayManually = (props) => {
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
-                value="300"
+                value="1000"
                 onClick={() => handleStaticAmount(1000)}>
                 +1000
               </button>
@@ -117,7 +122,7 @@ const PayManually = (props) => {
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
-                value="300"
+                value="5000"
                 onClick={() => handleStaticAmount(5000)}>
                 +5000
               </button>
@@ -137,11 +142,11 @@ const PayManually = (props) => {
               {payMethods?.length &&
                 payMethods?.map((item, id) => {
                   return (
-                    <>
+                    
                       <Col
                         key={item.methodName + id}
-                        onClick={() => handlePaymentDetails(item.methodName)}>
-                        <div className="css-1502y4u">
+                        onClick={() => handlePaymentDetails(item.methodName, id)}>
+                        <div className={`css-1502y4u ${active===id?"active3":""} `}>
                           <img
                             src={item.logo}
                             className="css-37vfbv"
@@ -150,7 +155,6 @@ const PayManually = (props) => {
                           <p className="Typography-root ">{item.methodName}</p>
                         </div>
                       </Col>
-                    </>
                   );
                 })}
             </Row>
@@ -277,6 +281,7 @@ const PayManually = (props) => {
                     }
                     style={{ width: "150px" }}
                     onClick={(e) => handleShow(e)}
+                    alt="QR-Code"
                   />
                 </div>
               </Col>
@@ -298,6 +303,7 @@ const PayManually = (props) => {
                       allDatataa?.qrCode?.qrCodeImage
                     }
                     className="modals-image"
+                    alt="QR-code"
                   />
                 </Modal.Body>
               </Modal>
@@ -312,23 +318,12 @@ const PayManually = (props) => {
                           allDatataa?.qrCode &&
                           allDatataa?.qrCode?.displayName
                         }
+                        readOnly
                         type="text"
                       />
                     </div>
                   </Col>
                 </Row>
-                {/* <Row>
-                  <Col>
-                    <div className="">
-                      <button className="download">
-                        <p className="Typography-root text-right">
-                          <i class="fa fa-download" aria-hidden="true"></i> QR
-                          Code
-                        </p>
-                      </button>
-                    </div>
-                  </Col>
-                </Row> */}
               </Col>
             </Row>
           </Container>
@@ -345,7 +340,7 @@ const PayManually = (props) => {
                 <label className="images-section">
                   {!files && (
                     <div className="image-text">
-                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      <i className="fa fa-plus" aria-hidden="true"></i>
                       <p>Click here to upload payment screenshot</p>
                     </div>
                   )}
@@ -361,6 +356,7 @@ const PayManually = (props) => {
                     onChange={(e) =>
                       e.target.files && setFiles(e.target.files[0])
                     }
+                    readOnly
                     type="file"
                     style={{ display: "none" }}
                   />

@@ -85,6 +85,10 @@ div#casino {
 .mob-view{
     display: none;
 }
+.coll-6 {
+    flex: 0 0 auto;
+    width: 25%;
+}
 
 
 @media screen and (max-width: 500px) {
@@ -93,6 +97,10 @@ div#casino {
     }
     .desk-view{
         display: none;
+    }
+    .coll-6 {
+        flex: 0 0 auto;
+        width: 50%;
     }
     
     

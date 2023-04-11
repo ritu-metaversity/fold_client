@@ -1,39 +1,39 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import NavBar from "../../../navBar/NavBar";
 import "../../../navBar/TopNav.css";
 import MatchBet from "../../MatchBet/MatchBet";
 import GameDetail from "../GameDetail";
 import "./GameHead.css";
+import NavBar from "../../../navBar/NavBar";
 
-function GameHead() {
+function GameHead({SportId, matchLength}) {
   const [ActiveNavbar, setActiveNavBar] = useState(1);
-
+  const [betLength, setBetlenght] = useState(0)
   const handleClick = (val) => {
     setActiveNavBar(val);
+    
   };
+  // console.log(matchLength)
 
   return (
     <>
-      <NavBar />
-
+    <NavBar/>
       <div >
         <ul className="nav nav-tabs ">
           <li className={`nav-item ${ActiveNavbar === 1 ? "active2" : ""}`}>
-            <Link
+            <button
               data-toggle="tab"
-              className="nav-link nav2"
+              className="nav-link nav2 nav-btn"
               onClick={() => handleClick(1)}>
               Odds
-            </Link>
+            </button>
           </li>
           <li className={`nav-item ${ActiveNavbar === 2 ? "active2" : ""}`}>
-            <Link
+            <button
               data-toggle="tab"
-              className="nav-link"
+              className="nav-link nav-btn"
               onClick={() => handleClick(2)}>
-              Matched Bet (0)
-            </Link>
+              Matched Bet ({betLength})
+            </button>
           </li>
         </ul>
         <div className="tv-icon">
@@ -42,8 +42,12 @@ function GameHead() {
           </p>
         </div>
       </div>
-
-      {ActiveNavbar === 1 ? <GameDetail /> : <MatchBet />}
+      <div style={{display:ActiveNavbar===1?"block":"none"}}>
+        <GameDetail SportId={SportId}/> : 
+      </div>
+      <div style={{display:ActiveNavbar===2?"block":"none"}}>
+        <MatchBet matchLength={betLength} setMatchLength = {setBetlenght}/>
+      </div>
     </>
   );
 }

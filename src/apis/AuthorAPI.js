@@ -9,7 +9,6 @@ export const AuthorAPI = {
         data: {
             userId: userId,
             password: password,
-            // appUrl: "atozscore.com"
             appUrl: window.location.hostname
         },
         signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
@@ -51,6 +50,34 @@ export const AuthorAPI = {
       })
   
       return response.data
+    },
+
+    Register: async function ({username, password, confirmPassword, mobile}, cancel = false) {
+      const response = await api.request({
+        url: `/user/self-register`,
+        method: "POST",
+        data: {
+            username: username,
+            confirmPassword:confirmPassword,
+            password: password,
+            mobile:mobile,
+            appUrl: window.location.hostname
+        },
+        signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
+      })
+  
+      return response.data
+    },
+
+    VALIDATE_JWT: async function (cancel = false) {
+      const response = await api.request({
+        url: `/util/validate-jwt-token`,
+        method: "POST",
+
+        signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
+      })
+  
+      return response
     },
 
   }

@@ -3,13 +3,11 @@ import './SlotGame.css'
 import SideBar from '../../sidebar/SideBar'
 import {Link} from 'react-router-dom'
 import Footer from '../../footer/Footer'
-import NavBar from '../../navBar/NavBar'
 
 
 function SlotGame() {
     return (
         <>
-        <NavBar/>
         <div className="main">
             <div className="container-fluid container-fluid-5">
                 <div className="row row5">
@@ -19,14 +17,14 @@ function SlotGame() {
                     <div  className="col-md-10 featured-box">
                         <div >
                             <ul  role="tablist" className="nav nav-tabs m-b-20">
-                                <li  className="nav-item show"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>NEWLY RELEASED GAMES</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>HOT GAMES</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SLOTS</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>TABLE GAMES</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SHOOTING GAMES</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>Instant WIN</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SCRATCH CARD</Link></li>
-                                <li  className="nav-item"><Link to="/" className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>PUSH GAMING</Link></li>
+                                <li  className="nav-item show"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>NEWLY RELEASED GAMES</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>HOT GAMES</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SLOTS</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>TABLE GAMES</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SHOOTING GAMES</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>Instant WIN</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>SCRATCH CARD</Link></li>
+                                <li  className="nav-item"><Link  className="nav-link casino-call" style={{whiteSpace: "nowrap"}}>PUSH GAMING</Link></li>
                             </ul>
                             <div  className="tab-content">
                                 <div  id="newGame" className="tab-pane show">
