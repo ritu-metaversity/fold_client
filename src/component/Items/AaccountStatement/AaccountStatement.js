@@ -42,13 +42,9 @@ function AaccountStatement() {
     setIndexValue(e.target.value);
   };
 
-  const handleCloseModal = () => setShowModals(false);
-  const handleShow = (e, remark, marketId) => {
-    e.preventDefault();
-    setShowModals(true);
-    setRemark(remark);
-    setMarketId(marketId);
-  };
+
+
+  // console.log(MarketId);
 
   useEffect(() => {
     UserAPI.Account_Statement({
@@ -58,12 +54,21 @@ function AaccountStatement() {
       toDate: time,
       type: 1,
     }).then((res) => {
+      // console.log(res)
       setPageLength(res.totalPages);
       setDataList(res.dataList);
       setDataListLength(res.dataList.length);
     });
     // eslint-disable-next-line
   }, []);
+
+  const handleCloseModal = () => setShowModals(false);
+  const handleShow = (e, remark, marketId) => {
+    e.preventDefault();
+    setShowModals(true);
+    setRemark(remark);
+    setMarketId(marketId);
+  };
 
   const submit = () => {
     if (startDate === "") {
@@ -379,12 +384,12 @@ function AaccountStatement() {
                         <span aria-hidden="true">Prev</span>
                       </button>
                     </li>
-                    <li
+                    {/* <li
                       className="page-item ">
                       <button className="plink act">
                         <span aria-hidden="true" className="num">0</span>
                       </button>
-                    </li>
+                    </li> */}
                     {result?.length > 0 &&
                       result.map((item, id) => {
                         return (
@@ -392,8 +397,8 @@ function AaccountStatement() {
                             key={item + id}
                             className="page-item act"
                             onClick={() => handlePagenation(id)}>
-                            <button className="page-link">
-                              <span aria-hidden="true">
+                            <button className="page-link act">
+                              <span aria-hidden="true" className="num">
                                 {item === "" ? 0 : item}
                               </span>
                             </button>

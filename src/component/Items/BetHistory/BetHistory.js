@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import NavBar from "../../navBar/NavBar";
 import "../AaccountStatement/AaccountStatement.css";
 import { DatePicker } from "antd";
@@ -10,7 +10,7 @@ function BetHistory() {
   // const [startDate, setStartDate] = useState("");
   // const [show, setShow] = useState(false);
 
-  var curr = new Date();
+  // var curr = new Date();
 
   // const inInd = curr.toLocaleTimeString([], {
   //   hour: "2-digit",
@@ -26,7 +26,6 @@ function BetHistory() {
   //   } else {
   //     setStartDate(startDate);
   //   }
-
   //   if (show === false) {
   //     setShow(true);
   //   }

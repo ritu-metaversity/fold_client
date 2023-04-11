@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "../item/Item.css";
 import { GameAPI } from "../../apis/gameAPI";
+import { Link } from "react-router-dom";
 
 function TopNav(props) {
   const [Active, setActive] = useState(4);
@@ -18,8 +19,6 @@ function TopNav(props) {
     setActive(val);
     props.gameId(val);
   };
-
-
   return (
     <div>
       <div className="sports active">
@@ -27,9 +26,9 @@ function TopNav(props) {
           {activeSport.map((res, id) => {
               return (
                 <li className="nav-item text-center" key={id}>
-                  <a
+                  <Link
                     data-toggle="tab"
-                    href="#1"
+                    // to=''
                     className={`nav-link nav1 ${
                       Active === res.sportId ? "active" : null
                     }`}
@@ -41,15 +40,14 @@ function TopNav(props) {
                         <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/1.png" alt="" />:
                         <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png" alt="" />
                       }
-                      
                     </div>
                     <div>{res.sportName}</div>
-                  </a>
+                  </Link>
                 </li>
               );
           })}
 
-          
+
           {/* <li  className="nav-item text-center" >
             <a
               

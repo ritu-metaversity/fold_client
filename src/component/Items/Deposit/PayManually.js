@@ -17,7 +17,6 @@ const PayManually = (props) => {
   const [active, setActive] = useState(0);
 
   const [files, setFiles] = useState(null);
-  // const [files, setPayment handlePaymentDetails] = useState("");
 
   const increment = () => {
     setBitValue(Bitvalue + 10);
@@ -27,7 +26,6 @@ const PayManually = (props) => {
   };
   const handleStaticAmount = (vl) => {
     setBitValue(Bitvalue + vl);
-    console.log(vl)
     console.log(Bitvalue + vl)
   };
   useEffect(() => {
@@ -45,12 +43,17 @@ const PayManually = (props) => {
 
   const handleSubmit = () => {
     const data = new FormData();
-
     data.append("amount", Bitvalue.toString());
     data.append("image", files || "");
-
     UserAPI.Self_Deposit_App({ data }).then((res) => {
       props.UpdateDetails(true);
+      console.log(res.status)
+      if(res.status === true){
+        setBitValue(0);
+        setFiles(null);
+        setPaymentMode("UPI");
+        setActive(0)
+      }
     });
   };
 
@@ -79,7 +82,6 @@ const PayManually = (props) => {
               placeholder="Enter Amount"
               className="priceinput"
               value={Bitvalue}
-              // defaultValue={Bitvalue}
             />
             <button
               className="stakeactionminus priceminus btn"

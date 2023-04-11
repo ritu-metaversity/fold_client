@@ -7,14 +7,14 @@ import { UserAPI } from "../../apis/UserAPI";
 const NavBar = () => {
   const [close, setClose] = useState(false);
   const [droup, setDrop] = useState(false);
-  const [userbalance, setUserbalance] = useState();
+  const [userbalance, setUserbalance] = useState("0.00");
   // eslint-disable-next-line
   const [userdetail, setUserDetail] = useState(localStorage.getItem("UserId"));
   const [userMessage, setUserMessage] = useState("");
   const [status, setStatus] = useState(false);
   const [error, setError] = useState(false);
 
-
+  
 
   function toggle(e) {
     e.preventDefault();
@@ -32,8 +32,6 @@ const NavBar = () => {
       setDrop(false);
     }
   }
-
-
   useEffect(()=>{
     UserAPI.Self_By_App_Url().then((res)=>{
       setStatus(res.data.selfAllowed)
@@ -43,13 +41,28 @@ const NavBar = () => {
   const token = localStorage.getItem("token")
 
   useEffect(() => {
-    if(localStorage.getItem("token"))
-    UserAPI.User_Balance().then((res) => {
-      setUserbalance(res.data.balance);
-    }).catch((error)=>{
-      setError(true)
-    });
-  }, [token]);
+    setInterval(() => {
+     
+    }, 1000)
+  }, []);
+
+  useEffect(() => {
+    const time = setInterval(() => {
+      if(token !== null){
+        UserAPI.User_Balance().then((res) => {
+          setUserbalance(res.data.balance);
+        }).catch((error)=>{
+          setError(true)
+        })
+      }
+    }, 1000);
+    return ()=>clearInterval(time)
+    // eslint-disable-next-line
+  }, []);
+
+ 
+  
+  // console.log(userbalance);
 
 
   useEffect(() => {
@@ -102,7 +115,7 @@ const NavBar = () => {
                 <div className="col-6 text-right bal-expo">
                   <p className={`mb-0 ${!balanceShow ? "d-none" : ""}`}>
                     <i className="fas fa-landmark mr-1"></i>
-                    <b>{error?"0.00": userbalance===""?"0.00":userbalance}</b>
+                    <b>{error? "0.00": userbalance===""?"0.00":userbalance}</b>
                   </p>
                   <div className="exp">
                     <span className={`mr-1 ${!expShow ? "d-none" : ""}`}>
@@ -173,7 +186,7 @@ const NavBar = () => {
                           Unsetteled Bet
                         </Link>
                         {/* <Link
-                          
+                          to=""
                           className="dropdown-item">
                           Casino Report History
                         </Link> */}
@@ -188,7 +201,6 @@ const NavBar = () => {
                           Change Password
                         </Link>
                         <Link
-                          
                           className="dropdown-item"
                           onClick={balanceHideShow}>
                           Balance
@@ -207,7 +219,6 @@ const NavBar = () => {
                           </div>
                         </Link>
                         <Link
-                          
                           className="dropdown-item"
                           onClick={expHideShow}>
                           Exposure

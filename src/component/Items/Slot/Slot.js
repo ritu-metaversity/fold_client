@@ -11,7 +11,7 @@ const Slot = () => {
   const [casinoListId, setCasinoListId] = useState(323334);
   const [casinoData, setCasinoData] = useState("");
   const [casinoName, setCasinoName] = useState("Indian Casino");
-  const [isLoading, setIsLoading]=useState(true)
+  const [isLoading, setIsLoading]=useState(true);
 
   useEffect(() => {
     GameAPI.CASINO_TYPES().then((res) => {
@@ -19,17 +19,18 @@ const Slot = () => {
     });
   }, []);
 
-  const handleClick = (id, name,) => {
+  const handleClick = (id, name, e) => {
     setCasinoListId(id);
     setActiveClass(id);
-    setCasinoName(name)
+    setCasinoName(name);
+    // e.preventDefault();
   };
 
   useEffect(() => {
     GameAPI.CASINO_LIST_BY_TYPE({
       id: casinoListId,
     }).then((res) => {
-      setCasinoData(res);
+      setCasinoData(res); 
       setIsLoading(false)
     });
   }, [casinoListId]);
@@ -59,7 +60,7 @@ const Slot = () => {
                           ActiveClass === item.id ? "active2" : ""
                         }`
                       }
-                        onClick={() => handleClick(item.id, item.name, item.gameId)}>
+                        onClick={(e) => handleClick(item.id, item.name, item.gameId, e)}>
                         <a
                           data-toggle="tab"
                           href="#casino"

@@ -13,12 +13,14 @@ function Login() {
  
   const handleLogin = () => {
 
-    // history.push('/')
+    // history.push('/home')
 
     if(password === "" && user ===""){
-      setMessage("password: length must be between 4 and 30")
+      setStatusVal(false)
+      setMessage("password: length must be between 4 and 30");
     }
-   
+
+
     if (password !== "" && user !== ""){
       AuthorAPI.Login({
         userId: user,
@@ -28,7 +30,6 @@ function Login() {
         axios.defaults.headers.common["Authorization"] = token;
         localStorage.setItem("token", token);
         setStatusVal(res.status);
-        // console.log(StatusVal)
         setMessage("Invalid Username or password")
         const uId = res.userId;
         localStorage.setItem("UserId", uId);
@@ -47,7 +48,6 @@ function Login() {
   
   const popupClose = (vl) => {
     setStatusVal(vl);
-    // console.log(vl)
   };
 
   return (
@@ -64,6 +64,7 @@ function Login() {
         ) : (
           ""
         )}
+
         <div className="login-wrapper">
           <div className="text-center logo-login mb-3">
             <img
@@ -100,7 +101,6 @@ function Login() {
                   aria-invalid="false"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-
                 <span
                   className="text-danger error-msg"
                   style={{ display: "none" }}></span>

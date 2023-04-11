@@ -665,15 +665,16 @@ p.team-name.col-6.text-right {
     font-family: "Roboto Condensed", sans-serif;
 }
 
-.box-1.lay.float-left.text-center.blink {
+/* .box-1.lay.float-left.text-center.blink {
     animation: blinking 100ms !important;
     background-color: #ffc01a !important;
-}
+} */
 
 .blink {
     animation: blinking 100ms !important;
     background-color: #ffc01a !important;
 }
+
 
 @keyframes blinking {
     100% {
@@ -796,4 +797,14 @@ p.no-found {
 
 .back-2, .back2 {
     background-color: rgba(114, 187, 239, 0.75) !important;
+}
+
+.cpointer{
+    cursor: pointer;
+}
+
+.fade.modal.show {
+    background: #00000073 !important;
+    width: 100% !important;
+    margin: 0px !important;
 }

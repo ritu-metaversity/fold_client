@@ -39,7 +39,7 @@ function App() {
       AuthorAPI.VALIDATE_JWT()
         .then()
         .catch((error) => {
-          if (token !== null) {
+          if (token !== null){
             if (error.response.status === 401) {
               localStorage.clear();
               history.push("/login");
@@ -49,6 +49,7 @@ function App() {
         });  
     }, 2000);
     return ()=>clearInterval(time)
+    // eslint-disable-next-line
   }, []);
 
 

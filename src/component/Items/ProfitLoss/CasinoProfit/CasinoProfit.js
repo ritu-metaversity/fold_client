@@ -86,7 +86,7 @@ function CasinoProfit() {
     }
 
     UserAPI.Profit_Loss({
-      index: 1,
+      index: IndexValue,
       pageNumber:1,
       toDate: endDate,
       fromDate: startDate,
@@ -298,5 +298,4 @@ function CasinoProfit() {
     </div>
   );
 }
-
 export default CasinoProfit;

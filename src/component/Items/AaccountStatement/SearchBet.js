@@ -15,6 +15,7 @@ const SearchBet = (props) => {
     }).then((res) => {
       setBetListData(res.data);
     });
+    // eslint-disable-next-line
   }, [betValue]);
 
 

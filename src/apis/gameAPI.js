@@ -2,166 +2,205 @@ import { api } from "./configs/axiosConfigs";
 import { defineCancelApiObject } from "./configs/axiosUtils";
 
 export const GameAPI = {
-    Active_Match_Sport_Wise :
-     async function ({sportId}, cancel = false) {
+  Active_Match_Sport_Wise: async function ({ sportId }, cancel = false) {
+    const response = await api.request({
+      url: "/enduser/active-match-sport-wise-open",
+      method: "POST",
+      data: {
+        sportId: sportId,
+      },
 
-        const response = await api.request({
-            url: "/enduser/active-match-sport-wise-open",
-            method: "POST",
-            data: {
-                sportId: sportId,
-            },
-            
-            signal: cancel ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal : undefined,
-        })
-     
-      return response
-    },  
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
 
-    Place_Bet :
-     async function (cancel = false) {
-
-        const response = await api.request({
-            url: "/enduser/get-stake-button",
-            method: "POST",
-            
-            signal: cancel ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal : undefined,
-        })
-     
-      return response.data.data
-    }, 
-    
-    Side_Bar_Data : async function (cancel = false) {
-
-        const response = await api.request({
-            url: "/enduser/left-menu-data-open",
-            method: "POST",
-            
-            signal: cancel ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal : undefined,
-        })
-     
-      return response.data.data
-    }, 
-
-    Match_Bet_List : async function ({matchId}, cancel = false) {
-
-        const response = await api.request({
-            url: "/enduser/bet-list-by-matchid",
-            method: "POST",
-            data :{
-              matchId:matchId
-            },
-            
-            signal: cancel ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal : undefined,
-        })
-     
-      return response.data
-    },
-
-    Get_Stack_Value : async function ( cancel = false) {
-      const response = await api.request({
-          url: "/enduser/get-stake-button",
-          method: "POST",
-          
-          
-          signal: cancel ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal : undefined,
-      })
-   
-    return response.data.data
+    return response;
   },
 
-  Set_Stack_Value : async function ({updateStack}, cancel = false) {
-   
+  Place_Bet: async function (cancel = false) {
     const response = await api.request({
-        url: "/enduser/set-stake-button",
-        method: "POST",
-        data:updateStack,
-        
-        signal: cancel ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal : undefined,
-    })
- 
-  return response.data
-},
+      url: "/enduser/get-stake-button",
+      method: "POST",
 
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
 
-CASINO_TYPES : async function (cancel = false) {
- 
-  const response = await api.request({
+    return response.data.data;
+  },
+
+  Side_Bar_Data: async function (cancel = false) {
+    const response = await api.request({
+      url: "/enduser/left-menu-data-open",
+      method: "POST",
+
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data.data;
+  },
+
+  Match_Bet_List: async function ({ matchId }, cancel = false) {
+    const response = await api.request({
+      url: "/enduser/bet-list-by-matchid",
+      method: "POST",
+      data: {
+        matchId: matchId,
+      },
+
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+
+  Get_Stack_Value: async function (cancel = false) {
+    const response = await api.request({
+      url: "/enduser/get-stake-button",
+      method: "POST",
+
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data.data;
+  },
+
+  Set_Stack_Value: async function ({ updateStack }, cancel = false) {
+    const response = await api.request({
+      url: "/enduser/set-stake-button",
+      method: "POST",
+      data: updateStack,
+
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+
+  CASINO_TYPES: async function (cancel = false) {
+    const response = await api.request({
       url: "/casino/all-casino-types",
       method: "POST",
-      
-      signal: cancel ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal : undefined,
-  })
 
-return response.data.data
-},
-CASINO_LIST_BY_TYPE: async function ({id}, cancel = false) {
- 
-  const response = await api.request({
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data.data;
+  },
+  CASINO_LIST_BY_TYPE: async function ({ id }, cancel = false) {
+    const response = await api.request({
       url: "/casino/casino-tables-by-types",
       method: "POST",
-      data:{
-        id:id
+      data: {
+        id: id,
       },
-      
-      signal: cancel ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal : undefined,
-  })
 
-return response.data.data
-},
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
 
+    return response.data.data;
+  },
 
-ACTIVE_SPORT_LIST: async function (cancel = false) {
- 
-  const response = await api.request({
+  ACTIVE_SPORT_LIST: async function (cancel = false) {
+    const response = await api.request({
       url: "/enduser/active-sport-list",
       method: "POST",
-      
-      signal: cancel ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal : undefined,
-  })
 
-return response.data.data
-},
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
 
+    return response.data.data;
+  },
 
-PLACE_BET: async function ({userIp, isFancy, isBack, odds, stake, name, marketName, selectionId, priceValue, placeTime, marketId, matchId, t, userAgent, browser, device, deviceType, os, os_version, browser_version, orientation
-}, cancel = false) {
- 
-  const response = await api.request({
+  PLACE_BET: async function (
+    {
+      userIp,
+      deviceInfo,
+      isFancy,
+      isBack,
+      odds,
+      stake,
+      name,
+      marketName,
+      selectionId,
+      priceValue,
+      placeTime,
+      marketId,
+      matchId,
+    },
+    cancel = false
+  ) {
+    const response = await api.request({
       url: "/enduser/place-bets",
       method: "POST",
-      data:{
-        userIp:userIp,
-        isFancy:isFancy,
-        isBack:isBack,
-        odds:odds,
+      data: {
+        userIp: userIp,
+        isFancy: isFancy,
+        isBack: isBack,
+        odds: odds,
         stake: stake,
-        name:name,
-        marketName:marketName,
-        selectionId:selectionId,
-        priceValue:priceValue,
-        placeTime:placeTime,
-        marketId:marketId,
-        matchId:matchId,
-        t:t,
-        deviceInfo:{
-          userAgent:userAgent,
-          browser:browser,
-          device:device,
-          deviceType:deviceType,
-          os:os,
-          os_version:os_version,
-          browser_version: browser_version,
-          orientation:orientation
-        }
+        name: name,
+        marketName: marketName,
+        selectionId: selectionId,
+        priceValue: priceValue,
+        placeTime: placeTime,
+        marketId: marketId,
+        matchId: matchId,
+        deviceInfo,
+        // deviceInfo:{
+        //   userAgent:userAgent,
+        //   browser:browser,
+        //   device:device,
+        //   deviceType:deviceType,
+        //   os:os,
+        //   os_version:os_version,
+        //   browser_version: browser_version,
+        //   orientation:orientation
+        // }
       },
-      
-      signal: cancel ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal : undefined,
-  })
 
-return response
-},
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
 
-  }
+    return response;
+  },
 
-  const cancelApiObject = defineCancelApiObject(GameAPI)
+  USER_FANCY_BOOK: async function ({ matchId, fancyId }, cancel = false) {
+    const response = await api.request({
+      url: "/enduser/user-fancy-book",
+      method: "POST",
+      data: {
+        matchId,
+        fancyId
+      },
+
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data.data;
+  },
+
+
+};
+
+const cancelApiObject = defineCancelApiObject(GameAPI);

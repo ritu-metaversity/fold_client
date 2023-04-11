@@ -3,7 +3,7 @@ import "./Placebet.css";
 import { GameAPI } from "../../apis/gameAPI";
 import axios from "axios";
 
-function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchId, marketId, selectionId, MarketName, placeTime, isFancy, toss,data }) {
+function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchId, marketId, selectionId, MarketName, placeTime, isFancy,data, priceValue }) {
   const [updated, setUpdated] = useState("");
   const [StackVal, setStackVal] = useState("");
   const [userIP, setUserIP] = useState("");
@@ -33,15 +33,14 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
         "isFancy": isFancy,
         "isBack": colorName ==="back" ? true:false,
         "odds": odds,
-        "stake": updated,
+        "stake": parseInt(updated),
         "name": name, 
         "marketName": MarketName,
-        "selectionId": selectionId,
-        "priceValue": odds, 
+        "selectionId": parseInt(selectionId),
+        "priceValue": isFancy===false? odds : priceValue, 
         "placeTime": placeTime,
         "marketId":marketId===""?selectionId:marketId,
         "matchId": matchId,
-        "t":toss===""?"":toss, 
         "deviceInfo": {
            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
            "browser": "Chrome",
@@ -73,7 +72,6 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
       setStackVal(res);
     })
   }, []);
-
 
   return (
     <>
@@ -159,7 +157,7 @@ function Placebet({ spanValueRate, spanValueName, matchDetail, colorName, matchI
 
               {matchDetail.map((e) => {
                 return (
-                  <div className={`row row5 mt-2 ${isFancy==="true"?"fancy-none":""}`} key={e.selectionId+e.selectionId}>
+                  <div className={`row row5 mt-2 ${isFancy===true?"fancy-none":""}`} key={e.selectionId+e.selectionId}>
                     <div className="col-4">
                       <span>{e.name}</span>
                     </div>

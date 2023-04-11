@@ -3,6 +3,7 @@ import NavBar from "../../navBar/NavBar";
 import "../AaccountStatement/AaccountStatement.css";
 import AlertBtn from "../../Alert/AlertBtn";
 import { AuthorAPI } from "../../../apis/AuthorAPI";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function ChangePassword() {
   const [currPassword, setCurrPassword] = useState("");
@@ -14,6 +15,9 @@ function ChangePassword() {
   const passType = localStorage.getItem("Password-type");
   const userId = localStorage.getItem("UserId");
   const Token = localStorage.getItem("token");
+
+
+  const history = useHistory();
 
   const handleClick = () => {
     if (currPassword === "") {
@@ -44,11 +48,13 @@ function ChangePassword() {
             oldPassword: currPassword,
           })
             .then((res) => {
-              console.log(res);
-              // setMessege(res.data.message)
               setColor("success");
               setMessege("Password Updated");
               setShowError(true);
+              if(res.status === true){
+                history.push('/login');
+                window.location.reload();
+              }
             })
             .catch((err) => {
               console.log(err);
@@ -59,15 +65,17 @@ function ChangePassword() {
             newPassword: newPasswords,
           }).then((res) => {
             // console.log(res.message)
-
-            if (res.status === false) {
-              setShowError(true);
-              setColor("danger");
-              setMessege(res.message);
-            } else {
+            // if (res.status === false) {
+            //   setShowError(true);
+            //   setColor("danger");
+            //   setMessege(res.message);
+            // } 
+            if(res.status===true) {
               setShowError(true);
               setColor("success");
               setMessege(res.message);
+              history.push('/login');
+              window.location.reload();
             }
           });
         }

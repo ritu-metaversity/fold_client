@@ -25,7 +25,6 @@ function MatchBet(props) {
     { shouldReconnect: (event) => true }
   );
 
-
   useEffect(()=>{
       if (lastMessage?.data && JSON.parse(lastMessage?.data)?.data){
         setMatchBet(JSON.parse(lastMessage?.data))
@@ -33,11 +32,11 @@ function MatchBet(props) {
         const vals = Object.values(bets);
         let noOfBets = 0;
         for (let val of vals ){
-          // console.log(vals)
           noOfBets+=(val.length)
         }
         props.setMatchLength(noOfBets)
       }
+    // eslint-disable-next-line
   }, [lastMessage])
 
   return (
@@ -70,7 +69,7 @@ function MatchBet(props) {
                         return(
                         <tr key={id}>
                           <td>{item?.nation}</td>
-                          <td>{item?.rate}</td>
+                          <td className="text-right">{item?.rate}</td>
 
                           <td className="text-right">{item?.amount}</td>
                         </tr>

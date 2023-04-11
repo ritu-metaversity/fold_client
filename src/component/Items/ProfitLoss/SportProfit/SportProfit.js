@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { React,  useEffect, useState } from "react";
 import "../ProfitLoss.css";
 import "../../AaccountStatement/AaccountStatement.css";
 import moment from "moment";
@@ -90,7 +90,7 @@ function SportProfit() {
     }
 
     UserAPI.Profit_Loss({
-      index: 0,
+      index: IndexValue,
       pageNumber:2,
       toDate: endDate,
       fromDate: startDate,
@@ -234,7 +234,7 @@ function SportProfit() {
                     className="table b-table table-bordered"
                     id="__BVID__104">
                     <thead>
-                      <tr role="row ">
+                      <tr role="row">
                         <th
                           role="columnheader"
                           scope="col"

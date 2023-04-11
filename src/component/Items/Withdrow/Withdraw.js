@@ -6,7 +6,7 @@ import NavBar from "../../navBar/NavBar";
 import "./Withdraw.css";
 
 const Withdraw = () => {
-  const [tableDatashow, setTabledataShow] = useState(false);
+  // const [tableDatashow, setTabledataShow] = useState(false);
   const [amount, setAmount] = useState();
   const [bankName, setBankName] = useState("");
   const [accountType, setAccountType] = useState("Saving");
@@ -67,15 +67,19 @@ const Withdraw = () => {
         ifsc: ifsc,
         accountNumber: accountNumber,
       }).then((res) => {
-        console.log(res)
-        if (res.status === true) {
-          setTabledataShow(true);
-        }
         UserAPI.Withdraw_Request().then((res) => {
           console.log(res)
           setWithdrawReq(res.data);
           setDataLength(res.data.length);
+      
         });
+        if(res.status === true){
+          setAmount("");
+          setBankName("");
+          setAccountNumber("");
+          setIFSC("");
+          setAccountHolderName("");
+        }
       }).catch((error)=>{
       setErrorAlert(true)
         setMessage(error.response.data.message)
@@ -110,6 +114,7 @@ const Withdraw = () => {
               <input
                 type="number"
                 className="account-input"
+                value={amount}
                 onChange={(e) => setAmount(e.target.value)}
               />
             </div>
@@ -119,6 +124,7 @@ const Withdraw = () => {
               <input
                 type="number"
                 className="account-input"
+                value={accountNumber}
                 onChange={(e) => setAccountNumber(e.target.value)}
               />
             </div>
@@ -128,6 +134,7 @@ const Withdraw = () => {
               <input
                 type="text"
                 className="account-input"
+               value={accountHolderName}
                 onChange={(e) => setAccountHolderName(e.target.value)}
               />
             </div>
@@ -137,6 +144,7 @@ const Withdraw = () => {
               <input
                 type="type"
                 className="account-input"
+                value={bankName}
                 onChange={(e) => setBankName(e.target.value)}
               />
             </div>
@@ -146,6 +154,7 @@ const Withdraw = () => {
               <input
                 type="type"
                 className="account-input"
+                value={ifsc}
                 onChange={(e) => setIFSC(e.target.value)}
               />
             </div>
