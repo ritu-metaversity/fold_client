@@ -3,7 +3,7 @@ import NavBar from "../../navBar/NavBar";
 import "../AaccountStatement/AaccountStatement.css";
 import AlertBtn from "../../Alert/AlertBtn";
 import { AuthorAPI } from "../../../apis/AuthorAPI";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 
 function ChangePassword() {
   const [currPassword, setCurrPassword] = useState("");
@@ -17,7 +17,7 @@ function ChangePassword() {
   const Token = localStorage.getItem("token");
 
 
-  const history = useHistory();
+  const nav = useNavigate();
 
   const handleClick = () => {
     if (currPassword === "") {
@@ -52,7 +52,7 @@ function ChangePassword() {
               setMessege("Password Updated");
               setShowError(true);
               if(res.status === true){
-                history.push('/login');
+                nav('/login');
                 window.location.reload();
               }
             })
@@ -74,7 +74,7 @@ function ChangePassword() {
               setShowError(true);
               setColor("success");
               setMessege(res.message);
-              history.push('/login');
+              nav('/login');
               window.location.reload();
             }
           });
@@ -102,11 +102,11 @@ function ChangePassword() {
       <div className="report-container wrapper">
         <div className="card">
           <div className="card-header">
-            <h4 className="mb-0">Change Password</h4>
+            <h4 className="mb-0 heading-ch">Change Password</h4>
           </div>
           <div className="card-body container-fluid container-fluid-5">
             <div className="row row5 mt-2 acc-stat">
-              <div className="col-12">
+              <div className="col-12 ch-pass">
                 <div className="form-group">
                   <label>Current Password</label>{" "}
                   <input

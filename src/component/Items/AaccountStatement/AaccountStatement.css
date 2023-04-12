@@ -35,7 +35,7 @@
 }
 .custom-select {
     display: inline-block;
-    width: 100%;
+    width: 99%;
     height: calc(2.25rem + 2px);
     padding: 0.375rem 1.75rem 0.375rem 0.75rem;
     line-height: 1.5;
@@ -45,6 +45,7 @@
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     appearance: none;
+    margin-inline: 7px;
 }
 .card {
     position: relative;
@@ -122,26 +123,26 @@ input[type=checkbox], input[type=radio] {
 .custom-control-label::before {
     position: absolute;
     top: 0.25rem;
-    left: 0;
+    left: 3px;
     display: block;
     width: 1rem;
     height: 1rem;
     pointer-events: none;
     content: "";
+    -webkit-user-select: none;
     user-select: none;
     background-color: #dee2e6;
+    border-radius: unset;
 }
 .custom-radio .custom-control-input:checked~.custom-control-label::after {
     background-image: url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E);
 }
 
-.custom-control-label::after {
-    top: 0;
-}
+
 .custom-control-label::after {
     position: absolute;
     top: 0.25rem;
-    left: 0;
+    left: 3px;
     display: block;
     width: 1rem;
     height: 1rem;
@@ -270,7 +271,7 @@ input[type=checkbox], input[type=radio] {
 }
 .custom-control-label::before {
     position: absolute;
-    top: 0;
+    top: 2px;
     left: -17px;
     display: block;
     width: 1rem;
@@ -388,8 +389,8 @@ button.page-link {
     }
     .custom-control-label::after {
         position: absolute;
-        top: -9%;
-        left: -19px;
+        top: 0px;
+        left: -17px;
         display: block;
         width: 1rem;
         height: 1rem;
@@ -406,10 +407,6 @@ button.page-link {
     label.custom-control-label.control-label1 {
         margin-left: 11px;
     }
-    .acc-stat{
-        width: 50%;
-        margin: auto !important;
-    }
     .bg-color{
         background-color: #2c3d50 !important;
         color: #fff !important;
@@ -417,7 +414,27 @@ button.page-link {
     .chbtn{
             margin-bottom: 15px !important;
             margin-top: 4px !important;
-            border: 1px solid #ced4da !important;
+            /* border: 1px solid #ced4da !important;     */
+    }
+    .ant-picker.css-dev-only-do-not-override-1km3mtt {
+        padding: 7px 9px 7px 8px;
+        border-radius: 4px;
+        width: 142%;
+    }
+    .ch-pass{
+        width: 99%;
+        margin-inline: 7px;
+    }
+    h4.mb-0.heading-ch {
+        margin-left: -9px;
+        padding: 0;
+    }
+    .table-responsive {
+        width: 99%;
+        margin-inline: 7px;
+    }
+    .button-value.card-body.container-fluid.container-fluid-5 {
+        width: 99%;
     }
     
 }
@@ -427,6 +444,9 @@ button.page-link {
 button.btn.btn-primary.btn-block.btn-sm {
     font-size: 14px;
     padding: 4px;
+    width: 99%;
+    margin-inline: 7px;
+    border-radius: unset;
 }
 
 
@@ -457,7 +477,7 @@ button.btn.btn-primary.btn-block.btn-sm {
 }
 div#account-statement_length {
     margin-top: -3px;
-    margin-left: 4px;
+    margin-left: 6px;
 }
 .page-item.disabled .page-link {
     color: #6c757d;
@@ -517,14 +537,6 @@ span.page-link {
     color: #6c757d !important;
 
 }
-/* .page-link:hover {
-    text-decoration: none !important;
-    z-index: 0;
-    color: unset;
-    background-color:unset;
-    border-color: unset;
-} */
-
 @media screen and (max-width: 350px) {
     span.ant-picker-suffix {
         padding-left: 0px !important;
@@ -556,5 +568,13 @@ span.page-link {
     }
 }
 
+container .table tr th {
+    /* white-space: nowrap; */
+    padding: 5px 7px !important;
+}
 
-
+.chanbtn{
+    border: 1px solid #ced4da !important;
+    margin-bottom: 8px !important;
+    margin-top: 4px !important;
+}

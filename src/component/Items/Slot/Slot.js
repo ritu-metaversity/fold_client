@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../apis/gameAPI";
 import Mobilenav from "../../navBar/MobileNav/Mobilenav";
 import NavBar from "../../navBar/NavBar";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./Slot.css";
+import { useNavigate } from "react-router-dom";
 
 const Slot = () => {
   const [casinoList, setCasinoList] = useState("");
@@ -35,9 +35,9 @@ const Slot = () => {
     });
   }, [casinoListId]);
 
-  const history = useHistory();
+  const nav = useNavigate();
   const handleData = (id, e) => {
-    history.push(`/casino/${id}`);
+    nav(`/casino/${id}`);
     e.preventDefault();
   };
 

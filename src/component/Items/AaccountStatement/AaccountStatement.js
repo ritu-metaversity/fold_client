@@ -17,7 +17,7 @@ function AaccountStatement() {
   const [startDate, setStartDate] = useState(timeBefore);
   const [endDate, setEndDate] = useState(time);
   const [type, setType] = useState(1);
-  const [IndexValue, setIndexValue] = useState(5);
+  const [IndexValue, setIndexValue] = useState(100);
   const [show, setShow] = useState(false);
   const [dataList, setDataList] = useState("");
   const [dataListLength, setDataListLength] = useState();
@@ -155,10 +155,10 @@ function AaccountStatement() {
       <div className="report-container wrapper">
         <div className="card">
           <div className="card-header">
-            <h4 className="mb-0">Account Statement</h4>
+            <h4 className="mb-0 heading-ch">Account Statement</h4>
           </div>
           <div className="card-body statement container-fluid container-fluid-5">
-            <div className="row row5 acc-stat">
+            <div className="row row5 ">
               <div className="col-6">
                 <div className="form-group mb-0">
                   <div className="mx-datepicker" style={{ width: "auto" }}>
@@ -179,7 +179,7 @@ function AaccountStatement() {
                   </div>
                 </div>
               </div>
-              <div className="col-6 text-right">
+              <div className="col-6 ">
                 <div className="form-group mb-0">
                   <div className="mx-datepicker" style={{ width: "auto" }}>
                     <div className="mx-input-wrapper">
@@ -199,7 +199,7 @@ function AaccountStatement() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2 acc-stat">
+            <div className="row row5  ">
               <div className="col-12">
                 <div className="form-group mb-0">
                   <select
@@ -213,9 +213,17 @@ function AaccountStatement() {
                 </div>
               </div>
             </div>
-
+            <div className="row row5 mt-2 ">
+              <div className="col-12">
+                <button
+                  className="btn btn-primary btn-block btn-sm"
+                  onClick={submit}>
+                  Submit
+                </button>
+              </div>
+            </div>
             <div
-              className="row row5 mt-2 acc-stat"
+              className={`row row5 mt-2 ${dataListLength === 0?"dis-none":""}`}
               style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div
@@ -239,22 +247,14 @@ function AaccountStatement() {
                       <option value="40">40</option>
                       <option value="45">45</option>
                       <option value="50">50</option>
+                      <option value="100" selected>100</option>
                     </select>
                     entries
                   </label>
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2 acc-stat">
-              <div className="col-12">
-                <button
-                  className="btn btn-primary btn-block btn-sm"
-                  onClick={submit}>
-                  Submit
-                </button>
-              </div>
-            </div>
-
+            
             <div className="row row5 mt-2">
               <div className="col-12">
                 <div className="table-responsive">
@@ -270,15 +270,15 @@ function AaccountStatement() {
                           role="columnheader"
                           scope="col"
                           aria-colindex="2"
-                          className="text-left bg-color">
-                          Sr no
+                          className="text-center bg-color">
+                          Date
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="1"
                           className="text-left bg-color">
-                          Date
+                          Sr no
                         </th>
                         <th
                           role="columnheader"
@@ -320,11 +320,13 @@ function AaccountStatement() {
                               onClick={(e) =>
                                 handleShow(e, item.remark, item.marketid)
                               }>
-                              <td aria-colindex="2" className="text-left">
-                                {item.sno}
+                              <td aria-colindex="2" className="text-center">
+                              {moment(item.date).format("YYYY-MM-DD h:mm")}
+
                               </td>
                               <td aria-colindex="1" className="text-left">
-                                {moment(item.date).format("YYYY-MM-DD h:mm")}
+                                {item.sno}
+
                               </td>
                               <td
                                 aria-colindex="3"
@@ -385,7 +387,7 @@ function AaccountStatement() {
               </div>
             </div>
             {
-              pageLength === 0?"":( <div className="row row5 mt-2 acc-stat">
+              pageLength === 0?"":( <div className="row row5 mt-2  ">
               <div className="col-12">
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">

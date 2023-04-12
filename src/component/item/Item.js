@@ -1,12 +1,10 @@
 import { React, useEffect, useState } from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { AuthorAPI } from "../../apis/AuthorAPI";
 
 function Item({ gameIdForItemPage, sportId }) {
-  const history = useHistory();
   const [gameName, setGameName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -37,9 +35,9 @@ function Item({ gameIdForItemPage, sportId }) {
     }
     // eslint-disable-next-line
   }, [gameIdForItemPage]);
-
+const nav  = useNavigate()
   const handleData = (id) => {
-    history.push(`/gamedetail/${id}`);
+    nav(`/gamedetail/${id}`);
   };
 
   return (

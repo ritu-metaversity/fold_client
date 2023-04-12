@@ -8,9 +8,9 @@ import AlertBtn from "../../Alert/AlertBtn";
 import Accordion from "react-bootstrap/Accordion";
 import { socket } from "./socket";
 import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import FancyModals from "./FancyModals/FancyModals";
 import { createProfits } from "./eventUtil";
+import { useNavigate } from "react-router-dom";
 
 function GameDetail({ getStackValue, SportId }) {
   var curr = new Date();
@@ -138,11 +138,11 @@ function GameDetail({ getStackValue, SportId }) {
     // eslint-disable-next-line
   }, [id]);
 
-  const history = useHistory();
+  const nav = useNavigate();
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token === null) {
-      history.push("/login");
+      nav("/login");
       window.location.reload();
     }
     // eslint-disable-next-line

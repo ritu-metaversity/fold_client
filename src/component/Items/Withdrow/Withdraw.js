@@ -188,6 +188,9 @@ const Withdraw = () => {
                   className="table b-table table-bordered"
                   id="__BVID__104">
                   <thead>
+                  <tr className="previous-deposite">
+                    <th colSpan="9">Previous Withdraw</th>
+                  </tr>
                     <tr role="row" className="account-detail">
                       <th
                         role="columnheader"

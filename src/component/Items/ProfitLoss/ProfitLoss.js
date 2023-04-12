@@ -26,7 +26,7 @@ function ProfitLoss() {
     <>
     <NavBar />
     <div className="card-header">
-          <h4 className="mb-0">Profit Loss</h4>
+          <h4 className="mb-0" style={{marginLeft:"10px"}}>Profit Loss</h4>
         </div>
     <Tabs defaultActiveKey="1" items={items} onClick={onChange} />
     </>

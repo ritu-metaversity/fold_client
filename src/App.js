@@ -8,7 +8,7 @@ import "./component/sidebar/sidebar.css";
 import "../src/component/navBar/TopNav.css";
 
 import Login from "./component/login/Login";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 // eslint-disable-next-line
 import SlotGame from "./component/Items/SlotGame/SlotGame";
 import Home from "./component/Home/Home";
@@ -25,97 +25,60 @@ import Casino from "./component/Items/Casino/Casino";
 import Deposit from "./component/Items/Deposit/Deposit";
 import Withdraw from "./component/Items/Withdrow/Withdraw";
 import Register from "./component/Register/Register";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { AuthorAPI } from "./apis/AuthorAPI";
 
 function App() {
   const [SportId, setSportId] = useState("");
-  const history = useHistory();
   const token = localStorage.getItem("token");
+
+  const nav = useNavigate();
 
   useEffect(() => {
     const time = setInterval(() => {
-      if(localStorage.getItem("token"))
-      AuthorAPI.VALIDATE_JWT()
-        .then()
-        .catch((error) => {
-          if (token !== null){
-            if (error.response.status === 401) {
-              localStorage.clear();
-              history.push("/login");
-              window.location.reload();
+      if (localStorage.getItem("token"))
+        AuthorAPI.VALIDATE_JWT()
+          .then()
+          .catch((error) => {
+            if (token !== null) {
+              if (error.response.status === 401) {
+                localStorage.clear();
+                nav("/login");
+                window.location.reload();
+              }
             }
-          }
-        });  
+          });
     }, 1000);
-    return ()=>clearInterval(time)
+    return () => clearInterval(time);
     // eslint-disable-next-line
   }, []);
-
 
   const idddd = (id) => {
     setSportId(id);
   };
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/Register" component={Register} />
-          <Route exact path="/">
-            <Login />
-          </Route>
-          <Route exact path="/Home">
-            <Home idddd={idddd} />
-          </Route>
-          <Route exact path="/deposit">
-            <Deposit />
-          </Route>
-          <Route exact path="/withdraw">
-            <Withdraw />
-          </Route>
-          <Route exact path="/gamedetail/:id">
-            <GameHead SportId={SportId} />
-          </Route>
-          <Route exact path="/casino/:id">
-            <Casino />
-          </Route>
-          <Route exact path="/m/reports/accountstatement">
-            <AaccountStatement />
-          </Route>
-          <Route exact path="/m/reports/profitloss">
-            <ProfitLoss />
-          </Route>
-          <Route exact path="/m/reports/bethistory">
-            <BetHistory />
-          </Route>
-          <Route exact path="/m/reports/unsetteledbet">
-            <UnSetteledBet />
-          </Route>
-          <Route exact path="/m/setting/changebtnvalue">
-            <ChangeBtnValue />
-          </Route>
-          <Route exact path="/m/setting/changepassword">
-            <ChangePassword />
-          </Route>
-          <Route exact path="/m/sports">
-            <Home />
-          </Route>
-          <Route exact path="/m/In-play">
-            <Home />
-          </Route>
-          <Route exact path="/m/slot">
-            <Slot />
-          </Route>
-          <Route exact path="/m/others">
-            <Home />
-          </Route>
-          <Route exact path="/SignOut">
-            <SignOut />
-          </Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
+    <div className="App">
+        <Routes>
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/Register" element={<Register />} />
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/Home" element={<Home idddd={idddd} />} />
+          <Route exact path="/deposit" element={<Deposit />} />
+          <Route exact path="/withdraw" element={<Withdraw />}/>
+          <Route exact path="/gamedetail/:id" element={<GameHead SportId={SportId} />} />
+          <Route exact path="/casino/:id" element={<Casino />} />
+          <Route exact path="/m/reports/accountstatement" element={<AaccountStatement />}/>
+          <Route exact path="/m/reports/profitloss" element={<ProfitLoss />} />
+          <Route exact path="/m/reports/bethistory" element={<BetHistory />} />
+          <Route exact path="/m/reports/unsetteledbet" element={<UnSetteledBet />} />
+          <Route exact path="/m/setting/changebtnvalue" element={<ChangeBtnValue />} />
+          <Route exact path="/m/setting/changepassword" element={<ChangePassword />} />
+          <Route exact path="/m/sports" element={<Home />}/>
+          <Route exact path="/m/In-play" element={<Home />}/>
+          <Route exact path="/m/slot" element={<Slot />}/>
+          <Route exact path="/m/others" element={<Home />}/>
+          <Route exact path="/SignOut" element={<SignOut />}/>
+        </Routes>
+    </div>
   );
 }
 

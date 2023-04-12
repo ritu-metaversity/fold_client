@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AlertBtn from "../Alert/AlertBtn";
 import { AuthorAPI } from "../../apis/AuthorAPI";
 
 function Login() {
-  const history = useHistory();
+  const nav = useNavigate();
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
   const [StatusVal, setStatusVal] = useState(true);
@@ -32,19 +32,19 @@ function Login() {
         const uId = res.userId;
         localStorage.setItem("UserId", uId);
         if (res.token !== "" && user === res.userId) {
-          history.push("/home");
+          nav("/home");
         }
         const pType = res.passwordtype;
         localStorage.setItem("Password-type", pType);
         if (pType === "old") {
-          history.push("/m/setting/changepassword");
+          nav("/m/setting/changepassword");
         }
       });
     }
   };
 
   if(localStorage.getItem("token") !== null){
-    history.push('/home');
+    nav('/home');
     window.location.reload();
   }
   

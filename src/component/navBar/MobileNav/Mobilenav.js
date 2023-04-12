@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "../Nav.css";
 
 function Mobilenav() {
@@ -9,6 +9,23 @@ function Mobilenav() {
     setActive(val);
     e.preventDefault();
   };
+
+  const {pathname} = useLocation()
+
+  useEffect(()=>{
+    if(pathname === '/m/slot'){
+      setActive(3)
+    }else if(pathname === '/m/Sports'){
+      setActive(2)
+    }else if(pathname ==='/m/In-play'){
+      setActive(1)
+    }else if((pathname ==='/m/Others')){
+      setActive(4)
+    }else{
+      setActive(1)
+    }
+
+  },[pathname])
 
   return (
     <>

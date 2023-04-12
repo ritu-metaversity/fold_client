@@ -6,12 +6,12 @@ import { UserAPI } from "../../../apis/UserAPI";
 import "./PayManually.css";
 import { Input } from "antd";
 import Modal from "react-bootstrap/Modal";
-import { type } from "@testing-library/user-event/dist/type";
 
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
   const [UpiDetail, setUpiDetail] = useState();
-  const [Bitvalue, setBitValue] = useState(0);
+  const [Bitvalue, setBitValue] = useState("0");
+
   const [BitvalueInputField, setBitValueInputField] = useState(0);
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
@@ -21,14 +21,15 @@ const PayManually = (props) => {
   const [files, setFiles] = useState(null);
 
   const increment = () => {
-    setBitValue(Bitvalue + 10);
+    setBitValue(Number(Bitvalue) + 10);
   };
   const decrement = () => {
-    setBitValue(Bitvalue - 10);
+    if(Bitvalue !== "0")
+    setBitValue(Number(Bitvalue) - 10);
   };
+
   const handleStaticAmount = (vl) => {
-setBitValue(Bitvalue + vl);
-    console.log(Bitvalue + vl)
+    setBitValue((Bitvalue)=>(Number(Bitvalue)||0) + Number(vl));
   };
 
   const handleStaticAmountInput =(e)=>{
@@ -37,7 +38,7 @@ let Inputvalue = e.target.value
 
 setBitValue( parseInt(Inputvalue));
 
-console.log(Bitvalue, )
+// console.log(Bitvalue, )
 
   }
 console.log(typeof Bitvalue)
@@ -76,6 +77,8 @@ console.log(typeof Bitvalue)
     setShowModals(true);
   };
 
+  console.log(Bitvalue, "adfsdafgsgdshdh")
+
   return (
     <div>
       <p className="enter-amount">Enter Amount</p>
@@ -95,7 +98,7 @@ console.log(typeof Bitvalue)
               placeholder="Enter Amount"
               className="priceinput"
               onChange={handleStaticAmountInput}
-              Value={Number(Bitvalue)}
+              value={Number(Bitvalue)}
             />
             <button
               className="stakeactionminus priceminus btn"
@@ -112,22 +115,6 @@ console.log(typeof Bitvalue)
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
-                value="100"
-                onClick={() => handleStaticAmount(100)}>
-                +100
-              </button>
-            </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                value="500"
-                onClick={() => handleStaticAmount(500)}>
-                +500
-              </button>
-            </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
                 value="1000"
                 onClick={() => handleStaticAmount(1000)}>
                 +1000
@@ -141,6 +128,22 @@ console.log(typeof Bitvalue)
                 +5000
               </button>
             </div>
+            <div className="col-3 price-data">
+              <button
+                className="btn btn-secondary btn-block mb-2"
+                value="100000"
+                onClick={() => handleStaticAmount(100000)}>
+                +100000
+              </button>
+            </div>
+            <div className="col-3 price-data">
+              <button
+                className="btn btn-secondary btn-block mb-2"
+                value="500000"
+                onClick={() => handleStaticAmount(500000)}>
+                +500000
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -148,7 +151,7 @@ console.log(typeof Bitvalue)
       <div className="paymethods">
         <Container>
           <div className="amount">
-            <h1>Pay {Number(Bitvalue === null ?0:Bitvalue)}/-</h1>
+            <h1>Pay {(Bitvalue)||0}/-</h1>
             <p>Pay Manually</p>
           </div>
           <div className="bank-logo">

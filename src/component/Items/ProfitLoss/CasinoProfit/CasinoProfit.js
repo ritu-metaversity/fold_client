@@ -24,6 +24,7 @@ function CasinoProfit() {
   const [CasinoList, setCasinoList] = useState([]);
   const [MatchId, setMatchId] = useState();
   const [CasinoDataList, setCasinoDataList] = useState();
+  const [CDataList, setCDataList] = useState();
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
@@ -66,6 +67,7 @@ function CasinoProfit() {
       pageSize:1,
       index:0
     }).then((res) => {
+      setCDataList(res.data)
       setPLValue(res.data.market);
       setCasinoDataList(res.data.length);
     });
@@ -95,7 +97,7 @@ function CasinoProfit() {
       userId: "",
       pageSize: 2,
     }).then((res) => {
-      console.log(res)
+       console.log(res)
         setPLValue(res.data.market);
         setCasinoDataList(res.data.length);
     });
@@ -127,12 +129,10 @@ function CasinoProfit() {
                   </div>
                 </div>
               </div>
-              <div className="col-6 text-right">
+              <div className="col-6">
                 <div className="form-group mb-0">
                   <div
                     className="mx-datepicker"
-                    not-before="Sun Jan 15 2023 05:30:00 GMT+0530 (India Standard Time)"
-                    not-after="Wed Feb 15 2023 05:30:00 GMT+0530 (India Standard Time)"
                     style={{ width: "auto" }}>
                     <div className="mx-input-wrapper">
                       <DatePicker
@@ -182,11 +182,20 @@ function CasinoProfit() {
                 </div>
               </div>
             </div>
+            <div className="row row5 mt-2 acc-stat">
+              <div className="col-12">
+                <button
+                  className="btn btn-primary btn-block btn-sm"
+                  onClick={submit}>
+                  Submit
+                </button>
+              </div>
+            </div>
             <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div
                   id="account-statement_length"
-                  className="dataTables_length">
+                  className={`dataTables_length ${CDataList === null?"dis-none":""}`}>
                   <label style={{ fontSize: "14px" }}>
                     Show
                     <select
@@ -205,21 +214,14 @@ function CasinoProfit() {
                       <option value="40">40</option>
                       <option value="45">45</option>
                       <option value="50">50</option>
+                      <option value="100">100</option>
                     </select>
                     entries
                   </label>
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2 acc-stat">
-              <div className="col-12">
-                <button
-                  className="btn btn-primary btn-block btn-sm"
-                  onClick={submit}>
-                  Submit
-                </button>
-              </div>
-            </div>
+            
             <div className="row row5 mt-2">
               <div className="col-12">
                 <div className="table-responsive">
@@ -278,7 +280,7 @@ function CasinoProfit() {
                     <tbody>
                     <tr
                       role="row"
-                      className={`b-table-empty-row ${CasinoDataList===0?"":"dis-none"}`}>
+                      className={`b-table-empty-row ${CasinoDataList===0  || CDataList === null?"":"dis-none"}`}>
                       <td colSpan="6" role="cell">
                         <div role="alert" aria-live="polite">
                           <div className="text-center my-2">

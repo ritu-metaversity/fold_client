@@ -13,6 +13,7 @@ function UnSetteledBet() {
   const [betValue, setBetValue] = useState(1);
   const [deleteVal, setDeleteVal] = useState(1);
   const [currentPage, setCurrentPage] = useState();
+  const [Active,  setActive] = useState(1);
 
 
   useEffect(() => {
@@ -47,8 +48,9 @@ function UnSetteledBet() {
     result[i] = i;
   }
 
-  const handleClick = (val) => {
+  const handleClick = (val ,id) => {
     setPagination(val);
+    setActive(id)
   };
 
   const increment = () => {
@@ -84,14 +86,13 @@ function UnSetteledBet() {
   return (
     <div>
       <NavBar />
-
       <div className="report-container wrapper">
         <div className="card">
           <div className="card-header">
-            <h4 className="mb-0">Un-Setteled Bet</h4>
+            <h4 className="mb-0 heading-ch">Un-Setteled Bet</h4>
           </div>
           <div className="card-body container-fluid container-fluid-5 unsetteledbet">
-            <div className="row row5 acc-stat">
+            <div className="row row5 ">
               <div className="col-12 text-center">
                 <div
                   id="match_unmatched_delete"
@@ -135,7 +136,7 @@ function UnSetteledBet() {
             </div>
             <div className={`${deleteVal === "2" ? "d-none" : ""}`}>
               <div
-                className={`row row5 mt-2 acc-stat ${
+                className={`row row5 mt-2  ${
                   ListLength === 0 ? "dis-none" : ""
                 }`}>
                 <div className="col-6">
@@ -230,13 +231,14 @@ function UnSetteledBet() {
                         <option value="40">40</option>
                         <option value="45">45</option>
                         <option value="50">50</option>
+                        <option value="100" selected>100</option>
                       </select>
                       entries
                     </label>
                   </div>
                 </div>
               </div>
-              <div className="row row5 mt-2 acc-stat">
+              <div className="row row5 mt-2 ">
                 <div className="col-12">
                   <button
                     className="btn btn-primary btn-block btn-sm"
@@ -248,7 +250,7 @@ function UnSetteledBet() {
               <div className="row row5 mt-2 ">
                 <div className="row row5 mt-2">
                   <div className="col-12">
-                    <div className="table-responsive acc-stat">
+                    <div className="table-responsive unsetTable">
                       <table
                         role="table"
                         aria-busy="false"
@@ -393,7 +395,7 @@ function UnSetteledBet() {
                         <tbody>
                           <tr
                             role="row"
-                            className={`b-table-empty-row  acc-stat
+                            className={`b-table-empty-row  
                           ${ListLength === 0 ? "" : "dis-none"}`}>
                             <td colSpan="6" role="cell">
                               <div role="alert" aria-live="polite">
@@ -411,7 +413,7 @@ function UnSetteledBet() {
               </div>
 
                             
-              <div className="row row5 mt-2 acc-stat">
+              <div className="row row5 mt-2 ">
               <div className="col-12">
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">
@@ -431,8 +433,8 @@ function UnSetteledBet() {
                           <li
                             key={item + id}
                             className="page-item "
-                            onClick={() => handleClick(item)}>
-                            <button className="plink act">
+                            onClick={() => handleClick(item, id)}>
+                            <button className={`plink ${Active === item ? "act" :""}` }>
                               <span aria-hidden="true" className="num">
                                 {item === "" ? 1 : item}
                               </span>
