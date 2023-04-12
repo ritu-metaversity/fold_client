@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../apis/gameAPI";
 import Mobilenav from "../../navBar/MobileNav/Mobilenav";
 import NavBar from "../../navBar/NavBar";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./Slot.css";
+import { useNavigate } from "react-router-dom";
 
 const Slot = () => {
   const [casinoList, setCasinoList] = useState("");
@@ -23,7 +23,7 @@ const Slot = () => {
     setCasinoListId(id);
     setActiveClass(id);
     setCasinoName(name);
-    // e.preventDefault();
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -35,16 +35,17 @@ const Slot = () => {
     });
   }, [casinoListId]);
 
-  const history = useHistory();
+  const nav = useNavigate();
   const handleData = (id, e) => {
+    nav(`/casino/${id}`);
     e.preventDefault();
-    history.push(`/casino/${id}`);
   };
 
   return (
     <>
       <NavBar />
       <Mobilenav />
+      <>
       {
         isLoading?<p className="lodder"><i className="fa fa-spinner fa-spin"></i></p>:<div className="tab-content">
         <div id="live-casino" className="tab-pane live-casino">
@@ -131,6 +132,7 @@ const Slot = () => {
         </div>
       </div>
       }
+      </>
     </>
   );
 };

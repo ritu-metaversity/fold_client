@@ -132,6 +132,7 @@ css-pw8cd7 .selected {
     border: 1px solid #ddd;
     width: 93%;
     border-radius: 5px;
+    padding: 12px;
 }
 
 .text-left {
@@ -216,10 +217,7 @@ css-pw8cd7 .selected {
         width: 30%;
         margin: auto;
     }
-    table#__BVID__104 {
-        width: 50%;
-        margin: auto;
-    }
+   
     .head-deposit {
         width: unset;
     }

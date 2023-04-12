@@ -1,12 +1,10 @@
 import { React, useEffect, useState } from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { AuthorAPI } from "../../apis/AuthorAPI";
 
 function Item({ gameIdForItemPage, sportId }) {
-  const history = useHistory();
   const [gameName, setGameName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -37,9 +35,9 @@ function Item({ gameIdForItemPage, sportId }) {
     }
     // eslint-disable-next-line
   }, [gameIdForItemPage]);
-
+const nav  = useNavigate()
   const handleData = (id) => {
-    history.push(`/gamedetail/${id}`);
+    nav(`/gamedetail/${id}`);
   };
 
   return (
@@ -72,7 +70,7 @@ function Item({ gameIdForItemPage, sportId }) {
                             <div className="col-8 game-head">
                               <p className="mb-0 game-name">
                                 <Link to="/gamedetail">
-                                  <strong>{item.matchName}</strong>
+                                  <span className="game-name">{item.matchName}</span>
                                 </Link>
                               </p>
                               <p className="mb-0 d-i">
@@ -91,13 +89,14 @@ function Item({ gameIdForItemPage, sportId }) {
                                     }
                                     style={{ verticalAlign: "bottom" }}></span>
                                 </span>
-                                <span className="game-icon">
-                                  <i className="fas fa-tv"></i>
+                                <span className={`game-icon ${item?.F ? "bm-icon" : "d-none"}`}>
+                                  <i className="fa fa-tv"></i>
                                 </span>
                                 <span className="game-icon">
                                   <img
                                     src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/ic_fancy.png"
                                     alt="game-icon"
+                                    className={item.channelId === "0" ? "d-none" : ""}
                                   />
                                 </span>
                                 <span className="game-icon">

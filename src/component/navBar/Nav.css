@@ -1281,6 +1281,7 @@ a.router-link-exact-active.router-link-active {
     padding-left: 5px;
     font-weight: bold;
     right: 0;
+    font-size: 12px;
 }
 
 .search-box .search_input-hover {

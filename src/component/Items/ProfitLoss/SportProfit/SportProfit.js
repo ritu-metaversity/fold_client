@@ -23,6 +23,8 @@ function SportProfit() {
   const [SportData, setSportData] = useState();
   // const [SportDataLength, setSportDataLength] = useState();
   const [DataList, setDataList] = useState();
+  const [DataVal, setDataVal] = useState();
+
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
@@ -64,10 +66,11 @@ function SportProfit() {
       fromDate: "",
       toDate: "",
       userId: "",
-      index:0,
+      index:100,
       pageNumber:1,
       pageSize:2,
     }).then((res) => {
+      setDataVal(res.data)
       setPLValue(res.data.market);
       // setDataList(res.data.market.length);
     
@@ -99,6 +102,7 @@ function SportProfit() {
       userId: "",
       pageSize: 2
     }).then((res) => {
+      setDataVal(res.data)
       setPLValue(res.data.market);
       setDataList(res.data.market.length);
     });
@@ -129,7 +133,7 @@ function SportProfit() {
                   </div>
                 </div>
               </div>
-              <div className="col-6 text-right">
+              <div className="col-6 ">
                 <div className="form-group mb-0">
                   <div
                     className="mx-datepicker"
@@ -186,11 +190,20 @@ function SportProfit() {
                 </div>
               </div>
             </div>
+            <div className="row row5 mt-2 acc-stat">
+              <div className="col-12">
+                <button
+                  className="btn btn-primary btn-block btn-sm"
+                  onClick={submit}>
+                  Submit
+                </button>
+              </div>
+            </div>
             <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div
                   id="account-statement_length"
-                  className="dataTables_length">
+                  className={`dataTables_length ${DataVal === null ? "dis-none":""}`}>
                   <label style={{ fontSize: "14px" }}>
                     Show
                     <select
@@ -209,21 +222,14 @@ function SportProfit() {
                       <option value="40">40</option>
                       <option value="45">45</option>
                       <option value="50">50</option>
+                      <option value="100" selected>100</option>
                     </select>
                     entries
                   </label>
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2 acc-stat">
-              <div className="col-12">
-                <button
-                  className="btn btn-primary btn-block btn-sm"
-                  onClick={submit}>
-                  Submit
-                </button>
-              </div>
-            </div>
+            
             <div className="row row5 mt-2">
               <div className="col-12">
                 <div className="table-responsive">
@@ -258,7 +264,7 @@ function SportProfit() {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className={`${DataList === 0|| DataList === null ?"dis-none":""}`}>
+                    <tbody className={`${DataList === 0|| DataVal === null  ?"dis-none":""}`}>
                       {PLValue?.length &&
                         PLValue.map((res) => {
                           return (
@@ -282,7 +288,7 @@ function SportProfit() {
                     <tr
                       role="row"
                       className={`b-table-empty-row ${
-                        DataList === null ||DataList===0  ? "" : "dis-none"
+                        DataVal === null ||DataList===0  ? "" : "dis-none"
                       }`}>
                       <td colSpan="6" role="cell">
                         <div role="alert" aria-live="polite">

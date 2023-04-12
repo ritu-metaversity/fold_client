@@ -1,9 +1,9 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function SignOut() {
-    const history = useHistory("")
+    const nav = useNavigate("")
     localStorage.clear();
-    history.push("/login")
+    nav("/login")
 }
 
 export default SignOut

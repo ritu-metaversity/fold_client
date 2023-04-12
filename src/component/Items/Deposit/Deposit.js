@@ -35,7 +35,7 @@ const Deposit = () => {
     <>
       <NavBar />
       {/* <Mobilenav /> */}
-      <><div className="card-header wit"><h4 className="mb-0">Deposite</h4></div>
+      <><div className="card-header wit"><h4 className="mb-0">Deposit</h4></div>
       <div className="wrapper main-conatiner deposit">
         <PayManually UpdateDetails={UpdateDetails} />
 
@@ -50,7 +50,7 @@ const Deposit = () => {
                 id="__BVID__104">
                 <thead>
                   <tr className="previous-deposite">
-                    <th colSpan="4">Previous Deposite</th>
+                    <th colSpan="4">Previous Deposit</th>
                   </tr>
                   <tr role="row" className="deposit-list">
                     <th

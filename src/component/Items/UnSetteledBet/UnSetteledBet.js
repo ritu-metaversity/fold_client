@@ -12,6 +12,8 @@ function UnSetteledBet() {
   const [pagination, setPagination] = useState(0);
   const [betValue, setBetValue] = useState(1);
   const [deleteVal, setDeleteVal] = useState(1);
+  const [currentPage, setCurrentPage] = useState();
+  const [Active,  setActive] = useState(1);
 
 
   useEffect(() => {
@@ -22,6 +24,7 @@ function UnSetteledBet() {
       betType: 1,
     }).then((res) => {
       // setPageLength(res.data.totalPages);
+      setCurrentPage(res.data.currentPage);
       setDataList(res.data.dataList);
     });
     // eslint-disable-next-line
@@ -29,10 +32,10 @@ function UnSetteledBet() {
 
   const submit = () => {
     UserAPI.Unsetteled_bet({
-      noOfRecords: recordValue,
+      noOfRecords: parseInt(recordValue),
       index: 0,
       sportType: 1,
-      betType: betValue,
+      betType: parseInt(betValue),
     }).then((res) => {
       setPageLength(res.data.totalPages);
       setListLength(res.data.dataList.length);
@@ -41,53 +44,55 @@ function UnSetteledBet() {
   };
 
   const result = [];
-  for (var i = 0; i <= pageLength; i++) {
+  for (var i = 1; i < pageLength; i++) {
     result[i] = i;
   }
 
-  const handleClick = (val) => {
+  const handleClick = (val ,id) => {
     setPagination(val);
+    setActive(id)
   };
+
   const increment = () => {
-    setPagination(pageLength + 1);
+    if(result?.length-1 === pageLength)
+    setPagination(pageLength);
   };
   const decerement = () => {
+    if(pageLength>1)
     setPagination(pageLength - 1);
   };
+
   const incrementByLast = ()=>{
-    setPagination(pageLength)
+    setPagination(pageLength-1)
   }
 
   const decrementByFirst=()=>{
-    setPagination(1)
+    setPagination(0)
   }
-
   useEffect(() => {
     if (ListLength > 0) {
       UserAPI.Unsetteled_bet({
-        noOfRecords: recordValue,
+        noOfRecords: parseInt(recordValue),
         index: pagination,
         sportType: 1,
-        betType: betValue,
+        betType: parseInt(betValue),
       }).then((res) => {
-        console.log(res.data.dataList);
         setDataList(res.data.dataList);
       });
     }
-    // eslint-disable-next-line
   }, [pagination]);
+
 
   return (
     <div>
       <NavBar />
-
       <div className="report-container wrapper">
         <div className="card">
           <div className="card-header">
-            <h4 className="mb-0">Un-Setteled Bet</h4>
+            <h4 className="mb-0 heading-ch">Un-Setteled Bet</h4>
           </div>
           <div className="card-body container-fluid container-fluid-5 unsetteledbet">
-            <div className="row row5 acc-stat">
+            <div className="row row5 ">
               <div className="col-12 text-center">
                 <div
                   id="match_unmatched_delete"
@@ -131,7 +136,7 @@ function UnSetteledBet() {
             </div>
             <div className={`${deleteVal === "2" ? "d-none" : ""}`}>
               <div
-                className={`row row5 mt-2 acc-stat ${
+                className={`row row5 mt-2  ${
                   ListLength === 0 ? "dis-none" : ""
                 }`}>
                 <div className="col-6">
@@ -226,13 +231,14 @@ function UnSetteledBet() {
                         <option value="40">40</option>
                         <option value="45">45</option>
                         <option value="50">50</option>
+                        <option value="100" selected>100</option>
                       </select>
                       entries
                     </label>
                   </div>
                 </div>
               </div>
-              <div className="row row5 mt-2 acc-stat">
+              <div className="row row5 mt-2 ">
                 <div className="col-12">
                   <button
                     className="btn btn-primary btn-block btn-sm"
@@ -244,7 +250,7 @@ function UnSetteledBet() {
               <div className="row row5 mt-2 ">
                 <div className="row row5 mt-2">
                   <div className="col-12">
-                    <div className="table-responsive acc-stat">
+                    <div className="table-responsive unsetTable">
                       <table
                         role="table"
                         aria-busy="false"
@@ -389,7 +395,7 @@ function UnSetteledBet() {
                         <tbody>
                           <tr
                             role="row"
-                            className={`b-table-empty-row  acc-stat
+                            className={`b-table-empty-row  
                           ${ListLength === 0 ? "" : "dis-none"}`}>
                             <td colSpan="6" role="cell">
                               <div role="alert" aria-live="polite">
@@ -406,8 +412,8 @@ function UnSetteledBet() {
                 </div>
               </div>
 
-
-              <div className="row row5 mt-2 acc-stat">
+                            
+              <div className="row row5 mt-2 ">
               <div className="col-12">
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">
@@ -421,34 +427,42 @@ function UnSetteledBet() {
                         <span aria-hidden="true">Prev</span>
                       </button>
                     </li>
-                    {/* <li
-                      className="page-item ">
-                      <button className="plink act">
-                        <span aria-hidden="true" className="num">0</span>
-                      </button>
-                    </li> */}
-                    {result?.length  &&
-                      result.map((item, id) => {
+                    {result?.length >0  &&
+                      result?.map((item, id) => {
                         return (
                           <li
                             key={item + id}
                             className="page-item "
-                            onClick={() => handleClick(id)}>
-                            <button className="plink act">
+                            onClick={() => handleClick(item, id)}>
+                            <button className={`plink ${Active === item ? "act" :""}` }>
                               <span aria-hidden="true" className="num">
-                                {item === "" ? 0 : item}
+                                {item === "" ? 1 : item}
                               </span>
                             </button>
                           </li>
                         );
                       })}
-                    <li className="page-item" onClick={increment}>
-                      <button className="page-link" aria-label="Next">
-                        <span aria-hidden="true">Next</span>
+                      {
+                        result?.length===0 && (
+                          <li
+                            // key={item + id}
+                            className="page-item "
+                            onClick={() => handleClick(1)}>
+                            <button className="plink act">
+                              <span aria-hidden="true" className="num">
+                                 1
+                              </span>
+                            </button>
+                          </li>
+                        )
+                      }
+                    <li className="page-item" onClick={increment} >
+                      <button className="page-link" disabled={pageLength ? true:false} aria-label="Next">
+                        <span aria-hidden="true" className="num">Next</span>
                       </button>
                     </li>
                     <li className="page-item" onClick={incrementByLast}>
-                      <button className="page-link" aria-label="Next">
+                      <button className="page-link"  aria-label="Next">
                         <span aria-hidden="true">Last</span>
                       </button>
                     </li>
@@ -456,39 +470,6 @@ function UnSetteledBet() {
                 </nav>
               </div>
             </div>
-
-
-              {/* <div className="row row5 mt-2 acc-stat">
-                <div className="col-12">
-                  <nav aria-label="Page navigation example">
-                    <ul className="pagination">
-                      <li className="page-item" onClick={decerement}>
-                        <button className="page-link" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                          <span className="sr-only">Previous</span>
-                        </button>
-                      </li>
-                      {result?.length &&
-                        result.map((item, id) => {
-                          return (
-                            <li
-                              className="page-item"
-                              key={id + id}
-                              onClick={() => handleClick(id)}>
-                              <button className="page-link">{item}</button>
-                            </li>
-                          );
-                        })}
-                      <li className="page-item" onClick={increment}>
-                        <button className="page-link" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                          <span className="sr-only">Next</span>
-                        </button>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div> */}
             </div>
             <div className={`row row5 mt-2 ${deleteVal==="2"?"":"d-none"}`}>
               <div className="col-12 ">

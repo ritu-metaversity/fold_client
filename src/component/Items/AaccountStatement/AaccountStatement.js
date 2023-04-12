@@ -17,7 +17,7 @@ function AaccountStatement() {
   const [startDate, setStartDate] = useState(timeBefore);
   const [endDate, setEndDate] = useState(time);
   const [type, setType] = useState(1);
-  const [IndexValue, setIndexValue] = useState(5);
+  const [IndexValue, setIndexValue] = useState(100);
   const [show, setShow] = useState(false);
   const [dataList, setDataList] = useState("");
   const [dataListLength, setDataListLength] = useState();
@@ -26,6 +26,7 @@ function AaccountStatement() {
   const [showModals, setShowModals] = useState(false);
   const [remark, setRemark] = useState();
   const [MarketId, setMarketId] = useState();
+  const [currentPage, setCurrentPage] = useState();
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
@@ -83,7 +84,7 @@ function AaccountStatement() {
 
     UserAPI.Account_Statement({
       noOfRecords: IndexValue,
-      index: 0,
+      index: "0",
       fromDate: startDate,
       toDate: endDate,
       type: type,
@@ -93,6 +94,8 @@ function AaccountStatement() {
       setDataListLength(res.dataList.length);
     });
   };
+
+  // console.log(pageLength);
 
   const result = [];
   for (var i = 0; i < pageLength; i++) {
@@ -110,14 +113,18 @@ function AaccountStatement() {
   };
 
   const increment = () => {
-    setPagination(pageLength + 1);
+    if(pageLength !== 1){
+
+      setPagination(pageLength + 1);
+    }
+    // console.log(pageLength+1)
   };
   const decrementByFirst = ()=>{
-    setPageLength(0)
+    setPageLength(1)
   }
 
   const incrementByLast = ()=>{
-    setPagination(pageLength)
+    setPagination(pageLength-1)
   }
 
   useEffect(() => {
@@ -130,10 +137,17 @@ function AaccountStatement() {
         type: type,
       }).then((res) => {
         setDataList(res.dataList);
+        setCurrentPage(res?.currentPage)
+
       });
     }
     // eslint-disable-next-line
   }, [pagination]);
+
+
+
+  // console.log(pageLength);
+
   return (
     <div>
       <NavBar />
@@ -141,10 +155,10 @@ function AaccountStatement() {
       <div className="report-container wrapper">
         <div className="card">
           <div className="card-header">
-            <h4 className="mb-0">Account Statement</h4>
+            <h4 className="mb-0 heading-ch">Account Statement</h4>
           </div>
           <div className="card-body statement container-fluid container-fluid-5">
-            <div className="row row5 acc-stat">
+            <div className="row row5 ">
               <div className="col-6">
                 <div className="form-group mb-0">
                   <div className="mx-datepicker" style={{ width: "auto" }}>
@@ -165,7 +179,7 @@ function AaccountStatement() {
                   </div>
                 </div>
               </div>
-              <div className="col-6 text-right">
+              <div className="col-6 ">
                 <div className="form-group mb-0">
                   <div className="mx-datepicker" style={{ width: "auto" }}>
                     <div className="mx-input-wrapper">
@@ -185,7 +199,7 @@ function AaccountStatement() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2 acc-stat">
+            <div className="row row5  ">
               <div className="col-12">
                 <div className="form-group mb-0">
                   <select
@@ -199,9 +213,17 @@ function AaccountStatement() {
                 </div>
               </div>
             </div>
-
+            <div className="row row5 mt-2 ">
+              <div className="col-12">
+                <button
+                  className="btn btn-primary btn-block btn-sm"
+                  onClick={submit}>
+                  Submit
+                </button>
+              </div>
+            </div>
             <div
-              className="row row5 mt-2 acc-stat"
+              className={`row row5 mt-2 ${dataListLength === 0?"dis-none":""}`}
               style={{ marginInline: "-7px" }}>
               <div className="col-6">
                 <div
@@ -225,22 +247,14 @@ function AaccountStatement() {
                       <option value="40">40</option>
                       <option value="45">45</option>
                       <option value="50">50</option>
+                      <option value="100" selected>100</option>
                     </select>
                     entries
                   </label>
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2 acc-stat">
-              <div className="col-12">
-                <button
-                  className="btn btn-primary btn-block btn-sm"
-                  onClick={submit}>
-                  Submit
-                </button>
-              </div>
-            </div>
-
+            
             <div className="row row5 mt-2">
               <div className="col-12">
                 <div className="table-responsive">
@@ -256,15 +270,15 @@ function AaccountStatement() {
                           role="columnheader"
                           scope="col"
                           aria-colindex="2"
-                          className="text-left bg-color">
-                          Sr no
+                          className="text-center bg-color">
+                          Date
                         </th>
                         <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="1"
                           className="text-left bg-color">
-                          Date
+                          Sr no
                         </th>
                         <th
                           role="columnheader"
@@ -306,11 +320,13 @@ function AaccountStatement() {
                               onClick={(e) =>
                                 handleShow(e, item.remark, item.marketid)
                               }>
-                              <td aria-colindex="2" className="text-left">
-                                {item.sno}
+                              <td aria-colindex="2" className="text-center">
+                              {moment(item.date).format("YYYY-MM-DD h:mm")}
+
                               </td>
                               <td aria-colindex="1" className="text-left">
-                                {moment(item.date).format("YYYY-MM-DD h:mm")}
+                                {item.sno}
+
                               </td>
                               <td
                                 aria-colindex="3"
@@ -370,7 +386,8 @@ function AaccountStatement() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2 acc-stat">
+            {
+              pageLength === 0?"":( <div className="row row5 mt-2  ">
               <div className="col-12">
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">
@@ -380,16 +397,10 @@ function AaccountStatement() {
                       </button>
                     </li>
                     <li className="page-item" onClick={decrement}>
-                      <button className="page-link" aria-label="Previous">
-                        <span aria-hidden="true">Prev</span>
+                      <button  disabled ={currentPage===pageLength?true:false} className="page-link" aria-label="Previous">
+                        <span aria-hidden="true" >Prev</span>
                       </button>
                     </li>
-                    {/* <li
-                      className="page-item ">
-                      <button className="plink act">
-                        <span aria-hidden="true" className="num">0</span>
-                      </button>
-                    </li> */}
                     {result?.length > 0 &&
                       result.map((item, id) => {
                         return (
@@ -399,14 +410,14 @@ function AaccountStatement() {
                             onClick={() => handlePagenation(id)}>
                             <button className="page-link act">
                               <span aria-hidden="true" className="num">
-                                {item === "" ? 0 : item}
+                                {item === "" ? 1 : item +1}
                               </span>
                             </button>
                           </li>
                         );
                       })}
                     <li className="page-item" onClick={increment}>
-                      <button className="page-link" aria-label="Next">
+                      <button className="page-link" disabled ={pageLength === 1 ? true:false} aria-label="Next">
                         <span aria-hidden="true">Next</span>
                       </button>
                     </li>
@@ -418,7 +429,9 @@ function AaccountStatement() {
                   </ul>
                 </nav>
               </div>
-            </div>
+            </div>)
+            }
+           
           </div>
         </div>
       </div>

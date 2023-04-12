@@ -58,10 +58,10 @@ function ChangeBtnValue() {
           }
           <div className="card">
             <div className="card-header">
-              <h4 className="mb-0">Change Button Values</h4>
+              <h4 className="mb-0 heading-ch">Change Button Values</h4>
             </div>
             <div className="card-body container-fluid container-fluid-5 button-value">
-              <div className="row row5 mb-1 acc-stat">
+              <div className="row row5 mb-1 ">
                 <div className="col-6">
                   <div className="button-title">
                     <span>
@@ -77,7 +77,7 @@ function ChangeBtnValue() {
                   </div>
                 </div>
               </div>
-              <div className="row row5 mb-1 acc-stat">
+              <div className="row row5 mb-1 ">
               <div className="col-6">
               {getKey?.length &&
                 getKey.map((item) => {
@@ -87,7 +87,7 @@ function ChangeBtnValue() {
                           placeholder="Button Value"
                           value={item}
                           maxLength="7"
-                          className="form-control chbtn"
+                          className="form-control chanbtn"
                           readOnly
                         />
                       </div>
@@ -105,7 +105,7 @@ function ChangeBtnValue() {
                             text="number"
                             value={updateStack[key]}
                             onChange={handleInput}
-                            className="form-control chbtn"
+                            className="form-control chanbtn"
                           />
                         </div>
                     );
@@ -114,7 +114,7 @@ function ChangeBtnValue() {
                  </div>
               </div>
 
-              <div className="row row5 mt-2 acc-stat">
+              <div className="row row5 mt-2 ">
                 <div className="col-12">
                   <button
                     className="btn btn-primary btn-block btn-sm"

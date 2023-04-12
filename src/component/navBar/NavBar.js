@@ -104,7 +104,7 @@ const NavBar = () => {
                   <Link
                     to="/home"
                     className="router-link-exact-active router-link-active">
-                    <i className="fas fa-home mr-1"></i>
+                    <i class="fa fa-home mr-1"></i>
                     <img
                       src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
                       alt="Exchange"
@@ -114,7 +114,7 @@ const NavBar = () => {
                 </div>
                 <div className="col-6 text-right bal-expo">
                   <p className={`mb-0 ${!balanceShow ? "d-none" : ""}`}>
-                    <i className="fas fa-landmark mr-1"></i>
+                    <i className="fa fa-bank mr-1"></i>
                     <b>{error? "0.00": userbalance===""?"0.00":userbalance}</b>
                   </p>
                   <div className="exp">
@@ -262,7 +262,7 @@ const NavBar = () => {
                       <Link  className="search_icon" onClick={droupMenu}>
                         <i
                           className={
-                            !droup ? "fas fa-search" : "fas fa-times"
+                            !droup ? "fa fa-search" : "fa fa-times"
                           }></i>
                       </Link>
                     </div>

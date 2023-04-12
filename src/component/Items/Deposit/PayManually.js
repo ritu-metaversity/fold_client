@@ -10,7 +10,9 @@ import Modal from "react-bootstrap/Modal";
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
   const [UpiDetail, setUpiDetail] = useState();
-  const [Bitvalue, setBitValue] = useState(0);
+  const [Bitvalue, setBitValue] = useState("0");
+
+  const [BitvalueInputField, setBitValueInputField] = useState(0);
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);
@@ -19,15 +21,27 @@ const PayManually = (props) => {
   const [files, setFiles] = useState(null);
 
   const increment = () => {
-    setBitValue(Bitvalue + 10);
+    setBitValue(Number(Bitvalue) + 10);
   };
   const decrement = () => {
-    setBitValue(Bitvalue - 10);
+    if(Bitvalue !== "0")
+    setBitValue(Number(Bitvalue) - 10);
   };
+
   const handleStaticAmount = (vl) => {
-    setBitValue(Bitvalue + vl);
-    console.log(Bitvalue + vl)
+    setBitValue((Bitvalue)=>(Number(Bitvalue)||0) + Number(vl));
   };
+
+  const handleStaticAmountInput =(e)=>{
+let Inputvalue = e.target.value
+// console.log(typeof parseInt(Inputvalue))
+
+setBitValue( parseInt(Inputvalue));
+
+// console.log(Bitvalue, )
+
+  }
+console.log(typeof Bitvalue)
   useEffect(() => {
     UserAPI.Get_Payment_Detail_By_Id().then((res) => {
       setPayMethods(res.data.paymentMethods);
@@ -63,6 +77,8 @@ const PayManually = (props) => {
     setShowModals(true);
   };
 
+  console.log(Bitvalue, "adfsdafgsgdshdh")
+
   return (
     <div>
       <p className="enter-amount">Enter Amount</p>
@@ -81,7 +97,8 @@ const PayManually = (props) => {
               type="number"
               placeholder="Enter Amount"
               className="priceinput"
-              value={Bitvalue}
+              onChange={handleStaticAmountInput}
+              value={Number(Bitvalue)}
             />
             <button
               className="stakeactionminus priceminus btn"
@@ -98,22 +115,6 @@ const PayManually = (props) => {
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
-                value="100"
-                onClick={() => handleStaticAmount(100)}>
-                +100
-              </button>
-            </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                value="500"
-                onClick={() => handleStaticAmount(500)}>
-                +500
-              </button>
-            </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
                 value="1000"
                 onClick={() => handleStaticAmount(1000)}>
                 +1000
@@ -127,6 +128,22 @@ const PayManually = (props) => {
                 +5000
               </button>
             </div>
+            <div className="col-3 price-data">
+              <button
+                className="btn btn-secondary btn-block mb-2"
+                value="100000"
+                onClick={() => handleStaticAmount(100000)}>
+                +100000
+              </button>
+            </div>
+            <div className="col-3 price-data">
+              <button
+                className="btn btn-secondary btn-block mb-2"
+                value="500000"
+                onClick={() => handleStaticAmount(500000)}>
+                +500000
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -134,7 +151,7 @@ const PayManually = (props) => {
       <div className="paymethods">
         <Container>
           <div className="amount">
-            <h1>Pay {Bitvalue}/-</h1>
+            <h1>Pay {(Bitvalue)||0}/-</h1>
             <p>Pay Manually</p>
           </div>
           <div className="bank-logo">

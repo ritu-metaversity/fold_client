@@ -18,7 +18,7 @@ function AlertBtn(props) {
   useEffect(() => {
     setTimeout(() => {
       props.popupClose(false);
-      showHide(false);
+      setShowHide(false);
     }, 1500);
     
   }, [props.val]);
