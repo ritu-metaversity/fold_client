@@ -6,11 +6,13 @@ import { UserAPI } from "../../../apis/UserAPI";
 import "./PayManually.css";
 import { Input } from "antd";
 import Modal from "react-bootstrap/Modal";
+import { type } from "@testing-library/user-event/dist/type";
 
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
   const [UpiDetail, setUpiDetail] = useState();
   const [Bitvalue, setBitValue] = useState(0);
+  const [BitvalueInputField, setBitValueInputField] = useState(0);
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);
@@ -25,9 +27,20 @@ const PayManually = (props) => {
     setBitValue(Bitvalue - 10);
   };
   const handleStaticAmount = (vl) => {
-    setBitValue(Bitvalue + vl);
+setBitValue(Bitvalue + vl);
     console.log(Bitvalue + vl)
   };
+
+  const handleStaticAmountInput =(e)=>{
+let Inputvalue = e.target.value
+// console.log(typeof parseInt(Inputvalue))
+
+setBitValue( parseInt(Inputvalue));
+
+console.log(Bitvalue, )
+
+  }
+console.log(typeof Bitvalue)
   useEffect(() => {
     UserAPI.Get_Payment_Detail_By_Id().then((res) => {
       setPayMethods(res.data.paymentMethods);
@@ -81,7 +94,8 @@ const PayManually = (props) => {
               type="number"
               placeholder="Enter Amount"
               className="priceinput"
-              value={Bitvalue}
+              onChange={handleStaticAmountInput}
+              Value={Number(Bitvalue)}
             />
             <button
               className="stakeactionminus priceminus btn"
@@ -134,7 +148,7 @@ const PayManually = (props) => {
       <div className="paymethods">
         <Container>
           <div className="amount">
-            <h1>Pay {Bitvalue}/-</h1>
+            <h1>Pay {Number(Bitvalue === null ?0:Bitvalue)}/-</h1>
             <p>Pay Manually</p>
           </div>
           <div className="bank-logo">

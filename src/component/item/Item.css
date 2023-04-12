@@ -441,4 +441,6 @@ table {
     display: flex;
     flex-direction: column;
 }
-
+.game-name {
+    font-weight: bolder;
+}

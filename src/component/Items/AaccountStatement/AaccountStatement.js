@@ -26,6 +26,7 @@ function AaccountStatement() {
   const [showModals, setShowModals] = useState(false);
   const [remark, setRemark] = useState();
   const [MarketId, setMarketId] = useState();
+  const [currentPage, setCurrentPage] = useState();
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
@@ -83,7 +84,7 @@ function AaccountStatement() {
 
     UserAPI.Account_Statement({
       noOfRecords: IndexValue,
-      index: 0,
+      index: "0",
       fromDate: startDate,
       toDate: endDate,
       type: type,
@@ -93,6 +94,8 @@ function AaccountStatement() {
       setDataListLength(res.dataList.length);
     });
   };
+
+  // console.log(pageLength);
 
   const result = [];
   for (var i = 0; i < pageLength; i++) {
@@ -110,14 +113,18 @@ function AaccountStatement() {
   };
 
   const increment = () => {
-    setPagination(pageLength + 1);
+    if(pageLength !== 1){
+
+      setPagination(pageLength + 1);
+    }
+    // console.log(pageLength+1)
   };
   const decrementByFirst = ()=>{
-    setPageLength(0)
+    setPageLength(1)
   }
 
   const incrementByLast = ()=>{
-    setPagination(pageLength)
+    setPagination(pageLength-1)
   }
 
   useEffect(() => {
@@ -130,10 +137,17 @@ function AaccountStatement() {
         type: type,
       }).then((res) => {
         setDataList(res.dataList);
+        setCurrentPage(res?.currentPage)
+
       });
     }
     // eslint-disable-next-line
   }, [pagination]);
+
+
+
+  // console.log(pageLength);
+
   return (
     <div>
       <NavBar />
@@ -370,7 +384,8 @@ function AaccountStatement() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2 acc-stat">
+            {
+              pageLength === 0?"":( <div className="row row5 mt-2 acc-stat">
               <div className="col-12">
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">
@@ -380,16 +395,10 @@ function AaccountStatement() {
                       </button>
                     </li>
                     <li className="page-item" onClick={decrement}>
-                      <button className="page-link" aria-label="Previous">
-                        <span aria-hidden="true">Prev</span>
+                      <button  disabled ={currentPage===pageLength?true:false} className="page-link" aria-label="Previous">
+                        <span aria-hidden="true" >Prev</span>
                       </button>
                     </li>
-                    {/* <li
-                      className="page-item ">
-                      <button className="plink act">
-                        <span aria-hidden="true" className="num">0</span>
-                      </button>
-                    </li> */}
                     {result?.length > 0 &&
                       result.map((item, id) => {
                         return (
@@ -399,14 +408,14 @@ function AaccountStatement() {
                             onClick={() => handlePagenation(id)}>
                             <button className="page-link act">
                               <span aria-hidden="true" className="num">
-                                {item === "" ? 0 : item}
+                                {item === "" ? 1 : item +1}
                               </span>
                             </button>
                           </li>
                         );
                       })}
                     <li className="page-item" onClick={increment}>
-                      <button className="page-link" aria-label="Next">
+                      <button className="page-link" disabled ={pageLength === 1 ? true:false} aria-label="Next">
                         <span aria-hidden="true">Next</span>
                       </button>
                     </li>
@@ -418,7 +427,9 @@ function AaccountStatement() {
                   </ul>
                 </nav>
               </div>
-            </div>
+            </div>)
+            }
+           
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ const Slot = () => {
     setCasinoListId(id);
     setActiveClass(id);
     setCasinoName(name);
-    // e.preventDefault();
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -37,14 +37,15 @@ const Slot = () => {
 
   const history = useHistory();
   const handleData = (id, e) => {
-    e.preventDefault();
     history.push(`/casino/${id}`);
+    e.preventDefault();
   };
 
   return (
     <>
       <NavBar />
       <Mobilenav />
+      <>
       {
         isLoading?<p className="lodder"><i className="fa fa-spinner fa-spin"></i></p>:<div className="tab-content">
         <div id="live-casino" className="tab-pane live-casino">
@@ -131,6 +132,7 @@ const Slot = () => {
         </div>
       </div>
       }
+      </>
     </>
   );
 };

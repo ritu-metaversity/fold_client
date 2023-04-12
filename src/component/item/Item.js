@@ -72,7 +72,7 @@ function Item({ gameIdForItemPage, sportId }) {
                             <div className="col-8 game-head">
                               <p className="mb-0 game-name">
                                 <Link to="/gamedetail">
-                                  <strong>{item.matchName}</strong>
+                                  <span className="game-name">{item.matchName}</span>
                                 </Link>
                               </p>
                               <p className="mb-0 d-i">
@@ -91,13 +91,14 @@ function Item({ gameIdForItemPage, sportId }) {
                                     }
                                     style={{ verticalAlign: "bottom" }}></span>
                                 </span>
-                                <span className="game-icon">
-                                  <i className="fas fa-tv"></i>
+                                <span className={`game-icon ${item?.F ? "bm-icon" : "d-none"}`}>
+                                  <i className="fa fa-tv"></i>
                                 </span>
                                 <span className="game-icon">
                                   <img
                                     src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/ic_fancy.png"
                                     alt="game-icon"
+                                    className={item.channelId === "0" ? "d-none" : ""}
                                   />
                                 </span>
                                 <span className="game-icon">

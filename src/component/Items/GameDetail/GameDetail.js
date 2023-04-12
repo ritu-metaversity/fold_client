@@ -10,6 +10,7 @@ import { socket } from "./socket";
 import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import FancyModals from "./FancyModals/FancyModals";
+import { createProfits } from "./eventUtil";
 
 function GameDetail({ getStackValue, SportId }) {
   var curr = new Date();
@@ -43,15 +44,19 @@ function GameDetail({ getStackValue, SportId }) {
   const [sId, setSid] = useState(SportId);
   const [OddSocketConnected, setOddSocketConnected] = useState(false);
   const [matchDetail, setMatchDelatil] = useState("");
-  // const [oddsPnl, setOddsPnl] = useState([]);
   const [FancyID, setFancyID] = useState();
   const [fancyOddsPnl, setFancyOddsPnl] = useState([]);
-  const [plnOddsFancy, setPlnOddsFancy] = useState();
   const [pValue, setPvalue] = useState();
   const [showFancyModals, setShowFancyModals] = useState(false);
   const [oddsssss, setOddsssss] = useState({});
   const [bookmakerPnl, setBookmakerPnl] = useState({});
   const [oddsPnl, setOddsPnl] = useState({});
+
+  const [profits, setProfits] = useState({
+    Odds: {},
+    Bookmaker: [],
+    Fancy: [],
+  });
 
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
@@ -143,15 +148,6 @@ function GameDetail({ getStackValue, SportId }) {
     // eslint-disable-next-line
   }, [token]);
 
-  const { lastMessage } = useWebSocket(
-    `ws://13.233.248.48:8082/enduserodd/${id}/${token}`,
-    { shouldReconnect: (event) => true }
-  );
-  useEffect(() => {
-    if (lastMessage?.data && JSON.parse(lastMessage?.data)?.data) {
-      setOddsPnl(JSON.parse(lastMessage?.data));
-    }
-  }, [lastMessage]);
 
   const { lastMessage: lastOddsPnl } = useWebSocket(
     `ws://13.233.248.48:8082/enduserodd/${id}/${token}`,
@@ -163,51 +159,38 @@ function GameDetail({ getStackValue, SportId }) {
         lastOddsPnl?.data &&
         JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data !== null
       ) {
-        setOddsPnl(
-          lastOddsPnl?.data &&
-            JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data
-        );
+        setOddsPnl(JSON.parse(lastOddsPnl?.data)?.data);
       } else {
-        setOddsPnl(null);
+        setOddsPnl([]);
       }
   }, [lastOddsPnl]);
 
   useEffect(() => {
-    if (oddsPnl) {
-      let bookmakerPnlllll = [
-        {
-          selection: oddsPnl[0]?.selection1,
-          pnl: oddsPnl[0]?.pnl1,
-        },
-        {
-          selection: oddsPnl[0]?.selection2,
-          pnl: oddsPnl[0]?.pnl2,
-        },
-        {
-          selection: oddsPnl[0]?.selection3,
-          pnl: oddsPnl[0]?.pnl3,
-        },
-      ];
-      let odsssss = [
-        {
-          selection: oddsPnl[1]?.selection1,
-          pnl: oddsPnl[1]?.pnl1,
-        },
-        {
-          selection: oddsPnl[1]?.selection2,
-          pnl: oddsPnl[1]?.pnl2,
-        },
-        {
-          selection: oddsPnl[1]?.selection3,
-          pnl: oddsPnl[1]?.pnl3,
-        },
-      ];
-      setOddsssss(odsssss);
-      setBookmakerPnl(bookmakerPnlllll);
-    }
-  }, [oddsPnl]);
-
-
+    createProfits({
+      fancyOdds,
+      fancyPnl: fancyOddsPnl,
+      betDetails: {
+        isFancy: fancy,
+        isBack: cName === "back" ? true : false,
+        odds: spanValueRate,
+        marketName: "",
+        selectionId: parseInt(selectionId),
+        priceValue: fancy === false ? spanValueRate : pValue,
+        marketId: marketId === "" ? selectionId : marketId,
+        matchId: matchId,
+      },
+      rechange: true,
+      pnl: oddsPnl,
+      setProfits,
+    });
+  }, [
+    spanValueRate,
+    oddsPnl,
+    fancyOddsPnl,
+    fancyOdds?.Odds && fancyOdds?.Odds[0]?.marketId,
+    marketId,
+    selectionId,
+  ]);
 
   const { lastMessage: FoddsPnl } = useWebSocket(
     `ws://13.233.248.48:8082/enduserfancy/${id}/${token}`,
@@ -215,12 +198,11 @@ function GameDetail({ getStackValue, SportId }) {
   );
   useEffect(() => {
     if (FoddsPnl?.data && JSON.parse(FoddsPnl?.data)?.data) {
-      setFancyOddsPnl(JSON.parse(FoddsPnl?.data));
+      setFancyOddsPnl(JSON.parse(FoddsPnl?.data)?.data);
     } else {
-      setFancyOddsPnl(null);
+      setFancyOddsPnl([]);
     }
   }, [FoddsPnl]);
-
 
   // useEffect(() => {
   //   const time = setInterval(() => {
@@ -242,8 +224,6 @@ function GameDetail({ getStackValue, SportId }) {
   //   }, 1000);
   //   return () => clearInterval(time);
   // }, [id, matchodd,  fancyOdds]);
-
-
 
   const handleGameName = (item, id) => {
     setCurrentFancy(item);
@@ -373,7 +353,7 @@ function GameDetail({ getStackValue, SportId }) {
                             `}>
                             {item.Name}
                             <p className="float-right mb-0">
-                              <i className="fas fa-info-circle"></i>
+                            <i class="fa fa-info-circle"></i>
                             </p>
                           </div>
                           <div
@@ -422,23 +402,27 @@ function GameDetail({ getStackValue, SportId }) {
 
                                         <p>
                                           <span
+                                            style={{ color: "black" }}
                                             className={`float-left ${
-                                              oddsssss.find(
-                                                (itemPnl) =>
-                                                  itemPnl.selection ==
-                                                  event?.selectionId
-                                              )?.pnl > 0
-                                                ? "success"
-                                                : "danger"
-                                            }`}
-                                            style={{ color: "black" }}>
-                                            {
-                                              oddsssss.find(
-                                                (itemPnl) =>
-                                                  itemPnl.selection ==
-                                                  event?.selectionId
-                                              )?.pnl
-                                            }
+                                              profits.Odds[
+                                                Number(item?.marketId)
+                                              ]?.find(
+                                                (profit) =>
+                                                  profit.sid ==
+                                                  event.selectionId
+                                              )?.value > 0
+                                                ? "text-success"
+                                                : "text-danger"
+                                            }`}>
+                                            {profits.Odds[
+                                              Number(item?.marketId)
+                                            ]
+                                              ?.find(
+                                                (profit) =>
+                                                  profit.sid ==
+                                                  event.selectionId
+                                              )
+                                              ?.value?.toFixed(2)}
                                           </span>
                                         </p>
                                       </div>
@@ -563,9 +547,10 @@ function GameDetail({ getStackValue, SportId }) {
                                               cName === "back" ? "back" : "lay"
                                             }>
                                             <Placebet
+                                              profits={profits}
                                               spanValueRate={spanValueRate}
                                               spanValueName={spanValueName}
-                                              matchDetail={matchDetail}
+                                              fancyOdds={fancyOdds}
                                               colorName={cName}
                                               getStackValue={getStackValue}
                                               matchId={matchId}
@@ -577,6 +562,8 @@ function GameDetail({ getStackValue, SportId }) {
                                               toss=""
                                               data={data}
                                               priceValue={pValue}
+                                              oddsssss={oddsssss}
+                                              bookmakerPnl={bookmakerPnl}
                                             />
                                           </Modal.Body>
                                         </Modal>
@@ -585,6 +572,9 @@ function GameDetail({ getStackValue, SportId }) {
                                   );
                                 })}
                             </div>
+                          </div>
+                          <div className="table-remark text-right remark">
+                            {item.display_message}
                           </div>
                         </div>
                       );
@@ -598,7 +588,7 @@ function GameDetail({ getStackValue, SportId }) {
                     <div className="market-title mt-1">
                       Bookmaker
                       <p className="float-right mb-0">
-                        <i className="fas fa-info-circle"></i>
+                        <i class="fa fa-info-circle"></i>
                       </p>
                     </div>
                     <div className="bookmaker-market">
@@ -620,140 +610,144 @@ function GameDetail({ getStackValue, SportId }) {
                         {fancyOdds?.Bookmaker?.length &&
                           fancyOdds?.Bookmaker.map((bookmaker, id) => {
                             return (
-                              <div
-                                key={bookmaker + id}
-                                data-title="SUSPENDED"
-                                className={`table-row ${
-                                  bookmaker.gstatus === "SUSPENDED"
-                                    ? "suspended"
-                                    : ""
-                                } ${bookmaker.t === "TOSS" ? "d-none" : ""}`}>
-                                <div className="float-left country-name box-4">
-                                  <span className="team-name">
-                                    <b>{bookmaker?.nation}</b>
-                                  </span>
-                                  <p>
-                                    <span
-                                      className={`float-left ${
-                                        bookmakerPnl.find(
-                                          (itemPnl) =>
-                                            itemPnl.selection == bookmaker?.sid
-                                        )?.pnl > 0
-                                          ? "success"
-                                          : "danger"
-                                      }`}
-                                      style={{ color: "black" }}>
-                                      {
-                                        bookmakerPnl.find(
-                                          (itemPnl) =>
-                                            itemPnl.selection == bookmaker?.sid
-                                        )?.pnl
-                                      }
-                                    </span>
-                                  </p>
-                                </div>
-                                <div className="box-1 back1 float-left back-1  text-center">
-                                  <button>
-                                    <span className="odd d-block">0</span>
-                                    <span className="d-block">0.0</span>
-                                  </button>
-                                </div>
-                                <div className="box-1 back2 float-left back-1  text-center">
-                                  <button>
-                                    <span className="odd d-block">0</span>{" "}
-                                    <span className="d-block">0.0</span>
-                                  </button>
-                                </div>
-
+                              <>
                                 <div
-                                  className={`box-1 back float-left back-1  text-center ${
-                                    bookmaker?.b1 !==
-                                    previousState?.Bookmaker[id]?.b1
-                                      ? "blink"
+                                  key={bookmaker + id}
+                                  data-title="SUSPENDED"
+                                  className={`table-row ${
+                                    bookmaker.gstatus === "SUSPENDED"
+                                      ? "suspended"
                                       : ""
-                                  }`}>
-                                  <button onClick={(e) => handleShow(e)}>
-                                    <span
-                                      className="odd d-block"
-                                      onClick={() =>
-                                        handleSpanValueBack(
-                                          bookmaker.b1,
-                                          bookmaker.nation,
-                                          "back",
-                                          mid,
-                                          bookmaker.mid,
-                                          bookmaker.sid,
-                                          bookmaker.nation,
-                                          pTime,
-                                          false,
-                                          bookmaker.t
-                                        )
-                                      }>
-                                      {bookmaker.b1}
+                                  } ${bookmaker.t === "TOSS" ? "d-none" : ""}`}>
+                                  <div className="float-left country-name box-4">
+                                    <span className="team-name">
+                                      <b>{bookmaker?.nation}</b>
                                     </span>
-                                    <span className="d-block">
-                                      {bookmaker?.bs1 === ""
-                                        ? "0.0"
-                                        : bookmaker?.bs1}
-                                    </span>
-                                  </button>
-                                </div>
+                                    <p>
+                                      <span
+                                        className={`float-left ${
+                                          profits.Bookmaker?.find(
+                                            (profit) =>
+                                              profit?.sid === bookmaker.sid
+                                          )?.value > 0
+                                            ? "text-success" :profits.Bookmaker?.find(
+                                              (profit) =>
+                                                profit?.sid === bookmaker.sid
+                                            )?.value < 0
+                                            ? "text-danger" :""
+                                        }`}
+                                        style={{ color: "black" }}>
+                                        {
+                                          profits.Bookmaker?.find(
+                                            (profit) =>
+                                              profit?.sid === bookmaker.sid
+                                          )?.value
+                                        }
+                                      </span>
+                                    </p>
+                                  </div>
+                                  <div className="box-1 back1 float-left back-1  text-center">
+                                    <button>
+                                      <span className="odd d-block">0</span>
+                                      <span className="d-block">0.0</span>
+                                    </button>
+                                  </div>
+                                  <div className="box-1 back2 float-left back-1  text-center">
+                                    <button>
+                                      <span className="odd d-block">0</span>{" "}
+                                      <span className="d-block">0.0</span>
+                                    </button>
+                                  </div>
 
-                                <div
-                                  className={`box-1 lay float-left text-center ${
-                                    bookmaker?.l1 !==
-                                    previousState?.Bookmaker[id]?.l1
-                                      ? "blink"
-                                      : ""
-                                  }`}>
-                                  <button onClick={(e) => handleShow(e)}>
-                                    <span
-                                      className="odd d-block"
-                                      onClick={() =>
-                                        handleSpanValueLay(
-                                          bookmaker.l1,
-                                          bookmaker.nation,
-                                          "lay",
-                                          mid,
-                                          bookmaker.mid,
-                                          bookmaker.sid,
-                                          bookmaker.nation,
-                                          pTime,
-                                          false,
-                                          bookmaker.t
-                                        )
-                                      }>
-                                      {bookmaker.l1}
-                                    </span>{" "}
-                                    <span className="d-block">
-                                      {bookmaker.ls1 === ""
-                                        ? "0.0"
-                                        : bookmaker.ls1}
-                                    </span>
-                                  </button>
+                                  <div
+                                    className={`box-1 back float-left back-1  text-center ${
+                                      bookmaker?.b1 !==
+                                      previousState?.Bookmaker[id]?.b1
+                                        ? "blink"
+                                        : ""
+                                    }`}>
+                                    <button onClick={(e) => handleShow(e)}>
+                                      <span
+                                        className="odd d-block"
+                                        onClick={() =>
+                                          handleSpanValueBack(
+                                            bookmaker.b1,
+                                            bookmaker.nation,
+                                            "back",
+                                            mid,
+                                            bookmaker.mid,
+                                            bookmaker.sid,
+                                            bookmaker.nation,
+                                            pTime,
+                                            false,
+                                            bookmaker.t
+                                          )
+                                        }>
+                                        {bookmaker.b1}
+                                      </span>
+                                      <span className="d-block">
+                                        {bookmaker?.bs1 === ""
+                                          ? "0.0"
+                                          : bookmaker?.bs1}
+                                      </span>
+                                    </button>
+                                  </div>
+
+                                  <div
+                                    className={`box-1 lay float-left text-center ${
+                                      bookmaker?.l1 !==
+                                      previousState?.Bookmaker[id]?.l1
+                                        ? "blink"
+                                        : ""
+                                    }`}>
+                                    <button onClick={(e) => handleShow(e)}>
+                                      <span
+                                        className="odd d-block"
+                                        onClick={() =>
+                                          handleSpanValueLay(
+                                            bookmaker.l1,
+                                            bookmaker.nation,
+                                            "lay",
+                                            mid,
+                                            bookmaker.mid,
+                                            bookmaker.sid,
+                                            bookmaker.nation,
+                                            pTime,
+                                            false,
+                                            bookmaker.t
+                                          )
+                                        }>
+                                        {bookmaker.l1}
+                                      </span>{" "}
+                                      <span className="d-block">
+                                        {bookmaker.ls1 === ""
+                                          ? "0.0"
+                                          : bookmaker.ls1}
+                                      </span>
+                                    </button>
+                                  </div>
+                                  <div className="box-1 lay2 float-left  text-center">
+                                    <button>
+                                      <span className="odd d-block">0</span>{" "}
+                                      <span className="d-block">0.0</span>
+                                    </button>
+                                  </div>
+                                  <div className="box-1 lay1 float-left  text-center">
+                                    <button>
+                                      <span className="odd d-block">0</span>{" "}
+                                      <span className="d-block">0.0</span>
+                                    </button>
+                                  </div>
                                 </div>
-                                <div className="box-1 lay2 float-left  text-center">
-                                  <button>
-                                    <span className="odd d-block">0</span>{" "}
-                                    <span className="d-block">0.0</span>
-                                  </button>
-                                </div>
-                                <div className="box-1 lay1 float-left  text-center">
-                                  <button>
-                                    <span className="odd d-block">0</span>{" "}
-                                    <span className="d-block">0.0</span>
-                                  </button>
-                                </div>
-                              </div>
+                              </>
                             );
                           })}
+                        <div className="table-remark text-right remark">
+                          {fancyOdds?.Bookmaker[0].display_message}
+                        </div>
                       </div>
                     </div>
-                    <div className="table-remark text-right remark">
-                      {matchDetail?.length && matchDetail[0].name} vs{" "}
-                      {matchDetail?.length && matchDetail[1].name} Match Bet
-                      Started In Our Exchange
-                    </div>
+
                     <div></div>
                   </div>
                   <div className="fancy-markets">
@@ -784,7 +778,7 @@ function GameDetail({ getStackValue, SportId }) {
                                 <div className="market-title float-left country-name box-4">
                                   <span>Session Market</span>
                                   <p className="float-right mb-0">
-                                    <i className="fas fa-info-circle"></i>
+                                    <i class="fa fa-info-circle"></i>
                                   </p>
                                 </div>
                                 <div className="box-1 float-left lay text-center">
@@ -800,9 +794,7 @@ function GameDetail({ getStackValue, SportId }) {
                                     <div className="fancy-tripple">
                                       <div data-title="" className="table-row">
                                         <div className="float-left country-name box-4">
-                                          <span
-                                            
-                                           >
+                                          <span>
                                             <b style={{ fontSize: "10px" }}>
                                               {item?.nation}
                                             </b>
@@ -818,7 +810,7 @@ function GameDetail({ getStackValue, SportId }) {
                                                       data-target="/min-max-info355"
                                                       aria-expanded="false"
                                                       className="info-icon collapsed">
-                                                      <i className="fas fa-info-circle m-l-10"></i>
+                                                      <i className="fa fa-info-circle m-l-10"></i>
                                                     </a>
                                                   </Accordion.Header>
                                                   <Accordion.Body>
@@ -860,13 +852,28 @@ function GameDetail({ getStackValue, SportId }) {
                                               </Accordion>
                                             </div>
                                           </div>
-                                          <p  className="cpointer" onClick={(e) =>
+                                          <p
+                                            className="cpointer"
+                                            onClick={(e) =>
                                               handleFancyBook(e, mid, item.sid)
                                             }>
                                             <span
-                                              className={`float-left ${fancyOddsPnl?.data.find(pnl => pnl.marketId===item.sid)?.pnl>0?"sucess":"danger"}`}
+                                              className={`float-left ${
+                                                fancyOddsPnl?.find(
+                                                  (pnl) =>
+                                                    pnl.marketId === item.sid
+                                                )?.pnl > 0
+                                                  ? "sucess" : fancyOddsPnl?.find(
+                                                    (pnl) =>
+                                                      pnl.marketId === item.sid
+                                                  )?.pnl < 0
+                                                  ? "danger" : ""
+                                              }`}
                                               style={{ color: "black" }}>
-                                             {fancyOddsPnl?.data.find(pnl => pnl.marketId===item.sid)?.pnl|| 0}
+                                              {fancyOddsPnl?.find(
+                                                (pnl) =>
+                                                  pnl.marketId === item.sid
+                                              )?.pnl || 0}
                                             </span>
                                           </p>
                                         </div>

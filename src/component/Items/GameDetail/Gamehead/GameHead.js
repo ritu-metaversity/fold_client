@@ -38,7 +38,7 @@ function GameHead({SportId, matchLength}) {
         </ul>
         <div className="tv-icon">
           <p className="mb-0">
-            <i className="fas fa-tv"></i>
+            <i className="fa fa-tv"></i>
           </p>
         </div>
       </div>

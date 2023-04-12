@@ -665,11 +665,6 @@ p.team-name.col-6.text-right {
     font-family: "Roboto Condensed", sans-serif;
 }
 
-/* .box-1.lay.float-left.text-center.blink {
-    animation: blinking 100ms !important;
-    background-color: #ffc01a !important;
-} */
-
 .blink {
     animation: blinking 100ms !important;
     background-color: #ffc01a !important;
@@ -679,8 +674,9 @@ p.team-name.col-6.text-right {
 @keyframes blinking {
     100% {
         background-color: #ffc01a !important;
-    }
+    }              
 }
+
 
 .fancy-market .suspended:after {
     width: 46%;

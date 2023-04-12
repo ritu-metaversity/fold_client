@@ -19,8 +19,6 @@ function Login() {
       setStatusVal(false)
       setMessage("password: length must be between 4 and 30");
     }
-
-
     if (password !== "" && user !== ""){
       AuthorAPI.Login({
         userId: user,
@@ -45,6 +43,10 @@ function Login() {
     }
   };
 
+  if(localStorage.getItem("token") !== null){
+    history.push('/home');
+    window.location.reload();
+  }
   
   const popupClose = (vl) => {
     setStatusVal(vl);
