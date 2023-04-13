@@ -60,12 +60,12 @@ function CasinoProfit() {
     UserAPI.Profit_Loss({
       sportId: SportId,
       matchId: "",
-      pageNumber:0,
       fromDate: startDate,
       toDate: endDate,
       userId: "",
-      pageSize:1,
-      index:0
+      index:0,
+      noOfRecords:100,
+      totalPages:1,
     }).then((res) => {
       setCDataList(res.data)
       setPLValue(res.data.market);
@@ -88,14 +88,14 @@ function CasinoProfit() {
     }
 
     UserAPI.Profit_Loss({
-      index: IndexValue,
-      pageNumber:1,
+      noOfRecords: IndexValue,
+      index:0,
       toDate: endDate,
       fromDate: startDate,
       sportId: SportId,
       matchId: MatchId,
       userId: "",
-      pageSize: 2,
+      totalPages: 2
     }).then((res) => {
        console.log(res)
         setPLValue(res.data.market);

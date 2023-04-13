@@ -67,7 +67,6 @@ function Placebet({
       },
     })
       .then((res) => {
-        // setStatus(res.data.status);
         data({
           status: true,
           message: res.data.message,
@@ -162,7 +161,7 @@ function Placebet({
                                 odds *
                                 updated) /
                                 100
-                          );
+                          ) || 0 ;
                         })
                       : profits?.Odds[marketId]?.map((profit) => {
                           return (
@@ -171,7 +170,7 @@ function Placebet({
                               (colorName === "back" ? 1 : -1) *
                                 (odds - 1) *
                                 updated
-                          );
+                          ) || 0;
                         })}
                   </span>
                   <span className={`${isFancy === true ? "" : "fancy-none"}`}>
@@ -241,9 +240,9 @@ function Placebet({
                               ((colorName === "back" ? 1 : -1) *
                                 odds *
                                 updated) /
-                                100
+                                100 || 0
                             : (profit?.value || 0) +
-                              (colorName === "back" ? -1 : 1) * updated}
+                              (colorName === "back" ? -1 : 1) * updated} 
                         </div>
                       </div>
                     ))
@@ -292,11 +291,11 @@ function Placebet({
                               : ""
                           }`}>
                           {profit.sid === selectionId
-                            ? profit.value +
+                            ? (profit?.value || 0) +
                               (colorName === "back" ? 1 : -1) *
                                 (odds - 1) *
-                                updated
-                            : profit.value +
+                                updated 
+                            : (profit.value || 0) +
                               (colorName === "back" ? -1 : 1) * updated}
                         </div>
                       </div>

@@ -12,21 +12,15 @@ function Item({ gameIdForItemPage, sportId }) {
     gameIdForItemPage = 4;
   }
 
-  const token = localStorage.getItem("token");
-  // useEffect(() => {
-  //   if (token === null) {
-  //     history.push("/login");
-  //     window.location.reload();
-  //   }
-  //   eslint-disable-next-line
-  // }, [token]);
-
+  
   useEffect(() => {
     if (gameIdForItemPage != null) {
+      const token = localStorage.getItem("token");
+
       axios
         .get(
           `http://43.205.50.127:9000/betfair_api/active_match/${gameIdForItemPage}`,
-          token
+          {token : token}
         )
         .then((res) => {
           setIsLoading(false);
@@ -35,6 +29,8 @@ function Item({ gameIdForItemPage, sportId }) {
     }
     // eslint-disable-next-line
   }, [gameIdForItemPage]);
+
+
 const nav  = useNavigate()
   const handleData = (id) => {
     nav(`/gamedetail/${id}`);

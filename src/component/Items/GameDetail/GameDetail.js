@@ -52,13 +52,30 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   const [showFancyModals, setShowFancyModals] = useState(false);
   const [oddsPnl, setOddsPnl] = useState({});
   const [StackVal, setStackVal] = useState([]);
-
+  const [userbalance, setUserbalance] = useState("0.00");
+  const [error, setError] = useState(false);
 
   const [profits, setProfits] = useState({
     Odds: {},
     Bookmaker: [],
     Fancy: [],
   });
+
+  useEffect(() => {
+    const time = setInterval(() => {
+      if (token !== null) {
+        UserAPI.User_Balance()
+          .then((res) => {
+            setUserbalance(res.data.balance);
+          })
+          .catch((error) => {
+            setError(true);
+          });
+      }
+    }, 1000);
+
+    return () => clearInterval(time);
+  }, []);
 
   // Stack Value Api
 
@@ -67,7 +84,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
       setStackVal(res);
     });
   }, []);
-
 
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
@@ -151,14 +167,13 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
 
   const nav = useNavigate();
   const token = localStorage.getItem("token");
-  
+
   useEffect(() => {
     if (token === null) {
       nav("/login");
     }
     // eslint-disable-next-line
   }, [token]);
-
 
   // const { lastMessage: lastOddsPnl } = useWebSocket(
   //   `ws://13.233.248.48:8082/enduserodd/${id}/${token}`,
@@ -176,18 +191,25 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   //     }
   // }, [lastOddsPnl]);
 
-  useEffect(()=>{
-    const time = setInterval(()=>{
+  useEffect(() => {
+    UserAPI.USER_ODDS_PNL({
+      matchId: id,
+    }).then((res) => {
+      setOddsPnl(res?.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    const time = setInterval(() => {
       UserAPI.USER_ODDS_PNL({
-        matchId: id
-      }).then((res)=>{
-        setOddsPnl(res?.data)
-      })
-    }, 5000)
+        matchId: id,
+      }).then((res) => {
+        setOddsPnl(res?.data);
+      });
+    }, 5000);
 
-    return ()=>clearInterval(time)
-
-  },[oddsPnl])
+    return () => clearInterval(time);
+  }, [oddsPnl]);
 
   useEffect(() => {
     createProfits({
@@ -216,21 +238,25 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     selectionId,
   ]);
 
+  useEffect(() => {
+    UserAPI.USER_FANCY_PNL({
+      matchId: id,
+    }).then((res) => {
+      setFancyOddsPnl(res?.data);
+    });
+  }, []);
 
-
-  useEffect(()=>{
-    const time = setInterval(()=>{
+  useEffect(() => {
+    const time = setInterval(() => {
       UserAPI.USER_FANCY_PNL({
-        matchId: id
-      }).then((res)=>{
-        setFancyOddsPnl(res?.data)
-      })
-    }, 5000)
+        matchId: id,
+      }).then((res) => {
+        setFancyOddsPnl(res?.data);
+      });
+    }, 5000);
 
     return () => clearInterval(time);
-
-  },[fancyOddsPnl])
-
+  }, [fancyOddsPnl]);
 
   // const { lastMessage: FoddsPnl } = useWebSocket(
   //   `ws://13.233.248.48:8082/enduserfancy/${id}/${token}`,
@@ -243,10 +269,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   //     setFancyOddsPnl([]);
   //   }
   // }, [FoddsPnl]);
-
-
-
-  
 
   // useEffect(() => {
   //   const time = setInterval(() => {
@@ -374,21 +396,22 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                 <p className="no-found">No real-time records found</p>
               ) : (
                 <>
-                {
-                  TvHideShow===true?<div id="scoreboard-box">
-                  <div className="scorecard scorecard-mobile">
-                    <div className="score-inner">
-                      <iframe
-                        src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sId}/${id}`}
-                        width="100%"
-                        className="score-card"
-                        title="scorecord"
-                        allowFullScreen={true}></iframe>
+                  {TvHideShow === true ? (
+                    <div id="scoreboard-box">
+                      <div className="scorecard scorecard-mobile">
+                        <div className="score-inner">
+                          <iframe
+                            src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sId}/${id}`}
+                            width="100%"
+                            className="score-card"
+                            title="scorecord"
+                            allowFullScreen={true}></iframe>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>:""
-                }
-                  
+                  ) : (
+                    ""
+                  )}
 
                   <div>
                     {matchodd?.map((item, id1) => {
@@ -400,7 +423,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                             `}>
                             {item.Name}
                             <p className="float-right mb-0">
-                            <i class="fa fa-info-circle"></i>
+                              <i class="fa fa-info-circle"></i>
                             </p>
                           </div>
                           <div
@@ -431,7 +454,8 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                             </div>
                             <div data-title="OPEN" className="table-body">
                               {item?.runners?.length &&
-                                item?.runners.map((event, index) => {
+                                item?.runners?.map((event, index) => {
+                                  const availableToBack=[...event.ex.availableToBack];
                                   return (
                                     <div
                                       data-title="ACTIVE"
@@ -459,7 +483,15 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                   event.selectionId
                                               )?.value > 0
                                                 ? "text-success"
-                                                : "text-danger"
+                                                : profits.Odds[
+                                                    Number(item?.marketId)
+                                                  ]?.find(
+                                                    (profit) =>
+                                                      profit.sid ==
+                                                      event.selectionId
+                                                  )?.value < 0
+                                                ? "text-danger"
+                                                : ""
                                             }`}>
                                             {profits.Odds[
                                               Number(item?.marketId)
@@ -469,23 +501,24 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                   profit.sid ==
                                                   event.selectionId
                                               )
-                                              ?.value?.toFixed(2)}
+                                              ?.value?.toFixed(2) || 0}
                                           </span>
                                         </p>
                                       </div>
-                                      {event.ex.availableToBack?.length &&
-                                        event.ex.availableToBack.map(
+                                      
+                                      {availableToBack?.length && 
+                                        availableToBack.map(
                                           (e, id) => {
                                             return (
                                               <div
-                                                key={e.size + e.price + id}
-                                                className={`box-1 box-7 back1 float-left back-1 text-center ${
-                                                  id === 1 ? "back2" : ""
-                                                } ${
-                                                  id === 0 || id === 1
+                                                // key={e.size + e.price + id}
+                                                className={`box-1 box-7 back1 float-left back-1 text-center  
+                                                ${
+                                                  id === 1 || id === 2
                                                     ? "ds-none"
                                                     : ""
-                                                }  ${
+                                                } 
+                                                 ${
                                                   e.price !==
                                                   previousState?.Odds[id1]
                                                     .runners[index]?.ex
@@ -523,7 +556,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                               </div>
                                             );
                                           }
-                                        )}
+                                        ).reverse()}
                                       {event?.ex?.availableToLay?.length &&
                                         event?.ex?.availableToLay.map(
                                           (e, id) => {
@@ -601,7 +634,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                               fancyOdds={fancyOdds}
                                               colorName={cName}
                                               getStackValue={getStackValue}
-                                              matchId={matchId}
+                                  x            matchId={matchId}
                                               marketId={marketId}
                                               selectionId={selectionId}
                                               MarketName={marketName}
@@ -620,7 +653,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                             </div>
                           </div>
                           <div className="table-remark text-right remark">
-                            {item.display_message}
+                            {item?.display_message}
                           </div>
                         </div>
                       );
@@ -676,19 +709,19 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                             (profit) =>
                                               profit?.sid === bookmaker.sid
                                           )?.value > 0
-                                            ? "text-success" :profits.Bookmaker?.find(
-                                              (profit) =>
-                                                profit?.sid === bookmaker.sid
-                                            )?.value < 0
-                                            ? "text-danger" :""
+                                            ? "text-danger"
+                                            : profits.Bookmaker?.find(
+                                                (profit) =>
+                                                  profit?.sid === bookmaker.sid
+                                              )?.value < 0
+                                            ? "text-success"
+                                            : ""
                                         }`}
                                         style={{ color: "black" }}>
-                                        {
-                                          profits.Bookmaker?.find(
-                                            (profit) =>
-                                              profit?.sid === bookmaker.sid
-                                          )?.value
-                                        }
+                                        {profits.Bookmaker?.find(
+                                          (profit) =>
+                                            profit?.sid === bookmaker.sid
+                                        )?.value?.toFixed(2) || 0}
                                       </span>
                                     </p>
                                   </div>
@@ -789,7 +822,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                             );
                           })}
                         <div className="table-remark text-right remark">
-                          {fancyOdds?.Bookmaker[0].display_message}
+                          {fancyOdds?.Bookmaker[0]?.display_message}
                         </div>
                       </div>
                     </div>
@@ -909,11 +942,14 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                   (pnl) =>
                                                     pnl.marketId === item.sid
                                                 )?.pnl > 0
-                                                  ? "sucess" : fancyOddsPnl?.find(
-                                                    (pnl) =>
-                                                      pnl.marketId === item.sid
-                                                  )?.pnl < 0
-                                                  ? "danger" : ""
+                                                  ? "sucess"
+                                                  : fancyOddsPnl?.find(
+                                                      (pnl) =>
+                                                        pnl.marketId ===
+                                                        item.sid
+                                                    )?.pnl < 0
+                                                  ? "danger"
+                                                  : ""
                                               }`}
                                               style={{ color: "black" }}>
                                               {fancyOddsPnl?.find(

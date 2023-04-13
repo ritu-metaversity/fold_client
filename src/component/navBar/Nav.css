@@ -776,6 +776,7 @@ p {
 .header-top {
     height: 60px;
     margin-top: 10px;
+    padding-inline: 5px;
 }
 
 .header-top ul {
@@ -1029,12 +1030,6 @@ li.float-left.download-apklink a {
     background-color: var(--bs-backdrop-bg);
 }
 
-
-/* mobile responsive */
-/* ---------------------------- */
-/* ---------------------------- */
-/* ---------------------------- */
-
 ul#home-events {
     display: flex;
     flex-wrap: wrap;
@@ -1049,7 +1044,7 @@ li.nav-item {
     display: block;
 }
 .header .logo {
-    width: 100px;
+    width: 111px;
 }
 .pb-1,
 .py-1 {
@@ -1071,7 +1066,7 @@ a {
     background-color: transparent;
 }
 .header .fa-home {
-    font-size: 20px;
+    font-size: 23px;
     vertical-align: middle;
     color: #fff;
 }
@@ -1441,4 +1436,7 @@ a {
 
 .exp span u {
     font-weight: 600;
+}
+.mb-4{
+    margin-top: -4px;
 }

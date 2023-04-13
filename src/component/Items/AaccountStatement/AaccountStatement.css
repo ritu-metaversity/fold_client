@@ -349,6 +349,9 @@ input[type=checkbox], input[type=radio] {
     .no-data-found{
         font-size: 14px;
     }
+    select.custom-select {
+        margin-top: -3px;
+    }
     
 }
 ul.pagination {
@@ -389,8 +392,8 @@ button.page-link {
     }
     .custom-control-label::after {
         position: absolute;
-        top: 0px;
-        left: -17px;
+        top: -2px;
+        left: -16px;
         display: block;
         width: 1rem;
         height: 1rem;
@@ -577,4 +580,7 @@ container .table tr th {
     border: 1px solid #ced4da !important;
     margin-bottom: 8px !important;
     margin-top: 4px !important;
+}
+.cpoint{
+    cursor: pointer;
 }

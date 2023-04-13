@@ -8,10 +8,12 @@ function MatchBet(props) {
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
 
-  useEffect(() => {
+
+  useEffect(()=>{
     GameAPI.Match_Bet_List({
       matchId: id,
     }).then((Item) => {
+      console.log(Item?.data)
       if (Item?.data) {
         setMatchBet(Item);
         const bets = Item?.data;
@@ -23,6 +25,27 @@ function MatchBet(props) {
         props.setMatchLength(noOfBets);
       }
     });
+  },[])
+
+  useEffect(() => {
+    const time = setInterval(()=>{
+      GameAPI.Match_Bet_List({
+        matchId: id,
+      }).then((Item) => {
+        if (Item?.data) {
+          setMatchBet(Item);
+          const bets = Item?.data;
+          const vals = Object.values(bets);
+          let noOfBets = 0;
+          for (let val of vals) {
+            noOfBets += val.length;
+          }
+          props.setMatchLength(noOfBets);
+        }
+      });
+      return ()=> clearInterval(time)
+    }, 5000)
+    
   }, [id]);
 
   // const { Item } = useWebSocket(
@@ -69,7 +92,7 @@ function MatchBet(props) {
                     <>
                       {matchBet?.data[key].map((item, id) => {
                         return (
-                          <tr key={id}>
+                          <tr key={id} className={`${item?.back === true ? "back" :"lay"}`}>
                             <td>{item?.nation}</td>
                             <td className="text-right">{item?.rate}</td>
 

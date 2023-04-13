@@ -29,13 +29,16 @@ import { AuthorAPI } from "./apis/AuthorAPI";
 
 function App() {
   const [SportId, setSportId] = useState("");
-  const token = localStorage.getItem("token");
 
   const nav = useNavigate();
 
   useEffect(() => {
     const time = setInterval(() => {
-      if (token !== null)
+  const token = localStorage.getItem("token");
+      if (localStorage.getItem("token") !== null){
+
+        console.log(token)
+
         AuthorAPI.VALIDATE_JWT()
           .then()
           .catch((error) => {
@@ -44,11 +47,18 @@ function App() {
                 nav("/login");
               }
           });
-    }, 1000);
+    }}, 1000);
 
     return () => clearInterval(time);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(()=>{
+    if(localStorage.getItem("token") === null){
+      nav('/login')
+    }
+  },[])
+  
 
   const idddd = (id) => {
     setSportId(id);

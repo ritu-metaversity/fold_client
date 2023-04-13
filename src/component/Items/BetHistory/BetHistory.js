@@ -86,7 +86,7 @@ function BetHistory() {
                   </div>
                 </div>
               </div>
-              <div className="col-6 text-right">
+              <div className="col-6">
                 <div className="form-group mb-0">
                   <div
                     className="mx-datepicker"

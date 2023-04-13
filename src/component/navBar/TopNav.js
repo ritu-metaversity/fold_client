@@ -4,7 +4,7 @@ import { GameAPI } from "../../apis/gameAPI";
 import { Link } from "react-router-dom";
 
 function TopNav(props) {
-  const [Active, setActive] = useState(4);
+  const [active, setactive] = useState(4);
   const [activeSport, setActiveSport] = useState([]);
   // const [SportIdList, setSportIdList] = useState(4);
 
@@ -14,11 +14,15 @@ function TopNav(props) {
       setActiveSport(res);
     });
   }, []);
+  
 
   const handleClick = (val) => {
-    setActive(val);
+    setactive(val);
     props.gameId(val);
   };
+
+
+
   return (
     <div>
       <div className="sports active">
@@ -26,11 +30,11 @@ function TopNav(props) {
           {activeSport.map((res, id) => {
               return (
                 <li className="nav-item text-center" key={id}>
-                  <Link
+                  <a
                     data-toggle="tab"
-                    // to=''
+                    href={`#${id+1}`}
                     className={`nav-link nav1 ${
-                      Active === res.sportId ? "active" : null
+                      active === res.sportId ? "active" : null
                     }`}
                     onClick={() => handleClick(res.sportId)}>
                     <div>
@@ -42,7 +46,7 @@ function TopNav(props) {
                       }
                     </div>
                     <div>{res.sportName}</div>
-                  </Link>
+                  </a>
                 </li>
               );
           })}

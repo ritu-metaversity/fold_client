@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AlertBtn from "../Alert/AlertBtn";
 import { AuthorAPI } from "../../apis/AuthorAPI";
+import { api } from "../../apis/configs/axiosConfigs";
 
 function Login() {
   const nav = useNavigate();
@@ -27,6 +28,8 @@ function Login() {
         const token = res.token;
         axios.defaults.headers.common["Authorization"] = token;
         localStorage.setItem("token", token);
+api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
         setStatusVal(res.status);
         setMessage("Invalid Username or password")
         const uId = res.userId;
