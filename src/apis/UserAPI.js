@@ -223,6 +223,38 @@ export const UserAPI = {
 
     return response.data;
   },
+
+  USER_FANCY_PNL: async function ( {matchId}, cancel = false) {
+    const response = await api.request({
+      url: `/enduser/user-fancy-pnl`,
+      method: "POST",
+      data:{
+        matchId
+      },
+
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+  
+  USER_ODDS_PNL: async function ( {matchId}, cancel = false) {
+    const response = await api.request({
+      url: `/enduser/user-odds-pnl`,
+      method: "POST",
+      data:{
+        matchId
+      },
+
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
 };
 
 const cancelApiObject = defineCancelApiObject(UserAPI);

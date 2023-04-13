@@ -35,19 +35,17 @@ function App() {
 
   useEffect(() => {
     const time = setInterval(() => {
-      if (localStorage.getItem("token"))
+      if (token !== null)
         AuthorAPI.VALIDATE_JWT()
           .then()
           .catch((error) => {
-            if (token !== null) {
               if (error.response.status === 401) {
                 localStorage.clear();
                 nav("/login");
-                window.location.reload();
               }
-            }
           });
     }, 1000);
+
     return () => clearInterval(time);
     // eslint-disable-next-line
   }, []);
@@ -55,6 +53,8 @@ function App() {
   const idddd = (id) => {
     setSportId(id);
   };
+
+  
   return (
     <div className="App">
         <Routes>

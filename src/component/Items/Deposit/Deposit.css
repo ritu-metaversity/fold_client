@@ -196,7 +196,36 @@ css-pw8cd7 .selected {
 }
 
 
-@media screen and (min-width: 850px) and (max-width: 2000px) {
+@media screen and (min-width: 500px) and (max-width: 800px) {
+    
+    
+    .colval{
+        width: 26%;
+        margin-right: 10px;
+    }
+    .marTop {
+        margin-top: -9px;
+    }
+    .col-3.price-data button {
+        padding: 4px;
+        margin-top: 6px;
+    }
+
+}
+
+
+@media screen and (min-width: 800px) and (max-width: 3000px) {
+    .colval{
+        width: 22%;
+        margin-right: 10px;
+    }
+    .marTop {
+        margin-top: -9px;
+    }
+    .col-3.price-data button {
+        padding: 4px;
+        margin-top: 6px;
+    }
     .wrapper.main-conatiner.deposit {
         margin-inline: 35px;
     }
@@ -217,9 +246,13 @@ css-pw8cd7 .selected {
         width: 30%;
         margin: auto;
     }
-   
     .head-deposit {
         width: unset;
     }
-    
 }
+
+.col-3.price-data button {
+    padding: 4px;
+}
+
+

@@ -16,9 +16,11 @@ function Placebet({
   data,
   priceValue,
   profits,
+  StackVal,
+
 }) {
   const [updated, setUpdated] = useState("");
-  const [StackVal, setStackVal] = useState("");
+  // const [StackVal, setStackVal] = useState("");
   const [userIP, setUserIP] = useState("");
   // eslint-disable-next-line
   const [odds, setOdds] = useState(spanValueRate);
@@ -79,11 +81,11 @@ function Placebet({
       });
   };
 
-  useEffect(() => {
-    GameAPI.Place_Bet().then((res) => {
-      setStackVal(res);
-    });
-  }, []);
+  // useEffect(() => {
+  //   GameAPI.Place_Bet().then((res) => {
+  //     setStackVal(res);
+  //   });
+  // }, []);
 
   return (
     <>
@@ -147,9 +149,9 @@ function Placebet({
                 </div>
                 <div className="col-4 text-center pt-1">
                   <span className={`${isFancy === true ? "fancy-none" : ""}`}>
-                    {marketId.includes("BM") ||
-                    marketId.includes("Bm") ||
-                    marketId.includes("bm")
+                    {marketId?.includes("BM") ||
+                    marketId?.includes("Bm") ||
+                    marketId?.includes("bm")
                       ? profits?.Bookmaker?.filter(
                           (item) => item?.mid === marketId
                         ).map((profit) => {
@@ -165,7 +167,7 @@ function Placebet({
                       : profits?.Odds[marketId]?.map((profit) => {
                           return (
                             profit.sid === selectionId &&
-                            profit.value +
+                            (profit?.value || 0) +
                               (colorName === "back" ? 1 : -1) *
                                 (odds - 1) *
                                 updated
@@ -178,7 +180,7 @@ function Placebet({
                 </div>
               </div>
               <div className="row row5 mt-2">
-                {Object.values(StackVal).map((e, id) => {
+                {Object.values(StackVal)?.map((e, id) => {
                   return (
                     <div className="col-4" key={e + id}>
                       <button
@@ -192,9 +194,9 @@ function Placebet({
                 })}
               </div>
               <div className={`${isFancy === true ? "fancy-none" : ""}`}>
-                {marketId.includes("BM") ||
-                marketId.includes("bm") ||
-                marketId.includes("Bm")
+                {marketId?.includes("BM") ||
+                marketId?.includes("bm") ||
+                marketId?.includes("Bm")
                   ? profits.Bookmaker?.filter(
                       (item) => item?.mid === marketId
                     ).map((profit) => (

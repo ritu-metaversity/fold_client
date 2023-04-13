@@ -80,6 +80,17 @@ export const AuthorAPI = {
       return response
     },
 
+    LOGOUT: async function (cancel = false) {
+      const response = await api.request({
+        url: `/login/logout`,
+        method: "POST",
+
+        signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
+      })
+  
+      return response
+    },
+
   }
 
   const cancelApiObject = defineCancelApiObject(AuthorAPI)

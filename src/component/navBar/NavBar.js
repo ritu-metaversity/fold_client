@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
+import { AuthorAPI } from "../../apis/AuthorAPI";
 
 
 const NavBar = () => {
@@ -59,6 +60,15 @@ const NavBar = () => {
     return ()=>clearInterval(time)
     // eslint-disable-next-line
   }, []);
+
+
+  const nav = useNavigate()
+
+  const handleSignOut = ()=>{
+    AuthorAPI.LOGOUT().then((res)=>{
+      console.log(res);
+    })
+  }
 
  
   
@@ -239,6 +249,7 @@ const NavBar = () => {
                         </Link>
                         <Link
                           to="/SignOut"
+                          onClick={handleSignOut}
                           className="dropdown-item mt-2 text-danger">
                           <b>Logout</b>
                         </Link>

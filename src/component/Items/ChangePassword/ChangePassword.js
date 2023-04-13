@@ -53,7 +53,6 @@ function ChangePassword() {
               setShowError(true);
               if(res.status === true){
                 nav('/login');
-                window.location.reload();
               }
             })
             .catch((err) => {
@@ -75,7 +74,6 @@ function ChangePassword() {
               setColor("success");
               setMessege(res.message);
               nav('/login');
-              window.location.reload();
             }
           });
         }

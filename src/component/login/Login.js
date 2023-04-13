@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AlertBtn from "../Alert/AlertBtn";
 import { AuthorAPI } from "../../apis/AuthorAPI";
@@ -43,10 +43,13 @@ function Login() {
     }
   };
 
-  if(localStorage.getItem("token") !== null){
-    nav('/home');
-    window.location.reload();
-  }
+  useEffect(()=>{
+    if(localStorage.getItem("token") !== null){
+      nav('/home');
+    }
+  },[])
+
+  
   
   const popupClose = (vl) => {
     setStatusVal(vl);
@@ -113,7 +116,7 @@ function Login() {
                   className="btn btn-primary btn-block"
                   onClick={handleLogin}>
                   Login
-                  <i className="ml-2 fas fa-sign-in-alt"></i>
+                  <i className="ml-2 fa fa-sign-in"></i>
                 </button>
               </div>
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
@@ -122,7 +125,7 @@ function Login() {
                   className="btn btn-primary btn-block"
                   to="/Register">
                   Register
-                  <i className="ml-2 fas fa-sign-in-alt"></i>
+                  <i className="ml-2 fa fa-sign-in"></i>
                 </Link>
               </div>
               <small className="recaptchaTerms">

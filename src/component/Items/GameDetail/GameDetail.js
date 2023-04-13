@@ -7,12 +7,14 @@ import moment from "moment";
 import AlertBtn from "../../Alert/AlertBtn";
 import Accordion from "react-bootstrap/Accordion";
 import { socket } from "./socket";
-import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
+// import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 import FancyModals from "./FancyModals/FancyModals";
 import { createProfits } from "./eventUtil";
 import { useNavigate } from "react-router-dom";
+import { UserAPI } from "../../../apis/UserAPI";
+import { GameAPI } from "../../../apis/gameAPI";
 
-function GameDetail({ getStackValue, SportId }) {
+function GameDetail({ getStackValue, SportId, TvHideShow }) {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD h:mm:ss");
@@ -48,15 +50,24 @@ function GameDetail({ getStackValue, SportId }) {
   const [fancyOddsPnl, setFancyOddsPnl] = useState([]);
   const [pValue, setPvalue] = useState();
   const [showFancyModals, setShowFancyModals] = useState(false);
-  const [oddsssss, setOddsssss] = useState({});
-  const [bookmakerPnl, setBookmakerPnl] = useState({});
   const [oddsPnl, setOddsPnl] = useState({});
+  const [StackVal, setStackVal] = useState([]);
+
 
   const [profits, setProfits] = useState({
     Odds: {},
     Bookmaker: [],
     Fancy: [],
   });
+
+  // Stack Value Api
+
+  useEffect(() => {
+    GameAPI.Place_Bet().then((res) => {
+      setStackVal(res);
+    });
+  }, []);
+
 
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
@@ -140,30 +151,43 @@ function GameDetail({ getStackValue, SportId }) {
 
   const nav = useNavigate();
   const token = localStorage.getItem("token");
+  
   useEffect(() => {
     if (token === null) {
       nav("/login");
-      window.location.reload();
     }
     // eslint-disable-next-line
   }, [token]);
 
 
-  const { lastMessage: lastOddsPnl } = useWebSocket(
-    `ws://13.233.248.48:8082/enduserodd/${id}/${token}`,
-    { shouldReconnect: (event) => true }
-  );
-  useEffect(() => {
-    if (lastOddsPnl?.data && JSON.parse(lastOddsPnl?.data))
-      if (
-        lastOddsPnl?.data &&
-        JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data !== null
-      ) {
-        setOddsPnl(JSON.parse(lastOddsPnl?.data)?.data);
-      } else {
-        setOddsPnl([]);
-      }
-  }, [lastOddsPnl]);
+  // const { lastMessage: lastOddsPnl } = useWebSocket(
+  //   `ws://13.233.248.48:8082/enduserodd/${id}/${token}`,
+  //   { shouldReconnect: (event) => true }
+  // );
+  // useEffect(() => {
+  //   if (lastOddsPnl?.data && JSON.parse(lastOddsPnl?.data))
+  //     if (
+  //       lastOddsPnl?.data &&
+  //       JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data !== null
+  //     ) {
+  //       setOddsPnl(JSON.parse(lastOddsPnl?.data)?.data);
+  //     } else {
+  //       setOddsPnl([]);
+  //     }
+  // }, [lastOddsPnl]);
+
+  useEffect(()=>{
+    const time = setInterval(()=>{
+      UserAPI.USER_ODDS_PNL({
+        matchId: id
+      }).then((res)=>{
+        setOddsPnl(res?.data)
+      })
+    }, 5000)
+
+    return ()=>clearInterval(time)
+
+  },[oddsPnl])
 
   useEffect(() => {
     createProfits({
@@ -192,17 +216,37 @@ function GameDetail({ getStackValue, SportId }) {
     selectionId,
   ]);
 
-  const { lastMessage: FoddsPnl } = useWebSocket(
-    `ws://13.233.248.48:8082/enduserfancy/${id}/${token}`,
-    { shouldReconnect: (event) => true }
-  );
-  useEffect(() => {
-    if (FoddsPnl?.data && JSON.parse(FoddsPnl?.data)?.data) {
-      setFancyOddsPnl(JSON.parse(FoddsPnl?.data)?.data);
-    } else {
-      setFancyOddsPnl([]);
-    }
-  }, [FoddsPnl]);
+
+
+  useEffect(()=>{
+    const time = setInterval(()=>{
+      UserAPI.USER_FANCY_PNL({
+        matchId: id
+      }).then((res)=>{
+        setFancyOddsPnl(res?.data)
+      })
+    }, 5000)
+
+    return () => clearInterval(time);
+
+  },[fancyOddsPnl])
+
+
+  // const { lastMessage: FoddsPnl } = useWebSocket(
+  //   `ws://13.233.248.48:8082/enduserfancy/${id}/${token}`,
+  //   { shouldReconnect: (event) => true }
+  // );
+  // useEffect(() => {
+  //   if (FoddsPnl?.data && JSON.parse(FoddsPnl?.data)?.data) {
+  //     setFancyOddsPnl(JSON.parse(FoddsPnl?.data)?.data);
+  //   } else {
+  //     setFancyOddsPnl([]);
+  //   }
+  // }, [FoddsPnl]);
+
+
+
+  
 
   // useEffect(() => {
   //   const time = setInterval(() => {
@@ -330,18 +374,21 @@ function GameDetail({ getStackValue, SportId }) {
                 <p className="no-found">No real-time records found</p>
               ) : (
                 <>
-                  <div id="scoreboard-box">
-                    <div className="scorecard scorecard-mobile">
-                      <div className="score-inner">
-                        <iframe
-                          src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sId}/${id}`}
-                          width="100%"
-                          className="score-card"
-                          title="scorecord"
-                          allowFullScreen={true}></iframe>
-                      </div>
+                {
+                  TvHideShow===true?<div id="scoreboard-box">
+                  <div className="scorecard scorecard-mobile">
+                    <div className="score-inner">
+                      <iframe
+                        src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sId}/${id}`}
+                        width="100%"
+                        className="score-card"
+                        title="scorecord"
+                        allowFullScreen={true}></iframe>
                     </div>
                   </div>
+                </div>:""
+                }
+                  
 
                   <div>
                     {matchodd?.map((item, id1) => {
@@ -548,6 +595,7 @@ function GameDetail({ getStackValue, SportId }) {
                                             }>
                                             <Placebet
                                               profits={profits}
+                                              StackVal={StackVal}
                                               spanValueRate={spanValueRate}
                                               spanValueName={spanValueName}
                                               fancyOdds={fancyOdds}
@@ -562,8 +610,6 @@ function GameDetail({ getStackValue, SportId }) {
                                               toss=""
                                               data={data}
                                               priceValue={pValue}
-                                              oddsssss={oddsssss}
-                                              bookmakerPnl={bookmakerPnl}
                                             />
                                           </Modal.Body>
                                         </Modal>
