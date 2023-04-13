@@ -30,6 +30,7 @@ import { sportsTabList } from "../home/sportsTabList";
 import PnlModal from "./pnlModal";
 import {
   BetDetailsInterface,
+  BetsInterface,
   FancyOddsInterface,
   FancyPnl,
   Pnl,
@@ -44,7 +45,7 @@ import MyBetWrapper from "./bet/MyBetWrapper";
 import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 
 const anish_socket_actve = false;
-const ankit_socket_actve = true;
+const ankit_socket_actve = false;
 
 export const dharmParivartan = (str: string | number) => {
   if (["string", "number"].includes(typeof str)) {
@@ -81,6 +82,7 @@ const Event = () => {
   const [prevFancyOdds, setPrevFancyOdds] = useState<any>();
   const [selectedPnlMarketId, setSelectedPnlMarketId] = useState("");
   const [oddSocketConnected, setOddSocketConnected] = useState(false);
+  const [bets, setBets] = useState<BetsInterface | null>(null);
 
   const [profits, setProfits] = useState<ProfitObjectInterface>({
     Odds: {},
@@ -172,7 +174,7 @@ const Event = () => {
     // setLoading(true);
     const { response } = await userServices.betListByMatch(matchId);
     if (response?.data) {
-      // setBets(response.data);
+      setBets(response.data);
     }
     // setLoading(false);
   };
@@ -192,37 +194,37 @@ const Event = () => {
   //   return () => clearInterval(timer);
   // }, [matchId]);
 
-  const { lastMessage: oddsPnlLastMessage } = useWebSocket(
-    `${
-      process.env.REACT_APP_ANKIT_SOCKET_BET
-    }/enduserodd/${matchId}/${localStorage.getItem("token")}`,
-    { shouldReconnect: (event: CloseEvent) => true }
-  );
+  // const { lastMessage: oddsPnlLastMessage } = useWebSocket(
+  //   `${
+  //     process.env.REACT_APP_ANKIT_SOCKET_BET
+  //   }/enduserodd/${matchId}/${localStorage.getItem("token")}`,
+  //   { shouldReconnect: (event: CloseEvent) => true }
+  // );
 
-  useEffect(() => {
-    if (
-      oddsPnlLastMessage?.data &&
-      JSON.parse(oddsPnlLastMessage?.data)?.data &&
-      ankit_socket_actve
-    )
-      setPnl(JSON.parse(oddsPnlLastMessage?.data).data);
-  }, [oddsPnlLastMessage]);
+  // useEffect(() => {
+  //   if (
+  //     oddsPnlLastMessage?.data &&
+  //     JSON.parse(oddsPnlLastMessage?.data)?.data &&
+  //     ankit_socket_actve
+  //   )
+  //     setPnl(JSON.parse(oddsPnlLastMessage?.data).data);
+  // }, [oddsPnlLastMessage]);
 
-  const { lastMessage: fancyPnlLastMessage } = useWebSocket(
-    `${
-      process.env.REACT_APP_ANKIT_SOCKET_BET
-    }/enduserfancy/${matchId}/${localStorage.getItem("token")}`,
-    { shouldReconnect: (event: CloseEvent) => true }
-  );
+  // const { lastMessage: fancyPnlLastMessage } = useWebSocket(
+  //   `${
+  //     process.env.REACT_APP_ANKIT_SOCKET_BET
+  //   }/enduserfancy/${matchId}/${localStorage.getItem("token")}`,
+  //   { shouldReconnect: (event: CloseEvent) => true }
+  // );
 
-  useEffect(() => {
-    if (
-      fancyPnlLastMessage?.data &&
-      JSON.parse(fancyPnlLastMessage?.data)?.data &&
-      ankit_socket_actve
-    )
-      setFancyPnl(JSON.parse(fancyPnlLastMessage?.data).data);
-  }, [fancyPnlLastMessage]);
+  // useEffect(() => {
+  //   if (
+  //     fancyPnlLastMessage?.data &&
+  //     JSON.parse(fancyPnlLastMessage?.data)?.data &&
+  //     ankit_socket_actve
+  //   )
+  //     setFancyPnl(JSON.parse(fancyPnlLastMessage?.data).data);
+  // }, [fancyPnlLastMessage]);
 
   const getOdds = async () => {
     if (anish_socket_actve) return;
@@ -307,7 +309,7 @@ const Event = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       getPnl();
-      // getFancyPnl();
+      getFancyPnl();
       getBets();
     }, 5000);
     return () => clearInterval(timer);
@@ -514,7 +516,7 @@ const Event = () => {
             height={"100%"}
           >
             {betSlip}
-            {matches && <MyBetWrapper />}
+            {matches && <MyBetWrapper bets={bets} />}
           </Box>
         }
       >
@@ -548,7 +550,7 @@ const Event = () => {
             {fancyOdds?.Odds && fancyOdds?.Odds[0]?.eventTime}
           </Typography>
         </GameHeader>
-        {!matches && <MyBetWrapper />}
+        {!matches && <MyBetWrapper bets={bets} />}
         <LiveScoreTv
           lastMatchedTime={
             fancyOdds?.Odds &&

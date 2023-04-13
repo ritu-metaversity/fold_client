@@ -32,8 +32,8 @@ export const eventServices = {
   newFancy: async (id: string) => {
     const params: ApiServiceInterface = {
       resource: {
-        // URL: "http://142.132.159.166:9001/fancy/:id",
-        URL: "http://89.39.105.69:9001/fancy/:id",
+         URL: "http://142.132.159.166:9001/fancy/:id",
+        //URL: "http://89.39.105.69:9001/fancy/:id",
         // URL: "fancy/:id",
         METHOD: "GET",
       },
