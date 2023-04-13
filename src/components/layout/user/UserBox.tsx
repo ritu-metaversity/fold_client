@@ -5,6 +5,8 @@ import { Box } from "@mui/system";
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../../App";
 import { UserContainer } from "../styledComponents";
+import CustomizedDialog2 from "../../common/Dailog2";
+import CurrentBetsForModal from "./ModalBetsCurrent";
 
 export interface BalanceDataInterface {
   userId: number;
@@ -15,6 +17,7 @@ export interface BalanceDataInterface {
 const UserBox = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [open, setOpen] = useState(false);
+  const [openBetModal, setOpenBetModal] = useState(false);
   const { user, balance: balanceData } = useContext(UserContext);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
@@ -29,6 +32,14 @@ const UserBox = () => {
 
   return (
     <>
+      <CustomizedDialog2
+        open={openBetModal}
+        maxWidth={"lg"}
+        title="Exposure"
+        handleClose={() => setOpenBetModal(false)}
+      >
+        <CurrentBetsForModal />
+      </CustomizedDialog2>
       <UserContainer
         sx={{ flexDirection: { xs: "column", lg: "row" } }}
         color="text.secondary"
@@ -37,6 +48,7 @@ const UserBox = () => {
       >
         <Typography
           my="auto"
+          onClick={() => setOpenBetModal(true)}
           fontSize={{ xs: "0.65rem", sm: "0.75rem", lg: "0.8rem" }}
           color={{ xs: "white", lg: "text.primary" }}
           textAlign={"center"}

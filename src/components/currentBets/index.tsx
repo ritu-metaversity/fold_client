@@ -14,7 +14,7 @@ import { Form } from "react-bootstrap";
 import { userServices } from "../../utils/api/user/services";
 
 
-const betTypes = ["none", "all", "back", "lay"];
+export const betTypes = ["none", "all", "back", "lay"];
 
 const CurrentBets = () => {
   const matches = useMediaQuery("(min-width:1280px)");
