@@ -19,7 +19,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD h:mm:ss");
   const [showModals, setShowModals] = useState(false);
-  const [currentFancy, setCurrentFancy] = useState("Fancy3");
+  const [currentFancy, setCurrentFancy] = useState("Fancy2");
   const [matchodd, setMatchodd] = useState({});
   const [gameName, setGameName] = useState("");
   const [fancyOdds, setFancyOdds] = useState("");
@@ -32,7 +32,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   const [spanValueName, setSpanGameName] = useState("");
   const [previousState, setPreviousState] = useState("");
   const [cName, setCname] = useState("");
-  const [FancyActive, setFancyActive] = useState(1);
+  const [FancyActive, setFancyActive] = useState(0);
   const [PlaceDate, setPlaceDate] = useState();
   const [fancy, setFancy] = useState();
   const [status, setStatus] = useState();
@@ -60,6 +60,8 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     Bookmaker: [],
     Fancy: [],
   });
+
+  // const arr = ['css', 'js', 'ts'];
 
   useEffect(() => {
     const time = setInterval(() => {
@@ -135,8 +137,18 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
       var matchData = res.Odds[0];
       setETime(matchData);
       setMatchDelatil(matchData.runners);
+
+      
+      const fromIndex = Object.keys(res)?.indexOf("OddEven");
+      console.log(fromIndex);
+      Object.keys(res)?.splice(5, 0, Object.keys(res)?.splice(0,7));
+      console.log(Object.keys(res), "fsdgrdyhutyujy");
+
     }
   };
+
+
+   
 
   useEffect(() => {
     socket.on("OddsUpdated", oddFromSocketSlower);
@@ -191,19 +203,17 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   //     }
   // }, [lastOddsPnl]);
 
-
-
   useEffect(() => {
     UserAPI.USER_ODDS_PNL({
       matchId: id,
     }).then((res) => {
-      setOddsPnl(res?.data||[]);
+      setOddsPnl(res?.data || []);
     });
     const time = setInterval(() => {
       UserAPI.USER_ODDS_PNL({
         matchId: id,
       }).then((res) => {
-        setOddsPnl(res?.data||[]);
+        setOddsPnl(res?.data || []);
       });
     }, 5000);
 
@@ -211,7 +221,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   }, [id]);
 
   useEffect(() => {
-    console.log("Rechanges")
+    console.log("Rechanges");
     createProfits({
       fancyOdds,
       fancyPnl: fancyOddsPnl,
@@ -258,19 +268,18 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   //   selectionId,
   //   marketId
   // ]);
- 
-  
+
   useEffect(() => {
     UserAPI.USER_FANCY_PNL({
       matchId: id,
     }).then((res) => {
-      setFancyOddsPnl(res?.data||[]);
+      setFancyOddsPnl(res?.data || []);
     });
     const time = setInterval(() => {
       UserAPI.USER_FANCY_PNL({
         matchId: id,
       }).then((res) => {
-        setFancyOddsPnl(res?.data||[]);
+        setFancyOddsPnl(res?.data || []);
       });
     }, 5000);
 
@@ -312,7 +321,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
 
   const handleGameName = (item, id) => {
     setCurrentFancy(item);
-    setFancyActive(id);
+    // setFancyActive(id);
   };
   const handleSpanValueBack = (
     vll1,
@@ -339,9 +348,12 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     setPvalue(priceValue);
   };
   const handleCloseModal = () => setShowModals(false);
-  const handleShow = (e) => {
+  const handleShow = (e, id) => {
     e.preventDefault();
     setShowModals(true);
+    if (id === 1 || id === 2) {
+      setShowModals(false);
+    }
   };
   const handleSpanValueLay = (
     val1,
@@ -474,7 +486,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                             <div data-title="OPEN" className="table-body">
                               {item?.runners?.length &&
                                 item?.runners?.map((event, index) => {
-                                  const availableToBack=[...event.ex.availableToBack];
+                                  const availableToBack = [
+                                    ...event.ex.availableToBack,
+                                  ];
                                   return (
                                     <div
                                       data-title="ACTIVE"
@@ -524,35 +538,32 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                           </span>
                                         </p>
                                       </div>
-                                      
-                                      {availableToBack?.length && 
-                                        availableToBack.map(
-                                          (e, id) => {
+
+                                      {availableToBack?.length &&
+                                        availableToBack
+                                          .map((e, id) => {
                                             return (
                                               <div
                                                 key={e.size + e.price + id}
                                                 onClick={(e) =>
-                                                  handleShow(e)
+                                                  handleShow(e, id)
                                                 }
                                                 className={`box-1 box-7 back1 float-left back-1 text-center  
                                                 ${
                                                   id === 1 || id === 2
                                                     ? "ds-none"
-                                                    : ""
+                                                    : "cPointer"
                                                 } 
                                                  ${
-                                                  e?.price !==
-                                                  previousState?.Odds[id1]
-                                                    .runners[index]?.ex
-                                                    ?.availableToBack[id]?.price
-                                                    ? "blink"
-                                                    : ""
-                                                }`}>
-                                                <button
-                                                  // onClick={(e) =>
-                                                  //   handleShow(e)
-                                                  // }
-                                                  >
+                                                   e?.price !==
+                                                   previousState?.Odds[id1]
+                                                     .runners[index]?.ex
+                                                     ?.availableToBack[id]
+                                                     ?.price
+                                                     ? "blink"
+                                                     : ""
+                                                 }`}>
+                                                <button>
                                                   <span
                                                     className="odd d-block"
                                                     onClick={() =>
@@ -578,21 +589,21 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                 </button>
                                               </div>
                                             );
-                                          }
-                                        ).reverse()}
+                                          })
+                                          .reverse()}
                                       {event?.ex?.availableToLay?.length &&
                                         event?.ex?.availableToLay.map(
                                           (e, id) => {
                                             return (
                                               <div
                                                 key={e?.size + e?.price + id}
-                                                  onClick={(e) =>
-                                                    handleShow(e)
-                                                  }
+                                                onClick={(e) =>
+                                                  handleShow(e, id)
+                                                }
                                                 className={`box-1 box-7 lay float-left text-center  ${
                                                   id === 1 || id === 2
-                                                    ? "ds-none"
-                                                    : ""
+                                                    ? "ds-none "
+                                                    : "cPointer"
                                                 } ${
                                                   e?.price !==
                                                   previousState?.Odds[id1]
@@ -601,8 +612,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                     ? "blink"
                                                     : ""
                                                 } `}>
-                                                <button
-                                                >
+                                                <button>
                                                   <span
                                                     className="odd d-block"
                                                     onClick={() =>
@@ -629,7 +639,20 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                           }
                                         )}
 
-                                      {status === true || status === 400 ? (
+                                      
+                                    </div>
+                                  );
+                                })}
+                                
+                            </div>
+                          </div>
+                          <div className="table-remark text-right remark">
+                            {item?.display_message}
+                          </div>
+                        </div>
+                      );
+                    })}
+                    {status === true || status === 400 ? (
                                         ""
                                       ) : (
                                         <Modal
@@ -658,7 +681,8 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                               fancyOdds={fancyOdds}
                                               colorName={cName}
                                               getStackValue={getStackValue}
-                                  x            matchId={matchId}
+                                              x
+                                              matchId={matchId}
                                               marketId={marketId}
                                               selectionId={selectionId}
                                               MarketName={marketName}
@@ -671,17 +695,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                           </Modal.Body>
                                         </Modal>
                                       )}
-                                    </div>
-                                  );
-                                })}
-                            </div>
-                          </div>
-                          <div className="table-remark text-right remark">
-                            {item?.display_message}
-                          </div>
-                        </div>
-                      );
-                    })}
                     <div></div>
                   </div>
                   <div
@@ -763,14 +776,14 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                   </div>
 
                                   <div
-                                  onClick={(e) => handleShow(e)}
-                                    className={`box-1 back float-left back-1  text-center ${
+                                    onClick={(e) => handleShow(e)}
+                                    className={`box-1 back float-left back-1  text-center cPointer ${
                                       bookmaker?.b1 !==
                                       previousState?.Bookmaker[id]?.b1
                                         ? "blink"
                                         : ""
                                     }`}>
-                                    <button >
+                                    <button>
                                       <span
                                         className="odd d-block"
                                         onClick={() =>
@@ -798,14 +811,14 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                   </div>
 
                                   <div
-                                  onClick={(e) => handleShow(e)}
-                                    className={`box-1 lay float-left text-center ${
+                                    onClick={(e) => handleShow(e)}
+                                    className={`box-1 lay float-left text-center cPointer ${
                                       bookmaker?.l1 !==
                                       previousState?.Bookmaker[id]?.l1
                                         ? "blink"
                                         : ""
                                     }`}>
-                                    <button >
+                                    <button>
                                       <span
                                         className="odd d-block"
                                         onClick={() =>
@@ -857,13 +870,40 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                   </div>
                   <div className="fancy-markets">
                     <ul className="nav nav-tabs mt-2 fancy-nav">
+                      
                       {gameName?.length &&
-                        gameName.slice(3).map((item, id) => {
+                        gameName.map((item, id) => {
+                          // console.log(item, "dsfgfdhgjfg")
+                          if(["Odds","Bookmaker","Fancy","Khado","Ball","Meter"].includes(item)){
+                            return null
+                          }
+
                           return (
                             <li
                               key={item + id}
-                              className={`nav-item ${
-                                FancyActive === id ? "active" : ""
+                              className={`nav-item cPointer ${
+                                currentFancy === item ? "active" : ""
+                              }`}
+                              onClick={() => handleGameName(item, id)}>
+                              {/* eslint-disable-next-line */}
+                              <p data-toggle="tab" className="nav-link">
+                                {item}
+                              </p>
+                            </li>
+                          );
+                        })}
+                         {gameName?.length &&
+                        gameName.map((item, id) => {
+                          // console.log(item, "dsfgfdhgjfg")
+                          if(["Odds","Bookmaker","OddEven","Fancy","Fancy2","Fancy3"].includes(item)){
+                            return null
+                          }
+
+                          return (
+                            <li
+                              key={item + id}
+                              className={`nav-item cPointer ${
+                                currentFancy === item ? "active" : ""
                               }`}
                               onClick={() => handleGameName(item, id)}>
                               {/* eslint-disable-next-line */}

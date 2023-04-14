@@ -19,7 +19,7 @@ function AlertBtn(props) {
     setTimeout(() => {
       props.popupClose(false);
       setShowHide(false);
-    }, 1500);
+    }, 5000);
     
   }, [props.val]);
   

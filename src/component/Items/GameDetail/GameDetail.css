@@ -93,12 +93,15 @@
     float: left !important;
 }
 
-.table-row>div.back,
+/* .table-row>div.back,
 .table-row>div.back1,
 .table-row>div.back2,
 .table-row>div.lay,
 .table-row>div.lay1,
 .table-row>div.lay2 {
+    cursor: pointer;
+} */
+.cPointer{
     cursor: pointer;
 }
 

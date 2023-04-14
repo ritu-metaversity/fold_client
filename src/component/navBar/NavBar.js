@@ -153,16 +153,14 @@ const NavBar = () => {
                       </Modal.Body>
                     </Modal>
 
-
-
-                    <div className="dropdown d-inline-block" onClick={toggle}>
+                    <div className={close ? "overlayopen" :"overlayclose"} onClick={()=>setClose(false)}></div>
+                    <div className="dropdown d-inline-block" onClick={(e)=>toggle(e)}>
                       <p data-toggle="dropdown" className="dropdown-toggle">
                         <u>{userdetail?.length && userdetail}</u>
                       </p>
-                      <div
-                        className={
-                          !close ? "dropdown-menu" : "dropdown-menu show"
-                        }>
+                      {
+                        close ?<div
+                        className={!close ? "dropdown-menu" : "dropdown-menu show"}>
                         <Link
                           to="/home"
                           className="dropdown-item router-link-exact-active router-link-active">
@@ -202,11 +200,6 @@ const NavBar = () => {
                           className="dropdown-item">
                           Unsetteled Bet
                         </Link>
-                        {/* <Link
-                          to=""
-                          className="dropdown-item">
-                          Casino Report History
-                        </Link> */}
                         <Link
                           to="/m/setting/changebtnvalue"
                           className="dropdown-item">
@@ -258,7 +251,9 @@ const NavBar = () => {
                           className="dropdown-item mt-2 text-danger">
                           <b>Logout</b>
                         </Link>
-                      </div>
+                      </div>:""
+                      }
+                      
                     </div>
                   </div>
                 </div>
