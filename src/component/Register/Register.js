@@ -163,7 +163,7 @@ const Register = () => {
                 className="btn btn-primary btn-block"
                 onClick={handleLogin}>
                 Register
-                <i className="ml-2 fas fa-sign-in-alt"></i>
+                <i className="ml-2 fa fa-sign-in"></i>
               </button>
             </div>
             <div className="form-group mb-0" style={{ marginTop: "12px" }}>
@@ -171,7 +171,7 @@ const Register = () => {
                 type="submit"
                 to="/login"
                 className="btn btn-primary btn-block">
-                <i className="ml-2 fas fa-sign-in-alt rotateBtn"></i>
+                <i className="ml-2 fa fa-sign-in rotateBtn"></i>
                 Login
               </Link>
             </div>

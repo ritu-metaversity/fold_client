@@ -8,11 +8,24 @@ import NavBar from "../../../navBar/NavBar";
 function GameHead({SportId, matchLength}) {
   const [ActiveNavbar, setActiveNavBar] = useState(1);
   const [betLength, setBetlenght] = useState(0)
+  const [TvHideShow, setTvHideShow] = useState(false)
   const handleClick = (val) => {
     setActiveNavBar(val);
     
   };
   // console.log(matchLength)
+
+  const handleTvHideShow = ()=>{
+    if(TvHideShow===false){
+        setTvHideShow(true);
+        console.log("true");
+    }else{
+      setTvHideShow(false)
+      console.log("false");
+
+    }
+
+  }
 
   return (
     <>
@@ -36,14 +49,14 @@ function GameHead({SportId, matchLength}) {
             </button>
           </li>
         </ul>
-        <div className="tv-icon">
+        <div className="tv-icon" onClick={handleTvHideShow}>
           <p className="mb-0">
             <i className="fa fa-tv"></i>
           </p>
         </div>
       </div>
       <div style={{display:ActiveNavbar===1?"block":"none"}}>
-        <GameDetail SportId={SportId}/> : 
+        <GameDetail SportId={SportId} TvHideShow={TvHideShow}/> : 
       </div>
       <div style={{display:ActiveNavbar===2?"block":"none"}}>
         <MatchBet matchLength={betLength} setMatchLength = {setBetlenght}/>

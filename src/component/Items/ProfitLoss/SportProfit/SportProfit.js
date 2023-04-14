@@ -63,16 +63,16 @@ function SportProfit() {
     UserAPI.Profit_Loss({
       sportId: SportId,
       matchId: "",
-      fromDate: "",
-      toDate: "",
+      fromDate: startDate,
+      toDate: endDate,
       userId: "",
-      index:100,
-      pageNumber:1,
-      pageSize:2,
+      index:0,
+      noOfRecords:100,
+      totalPages:1,
     }).then((res) => {
       setDataVal(res.data)
       setPLValue(res.data.market);
-      // setDataList(res.data.market.length);
+      console.log(res?.data);
     
     });
   }, [SportId]);
@@ -93,14 +93,14 @@ function SportProfit() {
     }
 
     UserAPI.Profit_Loss({
-      index: IndexValue,
-      pageNumber:2,
+      noOfRecords: IndexValue,
+      index:0,
       toDate: endDate,
       fromDate: startDate,
       sportId: SportId,
       matchId: MatchId,
       userId: "",
-      pageSize: 2
+      totalPages: 2
     }).then((res) => {
       setDataVal(res.data)
       setPLValue(res.data.market);

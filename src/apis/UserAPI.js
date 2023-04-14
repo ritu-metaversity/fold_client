@@ -83,21 +83,21 @@ export const UserAPI = {
   //Profit Loss Api
 
   Profit_Loss: async function (
-    { pageSize, index, fromDate, sportId, matchId, toDate, userId, pageNumber },
+    { totalPages, index, fromDate, sportId, matchId, toDate, userId, noOfRecords },
     cancel = false
   ) {
     const response = await api.request({
       url: `/report/profit-loss-match-wise`,
       method: "POST",
       data: {
-        pageSize: pageSize,
+        totalPages: totalPages,
         index: index,
         fromDate: fromDate,
         sportId: sportId,
         matchId: matchId,
         toDate: toDate,
         userId: userId,
-        pageNumber: pageNumber,
+        noOfRecords: noOfRecords,
       },
       signal: cancel
         ? cancelApiObject[this.get.name].handleRequestCancellation().signal
@@ -215,6 +215,38 @@ export const UserAPI = {
     const response = await api.request({
       url: `/enduser/depsosit-request-client`,
       method: "POST",
+
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+
+  USER_FANCY_PNL: async function ( {matchId}, cancel = false) {
+    const response = await api.request({
+      url: `/enduser/user-fancy-pnl`,
+      method: "POST",
+      data:{
+        matchId
+      },
+
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+  
+  USER_ODDS_PNL: async function ( {matchId}, cancel = false) {
+    const response = await api.request({
+      url: `/enduser/user-odds-pnl`,
+      method: "POST",
+      data:{
+        matchId
+      },
 
       signal: cancel
         ? cancelApiObject[this.get.name].handleRequestCancellation().signal

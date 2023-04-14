@@ -677,6 +677,16 @@ p.team-name.col-6.text-right {
     }              
 }
 
+@media screen and (min-width: 700px) and (max-width: 3000px) {
+    .fancy-market .suspended:after {
+        width: 201% !important;
+        content: "suspended";
+        font-size: 16px;
+        color: #ff3c3c;
+        font-family: "Roboto Condensed", sans-serif;
+    }
+}
+
 
 .fancy-market .suspended:after {
     width: 46%;

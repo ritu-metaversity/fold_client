@@ -7,6 +7,7 @@ import { DatePicker } from "antd";
 import moment from "moment";
 import { UserAPI } from "../../../apis/UserAPI";
 import SearchBet from "./SearchBet";
+import AlertBtn from "../../Alert/AlertBtn";
 const dateFormat = "YYYY-MM-DD";
 
 function AaccountStatement() {
@@ -27,6 +28,10 @@ function AaccountStatement() {
   const [remark, setRemark] = useState();
   const [MarketId, setMarketId] = useState();
   const [currentPage, setCurrentPage] = useState();
+  const [ErrorMsg, setErrorMsg] = useState("");
+  const [Error, setError] = useState(false);
+  const [ColorName, setColorName] = useState("");
+  
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
@@ -78,10 +83,18 @@ function AaccountStatement() {
       setStartDate(startDate);
     }
     if (show === false || dataListLength !== 0) {
+      
       setShow(true);
     }
-    // if(dataListLength )
 
+    if(startDate === "" || endDate === ""){
+      setError(true)
+      setErrorMsg("Date is Required");
+      setColorName("danger");
+
+    }
+
+    if(startDate !== "" && endDate !==""){
     UserAPI.Account_Statement({
       noOfRecords: IndexValue,
       index: "0",
@@ -92,9 +105,14 @@ function AaccountStatement() {
       setPageLength(res.totalPages);
       setDataList(res.dataList);
       setDataListLength(res.dataList.length);
+    }).catch((error)=>{
+      // console.log(error.response.data.message);
+      setError(true)
+      setErrorMsg(error.response.data.message);
+      setColorName("danger")
     });
+  }
   };
-
   // console.log(pageLength);
 
   const result = [];
@@ -144,14 +162,18 @@ function AaccountStatement() {
     // eslint-disable-next-line
   }, [pagination]);
 
-
+  const popupClose = (vl) => {
+    setError(vl);
+  };
 
   // console.log(pageLength);
 
   return (
     <div>
       <NavBar />
-
+      {
+        Error ? <AlertBtn color={ColorName} val={ErrorMsg} popupClose={popupClose}/> :""
+      }
       <div className="report-container wrapper">
         <div className="card">
           <div className="card-header">
@@ -228,7 +250,7 @@ function AaccountStatement() {
               <div className="col-6">
                 <div
                   id="account-statement_length"
-                  className="dataTables_length">
+                  className="dataTables_length cpoint">
                   <label style={{ fontSize: "14px" }}>
                     Show
                     <select
@@ -310,7 +332,7 @@ function AaccountStatement() {
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="cpoint">
                       {dataList?.length > 0 &&
                         dataList.map((item) => {
                           return (

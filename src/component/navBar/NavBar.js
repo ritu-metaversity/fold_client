@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
-
+import { AuthorAPI } from "../../apis/AuthorAPI";
+import Modal from "react-bootstrap/Modal";
+import ExposureModal from "../Items/ExposureModal/ExposureModal";
 
 const NavBar = () => {
   const [close, setClose] = useState(false);
@@ -13,8 +15,8 @@ const NavBar = () => {
   const [userMessage, setUserMessage] = useState("");
   const [status, setStatus] = useState(false);
   const [error, setError] = useState(false);
-
-  
+  const [Exp, setExp] = useState("");
+  const [showExpModals, setShowExpModals] = useState(false);
 
   function toggle(e) {
     e.preventDefault();
@@ -32,51 +34,51 @@ const NavBar = () => {
       setDrop(false);
     }
   }
-  useEffect(()=>{
-    UserAPI.Self_By_App_Url().then((res)=>{
-      setStatus(res.data.selfAllowed)
-    })
-  },[])
+ 
 
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    setInterval(() => {
-     
-    }, 1000)
-  }, []);
+    
+    UserAPI.Self_By_App_Url().then((res) => {
+      setStatus(res.data.selfAllowed);
+    });
 
-  useEffect(() => {
-    const time = setInterval(() => {
-      if(token !== null){
-        UserAPI.User_Balance().then((res) => {
+    if (token !== null) {
+      UserAPI.User_Balance()
+        .then((res) => {
           setUserbalance(res.data.balance);
-        }).catch((error)=>{
-          setError(true)
+          setExp(res?.data?.libality);
         })
-      }
-    }, 1000);
-    return ()=>clearInterval(time)
+        .catch((error) => {
+          setError(true);
+        });
+    }
+
     // eslint-disable-next-line
   }, []);
 
- 
-  
-  // console.log(userbalance);
+  const nav = useNavigate();
 
+  const handleSignOut = () => {
+    AuthorAPI.LOGOUT().then((res) => {
+      console.log(res);
+    });
+  };
+
+  // console.log(userbalance);
 
   useEffect(() => {
     UserAPI.User_Message().then((res) => {
       setUserMessage(res);
     });
-  },[]);
+  }, []);
 
-  
   const [balanceShow, setBalanceShow] = useState(true);
   const [expShow, setExpShowShow] = useState(true);
 
   const balanceHideShow = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (balanceShow === true) {
       setBalanceShow(false);
     } else {
@@ -85,12 +87,18 @@ const NavBar = () => {
   };
 
   const expHideShow = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (expShow === true) {
       setExpShowShow(false);
     } else {
       setExpShowShow(true);
     }
+  };
+
+  const handleExpModal = () => setShowExpModals(false);
+  const handleExpShow = (e) => {
+    setShowExpModals(true);
+    e.preventDefault();
   };
 
   return (
@@ -99,7 +107,7 @@ const NavBar = () => {
         <div className="">
           <header className="header">
             <div className="container-fluid">
-              <div className="row row5 pt-1 pb-1">
+              <div className="row row5 pt-1 pb-1 mb-4">
                 <div className="logo col-6">
                   <Link
                     to="/home"
@@ -115,33 +123,38 @@ const NavBar = () => {
                 <div className="col-6 text-right bal-expo">
                   <p className={`mb-0 ${!balanceShow ? "d-none" : ""}`}>
                     <i className="fa fa-bank mr-1"></i>
-                    <b>{error? "0.00": userbalance===""?"0.00":userbalance}</b>
+                    <b>
+                      {error
+                        ? "0.00"
+                        : userbalance === ""
+                        ? "0.00"
+                        : userbalance}
+                    </b>
                   </p>
-                  <div className="exp">
-                    <span className={`mr-1 ${!expShow ? "d-none" : ""}`}>
-                      <u >Exp:0</u>
+                  <div className="exp" >
+                    <span onClick={(e) =>handleExpShow(e)}>
+                      <u>Exp: {Exp}</u>
                     </span>
-                    {/* <Modal
+
+                    <Modal
+                      show={showExpModals}
+                      dialogClassName="modal-90w"
+                      onHide={handleExpModal}
                       style={{
-                        marginTop: "50px",
-                        width: "91%",
-                        marginInline: "3%",
-                      }}
-                      className="exp-modal1"
-                      size="lg"
-                      show={lgShow}
-                      onHide={() => setLgShow(false)}
-                      aria-labelledby="example-modal-sizes-title-lg">
+                        marginTop: "12px",
+                        marginInline: "2%",
+                        width: "95%",
+                      }}>
                       <Modal.Header closeButton closeVariant="white">
-                        <Modal.Title id="example-modal-sizes-title-lg">
-                          My Market
-                          <i className="fas fa-sync-alt ml-1 resetbtn"></i>
-                        </Modal.Title>
+                        <Modal.Title>Exposure</Modal.Title>
                       </Modal.Header>
-                      <Modal.Body className="exp-mod">
-                        <ExposureModal />
+                      <Modal.Body>
+                      <ExposureModal/>
                       </Modal.Body>
-                    </Modal> */}
+                    </Modal>
+
+
+
                     <div className="dropdown d-inline-block" onClick={toggle}>
                       <p data-toggle="dropdown" className="dropdown-toggle">
                         <u>{userdetail?.length && userdetail}</u>
@@ -157,12 +170,16 @@ const NavBar = () => {
                         </Link>
                         <Link
                           to="/deposit"
-                          className={`dropdown-item router-link-exact-active router-link-active ${status?"":"d-none"}`}>
+                          className={`dropdown-item router-link-exact-active router-link-active ${
+                            status ? "" : "d-none"
+                          }`}>
                           Deposit
                         </Link>
                         <Link
                           to="/withdraw"
-                          className={`dropdown-item router-link-exact-active router-link-active ${status?"":"d-none"}`}>
+                          className={`dropdown-item router-link-exact-active router-link-active ${
+                            status ? "" : "d-none"
+                          }`}>
                           Withdraw
                         </Link>
                         <Link
@@ -218,9 +235,7 @@ const NavBar = () => {
                               className="custom-control-label"></label>
                           </div>
                         </Link>
-                        <Link
-                          className="dropdown-item"
-                          onClick={expHideShow}>
+                        <Link className="dropdown-item" onClick={expHideShow}>
                           Exposure
                           <div className="custom-control custom-checkbox float-right">
                             <input
@@ -234,11 +249,12 @@ const NavBar = () => {
                               className="custom-control-label"></label>
                           </div>
                         </Link>
-                        <Link to='/home' className="dropdown-item">
+                        <Link to="/home" className="dropdown-item">
                           Rules
                         </Link>
                         <Link
                           to="/SignOut"
+                          onClick={handleSignOut}
                           className="dropdown-item mt-2 text-danger">
                           <b>Logout</b>
                         </Link>
@@ -259,7 +275,7 @@ const NavBar = () => {
                             : "search_input search_input-hover"
                         }
                       />
-                      <Link  className="search_icon" onClick={droupMenu}>
+                      <Link className="search_icon" onClick={droupMenu}>
                         <i
                           className={
                             !droup ? "fa fa-search" : "fa fa-times"

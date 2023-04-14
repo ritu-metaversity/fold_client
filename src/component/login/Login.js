@@ -1,34 +1,41 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AlertBtn from "../Alert/AlertBtn";
 import { AuthorAPI } from "../../apis/AuthorAPI";
+import { api } from "../../apis/configs/axiosConfigs";
 
 function Login() {
   const nav = useNavigate();
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
   const [StatusVal, setStatusVal] = useState(true);
-  const [message, setMessage]= useState("")
- 
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleLogin = () => {
-
     // history.push('/home')
-
-    if(password === "" && user ===""){
-      setStatusVal(false)
+    setIsLoading(true)
+    if (password === "" && user === "") {
+      setStatusVal(false);
       setMessage("password: length must be between 4 and 30");
+      setIsLoading(false)
+    }else{
+      setStatusVal(true)
+
     }
-    if (password !== "" && user !== ""){
+    if (password !== "" && user !== "") {
       AuthorAPI.Login({
         userId: user,
         password: password,
       }).then((res) => {
         const token = res.token;
+        setIsLoading(false)
         axios.defaults.headers.common["Authorization"] = token;
         localStorage.setItem("token", token);
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         setStatusVal(res.status);
-        setMessage("Invalid Username or password")
+        setMessage("Invalid Username or password");
         const uId = res.userId;
         localStorage.setItem("UserId", uId);
         if (res.token !== "" && user === res.userId) {
@@ -39,15 +46,18 @@ function Login() {
         if (pType === "old") {
           nav("/m/setting/changepassword");
         }
+      }).catch((error)=>{
+        setIsLoading(false);
       });
     }
   };
 
-  if(localStorage.getItem("token") !== null){
-    nav('/home');
-    window.location.reload();
-  }
-  
+  useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
+      nav("/home");
+    }
+  }, []);
+
   const popupClose = (vl) => {
     setStatusVal(vl);
   };
@@ -57,11 +67,7 @@ function Login() {
       <div className="wrapper">
         {StatusVal === false ? (
           <div className="alertBtn">
-            <AlertBtn
-              color="danger"
-              popupClose={popupClose}
-              val={message}
-            />
+            <AlertBtn color="danger" popupClose={popupClose} val={message} />
           </div>
         ) : (
           ""
@@ -113,7 +119,12 @@ function Login() {
                   className="btn btn-primary btn-block"
                   onClick={handleLogin}>
                   Login
-                  <i className="ml-2 fas fa-sign-in-alt"></i>
+                  
+                  
+                  {
+                    isLoading ?<i className="ml-2 fa fa-spinner fa-spin"></i> :<i className="ml-2 fa fa-sign-in"></i>
+                  }
+                  
                 </button>
               </div>
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
@@ -122,7 +133,7 @@ function Login() {
                   className="btn btn-primary btn-block"
                   to="/Register">
                   Register
-                  <i className="ml-2 fas fa-sign-in-alt"></i>
+                  <i className="ml-2 fa fa-sign-in"></i>
                 </Link>
               </div>
               <small className="recaptchaTerms">

@@ -11,8 +11,6 @@ const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
   const [UpiDetail, setUpiDetail] = useState();
   const [Bitvalue, setBitValue] = useState("0");
-
-  const [BitvalueInputField, setBitValueInputField] = useState(0);
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);
@@ -83,7 +81,7 @@ console.log(typeof Bitvalue)
     <div>
       <p className="enter-amount">Enter Amount</p>
       <div className="row row5 main-pricecontainor">
-        <div className="text-lef col-6 price-input">
+        <div className="text-lef col-6 colval price-input">
           <div className="float-left d-flex inputfield">
             <button
               className="stakeactionminus priceminus btn"
@@ -110,7 +108,7 @@ console.log(typeof Bitvalue)
             </button>
           </div>
         </div>
-        <div className="col-6 deposit-value">
+        <div className="col-6 marTop deposit-value">
           <div className="row price-values">
             <div className="col-3 price-data">
               <button

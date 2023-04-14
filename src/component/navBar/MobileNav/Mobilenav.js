@@ -7,7 +7,6 @@ function Mobilenav() {
 
   const handleClick = (val, e) => {
     setActive(val);
-    e.preventDefault();
   };
 
   const {pathname} = useLocation()
@@ -21,8 +20,6 @@ function Mobilenav() {
       setActive(1)
     }else if((pathname ==='/m/Others')){
       setActive(4)
-    }else{
-      setActive(1)
     }
 
   },[pathname])

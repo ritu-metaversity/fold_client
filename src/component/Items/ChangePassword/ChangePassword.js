@@ -19,6 +19,9 @@ function ChangePassword() {
 
   const nav = useNavigate();
 
+  console.log(newPasswords, "comn");
+  console.log(conformPassword, "comn");
+
   const handleClick = () => {
     if (currPassword === "") {
       setShowError(true);
@@ -52,8 +55,8 @@ function ChangePassword() {
               setMessege("Password Updated");
               setShowError(true);
               if(res.status === true){
+                AuthorAPI.LOGOUT()
                 nav('/login');
-                window.location.reload();
               }
             })
             .catch((err) => {
@@ -64,23 +67,27 @@ function ChangePassword() {
             currentPassword: currPassword,
             newPassword: newPasswords,
           }).then((res) => {
-            // console.log(res.message)
-            // if (res.status === false) {
-            //   setShowError(true);
-            //   setColor("danger");
-            //   setMessege(res.message);
-            // } 
+            localStorage.clear();
+
+            // AuthorAPI.LOGOUT().then((res)=>{
+            //   console.log(res);
+            // }).catch((error)=>{
+            //   console.log(error)
+            // })
+
             if(res.status===true) {
               setShowError(true);
               setColor("success");
               setMessege(res.message);
+              AuthorAPI.LOGOUT();
               nav('/login');
-              window.location.reload();
             }
           });
         }
       }
     }
+
+   
   };
 
   const popupClose = (vl) => {

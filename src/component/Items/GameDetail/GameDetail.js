@@ -7,17 +7,19 @@ import moment from "moment";
 import AlertBtn from "../../Alert/AlertBtn";
 import Accordion from "react-bootstrap/Accordion";
 import { socket } from "./socket";
-import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
+// import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 import FancyModals from "./FancyModals/FancyModals";
 import { createProfits } from "./eventUtil";
 import { useNavigate } from "react-router-dom";
+import { UserAPI } from "../../../apis/UserAPI";
+import { GameAPI } from "../../../apis/gameAPI";
 
-function GameDetail({ getStackValue, SportId }) {
+function GameDetail({ getStackValue, SportId, TvHideShow }) {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD h:mm:ss");
   const [showModals, setShowModals] = useState(false);
-  const [currentFancy, setCurrentFancy] = useState("Fancy2");
+  const [currentFancy, setCurrentFancy] = useState("Fancy3");
   const [matchodd, setMatchodd] = useState({});
   const [gameName, setGameName] = useState("");
   const [fancyOdds, setFancyOdds] = useState("");
@@ -48,15 +50,40 @@ function GameDetail({ getStackValue, SportId }) {
   const [fancyOddsPnl, setFancyOddsPnl] = useState([]);
   const [pValue, setPvalue] = useState();
   const [showFancyModals, setShowFancyModals] = useState(false);
-  const [oddsssss, setOddsssss] = useState({});
-  const [bookmakerPnl, setBookmakerPnl] = useState({});
-  const [oddsPnl, setOddsPnl] = useState({});
+  const [oddsPnl, setOddsPnl] = useState([]);
+  const [StackVal, setStackVal] = useState([]);
+  const [userbalance, setUserbalance] = useState("0.00");
+  const [error, setError] = useState(false);
 
   const [profits, setProfits] = useState({
     Odds: {},
     Bookmaker: [],
     Fancy: [],
   });
+
+  useEffect(() => {
+    const time = setInterval(() => {
+      if (token !== null) {
+        UserAPI.User_Balance()
+          .then((res) => {
+            setUserbalance(res.data.balance);
+          })
+          .catch((error) => {
+            setError(true);
+          });
+      }
+    }, 1000);
+
+    return () => clearInterval(time);
+  }, []);
+
+  // Stack Value Api
+
+  useEffect(() => {
+    GameAPI.Place_Bet().then((res) => {
+      setStackVal(res);
+    });
+  }, []);
 
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
@@ -140,32 +167,51 @@ function GameDetail({ getStackValue, SportId }) {
 
   const nav = useNavigate();
   const token = localStorage.getItem("token");
+
   useEffect(() => {
     if (token === null) {
       nav("/login");
-      window.location.reload();
     }
     // eslint-disable-next-line
   }, [token]);
 
+  // const { lastMessage: lastOddsPnl } = useWebSocket(
+  //   `ws://13.233.248.48:8082/enduserodd/${id}/${token}`,
+  //   { shouldReconnect: (event) => true }
+  // );
+  // useEffect(() => {
+  //   if (lastOddsPnl?.data && JSON.parse(lastOddsPnl?.data))
+  //     if (
+  //       lastOddsPnl?.data &&
+  //       JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data !== null
+  //     ) {
+  //       setOddsPnl(JSON.parse(lastOddsPnl?.data)?.data);
+  //     } else {
+  //       setOddsPnl([]);
+  //     }
+  // }, [lastOddsPnl]);
 
-  const { lastMessage: lastOddsPnl } = useWebSocket(
-    `ws://13.233.248.48:8082/enduserodd/${id}/${token}`,
-    { shouldReconnect: (event) => true }
-  );
-  useEffect(() => {
-    if (lastOddsPnl?.data && JSON.parse(lastOddsPnl?.data))
-      if (
-        lastOddsPnl?.data &&
-        JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data !== null
-      ) {
-        setOddsPnl(JSON.parse(lastOddsPnl?.data)?.data);
-      } else {
-        setOddsPnl([]);
-      }
-  }, [lastOddsPnl]);
+
 
   useEffect(() => {
+    UserAPI.USER_ODDS_PNL({
+      matchId: id,
+    }).then((res) => {
+      setOddsPnl(res?.data||[]);
+    });
+    const time = setInterval(() => {
+      UserAPI.USER_ODDS_PNL({
+        matchId: id,
+      }).then((res) => {
+        setOddsPnl(res?.data||[]);
+      });
+    }, 5000);
+
+    return () => clearInterval(time);
+  }, [id]);
+
+  useEffect(() => {
+    console.log("Rechanges")
     createProfits({
       fancyOdds,
       fancyPnl: fancyOddsPnl,
@@ -184,25 +230,64 @@ function GameDetail({ getStackValue, SportId }) {
       setProfits,
     });
   }, [
-    spanValueRate,
+    // spanValueRate,
     oddsPnl,
     fancyOddsPnl,
-    fancyOdds?.Odds && fancyOdds?.Odds[0]?.marketId,
+    isLoading,
     marketId,
     selectionId,
   ]);
-
-  const { lastMessage: FoddsPnl } = useWebSocket(
-    `ws://13.233.248.48:8082/enduserfancy/${id}/${token}`,
-    { shouldReconnect: (event) => true }
-  );
+  // useEffect(() => {
+  //   createProfits({
+  //     fancyOdds,
+  //     fancyPnl: fancyOddsPnl,
+  //     betDetails: {
+  //       isFancy: fancy,
+  //       isBack: cName === "back" ? true : false,
+  //       odds: spanValueRate,
+  //       marketName: "",
+  //       selectionId: parseInt(selectionId),
+  //       priceValue: fancy === false ? spanValueRate : pValue,
+  //       marketId: marketId === "" ? selectionId : marketId,
+  //       matchId: matchId,
+  //     },
+  //     pnl: oddsPnl,
+  //     setProfits,
+  //   });
+  // }, [
+  //   selectionId,
+  //   marketId
+  // ]);
+ 
+  
   useEffect(() => {
-    if (FoddsPnl?.data && JSON.parse(FoddsPnl?.data)?.data) {
-      setFancyOddsPnl(JSON.parse(FoddsPnl?.data)?.data);
-    } else {
-      setFancyOddsPnl([]);
-    }
-  }, [FoddsPnl]);
+    UserAPI.USER_FANCY_PNL({
+      matchId: id,
+    }).then((res) => {
+      setFancyOddsPnl(res?.data||[]);
+    });
+    const time = setInterval(() => {
+      UserAPI.USER_FANCY_PNL({
+        matchId: id,
+      }).then((res) => {
+        setFancyOddsPnl(res?.data||[]);
+      });
+    }, 5000);
+
+    return () => clearInterval(time);
+  }, [id]);
+
+  // const { lastMessage: FoddsPnl } = useWebSocket(
+  //   `ws://13.233.248.48:8082/enduserfancy/${id}/${token}`,
+  //   { shouldReconnect: (event) => true }
+  // );
+  // useEffect(() => {
+  //   if (FoddsPnl?.data && JSON.parse(FoddsPnl?.data)?.data) {
+  //     setFancyOddsPnl(JSON.parse(FoddsPnl?.data)?.data);
+  //   } else {
+  //     setFancyOddsPnl([]);
+  //   }
+  // }, [FoddsPnl]);
 
   // useEffect(() => {
   //   const time = setInterval(() => {
@@ -330,18 +415,22 @@ function GameDetail({ getStackValue, SportId }) {
                 <p className="no-found">No real-time records found</p>
               ) : (
                 <>
-                  <div id="scoreboard-box">
-                    <div className="scorecard scorecard-mobile">
-                      <div className="score-inner">
-                        <iframe
-                          src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sId}/${id}`}
-                          width="100%"
-                          className="score-card"
-                          title="scorecord"
-                          allowFullScreen={true}></iframe>
+                  {TvHideShow === true ? (
+                    <div id="scoreboard-box">
+                      <div className="scorecard scorecard-mobile">
+                        <div className="score-inner">
+                          <iframe
+                            src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sId}/${id}`}
+                            width="100%"
+                            className="score-card"
+                            title="scorecord"
+                            allowFullScreen={true}></iframe>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  ) : (
+                    ""
+                  )}
 
                   <div>
                     {matchodd?.map((item, id1) => {
@@ -353,7 +442,7 @@ function GameDetail({ getStackValue, SportId }) {
                             `}>
                             {item.Name}
                             <p className="float-right mb-0">
-                            <i class="fa fa-info-circle"></i>
+                              <i class="fa fa-info-circle"></i>
                             </p>
                           </div>
                           <div
@@ -384,7 +473,8 @@ function GameDetail({ getStackValue, SportId }) {
                             </div>
                             <div data-title="OPEN" className="table-body">
                               {item?.runners?.length &&
-                                item?.runners.map((event, index) => {
+                                item?.runners?.map((event, index) => {
+                                  const availableToBack=[...event.ex.availableToBack];
                                   return (
                                     <div
                                       data-title="ACTIVE"
@@ -412,7 +502,15 @@ function GameDetail({ getStackValue, SportId }) {
                                                   event.selectionId
                                               )?.value > 0
                                                 ? "text-success"
-                                                : "text-danger"
+                                                : profits.Odds[
+                                                    Number(item?.marketId)
+                                                  ]?.find(
+                                                    (profit) =>
+                                                      profit.sid ==
+                                                      event.selectionId
+                                                  )?.value < 0
+                                                ? "text-danger"
+                                                : ""
                                             }`}>
                                             {profits.Odds[
                                               Number(item?.marketId)
@@ -422,24 +520,28 @@ function GameDetail({ getStackValue, SportId }) {
                                                   profit.sid ==
                                                   event.selectionId
                                               )
-                                              ?.value?.toFixed(2)}
+                                              ?.value?.toFixed(2) || 0}
                                           </span>
                                         </p>
                                       </div>
-                                      {event.ex.availableToBack?.length &&
-                                        event.ex.availableToBack.map(
+                                      
+                                      {availableToBack?.length && 
+                                        availableToBack.map(
                                           (e, id) => {
                                             return (
                                               <div
                                                 key={e.size + e.price + id}
-                                                className={`box-1 box-7 back1 float-left back-1 text-center ${
-                                                  id === 1 ? "back2" : ""
-                                                } ${
-                                                  id === 0 || id === 1
+                                                onClick={(e) =>
+                                                  handleShow(e)
+                                                }
+                                                className={`box-1 box-7 back1 float-left back-1 text-center  
+                                                ${
+                                                  id === 1 || id === 2
                                                     ? "ds-none"
                                                     : ""
-                                                }  ${
-                                                  e.price !==
+                                                } 
+                                                 ${
+                                                  e?.price !==
                                                   previousState?.Odds[id1]
                                                     .runners[index]?.ex
                                                     ?.availableToBack[id]?.price
@@ -447,9 +549,10 @@ function GameDetail({ getStackValue, SportId }) {
                                                     : ""
                                                 }`}>
                                                 <button
-                                                  onClick={(e) =>
-                                                    handleShow(e)
-                                                  }>
+                                                  // onClick={(e) =>
+                                                  //   handleShow(e)
+                                                  // }
+                                                  >
                                                   <span
                                                     className="odd d-block"
                                                     onClick={() =>
@@ -476,19 +579,22 @@ function GameDetail({ getStackValue, SportId }) {
                                               </div>
                                             );
                                           }
-                                        )}
+                                        ).reverse()}
                                       {event?.ex?.availableToLay?.length &&
                                         event?.ex?.availableToLay.map(
                                           (e, id) => {
                                             return (
                                               <div
                                                 key={e?.size + e?.price + id}
+                                                  onClick={(e) =>
+                                                    handleShow(e)
+                                                  }
                                                 className={`box-1 box-7 lay float-left text-center  ${
                                                   id === 1 || id === 2
                                                     ? "ds-none"
                                                     : ""
                                                 } ${
-                                                  e.price !==
+                                                  e?.price !==
                                                   previousState?.Odds[id1]
                                                     .runners[index]?.ex
                                                     ?.availableToLay[id]?.price
@@ -496,9 +602,7 @@ function GameDetail({ getStackValue, SportId }) {
                                                     : ""
                                                 } `}>
                                                 <button
-                                                  onClick={(e) =>
-                                                    handleShow(e)
-                                                  }>
+                                                >
                                                   <span
                                                     className="odd d-block"
                                                     onClick={() =>
@@ -548,12 +652,13 @@ function GameDetail({ getStackValue, SportId }) {
                                             }>
                                             <Placebet
                                               profits={profits}
+                                              StackVal={StackVal}
                                               spanValueRate={spanValueRate}
                                               spanValueName={spanValueName}
                                               fancyOdds={fancyOdds}
                                               colorName={cName}
                                               getStackValue={getStackValue}
-                                              matchId={matchId}
+                                  x            matchId={matchId}
                                               marketId={marketId}
                                               selectionId={selectionId}
                                               MarketName={marketName}
@@ -562,8 +667,6 @@ function GameDetail({ getStackValue, SportId }) {
                                               toss=""
                                               data={data}
                                               priceValue={pValue}
-                                              oddsssss={oddsssss}
-                                              bookmakerPnl={bookmakerPnl}
                                             />
                                           </Modal.Body>
                                         </Modal>
@@ -574,7 +677,7 @@ function GameDetail({ getStackValue, SportId }) {
                             </div>
                           </div>
                           <div className="table-remark text-right remark">
-                            {item.display_message}
+                            {item?.display_message}
                           </div>
                         </div>
                       );
@@ -630,19 +733,19 @@ function GameDetail({ getStackValue, SportId }) {
                                             (profit) =>
                                               profit?.sid === bookmaker.sid
                                           )?.value > 0
-                                            ? "text-success" :profits.Bookmaker?.find(
-                                              (profit) =>
-                                                profit?.sid === bookmaker.sid
-                                            )?.value < 0
-                                            ? "text-danger" :""
+                                            ? "text-danger"
+                                            : profits.Bookmaker?.find(
+                                                (profit) =>
+                                                  profit?.sid === bookmaker.sid
+                                              )?.value < 0
+                                            ? "text-success"
+                                            : ""
                                         }`}
                                         style={{ color: "black" }}>
-                                        {
-                                          profits.Bookmaker?.find(
-                                            (profit) =>
-                                              profit?.sid === bookmaker.sid
-                                          )?.value
-                                        }
+                                        {profits.Bookmaker?.find(
+                                          (profit) =>
+                                            profit?.sid === bookmaker.sid
+                                        )?.value?.toFixed(2) || 0}
                                       </span>
                                     </p>
                                   </div>
@@ -660,13 +763,14 @@ function GameDetail({ getStackValue, SportId }) {
                                   </div>
 
                                   <div
+                                  onClick={(e) => handleShow(e)}
                                     className={`box-1 back float-left back-1  text-center ${
                                       bookmaker?.b1 !==
                                       previousState?.Bookmaker[id]?.b1
                                         ? "blink"
                                         : ""
                                     }`}>
-                                    <button onClick={(e) => handleShow(e)}>
+                                    <button >
                                       <span
                                         className="odd d-block"
                                         onClick={() =>
@@ -694,13 +798,14 @@ function GameDetail({ getStackValue, SportId }) {
                                   </div>
 
                                   <div
+                                  onClick={(e) => handleShow(e)}
                                     className={`box-1 lay float-left text-center ${
                                       bookmaker?.l1 !==
                                       previousState?.Bookmaker[id]?.l1
                                         ? "blink"
                                         : ""
                                     }`}>
-                                    <button onClick={(e) => handleShow(e)}>
+                                    <button >
                                       <span
                                         className="odd d-block"
                                         onClick={() =>
@@ -743,7 +848,7 @@ function GameDetail({ getStackValue, SportId }) {
                             );
                           })}
                         <div className="table-remark text-right remark">
-                          {fancyOdds?.Bookmaker[0].display_message}
+                          {fancyOdds?.Bookmaker[0]?.display_message}
                         </div>
                       </div>
                     </div>
@@ -753,7 +858,7 @@ function GameDetail({ getStackValue, SportId }) {
                   <div className="fancy-markets">
                     <ul className="nav nav-tabs mt-2 fancy-nav">
                       {gameName?.length &&
-                        gameName.slice(2).map((item, id) => {
+                        gameName.slice(3).map((item, id) => {
                           return (
                             <li
                               key={item + id}
@@ -762,9 +867,9 @@ function GameDetail({ getStackValue, SportId }) {
                               }`}
                               onClick={() => handleGameName(item, id)}>
                               {/* eslint-disable-next-line */}
-                              <a data-toggle="tab" className="nav-link">
+                              <p data-toggle="tab" className="nav-link">
                                 {item}
-                              </a>
+                              </p>
                             </li>
                           );
                         })}
@@ -805,13 +910,13 @@ function GameDetail({ getStackValue, SportId }) {
                                                 <Accordion.Item eventKey={id}>
                                                   <Accordion.Header>
                                                     {/* eslint-disable-next-line */}
-                                                    <a
+                                                    <p
                                                       data-toggle="collapse"
                                                       data-target="/min-max-info355"
                                                       aria-expanded="false"
                                                       className="info-icon collapsed">
                                                       <i className="fa fa-info-circle m-l-10"></i>
-                                                    </a>
+                                                    </p>
                                                   </Accordion.Header>
                                                   <Accordion.Body>
                                                     <div
@@ -863,11 +968,14 @@ function GameDetail({ getStackValue, SportId }) {
                                                   (pnl) =>
                                                     pnl.marketId === item.sid
                                                 )?.pnl > 0
-                                                  ? "sucess" : fancyOddsPnl?.find(
-                                                    (pnl) =>
-                                                      pnl.marketId === item.sid
-                                                  )?.pnl < 0
-                                                  ? "danger" : ""
+                                                  ? "sucess"
+                                                  : fancyOddsPnl?.find(
+                                                      (pnl) =>
+                                                        pnl.marketId ===
+                                                        item.sid
+                                                    )?.pnl < 0
+                                                  ? "danger"
+                                                  : ""
                                               }`}
                                               style={{ color: "black" }}>
                                               {fancyOddsPnl?.find(
