@@ -530,7 +530,10 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                           (e, id) => {
                                             return (
                                               <div
-                                                // key={e.size + e.price + id}
+                                                key={e.size + e.price + id}
+                                                onClick={(e) =>
+                                                  handleShow(e)
+                                                }
                                                 className={`box-1 box-7 back1 float-left back-1 text-center  
                                                 ${
                                                   id === 1 || id === 2
@@ -546,9 +549,10 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                     : ""
                                                 }`}>
                                                 <button
-                                                  onClick={(e) =>
-                                                    handleShow(e)
-                                                  }>
+                                                  // onClick={(e) =>
+                                                  //   handleShow(e)
+                                                  // }
+                                                  >
                                                   <span
                                                     className="odd d-block"
                                                     onClick={() =>
@@ -582,6 +586,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                             return (
                                               <div
                                                 key={e?.size + e?.price + id}
+                                                  onClick={(e) =>
+                                                    handleShow(e)
+                                                  }
                                                 className={`box-1 box-7 lay float-left text-center  ${
                                                   id === 1 || id === 2
                                                     ? "ds-none"
@@ -595,9 +602,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                     : ""
                                                 } `}>
                                                 <button
-                                                  onClick={(e) =>
-                                                    handleShow(e)
-                                                  }>
+                                                >
                                                   <span
                                                     className="odd d-block"
                                                     onClick={() =>
@@ -758,13 +763,14 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                   </div>
 
                                   <div
+                                  onClick={(e) => handleShow(e)}
                                     className={`box-1 back float-left back-1  text-center ${
                                       bookmaker?.b1 !==
                                       previousState?.Bookmaker[id]?.b1
                                         ? "blink"
                                         : ""
                                     }`}>
-                                    <button onClick={(e) => handleShow(e)}>
+                                    <button >
                                       <span
                                         className="odd d-block"
                                         onClick={() =>
@@ -792,13 +798,14 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                   </div>
 
                                   <div
+                                  onClick={(e) => handleShow(e)}
                                     className={`box-1 lay float-left text-center ${
                                       bookmaker?.l1 !==
                                       previousState?.Bookmaker[id]?.l1
                                         ? "blink"
                                         : ""
                                     }`}>
-                                    <button onClick={(e) => handleShow(e)}>
+                                    <button >
                                       <span
                                         className="odd d-block"
                                         onClick={() =>

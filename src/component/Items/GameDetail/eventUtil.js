@@ -135,7 +135,7 @@ export const createProfits = ({
           }, {}) || {}),
         },
         Bookmaker: fancyOdds?.Bookmaker?.map((element) => {
-          const pnlsBookmaker = pnl?.find((pnl) => pnl?.marketId == element.mid);
+          const pnlsBookmaker = pnl?.find((pnl) => pnl?.marketId == element.mid)||{};
           if (!pnlsBookmaker) return null;
           const plnBookmakerArray = [
             {

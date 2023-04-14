@@ -61,7 +61,6 @@ function App() {
     setSportId(id);
   };
 
-  useEffect(()=>{console.log(pathname)},[pathname])
   
   return (
     <div className="App">

@@ -34,15 +34,16 @@ const NavBar = () => {
       setDrop(false);
     }
   }
-  useEffect(() => {
-    UserAPI.Self_By_App_Url().then((res) => {
-      setStatus(res.data.selfAllowed);
-    });
-  }, []);
+ 
 
   const token = localStorage.getItem("token");
 
   useEffect(() => {
+    
+    UserAPI.Self_By_App_Url().then((res) => {
+      setStatus(res.data.selfAllowed);
+    });
+
     if (token !== null) {
       UserAPI.User_Balance()
         .then((res) => {
