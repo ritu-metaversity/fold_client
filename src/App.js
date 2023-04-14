@@ -8,7 +8,7 @@ import "./component/sidebar/sidebar.css";
 import "../src/component/navBar/TopNav.css";
 
 import Login from "./component/login/Login";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 // eslint-disable-next-line
 import SlotGame from "./component/Items/SlotGame/SlotGame";
 import Home from "./component/Home/Home";
@@ -31,14 +31,11 @@ function App() {
   const [SportId, setSportId] = useState("");
 
   const nav = useNavigate();
+  const {pathname} = useLocation()
 
   useEffect(() => {
     const time = setInterval(() => {
-  const token = localStorage.getItem("token");
       if (localStorage.getItem("token") !== null){
-
-        console.log(token)
-
         AuthorAPI.VALIDATE_JWT()
           .then()
           .catch((error) => {
@@ -64,6 +61,7 @@ function App() {
     setSportId(id);
   };
 
+  useEffect(()=>{console.log(pathname)},[pathname])
   
   return (
     <div className="App">

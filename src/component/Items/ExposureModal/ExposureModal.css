@@ -1,0 +1,29 @@
+.eventName {
+    padding-right: 160px !important;
+}
+.expBtn {
+    text-decoration: none;
+    border: none;
+    outline: unset;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+
+}
+.expBtn:first-child{
+    margin-right: 12px;
+}
+.sports .nav-tabs .nav-link.active {
+    background-color: #0088cc !important;
+}
+.expLeft{
+    margin-left: -2px;
+    cursor: pointer;
+}
+.expRight{
+    margin-right: -2px;
+    cursor: pointer;
+}
+.custom-control-input, .custom-control-label{
+    cursor: pointer;
+}

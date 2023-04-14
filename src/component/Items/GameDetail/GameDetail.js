@@ -19,7 +19,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD h:mm:ss");
   const [showModals, setShowModals] = useState(false);
-  const [currentFancy, setCurrentFancy] = useState("Fancy2");
+  const [currentFancy, setCurrentFancy] = useState("Fancy3");
   const [matchodd, setMatchodd] = useState({});
   const [gameName, setGameName] = useState("");
   const [fancyOdds, setFancyOdds] = useState("");
@@ -50,7 +50,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   const [fancyOddsPnl, setFancyOddsPnl] = useState([]);
   const [pValue, setPvalue] = useState();
   const [showFancyModals, setShowFancyModals] = useState(false);
-  const [oddsPnl, setOddsPnl] = useState({});
+  const [oddsPnl, setOddsPnl] = useState([]);
   const [StackVal, setStackVal] = useState([]);
   const [userbalance, setUserbalance] = useState("0.00");
   const [error, setError] = useState(false);
@@ -191,27 +191,27 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   //     }
   // }, [lastOddsPnl]);
 
+
+
   useEffect(() => {
     UserAPI.USER_ODDS_PNL({
       matchId: id,
     }).then((res) => {
-      setOddsPnl(res?.data);
+      setOddsPnl(res?.data||[]);
     });
-  }, []);
-
-  useEffect(() => {
     const time = setInterval(() => {
       UserAPI.USER_ODDS_PNL({
         matchId: id,
       }).then((res) => {
-        setOddsPnl(res?.data);
+        setOddsPnl(res?.data||[]);
       });
     }, 5000);
 
     return () => clearInterval(time);
-  }, [oddsPnl]);
+  }, [id]);
 
   useEffect(() => {
+    console.log("Rechanges")
     createProfits({
       fancyOdds,
       fancyPnl: fancyOddsPnl,
@@ -230,33 +230,52 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
       setProfits,
     });
   }, [
-    spanValueRate,
+    // spanValueRate,
     oddsPnl,
     fancyOddsPnl,
-    fancyOdds?.Odds && fancyOdds?.Odds[0]?.marketId,
+    isLoading,
     marketId,
     selectionId,
   ]);
-
+  // useEffect(() => {
+  //   createProfits({
+  //     fancyOdds,
+  //     fancyPnl: fancyOddsPnl,
+  //     betDetails: {
+  //       isFancy: fancy,
+  //       isBack: cName === "back" ? true : false,
+  //       odds: spanValueRate,
+  //       marketName: "",
+  //       selectionId: parseInt(selectionId),
+  //       priceValue: fancy === false ? spanValueRate : pValue,
+  //       marketId: marketId === "" ? selectionId : marketId,
+  //       matchId: matchId,
+  //     },
+  //     pnl: oddsPnl,
+  //     setProfits,
+  //   });
+  // }, [
+  //   selectionId,
+  //   marketId
+  // ]);
+ 
+  
   useEffect(() => {
     UserAPI.USER_FANCY_PNL({
       matchId: id,
     }).then((res) => {
-      setFancyOddsPnl(res?.data);
+      setFancyOddsPnl(res?.data||[]);
     });
-  }, []);
-
-  useEffect(() => {
     const time = setInterval(() => {
       UserAPI.USER_FANCY_PNL({
         matchId: id,
       }).then((res) => {
-        setFancyOddsPnl(res?.data);
+        setFancyOddsPnl(res?.data||[]);
       });
     }, 5000);
 
     return () => clearInterval(time);
-  }, [fancyOddsPnl]);
+  }, [id]);
 
   // const { lastMessage: FoddsPnl } = useWebSocket(
   //   `ws://13.233.248.48:8082/enduserfancy/${id}/${token}`,
@@ -519,7 +538,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                     : ""
                                                 } 
                                                  ${
-                                                  e.price !==
+                                                  e?.price !==
                                                   previousState?.Odds[id1]
                                                     .runners[index]?.ex
                                                     ?.availableToBack[id]?.price
@@ -568,7 +587,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                     ? "ds-none"
                                                     : ""
                                                 } ${
-                                                  e.price !==
+                                                  e?.price !==
                                                   previousState?.Odds[id1]
                                                     .runners[index]?.ex
                                                     ?.availableToLay[id]?.price
@@ -832,7 +851,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                   <div className="fancy-markets">
                     <ul className="nav nav-tabs mt-2 fancy-nav">
                       {gameName?.length &&
-                        gameName.slice(2).map((item, id) => {
+                        gameName.slice(3).map((item, id) => {
                           return (
                             <li
                               key={item + id}
@@ -841,9 +860,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                               }`}
                               onClick={() => handleGameName(item, id)}>
                               {/* eslint-disable-next-line */}
-                              <a data-toggle="tab" className="nav-link">
+                              <p data-toggle="tab" className="nav-link">
                                 {item}
-                              </a>
+                              </p>
                             </li>
                           );
                         })}
@@ -884,13 +903,13 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                 <Accordion.Item eventKey={id}>
                                                   <Accordion.Header>
                                                     {/* eslint-disable-next-line */}
-                                                    <a
+                                                    <p
                                                       data-toggle="collapse"
                                                       data-target="/min-max-info355"
                                                       aria-expanded="false"
                                                       className="info-icon collapsed">
                                                       <i className="fa fa-info-circle m-l-10"></i>
-                                                    </a>
+                                                    </p>
                                                   </Accordion.Header>
                                                   <Accordion.Body>
                                                     <div

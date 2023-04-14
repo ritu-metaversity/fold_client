@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "../item/Item.css";
 import { GameAPI } from "../../apis/gameAPI";
-import { Link } from "react-router-dom";
+
 
 function TopNav(props) {
   const [active, setactive] = useState(4);

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
 import { AuthorAPI } from "../../apis/AuthorAPI";
-import Modal from "antd/es/modal/Modal";
+import Modal from "react-bootstrap/Modal";
 import ExposureModal from "../Items/ExposureModal/ExposureModal";
 
 const NavBar = () => {
@@ -16,7 +16,7 @@ const NavBar = () => {
   const [status, setStatus] = useState(false);
   const [error, setError] = useState(false);
   const [Exp, setExp] = useState("");
-  const [showModals, setShowModals] = useState(false);
+  const [showExpModals, setShowExpModals] = useState(false);
 
   function toggle(e) {
     e.preventDefault();
@@ -94,10 +94,9 @@ const NavBar = () => {
     }
   };
 
-  const handleCloseModal = () => setShowModals(false);
-  const handleShow = (e) => {
-    // console.log("hello");
-    setShowModals(true);
+  const handleExpModal = () => setShowExpModals(false);
+  const handleExpShow = (e) => {
+    setShowExpModals(true);
     e.preventDefault();
   };
 
@@ -131,25 +130,29 @@ const NavBar = () => {
                         : userbalance}
                     </b>
                   </p>
-                  <div className="exp" onClick={(e) =>handleShow(e)}>
-                    <span>
+                  <div className="exp" >
+                    <span onClick={(e) =>handleExpShow(e)}>
                       <u>Exp: {Exp}</u>
                     </span>
+
                     <Modal
-                      show={showModals}
-                      onHide={handleCloseModal}
+                      show={showExpModals}
+                      dialogClassName="modal-90w"
+                      onHide={handleExpModal}
                       style={{
                         marginTop: "12px",
                         marginInline: "2%",
                         width: "95%",
                       }}>
                       <Modal.Header closeButton closeVariant="white">
-                        <Modal.Title>Placebet</Modal.Title>
+                        <Modal.Title>Exposure</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                       <ExposureModal/>
                       </Modal.Body>
                     </Modal>
+
+
 
                     <div className="dropdown d-inline-block" onClick={toggle}>
                       <p data-toggle="dropdown" className="dropdown-toggle">

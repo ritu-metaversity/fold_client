@@ -379,7 +379,7 @@ table {
     .text-center {
         text-align: center!important;
     }
-    .game-col a {
+    .game-col div {
         height: 24px;
         line-height: 24px;
         font-size: 14px;

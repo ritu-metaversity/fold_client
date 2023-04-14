@@ -1436,7 +1436,18 @@ a {
 
 .exp span u {
     font-weight: 600;
+    margin-right: 8px;
+    cursor: pointer;
 }
 .mb-4{
     margin-top: -4px;
+}
+.betInfo{
+    font-size: 12px;
+}
+.betColor{
+    color: #0088cc !important;
+}
+.exposre{
+    margin-top: -12px;
 }

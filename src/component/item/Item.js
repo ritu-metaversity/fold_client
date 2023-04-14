@@ -31,10 +31,11 @@ function Item({ gameIdForItemPage, sportId }) {
   }, [gameIdForItemPage]);
 
 
-const nav  = useNavigate()
-  const handleData = (id) => {
-    nav(`/gamedetail/${id}`);
-  };
+// const nav  = useNavigate()
+
+//   const handleData = (id) => {
+//     nav(`/gamedetail/${id}`);
+//   };
 
   return (
     <div>
@@ -58,16 +59,16 @@ const nav  = useNavigate()
                   ) : gameName?.length > 0 ? (
                     gameName?.map((item, id) => {
                       return (
+                        <Link to={`/gamedetail/${item.matchId}`} >
                         <div
                           className="game-list pt-1 pb-1 container-fluid"
                           key={id}
-                          onClick={() => handleData(item?.matchId)}>
+                          // onClick={() => handleData(item?.matchId)}
+                          >
                           <div className="row row5">
                             <div className="col-8 game-head">
                               <p className="mb-0 game-name">
-                                <Link to="/gamedetail">
                                   <span className="game-name">{item.matchName}</span>
-                                </Link>
                               </p>
                               <p className="mb-0 d-i">
                                 {moment(item.openDate).format(
@@ -121,32 +122,34 @@ const nav  = useNavigate()
                           <div className="row row5">
                             <div className="col-12">
                               <div className="text-center game-col game-home">
-                                <Link className="btn-back">
+                                <div className="btn-back">
                                   {item.team1Back === 0 ? "0" : item.team1Back}
-                                </Link>
-                                <Link className="btn-lay">
+                                </div>
+                                <div className="btn-lay">
                                   {item.team1Lay === 0 ? "0" : item.team1Lay}
-                                </Link>
+                                </div>
                               </div>
                               <div className="text-center game-col game-home">
-                                <Link className="btn-back">
+                                <div className="btn-back">
                                   {item.drawBack === 0 ? "0" : item.drawBack}
-                                </Link>
-                                <Link className="btn-lay">
+                                </div>
+                                <div className="btn-lay">
                                   {item.drawLay === 0 ? "0" : item.drawLay}
-                                </Link>
+                                </div>
                               </div>
                               <div className="text-center game-col game-home">
-                                <Link className="btn-back">
+                                <div className="btn-back">
                                   {item.team2Back === 0 ? "0" : item.team2Back}
-                                </Link>
-                                <Link className="btn-lay">
+                                </div>
+                                <div className="btn-lay">
                                   {item.team2Lay === 0 ? "0" : item.team2Lay}
-                                </Link>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
+                        </Link>
+
                       );
                     })
                   ) : (

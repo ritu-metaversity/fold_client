@@ -7,7 +7,7 @@ export const createProfits = ({
     setProfits,
   }) => {
     if (!fancyOdds) return;
-    if(!pnl?.length){
+    if(!Array.isArray(pnl)){
         console.log("pnl is not array")
         return;
     }
@@ -101,8 +101,8 @@ export const createProfits = ({
           ...(fancyOdds?.Odds?.reduce((accu, current) => {
             const pnlsOddCurrent = pnl?.find(
               (element) => element?.marketId == current?.marketId
-            );
-            if (!pnlsOddCurrent) return accu;
+            )||{};
+            // if (!pnlsOddCurrent) return accu;
   
             const plnArrayCurrent = pnlsOddCurrent
               ? [
