@@ -1,4 +1,4 @@
-import { Switch, Typography } from "@mui/material";
+import { Switch, Typography, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -65,29 +65,36 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
   //   () => (channelId && channelId.toString() !== "0" ? true : false),
   //   [channelId]
   // );
+  const isMobile = useMediaQuery("(max-width: 480px)");
   return (
     <>
       <Typography
         fontWeight={500}
-        width="100%"
+        // width="100%"
+        textAlign={isMobile ? "left" : "center"}
+        paddingLeft={isMobile ? "70px" : ""}
         fontSize={{ xs: "0.6rem", position: "relative" }}
       >
-        LastMatched {lastMatchedTime}
+        {`${lastMatchedTime}`}
         <Box
           display="flex"
           alignItems={"center"}
-          sx={{ position: "absolute", right: 80, top: "-1.2em" }}
+          sx={{ position: "absolute", right: 60, top: "-1.2em" }}
         >
           <ScoreboardIcon className="icon-medium" />
-          <Switch onChange={handleShowScore2Change} checked={showScore2} />{" "}
+          <Switch
+            style={{ marginLeft: "0.2em" }}
+            onChange={handleShowScore2Change}
+            checked={showScore2}
+          />
         </Box>
         <Box
           display="flex"
           alignItems={"center"}
-          sx={{ position: "absolute", right: 0, top: "-1.2em" }}
+          sx={{ position: "absolute", right: -10, top: "-1.2em" }}
         >
           <ScoreboardIcon className="icon-medium" />
-          <Switch onChange={handleShowScoreChange} checked={showScore} />{" "}
+          <Switch onChange={handleShowScoreChange} checked={showScore} />
         </Box>
         <Box
           display="flex"
@@ -123,7 +130,8 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
           width="100%"
           className="live-iframe"
           title="score-iframe"
-          src={`https://luckybet.one/?eventId=${matchId}`}
+          src="https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&autoplay=true"
+          // src={`https://luckybet.one/?eventId=${matchId}`}
           //src={`http://13.233.57.150/test.php?ChannelId=${channelId}`}
         />
       )}

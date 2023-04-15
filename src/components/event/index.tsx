@@ -91,16 +91,6 @@ const Event = () => {
   });
   const nav = useNavigate();
 
-  //socket
-  useEffect(() => {
-    // no-op if the socket is already connected
-    socket.connect();
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
   const oddFromSocket = (response: any) => {
     console.log(response, "socket");
     Object.keys(response).forEach((element) => {
@@ -130,6 +120,16 @@ const Event = () => {
       return { ...response, Odds };
     });
   };
+
+  //socket
+  useEffect(() => {
+    // no-op if the socket is already connected
+    socket.connect();
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const oddFromSocketSlower = (response: any) => {
     if (response) {
