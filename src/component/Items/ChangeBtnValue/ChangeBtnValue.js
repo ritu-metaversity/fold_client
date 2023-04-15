@@ -50,7 +50,6 @@ function ChangeBtnValue() {
 
   return (
     <div>
-      <NavBar/>
       <div className="main">
         <div className="report-container wrapper">
           {

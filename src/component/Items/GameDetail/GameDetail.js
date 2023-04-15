@@ -61,7 +61,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     Fancy: [],
   });
 
-  // const arr = ['css', 'js', 'ts'];
 
   useEffect(() => {
     const time = setInterval(() => {
@@ -121,17 +120,23 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
 
   const oddFromSocketSlower = (res) => {
     if (res) {
-      if (fancyOdds) {
-        const oldOdds = { ...fancyOdds };
-        setPreviousState(oldOdds);
-      } else {
-        setPreviousState(res);
-      }
+     
+      setFancyOdds(
+        (fancyOdds)=>{
+          if (fancyOdds) {
+            const oldOdds = { ...fancyOdds };
+            setPreviousState(oldOdds);
+          } else {
+            setPreviousState(res);
+          }
+          return res;
+        }
+        );
+
       setMFancyOdds(res);
       setMaxBet(res.Bookmaker[0]);
       setMinBet(res);
       setIsLoading(false);
-      setFancyOdds(res);
       setGameName(Object.keys(res));
       setMatchodd(res.Odds);
       var matchData = res.Odds[0];
@@ -151,6 +156,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
    
 
   useEffect(() => {
+    socket.on("connect", ()=>{
+      setOddSocketConnected(false)
+    });
     socket.on("OddsUpdated", oddFromSocketSlower);
     socket.on("JoinedSuccessfully", () => {
       setOddSocketConnected(true);
@@ -443,7 +451,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                   ) : (
                     ""
                   )}
-
                   <div>
                     {matchodd?.map((item, id1) => {
                       return (
@@ -641,7 +648,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
 
                                       
                                     </div>
-                                  );
+                                  )
                                 })}
                                 
                             </div>
@@ -729,11 +736,10 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                               <>
                                 <div
                                   key={bookmaker + id}
-                                  data-title="SUSPENDED"
+                                  data-title={bookmaker.gstatus}
                                   className={`table-row ${
                                     bookmaker.gstatus === "SUSPENDED"
-                                      ? "suspended"
-                                      : ""
+                                      ? "suspended" :bookmaker.gstatus === "BALL RUNNING"?"ballrunning": ""
                                   } ${bookmaker.t === "TOSS" ? "d-none" : ""}`}>
                                   <div className="float-left country-name box-4">
                                     <span className="team-name">
@@ -1053,10 +1059,10 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                           </button>
                                         </div>
                                         <div
+                                         data-title={item.gstatus}
                                           className={`box-1 back float-left text-center ${
                                             item.gstatus === "SUSPENDED"
-                                              ? "suspended"
-                                              : ""
+                                              ? "suspended" :item.gstatus === "BALL RUNNING"?"ballrunning": ""
                                           }`}
                                           onClick={(e) => handleShow(e)}>
                                           <button
@@ -1087,7 +1093,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                       </div>
                                     </div>
                                   </div>
-                                );
+                                )
                               })}
                               <Modal
                                 show={showFancyModals}
@@ -1123,7 +1129,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
         </div>
       )}
     </div>
-  );
+  )
 }
 
 export default GameDetail;

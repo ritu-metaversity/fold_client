@@ -99,7 +99,6 @@ const Withdraw = () => {
   }
   return (
     <>
-      <NavBar />
       {errorAlert ? <AlertBtn color="danger"  popupClose={popupClose}  val={message}/> : ""}
       <>
       <div className="card-header wit"><h4 className="mb-0">Withdraw</h4></div>

@@ -170,7 +170,6 @@ function AaccountStatement() {
 
   return (
     <div>
-      <NavBar />
       {
         Error ? <AlertBtn color={ColorName} val={ErrorMsg} popupClose={popupClose}/> :""
       }

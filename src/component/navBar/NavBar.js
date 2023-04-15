@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
 import { AuthorAPI } from "../../apis/AuthorAPI";
@@ -103,7 +103,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="wrapper">
+      <div className="wrapper main-gameHead2">
         <div className="">
           <header className="header">
             <div className="container-fluid">
@@ -288,6 +288,7 @@ const NavBar = () => {
           </header>
         </div>
       </div>
+      <Outlet/>
     </>
   );
 };

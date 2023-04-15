@@ -26,65 +26,92 @@ import Deposit from "./component/Items/Deposit/Deposit";
 import Withdraw from "./component/Items/Withdrow/Withdraw";
 import Register from "./component/Register/Register";
 import { AuthorAPI } from "./apis/AuthorAPI";
+import Sport from "./component/Sports/Sport";
+import SportData from "./component/Sports/SportData";
+import NavBar from "./component/navBar/NavBar";
+import Mobilenav from "./component/navBar/MobileNav/Mobilenav";
 
 function App() {
   const [SportId, setSportId] = useState("");
 
   const nav = useNavigate();
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const time = setInterval(() => {
-      if (localStorage.getItem("token") !== null){
+      if (localStorage.getItem("token") !== null) {
         AuthorAPI.VALIDATE_JWT()
           .then()
           .catch((error) => {
-              if (error.response.status === 401) {
-                localStorage.clear();
-                nav("/login");
-              }
+            if (error.response.status === 401) {
+              localStorage.clear();
+              nav("/login");
+            }
           });
-    }}, 1000);
+      }
+    }, 1000);
 
     return () => clearInterval(time);
     // eslint-disable-next-line
   }, []);
 
-  useEffect(()=>{
-    if(localStorage.getItem("token") === null){
-      nav('/login')
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      nav("/login");
     }
-  },[])
-  
+  }, []);
 
   const idddd = (id) => {
     setSportId(id);
   };
 
-  
   return (
     <div className="App">
-        <Routes>
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/Register" element={<Register />} />
-          <Route exact path="/" element={<Login />} />
-          <Route exact path="/Home" element={<Home idddd={idddd} />} />
+      <Routes>
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/Register" element={<Register />} />
+        <Route exact path="/" element={<Login />} />
+        <Route path="" element={<NavBar />}>
           <Route exact path="/deposit" element={<Deposit />} />
-          <Route exact path="/withdraw" element={<Withdraw />}/>
-          <Route exact path="/gamedetail/:id" element={<GameHead SportId={SportId} />} />
+          <Route exact path="/withdraw" element={<Withdraw />} />
+          <Route
+            exact
+            path="/gamedetail/:id"
+            element={<GameHead SportId={SportId} />}
+          />
           <Route exact path="/casino/:id" element={<Casino />} />
-          <Route exact path="/m/reports/accountstatement" element={<AaccountStatement />}/>
+          <Route
+            exact
+            path="/m/reports/accountstatement"
+            element={<AaccountStatement />}
+          />
           <Route exact path="/m/reports/profitloss" element={<ProfitLoss />} />
           <Route exact path="/m/reports/bethistory" element={<BetHistory />} />
-          <Route exact path="/m/reports/unsetteledbet" element={<UnSetteledBet />} />
-          <Route exact path="/m/setting/changebtnvalue" element={<ChangeBtnValue />} />
-          <Route exact path="/m/setting/changepassword" element={<ChangePassword />} />
-          <Route exact path="/m/sports" element={<Home />}/>
-          <Route exact path="/m/In-play" element={<Home />}/>
-          <Route exact path="/m/slot" element={<Slot />}/>
-          <Route exact path="/m/others" element={<Home />}/>
-          <Route exact path="/SignOut" element={<SignOut />}/>
-        </Routes>
+          <Route
+            exact
+            path="/m/reports/unsetteledbet"
+            element={<UnSetteledBet />}
+          />
+          <Route
+            exact
+            path="/m/setting/changebtnvalue"
+            element={<ChangeBtnValue />}
+          />
+          <Route
+            exact
+            path="/m/setting/changepassword"
+            element={<ChangePassword />}
+          />
+          <Route exact path="/SignOut" element={<SignOut />} />
+          <Route path="" element={<Mobilenav />}>
+            <Route exact path="/Home" element={<Home idddd={idddd} />} />
+            <Route exact path="/m/sports" element={<SportData />} />
+            <Route exact path="/m/others" element={<Home />} />
+            <Route exact path="/m/In-play" element={<Home />} />
+            <Route exact path="/m/slot" element={<Slot />} />
+          </Route>
+        </Route>
+      </Routes>
     </div>
   );
 }

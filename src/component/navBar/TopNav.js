@@ -3,7 +3,7 @@ import "../item/Item.css";
 import { GameAPI } from "../../apis/gameAPI";
 
 
-function TopNav(props) {
+function TopNav({gameId}) {
   const [active, setactive] = useState(4);
   const [activeSport, setActiveSport] = useState([]);
   // const [SportIdList, setSportIdList] = useState(4);
@@ -16,17 +16,17 @@ function TopNav(props) {
   }, []);
   
 
-  const handleClick = (val) => {
+  const handleClick = (val, val2) => {
     setactive(val);
-    props.gameId(val);
+    gameId(val);
   };
 
 
 
   return (
     <div>
-      <div className="sports active">
-        <ul className="nav nav-tabs game-nav-bar">
+      <div className="sports active ">
+        <ul className="nav nav-tabs main-gameHead3 game-nav-bar">
           {activeSport.map((res, id) => {
               return (
                 <li className="nav-item text-center" key={id}>
@@ -36,7 +36,7 @@ function TopNav(props) {
                     className={`nav-link nav1 ${
                       active === res.sportId ? "active" : null
                     }`}
-                    onClick={() => handleClick(res.sportId)}>
+                    onClick={() => handleClick(res?.sportId, res?.sportName)}>
                     <div>
                       {
                         res.sportId===4?<img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/4.png"

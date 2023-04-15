@@ -10,7 +10,6 @@ const Casino = () => {
   const id = Gameid.slice(8);
   return (
     <>
-      <NavBar />
       <Mobilenav />
       <iframe
         src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
