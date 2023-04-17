@@ -209,8 +209,10 @@ table {
     border-top: 1px solid #dee2e6;
 }
 .game-name {
-    width: 80%;
+    width: 100%;
     float: left;
+    font-size: 14px;
+        font-weight: bolder;
 }
 .coupon-table tr td {
     padding: 0;
@@ -321,10 +323,7 @@ table {
     .pt-1, .py-1 {
         padding-top: 0.25rem!important;
     }
-    .game-name {
-        font-size: 14px;
-        font-weight: 500;
-    }
+   
     .mb-0, .my-0 {
         margin-bottom: 0!important;
     }
@@ -441,9 +440,7 @@ table {
     display: flex;
     flex-direction: column;
 }
-.game-name {
-    font-weight: bolder;
-}
+
 /* .main-container{
     overflow: hidden;
     height: calc(100vh - 100px);

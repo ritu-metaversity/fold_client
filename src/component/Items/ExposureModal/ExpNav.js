@@ -12,20 +12,20 @@ const ExpNav = (props) => {
     <div className="sports active">
       <ul className="nav nav-tabs game-nav-bar">
         <li className="nav-item text-center expLeft">
-          <a
+          <button
             data-toggle="tab"
-            className={`nav-link nav1 ${Active === 1 ? "active" : ""}`}
+            className={`nav-link nav1 toggleBtn ${Active === 1 ? "active" : ""}`}
             >
             <div onClick={() => handleClick(1)}>Sports</div>
-          </a>
+          </button>
         </li>
         <li className="nav-item text-center expRight">
-          <a
+          <button
             data-toggle="tab"
-            className={`nav-link nav1 ${Active === 2 ? "active" : ""}`}
+            className={`nav-link nav1 toggleBtn ${Active === 2 ? "active" : ""}`}
             >
             <div onClick={() => handleClick(2)}>Casino</div>
-          </a>
+          </button>
         </li>
       </ul>
     </div>

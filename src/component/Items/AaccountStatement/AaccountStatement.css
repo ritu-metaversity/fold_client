@@ -170,17 +170,6 @@ input[type=checkbox], input[type=radio] {
         border-radius: 0;
         border: 0;
     }
-    .card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #fff;
-        background-clip: border-box;
-        border: unset !important;
-        border-radius: 0.25rem;
-    }
     .card-header {
         padding: 6px;
         border-radius: 0 !important;
@@ -271,8 +260,8 @@ input[type=checkbox], input[type=radio] {
 }
 .custom-control-label::before {
     position: absolute;
-    top: 2px;
-    left: -17px;
+    top: 0px;
+    left: -19px;
     display: block;
     width: 1rem;
     height: 1rem;
@@ -284,8 +273,8 @@ input[type=checkbox], input[type=radio] {
 }
 .custom-control-label::after {
     position: absolute;
-    top: 0;
-    left: -17px;
+    top: 0px;
+    left: -19px;
     display: block;
     width: 1rem;
     height: 1rem;
@@ -583,4 +572,12 @@ container .table tr th {
 }
 .cpoint{
     cursor: pointer;
+}
+.card-body.statement.container-fluid.container-fluid-5 {
+    height: calc(100vh - 200px);
+}
+tr.lodding {
+    text-align: center;
+    background: #ddd;
+    font-size: 22px;
 }

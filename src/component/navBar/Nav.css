@@ -1487,3 +1487,9 @@ background-color: #007bff;
     height: calc(100vh - 200px);
     overflow: scroll;
 }
+
+@media screen and (max-width: 400px){
+    span.betInfo {
+        display: block;
+    }    
+}

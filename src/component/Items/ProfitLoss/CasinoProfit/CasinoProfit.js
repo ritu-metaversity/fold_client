@@ -25,6 +25,8 @@ function CasinoProfit() {
   const [MatchId, setMatchId] = useState();
   const [CasinoDataList, setCasinoDataList] = useState();
   const [CDataList, setCDataList] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
@@ -67,6 +69,7 @@ function CasinoProfit() {
       noOfRecords:100,
       totalPages:1,
     }).then((res) => {
+      setIsLoading(false)
       setCDataList(res.data)
       setPLValue(res.data.market);
       setCasinoDataList(res.data.length);
@@ -97,9 +100,9 @@ function CasinoProfit() {
       userId: "",
       totalPages: 2
     }).then((res) => {
-       console.log(res)
-        setPLValue(res.data.market);
-        setCasinoDataList(res.data.length);
+      setIsLoading(false)
+      setPLValue(res.data.market);
+      setCasinoDataList(res.data.length);
     });
   };
 
@@ -256,6 +259,13 @@ function CasinoProfit() {
                         </th>
                       </tr>
                     </thead>
+                    {
+                      isLoading?(<tr className="lodding">
+                      <td colSpan="3">
+                      <i className="fa fa-spinner fa-spin"></i>
+                      </td>
+                    
+                  </tr>):(<>
                     <tbody className={`${CasinoDataList===0?"dis-none":""}`}>
                       {PLValue?.length &&
                         PLValue.map((res) => {
@@ -290,6 +300,9 @@ function CasinoProfit() {
                       </td>
                     </tr>
                   </tbody>
+                  </>)
+                    }
+                    
                   </table>
                 </div>
               </div>

@@ -255,4 +255,6 @@ css-pw8cd7 .selected {
     padding: 4px;
 }
 
-
+.wrapper.main-conatiner.deposit {
+    height: calc(100vh - 200px);
+}
