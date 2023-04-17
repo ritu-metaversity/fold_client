@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
 import { AuthorAPI } from "../../apis/AuthorAPI";
@@ -16,6 +16,9 @@ const NavBar = () => {
   const [status, setStatus] = useState(false);
   const [error, setError] = useState(false);
   const [Exp, setExp] = useState("");
+  const [show, setShow] = useState("top");
+  // const [lastScrollY, setLastScrollY] = useState(0);
+
   const [showExpModals, setShowExpModals] = useState(false);
 
   function toggle(e) {
@@ -34,6 +37,9 @@ const NavBar = () => {
       setDrop(false);
     }
   }
+
+
+  
  
 
   const token = localStorage.getItem("token");
@@ -101,9 +107,40 @@ const NavBar = () => {
     e.preventDefault();
   };
 
+  const location = useLocation();
+
+  // useEffect(()=>{
+  //   window.scrollTo(0,0);
+  // }, [location])
+  
+
+
+  // const controlNavbar =()=>{
+    
+  //   // console.log(window.scrollY);
+  //   if(window.scrollY > 111){
+  //     if(window.scrollY>lastScrollY) {
+  //       setShow("showNav")
+  //     }else{
+  //       setShow("hideNav")
+  //     }
+  //   }else{
+  //     setShow("top")
+  //   }
+  //   setLastScrollY(window.scrollY)
+
+  // }
+
+  // useEffect(()=>{
+  //   window.addEventListener("scroll", controlNavbar)
+  //   return ()=>{
+  //     window.removeEventListener("scroll", controlNavbar)
+  //   }
+  // },[lastScrollY])
+
   return (
     <>
-      <div className="wrapper main-gameHead2">
+      <div className="wrapper">
         <div className="">
           <header className="header">
             <div className="container-fluid">

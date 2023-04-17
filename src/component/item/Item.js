@@ -7,8 +7,10 @@ import axios from "axios";
 function Item({ gameIdForItemPage, spName }) {
   const [gameName, setGameName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [matchListLength, setMatchListLength] = useState("");
 
-  console.log(gameIdForItemPage, "DFgffhdjkfewartdfjgutretdfy")
+
+
   if (!gameIdForItemPage) {
     gameIdForItemPage = 4;
   }
@@ -42,14 +44,10 @@ function Item({ gameIdForItemPage, spName }) {
           {token : token}
         )
         .then((res) => {
-          res?.data.data?.map((res)=>{
-            console.log(res.name, "res");
-          })
-          setGameName(res.data.data)
+          setGameName(res.data.data);
           setIsLoading(false);
         });
   }, []);
-  
 
 
   return (
@@ -59,20 +57,21 @@ function Item({ gameIdForItemPage, spName }) {
           <i className="fa fa-spinner fa-spin"></i>
         </p>
       ) : (
-        <div className="">
+        <>
           <div className="tab-pane container pl-0 pr-0">
             <div
-              className="game-listing-container"
+              className="game-listing-container main-container"
+
              >
               <div>
                
                <div className="">
-                  {gameName?.length === 0 ? (
+                  {gameName?.find((item) => 
+                  item?.sportid === gameIdForItemPage)?.matchList?.length === 0 ? (
                     <p className="no-found">No real-time records found</p>
                   ) : gameName?.length > 0 ? 
                     gameName?.find((item) => 
                       item?.sportid === gameIdForItemPage)?.matchList.map((item)=>{
-                        console.log(item)
                         return(
                           <Link to={`/gamedetail/${item.matchId}`} >
                           <div
@@ -173,7 +172,7 @@ function Item({ gameIdForItemPage, spName }) {
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

@@ -444,3 +444,7 @@ table {
 .game-name {
     font-weight: bolder;
 }
+/* .main-container{
+    overflow: hidden;
+    height: calc(100vh - 100px);
+} */

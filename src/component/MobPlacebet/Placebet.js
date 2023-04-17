@@ -17,9 +17,10 @@ function Placebet({
   priceValue,
   profits,
   StackVal,
+  userIP
 }) {
   const [updated, setUpdated] = useState("");
-  const [userIP, setUserIP] = useState("");
+  // const [userIP, setUserIP] = useState("");
   // eslint-disable-next-line
   const [odds, setOdds] = useState(spanValueRate);
   // eslint-disable-next-line
@@ -33,11 +34,13 @@ function Placebet({
 
   // console.log(typeof updated)
 
-  useEffect(() => {
-    axios.get("https://geolocation-db.com/json/").then((res) => {
-      setUserIP(res.data.IPv4);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("https://geolocation-db.com/json/").then((res) => {
+  //     setUserIP(res.data.IPv4);
+  //   });
+  // }, []);
+
+  // console.log(userIP, "userIPuserIP")
 
   const handleSubmit = () => {
     setIsLoading(true)
@@ -237,13 +240,14 @@ function Placebet({
                             : "text-success"
                         }`}>
                         {profit.sid == selectionId
-                          ? ((profit?.value || 0) +
+                          ? (((profit?.value || 0) +
                               ((colorName === "back" ? 1 : -1) *
                                 odds *
                                 updated) /
-                                100).toFixed(2)
-                          : ((profit?.value || 0) +
-                            (colorName === "back" ? -1 : 1) * updated).toFixed(2)}
+                                100)).toFixed(2)
+                          : (((profit?.value || 0) +
+                            (colorName === "back" ? -1 : 1) * updated)).toFixed(2)}
+
                       </div>
                     </div>
                   ))
@@ -289,12 +293,12 @@ function Placebet({
                             : ""
                         }`}>
                         {profit.sid === selectionId
-                          ? (profit?.value || 0) +
+                          ? ((profit?.value || 0) +
                             (colorName === "back" ? 1 : -1) *
                               (odds - 1) *
-                              updated
-                          : (profit.value || 0) +
-                            (colorName === "back" ? -1 : 1) * updated}
+                              updated).toFixed(2)
+                          : ((profit.value || 0) +
+                            (colorName === "back" ? -1 : 1) * updated).toFixed(2)}
                       </div>
                     </div>
                   ))}
