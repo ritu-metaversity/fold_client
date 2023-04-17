@@ -38,7 +38,15 @@ i.fa.fa-tv {
     position: sticky;
     top: 0;
 }
-ul.nav.nav-tabs.main-gameHead1.game-nav-bar {
+
+/* .wrapper.main-gameHead2 {
+    position: sticky;
+    width: 100%;
+    top: 0;
+    z-index: 2;
+} */
+
+/* ul.nav.nav-tabs.main-gameHead1.game-nav-bar {
     position: sticky;
     top: 111px;
-}
+} */

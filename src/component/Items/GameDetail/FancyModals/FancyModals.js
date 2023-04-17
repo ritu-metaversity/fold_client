@@ -11,14 +11,19 @@ const FancyModals = ({ matchId, FancyID }) => {
       fancyId: FancyID,
     }).then((res) => {
       setFancyData(Object.values(res));
-      // setFancyData(vals);
     });
   }, []);
 
+  console.log(FancyData?.length, "bjjknjjk")
+
   return (
+
+
     <div>
+      
       <div id="__BVID__287___BV_modal_body_">
         <div>
+        { FancyData?.length === 0 ? (<p className="no-found">No real-time records found</p>): (
           <div className={`place-bet pt-2 pb-2`}>
             <div className={`container-fluid container-fluid-5`}>
               <div className="row row5">
@@ -66,6 +71,7 @@ const FancyModals = ({ matchId, FancyID }) => {
               </div>
             </div>
           </div>
+          )}
         </div>
       </div>
     </div>

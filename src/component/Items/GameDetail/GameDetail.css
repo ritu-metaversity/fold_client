@@ -833,3 +833,8 @@ p.no-found {
     width: 100% !important;
     margin: 0px !important;
 }
+
+.main-containor{
+    height: calc(100vh - 100px);
+    overflow: scroll;
+}

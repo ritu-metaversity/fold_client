@@ -26,7 +26,7 @@ function TopNav({gameId}) {
   return (
     <div>
       <div className="sports active ">
-        <ul className="nav nav-tabs main-gameHead3 game-nav-bar">
+        <ul className="nav nav-tabs game-nav-bar">
           {activeSport.map((res, id) => {
               return (
                 <li className="nav-item text-center" key={id}>
