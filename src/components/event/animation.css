@@ -86,7 +86,10 @@
 .fancy-ball-running::after {
     content: "BALL RUNNING"
 }
+.ball-running::after{
+    content: "BALL RUNNING"
 
+}
 .suspended,.fancy-suspended {
 cursor: not-allowed;
 pointer-events: none;
