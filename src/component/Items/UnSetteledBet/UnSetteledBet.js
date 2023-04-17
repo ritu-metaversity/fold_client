@@ -85,7 +85,6 @@ function UnSetteledBet() {
 
   return (
     <div>
-      <NavBar />
       <div className="report-container wrapper">
         <div className="card">
           <div className="card-header">

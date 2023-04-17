@@ -64,3 +64,18 @@ button.stakeactionminus.btn {
     background: #0088cc;
     color: #fff;
 }
+p.place-lodder {
+    height: 313px;
+    width: 515px;
+    display: block;
+    position: absolute;
+    background: #0000006b;
+    left: 0px;
+    top: 0;
+}
+p.place-lodder i {
+    font-size: 24px;
+    margin-inline: 43%;
+    margin-top: 26%;
+    color: #fff;
+}

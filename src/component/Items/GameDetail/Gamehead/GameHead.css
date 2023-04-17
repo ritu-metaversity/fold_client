@@ -34,3 +34,11 @@ i.fa.fa-tv {
     font-weight: bold;
     margin-top: 8px;
 }
+.wrapper.main-gameHead2 {
+    position: sticky;
+    top: 0;
+}
+ul.nav.nav-tabs.main-gameHead1.game-nav-bar {
+    position: sticky;
+    top: 111px;
+}

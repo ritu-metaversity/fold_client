@@ -93,12 +93,15 @@
     float: left !important;
 }
 
-.table-row>div.back,
+/* .table-row>div.back,
 .table-row>div.back1,
 .table-row>div.back2,
 .table-row>div.lay,
 .table-row>div.lay1,
 .table-row>div.lay2 {
+    cursor: pointer;
+} */
+.cPointer{
     cursor: pointer;
 }
 
@@ -657,24 +660,43 @@ p.team-name.col-6.text-right {
     font-family: Arial, Verdana, Helvetica, sans-serif;
 }
 
-.fancy-market .suspended:after {
+.ballrunning:after {
+    width: 100%;
+    content: "BALL RUNNING";
+    font-size: 16px;
+    color: #ff0000;
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+}
+
+.ballrunning:after {
     width: 203% !important;
-    content: "suspended";
+    content: "BALL RUNNING";
     font-size: 16px;
     color: #ff3c3c;
     font-family: "Roboto Condensed", sans-serif;
 }
 
-.blink {
-    animation: blinking 100ms !important;
+
+.fancy-market .suspended:after {
+    width: 203% !important;
+    content: attr(data-title);
+    font-size: 16px;
+    color: #ff3c3c;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+
+
+.blink1 {
+    animation: blinking 10s infinite !important;
     background-color: #ffc01a !important;
 }
 
 
 @keyframes blinking {
-    100% {
-        background-color: #ffc01a !important;
-    }              
+   100%{
+    background-color: #ffc01a !important;
+   }      
 }
 
 @media screen and (min-width: 700px) and (max-width: 3000px) {
@@ -770,10 +792,7 @@ p.no-found {
 .accordion {
     --bs-accordion-body-padding-x: none;
 }
-.main-div {
-    overflow: scroll;
-    height: 83vh;
-}
+
 .main-div::-webkit-scrollbar{
     display: none;
 }

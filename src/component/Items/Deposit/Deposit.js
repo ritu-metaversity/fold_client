@@ -33,7 +33,6 @@ const Deposit = () => {
 
   return (
     <>
-      <NavBar />
       {/* <Mobilenav /> */}
       <><div className="card-header wit"><h4 className="mb-0">Deposit</h4></div>
       <div className="wrapper main-conatiner deposit">

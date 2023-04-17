@@ -8,21 +8,20 @@ import NavBar from "../navBar/NavBar";
 function Home(props) {
 
 
-const [gameIdForItemPage, setGameIdForItemPage]=useState("");
+const [gameIdForItemPage, setGameIdForItemPage]=useState(4);
 
 const gameId =(id)=>{
   setGameIdForItemPage(id)
   props.idddd(id)
 }
 
+
   return (
     <div>
-      <div  className="wrapper">
-        <NavBar/>
-        <Mobilenav/>
+      <div  className="main-gameHead">
         <TopNav gameId={gameId} />
-        <Item gameIdForItemPage={gameIdForItemPage}/>
       </div>
+        <Item gameIdForItemPage={gameIdForItemPage}/>
     </div>
   );
 }

@@ -24,7 +24,6 @@ function ProfitLoss() {
   };
   return (
     <>
-    <NavBar />
     <div className="card-header">
           <h4 className="mb-0" style={{marginLeft:"10px"}}>Profit Loss</h4>
         </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import "../Nav.css";
 
 function Mobilenav() {
@@ -26,7 +26,7 @@ function Mobilenav() {
 
   return (
     <>
-      <ul className="nav nav-tabs game-nav-bar">
+      <ul className="nav nav-tabs main-gameHead1 game-nav-bar">
         <li
           className={`nav-item ${Active === 1 ? "active2" : ""}`}
           onClick={(e) => handleClick(1, e)}>
@@ -56,6 +56,7 @@ function Mobilenav() {
           </Link>
         </li>
       </ul>
+      <Outlet/>
     </>
   );
 }

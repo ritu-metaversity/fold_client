@@ -24,6 +24,7 @@ function Placebet({
   const [odds, setOdds] = useState(spanValueRate);
   // eslint-disable-next-line
   const [name, setName] = useState(spanValueName);
+  const [isLoading, setIsLoading] = useState(false)
 
   const [getBetValu, setgetBetValu] = useState(spanValueRate);
   const handleClick = (event) => {
@@ -39,6 +40,7 @@ function Placebet({
   }, []);
 
   const handleSubmit = () => {
+    setIsLoading(true)
     GameAPI.PLACE_BET({
       userIp: userIP,
       isFancy: isFancy,
@@ -65,6 +67,7 @@ function Placebet({
       },
     })
       .then((res) => {
+        setIsLoading(false)
         data({
           status: true,
           message: res.data.message,
@@ -86,7 +89,11 @@ function Placebet({
 
   return (
     <>
-      <div id="__BVID__287___BV_modal_body_">
+    {
+      isLoading && <p className="place-lodder">
+      <i className="fa fa-spinner fa-spin"></i>
+    </p>}
+        <div id="__BVID__287___BV_modal_body_">
         <div className={`place-bet pt-2 pb-2`}>
           <div className={`container-fluid container-fluid-5`}>
             <div className="row row5">
@@ -154,18 +161,18 @@ function Placebet({
                       ).map((profit) => {
                         return (
                           profit.sid === selectionId &&
-                          (profit?.value || 0) +
+                          ((profit?.value || 0) +
                             ((colorName === "back" ? 1 : -1) * odds * updated) /
-                              100
+                              100).toFixed(2)
                         );
                       })
                     : profits?.Odds[marketId]?.map((profit) => {
                         return (
                           profit.sid === selectionId &&
-                          (profit?.value || 0) +
+                          ((profit?.value || 0) +
                             (colorName === "back" ? 1 : -1) *
                               (odds - 1) *
-                              updated
+                              updated).toFixed(2)
                         );
                       })}
                 </span>
@@ -230,13 +237,13 @@ function Placebet({
                             : "text-success"
                         }`}>
                         {profit.sid == selectionId
-                          ? (profit?.value || 0) +
+                          ? ((profit?.value || 0) +
                               ((colorName === "back" ? 1 : -1) *
                                 odds *
                                 updated) /
-                                100 || 0
-                          : (profit?.value || 0) +
-                            (colorName === "back" ? -1 : 1) * updated}
+                                100).toFixed(2)
+                          : ((profit?.value || 0) +
+                            (colorName === "back" ? -1 : 1) * updated).toFixed(2)}
                       </div>
                     </div>
                   ))
@@ -295,6 +302,7 @@ function Placebet({
           </div>
         </div>
       </div>
+      
     </>
   );
 }

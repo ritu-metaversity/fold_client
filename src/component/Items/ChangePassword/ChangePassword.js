@@ -95,7 +95,6 @@ function ChangePassword() {
   };
   return (
     <div>
-      <NavBar />
       {ShowError === true ? (
         <AlertBtn
           color={color}

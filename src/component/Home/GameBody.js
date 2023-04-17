@@ -12,9 +12,7 @@ function GameBody() {
 
   return (
     <div>
-      <NavBar/>
       <div className="wrapper">
-        <Mobilenav/>
         <TopNav />
         <Item />
       </div>
