@@ -35,8 +35,8 @@ interface RegisterPayload {
 interface CurrentBetsPayload {
   sportType: number;
   betType: number;
-  noOfRecords: number;
-  index: number;
+  noOfRecords?: number;
+  index?: number;
 }
 export interface AccountStatementPayload {
   index: number;

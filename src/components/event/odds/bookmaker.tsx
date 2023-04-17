@@ -167,7 +167,13 @@ const Bookmaker = ({
         container
         color="black"
         item
-        className={suspended ? "suspended" : ""}
+        className={
+          "suspended" === values.gstatus?.toLowerCase()
+            ? "suspended"
+            : "ball running" === values.gstatus?.toLowerCase()
+            ? "ball-running suspended"
+            : ""
+        }
         xs={12}
         lg={5.4}
         maxWidth={{ lg: 356, xl: 700 }}
