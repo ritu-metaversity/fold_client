@@ -13,12 +13,12 @@ import { columns } from "./columns";
 import AccountTable from "./customAccountTable";
 import Filter from "./Filter";
 import { AccountContainer } from "./styledComponents";
+import moment from "moment";
 
 export function subtractMonths(numOfMonths: number, date = new Date()) {
   date.setMonth(date.getMonth() - numOfMonths);
   return date;
 }
-
 
 export function subtractWeeks(numOfWeek: number, date = new Date()) {
   date.setDate(date.getDate() - numOfWeek * 7);
@@ -43,8 +43,8 @@ const Account = () => {
     noOfRecords: 25,
     totalPages: 1,
     index: 0,
-    fromDate: subtractMonths(1).toISOString().split("T")[0],
-    toDate: new Date().toISOString().split("T")[0],
+    fromDate: moment(subtractWeeks(2)).format("YYYY-MM-DD"),
+    toDate: moment().format("YYYY-MM-DD"),
   });
 
   const getStatement = async () => {

@@ -14,7 +14,8 @@ import { styled } from "@mui/material";
 
 import React, { FC, useState } from "react";
 import { colorHex } from "../../utils/constants";
-import { AccountStatementFilter, subtractWeeks } from ".";
+import { AccountStatementFilter, subtractMonths, subtractWeeks } from ".";
+import moment from "moment";
 
 const LabelText = styled(Typography)(({ theme }) => ({
   color: "text.secondary",
@@ -30,12 +31,12 @@ interface Props {
 }
 const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
   const [toDate, setToDate] = useState(new Date(Date.now()));
-  const [fromDate, setFromDate] = useState(subtractWeeks(1));
+  const [fromDate, setFromDate] = useState(subtractWeeks(2));
   const handleSubmit = () => {
     setSearchFilters({
       ...searchFilters,
-      toDate: toDate.toISOString().split("T")[0],
-      fromDate: fromDate.toISOString().split("T")[0],
+      toDate: moment(toDate).format("YYYY-MM-DD"),
+      fromDate: moment(fromDate).format("YYYY-MM-DD"),
     });
   };
   return (
@@ -84,7 +85,7 @@ const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
           <LabelText>From</LabelText>
           <CustomizedDatePicker
             value={fromDate}
-            minDate={new Date(Date.now() - 5184000000)}
+            minDate={subtractMonths(2)}
             maxDate={new Date()}
             onChange={setFromDate}
           />
@@ -92,7 +93,7 @@ const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
         <Grid item xs={6} pr={{ lg: 2 }} lg={1.5} textAlign="left">
           <LabelText>To</LabelText>
           <CustomizedDatePicker
-            minDate={new Date(Date.now() - 5184000000)}
+            minDate={subtractMonths(2)}
             value={toDate}
             maxDate={new Date()}
             onChange={setToDate}

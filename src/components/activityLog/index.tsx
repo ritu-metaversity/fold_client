@@ -32,8 +32,8 @@ const Activity = () => {
   const [searchFilters, setSearchFilters] = useState<searchFilters>({
     type: "login",
     pageSize: 25,
-    toDate: moment().format("DD-MM-YYYY"),
-    fromDate: moment().subtract(1, "week").format("DD-MM-YYYY"),
+    toDate: moment().format("YYYY-MM-DD"),
+    fromDate: moment().subtract(2, "week").format("YYYY-MM-DD"),
   });
   const [rows, setRows] = useState<any[]>([]);
   const [originalRows, setOriginalRows] = useState<any[]>([]);
@@ -79,6 +79,9 @@ const Activity = () => {
             })
           );
           setPage(1);
+        } else {
+          setOriginalRows([]);
+          setRows([]);
         }
       } else if (searchFilters.type === "password") {
         const { response } = await utilServices.passwordHistory(searchFilters);

@@ -16,7 +16,7 @@ import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { colorHex } from "../../utils/constants";
 import { CustomizedDatePicker } from "../accountSummary/CustomizedDatePicker";
 import { searchFilters } from ".";
-import { subtractWeeks } from "../accountSummary";
+import { subtractMonths, subtractWeeks } from "../accountSummary";
 import moment from "moment";
 
 export const LabelText = styled(Typography)(({ theme }) => ({
@@ -34,15 +34,15 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
   const [toDate, setToDate] = useState(new Date());
   const [type, setType] = useState("login");
   const [pageSize, setPageSize] = useState<number>(25);
-  const [fromDate, setFromDate] = useState(subtractWeeks(1));
+  const [fromDate, setFromDate] = useState(subtractWeeks(2));
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchFilters({
       ...searchFilters,
       type,
-      toDate: moment(toDate).format("DD-MM-YYYY"),
-      fromDate: moment(fromDate).format("DD-MM-YYYY"),
+      toDate: moment(toDate).format("YYYY-MM-DD"),
+      fromDate: moment(fromDate).format("YYYY-MM-DD"),
     });
   };
   const handlePageSizeChange = (e: SelectChangeEvent<number>) => {
@@ -95,7 +95,7 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
           <Grid item xs={6} lg={1.5} textAlign="left" pr={1}>
             <LabelText>From</LabelText>
             <CustomizedDatePicker
-              minDate={new Date(Date.now() - 5184000000)}
+              minDate={subtractMonths(2)}
               maxDate={new Date()}
               value={fromDate}
               onChange={setFromDate}
@@ -104,7 +104,7 @@ const Filter = ({ searchFilters, setSearchFilters }: Props) => {
           <Grid item xs={6} pr={{ lg: 2 }} lg={1.5} textAlign="left">
             <LabelText>To</LabelText>
             <CustomizedDatePicker
-              minDate={new Date(Date.now() - 5184000000)}
+              minDate={subtractMonths(2)}
               maxDate={new Date()}
               value={toDate}
               onChange={setToDate}
