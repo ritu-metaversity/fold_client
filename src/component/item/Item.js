@@ -47,6 +47,7 @@ function Item({ gameIdForItemPage, spName }) {
           setGameName(res.data.data);
           setIsLoading(false);
         });
+        setIsLoading(true)
   }, []);
 
 

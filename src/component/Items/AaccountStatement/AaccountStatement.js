@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import NavBar from "../../navBar/NavBar";
 import "./AaccountStatement.css";
 import dayjs from "dayjs";
 import { DatePicker } from "antd";
@@ -31,6 +30,8 @@ function AaccountStatement() {
   const [ErrorMsg, setErrorMsg] = useState("");
   const [Error, setError] = useState(false);
   const [ColorName, setColorName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [Active, setActive] = useState(1)
   
 
   const StartDateValue = (date, dateString) => {
@@ -60,7 +61,8 @@ function AaccountStatement() {
       toDate: time,
       type: 1,
     }).then((res) => {
-      // console.log(res)
+      // console.log(res);
+      setIsLoading(false)
       setPageLength(res.totalPages);
       setDataList(res.dataList);
       setDataListLength(res.dataList.length);
@@ -102,6 +104,7 @@ function AaccountStatement() {
       toDate: endDate,
       type: type,
     }).then((res) => {
+      setIsLoading(false);
       setPageLength(res.totalPages);
       setDataList(res.dataList);
       setDataListLength(res.dataList.length);
@@ -122,6 +125,7 @@ function AaccountStatement() {
 
   const handlePagenation = (val) => {
     setPagination(val);
+    setActive(val)
   };
 
   const decrement = () => {
@@ -132,10 +136,8 @@ function AaccountStatement() {
 
   const increment = () => {
     if(pageLength !== 1){
-
       setPagination(pageLength + 1);
     }
-    // console.log(pageLength+1)
   };
   const decrementByFirst = ()=>{
     setPageLength(1)
@@ -331,7 +333,15 @@ function AaccountStatement() {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="cpoint">
+                    {
+                      isLoading?(<tr className="lodding">
+                        <td colSpan="6">
+                        <i className="fa fa-spinner fa-spin"></i>
+                        </td>
+                      
+                    </tr>):(
+                      <>
+                      <tbody className="cpoint">
                       {dataList?.length > 0 &&
                         dataList.map((item) => {
                           return (
@@ -403,12 +413,16 @@ function AaccountStatement() {
                         </td>
                       </tr>
                     </tbody>
+                    </>
+                      )
+                    }
                   </table>
                 </div>
               </div>
             </div>
+
             {
-              pageLength === 0?"":( <div className="row row5 mt-2  ">
+              pageLength === 0 || isLoading ?"":( <div className="row row5 mt-2 ">
               <div className="col-12">
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">
@@ -429,8 +443,8 @@ function AaccountStatement() {
                             key={item + id}
                             className="page-item act"
                             onClick={() => handlePagenation(id)}>
-                            <button className="page-link act">
-                              <span aria-hidden="true" className="num">
+                            <button className={`page-link ${Active === id ? "act":""} `}>
+                              <span aria-hidden="true" className={Active === id? "num":""}>
                                 {item === "" ? 1 : item +1}
                               </span>
                             </button>

@@ -15,6 +15,10 @@
 }
 .sports .nav-tabs .nav-link.active {
     background-color: #0088cc !important;
+    
+}
+.toggleBtn{
+    width: 100%;
 }
 .expLeft{
     margin-left: -2px;
@@ -26,4 +30,14 @@
 }
 .custom-control-input, .custom-control-label{
     cursor: pointer;
+}
+.main-exp-containor {
+    overflow: unset !important;
+}
+.exp-data{
+
+}
+
+.game-nav-bar::-webkit-scrollbar{
+    display: none;
 }

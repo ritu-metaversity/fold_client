@@ -5,7 +5,7 @@ import NavBar from "../../navBar/NavBar";
 import "../AaccountStatement/AaccountStatement.css";
 
 function UnSetteledBet() {
-  const [recordValue, setRecordValue] = useState(5);
+  const [recordValue, setRecordValue] = useState(100);
   const [DataList, setDataList] = useState("");
   const [ListLength, setListLength] = useState("");
   const [pageLength, setPageLength] = useState(0);
@@ -18,30 +18,33 @@ function UnSetteledBet() {
 
   useEffect(() => {
     UserAPI.Unsetteled_bet({
-      noOfRecords: 100,
-      index: 0,
-      sportType: 1,
-      betType: 1,
-    }).then((res) => {
-      // setPageLength(res.data.totalPages);
-      setCurrentPage(res.data.currentPage);
-      setDataList(res.data.dataList);
-    });
-    // eslint-disable-next-line
-  }, []);
-
-  const submit = () => {
-    UserAPI.Unsetteled_bet({
       noOfRecords: parseInt(recordValue),
       index: 0,
       sportType: 1,
       betType: parseInt(betValue),
     }).then((res) => {
       setPageLength(res.data.totalPages);
+      setCurrentPage(res.data.currentPage);
       setListLength(res.data.dataList.length);
       setDataList(res.data.dataList);
     });
-  };
+    // eslint-disable-next-line
+  }, [betValue, betValue]);
+
+  // const submit = () => {
+  //   UserAPI.Unsetteled_bet({
+  //     noOfRecords: parseInt(recordValue),
+  //     index: 0,
+  //     sportType: 1,
+  //     betType: parseInt(betValue),
+  //   }).then((res) => {
+  //     setPageLength(res.data.totalPages);
+  //     setListLength(res.data.dataList.length);
+  //     setDataList(res.data.dataList);
+  //   });
+  // };
+
+  
 
   const result = [];
   for (var i = 1; i < pageLength; i++) {
@@ -135,9 +138,7 @@ function UnSetteledBet() {
             </div>
             <div className={`${deleteVal === "2" ? "d-none" : ""}`}>
               <div
-                className={`row row5 mt-2  ${
-                  ListLength === 0 ? "dis-none" : ""
-                }`}>
+                className={`row row5 mt-2`}>
                 <div className="col-6">
                   <div
                     className="form-group mb-0"
@@ -207,7 +208,9 @@ function UnSetteledBet() {
                     </div>
                   </div>
                 </div>
-                <div className="col-6">
+                <div className={`col-6 ${
+                  ListLength === 0 ? "dis-none" : ""
+                }`}>
                   <div
                     id="account-statement_length"
                     className="dataTables_length"
@@ -237,7 +240,7 @@ function UnSetteledBet() {
                   </div>
                 </div>
               </div>
-              <div className="row row5 mt-2 ">
+              {/* <div className="row row5 mt-2 ">
                 <div className="col-12">
                   <button
                     className="btn btn-primary btn-block btn-sm"
@@ -245,7 +248,7 @@ function UnSetteledBet() {
                     Submit
                   </button>
                 </div>
-              </div>
+              </div> */}
               <div className="row row5 mt-2 ">
                 <div className="row row5 mt-2">
                   <div className="col-12">
@@ -396,7 +399,7 @@ function UnSetteledBet() {
                             role="row"
                             className={`b-table-empty-row  
                           ${ListLength === 0 ? "" : "dis-none"}`}>
-                            <td colSpan="6" role="cell">
+                            <td colSpan="8" role="cell">
                               <div role="alert" aria-live="polite">
                                 <div className="text-center my-2">
                                   There are no records to show

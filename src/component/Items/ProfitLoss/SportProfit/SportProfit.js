@@ -24,6 +24,7 @@ function SportProfit() {
   // const [SportDataLength, setSportDataLength] = useState();
   const [DataList, setDataList] = useState();
   const [DataVal, setDataVal] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
 
   const StartDateValue = (date, dateString) => {
@@ -70,6 +71,7 @@ function SportProfit() {
       noOfRecords:100,
       totalPages:1,
     }).then((res) => {
+      setIsLoading(false);
       setDataVal(res.data)
       setPLValue(res.data.market);
       console.log(res?.data);
@@ -102,6 +104,7 @@ function SportProfit() {
       userId: "",
       totalPages: 2
     }).then((res) => {
+      setIsLoading(false)
       setDataVal(res.data)
       setPLValue(res.data.market);
       setDataList(res.data.market.length);
@@ -264,6 +267,13 @@ function SportProfit() {
                         </th>
                       </tr>
                     </thead>
+                    {
+                      isLoading? (<tr className="lodding">
+                      <td colSpan="3">
+                      <i className="fa fa-spinner fa-spin"></i>
+                      </td>
+                    
+                  </tr>):(<>
                     <tbody className={`${DataList === 0|| DataVal === null  ?"dis-none":""}`}>
                       {PLValue?.length &&
                         PLValue.map((res) => {
@@ -299,6 +309,9 @@ function SportProfit() {
                       </td>
                     </tr>
                   </tbody>
+                  </>)
+                    }
+                   
                   </table>
                 </div>
               </div>
