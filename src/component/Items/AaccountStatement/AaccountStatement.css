@@ -569,9 +569,9 @@ container .table tr th {
 .cpoint{
     cursor: pointer;
 }
-.card-body.statement.container-fluid.container-fluid-5 {
+/* .card-body.statement.container-fluid.container-fluid-5 {
     height: calc(100vh - 200px);
-}
+} */
 tr.lodding {
     text-align: center;
     background: #ddd;
@@ -588,9 +588,9 @@ tr.lodding {
 }
 
 
-.card-body.container-fluid.container-fluid-5.button-value {
+/* .card-body.container-fluid.container-fluid-5.button-value {
     height: calc(100vh - 148px);
-}
+} */
 .optionValue{
     border: 1px solid #ddd;
     font-size: 14px;
