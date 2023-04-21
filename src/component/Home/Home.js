@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import Item from "../item/Item";
-import Mobilenav from "../navBar/MobileNav/Mobilenav";
-// import NavBar from "../navBar/NavBar";
 import TopNav from "../navBar/TopNav";
-import NavBar from "../navBar/NavBar";
 
 function Home(props) {
 

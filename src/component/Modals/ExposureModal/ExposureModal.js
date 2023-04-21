@@ -5,12 +5,12 @@ function ExposureModal() {
   return (
     <>
       <div style={{display: "block"}}>
-        <div class="modal-dialog modal-lg">
+        <div className="modal-dialog modal-lg">
           <div>
             <div id="myMarketModal___BV_modal_body_">
-              <table class="table table-hover">
+              <table className="table table-hover">
                 <thead>
-                  <tr class="theme1font">
+                  <tr className="theme1font">
                     <th>Event Type</th>
                     <th>Event Name</th>
                     <th>Match Name</th>
@@ -19,7 +19,7 @@ function ExposureModal() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td colspan="4" class="text-center no-real">
+                    <td colspan="4" className="text-center no-real">
                       No real-time records found
                     </td>
                   </tr>

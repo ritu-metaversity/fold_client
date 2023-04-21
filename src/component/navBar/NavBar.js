@@ -143,7 +143,7 @@ const NavBar = () => {
                   <Link
                     to="/home"
                     className="router-link-exact-active router-link-active">
-                    <i class="fa fa-home mr-1"></i>
+                    <i className="fa fa-home mr-1"></i>
                     <img
                       src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
                       alt="Exchange"
@@ -179,7 +179,7 @@ const NavBar = () => {
                       <Modal.Header closeButton closeVariant="white">
                         <Modal.Title>Exposure</Modal.Title>
                       </Modal.Header>
-                      <Modal.Body>
+                      <Modal.Body className="account-popup">
                       <ExposureModal/>
                       </Modal.Body>
                     </Modal>

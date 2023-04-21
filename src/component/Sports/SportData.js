@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import NavBar from "../navBar/NavBar";
 import TopNav from "../navBar/TopNav";
-import Mobilenav from "../navBar/MobileNav/Mobilenav";
 import Sport from "./Sport";
 
 const SportData = (props) => {

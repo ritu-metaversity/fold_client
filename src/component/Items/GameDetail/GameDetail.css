@@ -837,11 +837,14 @@ p.no-found {
     margin: 0px !important;
 }
 
-.main-containor{
+/* .main-containor{
     height: calc(100vh - 80px);
     overflow: scroll;
-}
+} */
 .place-value{
     width: 100%;
     overflow: hidden;
+}
+.odbtn{
+    width: 100% !important;
 }

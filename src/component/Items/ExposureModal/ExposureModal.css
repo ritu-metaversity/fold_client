@@ -35,9 +35,29 @@
     overflow: unset !important;
 }
 .exp-data{
-
+    margin-left: -21px;
 }
 
 .game-nav-bar::-webkit-scrollbar{
+    display: none;
+}
+div#match_unmatched_deleted {
+    margin-left: -9px;
+    display: flex;
+    justify-content: space-between;
+}
+.expRedioBtn{
+    margin-left: -28px;
+}   
+.betColor{
+    color: green !important;
+}
+.expMaindiv {
+    margin-left: -8px;
+    margin-right: -4px;
+    border-top: 1px solid #ddddddb8;
+    padding-top: 8px;
+}
+.table-responsive.unsetTable.expMaindiv::-webkit-scrollbar {
     display: none;
 }

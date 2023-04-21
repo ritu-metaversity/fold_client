@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../apis/gameAPI";
-import Mobilenav from "../../navBar/MobileNav/Mobilenav";
-import NavBar from "../../navBar/NavBar";
 import "./Slot.css";
 import { useNavigate } from "react-router-dom";
 
