@@ -20,7 +20,6 @@ function ProfitLoss() {
     
   ];
   const onChange = (key) => {
-    console.log(key);
   };
   return (
     <>

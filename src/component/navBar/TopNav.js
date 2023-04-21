@@ -45,7 +45,7 @@ function TopNav({gameId}) {
                         <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png" alt="" />
                       }
                     </div>
-                    <div>{res.sportName}</div>
+                    <div className="sport_name">{res.sportName}</div>
                   </a>
                 </li>
               );

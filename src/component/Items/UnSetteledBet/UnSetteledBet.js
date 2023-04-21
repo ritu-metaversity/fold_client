@@ -1,7 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { UserAPI } from "../../../apis/UserAPI";
-import NavBar from "../../navBar/NavBar";
 import "../AaccountStatement/AaccountStatement.css";
 
 function UnSetteledBet() {

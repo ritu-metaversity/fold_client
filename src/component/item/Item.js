@@ -7,7 +7,6 @@ import axios from "axios";
 function Item({ gameIdForItemPage, spName }) {
   const [gameName, setGameName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [matchListLength, setMatchListLength] = useState("");
 
 
 
@@ -28,13 +27,11 @@ function Item({ gameIdForItemPage, spName }) {
   //       )
   //       .then((res) => {
   //         setIsLoading(false);
-  //         console.log(res.data,"dfskdjfjsdhfkjshdfkjsd")
   //         setGameName(res.data.data);
   //       });
   //   }
   //   // eslint-disable-next-line
   // }, [gameIdForItemPage]);
-
 
   useEffect(() => {
       const token = localStorage.getItem("token");
@@ -47,7 +44,7 @@ function Item({ gameIdForItemPage, spName }) {
           setGameName(res.data.data);
           setIsLoading(false);
         });
-        setIsLoading(true)
+        // setIsLoading(true)
   }, []);
 
 

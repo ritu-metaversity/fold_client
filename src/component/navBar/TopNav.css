@@ -94,7 +94,7 @@
 }
 
 .sports .nav-tabs li img {
-    height: 20px;
+    height: 18px;
     margin-bottom: 5px;
 }
 
@@ -119,3 +119,7 @@
     position: sticky;
     top: 150px;
 } */
+
+.sport_name{
+    font-size: 12px;
+}

@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import moment from "moment";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 // import { AuthorAPI } from "../../apis/AuthorAPI";
 
@@ -11,8 +11,6 @@ function Sport({ gameIdForItemPage }) {
   if (gameIdForItemPage === "" || gameIdForItemPage === undefined) {
     gameIdForItemPage = 4;
   }
-
-  console.log(gameIdForItemPage, "asdfdsefgretyhrtuty45")
 
   
   useEffect(() => {
@@ -26,12 +24,12 @@ function Sport({ gameIdForItemPage }) {
         )
         .then((res) => {
           setIsLoading(false);
-          console.log(res.data,"dfskdjfjsdhfkjshdfkjsd")
           setGameName(res.data.data);
         });
     }
     // eslint-disable-next-line
   }, [gameIdForItemPage]);
+
 
   return (
     <div>

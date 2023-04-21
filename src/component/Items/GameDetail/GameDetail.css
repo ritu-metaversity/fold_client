@@ -660,7 +660,7 @@ p.team-name.col-6.text-right {
     font-family: Arial, Verdana, Helvetica, sans-serif;
 }
 
-.ballrunning:after {
+.fancy-market .ballrunning:after {
     width: 100%;
     content: "BALL RUNNING";
     font-size: 16px;
@@ -668,13 +668,16 @@ p.team-name.col-6.text-right {
     font-family: Arial, Verdana, Helvetica, sans-serif;
 }
 
-.ballrunning:after {
+.fancy-market .ballrunning:after {
     width: 203% !important;
     content: "BALL RUNNING";
     font-size: 16px;
     color: #ff3c3c;
     font-family: "Roboto Condensed", sans-serif;
 }
+
+
+
 
 
 .fancy-market .suspended:after {
@@ -835,6 +838,10 @@ p.no-found {
 }
 
 .main-containor{
-    height: calc(100vh - 150px);
+    height: calc(100vh - 80px);
     overflow: scroll;
+}
+.place-value{
+    width: 100%;
+    overflow: hidden;
 }

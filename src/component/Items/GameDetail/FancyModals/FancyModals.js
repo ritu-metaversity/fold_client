@@ -14,7 +14,6 @@ const FancyModals = ({ matchId, FancyID }) => {
     });
   }, []);
 
-  console.log(FancyData?.length, "bjjknjjk")
 
   return (
 

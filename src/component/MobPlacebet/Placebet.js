@@ -32,7 +32,6 @@ function Placebet({
     setUpdated(event.target.value);
   };
 
-  // console.log(typeof updated)
 
   // useEffect(() => {
   //   axios.get("https://geolocation-db.com/json/").then((res) => {
@@ -40,7 +39,6 @@ function Placebet({
   //   });
   // }, []);
 
-  // console.log(userIP, "userIPuserIP")
 
   const handleSubmit = () => {
     setIsLoading(true)

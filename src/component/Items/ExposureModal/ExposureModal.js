@@ -17,7 +17,6 @@ const ExposureModal = () => {
     const [isLoading, setIsLoading] = useState(true)
 
 
-    // console.log(setActive  , "sportId")
     const sporttype = (val)=>{
         setSpType(val);
 

@@ -68,7 +68,6 @@ const Withdraw = () => {
         accountNumber: accountNumber,
       }).then((res) => {
         UserAPI.Withdraw_Request().then((res) => {
-          console.log(res)
           setWithdrawReq(res.data);
           setDataLength(res.data.length);
       

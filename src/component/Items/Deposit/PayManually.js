@@ -32,14 +32,10 @@ const PayManually = (props) => {
 
   const handleStaticAmountInput =(e)=>{
 let Inputvalue = e.target.value
-// console.log(typeof parseInt(Inputvalue))
 
 setBitValue( parseInt(Inputvalue));
 
-// console.log(Bitvalue, )
-
   }
-console.log(typeof Bitvalue)
   useEffect(() => {
     UserAPI.Get_Payment_Detail_By_Id().then((res) => {
       setPayMethods(res.data.paymentMethods);
@@ -59,7 +55,6 @@ console.log(typeof Bitvalue)
     data.append("image", files || "");
     UserAPI.Self_Deposit_App({ data }).then((res) => {
       props.UpdateDetails(true);
-      console.log(res.status)
       if(res.status === true){
         setBitValue(0);
         setFiles(null);
@@ -75,7 +70,6 @@ console.log(typeof Bitvalue)
     setShowModals(true);
   };
 
-  console.log(Bitvalue, "adfsdafgsgdshdh")
 
   return (
     <div>

@@ -9,7 +9,6 @@ function RightHeader() {
 
     const sendData = (id) => {
         setGame(id)
-        console.log(id)
     }
     return (
         <div>

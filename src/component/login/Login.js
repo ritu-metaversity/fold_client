@@ -120,7 +120,6 @@ function Login() {
                   onClick={handleLogin}>
                   Login
                   
-                  
                   {
                     isLoading ?<i className="ml-2 fa fa-spinner fa-spin"></i> :<i className="ml-2 fa fa-sign-in"></i>
                   }

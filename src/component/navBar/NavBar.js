@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
 import { AuthorAPI } from "../../apis/AuthorAPI";
@@ -16,7 +16,7 @@ const NavBar = () => {
   const [status, setStatus] = useState(false);
   const [error, setError] = useState(false);
   const [Exp, setExp] = useState("");
-  const [show, setShow] = useState("top");
+  // const [show, setShow] = useState("top");
   // const [lastScrollY, setLastScrollY] = useState(0);
 
   const [showExpModals, setShowExpModals] = useState(false);
@@ -50,7 +50,7 @@ const NavBar = () => {
       setStatus(res.data.selfAllowed);
     });
 
-    if (token !== null) {
+    if (token !== null || localStorage.getItem("Password-type" !== "old")) {
       UserAPI.User_Balance()
         .then((res) => {
           setUserbalance(res.data.balance);
@@ -61,24 +61,19 @@ const NavBar = () => {
         });
     }
 
-    // eslint-disable-next-line
-  }, []);
 
-  const nav = useNavigate();
-
-  const handleSignOut = () => {
-    AuthorAPI.LOGOUT().then((res) => {
-      console.log(res);
-    });
-  };
-
-  // console.log(userbalance);
-
-  useEffect(() => {
     UserAPI.User_Message().then((res) => {
       setUserMessage(res);
     });
+
+    // eslint-disable-next-line
   }, []);
+
+
+  const handleSignOut = () => {
+    AuthorAPI.LOGOUT().then((res) => {
+    });
+  };
 
   const [balanceShow, setBalanceShow] = useState(true);
   const [expShow, setExpShowShow] = useState(true);
@@ -107,7 +102,7 @@ const NavBar = () => {
     e.preventDefault();
   };
 
-  const location = useLocation();
+  // const location = useLocation();
 
   // useEffect(()=>{
   //   window.scrollTo(0,0);
@@ -117,7 +112,6 @@ const NavBar = () => {
 
   // const controlNavbar =()=>{
     
-  //   // console.log(window.scrollY);
   //   if(window.scrollY > 111){
   //     if(window.scrollY>lastScrollY) {
   //       setShow("showNav")
