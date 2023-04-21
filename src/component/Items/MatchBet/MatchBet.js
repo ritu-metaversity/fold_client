@@ -13,7 +13,6 @@ function MatchBet(props) {
     GameAPI.Match_Bet_List({
       matchId: id,
     }).then((Item) => {
-      console.log(Item?.data)
       if (Item?.data) {
         setMatchBet(Item);
         const bets = Item?.data;

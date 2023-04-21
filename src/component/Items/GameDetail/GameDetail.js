@@ -6,13 +6,13 @@ import moment from "moment";
 import AlertBtn from "../../Alert/AlertBtn";
 import Accordion from "react-bootstrap/Accordion";
 import { socket } from "./socket";
-// import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 import FancyModals from "./FancyModals/FancyModals";
 import { createProfits } from "./eventUtil";
 import { useNavigate } from "react-router-dom";
 import { UserAPI } from "../../../apis/UserAPI";
 import { GameAPI } from "../../../apis/gameAPI";
 import axios from "axios";
+import Item from "antd/es/list/Item";
 
 function GameDetail({ getStackValue, SportId, TvHideShow }) {
   var curr = new Date();
@@ -64,7 +64,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
 
   useEffect(() => {
     const time = setInterval(() => {
-      if (token !== null) {
+      if (token !== null || localStorage.getItem("Password-type" !== "old")) {
         UserAPI.User_Balance()
           .then((res) => {
             setUserbalance(res?.data?.balance);
@@ -665,7 +665,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                           <Modal.Title>Placebet</Modal.Title>
                         </Modal.Header>
                         <Modal.Body
-                          className={cName === "back" ? "back" : "lay"}>
+                          className={`place-value ${cName === "back" ? "back" : "lay"}`}>
                           <Placebet
                             profits={profits}
                             StackVal={StackVal}
@@ -718,17 +718,15 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                       <div className="table-body">
                         {fancyOdds?.Bookmaker?.length &&
                           fancyOdds?.Bookmaker?.map((bookmaker, id) => {
+                            console.log(bookmaker.gstatus);
                             return (
                               <>
                                 <div
                                   key={bookmaker + id}
                                   data-title={bookmaker?.gstatus}
                                   className={`table-row ${
-                                    bookmaker?.gstatus === "SUSPENDED"
-                                      ? "suspended"
-                                      : bookmaker?.gstatus === "BALL RUNNING"
-                                      ? "ballrunning"
-                                      : ""
+                                    bookmaker?.gstatus==="SUSPENDED"?"suspended":bookmaker?.gstatus === "BALL RUNNING"?"ballrunning":""
+
                                   } ${bookmaker?.t === "TOSS" ? "d-none" : ""}`}>
                                   <div className="float-left country-name box-4">
                                     <span className="team-name">
@@ -889,7 +887,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                               onClick={() => handleGameName(item, id)}>
                               {/* eslint-disable-next-line */}
                               <p data-toggle="tab" className="nav-link">
-                                {item}
+                                {item==="Fancy2"?"Fancy":item==="Fancy3"?"Fancy2":item}
                               </p>
                             </li>
                           );

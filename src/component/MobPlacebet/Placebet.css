@@ -60,13 +60,13 @@ button.stakeactionminus.btn {
 .text-success {
     color: #169733 !important;
 }
-.modal-header {
+.modal-header { 
     background: #0088cc;
     color: #fff;
 }
 p.place-lodder {
-    height: 313px;
-    width: 515px;
+    height: 100%;
+    width: 100%;
     display: block;
     position: absolute;
     background: #0000006b;
@@ -78,4 +78,24 @@ p.place-lodder i {
     margin-inline: 43%;
     margin-top: 26%;
     color: #fff;
+}
+@media screen and (max-width: 375px) {
+    p.place-lodder i {
+        margin-inline: 48%;
+        margin-top: 40%;
+    }
+}
+
+@media screen and (min-width: 376px) and (max-width: 450px) {
+    p.place-lodder i {
+        margin-inline: 47%;
+        margin-top: 35%;
+    }
+}
+
+@media screen and (min-width: 451px) and (max-width: 30000px) {
+    p.place-lodder i {
+        margin-inline: 48%;
+        margin-top: 28%;
+    }
 }

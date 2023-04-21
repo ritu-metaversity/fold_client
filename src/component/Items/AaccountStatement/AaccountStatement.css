@@ -581,3 +581,17 @@ tr.lodding {
     background: #ddd;
     font-size: 22px;
 }
+.stack-change{
+    z-index: 9;
+}
+@media screen and (max-width: 425px) {
+    .stack-change i{
+        margin-top: 65% !important;
+    }
+    
+}
+
+
+.card-body.container-fluid.container-fluid-5.button-value {
+    height: calc(100vh - 148px);
+}

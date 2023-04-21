@@ -1,7 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { UserAPI } from "../../../apis/UserAPI";
-import NavBar from "../../navBar/NavBar";
 import "./Deposit.css";
 import PayManually from "./PayManually";
 import Modal from "react-bootstrap/Modal";

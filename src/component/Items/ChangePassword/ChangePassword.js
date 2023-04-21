@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import NavBar from "../../navBar/NavBar";
 import "../AaccountStatement/AaccountStatement.css";
 import AlertBtn from "../../Alert/AlertBtn";
 import { AuthorAPI } from "../../../apis/AuthorAPI";
@@ -18,9 +17,6 @@ function ChangePassword() {
 
 
   const nav = useNavigate();
-
-  console.log(newPasswords, "comn");
-  console.log(conformPassword, "comn");
 
   const handleClick = () => {
     if (currPassword === "") {
@@ -60,8 +56,8 @@ function ChangePassword() {
               }
             })
             .catch((err) => {
-              console.log(err);
             });
+            
         } else {
           AuthorAPI.Change_Passwords({
             currentPassword: currPassword,
@@ -69,11 +65,6 @@ function ChangePassword() {
           }).then((res) => {
             localStorage.clear();
 
-            // AuthorAPI.LOGOUT().then((res)=>{
-            //   console.log(res);
-            // }).catch((error)=>{
-            //   console.log(error)
-            // })
 
             if(res.status===true) {
               setShowError(true);

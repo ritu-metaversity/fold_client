@@ -74,7 +74,6 @@ function SportProfit() {
       setIsLoading(false);
       setDataVal(res.data)
       setPLValue(res.data.market);
-      console.log(res?.data);
     
     });
   }, [SportId]);

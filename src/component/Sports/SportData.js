@@ -8,7 +8,6 @@ const SportData = (props) => {
   const [gameIdForItemPage, setGameIdForItemPage] = useState("");
 
   const gameId = (id) => {
-    // console.log(id, "SportData")
     setGameIdForItemPage(id);
     props.idddd(id);
   };

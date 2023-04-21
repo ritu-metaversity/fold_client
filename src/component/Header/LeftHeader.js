@@ -29,12 +29,11 @@ function LeftHeader(props) {
 //       .then((res) => {
 //         var matchData = res.data.data;
 //         matchData.map((e)=>{
-//           console.log(e.sportId);
-//           console.log(e.sportName);
+//          
 //           localStorage.setItem("sportId", e. );
 //           localStorage.setItem("sportName", e.sportName);
 //         })
-//         // console.log(matchData);
+
 //       }); // eslint-disable-next-line
 //   }, []);
   

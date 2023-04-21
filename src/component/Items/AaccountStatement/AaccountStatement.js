@@ -51,7 +51,6 @@ function AaccountStatement() {
 
 
 
-  // console.log(MarketId);
 
   useEffect(() => {
     UserAPI.Account_Statement({
@@ -61,7 +60,6 @@ function AaccountStatement() {
       toDate: time,
       type: 1,
     }).then((res) => {
-      // console.log(res);
       setIsLoading(false)
       setPageLength(res.totalPages);
       setDataList(res.dataList);
@@ -109,14 +107,12 @@ function AaccountStatement() {
       setDataList(res.dataList);
       setDataListLength(res.dataList.length);
     }).catch((error)=>{
-      // console.log(error.response.data.message);
       setError(true)
       setErrorMsg(error.response.data.message);
       setColorName("danger")
     });
   }
   };
-  // console.log(pageLength);
 
   const result = [];
   for (var i = 0; i < pageLength; i++) {
@@ -167,8 +163,6 @@ function AaccountStatement() {
   const popupClose = (vl) => {
     setError(vl);
   };
-
-  // console.log(pageLength);
 
   return (
     <div>

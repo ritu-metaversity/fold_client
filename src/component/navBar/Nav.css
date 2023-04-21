@@ -130,6 +130,53 @@ p {
 .suspended {
     position: relative;
 }
+.ballrunning {
+    position: relative;
+}
+
+.ballrunning:after {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: var(--white-color);
+    text-transform: uppercase;
+    font-family: "Font Awesome 5 Free";
+    content: "\f023";
+    font-weight: 900;
+    font-size: 18px;
+    top: 0;
+}
+.sports-wrapper .main-market .ballrunning:after {
+    width: 60%;
+    content: "BALL RUNNING";
+    font-size: 16px;
+    color: #ff0000;
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+}
+
+
+.bookmaker-market .ballrunning:after {
+    width: 60%;
+    content: "BALL RUNNING";
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 16px;
+    color: #ff3c3c;
+}
+
+.bookmaker-market .col-4 .ballrunning:after {
+    width: 72%;
+    content: "BALL RUNNING";
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 16px;
+    color: #ff3c3c;
+}
+
+
 
 .suspended:after {
     position: absolute;
@@ -151,7 +198,7 @@ p {
 
 .sports-wrapper .main-market .suspended:after {
     width: 60%;
-    content: attr(data-title);
+    content: "SUSPENDED";
     font-size: 16px;
     color: #ff0000;
     font-family: Arial, Verdana, Helvetica, sans-serif;
@@ -159,7 +206,7 @@ p {
 
 .bookmaker-market .suspended:after {
     width: 60%;
-    content: attr(data-title);
+    content: "SUSPENDED";
     font-family: "Roboto Condensed", sans-serif;
     font-size: 16px;
     color: #ff3c3c;
@@ -167,7 +214,7 @@ p {
 
 .bookmaker-market .col-4 .suspended:after {
     width: 72%;
-    content: attr(data-title);
+    content: "SUSPENDED";
     font-family: "Roboto Condensed", sans-serif;
     font-size: 16px;
     color: #ff3c3c;
@@ -175,7 +222,7 @@ p {
 
 .fancy-market .suspended:after {
     width: 72%;
-    content: attr(data-title);
+    content: "SUSPENDED";
     font-family: "Roboto Condensed", sans-serif;
     font-size: 16px;
     color: #ff3c3c;
@@ -1465,11 +1512,6 @@ a {
 display: none;
 }
 
-/* .show{ 
-    width: 40%;
-    right: 0;
-    height: auto;
-} */
 .list{
 width: 100px;
 height: 340px;
@@ -1478,10 +1520,7 @@ background-color: #007bff;
 
 }
 
-/* .showNav {
-    position: fixed;
-    width: 100%;
-} */
+
 
 .game-listing-container {
     height: calc(100vh - 200px);

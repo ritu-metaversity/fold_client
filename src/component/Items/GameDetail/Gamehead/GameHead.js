@@ -12,15 +12,12 @@ function GameHead({ SportId, matchLength }) {
   const handleClick = (val) => {
     setActiveNavBar(val);
   };
-  // console.log(matchLength)
 
   const handleTvHideShow = () => {
     if (TvHideShow === false) {
       setTvHideShow(true);
-      console.log("true");
     } else {
       setTvHideShow(false);
-      console.log("false");
     }
   };
 

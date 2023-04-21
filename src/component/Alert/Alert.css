@@ -1,7 +1,6 @@
 .alert-messege {
-    position: absolute;
+    position: fixed;
     top: 7px;
-    /* height: 120px; */
     width: 100%;
     z-index: 999;
 }
