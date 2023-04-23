@@ -383,6 +383,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     setStatus(vl?.status);
     setMessege(vl?.message);
   };
+  
   const popupClose = (vl) => {
     setErrorMsg(vl);
   };

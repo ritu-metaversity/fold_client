@@ -16,6 +16,7 @@ const Withdraw = () => {
   const [dataLength, setDataLength] = useState();
   const [errorAlert, setErrorAlert] = useState(false);
   const [message, setMessage] = useState({})
+  const [colorName, setColorName] = useState()
 
   const validateForm =()=>{
     let error = {};
@@ -24,31 +25,38 @@ const Withdraw = () => {
 
     if(amount === ""){
       setErrorAlert(true)
+      setColorName("danger")
       error= "The Amount field is required"
     }
     
     if(bankName === ""){
       setErrorAlert(true)
+      setColorName("danger")
       error = "The Bank Name field is required"
     }else if(!letters.test(bankName)){
       setErrorAlert(true)
+      setColorName("danger")
       error = "Invaild Bank Name"
     }
 
     if(ifsc ===""){
       setErrorAlert(true)
+      setColorName("danger")
       error = 'The IFSC field is required'
     }
 
     if(accountHolderName === ""){
       setErrorAlert(true)
+      setColorName("danger")
       error = "The Account Name field is required"
     }else if(!letters.test(accountHolderName)){
       setErrorAlert(true)
+      setColorName("danger")
       error = "Invaild Name"
     }
     if(accountNumber === ""){
       setErrorAlert(true)
+      setColorName("danger")
       error = "The Account Number field is required"
     }
 
@@ -71,6 +79,9 @@ const Withdraw = () => {
           setDataLength(res.data.length);
       
         });
+        setMessage(res.message)
+        setErrorAlert(true)
+        setColorName("success")
         if(res.status === true){
           setAmount("");
           setBankName("");
@@ -97,7 +108,7 @@ const Withdraw = () => {
   }
   return (
     <>
-      {errorAlert ? <AlertBtn color="danger"  popupClose={popupClose}  val={message}/> : ""}
+      {errorAlert ? <AlertBtn color={colorName}  popupClose={popupClose}  val={message}/> : ""}
       <>
       <div className="card-header wit"><h4 className="mb-0">Withdraw</h4></div>
       

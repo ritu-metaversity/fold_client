@@ -34,7 +34,7 @@ function BetHistory() {
     <div>
       <div className="report-container wrapper">
         <div className="card">
-          <div className="card-header">
+          <div className="card-header" style={{marginLeft:"-8px"}}>
             <h4 className="mb-0">Bet History</h4>
           </div>
           <div className="card-body container-fluid container-fluid-5">

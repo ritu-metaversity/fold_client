@@ -6,6 +6,7 @@ import { UserAPI } from "../../../apis/UserAPI";
 import "./PayManually.css";
 import { Input } from "antd";
 import Modal from "react-bootstrap/Modal";
+import AlertBtn from "../../Alert/AlertBtn";
 
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
@@ -15,6 +16,12 @@ const PayManually = (props) => {
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);
   const [active, setActive] = useState(0);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [color, setColor] = useState();
+  const [messege, setMessege] = useState();
+  const [alertBtnshow, setAlertBtnshow] = useState(false);
+
+
 
   const [files, setFiles] = useState(null);
 
@@ -55,12 +62,19 @@ setBitValue( parseInt(Inputvalue));
     data.append("image", files || "");
     UserAPI.Self_Deposit_App({ data }).then((res) => {
       props.UpdateDetails(true);
+      setMessege(res.message);
+      setColor("success");
+      setAlertBtnshow(true)
       if(res.status === true){
         setBitValue(0);
         setFiles(null);
         setPaymentMode("UPI");
         setActive(0)
       }
+    }).catch((error)=>{
+      setMessege(error.respose.data.message);
+      setColor("danger");
+      setAlertBtnshow(true)
     });
   };
 
@@ -70,9 +84,16 @@ setBitValue( parseInt(Inputvalue));
     setShowModals(true);
   };
 
+  const popupClose = (vl) => {
+    setErrorMsg(vl);
+  };
+
 
   return (
     <div>
+      {alertBtnshow?
+         <AlertBtn color={color} val={messege} popupClose={popupClose} />:""
+      }
       <p className="enter-amount">Enter Amount</p>
       <div className="row row5 main-pricecontainor">
         <div className="text-lef col-6 colval price-input">

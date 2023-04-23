@@ -40,6 +40,7 @@ function App() {
   useEffect(() => {
     const time = setInterval(() => {
       if (localStorage.getItem("token") !== null) {
+        if(localStorage.getItem("Password-type") !== "old"){
         AuthorAPI.VALIDATE_JWT()
           .then()
           .catch((error) => {
@@ -48,6 +49,7 @@ function App() {
               nav("/login");
             }
           });
+        }
       }
     }, 1000);
 

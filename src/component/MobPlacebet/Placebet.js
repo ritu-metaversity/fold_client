@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import "./Placebet.css";
 import { GameAPI } from "../../apis/gameAPI";
-import axios from "axios";
 
 function Placebet({
   spanValueRate,
@@ -39,6 +38,7 @@ function Placebet({
   //   });
   // }, []);
 
+  // console.log(userIP, "userIPuserIP")
 
   const handleSubmit = () => {
     setIsLoading(true)

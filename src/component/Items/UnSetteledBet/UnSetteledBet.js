@@ -79,8 +79,6 @@ function UnSetteledBet() {
     }
   }, [pagination]);
 
-  // console.log(pageLength, "dsfsdgsdfg")
-
   return (
     <div>
       <div className="report-container wrapper">
@@ -90,7 +88,7 @@ function UnSetteledBet() {
           </div>
           <div className="card-body container-fluid container-fluid-5 unsetteledbet">
             <div className="row row5 ">
-              <div className="col-6 text-center">
+              <div className="col-6">
                 <div
                   id="match_unmatched_delete"
                   role="radiogroup"
@@ -140,8 +138,7 @@ function UnSetteledBet() {
                     <div className="row row5 mt-2">
                       <div className="col-12">
                         <div
-                          className="form-group mb-0"
-                          style={{ marginLeft: "20px", marginTop: "12px" }}>
+                          className="form-group mb-0 backLay">
                           <div
                             id="match_unmatched_delete"
                             role="radiogroup"
