@@ -20,6 +20,7 @@ const Deposit = () => {
   useEffect(() => {
     UserAPI.Deposit_Request().then((res) => {
       setPaymentListDetails(res);
+      
     });
   }, []);
 

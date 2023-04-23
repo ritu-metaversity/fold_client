@@ -3,7 +3,7 @@ import { AuthorAPI } from "../../apis/AuthorAPI";
 import RegisterModals from "./RegisterModals";
 import Modal from "react-bootstrap/Modal";
 import AlertBtn from "../Alert/AlertBtn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [password, setPassword] = useState();
@@ -49,6 +49,7 @@ const Register = () => {
     return Object.keys(error).length === 0;
   }
 
+  const nav = useNavigate()
 
   const handleLogin = () => {
     if(validateForm()) {
@@ -59,9 +60,9 @@ const Register = () => {
         mobile: mobileNumber,
       })
         .then((res) => {
-          setUserId(res.username);
-          setUserPassword(res.password);
-          setShowModals(true);
+          localStorage.setItem("UserName", res.username);
+          localStorage.setItem("UserPassword", res.password)
+          nav('/');
         })
         .catch((error) => {
           setStatusCode(error.response.status);
@@ -71,9 +72,6 @@ const Register = () => {
     }
   };
 
-  // setTimeout(() => {
-  //   setTimeOut(1);
-  // }, 15000);
 
   const popupClose=(vl)=>{
     setStatusVal(vl)
@@ -176,26 +174,6 @@ const Register = () => {
               </Link>
             </div>
           </form>
-          {StatusCode === 400 ? (
-            ""
-          ) : (
-            <Modal
-              show={showModals}
-              className={``}
-              onHide={handleCloseModal}
-              style={{
-                marginTop: "12px",
-                marginInline: "2%",
-                width: "95%",
-              }}>
-              <Modal.Header closeButton closeVariant="white">
-                <Modal.Title>Register</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <RegisterModals userId={userId} password={userPassword} />
-              </Modal.Body>
-            </Modal>
-          )}
         </div>
       </div>
     </>

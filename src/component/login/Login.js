@@ -4,6 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import AlertBtn from "../Alert/AlertBtn";
 import { AuthorAPI } from "../../apis/AuthorAPI";
 import { api } from "../../apis/configs/axiosConfigs";
+import { UserAPI } from "../../apis/UserAPI";
+import Modal from "react-bootstrap/Modal";
+import RegisterModals from "../Register/RegisterModals";
+
 
 function Login() {
   const nav = useNavigate();
@@ -12,6 +16,9 @@ function Login() {
   const [StatusVal, setStatusVal] = useState(true);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [statusbtn , setStatusBtn] =useState(false)
+  const [showModals, setShowModals] = useState(false);
+
 
   const handleLogin = () => {
     // history.push('/home')
@@ -31,6 +38,8 @@ function Login() {
       }).then((res) => {
         const token = res.token;
         setIsLoading(false)
+        localStorage.removeItem('UserName');
+        localStorage.removeItem('UserPassword');
         axios.defaults.headers.common["Authorization"] = token;
         localStorage.setItem("token", token);
         api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -56,11 +65,24 @@ function Login() {
     if (localStorage.getItem("token") !== null) {
       nav("/home");
     }
+    UserAPI.Self_By_App_Url().then((res) => {
+      setStatusBtn(res.data.selfAllowed);
+    });
   }, []);
 
   const popupClose = (vl) => {
     setStatusVal(vl);
   };
+
+  const handleCloseModal = () => setShowModals(false);
+
+  useEffect(()=>{
+    if(localStorage.getItem("UserName") !== null){
+      setShowModals(true);
+    }
+  }, [])
+
+ 
 
   return (
     <>
@@ -129,7 +151,7 @@ function Login() {
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
                 <Link
                   type="submit"
-                  className="btn btn-primary btn-block"
+                  className={`btn btn-primary btn-block ${statusbtn?"":"d-none"}`}
                   to="/Register">
                   Register
                   <i className="ml-2 fa fa-sign-in"></i>
@@ -153,6 +175,23 @@ function Login() {
           </div>
         </div>
       </div>
+
+      <Modal
+              show={showModals}
+              className={``}
+              onHide={handleCloseModal}
+              style={{
+                marginTop: "12px",
+                marginInline: "2%",
+                width: "95%",
+              }}>
+              <Modal.Header closeButton closeVariant="white">
+                <Modal.Title>Register</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <RegisterModals/>
+              </Modal.Body>
+            </Modal>
     </>
   );
 }

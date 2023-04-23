@@ -569,9 +569,9 @@ container .table tr th {
 .cpoint{
     cursor: pointer;
 }
-.card-body.statement.container-fluid.container-fluid-5 {
+/* .card-body.statement.container-fluid.container-fluid-5 {
     height: calc(100vh - 200px);
-}
+} */
 tr.lodding {
     text-align: center;
     background: #ddd;
@@ -588,9 +588,9 @@ tr.lodding {
 }
 
 
-.card-body.container-fluid.container-fluid-5.button-value {
+/* .card-body.container-fluid.container-fluid-5.button-value {
     height: calc(100vh - 148px);
-}
+} */
 .optionValue{
     border: 1px solid #ddd;
     font-size: 14px;
@@ -637,4 +637,39 @@ div#match_unmatched {
 }
 .rediobtn {
     margin-left: 7px;
+}
+.backLay{
+    margin-left: 20px;
+    margin-top: 12px; 
+}
+
+@media screen and (min-width: 800px)  and (max-width: 3000px){
+    button.btn.btn-primary.btn-block.btn-sm {
+        font-size: 14px;
+        padding: 4px;
+        width: 100%;
+        margin-right: 2px;
+        border-radius: unset;
+    }    
+    select.custom-select {
+        margin-left: -1px;
+    }
+    .custom-select {
+        width: 100%;
+        margin-inline: 7px;
+    }
+    .row.row5.mt-2.match_unmatched {
+        margin-bottom: 11px;
+    }
+    .backLay{
+        margin-left: unset;
+        margin-right: 4px;
+    }
+}
+
+.card-header {
+    background: #2c3d50;
+    color: #fff;
+    border-radius: unset !important;
+    padding: 6px 17px;
 }

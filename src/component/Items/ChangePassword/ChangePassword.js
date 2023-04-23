@@ -31,13 +31,12 @@ function ChangePassword() {
       setShowError(true);
       setColor("danger");
       setMessege("New Password and Password Confirmation should be same");
-    } else {
-      setShowError(false);
-    }
+    } 
+    
 
     if (conformPassword !== "" && newPasswords !== "") {
-      if (newPasswords === conformPassword) {
-        if (passType === "old") {
+      // if (newPasswords === conformPassword) {
+        if (localStorage.getItem("Password-type") === "old") {
           AuthorAPI.FIRST_LOGIN({
             currentPassword: currPassword,
             newPassword: newPasswords,
@@ -47,25 +46,23 @@ function ChangePassword() {
             oldPassword: currPassword,
           })
             .then((res) => {
-              setColor("success");
-              setMessege("Password Updated");
-              setShowError(true);
+              // console.log(res.message)
+              localStorage.clear();
               if(res.status === true){
-                AuthorAPI.LOGOUT()
-                nav('/login');
-              }
+              setShowError(true);
+              setColor("success");
+              setMessege(res.message);
+              nav('/');
+            }
             })
-            .catch((err) => {
-            });
             
         } else {
+          if(newPasswords === conformPassword){
           AuthorAPI.Change_Passwords({
             currentPassword: currPassword,
             newPassword: newPasswords,
           }).then((res) => {
             localStorage.clear();
-
-
             if(res.status===true) {
               setShowError(true);
               setColor("success");
@@ -73,9 +70,11 @@ function ChangePassword() {
               AuthorAPI.LOGOUT();
               nav('/login');
             }
+
           });
         }
-      }
+        }
+      // }
     }
 
    

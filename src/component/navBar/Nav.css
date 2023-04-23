@@ -776,9 +776,9 @@ p {
 
 /*Main CSS*/
 
-.main {
+/* .main {
     min-height: calc(100vh - 159px);
-}
+} */
 
 .header {
     background-color: #0088cc;
@@ -1522,10 +1522,10 @@ background-color: #007bff;
 
 
 
-.game-listing-container {
+/* .game-listing-container {
     height: calc(100vh - 200px);
     overflow: scroll;
-}
+} */
 
 @media screen and (max-width: 400px){
     span.betInfo {

@@ -1,7 +1,10 @@
 import React from "react";
 import './RegisterModals.css'
 
-const RegisterModals = (props) => {
+const RegisterModals = () => {
+
+  const pass = localStorage.getItem("UserPassword")
+  const userName = localStorage.getItem("UserName")
     
   return (
     <>
@@ -10,11 +13,11 @@ const RegisterModals = (props) => {
           <div className="row row5">
             <div className="user-id user">
                 <p>User Name:</p>
-                <p>{props.userId}</p>
+                <p>{userName}</p>
             </div>
             <div className="user-id">
                 <p>Password:</p>
-                <p>{props.password}</p>
+                <p>{pass}</p>
             </div>
           </div>
         </div>
