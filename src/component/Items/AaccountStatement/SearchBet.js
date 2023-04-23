@@ -23,9 +23,9 @@ const SearchBet = (props) => {
     <div>
       <div id="__BVID__287___BV_modal_body_">
         <div>
-          <div className={`place-bet pt-2 pb-2`}>
+          <div className="place-bet pt-2 pb-2">
             <div className={`container-fluid container-fluid-5`}>
-              <div className="row row5">
+              <div className="">
                 <div className="col-12 remark-name">{props.remark}</div>
 
                 <div className="row row5 mt-2" style={{ marginInline: "-7px" }}>
@@ -34,10 +34,10 @@ const SearchBet = (props) => {
                       className="form-group mb-0"
                       style={{ marginTop: "12px" }}>
                       <div
-                        id="match_unmatched_delete"
+                        id="match_unmatched"
                         role="radiogroup"
                         tabIndex="-1">
-                        <div className="custom-control custom-control-inline custom-radio p-l">
+                        <div className="custom-control custom-control-inline custom-radio rediobtn1 p-l">
                           <input
                             id="all"
                             type="radio"
@@ -54,7 +54,7 @@ const SearchBet = (props) => {
                             <span>All</span>
                           </label>
                         </div>
-                        <div className="custom-control custom-control-inline custom-radio p-l ">
+                        <div className="custom-control custom-control-inline custom-radio rediobtn p-l ">
                           <input
                             id="Back"
                             type="radio"
@@ -70,7 +70,7 @@ const SearchBet = (props) => {
                             <span>Back</span>
                           </label>
                         </div>
-                        <div className="custom-control custom-control-inline custom-radio p-l">
+                        <div className="custom-control custom-control-inline custom-radio rediobtn p-l">
                           <input
                             id="Lay"
                             type="radio"

@@ -12,6 +12,7 @@ function ChangeBtnValue() {
   const [updateStack, setUpdateStack] = useState({});
   // eslint-disable-next-line
   const [timeOut, setTimeOut] = useState(null);
+  const [Message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingonChange, setIsLoadingonChange] = useState(false)
 
@@ -30,8 +31,15 @@ function ChangeBtnValue() {
       if (res.status === true) {
         setIsLoadingonChange(false);
         setMessageShow(true);
+        setMessage("Successfully updated!");
         setColor("success");
       }
+    }).catch((err)=>{
+      setIsLoadingonChange(false);
+      setMessageShow(true);
+      setColor("danger");
+      setMessage(err.response.data.message)
+
     });
   };
   const handleInput = (e) => {
@@ -62,7 +70,7 @@ function ChangeBtnValue() {
               <AlertBtn
                 color={color}
                 popupClose={popupClose}
-                val="Successfully updated!"
+                val={Message}
                 style={{ width: "50px" }}
               />
             ) : (

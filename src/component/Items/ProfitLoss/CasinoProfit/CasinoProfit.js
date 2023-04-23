@@ -7,6 +7,7 @@ import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import { UserAPI } from "../../../../apis/UserAPI";
 import { GameAPI } from "../../../../apis/gameAPI";
+import AlertBtn from "../../../Alert/AlertBtn";
 
 const dateFormat = "YYYY-MM-DD";
 function CasinoProfit() {
@@ -26,6 +27,9 @@ function CasinoProfit() {
   const [CasinoDataList, setCasinoDataList] = useState();
   const [CDataList, setCDataList] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [ErrorMsg, setErrorMsg] = useState("");
+  const [Error, setError] = useState(false);
+  const [ColorName, setColorName] = useState("");
 
 
   const StartDateValue = (date, dateString) => {
@@ -90,6 +94,14 @@ function CasinoProfit() {
       setShow(true);
     }
 
+    if(startDate === "" || endDate === ""){
+      setError(true)
+      setErrorMsg("Date is Required");
+      setColorName("danger");
+
+    }
+
+    if(startDate !== "" && endDate !== ""){
     UserAPI.Profit_Loss({
       noOfRecords: IndexValue,
       index:0,
@@ -104,10 +116,17 @@ function CasinoProfit() {
       setPLValue(res.data.market);
       setCasinoDataList(res.data.length);
     });
+  }
+  };
+  const popupClose = (vl) => {
+    setError(vl);
   };
 
   return (
     <div>
+      {
+        Error ? <AlertBtn color={ColorName} val={ErrorMsg} popupClose={popupClose}/> :""
+      }
       <div className="report-container Mobile-view-topNav">
         <div className="card">
           <div className="card-body container-fluid container-fluid-5">
@@ -195,32 +214,33 @@ function CasinoProfit() {
               </div>
             </div>
             <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>
-              <div className="col-6">
-                <div
+              <div className="">
+              <div
                   id="account-statement_length"
-                  className={`dataTables_length ${CDataList === null?"dis-none":""}`}>
-                  <label style={{ fontSize: "14px" }}>
-                    Show
-                    <select
-                      name="account-statement_length"
-                      aria-controls="account-statement"
-                      className="form-control form-control-sm theme1font"
-                      style={{ fontSize: "14px" }}
-                      onChange={getIndexValues}>
-                      <option value="5">5</option>
-                      <option value="10">10</option>
-                      <option value="15">15</option>
-                      <option value="20">20</option>
-                      <option value="25">25</option>
-                      <option value="30">30</option>
-                      <option value="35">35</option>
-                      <option value="40">40</option>
-                      <option value="45">45</option>
-                      <option value="50">50</option>
-                      <option value="100">100</option>
-                    </select>
-                    entries
-                  </label>
+                  className="dataTables_length cpoint d-flex align-items-center">
+                  <label style={{ fontSize: "14px" }} className="showEntries">Show</label>
+                  <select 
+                    name="account-statement_length"
+                    aria-controls="account-statement"
+                    className="form-control form-control-sm theme1font optionValue"
+                    style={{ fontSize: "14px" }}
+                    onChange={getIndexValues}>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="100" selected>
+                      100
+                    </option>
+                  </select>
+                  <i className="fa fa-angle-down arrowBtn"></i>
+                  <label className="entries">entries</label>
                 </div>
               </div>
             </div>
@@ -266,7 +286,7 @@ function CasinoProfit() {
                       </td>
                     
                   </tr>):(<>
-                    <tbody className={`${CasinoDataList===0?"dis-none":""}`}>
+                    <tbody className={`${CasinoDataList===0 || CDataList === null?"dis-none":""}`}>
                       {PLValue?.length &&
                         PLValue.map((res) => {
                           return (

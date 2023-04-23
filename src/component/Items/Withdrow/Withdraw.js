@@ -2,7 +2,6 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { UserAPI } from "../../../apis/UserAPI";
 import AlertBtn from "../../Alert/AlertBtn";
-import NavBar from "../../navBar/NavBar";
 import "./Withdraw.css";
 
 const Withdraw = () => {

@@ -1,7 +1,6 @@
 import {React, useState} from 'react'
 import Footer from '../footer/Footer'
 import Item from '../item/Item'
-// import NavBar from '../navBar/NavBar'
 import SideBar from '../sidebar/SideBar'
 // import axios from 'axios'
 
@@ -48,8 +47,8 @@ function LeftHeader(props) {
                             <SideBar />
                         </div>
                         <div className="col-md-10 featured-box">
-                            <ul role="tablist" id="home-events" class="nav nav-tabs">
-                                <li class="nav-item"><a href="/" data-toggle="tab" class="nav-link active">{game}</a></li>
+                            <ul role="tablist" id="home-events" className="nav nav-tabs">
+                                <li className="nav-item"><a href="/" data-toggle="tab" className="nav-link active">{game}</a></li>
                             </ul>
                             <Item />
                         </div>

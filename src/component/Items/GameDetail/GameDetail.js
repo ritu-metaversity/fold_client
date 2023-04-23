@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { UserAPI } from "../../../apis/UserAPI";
 import { GameAPI } from "../../../apis/gameAPI";
 import axios from "axios";
-import Item from "antd/es/list/Item";
 
 function GameDetail({ getStackValue, SportId, TvHideShow }) {
   var curr = new Date();
@@ -454,7 +453,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                             `}>
                             {item?.Name}
                             <p className="float-right mb-0">
-                              <i class="fa fa-info-circle"></i>
+                              <i className="fa fa-info-circle"></i>
                             </p>
                           </div>
                           <div
@@ -563,10 +562,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                      ? "blink"
                                                      : ""
                                                  }`}>
-                                                <button>
-                                                  <span
-                                                    className="odd d-block"
-                                                    onClick={() =>
+                                                <button className="odbtn" onClick={() =>
                                                       handleSpanValueBack(
                                                         e?.price,
                                                         event?.name,
@@ -579,6 +575,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                         false
                                                       )
                                                     }>
+                                                  <span
+                                                    className="odd d-block"
+                                                    >
                                                     {e?.price}
                                                   </span>{" "}
                                                   <span className="d-block">
@@ -612,10 +611,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                     ? "blink"
                                                     : ""
                                                 } `}>
-                                                <button>
-                                                  <span
-                                                    className="odd d-block"
-                                                    onClick={() =>
+                                                <button className="odbtn" onClick={() =>
                                                       handleSpanValueLay(
                                                         e?.price,
                                                         event?.name,
@@ -628,6 +624,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                         false
                                                       )
                                                     }>
+                                                  <span
+                                                    className="odd d-block"
+                                                    >
                                                     {e?.price}
                                                   </span>
                                                   <span className="d-block">
@@ -697,7 +696,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                     <div className="market-title mt-1">
                       Bookmaker
                       <p className="float-right mb-0">
-                        <i class="fa fa-info-circle"></i>
+                        <i className="fa fa-info-circle"></i>
                       </p>
                     </div>
                     <div className="bookmaker-market">
@@ -718,7 +717,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                       <div className="table-body">
                         {fancyOdds?.Bookmaker?.length &&
                           fancyOdds?.Bookmaker?.map((bookmaker, id) => {
-                            console.log(bookmaker.gstatus);
                             return (
                               <>
                                 <div
@@ -776,10 +774,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                         ? "blink"
                                         : ""
                                     }`}>
-                                    <button>
-                                      <span
-                                        className="odd d-block"
-                                        onClick={() =>
+                                    <button className="odbtn" onClick={() =>
                                           handleSpanValueBack(
                                             bookmaker?.b1,
                                             bookmaker?.nation,
@@ -793,6 +788,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                             bookmaker?.t
                                           )
                                         }>
+                                      <span
+                                        className="odd d-block"
+                                        >
                                         {bookmaker?.b1}
                                       </span>
                                       <span className="d-block">
@@ -811,10 +809,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                         ? "blink"
                                         : ""
                                     }`}>
-                                    <button>
-                                      <span
-                                        className="odd d-block"
-                                        onClick={() =>
+                                    <button className="odbtn" onClick={() =>
                                           handleSpanValueLay(
                                             bookmaker?.l1,
                                             bookmaker?.nation,
@@ -828,6 +823,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                             bookmaker?.t
                                           )
                                         }>
+                                      <span
+                                        className="odd d-block"
+                                        >
                                         {bookmaker?.l1}
                                       </span>{" "}
                                       <span className="d-block">
@@ -931,7 +929,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                 <div className="market-title float-left country-name box-4">
                                   <span>Session Market</span>
                                   <p className="float-right mb-0">
-                                    <i class="fa fa-info-circle"></i>
+                                    <i className="fa fa-info-circle"></i>
                                   </p>
                                 </div>
                                 <div className="box-1 float-left lay text-center">
@@ -1037,7 +1035,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                         <div
                                           className="box-1 lay float-left text-center"
                                           onClick={(e) => handleShow(e)}>
-                                          <button
+                                          <button className="odbtn"
                                             onClick={() =>
                                               handleSpanValueLay(
                                                 item?.l1,
@@ -1070,7 +1068,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                               : ""
                                           }`}
                                           onClick={(e) => handleShow(e)}>
-                                          <button
+                                          <button className="odbtn"
                                             onClick={() =>
                                               handleSpanValueBack(
                                                 item?.b1,

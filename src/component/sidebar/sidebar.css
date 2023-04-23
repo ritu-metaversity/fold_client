@@ -21,7 +21,7 @@
 
 .sidebar {
     padding: 0 !important;
-    min-height: calc(100vh - 159px);
+    /* min-height: calc(100vh - 159px); */
     max-width: 15% !important;
     background-color: var(--grey-bg);
     color: var(--site-color);

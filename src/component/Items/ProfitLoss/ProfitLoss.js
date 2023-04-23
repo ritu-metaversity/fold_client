@@ -1,6 +1,5 @@
 import { Tabs } from "antd";
 import SportProfit from "./SportProfit/SportProfit";
-import NavBar from "../../navBar/NavBar";
 import CasinoProfit from "./CasinoProfit/CasinoProfit";
 
 

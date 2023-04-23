@@ -1,6 +1,5 @@
 import React from "react";
 import Mobilenav from "../../navBar/MobileNav/Mobilenav";
-import NavBar from "../../navBar/NavBar";
 import "./Casino.css";
 
 const Casino = () => {

@@ -3,7 +3,6 @@ import "../../../navBar/TopNav.css";
 import MatchBet from "../../MatchBet/MatchBet";
 import GameDetail from "../GameDetail";
 import "./GameHead.css";
-import NavBar from "../../../navBar/NavBar";
 
 function GameHead({ SportId, matchLength }) {
   const [ActiveNavbar, setActiveNavBar] = useState(1);

@@ -1,7 +1,6 @@
 import { React, useState } from 'react'
 import Footer from '../footer/Footer'
 import Item from '../item/Item'
-// import NavBar from '../navBar/NavBar'
 import SideBar from '../sidebar/SideBar'
 
 function RightHeader() {
@@ -21,7 +20,7 @@ function RightHeader() {
                         <div className="col-md-10 featured-box">
                             <div>
         
-                                <div class="game-heading"><span class="card-header-title">
+                                <div className="game-heading"><span className="card-header-title">
                                     {game}
                                 </span>
                                 </div>
