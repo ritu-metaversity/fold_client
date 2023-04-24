@@ -30,6 +30,9 @@ import Sport from "./component/Sports/Sport";
 import SportData from "./component/Sports/SportData";
 import NavBar from "./component/navBar/NavBar";
 import Mobilenav from "./component/navBar/MobileNav/Mobilenav";
+import Signup1 from "./component/SignUpForm/singup1/Signup1";
+import Signup2 from "./component/SignUpForm/signup2/Signup2";
+import Signup3 from "./component/SignUpForm/signup3/Signup3";
 
 function App() {
   const [SportId, setSportId] = useState("");
@@ -59,6 +62,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
+      localStorage.clear()
       nav("/login");
     }
   }, []);
@@ -73,6 +77,9 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/" element={<Login />} />
+        <Route exact path="/signup2" element={<Signup2/>} />
+        <Route exact path="/signup1" element={<Signup1/>} />
+        <Route exact path="/signup3" element={<Signup3/>} />
         <Route path="" element={<NavBar />}>
           <Route exact path="/deposit" element={<Deposit />} />
           <Route exact path="/withdraw" element={<Withdraw />} />

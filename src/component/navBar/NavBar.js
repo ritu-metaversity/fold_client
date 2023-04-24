@@ -42,10 +42,9 @@ const NavBar = () => {
   
  
 
-  const token = localStorage.getItem("token");
-
+  
   useEffect(() => {
-    
+    const token = localStorage.getItem("token");
     UserAPI.Self_By_App_Url().then((res) => {
       setStatus(res.data.selfAllowed);
     });

@@ -42,9 +42,8 @@ function MatchBet(props) {
           props.setMatchLength(noOfBets);
         }
       });
-      return ()=> clearInterval(time)
     }, 5000)
-    
+    return ()=> clearInterval(time)
   }, [id]);
 
   // const { Item } = useWebSocket(

@@ -1,0 +1,169 @@
+import React, { useState } from "react";
+import "./Signup3.css";
+import * as yup from "yup";
+
+const Signup3 = () => {
+  const [passwordShow, setPasswordShow] = useState(false);
+  const [CpasswordShow, setCPasswordShow] = useState(false);
+  const [input, setInput] = useState({
+    username: "",
+    password: "",
+    confirmpassword: "",
+    mobile: "",
+    sms: "",
+  });
+  const [disabled, setDisabled] = useState(true)
+
+  const handlePasswordShow = () => {
+    if (passwordShow === true) {
+      setPasswordShow(false);
+    } else {
+      setPasswordShow(true);
+    }
+  };
+  const handleConfirmPassword = () => {
+    if (CpasswordShow === true) {
+      setCPasswordShow(false);
+    } else {
+      setCPasswordShow(true);
+    }
+  };
+
+
+
+  const handleInput = (e) => {
+    
+    const input = e.target;
+    const key = input.name;
+    const value = input.value;
+
+    return setInput((oldData) => {
+      return {
+        ...oldData,
+        [key]: value,
+      };
+    });
+  };
+
+  let schema = yup.object().shape({
+    username: yup.string().required("Email is Required").email(),
+    password: yup.string().required("Password is required").min(4).max(10),
+    // confirmpassword:yup.string().oneOf([yup.ref('password')]),
+    // mobile: yup.number().required("Phone number is required").min(3).max(15).matches(/^([0]{1}|\+?[234]{3})([7-9]{1})([0|1]{1})([\d]{1})([\d]{7})$/g,"Invalid phone number"),
+    sms: yup.number().required().integer
+  });
+
+const validation = async()=>{
+    const isValid = await schema.isValid(input);
+
+    console.log(isValid);
+}
+
+
+  return (
+    <>
+      <div className="backgroundImg">
+        <div className="container">
+          <div className="row px-lg-0 px-sm-5">
+            <div className="col-md-12 col-lg-6">
+              <div className="videoholder">{/* <!-- video here --> */}</div>
+            </div>
+            <div className="col-md-12 col-lg-6">
+              <div className="formholder">
+                <h4 className="heading">GET ₹1K RISK FREE PREDICTION</h4>
+
+                <form id="form" className="mainform">
+                  <div className="username">
+                    <input
+                      type="text"
+                      name="username"
+                      autoComplete="off"
+                      placeholder="Username"
+                      id="username"
+                      value={input.username}
+                      onChange={handleInput}
+                      onKeyDown={validation}
+                    />
+                  </div>
+                  <div className="password">
+                    <input
+                      type={passwordShow ? "text" : "password"}
+                      autoComplete="off"
+                      name="password"
+                      id="password"
+                      placeholder="Password"
+                      value={input.password}
+                      onChange={handleInput}
+                      onKeyDown={validation}
+                    />
+                    <p className="eye">
+                      <i
+                        className="fa fa-eye-slash"
+                        onClick={handlePasswordShow}></i>
+                    </p>
+                  </div>
+                  <div className="password">
+                    <input
+                      type={CpasswordShow ? "text" : "password"}
+                      name="confirmpass"
+                      id="confirmpassword"
+                      placeholder="Confirm Password"
+                      value={input.confirmpass}
+                      onChange={handleInput}
+                      onKeyDown={validation}
+                    />
+                    <p className="eye">
+                      <i
+                        className="fa fa-eye-slash"
+                        onClick={handleConfirmPassword}></i>
+                    </p>
+                  </div>
+                  <div className="mobilecode">
+                    <input
+                      type="tel"
+                      autocomplete="off"
+                      name="mobile"
+                      placeholder="Mobile"
+                      id="mobile"
+                      value={input.mobile}
+                      onChange={handleInput}
+                      onKeyDown={validation}
+                    />
+                    <button className="custom-btn btn-7 _btn">
+                      <span>Get Code</span>
+                    </button>
+                  </div>
+                  <div className="verificationcode">
+                    <input
+                      type="number"
+                      name="verificationcode"
+                      placeholder="SMS verification code"
+                      id="verificationcode"
+                      value={input.verificationcode}
+                      onChange={handleInput}
+                      onKeyDown={validation}
+                    />
+                  </div>
+                  <div className="signupbuttonholder">
+                    <button disabled={disabled} className="custom-btn btn-7" id="_signup">
+                      <span>Sign Up</span>
+                    </button>
+                  </div>
+
+                  <div className="alreadyaccount">
+                    Already have an account?
+                    <a className="signin" href="javascript:void(0)">
+                      Sign in
+                    </a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Signup3;

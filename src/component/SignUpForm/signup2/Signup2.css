@@ -1,0 +1,140 @@
+.main-sinnup-2 {
+    width: 450px;
+    height: 500px;
+    background: #05203b;
+    overflow: hidden;
+    /* display: flex; */
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 5px 20px 50px #000;
+    position: absolute;
+    right: 61px;
+    top: 20vh;
+}
+
+.signup-container {
+    height: 100vh;
+    background: url("https://www.indipredict.com/static/DesktopLandscape.97c847c8.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+}
+
+#chk {
+    display: none;
+}
+
+.signup {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.signup label {
+    color: #fff;
+    font-size: 30px;
+    justify-content: center;
+    display: flex;
+    margin: 31px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+
+.loginData label {
+    color: #fff;
+    font-size: 2.3em;
+    justify-content: center;
+    display: flex;
+    margin: 60px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+
+.signup-input {
+    width: 80%;
+    height: 38px;
+    background: #e0dede;
+    justify-content: center;
+    display: flex;
+    margin: 20px auto;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+.signup button {
+    width: 80%;
+    height: 40px;
+    margin: 10px auto;
+    justify-content: center;
+    display: block;
+    color: #fff;
+    background: #573b8a;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: .2s ease-in;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #6d44b8;
+}
+
+.loginData {
+    height: 129px;
+    background: #eee;
+    border-radius: 60% / 48%;
+    transform: translateY(-153px);
+    transition: .8s ease-in-out;
+}
+
+.loginData label {
+    color: #573b8a;
+    transform: scale(.6);
+}
+
+/* #chk:checked ~ .login{
+	transform: translateY(-500px);
+} */
+#chk:checked~.login label {
+    transform: scale(1);
+}
+
+#chk:checked~.signup label {
+    transform: scale(.6);
+}
+
+
+@media screen and (min-width: 300px) and (max-width: 1026px) {
+    .signup-container {
+        height: 100vh;
+        background: url("https://www.indipredict.com/static/MobilePostScreenPortrait.eb7876df.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 0 0;
+    }
+
+    .main-sinnup-2 {
+        width: 98% !important;
+        right: 0;
+        margin-inline: 1%;
+        position: absolute;
+        top: unset;
+        bottom: 13px;
+        height: 450px;
+    }
+    .signup-input {
+        width: 92%;
+        height: 30px;
+    }
+    .signup button {
+        width: 92%;
+    }
+}

@@ -31,15 +31,6 @@ function Placebet({
     setUpdated(event.target.value);
   };
 
-
-  // useEffect(() => {
-  //   axios.get("https://geolocation-db.com/json/").then((res) => {
-  //     setUserIP(res.data.IPv4);
-  //   });
-  // }, []);
-
-  // console.log(userIP, "userIPuserIP")
-
   const handleSubmit = () => {
     setIsLoading(true)
     GameAPI.PLACE_BET({

@@ -16,7 +16,7 @@ import axios from "axios";
 function GameDetail({ getStackValue, SportId, TvHideShow }) {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
-  const pTime = moment(curr).format("YYYY-MM-DD h:mm:ss");
+  const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [showModals, setShowModals] = useState(false);
   const [currentFancy, setCurrentFancy] = useState("Fancy2");
   const [matchodd, setMatchodd] = useState({});
@@ -54,7 +54,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   const [error, setError] = useState(false);
   const [userIP, setUserIP] = useState("");
 
-
   const [profits, setProfits] = useState({
     Odds: {},
     Bookmaker: [],
@@ -63,6 +62,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
 
   useEffect(() => {
     const time = setInterval(() => {
+      const token = localStorage.getItem("token")
       if (token !== null || localStorage.getItem("Password-type" !== "old")) {
         UserAPI.User_Balance()
           .then((res) => {
@@ -171,15 +171,15 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     // eslint-disable-next-line
   }, [id]);
 
-  const nav = useNavigate();
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    if (token === null) {
-      nav("/login");
-    }
-    // eslint-disable-next-line
-  }, [token]);
+  // const nav = useNavigate();
+  
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token === null) {
+  //     nav("/login");
+  //   }
+  //   // eslint-disable-next-line
+  // }, []);
 
   // const { lastMessage: lastOddsPnl } = useWebSocket(
   //   `ws://13.233.248.48:8082/enduserodd/${id}/${token}`,
@@ -197,10 +197,10 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   //     }
   // }, [lastOddsPnl]);
 
-
   useEffect(() => {
-    axios.get("https://geolocation-db.com/json/").then((res) => {
-      setUserIP(res?.data?.IPv4);
+    fetch("https://api.ipify.org?format=json").then(res=>res.json()).then((res) => {
+      // console.log(res.ip, "sdfgdfg")
+      setUserIP(res?.ip);
     });
   }, []);
 
@@ -383,7 +383,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     setStatus(vl?.status);
     setMessege(vl?.message);
   };
-  
+
   const popupClose = (vl) => {
     setErrorMsg(vl);
   };
@@ -538,10 +538,8 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                           </span>
                                         </p>
                                       </div>
-
                                       {availableToBack?.length &&
-                                        availableToBack
-                                          .map((e, id) => {
+                                        availableToBack?.map((e, id) => {
                                             return (
                                               <div
                                                 key={e?.size + e?.price + id}
@@ -556,29 +554,28 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                 } 
                                                  ${
                                                    e?.price !==
-                                                   previousState?.Odds[id1]
-                                                     .runners[index]?.ex
+                                                   previousState?.Odds[id1]?.runners[index]?.ex
                                                      ?.availableToBack[id]
                                                      ?.price
                                                      ? "blink"
                                                      : ""
                                                  }`}>
-                                                <button className="odbtn" onClick={() =>
-                                                      handleSpanValueBack(
-                                                        e?.price,
-                                                        event?.name,
-                                                        "back",
-                                                        mid,
-                                                        item?.marketId,
-                                                        event?.selectionId,
-                                                        item?.Name,
-                                                        pTime,
-                                                        false
-                                                      )
-                                                    }>
-                                                  <span
-                                                    className="odd d-block"
-                                                    >
+                                                <button
+                                                  className="odbtn"
+                                                  onClick={() =>
+                                                    handleSpanValueBack(
+                                                      e?.price,
+                                                      event?.name,
+                                                      "back",
+                                                      mid,
+                                                      item?.marketId,
+                                                      event?.selectionId,
+                                                      item?.Name,
+                                                      pTime,
+                                                      false
+                                                    )
+                                                  }>
+                                                  <span className="odd d-block">
                                                     {e?.price}
                                                   </span>{" "}
                                                   <span className="d-block">
@@ -592,7 +589,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                           })
                                           .reverse()}
                                       {event?.ex?.availableToLay?.length &&
-                                        event?.ex?.availableToLay.map(
+                                        event?.ex?.availableToLay?.map(
                                           (e, id) => {
                                             return (
                                               <div
@@ -606,28 +603,27 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                     : "cPointer"
                                                 } ${
                                                   e?.price !==
-                                                  previousState?.Odds[id1]
-                                                    .runners[index]?.ex
+                                                  previousState?.Odds[id1]?.runners[index]?.ex
                                                     ?.availableToLay[id]?.price
                                                     ? "blink"
                                                     : ""
                                                 } `}>
-                                                <button className="odbtn" onClick={() =>
-                                                      handleSpanValueLay(
-                                                        e?.price,
-                                                        event?.name,
-                                                        "lay",
-                                                        mid,
-                                                        item?.marketId,
-                                                        event?.selectionId,
-                                                        item?.Name,
-                                                        pTime,
-                                                        false
-                                                      )
-                                                    }>
-                                                  <span
-                                                    className="odd d-block"
-                                                    >
+                                                <button
+                                                  className="odbtn"
+                                                  onClick={() =>
+                                                    handleSpanValueLay(
+                                                      e?.price,
+                                                      event?.name,
+                                                      "lay",
+                                                      mid,
+                                                      item?.marketId,
+                                                      event?.selectionId,
+                                                      item?.Name,
+                                                      pTime,
+                                                      false
+                                                    )
+                                                  }>
+                                                  <span className="odd d-block">
                                                     {e?.price}
                                                   </span>
                                                   <span className="d-block">
@@ -665,7 +661,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                           <Modal.Title>Placebet</Modal.Title>
                         </Modal.Header>
                         <Modal.Body
-                          className={`place-value ${cName === "back" ? "back" : "lay"}`}>
+                          className={`place-value ${
+                            cName === "back" ? "back" : "lay"
+                          }`}>
                           <Placebet
                             profits={profits}
                             StackVal={StackVal}
@@ -724,9 +722,14 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                   key={bookmaker + id}
                                   data-title={bookmaker?.gstatus}
                                   className={`table-row ${
-                                    bookmaker?.gstatus==="SUSPENDED"?"suspended":bookmaker?.gstatus === "BALL RUNNING"?"ballrunning":""
-
-                                  } ${bookmaker?.t === "TOSS" ? "d-none" : ""}`}>
+                                    bookmaker?.gstatus === "SUSPENDED"
+                                      ? "suspended"
+                                      : bookmaker?.gstatus === "BALL RUNNING"
+                                      ? "ballrunning"
+                                      : ""
+                                  } ${
+                                    bookmaker?.t === "TOSS" ? "d-none" : ""
+                                  }`}>
                                   <div className="float-left country-name box-4">
                                     <span className="team-name">
                                       <b>{bookmaker?.nation}</b>
@@ -775,23 +778,23 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                         ? "blink"
                                         : ""
                                     }`}>
-                                    <button className="odbtn" onClick={() =>
-                                          handleSpanValueBack(
-                                            bookmaker?.b1,
-                                            bookmaker?.nation,
-                                            "back",
-                                            mid,
-                                            bookmaker?.mid,
-                                            bookmaker?.sid,
-                                            bookmaker?.nation,
-                                            pTime,
-                                            false,
-                                            bookmaker?.t
-                                          )
-                                        }>
-                                      <span
-                                        className="odd d-block"
-                                        >
+                                    <button
+                                      className="odbtn"
+                                      onClick={() =>
+                                        handleSpanValueBack(
+                                          bookmaker?.b1,
+                                          bookmaker?.nation,
+                                          "back",
+                                          mid,
+                                          bookmaker?.mid,
+                                          bookmaker?.sid,
+                                          bookmaker?.nation,
+                                          pTime,
+                                          false,
+                                          bookmaker?.t
+                                        )
+                                      }>
+                                      <span className="odd d-block">
                                         {bookmaker?.b1}
                                       </span>
                                       <span className="d-block">
@@ -810,23 +813,23 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                         ? "blink"
                                         : ""
                                     }`}>
-                                    <button className="odbtn" onClick={() =>
-                                          handleSpanValueLay(
-                                            bookmaker?.l1,
-                                            bookmaker?.nation,
-                                            "lay",
-                                            mid,
-                                            bookmaker?.mid,
-                                            bookmaker?.sid,
-                                            bookmaker?.nation,
-                                            pTime,
-                                            false,
-                                            bookmaker?.t
-                                          )
-                                        }>
-                                      <span
-                                        className="odd d-block"
-                                        >
+                                    <button
+                                      className="odbtn"
+                                      onClick={() =>
+                                        handleSpanValueLay(
+                                          bookmaker?.l1,
+                                          bookmaker?.nation,
+                                          "lay",
+                                          mid,
+                                          bookmaker?.mid,
+                                          bookmaker?.sid,
+                                          bookmaker?.nation,
+                                          pTime,
+                                          false,
+                                          bookmaker?.t
+                                        )
+                                      }>
+                                      <span className="odd d-block">
                                         {bookmaker?.l1}
                                       </span>{" "}
                                       <span className="d-block">
@@ -886,7 +889,11 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                               onClick={() => handleGameName(item, id)}>
                               {/* eslint-disable-next-line */}
                               <p data-toggle="tab" className="nav-link">
-                                {item==="Fancy2"?"Fancy":item==="Fancy3"?"Fancy2":item}
+                                {item === "Fancy2"
+                                  ? "Fancy"
+                                  : item === "Fancy3"
+                                  ? "Fancy2"
+                                  : item}
                               </p>
                             </li>
                           );
@@ -1036,7 +1043,8 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                         <div
                                           className="box-1 lay float-left text-center"
                                           onClick={(e) => handleShow(e)}>
-                                          <button className="odbtn"
+                                          <button
+                                            className="odbtn"
                                             onClick={() =>
                                               handleSpanValueLay(
                                                 item?.l1,
@@ -1069,7 +1077,8 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                               : ""
                                           }`}
                                           onClick={(e) => handleShow(e)}>
-                                          <button className="odbtn"
+                                          <button
+                                            className="odbtn"
                                             onClick={() =>
                                               handleSpanValueBack(
                                                 item?.b1,

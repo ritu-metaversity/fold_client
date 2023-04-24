@@ -9,7 +9,8 @@ function Mobilenav() {
     setActive(val);
   };
 
-  const {pathname} = useLocation()
+  const {pathname} = useLocation();
+
 
   useEffect(()=>{
     if(pathname === '/m/slot'){
@@ -20,6 +21,9 @@ function Mobilenav() {
       setActive(1)
     }else if((pathname ==='/m/Others')){
       setActive(4)
+    }
+    else if((pathname?.slice(0,7) === '/casino')){
+      setActive(3)
     }
 
   },[pathname])

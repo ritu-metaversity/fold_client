@@ -164,7 +164,7 @@ const ExposureModal = () => {
                       aria-colcount="10"
                       className="table b-table table-bordered"
                       id="__BVID__96">
-                      <thead className="">
+                      <thead className="theme1font">
                         <tr role="row" className="">
                           <th
                             role="columnheader"
