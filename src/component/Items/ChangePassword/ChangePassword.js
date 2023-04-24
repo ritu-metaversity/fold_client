@@ -47,12 +47,16 @@ function ChangePassword() {
           })
             .then((res) => {
               // console.log(res.message)
-              localStorage.clear();
               if(res.status === true){
-              setShowError(true);
-              setColor("success");
-              setMessege(res.message);
-              nav('/');
+                setShowError(true);
+                setColor("success");
+                setMessege(res.message);
+                setTimeout(function() {
+                  AuthorAPI.LOGOUT();
+                  localStorage.clear();
+                  nav('/');
+                }, 3000);
+               
             }
             })
             
@@ -67,8 +71,11 @@ function ChangePassword() {
               setShowError(true);
               setColor("success");
               setMessege(res.message);
-              AuthorAPI.LOGOUT();
-              nav('/login');
+              setTimeout(function() {
+                localStorage.clear();
+                AuthorAPI.LOGOUT();
+                nav('/');
+              }, 3000);
             }
 
           });

@@ -68,6 +68,10 @@ function Login() {
     UserAPI.Self_By_App_Url().then((res) => {
       setStatusBtn(res.data.selfAllowed);
     });
+
+    if(localStorage.getItem("token") === null){
+      nav("/")
+    }
   }, []);
 
   const popupClose = (vl) => {

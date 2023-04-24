@@ -11,7 +11,6 @@ import { createProfits } from "./eventUtil";
 import { useNavigate } from "react-router-dom";
 import { UserAPI } from "../../../apis/UserAPI";
 import { GameAPI } from "../../../apis/gameAPI";
-import axios from "axios";
 
 function GameDetail({ getStackValue, SportId, TvHideShow }) {
   var curr = new Date();
