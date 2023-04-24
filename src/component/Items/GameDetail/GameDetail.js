@@ -489,6 +489,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                   const availableToBack = [
                                     ...event?.ex?.availableToBack,
                                   ];
+                                  const availableToLay = [
+                                    ...event?.ex?.availableToLay
+                                  ];
                                   return (
                                     <div
                                       data-title="ACTIVE"
@@ -588,8 +591,8 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                             );
                                           })
                                           .reverse()}
-                                      {event?.ex?.availableToLay?.length &&
-                                        event?.ex?.availableToLay?.map(
+                                      {availableToLay?.length &&
+                                        availableToLay?.map(
                                           (e, id) => {
                                             return (
                                               <div

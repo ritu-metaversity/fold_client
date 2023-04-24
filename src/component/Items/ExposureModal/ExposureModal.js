@@ -41,7 +41,7 @@ const ExposureModal = () => {
           <ExpNav sporttype={sporttype} />
           <div className="card-body container-fluid container-fluid-5 exposre">
             {isLoading ? (
-              <p className="lodder">
+              <p className="lodder-exp">
                 <i className="fa fa-spinner fa-spin"></i>
               </p>
             ) : (
@@ -222,15 +222,15 @@ const ExposureModal = () => {
                       <tbody
                         className={DataList?.length === 0 ? "dis-none" : ""}>
                         {DataList?.length &&
-                          DataList.map((item, id) => {
+                          DataList?.map((item, id) => {
                             return (
                               <tr
                                 role="row"
-                                key={item.pnl + id}
+                                key={item?.pnl + id}
                                 className={`${
-                                  item.isback === true
+                                  item?.isback === true
                                     ? "back"
-                                    : item.isback === false
+                                    : item?.isback === false
                                     ? "lay"
                                     : ""
                                 }`}>
@@ -238,45 +238,45 @@ const ExposureModal = () => {
                                   role="columnheader"
                                   aria-colindex="1"
                                   className="text-left">
-                                  {item.sportName}
+                                  {item?.sportName}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="2"
                                   className="text-left ">
-                                  {item.eventName}
+                                  {item?.eventName}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="3"
                                   className="text-left">
-                                  {item.marketname}
+                                  {item?.marketname}
                                 </td>
 
                                 <td
                                   role="columnheader"
                                   aria-colindex="5"
                                   className="text-left ">
-                                  {item.nation}
+                                  {item?.nation}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="6"
                                   className="text-left">
-                                  {item.rate}
+                                  {item?.rate}
                                 </td>
 
                                 <td
                                   role="columnheader"
                                   aria-colindex="8"
                                   className="text-right">
-                                  {item.amount}
+                                  {item?.amount}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="9"
                                   className="text-center ">
-                                  {item.time}
+                                  {item?.time}
                                 </td>
                               </tr>
                             );
@@ -289,7 +289,7 @@ const ExposureModal = () => {
                             ${DataList?.length === 0 ? "" : "d-none"}`}>
                           <td colSpan="7" role="cell">
                             <div role="alert" aria-live="polite">
-                              <div className="text-center my-2">
+                              <div className="text-center">
                                 There are no records to show
                               </div>
                             </div>
