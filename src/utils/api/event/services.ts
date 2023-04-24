@@ -32,11 +32,12 @@ export const eventServices = {
   newFancy: async (id: string) => {
     const params: ApiServiceInterface = {
       resource: {
-         URL: "http://142.132.159.166:9001/fancy/:id",
+        //  URL: "http://142.132.159.166:9001/fancy/:id",
+        URL: "fancy/:id",
         METHOD: "GET",
       },
-      // betfair: true,
-      noAuth: true,
+      betfair: true,
+      // noAuth: true,
       pathVars: { id: id },
     };
     return await apiHandler(params);

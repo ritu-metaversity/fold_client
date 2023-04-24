@@ -121,7 +121,7 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
           width="100%"
           height="300px"
           title="score-iframe score-iframe2"
-          src={`http://15.207.182.173:3050/event/${matchId}`}
+          src={`http://15.207.182.173:3050/event/${matchId}/?theme=dark-wolf`}
           // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
         />
       )}

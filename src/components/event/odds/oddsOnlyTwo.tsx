@@ -156,6 +156,7 @@ const OddsOnlyTwo = ({
         justifyContent={{ xs: "space-between", lg: "center" }}
         lg={5.7}
         xs={12}
+        textTransform={"capitalize"}
         fontSize={"0.8rem"}
       >
         <>{odds?.nation}</>

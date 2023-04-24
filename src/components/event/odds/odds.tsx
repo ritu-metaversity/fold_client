@@ -39,7 +39,15 @@ const gridProps2 = {
 
 const ValuesComponent = ({ price, size }: { price: number; size: number }) => (
   <>
-    <Typography fontWeight={700} mb={"-0.3rem"} fontSize="0.96rem">
+    <Typography
+      sx={{
+        zIndex: 100,
+        // textShadow: "1.5px 1.5px 8px rgba(255, 255, 255, .5)",
+      }}
+      fontWeight={800}
+      mb={"-0.3rem"}
+      fontSize="0.96rem"
+    >
       {price || "__"}
     </Typography>
     <Typography fontWeight={400} fontSize="0.75rem">

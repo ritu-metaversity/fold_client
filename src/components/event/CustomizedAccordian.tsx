@@ -22,24 +22,29 @@ const Accordion = styled((props: AccordionProps) => (
 }));
 
 const AccordionSummary = styled((props: AccordionSummaryProps) => (
-
   <MuiAccordionSummary
     expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.7rem" }} />}
     {...props}
   />
-
 ))(({ theme }) => ({
-  borderRadius: "10px 10px 0 0", 
+  borderRadius: "8px 8px 0 0",
+  minHeight: "25px",
+  "& .MuiAccordionSummary-content": {
+    marginLeft: theme.spacing(1),
+  },
+  [theme.breakpoints.down("lg")]: {
+    borderRadius: "4px 4px 0 0",
+    minHeight: "15px",
+    "& .MuiAccordionSummary-content": {
+      marginBlock: theme.spacing(1),
+    },
+  },
   marginTop: 1,
-  minHeight:"25px",
   backgroundColor:
     theme.palette.mode === "dark" ? colorHex.bg2 : "rgba(0, 0, 0, .03)",
   flexDirection: "row-reverse",
   "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
     transform: "rotate(90deg)",
-  },
-  "& .MuiAccordionSummary-content": {
-    marginLeft: theme.spacing(1),
   },
 }));
 

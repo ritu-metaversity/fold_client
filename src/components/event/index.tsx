@@ -13,7 +13,7 @@ import React, {
   useState,
 } from "react";
 import CustomizedAccordions from "./CustomizedAccordian";
-import { Grid, Typography, useMediaQuery } from "@mui/material";
+import { Grid, Typography, styled, useMediaQuery } from "@mui/material";
 import OddsOnlyTwo from "./odds/oddsOnlyTwo";
 import HomeLayout from "../layout/homeLayout";
 import { BetSlip } from "./bet/BetSlip";
@@ -363,22 +363,17 @@ const Event = () => {
               title={
                 <Box flex={1} display="flex" justifyContent={"space-between"}>
                   <Typography
-                    fontSize="0.85rem"
+                    fontSize={{ xs: "0.75rem", lg: "0.85rem" }}
                     lineHeight={1}
                     fontWeight={500}
                   >
                     {singleOdd.Name}
                   </Typography>
-                  <Typography
-                    fontSize="0.85rem"
-                    lineHeight={1}
-                    fontWeight={700}
-                    display={{ lg: "none" }}
-                  >
+                  <MinMaxDelayTypography display={{ lg: "none" }}>
                     Max: {dharmParivartan(singleOdd.maxBet)}
                     {`  Min`}:{dharmParivartan(singleOdd.minBet)}
                     {`  Bet Delay`}: {singleOdd.betDelay}
-                  </Typography>
+                  </MinMaxDelayTypography>
                 </Box>
               }
             >
@@ -427,18 +422,18 @@ const Event = () => {
           <CustomizedAccordions
             title={
               <Box flex={1} display="flex" justifyContent={"space-between"}>
-                <Typography fontSize="0.85rem" fontWeight={500}>
+                <Typography
+                  lineHeight={1}
+                  fontSize={{ xs: "0.75rem", lg: "0.85rem" }}
+                  fontWeight={500}
+                >
                   {type ? "Toss" : "Bookmaker"}
                 </Typography>
-                <Typography
-                  fontSize="0.85rem"
-                  display={{ lg: "none" }}
-                  fontWeight={700}
-                >
+                <MinMaxDelayTypography>
                   Max: {dharmParivartan(BookmakerOdds[0].maxBet)}
                   {`   Min`}: {dharmParivartan(BookmakerOdds[0].minBet)}
                   {`   Bet Delay`}: {BookmakerOdds[0].betDelay}
-                </Typography>
+                </MinMaxDelayTypography>
               </Box>
             }
           >
@@ -611,16 +606,16 @@ const Event = () => {
               <CustomizedAccordions
                 title={
                   <Box flex={1} display="flex" justifyContent={"space-between"}>
-                    <Typography fontSize="0.85rem" fontWeight={500}>
+                    <Typography
+                      fontSize={{ xs: "0.75rem", lg: "0.85rem" }}
+                      lineHeight={1}
+                      fontWeight={500}
+                    >
                       {fancyMarket}
                     </Typography>
-                    <Typography
-                      fontSize="0.85rem"
-                      lineHeight={1}
-                      fontWeight={700}
-                    >
+                    <MinMaxDelayTypography>
                       Bet Delay: {fancyOdds[fancyMarket][0].betDelay}
-                    </Typography>
+                    </MinMaxDelayTypography>
                   </Box>
                 }
               >
@@ -707,3 +702,15 @@ function BetResult({ value, title }: { value: number; title: string }) {
     </Box>
   );
 }
+
+const MinMaxDelayTypography = styled(Typography)(({ theme }) => ({
+  lineHeight: 1,
+  fontWeight: 700,
+  // fontSize: { xs: "0.75rem", lg: "0.85rem" },
+  [theme.breakpoints.up("lg")]: {
+    fontSize: "0.85rem",
+  },
+  [theme.breakpoints.down("lg")]: {
+    fontSize: "0.75rem",
+  },
+}));
