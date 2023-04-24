@@ -59,6 +59,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
+      localStorage.clear()
       nav("/login");
     }
   }, []);

@@ -60,7 +60,7 @@ function SportProfit() {
   useEffect(() => {
     if (SportId !== "") {
       GameAPI.Active_Match_Sport_Wise({ sportId: SportId }).then((res) => {
-        setSportData(res.data.data);
+        setSportData(res?.data?.data);
       });
     }
   }, [SportId]);
@@ -77,8 +77,8 @@ function SportProfit() {
       totalPages:1,
     }).then((res) => {
       setIsLoading(false);
-      setDataVal(res.data)
-      setPLValue(res.data.market);
+      setDataVal(res?.data)
+      setPLValue(res?.data?.market);
     
     });
   }, [SportId]);
@@ -109,19 +109,19 @@ function SportProfit() {
     if(startDate !== "" &&  endDate !== ""){
 
     UserAPI.Profit_Loss({
-      noOfRecords: IndexValue,
+      noOfRecords: parseInt(IndexValue),
       index:0,
       toDate: endDate,
       fromDate: startDate,
-      sportId: SportId,
+      sportId: parseInt(SportId),
       matchId: MatchId,
       userId: "",
       totalPages: 2
     }).then((res) => {
       setIsLoading(false)
-      setDataVal(res.data)
-      setPLValue(res.data.market);
-      setDataList(res.data.market.length);
+      setDataVal(res?.data)
+      setPLValue(res?.data?.market);
+      setDataList(res?.data?.market?.length);
     });
   }
   };
@@ -188,11 +188,11 @@ function SportProfit() {
                     name="reportType"
                     className="custom-select"
                     onChange={getOptionValue1}>
-                    <option>Select Match</option>
+                    <option selected>Select Match</option>
                     {SportList?.length &&
                       SportList?.map((item) => {
                         return (
-                          <option value={item.sportId} key={item.sportId}>{item.sportName}</option>
+                          <option value={item?.sportId} key={item?.sportId}>{item?.sportName}</option>
                         );
                       })}
                   </select>
@@ -209,7 +209,7 @@ function SportProfit() {
                     {SportData?.length &&
                       SportData?.map((item) => {
                         return (
-                          <option value={item.matchId} key={item.matchId}>{item.matchName}</option>
+                          <option value={item?.matchId} key={item?.matchId}>{item?.matchName}</option>
                         );
                       })}
                   </select>
@@ -304,15 +304,15 @@ function SportProfit() {
                           return (
                             <tr role="row" key={res.matchName}>
                               <td aria-colindex="2" className="text-left">
-                                {res.matchName}
+                                {res?.matchName}
                               </td>
                               <td aria-colindex="1" className="text-right">
-                                {parseFloat(res.pnl).toFixed(2)}
+                                {parseFloat(res?.pnl).toFixed(2)}
                               </td>
                               <td
                                 aria-colindex="5"
                                 className="text-right text-success">
-                                {res.commssionMila}
+                                {res?.commssionMila}
                               </td>
                             </tr>
                           )
@@ -322,7 +322,7 @@ function SportProfit() {
                     <tr
                       role="row"
                       className={`b-table-empty-row ${
-                        DataVal === null ||DataList===0  ? "" : "dis-none"
+                        DataVal === null || DataList===0  ? "" : "dis-none"
                       }`}>
                       <td colSpan="6" role="cell">
                         <div role="alert" aria-live="polite">

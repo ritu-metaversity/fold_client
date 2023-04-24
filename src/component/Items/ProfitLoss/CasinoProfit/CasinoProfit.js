@@ -74,9 +74,9 @@ function CasinoProfit() {
       totalPages:1,
     }).then((res) => {
       setIsLoading(false)
-      setCDataList(res.data)
-      setPLValue(res.data.market);
-      setCasinoDataList(res.data.length);
+      setCDataList(res?.data)
+      setPLValue(res?.data?.market);
+      setCasinoDataList(res?.data?.length);
     });
   }, [SportId, startDate, endDate]);
 
@@ -113,8 +113,8 @@ function CasinoProfit() {
       totalPages: 2
     }).then((res) => {
       setIsLoading(false)
-      setPLValue(res.data.market);
-      setCasinoDataList(res.data.length);
+      setPLValue(res?.data?.market);
+      setCasinoDataList(res?.data?.length);
     });
   }
   };
