@@ -61,3 +61,17 @@ div#match_unmatched_deleted {
 .table-responsive.unsetTable.expMaindiv::-webkit-scrollbar {
     display: none;
 }
+
+
+.lodder-exp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: #00000038;
+}
+.lodder-exp i{
+    font-size: 23px;
+    padding: 24px;
+} 

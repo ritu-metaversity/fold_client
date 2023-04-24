@@ -64,6 +64,12 @@ function App() {
     }
   }, []);
 
+  useEffect(()=>{
+  if(pathname!=="/m/setting/changepassword" && localStorage.getItem("Password-type")==="old"){
+  nav("/m/setting/changepassword")
+  }
+  },[pathname])
+
   const idddd = (id) => {
     setSportId(id);
   };
