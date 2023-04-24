@@ -122,16 +122,16 @@
 
 }
 
-.lay1 {
-    background-color: rgba(250, 169, 186, 0.75);
+.lay1, .box-1.lay2.float-left.text-center {
+    background-color: rgba(250, 169, 186, 0.75) !important;
 }
 
 .lay,
-.lay-color {
+.lay-color, .box-1.lay.float-left.text-center.cPointer {
     background-color: #faa9ba !important;
 }
 
-.lay2 {
+.box-1.lay1.float-left.text-center {
     background-color: rgba(250, 169, 186, 0.5) !important;
 }
 
@@ -145,13 +145,35 @@
     background-color: rgba(114, 187, 239, 0.5) !important;
 }
 
-.back1 {
-    background-color: rgba(114, 187, 239, 0.75);
+.box-1.box-7.float-left.back.text-center.back-1.ds-none, .box-1.float-left.back-2.text-center {
+    background-color: rgba(114, 187, 239, 0.75) !important;
+}
+.box-1.box-7.float-left.back.text-center.back-2, .box-1.float-left.back-1.text-center {
+    background-color: rgba(114, 187, 239, 0.5) !important;
 }
 
-.back,
-.back-color {
+.box-1.back.float-left.text-center.cPointer {
     background-color: #72bbef !important;
+}
+
+
+
+.back,
+.back-color, .back.box-1.float-left.text-center {
+    background-color: #72bbef !important;
+}
+
+.box-7.back {
+    background-color: #72bbef !important;
+}
+.box-1.box-7.lay {
+    background-color: #faa9ba !important;
+}
+.box-1.box-7.lay-1 {
+    background-color: rgba(250, 169, 186, 0.75) !important;
+}
+.box-1.box-7.lay-2 {
+    background-color: rgba(250, 169, 186, 0.5) !important;
 }
 
 .mt-1,
@@ -387,9 +409,8 @@ button.nav-link.nav2.nav-btn:first-child {
     display: none;
 }
 
-.back-1,
 .back1 {
-    background-color: rgba(114, 187, 239, 0.5);
+    background-color: rgba(114, 187, 239, 0.75);
 }
 
 .table-row>div .odd {
@@ -418,7 +439,7 @@ button.nav-link.nav2.nav-btn:first-child {
 }
 
 .back {
-    background-color: #a7d8fd !important;
+    background-color: #72bbef !important;
 }
 
 .table-row>div button {

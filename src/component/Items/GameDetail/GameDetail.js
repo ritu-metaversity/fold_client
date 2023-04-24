@@ -549,12 +549,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                 onClick={(e) =>
                                                   handleShow(e, id)
                                                 }
-                                                className={`box-1 box-7 back1 float-left back-1 text-center  
-                                                ${
-                                                  id === 1 || id === 2
-                                                    ? "ds-none"
-                                                    : "cPointer"
-                                                } 
+                                                className={`box-1 box-7 float-left back text-center 
+                                                ${id === 1 ?"back-1":""}${id === 2 ?"back-2":""}
+                                                ${id === 1 || id === 2? "ds-none": "cPointer"} 
                                                  ${
                                                    e?.price !==
                                                    previousState?.Odds[id1]?.runners[index]?.ex
@@ -600,7 +597,10 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                 onClick={(e) =>
                                                   handleShow(e, id)
                                                 }
-                                                className={`box-1 box-7 lay float-left text-center  ${
+                                                className={`box-1 box-7 lay float-left text-center 
+                                                ${id === 1?"lay-1":""}
+                                                ${id === 2?"lay-2":""}
+                                                 ${
                                                   id === 1 || id === 2
                                                     ? "ds-none "
                                                     : "cPointer"
@@ -760,13 +760,13 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                       </span>
                                     </p>
                                   </div>
-                                  <div className="box-1 back1 float-left back-1  text-center">
+                                  <div className="box-1  float-left back-1  text-center">
                                     <button>
                                       <span className="odd d-block">0</span>
                                       <span className="d-block">0.0</span>
                                     </button>
                                   </div>
-                                  <div className="box-1 back2 float-left back-1  text-center">
+                                  <div className="box-1 float-left back-2  text-center">
                                     <button>
                                       <span className="odd d-block">0</span>{" "}
                                       <span className="d-block">0.0</span>
@@ -775,7 +775,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
 
                                   <div
                                     onClick={(e) => handleShow(e)}
-                                    className={`box-1 back float-left back-1  text-center cPointer ${
+                                    className={`box-1 back float-left text-center cPointer ${
                                       bookmaker?.b1 !==
                                       previousState?.Bookmaker[id]?.b1
                                         ? "blink"
