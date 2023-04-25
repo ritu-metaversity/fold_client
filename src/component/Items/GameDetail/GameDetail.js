@@ -58,6 +58,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     Fancy: [],
   });
 
+
   useEffect(() => {
     const time = setInterval(() => {
       const token = localStorage.getItem("token")
@@ -742,12 +743,12 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                             (profit) =>
                                               profit?.sid === bookmaker?.sid
                                           )?.value > 0
-                                            ? "text-danger"
+                                            ? "text-success"
                                             : profits.Bookmaker?.find(
                                                 (profit) =>
                                                   profit?.sid === bookmaker?.sid
                                               )?.value < 0
-                                            ? "text-success"
+                                            ? "text-danger"
                                             : ""
                                         }`}
                                         style={{ color: "black" }}>

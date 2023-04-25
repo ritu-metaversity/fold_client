@@ -27,7 +27,7 @@ function UnSetteledBet() {
       setDataList(res.data.dataList);
     });
     // eslint-disable-next-line
-  }, [betValue, betValue]);
+  }, [betValue, betValue, recordValue]);
 
   // const submit = () => {
   //   UserAPI.Unsetteled_bet({
@@ -427,7 +427,6 @@ function UnSetteledBet() {
                         })}
                       {result?.length === 0 && (
                         <li
-                          // key={item + id}
                           className="page-item "
                           onClick={() => handleClick(1)}>
                           <button className="plink act">

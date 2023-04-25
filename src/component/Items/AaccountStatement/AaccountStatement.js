@@ -73,6 +73,7 @@ function AaccountStatement() {
   };
 
   const submit = () => {
+    setIsLoading(true)
     if (startDate === "") {
       setStartDate(moment().format().slice(0, 10));
     } else {
