@@ -29,6 +29,11 @@ function SportProfit() {
   const [Error, setError] = useState(false);
   const [ColorName, setColorName] = useState("");
   const [ErrorMsg, setErrorMsg] = useState("");
+  const [pageLength, setPageLength] = useState(0);
+  const [pagination, setPagination] = useState(0);
+  const [Active, setActive] = useState(0);
+  // const [currentPage, setCurrentPage] = useState();
+
 
 
 
@@ -78,10 +83,11 @@ function SportProfit() {
     }).then((res) => {
       setIsLoading(false);
       setDataVal(res?.data)
+      setPageLength(res?.data?.totalRecord);
       setPLValue(res?.data?.market);
     
     });
-  }, [SportId]);
+  }, [SportId, pagination]);
   
 
   const getIndexValues = (e) => {
@@ -116,15 +122,50 @@ function SportProfit() {
       sportId: parseInt(SportId),
       matchId: MatchId,
       userId: "",
-      totalPages: 2
+      totalPages: pageLength
     }).then((res) => {
       setIsLoading(false)
+      setPageLength(res?.data?.totalRecord);
       setDataVal(res?.data)
       setPLValue(res?.data?.market);
       setDataList(res?.data?.market?.length);
     });
   }
   };
+
+  const result = [];
+  for (var i = 0; i < pageLength; i++) {
+    result[i] = i;
+  }
+
+  const handlePagenation = (val) => {
+    setPagination(val);
+    setActive(val);
+  };
+
+  const decrement = () => {
+    if (pagination > 0) {
+      setPagination(pagination - 1);
+      setActive(pagination - 1);
+    }
+  };
+
+  const increment = () => {
+    if (pagination !== 1) {
+      setPagination(pagination + 1);
+      setActive(pagination + 1);
+    }
+  };
+  const decrementByFirst = () => {
+    setPagination(1);
+    setActive(0)
+  };
+
+  const incrementByLast = () => {
+    setPagination(pageLength - 1);
+    setActive(pageLength-1)
+  };
+
 
   const popupClose = (vl) => {
     setError(vl);
@@ -340,6 +381,72 @@ function SportProfit() {
                 </div>
               </div>
             </div>
+            <div className={`row row5 mt-2 ${DataVal === null?"d-none":""}`}>
+                <div className="col-12">
+                  <nav aria-label="Page navigation example">
+                    <ul className="pagination">
+                      <li className="page-item" onClick={decrementByFirst}>
+                        <button className="page-link" aria-label="Previous">
+                          <span aria-hidden="true">First</span>
+                        </button>
+                      </li>
+                      <li className="page-item" onClick={decrement}>
+                        <button
+                          disabled={pageLength == 1 ? true : false}
+                          className="page-link"
+                          aria-label="Previous">
+                          <span aria-hidden="true">Prev</span>
+                        </button>
+                      </li>
+                      {result?.length > 0 &&
+                        result.map((item, id) => {
+                          return (
+                            <li
+                              key={item + id}
+                              className="page-item act"
+                              onClick={() => handlePagenation(id)}>
+                              <button
+                                className={`page-link ${
+                                  Active === id ? "act" : ""
+                                } `}>
+                                <span
+                                  aria-hidden="true"
+                                  className={Active === id ? "num" : ""}>
+                                  {item === "" ? 1 : item+1}
+                                </span>
+                              </button>
+                            </li>
+                          );
+                        })}
+                        {result?.length === 0 && (
+                        <li
+                          // key={item + id}
+                          className="page-item "
+                          onClick={() => handlePagenation(1)}>
+                          <button className="plink act">
+                            <span aria-hidden="true" className="num">
+                              1
+                            </span>
+                          </button>
+                        </li>
+                      )}
+                      <li className="page-item" onClick={increment}>
+                        <button
+                          className="page-link"
+                          disabled={pageLength === 1 ? true : false}
+                          aria-label="Next">
+                          <span aria-hidden="true">Next</span>
+                        </button>
+                      </li>
+                      <li className="page-item" onClick={incrementByLast}>
+                        <button className="page-link" aria-label="Next">
+                          <span aria-hidden="true">Last</span>
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
           </div>
         </div>
       </div>

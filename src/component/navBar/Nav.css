@@ -1506,7 +1506,7 @@ a {
     height:100vh;
     z-index: 30;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .overlayclose{
 display: none;
@@ -1520,12 +1520,6 @@ background-color: #007bff;
 
 }
 
-
-
-/* .game-listing-container {
-    height: calc(100vh - 200px);
-    overflow: scroll;
-} */
 
 @media screen and (max-width: 400px){
     span.betInfo {

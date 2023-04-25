@@ -96,12 +96,8 @@ function Placebet({
                 <div className="float-right d-flex">
                   <button
                     className="stakeactionminus btn"
-                    onClick={() =>
-                      setgetBetValu(
-                        getBetValu >= 2 ? getBetValu - 0.1 : getBetValu - 0.05
-                      )
-                    }
-                    disabled={parseFloat(getBetValu).toFixed(2) === 1}>
+                    disabled="true"
+                    >
                     <span className="fa fa-minus"></span>
                   </button>{" "}
                   <input
@@ -109,18 +105,13 @@ function Placebet({
                     placeholder="15"
                     className="stakeinput"
                     onChange={(e) => setgetBetValu(e.target.value)}
-                    value={
-                      parseFloat(getBetValu).toFixed(2) <= 1 ? 0 : getBetValu
-                    }
+                    value={getBetValu}
                     readOnly
                   />
                   <button
                     className="stakeactionminus btn"
-                    onClick={() =>
-                      setgetBetValu(
-                        getBetValu >= 2 ? getBetValu + 0.1 : getBetValu + 0.05
-                      )
-                    }>
+                    disabled="true"
+                    >
                     <span className="fa fa-plus"></span>
                   </button>
                 </div>
