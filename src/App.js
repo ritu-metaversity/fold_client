@@ -30,9 +30,11 @@ import Sport from "./component/Sports/Sport";
 import SportData from "./component/Sports/SportData";
 import NavBar from "./component/navBar/NavBar";
 import Mobilenav from "./component/navBar/MobileNav/Mobilenav";
+import { message } from "antd";
 
 function App() {
   const [SportId, setSportId] = useState("");
+  const [Errmessage, setErrMessege] = useState("");
 
   const nav = useNavigate();
   const { pathname } = useLocation();
@@ -74,12 +76,16 @@ function App() {
     setSportId(id);
   };
 
+  const message = (vl)=>{
+    setErrMessege(vl)
+  }
+
   return (
     <div className="App">
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/Register" element={<Register />} />
-        <Route exact path="/" element={<Login />} />
+        <Route exact path="/" element={<Login  Errmessage={Errmessage}/>} />
         <Route path="" element={<NavBar />}>
           <Route exact path="/deposit" element={<Deposit />} />
           <Route exact path="/withdraw" element={<Withdraw />} />
@@ -109,7 +115,7 @@ function App() {
           <Route
             exact
             path="/m/setting/changepassword"
-            element={<ChangePassword />}
+            element={<ChangePassword  message={message}/>}
           />
           <Route exact path="/SignOut" element={<SignOut />} />
           <Route path="" element={<Mobilenav />}>

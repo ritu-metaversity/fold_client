@@ -9,7 +9,7 @@ import Modal from "react-bootstrap/Modal";
 import RegisterModals from "../Register/RegisterModals";
 
 
-function Login() {
+function Login({Errmessage}) {
   const nav = useNavigate();
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
@@ -19,6 +19,15 @@ function Login() {
   const [statusbtn , setStatusBtn] =useState(false)
   const [showModals, setShowModals] = useState(false);
 
+
+  // console.log(Errmessage, "Errmessage")
+
+  // useEffect(()=>{
+  //   if(Errmessage !== undefined){
+  //     setStatusVal(false)
+  //   }
+  // },[])
+  
 
   const handleLogin = () => {
     // history.push('/home')
@@ -91,13 +100,24 @@ function Login() {
   return (
     <>
       <div className="wrapper">
-        {StatusVal === false ? (
-          <div className="alertBtn">
-            <AlertBtn color="danger" popupClose={popupClose} val={message} />
+        {
+          Errmessage ===undefined ?(
+            StatusVal === false ? (
+              <div className="alertBtn">
+                <AlertBtn color="danger" popupClose={popupClose} val={message} />
+              </div>
+            ) : (
+              ""
+            )
+
+          ): (
+            <div className="alertBtn">
+            <AlertBtn color="success" popupClose={popupClose} val={Errmessage} />
           </div>
-        ) : (
-          ""
-        )}
+          )
+        }
+
+        
 
         <div className="login-wrapper">
           <div className="text-center logo-login mb-3">

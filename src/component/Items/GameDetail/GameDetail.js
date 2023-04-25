@@ -1146,5 +1146,4 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     </div>
   );
 }
-
 export default GameDetail;

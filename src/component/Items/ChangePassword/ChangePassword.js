@@ -3,8 +3,9 @@ import "../AaccountStatement/AaccountStatement.css";
 import AlertBtn from "../../Alert/AlertBtn";
 import { AuthorAPI } from "../../../apis/AuthorAPI";
 import { useNavigate } from "react-router-dom";
+import { propTypes } from "react-bootstrap/esm/Image";
 
-function ChangePassword() {
+function ChangePassword(props) {
   const [currPassword, setCurrPassword] = useState("");
   const [newPasswords, setNewpasswords] = useState("");
   const [conformPassword, setConformPassword] = useState("");
@@ -14,7 +15,6 @@ function ChangePassword() {
   const passType = localStorage.getItem("Password-type");
   const userId = localStorage.getItem("UserId");
   const Token = localStorage.getItem("token");
-
 
   const nav = useNavigate();
 
@@ -31,68 +31,64 @@ function ChangePassword() {
       setShowError(true);
       setColor("danger");
       setMessege("New Password and Password Confirmation should be same");
-    } 
-    
+    }
 
     if (conformPassword !== "" && newPasswords !== "") {
       // if (newPasswords === conformPassword) {
-        if (localStorage.getItem("Password-type") === "old") {
-          AuthorAPI.FIRST_LOGIN({
-            currentPassword: currPassword,
-            newPassword: newPasswords,
-            confirmPassword: conformPassword,
-            userid: userId,
-            token: Token,
-            oldPassword: currPassword,
-          })
-            .then((res) => {
-              // console.log(res.message)
-              if(res.status === true){
-                setShowError(true);
-                setColor("success");
-                setMessege(res.message);
-                setTimeout(function() {
-                  AuthorAPI.LOGOUT();
-                  localStorage.clear();
-                  nav('/');
-                }, 3000);
-               
-            }
-            })
-            
-        } else {
-          if(newPasswords === conformPassword){
+      if (localStorage.getItem("Password-type") === "old") {
+        AuthorAPI.FIRST_LOGIN({
+          currentPassword: currPassword,
+          newPassword: newPasswords,
+          confirmPassword: conformPassword,
+          userid: userId,
+          token: Token,
+          oldPassword: currPassword,
+        }).then((res) => {
+          // console.log(res.message)
+          if (res.status === true) {
+            setShowError(true);
+            setColor("success");
+            setMessege(res.message);
+            setTimeout(function () {
+              AuthorAPI.LOGOUT();
+              localStorage.clear();
+              nav("/");
+            }, 500);
+          }
+        });
+      } else {
+        if (newPasswords === conformPassword) {
           AuthorAPI.Change_Passwords({
             currentPassword: currPassword,
             newPassword: newPasswords,
           }).then((res) => {
             localStorage.clear();
-            if(res.status===true) {
+            if (res.status === true) {
               setShowError(true);
               setColor("success");
               setMessege(res.message);
-              setTimeout(function() {
+              setTimeout(function () {
                 localStorage.clear();
                 AuthorAPI.LOGOUT();
-                nav('/');
-              }, 3000);
+                nav("/");
+              }, 500);
             }
-
           });
         }
-        }
+      }
       // }
     }
-
-   
   };
+
+
+  props.message(message)
 
   const popupClose = (vl) => {
     setShowError(vl);
   };
   return (
     <div>
-      {ShowError === true ? (
+      {ShowError === false ? (
         <AlertBtn
           color={color}
           className="change-passwords"
