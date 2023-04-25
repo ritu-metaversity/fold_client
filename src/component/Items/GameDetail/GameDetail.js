@@ -8,7 +8,6 @@ import Accordion from "react-bootstrap/Accordion";
 import { socket } from "./socket";
 import FancyModals from "./FancyModals/FancyModals";
 import { createProfits } from "./eventUtil";
-import { useNavigate } from "react-router-dom";
 import { UserAPI } from "../../../apis/UserAPI";
 import { GameAPI } from "../../../apis/gameAPI";
 
@@ -503,7 +502,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                             fontSize: "14px",
                                             fontWeight: "300",
                                           }}>
-                                          <b>{event?.name}</b>
+                                          <b className="fanct-title">{event?.name}</b>
                                         </span>
 
                                         <p>
@@ -734,7 +733,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                   }`}>
                                   <div className="float-left country-name box-4">
                                     <span className="team-name">
-                                      <b>{bookmaker?.nation}</b>
+                                      <b className="fanct-title">{bookmaker?.nation}</b>
                                     </span>
                                     <p>
                                       <span
@@ -956,7 +955,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                       <div data-title="" className="table-row">
                                         <div className="float-left country-name box-4">
                                           <span>
-                                            <b style={{ fontSize: "10px" }}>
+                                            <b className="fanct-title">
                                               {item?.nation}
                                             </b>
                                           </span>

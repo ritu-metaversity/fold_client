@@ -342,6 +342,8 @@ input[type=checkbox], input[type=radio] {
 ul.pagination {
     overflow: scroll;
     width: 100%;
+    /* position: fixed;
+    bottom: 13px; */
     justify-content: center;
 }
 button.page-link span {

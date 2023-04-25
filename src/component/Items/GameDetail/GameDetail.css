@@ -696,11 +696,6 @@ p.team-name.col-6.text-right {
     color: #ff3c3c;
     font-family: "Roboto Condensed", sans-serif;
 }
-
-
-
-
-
 .fancy-market .suspended:after {
     width: 203% !important;
     content: attr(data-title);
@@ -858,10 +853,10 @@ p.no-found {
     margin: 0px !important;
 }
 
-/* .main-containor{
-    height: calc(100vh - 80px);
-    overflow: scroll;
-} */
+.fanct-title{
+    font-size: 12px;
+    font-weight: 900;
+}
 .place-value{
     width: 100%;
     overflow: hidden;

@@ -274,7 +274,7 @@ function UnSetteledBet() {
                             role="columnheader"
                             scope="col"
                             aria-colindex="6"
-                            className="text-left bg-color">
+                            className="text-left bg-color text-right">
                             User Rate
                           </th>
 
@@ -282,23 +282,23 @@ function UnSetteledBet() {
                             role="columnheader"
                             scope="col"
                             aria-colindex="8"
-                            className="text-left bg-color">
+                            className="text-left bg-color text-right">
                             Amount
                           </th>
                           <th
                             role="columnheader"
                             scope="col"
                             aria-colindex="9"
-                            className="text- bg-color">
+                            className="text- bg-color text-center">
                             Place Date
                           </th>
-                          <th
-                            role="columnheader"
-                            scope="col"
-                            aria-colindex="10"
-                            className=" bg-color">
-                            Match Date
-                          </th>
+                            {/* <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="10"
+                              className=" bg-color">
+                              Match Date
+                            </th> */}
                         </tr>
                       </thead>
                       <tbody className="">
@@ -348,7 +348,7 @@ function UnSetteledBet() {
                                 <td
                                   role="columnheader"
                                   aria-colindex="6"
-                                  className="text-left">
+                                  className="text-right">
                                   {item.rate}
                                 </td>
 
@@ -364,12 +364,12 @@ function UnSetteledBet() {
                                   className="text-center">
                                   {item.time}
                                 </td>
-                                <td
+                                {/* <td
                                   role="columnheader"
                                   aria-colindex="10"
                                   className="text-left">
                                   {moment(item.time).format("YYYY-MM-DD")}
-                                </td>
+                                </td> */}
                               </tr>
                             );
                           })}

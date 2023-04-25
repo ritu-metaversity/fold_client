@@ -31,7 +31,7 @@ function AaccountStatement() {
   const [Error, setError] = useState(false);
   const [ColorName, setColorName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [Active, setActive] = useState(1);
+  const [Active, setActive] = useState(0);
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
@@ -442,9 +442,7 @@ function AaccountStatement() {
                               className="page-item act"
                               onClick={() => handlePagenation(id)}>
                               <button
-                                className={`page-link ${
-                                  Active === id ? "act" : ""
-                                } `}>
+                                className={`page-link ${Active === id ? "act" : ""} `}>
                                 <span
                                   aria-hidden="true"
                                   className={Active === id ? "num" : ""}>
@@ -456,9 +454,11 @@ function AaccountStatement() {
                         })}
                       <li className="page-item" onClick={increment}>
                         <button
-                          className="page-link"
+                           className={`page-link ${Active === 1 ? "act" : ""} `}
                           disabled={pageLength === 1 ? true : false}
-                          aria-label="Next">
+                          aria-label="Next"
+                          onClick={() => handlePagenation(1)}
+                          >
                           <span aria-hidden="true">Next</span>
                         </button>
                       </li>

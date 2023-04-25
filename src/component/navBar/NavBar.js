@@ -65,7 +65,6 @@ const NavBar = () => {
       setUserMessage(res);
     });
 
-    // eslint-disable-next-line
   }, []);
 
 
