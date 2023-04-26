@@ -95,7 +95,7 @@ export const BetSlip: FC<Props> = ({
     setLoading(true);
     const data = {
       ...betId,
-      placeTime: moment(betId?.placeTime).format("YYYY-MM-DD hh:mm:ss.SSS"),
+      placeTime: moment(betId?.placeTime).format("YYYY-MM-DD HH:mm:ss.SSS"),
       matchId,
       userIp,
       deviceInfo: {

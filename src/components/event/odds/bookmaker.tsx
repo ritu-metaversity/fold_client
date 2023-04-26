@@ -50,7 +50,15 @@ const ValuesComponent = ({
   suspended: boolean;
 }) => (
   <>
-    <Typography fontWeight={700} mb={"-0.3rem"} fontSize="0.96rem">
+    <Typography
+      sx={{
+        textShadow:
+          "-0.2px 0 white, 0 0.2px white, 0.2px 0 white, 0 -0.2px white;",
+      }}
+      fontWeight={700}
+      mb={"-0.3rem"}
+      fontSize="0.96rem"
+    >
       {price || "__"}
     </Typography>
     <Typography fontWeight={400} fontSize="0.75rem">
@@ -152,7 +160,12 @@ const Bookmaker = ({
         justifyContent="space-between"
         alignItems={"center"}
       >
-        <Typography fontSize={"0.85rem"}>{values.nation}</Typography>
+        <Typography
+          textTransform={"capitalize"}
+          fontSize={{ xs: "0.75rem", lg: "0.85rem" }}
+        >
+          {values.nation}
+        </Typography>
         {profits && (
           <Typography
             color={profits?.value >= 0 ? "green" : "red"}
