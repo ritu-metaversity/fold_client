@@ -105,6 +105,7 @@ export const GameAPI = {
       method: "POST",
       data: {
         id: id,
+        appUrl: window.location.hostname
       },
 
       signal: cancel

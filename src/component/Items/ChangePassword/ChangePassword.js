@@ -3,7 +3,6 @@ import "../AaccountStatement/AaccountStatement.css";
 import AlertBtn from "../../Alert/AlertBtn";
 import { AuthorAPI } from "../../../apis/AuthorAPI";
 import { useNavigate } from "react-router-dom";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 function ChangePassword(props) {
   const [currPassword, setCurrPassword] = useState("");
@@ -15,27 +14,33 @@ function ChangePassword(props) {
   const passType = localStorage.getItem("Password-type");
   const userId = localStorage.getItem("UserId");
   const Token = localStorage.getItem("token");
+  const [isLoading, setIsLoading] = useState(false)
 
   const nav = useNavigate();
-
   const handleClick = () => {
+      
     if (currPassword === "") {
       setShowError(true);
       setColor("danger");
       setMessege("Current Password is required");
+      setIsLoading(false)
     } else if (newPasswords === "") {
       setShowError(true);
       setColor("danger");
       setMessege("New Password is required");
-    } else if (newPasswords !== currPassword) {
+      setIsLoading(false)
+    } 
+    else if (newPasswords !== currPassword) {
       setShowError(true);
       setColor("danger");
       setMessege("New Password and Password Confirmation should be same");
+      setIsLoading(false)
     }
-
+  
     if (conformPassword !== "" && newPasswords !== "") {
-      // if (newPasswords === conformPassword) {
+      setIsLoading(true)
       if (localStorage.getItem("Password-type") === "old") {
+     
         AuthorAPI.FIRST_LOGIN({
           currentPassword: currPassword,
           newPassword: newPasswords,
@@ -45,11 +50,13 @@ function ChangePassword(props) {
           oldPassword: currPassword,
         }).then((res) => {
           // console.log(res.message)
+          props.statusMsg(res.status)
           if (res.status === true) {
             setShowError(true);
             setColor("success");
             setMessege(res.message);
             setTimeout(function () {
+              setIsLoading(false)
               AuthorAPI.LOGOUT();
               localStorage.clear();
               nav("/");
@@ -63,11 +70,13 @@ function ChangePassword(props) {
             newPassword: newPasswords,
           }).then((res) => {
             localStorage.clear();
+            
             if (res.status === true) {
               setShowError(true);
               setColor("success");
               setMessege(res.message);
               setTimeout(function () {
+                setIsLoading(false)
                 localStorage.clear();
                 AuthorAPI.LOGOUT();
                 nav("/");
@@ -78,6 +87,7 @@ function ChangePassword(props) {
       }
       // }
     }
+    props.statusMsg(true)
   };
 
 
@@ -88,7 +98,7 @@ function ChangePassword(props) {
   };
   return (
     <div>
-      {ShowError === false ? (
+      {ShowError !== false ? (
         <AlertBtn
           color={color}
           className="change-passwords"
@@ -99,10 +109,14 @@ function ChangePassword(props) {
         ""
       )}
       <div className="report-container wrapper">
+        
         <div className="card">
           <div className="card-header">
             <h4 className="mb-0 heading-ch">Change Password</h4>
           </div>
+          {
+          isLoading && <p className="change-pass-loading"><i className="fa fa-spinner fa-spin"></i></p>
+        }
           <div className="card-body container-fluid container-fluid-5">
             <div className="row row5 mt-2 acc-stat">
               <div className="col-12 ch-pass">
