@@ -16,8 +16,6 @@ const NavBar = () => {
   const [status, setStatus] = useState(false);
   const [error, setError] = useState(false);
   const [Exp, setExp] = useState("");
-  // const [show, setShow] = useState("top");
-  // const [lastScrollY, setLastScrollY] = useState(0);
 
   const [showExpModals, setShowExpModals] = useState(false);
 
@@ -99,37 +97,6 @@ const NavBar = () => {
     setShowExpModals(true);
     e.preventDefault();
   };
-
-  // const location = useLocation();
-
-  // useEffect(()=>{
-  //   window.scrollTo(0,0);
-  // }, [location])
-  
-
-
-  // const controlNavbar =()=>{
-    
-  //   if(window.scrollY > 111){
-  //     if(window.scrollY>lastScrollY) {
-  //       setShow("showNav")
-  //     }else{
-  //       setShow("hideNav")
-  //     }
-  //   }else{
-  //     setShow("top")
-  //   }
-  //   setLastScrollY(window.scrollY)
-
-  // }
-
-  // useEffect(()=>{
-  //   window.addEventListener("scroll", controlNavbar)
-  //   return ()=>{
-  //     window.removeEventListener("scroll", controlNavbar)
-  //   }
-  // },[lastScrollY])
-
   return (
     <>
       <div className="wrapper">
@@ -162,7 +129,7 @@ const NavBar = () => {
                   </p>
                   <div className="exp" >
                     <span onClick={(e) =>handleExpShow(e)}>
-                      <u>Exp: {Exp}</u>
+                      <u>Exp: {parseFloat(Exp)?.toFixed(2)}</u>
                     </span>
 
                     <Modal

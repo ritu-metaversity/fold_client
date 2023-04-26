@@ -548,9 +548,8 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                 onClick={(e) =>
                                                   handleShow(e, id)
                                                 }
-                                                className={`box-1 box-7 float-left back text-center 
-                                                ${id === 1 ?"back-1":""}${id === 2 ?"back-2":""}
-                                                ${id === 1 || id === 2? "ds-none": "cPointer"} 
+                                                className={`box-1 box-7 float-left  text-center 
+                                                ${id===1?"back-2 ds-none":id === 2?"back-1 ds-none":"back"} 
                                                  ${
                                                    e?.price !==
                                                    previousState?.Odds[id1]?.runners[index]?.ex
@@ -596,14 +595,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                 onClick={(e) =>
                                                   handleShow(e, id)
                                                 }
-                                                className={`box-1 box-7 lay float-left text-center 
-                                                ${id === 1?"lay-1":""}
-                                                ${id === 2?"lay-2":""}
-                                                 ${
-                                                  id === 1 || id === 2
-                                                    ? "ds-none "
-                                                    : "cPointer"
-                                                } ${
+                                                className={`box-1 box-7 float-left text-center 
+                                                ${id===1?"lay-1 ds-none":id===2?"lay-2 ds-none":"lay"}
+                                                ${
                                                   e?.price !==
                                                   previousState?.Odds[id1]?.runners[index]?.ex
                                                     ?.availableToLay[id]?.price
@@ -704,8 +698,8 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                       <div className="table-header">
                         <div className="float-left country-name box-6 min-max">
                           <b>
-                            Min:{maxBet?.minBet} Max:{maxBet?.maxBet} BetDelay:{" "}
-                            {maxBet?.betDelay}
+                            Min:{maxBet?.minBet} Max:{maxBet?.maxBet} 
+                            {/* BetDelay:{" "} {maxBet?.betDelay} */}
                           </b>
                         </div>
                         <div className="back box-1 float-left text-center">
@@ -889,7 +883,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                 currentFancy === item ? "active" : ""
                               }`}
                               onClick={() => handleGameName(item, id)}>
-                              {/* eslint-disable-next-line */}
                               <p data-toggle="tab" className="nav-link">
                                 {item === "Fancy2"
                                   ? "Fancy"
@@ -922,7 +915,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                 currentFancy === item ? "active" : ""
                               }`}
                               onClick={() => handleGameName(item, id)}>
-                              {/* eslint-disable-next-line */}
                               <p data-toggle="tab" className="nav-link">
                                 {item}
                               </p>
@@ -998,15 +990,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                         }
                                                       </span>
                                                       <br />
-                                                      <span>
-                                                        <b>BetDelay:</b>
-                                                        <br />
-                                                        {
-                                                          mFancyOdds[
-                                                            currentFancy
-                                                          ][id]?.betDelay
-                                                        }
-                                                      </span>
                                                     </div>
                                                   </Accordion.Body>
                                                 </Accordion.Item>

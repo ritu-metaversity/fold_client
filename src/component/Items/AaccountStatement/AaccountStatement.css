@@ -675,3 +675,49 @@ div#match_unmatched {
     border-radius: unset !important;
     padding: 6px 17px;
 }
+
+.change-pass-loading {
+    font-size: 34px;
+    background-color: #dddddd8a;
+    position: absolute;
+    top: 12%;
+    height: 268px;
+    z-index: 22;
+    width: 100%;
+    text-align: center;
+}
+
+@media screen and (min-width: 426px) and (max-width: 768px) {
+    .change-pass-loading i{
+        margin-top: 15%;
+    }
+   
+}
+
+@media screen and (min-width: 769px) and (max-width: 1025px) {
+   
+    .change-pass-loading {
+        height: 284px;
+    }
+    .change-pass-loading i{
+        margin-top: 12%;
+    }
+}
+@media screen and (min-width: 1026px) and (max-width: 3000px) {
+   
+    .change-pass-loading {
+        height: 284px;
+    }
+    .change-pass-loading i{
+        margin-top: 8%;
+    }
+}
+
+
+
+@media screen and (min-width: 300px) and (max-width: 425px) {
+    .change-pass-loading i{
+        margin-top: 30%;
+    }
+    
+}
