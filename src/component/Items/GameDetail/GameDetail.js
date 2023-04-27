@@ -108,6 +108,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   // }, []);
 
   useEffect(() => {
+    const SportId = localStorage.getItem("SportId")
     if (SportId === "") {
       setSid(4);
     } else {
@@ -115,6 +116,9 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     }
     // eslint-disable-next-line
   }, [sId]);
+
+
+  console.log(sId, "asdsafgsd")
 
   const oddFromSocketSlower = (res) => {
     if (res) {
@@ -861,8 +865,8 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
 
                     <div></div>
                   </div>
-                  
-                   
+                  {
+                    sId == 4?(
                       <div className="fancy-markets">
                       <ul className="nav nav-tabs mt-2 fancy-nav">
                         {gameName?.length &&
@@ -1124,6 +1128,10 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                         <p className="no-found">No real-time records found</p>
                       )}
                     </div>
+                    ):""
+                  }
+                   
+                     
                    
                   
                  

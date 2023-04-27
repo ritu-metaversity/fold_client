@@ -97,7 +97,7 @@ function App() {
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
         <Route exact path="/signup3" element={<Signup3/>} />
-        <Route exact path="/signup1" element={<Signup1/>} />
+        {/* <Route exact path="/signup1" element={<Signup1/>} /> */}
         <Route path="" element={<NavBar />}>
           <Route exact path="/deposit" element={<Deposit />} />
           <Route exact path="/withdraw" element={<Withdraw />} />

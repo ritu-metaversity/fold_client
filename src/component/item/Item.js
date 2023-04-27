@@ -59,15 +59,13 @@ function Item({ gameIdForItemPage, spName }) {
         <>
           <div className="tab-pane container pl-0 pr-0">
             <div
-              className="game-listing-container main-container"
-
-             >
+              className="game-listing-container main-container">
               <div>
                
                <div className="">
                   {gameName?.find((item) => 
                   item?.sportid === gameIdForItemPage)?.matchList?.length === 0 ? (
-                    <p className="no-found">No real-time records found</p>
+                    <p className="no-found" style={{marginBottom:"12px"}}>No real-time records found</p>
                   ) : gameName?.length > 0 ? 
                     gameName?.find((item) => 
                       item?.sportid === gameIdForItemPage)?.matchList.map((item)=>{

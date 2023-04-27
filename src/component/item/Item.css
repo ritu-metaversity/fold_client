@@ -441,4 +441,7 @@ table {
     flex-direction: column;
 }
 
-
+.game-listing-container.main-container {
+    /* height: 60vh;
+    overflow: scroll; */
+}

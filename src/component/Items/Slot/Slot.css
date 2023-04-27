@@ -64,10 +64,6 @@
     height: auto;
 }
 
-div#casino {
-    background: #a7a9ab57;
-}
-
     .casinoicons {
         position: relative;
         box-shadow: 0 25px 8px -8px;
@@ -80,6 +76,7 @@ div#casino {
 .casino-main {
     height: 77vh;
     overflow: scroll;
+    background: #a7a9ab57;
 }
 
 .mob-view{

@@ -86,24 +86,21 @@ const Slot = () => {
                 <div id="casino" className="tab-pane ">
                   <div className="tab-content">
                     <div className="tab-pane casino-tables">
-                      <div className="container-fluid" style={{paddingTop:"12px"}}>
-                        {
-                          pathname==="/home" || pathname ==="/m/In-play" || pathname==="/Home" || pathname === "/m/Others"?"":(
+                      <div className="" >
+                        
                             <div className="row row5">
                             <div className="col-12">
                               <h4 className="text-uppercase mt-3">{casinoName}</h4>
                             </div>
                           </div>
-                          )
-                        }
                         <div
                           className={`row row5 mt-2 ${
                             casinoData === null ? "dis-none" : ""
                           }`}>
                           {casinoData?.length > 0 &&
-                            casinoData.map((item) => {
+                            casinoData.map((item, id) => {
                               return (
-                                <div key={item.gameId} className="coll-6 text-center" onClick={(e)=>handleData(item.gameId, e)}>
+                                <div key={item.gameId} className="col-3 text-center" onClick={(e)=>handleData(item.gameId, e)}>
                                   <div className="casinoicons" >
                                     <a href="/">
                                       <img
@@ -114,6 +111,10 @@ const Slot = () => {
                                       <div className="casino-name">
                                         {item.gameName}
                                       </div>
+                                      {/* {
+                                        id===0?<div class="new-launch-casino">New Launch</div>:""
+                                      } */}
+                                      
                                     </a>
                                   </div>
                                 </div>
