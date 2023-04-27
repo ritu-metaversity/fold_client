@@ -52,14 +52,12 @@ function ChangePassword(props) {
           // console.log(res.message)
           props.statusMsg(res.status)
           if (res.status === true) {
-            setShowError(true);
-            setColor("success");
             setMessege(res.message);
             setTimeout(function () {
               setIsLoading(false)
               AuthorAPI.LOGOUT();
               localStorage.clear();
-              nav("/");
+              nav("/login");
             }, 500);
           }
         });
@@ -72,14 +70,12 @@ function ChangePassword(props) {
             localStorage.clear();
             
             if (res.status === true) {
-              setShowError(true);
-              setColor("success");
               setMessege(res.message);
               setTimeout(function () {
                 setIsLoading(false)
                 localStorage.clear();
                 AuthorAPI.LOGOUT();
-                nav("/");
+                nav("/login");
               }, 500);
             }
           });

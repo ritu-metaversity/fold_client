@@ -67,6 +67,7 @@ const NavBar = () => {
 
 
   const handleSignOut = () => {
+    if(localStorage.getItem("token") !== null)
     AuthorAPI.LOGOUT().then((res) => {
     });
   };
