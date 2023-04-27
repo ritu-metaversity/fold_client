@@ -27,10 +27,11 @@ import Withdraw from "./component/Items/Withdrow/Withdraw";
 import Register from "./component/Register/Register";
 import { AuthorAPI } from "./apis/AuthorAPI";
 import Sport from "./component/Sports/Sport";
-import SportData from "./component/Sports/SportData";
+import SportData from "./component/Sports/SportData"; 
 import NavBar from "./component/navBar/NavBar";
 import Mobilenav from "./component/navBar/MobileNav/Mobilenav";
 import Signup3 from './component/Items/SignUpForm/signup3/Signup3'
+import Signup1 from './component/Items/SignUpForm/singup1/Signup1'
 
 function App() {
   const [SportId, setSportId] = useState("");
@@ -48,6 +49,7 @@ function App() {
           .then()
           .catch((error) => {
             if (error.response.status === 401) {
+              console.log("App.js")
               localStorage.clear();
               nav("/login");
             }
@@ -62,6 +64,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
+      console.log("App.js2")
       localStorage.clear()
       nav("/login");
     }
@@ -93,7 +96,8 @@ function App() {
         <Route exact path="/login" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
-        <Route exact path="/signup1" element={<Signup3/>} />
+        <Route exact path="/signup3" element={<Signup3/>} />
+        {/* <Route exact path="/signup1" element={<Signup1/>} /> */}
         <Route path="" element={<NavBar />}>
           <Route exact path="/deposit" element={<Deposit />} />
           <Route exact path="/withdraw" element={<Withdraw />} />

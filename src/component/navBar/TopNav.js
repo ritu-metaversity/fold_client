@@ -15,11 +15,12 @@ function TopNav({gameId}) {
     });
   }, []);
   
-
+  
   const handleClick = (val, val2) => {
     setactive(val);
     gameId(val);
   };
+  console.log(gameId, "dsdfd");
 
 
 

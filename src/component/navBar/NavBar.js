@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./Nav.css";
 import { UserAPI } from "../../apis/UserAPI";
 import { AuthorAPI } from "../../apis/AuthorAPI";
@@ -16,8 +16,12 @@ const NavBar = () => {
   const [status, setStatus] = useState(false);
   const [error, setError] = useState(false);
   const [Exp, setExp] = useState("");
-
+  const [balanceShow, setBalanceShow] = useState(true);
+  const [expShow, setExpShowShow] = useState(true);
   const [showExpModals, setShowExpModals] = useState(false);
+
+  const nav = useNavigate();
+
 
   function toggle(e) {
     e.preventDefault();
@@ -36,11 +40,6 @@ const NavBar = () => {
     }
   }
 
-
-  
- 
-
-  
   useEffect(() => {
     const token = localStorage.getItem("token");
     UserAPI.Self_By_App_Url().then((res) => {
@@ -63,7 +62,12 @@ const NavBar = () => {
       setUserMessage(res);
     });
 
-  }, []);
+    if (localStorage.getItem("token") === null) {
+      nav("/login");
+    }
+  }, [nav]);
+
+
 
 
   const handleSignOut = () => {
@@ -72,8 +76,7 @@ const NavBar = () => {
     });
   };
 
-  const [balanceShow, setBalanceShow] = useState(true);
-  const [expShow, setExpShowShow] = useState(true);
+ 
 
   const balanceHideShow = (e) => {
     e.preventDefault();
@@ -129,7 +132,7 @@ const NavBar = () => {
                     </b>
                   </p>
                   <div className="exp" >
-                    <span onClick={(e) =>handleExpShow(e)}>
+                    <span onClick={(e) =>handleExpShow(e)} className={expShow?"":"d-none"}>
                       <u>Exp: {parseFloat(Exp)?.toFixed(2)}</u>
                     </span>
 

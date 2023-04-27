@@ -1,15 +1,15 @@
 .backgroundImg {
     padding: 5%;
-    background-image: url("https://www.indipredict.com/static/DesktopLandscape.97c847c8.jpg");
+    background-image: url("/public/maggibook5_1.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: auto;
+    height: 100vh;
 }
 
 .formholder {
     text-align: center;
-    padding: 8%;
+    padding: 3%;
     border-radius: 20px;
     background-color: #fff;
     margin-top: 5%;
@@ -17,6 +17,8 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    width: 39%;
+    float: right;
 }
 
 .formholder::before {
@@ -28,7 +30,7 @@
     left: -20%;
     bottom: -10%;
     width: 200px;
-    background: linear-gradient(0deg, rgba(255, 151, 0, 1) 0%, rgba(251, 75, 2, 1) 100%);
+    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(209 99 164) 100%);
 }
 
 .formholder::after {
@@ -41,7 +43,7 @@
     right: -20%;
     top: -10%;
     width: 200px;
-    background: linear-gradient(0deg, rgba(255, 151, 0, 1) 0%, rgba(251, 75, 2, 1) 100%);
+    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(209 99 164) 100%);
 
 }
 
@@ -171,7 +173,7 @@
 }
 
 .btn-7 {
-    background: linear-gradient(0deg, rgba(255, 151, 0, 1) 0%, rgba(251, 75, 2, 1) 100%);
+    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(209 99 164) 100%);
     line-height: 42px;
     padding: 0;
     border: none;
@@ -269,20 +271,43 @@
         transform: translate(0%);
     }
 }
-
-@media screen and (max-width:520px) {
+@media screen and (min-width: 300px) and (max-width: 425px) {
 
     .backgroundImg {
-        height: auto;
-        padding: 2%;
+        background-position: center !important;
     }
-
+    .backgroundImg {
+        padding: 5%;
+        background-image: url("/public/Artboard2-2.png");
+        background-position: unset;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+    .formholder {
+        text-align: center;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-top: 5%;
+    z-index: 99;
+    position: relative;
+    isolation: isolate;
+    position: absolute;
+    overflow: hidden;
+    bottom: 0px;
+    left: 0%;
+    width: 98%;
+    margin-inline: 1%;
+    }
     .formholder {
         padding: 4%;
     }
 
     .heading {
         font-size: 14px;
+        color: rgb(192 104 175);
+        font-weight: 800;
+        letter-spacing: 2px;
     }
 
     .formholder::after {
@@ -299,5 +324,89 @@
         left: -25%;
     }
 
+    .username,
+    .password,
+    .mobilecode,
+    .verificationcode {
+        border-bottom: 1px dashed rgba(251, 75, 2, 1);
+        border-left: 0;
+        padding: 5px;
+        border-right: 0;
+        border-top: 0;
+        margin: 14px auto;
+        box-shadow: 10px 10px 6px 0px rgba(240, 240, 240, 1);
+    }
 
 }
+
+@media screen and (min-width: 425px) and (max-width: 800px) {
+
+    .backgroundImg {
+        height: 115vh !important;
+    }
+    .backgroundImg {
+        padding: 5%;
+        background-image: url("/public/Artboard2-2.png");
+        background-position: unset;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+
+    .formholder {
+        text-align: center;
+    /* padding: 8%; */
+    border-radius: 20px;
+    background-color: #fff;
+    margin-top: 5%;
+    z-index: 99;
+    position: relative;
+    isolation: isolate;
+    position: absolute;
+    overflow: hidden;
+    bottom: -68px;
+    left: 0%;
+    width: 98%;
+    margin-inline: 1%;
+    }
+
+    .formholder {
+        padding: 4%;
+    }
+
+    .heading {
+        font-size: 14px;
+        color: rgb(192 104 175);
+        font-weight: 800;
+        letter-spacing: 2px;
+    }
+
+    .formholder::after {
+        height: 120px;
+        width: 120px;
+        top: -5%;
+        right: -25%;
+    }
+
+    .formholder::before {
+        height: 120px;
+        width: 120px;
+        bottom: -5%;
+        left: -25%;
+    }
+
+    .username,
+    .password,
+    .mobilecode,
+    .verificationcode {
+        border-bottom: 1px dashed rgba(251, 75, 2, 1);
+        border-left: 0;
+        padding: 5px;
+        border-right: 0;
+        border-top: 0;
+        margin: 14px auto;
+        box-shadow: 10px 10px 6px 0px rgba(240, 240, 240, 1);
+    }
+
+}
+

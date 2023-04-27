@@ -7,7 +7,7 @@ const Signup1 = () => {
     <>
       <div class=" main-wrapper">
         <div className="singupdiv">
-        <div class="header">Sign Up</div>
+        <div class="header">GET ₹1K RISK FREE PREDICTION</div>
         <form action="#">
           <div class="field input-field">
             <input type="text" required />
