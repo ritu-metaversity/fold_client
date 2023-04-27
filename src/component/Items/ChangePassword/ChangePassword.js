@@ -52,8 +52,6 @@ function ChangePassword(props) {
           // console.log(res.message)
           props.statusMsg(res.status)
           if (res.status === true) {
-            setShowError(true);
-            setColor("success");
             setMessege(res.message);
             setTimeout(function () {
               setIsLoading(false)
@@ -72,8 +70,6 @@ function ChangePassword(props) {
             localStorage.clear();
             
             if (res.status === true) {
-              setShowError(true);
-              setColor("success");
               setMessege(res.message);
               setTimeout(function () {
                 setIsLoading(false)
