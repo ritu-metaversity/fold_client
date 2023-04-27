@@ -2,6 +2,7 @@ import { React, useEffect, useState } from "react";
 import moment from "moment";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Slot from "../Items/Slot/Slot";
 // import { AuthorAPI } from "../../apis/AuthorAPI";
 
 function Item({ gameIdForItemPage, spName }) {
@@ -169,6 +170,7 @@ function Item({ gameIdForItemPage, spName }) {
                 </div>
               </div>
             </div>
+            <Slot/>
           </div>
         </>
       )}

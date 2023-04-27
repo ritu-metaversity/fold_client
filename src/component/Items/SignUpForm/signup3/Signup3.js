@@ -61,12 +61,14 @@ const validation = async()=>{
   return (
     <>
       <div className="backgroundImg">
-        <div className="container">
+        <div className="">
           <div className="row px-lg-0 px-sm-5">
-            <div className="col-md-12 col-lg-6">
-              <div className="videoholder">{/* <!-- video here --> */}</div>
-            </div>
-            <div className="col-md-12 col-lg-6">
+            {/* <div className="col-md-12 col-lg-6">
+              <div className="videoholder">
+                <!-- video here -->
+                </div>
+            </div> */}
+            <div className="">
               <div className="formholder">
                 <h4 className="heading">GET ₹1K RISK FREE PREDICTION</h4>
 
@@ -128,17 +130,6 @@ const validation = async()=>{
                       onKeyDown={validation}
                     />
                   </div>
-                  {/* <div className="verificationcode">
-                    <input
-                      type="number"
-                      name="verificationcode"
-                      placeholder="SMS verification code"
-                      id="verificationcode"
-                      value={input.verificationcode}
-                      onChange={handleInput}
-                      onKeyDown={validation}
-                    />
-                  </div> */}
                   <div className="signupbuttonholder">
                     <button disabled={disabled} className="custom-btn btn-7" id="_signup">
                       <span>Sign Up</span>

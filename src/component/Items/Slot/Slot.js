@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../apis/gameAPI";
 import "./Slot.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Slot = () => {
   const [casinoList, setCasinoList] = useState("");
@@ -33,6 +33,12 @@ const Slot = () => {
     });
   }, [casinoListId]);
 
+  const {pathname} = useLocation();
+
+  console.log(pathname, "fesrgrt");
+
+
+
   const nav = useNavigate();
   const handleData = (id, e) => {
     nav(`/casino/${id}`);
@@ -43,10 +49,13 @@ const Slot = () => {
     <>
       <>
       {
-        isLoading?<p className="lodder"><i className="fa fa-spinner fa-spin"></i></p>:<div className="tab-content">
+        isLoading?<p className="lodder"><i className="fa fa-spinner fa-spin"></i></p>:
+        <div className="tab-content">
         <div id="live-casino" className="tab-pane live-casino">
           <div className="container-fluid">
-            <div className="row">
+            {
+              pathname==="/home" || pathname ==="/m/In-play" || pathname==="/Home" || pathname === "/m/Others"?"":(
+                <div className="row">
               <ul className="nav nav-tabs slot-nav-bar">
                 {casinoList?.length > 0 &&
                   casinoList.map((item) => {
@@ -69,17 +78,24 @@ const Slot = () => {
                   })}
               </ul>
             </div>
+              )
+            }
+            
             <div className="row">
               <div className="tab-content casino-main">
-                <div id="casino" className="tab-pane  container">
+                <div id="casino" className="tab-pane ">
                   <div className="tab-content">
-                    <div className="tab-pane  casino-tables">
-                      <div className="container-fluid">
-                        <div className="row row5">
-                          <div className="col-12">
-                            <h4 className="text-uppercase mt-3">{casinoName}</h4>
+                    <div className="tab-pane casino-tables">
+                      <div className="container-fluid" style={{paddingTop:"12px"}}>
+                        {
+                          pathname==="/home" || pathname ==="/m/In-play" || pathname==="/Home" || pathname === "/m/Others"?"":(
+                            <div className="row row5">
+                            <div className="col-12">
+                              <h4 className="text-uppercase mt-3">{casinoName}</h4>
+                            </div>
                           </div>
-                        </div>
+                          )
+                        }
                         <div
                           className={`row row5 mt-2 ${
                             casinoData === null ? "dis-none" : ""

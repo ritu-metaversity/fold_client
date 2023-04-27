@@ -17,8 +17,9 @@ function ChangePassword(props) {
   const [isLoading, setIsLoading] = useState(false)
 
   const nav = useNavigate();
+
+
   const handleClick = () => {
-      
     if (currPassword === "") {
       setShowError(true);
       setColor("danger");
@@ -56,9 +57,10 @@ function ChangePassword(props) {
             setTimeout(function () {
               setIsLoading(false)
               AuthorAPI.LOGOUT();
+              console.log("change-pass")
               localStorage.clear();
               nav("/login");
-            }, 500);
+            }, 200);
           }
         });
       } else {
@@ -67,16 +69,15 @@ function ChangePassword(props) {
             currentPassword: currPassword,
             newPassword: newPasswords,
           }).then((res) => {
-            localStorage.clear();
-            
             if (res.status === true) {
               setMessege(res.message);
               setTimeout(function () {
+                console.log("change-pass2")
                 setIsLoading(false)
                 localStorage.clear();
                 AuthorAPI.LOGOUT();
                 nav("/login");
-              }, 500);
+              }, 200);
             }
           });
         }

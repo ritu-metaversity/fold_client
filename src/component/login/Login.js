@@ -47,7 +47,7 @@ function Login({ Errmessage, Statusmessage }) {
           setMessage("Invalid Username or password");
           const uId = res.userId;
           localStorage.setItem("UserId", uId);
-          if (res.token !== "" && user === res.userId) {
+          if (res.token !== "") {
             nav("/home");
           }
           const pType = res.passwordtype;
@@ -73,7 +73,7 @@ function Login({ Errmessage, Statusmessage }) {
     if (localStorage.getItem("token") === null) {
       nav("/login");
     }
-  }, []);
+  }, [nav]);
 
   const popupClose = (vl) => {
     setStatusVal(vl);
