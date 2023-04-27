@@ -683,7 +683,7 @@ p.team-name.col-6.text-right {
 }
 
 .fancy-market .ballrunning:after {
-    width: 203% !important;
+    width: 200% !important;
     content: "BALL RUNNING";
     font-size: 16px;
     color: #ff3c3c;

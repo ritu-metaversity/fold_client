@@ -71,7 +71,7 @@ function Login({ Errmessage, Statusmessage }) {
     });
 
     if (localStorage.getItem("token") === null) {
-      nav("/");
+      nav("/login");
     }
   }, []);
 
@@ -101,7 +101,7 @@ function Login({ Errmessage, Statusmessage }) {
         ) : (
           ""
         )}
-        {StatusVal === false && Statusmessage === undefined  ? (
+        {StatusVal === false && Statusmessage === false  ? (
           <div className="alertBtn">
             <AlertBtn color="danger" popupClose={popupClose} val={message} />
           </div>

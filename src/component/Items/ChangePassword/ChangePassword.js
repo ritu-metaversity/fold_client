@@ -59,7 +59,7 @@ function ChangePassword(props) {
               setIsLoading(false)
               AuthorAPI.LOGOUT();
               localStorage.clear();
-              nav("/");
+              nav("/login");
             }, 500);
           }
         });
@@ -79,7 +79,7 @@ function ChangePassword(props) {
                 setIsLoading(false)
                 localStorage.clear();
                 AuthorAPI.LOGOUT();
-                nav("/");
+                nav("/login");
               }, 500);
             }
           });

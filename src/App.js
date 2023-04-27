@@ -83,15 +83,16 @@ function App() {
   
   const statusMsg=(val)=>{
     setStatusmessage(val)
-    console.log(val,"dsfdgvxfgv")
+    // console.log(val,"dsfdgvxfgv")
   }
 
 
   return (
     <div className="App">
       <Routes>
-        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/login" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
         <Route exact path="/Register" element={<Register />} />
+        <Route exact path="/" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
         <Route exact path="/signup1" element={<Signup3/>} />
         <Route path="" element={<NavBar />}>
           <Route exact path="/deposit" element={<Deposit />} />
