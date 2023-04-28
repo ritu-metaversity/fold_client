@@ -119,7 +119,7 @@ export const userServices = {
   register: async (data: RegisterPayload) => {
     const params = {
       resource: userResources.REGISTER,
-      data,
+      data: { ...data, userId: data.username },
     };
     return await apiWithSnackbar(params);
   },
