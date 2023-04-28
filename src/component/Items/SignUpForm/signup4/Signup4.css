@@ -1,6 +1,6 @@
-.backgroundImg2 {
+.backgroundImg3 {
     padding: 5%;
-    background-image: url("/public/images/diamondexch3.png");
+    background-image: url("/public/images/diamondexch4.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -8,9 +8,9 @@
 }
 
 @media screen and (min-width: 300px) and (max-width: 800px) {
-    .backgroundImg2 {
+    .backgroundImg3 {
         padding: 5%;
-        background-image: url("/public/images/diamondexchmob3.png");
+        background-image: url("/public/images/diamondexchmob4.png");
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;

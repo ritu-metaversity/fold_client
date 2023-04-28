@@ -2,56 +2,65 @@ import { React, useState, useEffect } from "react";
 import "../item/Item.css";
 import { GameAPI } from "../../apis/gameAPI";
 
-
-function TopNav({gameId}) {
+function TopNav({ gameId }) {
   const [active, setactive] = useState(4);
   const [activeSport, setActiveSport] = useState([]);
   // const [SportIdList, setSportIdList] = useState(4);
-
 
   useEffect(() => {
     GameAPI.ACTIVE_SPORT_LIST().then((res) => {
       setActiveSport(res);
     });
   }, []);
-  
-  
-  const handleClick = (val, val2) => {
+
+  const handleClick = (val) => {
     setactive(val);
     gameId(val);
+    localStorage.setItem("SportId", val)
   };
-  console.log(gameId, "dsdfd");
-
-
 
   return (
     <div>
       <div className="sports active ">
         <ul className="nav nav-tabs game-nav-bar">
           {activeSport.map((res, id) => {
-              return (
-                <li className="nav-item text-center" key={id}>
-                  <a
-                    data-toggle="tab"
-                    href={`#${id+1}`}
-                    className={`nav-link nav1 ${
-                      active === res.sportId ? "active" : null
-                    }`}
-                    onClick={() => handleClick(res?.sportId, res?.sportName)}>
-                    <div>
-                      {
-                        res.sportId===4?<img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/4.png"
-                         alt="" />:res.sportId===1?
-                        <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/1.png" alt="" />:
-                        <img src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png" alt="" />
-                      }
-                    </div>
-                    <div className="sport_name">{res.sportName}</div>
-                  </a>
-                </li>
-              );
+            return (
+              <li className="nav-item text-center" key={id}>
+                <a
+                  data-toggle="tab"
+                  href={`#${id + 1}`}
+                  className={`nav-link nav1 ${
+                    active === res.sportId ? "active" : null
+                  }`}
+                  onClick={() => handleClick(res?.sportId, res?.sportName)}>
+                  <div>
+                    {res.sportId === 4 ? (
+                      <img
+                        src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/4.png"
+                        alt=""
+                      />
+                    ) : res.sportId === 1 ? (
+                      <img
+                        src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/1.png"
+                        alt=""
+                      />
+                    ) : res.sportId === 14 ? (
+                      <img
+                        src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/66.png"
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png"
+                        alt=""
+                      />
+                    )}
+                  </div>
+                  <div className="sport_name">{res.sportName}</div>
+                </a>
+              </li>
+            );
           })}
-
 
           {/* <li  className="nav-item text-center" >
             <a

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./Signup2.css";
+import "./Signup1.css";
 import * as yup from "yup";
 
-const Signup2 = () => {
+const Signup1 = () => {
   const [passwordShow, setPasswordShow] = useState(false);
   const [CpasswordShow, setCPasswordShow] = useState(false);
   const [input, setInput] = useState({
@@ -60,7 +60,7 @@ const validation = async()=>{
 
   return (
     <>
-      <div className="backgroundImg2">
+      <div className="backgroundImg1">
         <div className="">
           <div className="row px-lg-0 px-sm-5">
             {/* <div className="col-md-12 col-lg-6">
@@ -70,7 +70,7 @@ const validation = async()=>{
             </div> */}
             <div className="">
               <div className="formholder">
-                <h4 className="heading">5X Bonus  Up to ₹25000</h4>
+                <h4 className="heading">Up to ₹25000 Extra Bonus on First Deposit</h4>
 
                 <form id="form" className="mainform">
                   <div className="username">
@@ -152,4 +152,4 @@ const validation = async()=>{
   );
 };
 
-export default Signup2;
+export default Signup1;

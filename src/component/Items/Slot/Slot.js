@@ -34,11 +34,6 @@ const Slot = () => {
   }, [casinoListId]);
 
   const {pathname} = useLocation();
-
-  console.log(pathname, "fesrgrt");
-
-
-
   const nav = useNavigate();
   const handleData = (id, e) => {
     nav(`/casino/${id}`);

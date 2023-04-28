@@ -108,14 +108,16 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
   // }, []);
 
   useEffect(() => {
-    const SportId = localStorage.getItem("SportId")
+    const SporId = localStorage.getItem("SportId")
     if (SportId === "") {
       setSid(4);
     } else {
-      setSid(SportId);
+      setSid(SporId);
     }
     // eslint-disable-next-line
   }, [sId]);
+
+
 
 
   console.log(sId, "asdsafgsd")

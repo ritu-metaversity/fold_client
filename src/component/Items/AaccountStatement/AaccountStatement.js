@@ -26,7 +26,6 @@ function AaccountStatement() {
   const [showModals, setShowModals] = useState(false);
   const [remark, setRemark] = useState();
   const [MarketId, setMarketId] = useState();
-  const [currentPage, setCurrentPage] = useState();
   const [ErrorMsg, setErrorMsg] = useState("");
   const [Error, setError] = useState(false);
   const [ColorName, setColorName] = useState("");
@@ -121,23 +120,30 @@ function AaccountStatement() {
     setActive(val);
   };
 
-  const decrement = () => {
-    if (pageLength > 0) {
-      setPagination(pageLength - 1);
-    }
+  const increment = () => { 
+    if(pageLength - 1 !== pagination){
+      setPagination(pagination + 1)
+     setActive(pagination+1 );
+    //  setDisable(pagination + 1)
+    console.log(pagination)
+  }
   };
 
-  const increment = () => {
-    if (pageLength !== 1) {
-      setPagination(pageLength + 1);
+
+  const decerement = () => {
+    if(pagination !== 0){
+      setPagination(pagination - 1)
+      setActive(pagination-1 );
+      // setDisable(pagination - 1)
     }
-  };
-  const decrementByFirst = () => {
-    setPageLength(1);
   };
 
   const incrementByLast = () => {
-    setPagination(pageLength - 1);
+    setPagination(pageLength-1);
+  };
+
+  const decrementByFirst = () => {
+    setPagination(0);
   };
 
   useEffect(() => {
@@ -150,7 +156,6 @@ function AaccountStatement() {
         type: type,
       }).then((res) => {
         setDataList(res.dataList);
-        setCurrentPage(res?.currentPage);
       });
     }
     // eslint-disable-next-line
@@ -419,59 +424,48 @@ function AaccountStatement() {
               ""
             ) : (
               <div className="row row5 mt-2 ">
-                <div className="col-12">
-                  <nav aria-label="Page navigation example">
-                    <ul className="pagination">
-                      <li className="page-item" onClick={decrementByFirst}>
-                        <button className="page-link" aria-label="Previous">
-                          <span aria-hidden="true">First</span>
-                        </button>
-                      </li>
-                      <li className="page-item" onClick={decrement}>
-                        <button
-                          disabled={currentPage === pageLength ? true : false}
-                          className="page-link"
-                          aria-label="Previous">
-                          <span aria-hidden="true">Prev</span>
-                        </button>
-                      </li>
-                      {result?.length > 0 &&
-                        result.map((item, id) => {
-                          return (
-                            <li
-                              key={item + id}
-                              className="page-item act"
-                              onClick={() => handlePagenation(id)}>
-                              <button
-                                className={`page-link ${Active === id ? "act" : ""} `}>
-                                <span
-                                  aria-hidden="true"
-                                  className={Active === id ? "num" : ""}>
-                                  {item === "" ? 1 : item + 1}
-                                </span>
-                              </button>
-                            </li>
-                          );
-                        })}
-                      <li className="page-item" onClick={increment}>
-                        <button
-                           className={`page-link ${Active === 1 ? "act" : ""} `}
-                          disabled={pageLength === 1 ? true : false}
-                          aria-label="Next"
-                          onClick={() => handlePagenation(1)}
-                          >
-                          <span aria-hidden="true">Next</span>
-                        </button>
-                      </li>
-                      <li className="page-item" onClick={incrementByLast}>
-                        <button className="page-link" aria-label="Next">
-                          <span aria-hidden="true">Last</span>
-                        </button>
-                      </li>
-                    </ul>
-                  </nav>
+                  <div
+                    className={`col-12 ${pageLength === 0 ? "dis-none" : ""}`}>
+                    <nav aria-label="Page navigation example">
+                      <ul className="pagination">
+                        <li className="page-item" onClick={decrementByFirst}>
+                          <button className="page-link" aria-label="Previous">
+                            <span aria-hidden="true">First</span>
+                          </button>
+                        </li>
+                        <li className="page-item" onClick={decerement}>
+                          <button className="page-link" aria-label="Previous">
+                            <span aria-hidden="true">Prev</span>
+                          </button>
+                        </li>
+                          <li
+                            className="page-item "
+                            onClick={() => handlePagenation(1)}>
+                            <button className="plink act">
+                              <span aria-hidden="true" className="num">
+                                {pagination+1}
+                              </span>
+                            </button>
+                          </li>
+                        <li className="page-item" onClick={increment}>
+                          <button
+                            className="page-link"
+                            // disabled={!(pageLength - 1 === pagination)}
+                            aria-label="Next">
+                            <span aria-hidden="true" className="num">
+                              Next
+                            </span>
+                          </button>
+                        </li>
+                        <li className="page-item" onClick={incrementByLast}>
+                          <button className="page-link" aria-label="Next">
+                            <span aria-hidden="true">Last</span>
+                          </button>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
                 </div>
-              </div>
             )}
           </div>
         </div>

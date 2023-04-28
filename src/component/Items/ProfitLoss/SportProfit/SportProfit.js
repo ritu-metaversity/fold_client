@@ -88,8 +88,8 @@ function SportProfit() {
     
     });
   }, [SportId, pagination]);
-  
 
+  
   const getIndexValues = (e) => {
     setIndexValue(e.target.value);
   };
@@ -133,37 +133,33 @@ function SportProfit() {
   }
   };
 
-  const result = [];
-  for (var i = 0; i < pageLength; i++) {
-    result[i] = i;
-  }
-
-  const handlePagenation = (val) => {
+  const handleClick = (val, id) => {
     setPagination(val);
-    setActive(val);
+    setActive(id);
   };
 
-  const decrement = () => {
-    if (pagination > 0) {
-      setPagination(pagination - 1);
-      setActive(pagination - 1);
-    }
+  const increment = () => { 
+    if(pageLength - 1 !== pagination){
+      setPagination(pagination + 1)
+     setActive(pagination+1 );
+    console.log(pagination)
+  }
   };
 
-  const increment = () => {
-    if (pagination !== 1) {
-      setPagination(pagination + 1);
-      setActive(pagination + 1);
+
+  const decerement = () => {
+    if(pagination !== 0){
+      setPagination(pagination - 1)
+      setActive(pagination-1 );
     }
-  };
-  const decrementByFirst = () => {
-    setPagination(1);
-    setActive(0)
   };
 
   const incrementByLast = () => {
-    setPagination(pageLength - 1);
-    setActive(pageLength-1)
+    setPagination(pageLength-1);
+  };
+
+  const decrementByFirst = () => {
+    setPagination(0);
   };
 
 
@@ -381,7 +377,7 @@ function SportProfit() {
                 </div>
               </div>
             </div>
-            <div className={`row row5 mt-2 ${DataVal === null?"d-none":""}`}>
+            {/* <div className={`row row5 mt-2 ${DataVal === null?"d-none":""}`}>
                 <div className="col-12">
                   <nav aria-label="Page navigation example">
                     <ul className="pagination">
@@ -446,7 +442,50 @@ function SportProfit() {
                     </ul>
                   </nav>
                 </div>
-              </div>
+              </div> */}
+              <div className={`row row5 mt-2 ${DataVal === null?"d-none":""}`}>
+                  <div
+                    className={`col-12 ${pageLength === 0 ? "dis-none" : ""}`}>
+                    <nav aria-label="Page navigation example">
+                      <ul className="pagination">
+                        <li className="page-item" onClick={decrementByFirst}>
+                          <button className="page-link" aria-label="Previous">
+                            <span aria-hidden="true">First</span>
+                          </button>
+                        </li>
+                        <li className="page-item" onClick={decerement}>
+                          <button className="page-link" aria-label="Previous">
+                            <span aria-hidden="true">Prev</span>
+                          </button>
+                        </li>
+                          <li
+                            className="page-item "
+                            onClick={() => handleClick(1)}>
+                            <button className="plink act" style={{padding: "5px 12px"}}>
+                              <span aria-hidden="true" className="num">
+                                {pagination+1}
+                              </span>
+                            </button>
+                          </li>
+                        <li className="page-item" onClick={increment}>
+                          <button
+                            className="page-link"
+                            // disabled={!(pageLength - 1 === pagination)}
+                            aria-label="Next">
+                            <span aria-hidden="true" className="num">
+                              Next
+                            </span>
+                          </button>
+                        </li>
+                        <li className="page-item" onClick={incrementByLast}>
+                          <button className="page-link" aria-label="Next">
+                            <span aria-hidden="true">Last</span>
+                          </button>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
           </div>
         </div>
       </div>

@@ -1519,6 +1519,26 @@ background-color: #007bff;
 
 
 }
+.depositMNav{
+    background-color: #59CE72 !important;
+    color: #fff;
+    width: 85%;
+    border-bottom: 1px solid #fff;
+    margin: auto;
+    border-radius: 5px;
+    margin-bottom: 6px;
+    padding-left: 5px;
+}
+.withdrawNav{
+    background-color: #DC3545 !important;
+    color: #fff;
+    width: 85%;
+    border-bottom: 1px solid #fff;
+    margin: auto;
+    border-radius: 5px;
+    margin-bottom: 6px;
+    padding-left: 5px;
+}
 
 
 @media screen and (max-width: 400px){

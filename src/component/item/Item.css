@@ -430,7 +430,7 @@ table {
     justify-content: center;
     align-items: center;
     height: 83vh;
-    background: #00000038;
+    background: #f1f5f8;
 }
 .lodder i{
     font-size: 32px;
@@ -441,7 +441,7 @@ table {
     flex-direction: column;
 }
 
-.game-listing-container.main-container {
-    /* height: 60vh;
-    overflow: scroll; */
+.scrollItem {
+    height: 30vh;
+    overflow: scroll;
 }

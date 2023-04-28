@@ -31,7 +31,10 @@ import SportData from "./component/Sports/SportData";
 import NavBar from "./component/navBar/NavBar";
 import Mobilenav from "./component/navBar/MobileNav/Mobilenav";
 import Signup3 from './component/Items/SignUpForm/signup3/Signup3'
-import Signup1 from './component/Items/SignUpForm/singup1/Signup1'
+import Signup1 from './component/Items/SignUpForm/signup1/Signup1'
+import Signup2 from "./component/Items/SignUpForm/signup2/Signup2";
+import Signup4 from "./component/Items/SignUpForm/signup4/Signup4";
+import Signup5 from "./component/Items/SignUpForm/signup5/Signup5";
 
 function App() {
   const [SportId, setSportId] = useState("");
@@ -62,11 +65,24 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
+
+
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
-      console.log("App.js2")
       localStorage.clear()
       nav("/login");
+      if(pathname === "/signup3"){
+        nav("/signup3");
+      }else if(pathname === "/signup1"){
+        nav("/signup1")
+      }else if(pathname === "/signup2"){
+        nav("/signup2")
+      }else if(pathname === "/signup4"){
+        nav("/signup4")
+      }else if(pathname === "/signup5"){
+        nav("/signup5")
+      }
+
     }
   }, []);
 
@@ -93,51 +109,59 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route exact path="/login" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
-        <Route exact path="/Register" element={<Register />} />
-        <Route exact path="/" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
+        <Route  path="/login" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
+        <Route  path="/Register" element={<Register />} />
+        <Route  path="/" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
         <Route exact path="/signup3" element={<Signup3/>} />
-        {/* <Route exact path="/signup1" element={<Signup1/>} /> */}
+        <Route exact path="/signup1" element={<Signup1/>} />
+        <Route exact path="/signup2" element={<Signup2/>} />
+        <Route exact path="/signup4" element={<Signup4/>} />
+        <Route exact path="/signup5" element={<Signup5/>} />
         <Route path="" element={<NavBar />}>
-          <Route exact path="/deposit" element={<Deposit />} />
-          <Route exact path="/withdraw" element={<Withdraw />} />
+          <Route  path="/deposit" element={<Deposit />} />
+          <Route  path="/withdraw" element={<Withdraw />} />
           <Route
-            exact
+            
             path="/gamedetail/:id"
             element={<GameHead SportId={SportId} />}
           />
-          <Route exact path="/casino/:id" element={<Casino />} />
+          <Route  path="/casino/:id" element={<Casino />} />
           <Route
-            exact
+            
             path="/m/reports/accountstatement"
             element={<AaccountStatement />}
           />
-          <Route exact path="/m/reports/profitloss" element={<ProfitLoss />} />
-          <Route exact path="/m/reports/bethistory" element={<BetHistory />} />
+          <Route  path="/m/reports/profitloss" element={<ProfitLoss />} />
+          <Route  path="/m/reports/bethistory" element={<BetHistory />} />
           <Route
-            exact
+            
             path="/m/reports/unsetteledbet"
             element={<UnSetteledBet />}
           />
           <Route
-            exact
+            
             path="/m/setting/changebtnvalue"
             element={<ChangeBtnValue />}
           />
           <Route
-            exact
+            
             path="/m/setting/changepassword"
             element={<ChangePassword  message={message} statusMsg={statusMsg}/>}
           />
-          <Route exact path="/SignOut" element={<SignOut />} />
+          <Route  path="/SignOut" element={<SignOut />} />
+
           <Route path="" element={<Mobilenav />}>
-            <Route exact path="/Home" element={<Home idddd={idddd} />} />
-            <Route exact path="/m/sports" element={<SportData />} />
-            <Route exact path="/m/others" element={<Home />} />
-            <Route exact path="/m/In-play" element={<Home />} />
-            <Route exact path="/m/slot" element={<Slot />} />
+            <Route  path="/Home" element={<Home idddd={idddd} />} />
+            <Route  path="/m/sports" element={<SportData />} />
+            <Route  path="/m/others" element={<Home />} />
+            <Route  path="/m/In-play" element={<Home />} />
+            <Route  path="/m/slot" element={<Slot />} />
           </Route>
+
         </Route>
+
+        <Route  path="*" element={<Login/>} />
+        
       </Routes>
     </div>
   );

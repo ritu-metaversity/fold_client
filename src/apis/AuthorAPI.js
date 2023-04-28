@@ -52,7 +52,7 @@ export const AuthorAPI = {
       return response.data
     },
 
-    Register: async function ({username, password, confirmPassword, mobile}, cancel = false) {
+    Register: async function ({username, password, confirmPassword, mobile, userId}, cancel = false) {
       const response = await api.request({
         url: `/user/self-register`,
         method: "POST",
@@ -61,6 +61,7 @@ export const AuthorAPI = {
             confirmPassword:confirmPassword,
             password: password,
             mobile:mobile,
+            userId:userId,
             appUrl: window.location.hostname
         },
         signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
