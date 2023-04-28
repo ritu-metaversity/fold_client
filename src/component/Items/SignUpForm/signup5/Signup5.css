@@ -1,13 +1,78 @@
-.backgroundImg {
+.backgroundImg4 {
     padding: 5%;
-    background-image: url("/public/images/diamondexchangemob1.png");
+    background-image: url("/public/images/diamondexch5.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
 }
+.formholder1::before {
+    animation: translate 3000ms infinite reverse;
+    position: absolute;
+    content: "";
+    border-radius: 50%;
+    height: 200px;
+    left: -20%;
+    bottom: -10%;
+    width: 200px;
+   background: linear-gradient(0deg, rgb(197 36 131) 0%, rgb(17 33 72) 100%);
+}
+.formholder1::after {
 
-.formholder {
+    animation: translate 3000ms infinite reverse;
+    position: absolute;
+    content: "";
+    border-radius: 50%;
+    height: 200px;
+    right: -20%;
+    top: -10%;
+    width: 200px;
+   background: linear-gradient(0deg, rgb(197 36 131) 0%, rgb(17 33 72) 100%);
+
+}
+
+/* @media screen and (min-width: 300px) and (max-width: 800px) {
+    .backgroundImg4 {
+        padding: 5%;
+        background-image: url("/public/images/diamondexch5mob.png");
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+    .formholder1 {
+        text-align: center;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-top: 5%;
+    z-index: 99;
+    position: relative;
+    isolation: isolate;
+    position: absolute;
+    overflow: hidden;
+    bottom: 0px;
+    left: 0%;
+    width: 98%;
+    margin-inline: 1%;
+    padding: 4%;
+    }
+    .formholder1::after {
+        height: 120px;
+        width: 120px;
+        top: -5%;
+        right: -25%;
+    }
+    .formholder1::before {
+        height: 120px;
+        width: 120px;
+        bottom: -5%;
+        left: -25%;
+    }
+
+} */
+
+
+.formholder1 {
     text-align: center;
     padding: 3%;
     border-radius: 20px;
@@ -27,7 +92,7 @@ color: rgb(14 78 143);
 font-weight: 800;
 letter-spacing: 2px;
 }
-.formholder::before {
+.formholder1::before {
     animation: translate 3000ms infinite reverse;
     position: absolute;
     content: "";
@@ -36,10 +101,10 @@ letter-spacing: 2px;
     left: -20%;
     bottom: -10%;
     width: 200px;
-    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(13 37 57) 100%);
+   background: linear-gradient(0deg, rgb(197 36 131) 0%, rgb(17 33 72) 100%);
 }
 
-.formholder::after {
+.formholder1::after {
 
     animation: translate 3000ms infinite reverse;
     position: absolute;
@@ -49,7 +114,7 @@ letter-spacing: 2px;
     right: -20%;
     top: -10%;
     width: 200px;
-    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(13 37 57) 100%);
+   background: linear-gradient(0deg, rgb(197 36 131) 0%, rgb(17 33 72) 100%);
 
 }
 
@@ -179,7 +244,7 @@ letter-spacing: 2px;
 }
 
 .btn-7 {
-    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(13 37 57) 100%);
+   background: linear-gradient(0deg, rgb(197 36 131) 0%, rgb(17 33 72) 100%);
     line-height: 42px;
     padding: 0;
     border: none;
@@ -278,19 +343,20 @@ letter-spacing: 2px;
     }
 }
 @media screen and (min-width: 300px) and (max-width: 800px) {
-    .backgroundImg {
+    .backgroundImg4 {
         padding: 5%;
-        background-image: url("/public/images/diamondexch1.png");
+        background-image: url("/public/images/diamondexch5mob.png");
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
         height: 100vh;
     }
+
     .alreadyaccount {
         margin: 11px auto;
         text-align: center;
     }
-    .formholder {
+    .formholder1 {
         text-align: center;
     border-radius: 20px;
     background-color: #fff;
@@ -315,14 +381,14 @@ letter-spacing: 2px;
     letter-spacing: 2px;
     }
 
-    .formholder::after {
+    .formholder1::after {
         height: 120px;
         width: 120px;
         top: -5%;
         right: -25%;
     }
 
-    .formholder::before {
+    .formholder1::before {
         height: 120px;
         width: 120px;
         bottom: -5%;
@@ -344,73 +410,4 @@ letter-spacing: 2px;
 
 }
 
-/* @media screen and (min-width: 426px) and (max-width: 800px) {
-
-    .backgroundImg {
-        height: 115vh !important;
-    }
-    .backgroundImg {
-        padding: 5%;
-        background-image: url("/public/images/diamondexch1.png");
-        background-position: top;
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 100vh;
-    }
-
-    .formholder {
-        text-align: center;
-        padding: 8%;
-        border-radius: 20px;
-        background-color: #fff;
-        z-index: 99;
-        position: relative;
-        isolation: isolate;
-        position: absolute;
-        overflow: hidden;
-        bottom: -131px;
-        left: 0%;
-        width: 98%;
-        margin-inline: 1%;
-    }
-
-    .formholder {
-        padding: 4%;
-    }
-
-    .heading {
-        font-size: 26px;
-        color: rgb(5 101 183);
-        font-weight: 800;
-        letter-spacing: 2px;
-    }
-
-    .formholder::after {
-        height: 120px;
-        width: 120px;
-        top: -5%;
-        right: -25%;
-    }
-
-    .formholder::before {
-        height: 120px;
-        width: 120px;
-        bottom: -5%;
-        left: -25%;
-    }
-
-    .username,
-    .password,
-    .mobilecode,
-    .verificationcode {
-        border-bottom: 1px dashed rgba(251, 75, 2, 1);
-        border-left: 0;
-        padding: 5px;
-        border-right: 0;
-        border-top: 0;
-        margin: 14px auto;
-        box-shadow: 10px 10px 6px 0px rgba(240, 240, 240, 1);
-    }
-
-} */
 

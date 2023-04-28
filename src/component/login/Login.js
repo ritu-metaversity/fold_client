@@ -18,7 +18,7 @@ function Login({ Errmessage, Statusmessage }) {
   const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
 
-  console.log(Statusmessage, "loginpage");
+  // console.log(Statusmessage, "loginpage");
 
   const handleLogin = () => {
     // history.push('/home')
@@ -36,7 +36,10 @@ function Login({ Errmessage, Statusmessage }) {
         password: password,
       })
         .then((res) => {
+          // console.log(res.message, "sdfsdgf")
           const token = res.token;
+          setMessage(res.message)
+          console.log(res)
           setIsLoading(false);
           localStorage.removeItem("UserName");
           localStorage.removeItem("UserPassword");
@@ -47,7 +50,7 @@ function Login({ Errmessage, Statusmessage }) {
           setMessage("Invalid Username or password");
           const uId = res.userId;
           localStorage.setItem("UserId", uId);
-          if (res.token !== "") {
+          if (res.token !== "" && res.status !== false) {
             nav("/home");
           }
           const pType = res.passwordtype;

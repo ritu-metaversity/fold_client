@@ -201,6 +201,28 @@ export const GameAPI = {
     return response.data.data;
   },
 
+  BET_HISTORY: async function ({ sportId, fromDate, toDate, index, noOfRecords, isdeleted }, cancel = false) {
+    const response = await api.request({
+      url: "enduser/bet-list-history",
+      method: "POST",
+      data: {
+        sportId,
+        fromDate,
+        toDate,
+        index,
+        noOfRecords,
+        isdeleted
+
+      },
+
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data.data;
+  },
+
 
 };
 

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { AuthorAPI } from "../../apis/AuthorAPI";
-import RegisterModals from "./RegisterModals";
-import Modal from "react-bootstrap/Modal";
 import AlertBtn from "../Alert/AlertBtn";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -10,15 +8,10 @@ const Register = () => {
   const [mobileNumber, setMobileNumber] = useState();
   const [UserName, setUserName] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
-  const [showModals, setShowModals] = useState(false);
-  const [userId, setUserId] = useState();
-  const [userPassword, setUserPassword] = useState();
   const [errorMsg, setErrorMsg] = useState();
   const [StatusVal, setStatusVal] = useState(true);
   const [StatusCode, setStatusCode] = useState();
-  // const [timeOut, setTimeOut] = useState(null);
 
-  const handleCloseModal = () => setShowModals(false);
 
 
 
@@ -58,6 +51,7 @@ const Register = () => {
         password: password,
         confirmPassword: confirmPassword,
         mobile: mobileNumber,
+        userId:UserName
       })
         .then((res) => {
           localStorage.setItem("UserName", res.username);

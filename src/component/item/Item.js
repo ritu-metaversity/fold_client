@@ -1,13 +1,13 @@
 import { React, useEffect, useState } from "react";
 import moment from "moment";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import axios from "axios";
 import Slot from "../Items/Slot/Slot";
-// import { AuthorAPI } from "../../apis/AuthorAPI";
 
 function Item({ gameIdForItemPage, spName }) {
   const [gameName, setGameName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [MatchListLength, setMatchListLength] = useState();
 
 
 
@@ -15,8 +15,6 @@ function Item({ gameIdForItemPage, spName }) {
     gameIdForItemPage = 4;
   }
 
-
-  
   // useEffect(() => {
   //   if (gameIdForItemPage != null) {
   //     const token = localStorage.getItem("token");
@@ -42,11 +40,17 @@ function Item({ gameIdForItemPage, spName }) {
           {token : token}
         )
         .then((res) => {
-          setGameName(res.data.data);
+          setGameName(res?.data?.data);
           setIsLoading(false);
+          
         });
+
         // setIsLoading(true)
   }, []);
+  
+  useEffect(()=>{
+    setMatchListLength(gameName && gameName?.find((item) =>item?.sportid === gameIdForItemPage)?.matchList?.length);
+  })
 
 
   return (
@@ -59,7 +63,7 @@ function Item({ gameIdForItemPage, spName }) {
         <>
           <div className="tab-pane container pl-0 pr-0">
             <div
-              className="game-listing-container main-container">
+              className={`game-listing-container main-container ${MatchListLength > 3 ?"scrollItem":""}`}>
               <div>
                
                <div className="">
@@ -168,8 +172,9 @@ function Item({ gameIdForItemPage, spName }) {
                 </div>
               </div>
             </div>
-            <Slot/>
+            
           </div>
+          <Slot/>
         </>
       )}
     </div>

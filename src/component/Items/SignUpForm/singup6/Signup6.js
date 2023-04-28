@@ -1,8 +1,8 @@
 import React from "react";
-import "./Signup1.css";
+import "./Signup6.css";
 import { Link } from "react-router-dom";
 
-const Signup1 = () => {
+const Signup6 = () => {
   return (
     <>
       <div class=" main-wrapper">
@@ -42,4 +42,4 @@ const Signup1 = () => {
   );
 };
 
-export default Signup1;
+export default Signup6;

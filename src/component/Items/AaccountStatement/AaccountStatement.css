@@ -721,3 +721,15 @@ div#match_unmatched {
     }
     
 }
+
+.lodderr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 57vh;
+    background: #00000038;
+}
+.lodderr i{
+    font-size: 28px;
+}

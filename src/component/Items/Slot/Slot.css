@@ -73,11 +73,9 @@
         cursor: pointer;
     }
 
-.casino-main {
-    height: 77vh;
-    overflow: scroll;
-    background: #a7a9ab57;
-}
+    .casino-main {
+        background: #f1f5f8;
+    }
 
 .mob-view{
     display: none;

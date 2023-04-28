@@ -1,4 +1,3 @@
-import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { UserAPI } from "../../../apis/UserAPI";
 import "../AaccountStatement/AaccountStatement.css";
@@ -52,15 +51,26 @@ function UnSetteledBet() {
     setActive(id);
   };
 
-  const increment = () => {
-    if (result?.length - 1 === pageLength) setPagination(pageLength);
+  const increment = () => { 
+    if(pageLength - 1 !== pagination){
+      setPagination(pagination + 1)
+     setActive(pagination+1 );
+    //  setDisable(pagination + 1)
+    console.log(pagination)
+  }
   };
+
+
   const decerement = () => {
-    if (pageLength > 1) setPagination(pageLength - 1);
+    if(pagination !== 0){
+      setPagination(pagination - 1)
+      setActive(pagination-1 );
+      // setDisable(pagination - 1)
+    }
   };
 
   const incrementByLast = () => {
-    setPagination(pageLength - 1);
+    setPagination(pageLength-1);
   };
 
   const decrementByFirst = () => {
@@ -364,12 +374,6 @@ function UnSetteledBet() {
                                   className="text-center">
                                   {item.time}
                                 </td>
-                                {/* <td
-                                  role="columnheader"
-                                  aria-colindex="10"
-                                  className="text-left">
-                                  {moment(item.time).format("YYYY-MM-DD")}
-                                </td> */}
                               </tr>
                             );
                           })}
@@ -392,69 +396,49 @@ function UnSetteledBet() {
                   </div>
                 </div>
               </div>
-
               <div className="row row5 mt-2 ">
-                <div className={`col-12 ${pageLength === 0 ? "dis-none" : ""}`}>
-                  <nav aria-label="Page navigation example">
-                    <ul className="pagination">
-                      <li className="page-item" onClick={decrementByFirst}>
-                        <button className="page-link" aria-label="Previous">
-                          <span aria-hidden="true">First</span>
-                        </button>
-                      </li>
-                      <li className="page-item" onClick={decerement}>
-                        <button className="page-link" aria-label="Previous">
-                          <span aria-hidden="true">Prev</span>
-                        </button>
-                      </li>
-                      {result?.length > 0 &&
-                        result?.map((item, id) => {
-                          return (
-                            <li
-                              key={item + id}
-                              className="page-item "
-                              onClick={() => handleClick(item, id)}>
-                              <button
-                                className={`plink ${
-                                  Active === item ? "act" : ""
-                                }`}>
-                                <span aria-hidden="true" className="num">
-                                  {item === "" ? 1 : item}
-                                </span>
-                              </button>
-                            </li>
-                          );
-                        })}
-                      {result?.length === 0 && (
-                        <li
-                          className="page-item "
-                          onClick={() => handleClick(1)}>
-                          <button className="plink act">
+                  <div
+                    className={`col-12 ${pageLength === 0 ? "dis-none" : ""}`}>
+                    <nav aria-label="Page navigation example">
+                      <ul className="pagination">
+                        <li className="page-item" onClick={decrementByFirst}>
+                          <button className="page-link" aria-label="Previous">
+                            <span aria-hidden="true">First</span>
+                          </button>
+                        </li>
+                        <li className="page-item" onClick={decerement}>
+                          <button className="page-link" aria-label="Previous">
+                            <span aria-hidden="true">Prev</span>
+                          </button>
+                        </li>
+                          <li
+                            className="page-item "
+                            onClick={() => handleClick(1)}>
+                            <button className="plink act">
+                              <span aria-hidden="true" className="num">
+                                {pagination+1}
+                              </span>
+                            </button>
+                          </li>
+                        <li className="page-item" onClick={increment}>
+                          <button
+                            className="page-link"
+                            // disabled={!(pageLength - 1 === pagination)}
+                            aria-label="Next">
                             <span aria-hidden="true" className="num">
-                              1
+                              Next
                             </span>
                           </button>
                         </li>
-                      )}
-                      <li className="page-item" onClick={increment}>
-                        <button
-                          className="page-link"
-                          disabled={pageLength ? true : false}
-                          aria-label="Next">
-                          <span aria-hidden="true" className="num">
-                            Next
-                          </span>
-                        </button>
-                      </li>
-                      <li className="page-item" onClick={incrementByLast}>
-                        <button className="page-link" aria-label="Next">
-                          <span aria-hidden="true">Last</span>
-                        </button>
-                      </li>
-                    </ul>
-                  </nav>
+                        <li className="page-item" onClick={incrementByLast}>
+                          <button className="page-link" aria-label="Next">
+                            <span aria-hidden="true">Last</span>
+                          </button>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
                 </div>
-              </div>
             </div>
             <div
               className={`row row5 mt-2 ${deleteVal === "2" ? "" : "d-none"}`}>

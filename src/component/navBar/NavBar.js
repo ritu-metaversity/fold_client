@@ -168,14 +168,14 @@ const NavBar = () => {
                         </Link>
                         <Link
                           to="/deposit"
-                          className={`dropdown-item router-link-exact-active router-link-active ${
+                          className={`dropdown-item router-link-exact-active router-link-active depositMNav ${
                             status ? "" : "d-none"
                           }`}>
                           Deposit
                         </Link>
                         <Link
                           to="/withdraw"
-                          className={`dropdown-item router-link-exact-active router-link-active ${
+                          className={`dropdown-item router-link-exact-active router-link-active withdrawNav ${
                             status ? "" : "d-none"
                           }`}>
                           Withdraw

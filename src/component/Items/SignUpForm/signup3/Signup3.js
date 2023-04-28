@@ -70,7 +70,7 @@ const validation = async()=>{
             </div> */}
             <div className="">
               <div className="formholder">
-                <h4 className="heading">GET ₹1K RISK FREE PREDICTION</h4>
+                <h4 className="heading">Deposit ₹500, Get ₹2500</h4>
 
                 <form id="form" className="mainform">
                   <div className="username">
