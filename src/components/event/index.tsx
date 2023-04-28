@@ -378,7 +378,7 @@ const Event = () => {
               }
             >
               <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
-                <OddsNumberTitle singleOdd={singleOdd} />
+                <OddsNumberTitle showBetDelay={true} singleOdd={singleOdd} />
                 {singleOdd?.runners.map((selection: any, index: string) => (
                   <Odds
                     details={singleOdd}
@@ -429,16 +429,19 @@ const Event = () => {
                 >
                   {type ? "Toss" : "Bookmaker"}
                 </Typography>
-                <MinMaxDelayTypography>
+                <MinMaxDelayTypography display={{lg:"none"}}>
                   Max: {dharmParivartan(BookmakerOdds[0].maxBet)}
                   {`   Min`}: {dharmParivartan(BookmakerOdds[0].minBet)}
-                  {`   Bet Delay`}: {BookmakerOdds[0].betDelay}
+                  {/* {`   Bet Delay`}: {BookmakerOdds[0].betDelay} */}
                 </MinMaxDelayTypography>
               </Box>
             }
           >
             <Box pb={{ xs: 1 }} px={{ xs: 1.5 }}>
-              <OddsNumberTitle singleOdd={BookmakerOdds[0]} />
+              <OddsNumberTitle
+                showBetDelay={false}
+                singleOdd={BookmakerOdds[0]}
+              />
               {BookmakerOdds?.map((odds: FancyOddsInterface, index) => (
                 <Bookmaker
                   suspended={odds?.gstatus === "SUSPENDED"}
@@ -613,9 +616,9 @@ const Event = () => {
                     >
                       {fancyMarket}
                     </Typography>
-                    <MinMaxDelayTypography>
+                    {/* <MinMaxDelayTypography>
                       Bet Delay: {fancyOdds[fancyMarket][0].betDelay}
-                    </MinMaxDelayTypography>
+                    </MinMaxDelayTypography> */}
                   </Box>
                 }
               >

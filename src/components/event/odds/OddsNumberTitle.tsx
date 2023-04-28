@@ -27,9 +27,10 @@ const gridProps2 = {
 
 interface Props {
   singleOdd: any;
+  showBetDelay: boolean;
 }
 
-export function OddsNumberTitle({ singleOdd }: Props) {
+export function OddsNumberTitle({ singleOdd, showBetDelay }: Props) {
   const { minBet, maxBet, betDelay } = singleOdd;
   return (
     <Grid container display={{ xs: "none", lg: "flex" }}>
@@ -58,7 +59,7 @@ export function OddsNumberTitle({ singleOdd }: Props) {
           >
             Max: {dharmParivartan(maxBet)}
             {`   Min`}:{dharmParivartan(minBet)}
-            {`   Bet Delay`}: {betDelay}
+            {showBetDelay ? `   Bet Delay: ${betDelay}` : ""}
           </Typography>
         </Grid>
         <Grid {...gridProps2}>Back</Grid>
