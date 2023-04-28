@@ -185,9 +185,9 @@ function Login({ Errmessage, Statusmessage }) {
               </small>
               <div className="form-group mt-1">
                 <p className="mt-1 text-center">
-                  <a href="mailto:info@diamondexch.com" className="mail-link">
-                    info@diamondexch.com
-                  </a>
+                  <Link to="/" className="mail-link">
+                 247diamondexch.com
+                  </Link>
                 </p>
               </div>
             </form>
