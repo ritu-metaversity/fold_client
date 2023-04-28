@@ -52,7 +52,6 @@ function App() {
           .then()
           .catch((error) => {
             if (error.response.status === 401) {
-              console.log("App.js")
               localStorage.clear();
               nav("/login");
             }
@@ -102,7 +101,6 @@ function App() {
   
   const statusMsg=(val)=>{
     setStatusmessage(val)
-    // console.log(val,"dsfdgvxfgv")
   }
 
 

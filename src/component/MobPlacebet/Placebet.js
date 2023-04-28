@@ -246,7 +246,7 @@ function Placebet({
                           <span
                             style={{ color: "black" }}
                             className={`${
-                              profit?.value > 0 ? "text-success" : "text-danger"
+                              profit?.value > 0 ? "text-success" :profit?.value < 0? "text-danger":""
                             }`}>
                             {profit.value}
                           </span>
@@ -262,15 +262,7 @@ function Placebet({
                             : profit.value +
                               (colorName === "back" ? -1 : 1) * updated) > 0
                             ? "text-success"
-                            : (profit.sid === selectionId
-                                ? profit.value +
-                                  (colorName === "back" ? 1 : -1) *
-                                    (odds - 1) *
-                                    updated
-                                : profit.value +
-                                  (colorName === "back" ? -1 : 1) * updated) < 0
-                            ? "text-danger"
-                            : ""
+                            : "text-danger"
                         }`}>
                         {profit.sid === selectionId
                           ? ((profit?.value || 0) +

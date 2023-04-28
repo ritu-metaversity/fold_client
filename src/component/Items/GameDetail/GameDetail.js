@@ -117,7 +117,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     // eslint-disable-next-line
   }, [sId]);
 
-
+  
 
 
   console.log(sId, "asdsafgsd")
