@@ -15,6 +15,9 @@ function Item({ gameIdForItemPage, spName }) {
     gameIdForItemPage = 4;
   }
 
+  localStorage.setItem("SportId", gameIdForItemPage);
+
+
   // useEffect(() => {
   //   if (gameIdForItemPage != null) {
   //     const token = localStorage.getItem("token");

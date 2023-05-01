@@ -6,7 +6,6 @@ axios.interceptors.response.use(
     function (err) {
       
       if (err.response?.status === 401) {
-        console.log("axios")
         localStorage.clear();
         window.location.replace("/")
       } else if (err?.response?.data?.message) {

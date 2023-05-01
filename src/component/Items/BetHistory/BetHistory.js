@@ -49,7 +49,6 @@ function BetHistory() {
     if(pageLength - 1 !== pagination){
       setPagination(pagination + 1)
      setActive(pagination+1 );
-    console.log(pagination)
   }
   };
 
@@ -80,12 +79,9 @@ function BetHistory() {
     }).then((res) => {
       setDataList(res?.dataList);
       setPageLength(res?.totalPages);
-      // console.log(res.totalPages ,"awdadas")
 
     });
   }, [pagination]);
-
-  // console.log(dataList)
 
   const getNoOfRecords = (e) => {
     setNoOfRecords(e.target.value);
@@ -112,11 +108,7 @@ function BetHistory() {
       setIsLoading(false);
       setDataList(res?.dataList);
       setPageLength(res.totalPages);
-
-      console.log(res, "asdsafsd");
-
       setDataListLength(res?.dataList?.length);
-      console.log(res, "dfsdghd");
     });
   };
 

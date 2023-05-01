@@ -20,8 +20,6 @@ function GameHead({ SportId, matchLength }) {
     }
   };
 
-  // console.log(SportId, "dsdfd")
-
   return (
     <>
       <div className="">

@@ -117,11 +117,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     // eslint-disable-next-line
   }, [sId]);
 
-  
-
-
-  console.log(sId, "asdsafgsd")
-
   const oddFromSocketSlower = (res) => {
     if (res) {
       setFancyOdds((fancyOdds) => {
@@ -204,7 +199,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
 
   useEffect(() => {
     fetch("https://api.ipify.org?format=json").then(res=>res.json()).then((res) => {
-      // console.log(res.ip, "sdfgdfg")
       setUserIP(res?.ip);
     });
   }, []);
@@ -400,8 +394,6 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
     setMatchId(mid);
     setFancyID(fanId);
   };
-
-  console.log(sId, "sId")
 
   return (
     <div className="main-div">

@@ -35,6 +35,7 @@ import Signup1 from './component/Items/SignUpForm/signup1/Signup1'
 import Signup2 from "./component/Items/SignUpForm/signup2/Signup2";
 import Signup4 from "./component/Items/SignUpForm/signup4/Signup4";
 import Signup5 from "./component/Items/SignUpForm/signup5/Signup5";
+import Signup6 from './component/Items/SignUpForm/singup6/Signup6';
 
 function App() {
   const [SportId, setSportId] = useState("");
@@ -80,6 +81,8 @@ function App() {
         nav("/signup4")
       }else if(pathname === "/signup5"){
         nav("/signup5")
+      }else if(pathname === "/signup6"){
+        nav("/signup6")
       }
 
     }
@@ -115,6 +118,7 @@ function App() {
         <Route exact path="/signup2" element={<Signup2/>} />
         <Route exact path="/signup4" element={<Signup4/>} />
         <Route exact path="/signup5" element={<Signup5/>} />
+        <Route exact path="/signup6" element={<Signup6/>} />
         <Route path="" element={<NavBar />}>
           <Route  path="/deposit" element={<Deposit />} />
           <Route  path="/withdraw" element={<Withdraw />} />

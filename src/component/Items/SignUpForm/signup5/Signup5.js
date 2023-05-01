@@ -53,8 +53,6 @@ const Signup5 = () => {
 
 const validation = async()=>{
     const isValid = await schema.isValid(input);
-
-    // console.log(isValid);
 }
 
 

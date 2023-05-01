@@ -55,8 +55,6 @@ function UnSetteledBet() {
     if(pageLength - 1 !== pagination){
       setPagination(pagination + 1)
      setActive(pagination+1 );
-    //  setDisable(pagination + 1)
-    console.log(pagination)
   }
   };
 

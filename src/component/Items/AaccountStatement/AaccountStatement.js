@@ -124,8 +124,6 @@ function AaccountStatement() {
     if(pageLength - 1 !== pagination){
       setPagination(pagination + 1)
      setActive(pagination+1 );
-    //  setDisable(pagination + 1)
-    console.log(pagination)
   }
   };
 
@@ -134,7 +132,6 @@ function AaccountStatement() {
     if(pagination !== 0){
       setPagination(pagination - 1)
       setActive(pagination-1 );
-      // setDisable(pagination - 1)
     }
   };
 

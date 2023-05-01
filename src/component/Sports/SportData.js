@@ -9,10 +9,6 @@ const SportData = (props) => {
     setGameIdForItemPage(id);
     props.idddd(id);
   };
-
-
-  console.log(gameIdForItemPage, "sadsaf")
-
   return (
     <>
       <div className="main-gameHead">

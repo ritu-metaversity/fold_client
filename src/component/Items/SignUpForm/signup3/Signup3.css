@@ -331,8 +331,7 @@ letter-spacing: 2px;
 
     .username,
     .password,
-    .mobilecode,
-    .verificationcode {
+    .mobilecode{
         border-bottom: 1px dashed rgba(251, 75, 2, 1);
         border-left: 0;
         padding: 5px;

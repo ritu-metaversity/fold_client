@@ -5,7 +5,6 @@ function SignOut() {
     const nav = useNavigate()
 
     useEffect(()=>{
-        console.log("sign-out")
     localStorage.clear();
     nav("/login")
     }, [])

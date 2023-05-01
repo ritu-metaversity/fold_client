@@ -18,8 +18,6 @@ function Login({ Errmessage, Statusmessage }) {
   const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
 
-  // console.log(Statusmessage, "loginpage");
-
   const handleLogin = () => {
     // history.push('/home')
     setIsLoading(true);
@@ -36,10 +34,8 @@ function Login({ Errmessage, Statusmessage }) {
         password: password,
       })
         .then((res) => {
-          // console.log(res.message, "sdfsdgf")
           const token = res.token;
           setMessage(res.message)
-          console.log(res)
           setIsLoading(false);
           localStorage.removeItem("UserName");
           localStorage.removeItem("UserPassword");
