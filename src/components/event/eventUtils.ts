@@ -8,7 +8,7 @@ import {
 
 export const transformMatchOdds = (odds: any) => {
   if (!odds.length) {
-    return null;
+    return [];
   }
 
   return odds.map((newOdds: any) => {

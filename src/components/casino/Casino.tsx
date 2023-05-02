@@ -14,6 +14,7 @@ import { colorHex } from "../../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { casinoService } from "../../utils/api/casino/service";
 import { UserContext } from "../../App";
+import axios from "axios";
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: "20px",
@@ -56,12 +57,21 @@ const Casino = () => {
       nav("/");
       return;
     }
-    const { response } = await casinoService.getCasinoListByType(Number(value));
-    if (response) {
-      setCasinoList(response.data || []);
+    if (Number(value) === 323334) {
+      axios
+        .get(
+          "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/wolf.json"
+        )
+        .then((res) => setCasinoList(res.data.data));
     } else {
       setCasinoList([]);
     }
+    // const { response } = await casinoService.getCasinoListByType(Number(value));
+    // if (response) {
+    //   setCasinoList(response.data || []);
+    // } else {
+    //   setCasinoList([]);
+    // }
   };
 
   useEffect(() => {

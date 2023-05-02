@@ -167,6 +167,7 @@ export function RegisterForm() {
                   ))}
                 </TextField>
                 <TextField
+                  className="remove-rotation-class"
                   margin="dense"
                   sx={{ flex: 1 }}
                   InputProps={{

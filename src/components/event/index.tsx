@@ -331,6 +331,7 @@ const Event = () => {
     });
   }, [betDetails?.marketId]);
 
+  console.log(fancyOdds, "odds==================");
   useEffect(() => {
     createProfits({
       fancyOdds,
@@ -429,7 +430,7 @@ const Event = () => {
                 >
                   {type ? "Toss" : "Bookmaker"}
                 </Typography>
-                <MinMaxDelayTypography display={{lg:"none"}}>
+                <MinMaxDelayTypography display={{ lg: "none" }}>
                   Max: {dharmParivartan(BookmakerOdds[0].maxBet)}
                   {`   Min`}: {dharmParivartan(BookmakerOdds[0].minBet)}
                   {/* {`   Bet Delay`}: {BookmakerOdds[0].betDelay} */}
@@ -518,40 +519,43 @@ const Event = () => {
           </Box>
         }
       >
-        <GameHeader
-          bgcolor={
-            sportsTabList.find(
-              (sportTab) =>
-                sportTab.name ===
-                activeEventList?.find((item) =>
-                  item.matchList.find(
-                    (item2) => item2.matchId === Number(matchId)
-                  )
-                )?.sportName
-            )?.color
-          }
-        >
-          <Typography
-            fontWeight={500}
-            textOverflow={"ellipsis"}
-            textTransform="uppercase"
-            fontSize={{ xs: "0.8rem", lg: "0.9rem" }}
+        {fancyOdds?.Odds[0] && (
+          <GameHeader
+            bgcolor={
+              sportsTabList.find(
+                (sportTab) =>
+                  sportTab.name ===
+                  activeEventList?.find((item) =>
+                    item.matchList.find(
+                      (item2) => item2.matchId === Number(matchId)
+                    )
+                  )?.sportName
+              )?.color
+            }
           >
-            {fancyOdds?.Odds ? `${fancyOdds?.Odds[0]?.Series} > ` : ""}
-            {currentMatch?.matchName}
-          </Typography>
+            <Typography
+              fontWeight={500}
+              textOverflow={"ellipsis"}
+              textTransform="uppercase"
+              fontSize={{ xs: "0.8rem", lg: "0.9rem" }}
+            >
+              {fancyOdds?.Odds ? `${fancyOdds?.Odds[0]?.Series} > ` : ""}
+              {currentMatch?.matchName}
+            </Typography>
 
-          <Typography
-            fontWeight={500}
-            fontSize={{ xs: "0.6rem", lg: "0.9rem" }}
-          >
-            {fancyOdds?.Odds && fancyOdds?.Odds[0]?.eventTime}
-          </Typography>
-        </GameHeader>
+            <Typography
+              fontWeight={500}
+              fontSize={{ xs: "0.6rem", lg: "0.9rem" }}
+            >
+              {fancyOdds?.Odds && fancyOdds?.Odds[0]?.eventTime}
+            </Typography>
+          </GameHeader>
+        )}
         {!matches && <MyBetWrapper bets={bets} />}
         <LiveScoreTv
           lastMatchedTime={
             fancyOdds?.Odds &&
+            fancyOdds?.Odds[0] &&
             moment(fancyOdds?.Odds[0]?.lastMatchTime).format(
               "DD/MM/YYYY hh:mm:ss"
             )

@@ -17,6 +17,7 @@ import { UserContext } from "../../App";
 import { colorHex } from "../../utils/constants";
 import { casinoService } from "../../utils/api/casino/service";
 import { CasinoList } from "../casino/Casino";
+import axios from "axios";
 
 const SideBarCasino = ({
   handleDrawerToggle,
@@ -37,14 +38,23 @@ const SideBarCasino = ({
     if (!isSignedIn) return;
     if (loading) return;
     setLoading(true);
-    const { response } = await casinoService.getCasinoListByType(
-      Number(casinoId)
-    );
-    if (response) {
-      setCasinoList(response.data || []);
+    if (Number(casinoId) === 323334) {
+      axios
+        .get(
+          "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/wolf.json"
+        )
+        .then((res) => setCasinoList(res.data.data));
     } else {
       setCasinoList([]);
     }
+    // const { response } = await casinoService.getCasinoListByType(
+    //   Number(casinoId)
+    // );
+    // if (response) {
+    //   setCasinoList(response.data || []);
+    // } else {
+    //   setCasinoList([]);
+    // }
     setLoading(false);
   }, [isSignedIn, casinoId]);
 
