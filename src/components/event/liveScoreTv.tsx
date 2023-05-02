@@ -75,7 +75,7 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
         paddingLeft={isMobile ? "70px" : ""}
         fontSize={{ xs: "0.6rem", position: "relative" }}
       >
-        {`${lastMatchedTime}`}
+        {`${lastMatchedTime || "Not Found"}`}
         <Box
           display="flex"
           alignItems={"center"}
