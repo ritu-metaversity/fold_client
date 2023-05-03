@@ -27,14 +27,14 @@ const TopCasinoHero: FC<Props> = ({ sideBanner }) => {
     () =>
       (() => {
         let images = [];
-        for (let i = 0; i < sideBanner.length - 1; i = i + 2) {
+        for (let i = 0; i <= sideBanner.length - 1; i = i + 2) {
           const b1 = sideBanner[i];
           const b2 = sideBanner[i + 1];
           images.push(
             <div>
-              <HeroImageContainerHalf key={b1.name + b2.name}>
-                <HeroImageHalf src={b1.path} alt={b1.name} />
-                <HeroImageHalf src={b2.path} alt={b2.name} />
+              <HeroImageContainerHalf key={b1.name + b2?.name}>
+                {b1 && <HeroImageHalf src={b1.path} alt={b1.name} />}
+                {b2 && <HeroImageHalf src={b2.path} alt={b2.name} />}
               </HeroImageContainerHalf>
             </div>
           );
