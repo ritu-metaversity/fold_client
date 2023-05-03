@@ -60,14 +60,14 @@ const Home = () => {
             arrows={false}
             slidesToScroll={4}
           >
-            {sideBanner.map((banner) => (
+            {sideBanner.map((banner, index) => (
               <BlinkImage
                 onClick={() => {
                   isSignedIn
                     ? nav("/casino/" + banner.clickUrl)
                     : setModal && setModal({ login: true });
                 }}
-                key={banner.name}
+                key={index}
                 src={banner.path}
                 alt={banner.name}
               />
@@ -76,7 +76,7 @@ const Home = () => {
         </Box>
       </BoxWithTitle>
     ),
-    [sideBanner]
+    [sideBanner, isSignedIn]
   );
 
   return (
