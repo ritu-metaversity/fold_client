@@ -1,18 +1,21 @@
 import { ButtonTabs } from "./buttonTabs";
 import BoxWithTitle from "../common/BoxWithTitle";
 import HomeLayout from "../layout/homeLayout";
-import { BlinkImage } from "../layout/styledComponents";
+import { BlinkImage, UserContainer } from "../layout/styledComponents";
 import Hero, { BannerInterface } from "./Hero";
 import Sports from "./Sports";
 import { userServices } from "../../utils/api/user/services";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import TopCasinoHero from "./TopCasinoHero";
 import { Box } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 
 const Home = () => {
+  const nav = useNavigate();
   const [sideBanner, setSideBanner] = useState<BannerInterface[]>([]);
   const getBannerList = async () => {
     const { response } = await userServices.bannerList(2);
@@ -22,6 +25,8 @@ const Home = () => {
       setSideBanner([]);
     }
   };
+
+  const { isSignedIn, setModal } = useContext(UserContext);
 
   useEffect(() => {
     getBannerList();
@@ -57,6 +62,11 @@ const Home = () => {
           >
             {sideBanner.map((banner) => (
               <BlinkImage
+                onClick={() => {
+                  isSignedIn
+                    ? nav("/casino/" + banner.clickUrl)
+                    : setModal && setModal({ login: true });
+                }}
                 key={banner.name}
                 src={banner.path}
                 alt={banner.name}

@@ -6,6 +6,7 @@ export interface BannerInterface {
   name: string;
   path: string;
   priority: number;
+  clickUrl: string;
 }
 const Hero = () => {
   const [heroBannerData, setHeroBannerData] = useState<BannerInterface[]>([]);
