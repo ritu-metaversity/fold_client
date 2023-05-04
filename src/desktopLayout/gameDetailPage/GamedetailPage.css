@@ -1,0 +1,139 @@
+@media screen and (min-width: 800px) and (max-width: 3000px) {
+    .main-market .box, .fancy-market .box {
+        width: 40%;
+        min-width: 40%;
+        max-width: 40%;
+    }    
+    .box-d-1 {
+        width: 10% !important;
+        min-width: 10% !important;
+        max-width: 10% !important;
+    }
+    .featured-box-detail {
+        max-width: 100% !important;
+        width: 100%;
+        flex: 0 0 70% !important;
+        min-height: 70vh;
+    }
+    .blink {
+        animation: blinking 5s infinite !important;
+        background-color: #ffc01a !important;
+    }
+    
+    
+    @keyframes blinking {
+       100%{
+        background-color: #ffc01a !important;
+       }      
+    }
+    .lay{
+    background-color: #faa9ba  !important;
+}
+    .back-2{
+    
+        background-color: rgba(114, 187, 239, 0.75) ;
+        cursor:unset !important;
+    }
+    .back-1{
+        background-color: rgba(114, 187, 239, 0.5) !important;
+        cursor: unset !important;
+    }
+    .lay-2{
+        background-color: rgba(250, 169, 186, 0.75) !important;
+    }
+    
+    /* .lay,
+    .lay-color, .box-1.lay.float-left.text-center.cPointer {
+        background-color: #faa9ba ;
+    } */
+    
+    .lay-1 {
+        background-color: rgba(250, 169, 186, 0.5) ;
+    }
+    .fancy-market .suspended:after {
+        width: 46% !important;
+        content: "suspended";
+        font-size: 16px;
+        color: #ff3c3c;
+        font-family: "Roboto Condensed", sans-serif;
+    }
+    button.nav-link.fancy-linkbtn {
+        background: unset;
+        outline: unset;
+        border: unset;
+    }
+    .active-nav{
+        background-color: #0088cc !important;
+        color: #fff !important;
+    }
+    .row.row5 {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+    .table-header>div, .table-row>div {
+        padding: 2px 0;
+        border: 1px solid #fff;
+        border-right: 0;
+        border-bottom: 0;
+        border-top: 0;
+    }    
+    .table-header, .table-row {
+        display: flex;
+        border-bottom: 1px solid #fff;
+    }
+
+    .game-heading {
+        background: #2c3d50;
+        padding: 12px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .place-bet .form-group {
+        margin-bottom: 0;
+    }
+    .amountint {
+        width: 35px;
+        padding-left: 5px;
+        float: left;
+        height: 24px;
+    }
+    .btn-group-vertical {
+        
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .btn-group, .btn-group-vertical {
+        position: relative;
+        display: inline-flex;
+        vertical-align: middle;
+    }
+    .coupon-table button.custom-btn-spinner {
+        height: 12px;
+        line-height: 12px;
+        min-width: 20px;
+        width: 20px;
+        vertical-align: top;
+        border-radius: 0;
+        background: #ddd;
+    }
+    .bet-stakes {
+        width: 15%;
+    }
+    .bet-profit {
+        width: 10%;
+    }
+    .bet-stake input {
+        width: 70px;
+        font-size: 12px;
+    height: 24px;
+    }
+    button.btn.btn-secondary.m-l-5.m-b-5 {
+        margin: 3px;
+        margin-left: 4px;
+    }
+    button.btn.btn-sm {
+        margin: 8px;
+    }
+}

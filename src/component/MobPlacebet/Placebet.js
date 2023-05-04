@@ -16,23 +16,22 @@ function Placebet({
   priceValue,
   profits,
   StackVal,
-  userIP
+  userIP,
 }) {
   const [updated, setUpdated] = useState("");
-  // const [userIP, setUserIP] = useState("");
-  // eslint-disable-next-line
   const [odds, setOdds] = useState(spanValueRate);
-  // eslint-disable-next-line
   const [name, setName] = useState(spanValueName);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const [getBetValu, setgetBetValu] = useState(spanValueRate);
+
   const handleClick = (event) => {
     setUpdated(event.target.value);
   };
 
+  
   const handleSubmit = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     GameAPI.PLACE_BET({
       userIp: userIP,
       isFancy: isFancy,
@@ -59,7 +58,7 @@ function Placebet({
       },
     })
       .then((res) => {
-        setIsLoading(false)
+        setIsLoading(false);
         data({
           status: true,
           message: res.data.message,
@@ -79,9 +78,10 @@ function Placebet({
   //   });
   // }, []);
 
+
   return (
     <>
-    {
+      {
       isLoading && <p className="place-lodder">
       <i className="fa fa-spinner fa-spin"></i>
     </p>}
@@ -165,7 +165,7 @@ function Placebet({
               </div>
             </div>
             <div className="row row5 mt-2">
-              {Object.values(StackVal)?.map((e, id) => {
+              {StackVal && Object.values(StackVal)?.map((e, id) => {
                 return (
                   <div className="col-4" key={e + id}>
                     <button
@@ -278,7 +278,6 @@ function Placebet({
           </div>
         </div>
       </div>
-      
     </>
   );
 }

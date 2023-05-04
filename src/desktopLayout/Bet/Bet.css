@@ -1,0 +1,144 @@
+
+/* Desk top view css */
+.sidebar-right {
+    max-width: 30% !important;
+    -ms-flex: 0 0 30% !important;
+    flex: 0 0 30% !important;
+    padding-left: 0 !important;
+}
+.ps {
+    overflow: hidden !important;
+    overflow-anchor: none;
+    touch-action: auto;
+}
+.sidebar-right-inner {
+    height: 90vh;
+}
+.place-bet {
+    position: relative;
+    overflow: hidden;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+.card-header {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+div.table-responsive {
+    overflow-x: hidden !important;
+}
+.place-bet .coupon-table tr th {
+    padding: 4px;
+}
+
+.coupon-table thead th:first-child {
+    text-align: left;
+    width: auto;
+    padding-left: 15px;
+    text-indent: 0;
+    padding-right: 15px;
+}
+.coupon-table thead th {
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    padding: 6px 0;
+    padding-left: 0px;
+    color: #303030;
+}
+.coupon-table tr td {
+    padding: 0;
+    vertical-align: middle;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+.coupon-table tr td:first-child {
+    padding-left: 15px;
+    vertical-align: middle;
+    padding-right: 15px;
+}
+.place-bet .coupon-table tr td {
+    padding: 4px;
+    font-weight: bold;
+}
+.bet-odds {
+    width: 25%;
+}
+.bet-stakes {
+    width: 15%;
+}
+.bet-profit {
+    width: 10%;
+}
+.place-bet .value-buttons .btn {
+    width: auto;
+    border: 0;
+    min-width: 17.9%;
+    float: left;
+    background-color: #2c3d50;
+    font-weight: normal;
+    color: #fff;
+}
+.value-buttons button {
+    margin-right: 3px;
+}
+.coupon-table button {
+    width: 100%;
+    min-width: 40px;
+    height: 25px;
+    margin: 0;
+    text-align: center;
+    display: inline-block;
+    padding: 0px;
+    color: #273a47;
+    border: 0;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem; 
+    background-color: unset;
+}
+.closeIcon{
+    border: unset;
+    background-color: unset;
+    outline: unset;
+}
+
+.bet-header {
+    padding: 0;
+}
+.bet-header h6 {
+    padding-top: 10px;
+    padding-left: 12px;
+}
+
+
+
+@media screen and (min-width: 800px) and (max-width: 3000px) {
+    .bet-table{
+        width: 100% !important;
+        margin-inline: unset !important;
+    }
+}

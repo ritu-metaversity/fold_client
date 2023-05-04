@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GameAPI } from "../../apis/gameAPI";
+import './Sidebar.css'
 
 function SideBar() {
   const [visible, setVisible] = useState(true);
@@ -69,7 +70,7 @@ function SideBar() {
   },[])
   
   return (
-    <div className="side-desk-view">
+    <div className="">
       <div
         data-toggle="collapse"
         data-target=".casino"
@@ -77,15 +78,13 @@ function SideBar() {
         className="sidebar-title collapsed"
         aria-expanded="false">
         <h5 className="d-inline-block m-b-0">Others</h5>
-        <i
-          className={!visible ? "fa fa-chevron-right" : "fa fa-chevron-down"}
-          style={{ color: "#fff" }}></i>
+        <i className={!visible ? "fa fa-chevron-right" : "fa fa-chevron-down"} style={{ color: "#fff" }}></i>
       </div>
       <nav className="casino ">
         {visible && (
           <ul>
             <li className="nav-item ">
-              <Link to="/livcasino" className="nav-link">
+              <Link to="/livecasino" className="nav-link">
                 <span className="new-launch-text">Live Casino</span>
               </Link>
             </li>

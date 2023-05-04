@@ -9,31 +9,11 @@ function Item({ gameIdForItemPage, spName }) {
   const [isLoading, setIsLoading] = useState(true);
   const [MatchListLength, setMatchListLength] = useState();
 
-
-
   if (!gameIdForItemPage) {
     gameIdForItemPage = 4;
   }
 
   localStorage.setItem("SportId", gameIdForItemPage);
-
-
-  // useEffect(() => {
-  //   if (gameIdForItemPage != null) {
-  //     const token = localStorage.getItem("token");
-
-  //     axios
-  //       .get(
-  //         `http://43.205.50.127:9000/betfair_api/active_match/${gameIdForItemPage}`,
-  //         {token : token}
-  //       )
-  //       .then((res) => {
-  //         setIsLoading(false);
-  //         setGameName(res.data.data);
-  //       });
-  //   }
-  //   // eslint-disable-next-line
-  // }, [gameIdForItemPage]);
 
   useEffect(() => {
       const token = localStorage.getItem("token");

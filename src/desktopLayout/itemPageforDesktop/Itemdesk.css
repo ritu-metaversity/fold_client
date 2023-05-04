@@ -84,7 +84,7 @@
 .coupon-table button {
     width: 100%;
     min-width: 40px;
-    height: 25px;
+    height: 31px;
     margin: 0;
     text-align: center;
     display: inline-block;
@@ -129,20 +129,6 @@
     word-wrap: break-word;
 }
 
-.coupon-table button {
-    width: 100%;
-    min-width: 40px;
-    height: 25px;
-    margin: 0;
-    text-align: center;
-    display: inline-block;
-    padding: 0px;
-    color: #273a47;
-    border: 0;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer; 
-}
 .button, select {
     text-transform: none;
 }
@@ -175,20 +161,6 @@ table {
 .lay, .lay-color {
     background-color: #faa9ba !important;
 }
-.coupon-table button {
-    width: 100%;
-    min-width: 40px;
-    height: 25px;
-    margin: 0;
-    text-align: center;
-    display: inline-block;
-    padding: 0px;
-    color: #273a47;
-    border: 0;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-}
 .back, .back-color {
     background-color: #72bbef !important;
 }
@@ -220,7 +192,7 @@ table {
     font-size: 14px;
     word-wrap: break-word;
 }
-.game-icons {
+.gIcon {
     float: right;
     width: 20%;
     text-align: right;
@@ -239,7 +211,7 @@ table {
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
 }
-.game-icon {
+.gIcon .game-icon {
     width: 25px;
     text-align: center;
     margin-top: 2px;
@@ -281,158 +253,18 @@ table {
     display: none;
 }
 
-
-
-
-
-
-/* mobile responsive  */
-/* -------------------------- */
-/* -------------------------- */
-
-
-
-    /* .desk-top-view{
-        display: none;
-    } */
-    .mob-view-item{
-        display: block;
-    }
-    .side-desk-view{
-        display: none;
-    }
-    /* .sidebar{
-        display: none;
-    } */
-    .pl-0, .px-0 {
-        padding-left: 0!important;
-    }
-    .pr-0, .px-0 {
-        padding-right: 0!important;
-    }
-    .game-listing-container a {
-        color: #000;
-    }
-    .game-list {
-        background-color: #f1f5f8;
-        border-bottom: 1px solid #d6d8d7;
-    }
-    .pb-1, .py-1 {
-        padding-bottom: 0.25rem!important;
-    }
-    .pt-1, .py-1 {
-        padding-top: 0.25rem!important;
-    }
-   
-    .text-right {
-        text-align: right!important;
-    }
-    .game-icon {
-        width: 20px;
-    }
-    .game-icon {
-        /* width: 30px; */
-        text-align: center;
-        display: inline-block;
-    }
-    .active-icon {
-        background-color: #97cc00;
-        height: 12px;
-        width: 12px;
-        border-radius: 50%;
-        display: inline-block;
-    }
-    /* .col-md-10.featured-box {
-        display: none;
-    } */
-    .game-icon .fa-tv {
-        color: #000;
-        font-size: 12px;
-        margin-top: 6px;
-        vertical-align: top;
-    }
-    .game-icons img {
-        width: 15px;
-        vertical-align: top;
-        margin-top: 5px;
-    }
-    .game-icons { 
-        width: unset;  
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .game-col {
-        float: left;
-        width: 33.33%;
-    }
-    .text-center {
-        text-align: center!important;
-    }
-    .game-col div {
-        height: 24px;
-        line-height: 24px;
-        font-size: 14px;
-        font-weight: 500;
-        float: left;
-        cursor: pointer;
-        width: 50%;
-        color: #000;
-    }
-    .btn-back {
-        background-color: #72bbef;
-    }
-    .btn-lay {
-        background-color: #faa9ba;
-    }
-    .d-i{
-        font-size: 12px;
-        display: inline-block;
-    }
-    .main {
-        min-height: 0px;
-        background: #f1f5f8;
-    }
-    .row.row5 {
-        margin-left: -10px;
-        margin-right: -10px;
-    }
-    .text-center.game-col.game-home {
-        font-size: 12px;
-        font-weight: 100;
-    }
-    footer {
-        display: none;
-    }
-    .mobile-view-item{
-        display: block;
-    }
-
-.norecords {
-    background-color: #ccc;
-    margin-bottom: 25px;
-    display: table;
-    width: 100%;
-    padding: 4px 15px;
+.gName{
+    width: unset;
+    font-weight: 500;
+    font-size: 15px;
 }
-.lodder {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 83vh;
-    background: #f1f5f8;
+.game_name{
+    box-shadow: unset !important;
+    display: table-cell !important;
 }
-.lodder i{
-    font-size: 32px;
-    font-weight: 800;
+.game_name a{
+    font-size: 14px !important;
 }
-.game-head{
-    display: flex;
-    flex-direction: column;
-}
-
-.scrollItem {
-    height: 30vh;
-    overflow: scroll;
+.item-table{
+    background-color: #ffffff !important;
 }

@@ -131,7 +131,7 @@
     background-color: #faa9ba ;
 }
 
-.box-1.lay1.float-left.text-center {
+.lay1.float-left.text-center {
     background-color: rgba(250, 169, 186, 0.5) ;
 }
 
@@ -141,8 +141,8 @@
     max-width: 40%;
 }
 
-.box-1.back.float-left.text-center.cPointer, .back,
-.back-color, .back.box-1.float-left.text-center  {
+.back.float-left.text-center.cPointer, .back,
+.back-color, .back.float-left.text-center  {
     background-color: #72bbef;
 }
 .back-2{
@@ -235,6 +235,7 @@
     background-color: #0088cc !important;
     color: #fff !important;
 }
+
 
 .game-page .nav-tabs .nav-link {
     color: #fff !important;
@@ -857,3 +858,7 @@ p.no-found {
 .odbtn{
     width: 100% !important;
 }
+
+
+
+
