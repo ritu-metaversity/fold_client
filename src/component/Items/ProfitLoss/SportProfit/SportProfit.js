@@ -16,7 +16,7 @@ function SportProfit() {
   const time = moment(curr).format("YYYY-MM-DD");
   const [startDate, setStartDate] = useState(timeBefore);
   const [endDate, setEndDate] = useState(time);
-  const [IndexValue, setIndexValue] = useState(5);
+  const [IndexValue, setIndexValue] = useState(100);
   const [PLValue, setPLValue] = useState();
   const [SportId, setSportId] = useState(4);
   const [MatchId, setMatchId] = useState();
@@ -142,7 +142,6 @@ function SportProfit() {
     if(pageLength - 1 !== pagination){
       setPagination(pagination + 1)
      setActive(pagination+1 );
-    console.log(pagination)
   }
   };
 
@@ -377,72 +376,6 @@ function SportProfit() {
                 </div>
               </div>
             </div>
-            {/* <div className={`row row5 mt-2 ${DataVal === null?"d-none":""}`}>
-                <div className="col-12">
-                  <nav aria-label="Page navigation example">
-                    <ul className="pagination">
-                      <li className="page-item" onClick={decrementByFirst}>
-                        <button className="page-link" aria-label="Previous">
-                          <span aria-hidden="true">First</span>
-                        </button>
-                      </li>
-                      <li className="page-item" onClick={decrement}>
-                        <button
-                          disabled={pageLength == 1 ? true : false}
-                          className="page-link"
-                          aria-label="Previous">
-                          <span aria-hidden="true">Prev</span>
-                        </button>
-                      </li>
-                      {result?.length > 0 &&
-                        result.map((item, id) => {
-                          return (
-                            <li
-                              key={item + id}
-                              className="page-item act"
-                              onClick={() => handlePagenation(id)}>
-                              <button
-                                className={`page-link ${
-                                  Active === id ? "act" : ""
-                                } `}>
-                                <span
-                                  aria-hidden="true"
-                                  className={Active === id ? "num" : ""}>
-                                  {item === "" ? 1 : item+1}
-                                </span>
-                              </button>
-                            </li>
-                          );
-                        })}
-                        {result?.length === 0 && (
-                        <li
-                          // key={item + id}
-                          className="page-item "
-                          onClick={() => handlePagenation(1)}>
-                          <button className="plink act">
-                            <span aria-hidden="true" className="num">
-                              1
-                            </span>
-                          </button>
-                        </li>
-                      )}
-                      <li className="page-item" onClick={increment}>
-                        <button
-                          className="page-link"
-                          disabled={pageLength === 1 ? true : false}
-                          aria-label="Next">
-                          <span aria-hidden="true">Next</span>
-                        </button>
-                      </li>
-                      <li className="page-item" onClick={incrementByLast}>
-                        <button className="page-link" aria-label="Next">
-                          <span aria-hidden="true">Last</span>
-                        </button>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div> */}
               <div className={`row row5 mt-2 ${DataVal === null?"d-none":""}`}>
                   <div
                     className={`col-12 ${pageLength === 0 ? "dis-none" : ""}`}>

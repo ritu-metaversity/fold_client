@@ -53,8 +53,6 @@ const Signup3 = () => {
 
 const validation = async()=>{
     const isValid = await schema.isValid(input);
-
-    // console.log(isValid);
 }
 
 
@@ -71,7 +69,7 @@ const validation = async()=>{
             <div className="">
               <div className="formholder">
                 <h4 className="heading">Deposit ₹500, Get ₹2500</h4>
-
+``
                 <form id="form" className="mainform">
                   <div className="username">
                     <input

@@ -1,6 +1,5 @@
 import React from 'react'
 import './SlotGame.css'
-import SideBar from '../../sidebar/SideBar'
 import {Link} from 'react-router-dom'
 import Footer from '../../footer/Footer'
 
@@ -12,7 +11,6 @@ function SlotGame() {
             <div className="container-fluid container-fluid-5">
                 <div className="row row5">
                     <div className="sidebar col-md-2">
-                        <SideBar />
                     </div>
                     <div  className="col-md-10 featured-box">
                         <div >

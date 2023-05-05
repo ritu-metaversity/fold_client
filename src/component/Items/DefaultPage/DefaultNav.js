@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
-import "../Nav.css";
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom';
 
-function Mobilenav() {
-  const [Active, setActive] = useState(1);
+const DefauilNav = () => {
+
+    const [Active, setActive] = useState(1);
 
   const handleClick = (val, e) => {
     setActive(val);
@@ -15,9 +15,9 @@ function Mobilenav() {
   useEffect(()=>{
     if(pathname === '/m/slot'){
       setActive(3)
-    }else if(pathname === '/m/Sports'){
+    }else if(pathname === '/sports'){
       setActive(2)
-    }else if(pathname ==='/m/In-play'){
+    }else if(pathname ==='/in-play'){
       setActive(1)
     }else if((pathname ==='/m/Others')){
       setActive(4)
@@ -26,25 +26,25 @@ function Mobilenav() {
       setActive(3)
     }
     else if(pathname==="/"){
-      setActive(2)
+      setActive(1)
     }
 
   },[pathname])
 
   return (
     <>
-      <ul className="nav nav-tabs main-gameHead1 game-nav-bar">
+    <ul className="nav nav-tabs main-gameHead1 game-nav-bar">
         <li
           className={`nav-item ${Active === 1 ? "active2" : ""}`}
           onClick={(e) => handleClick(1, e)}>
-          <Link data-toggle="tab" to="/m/In-play" className="nav-link navlink1">
+          <Link data-toggle="tab" to="/in-play" className="nav-link navlink1">
             In-play
           </Link>
         </li>
         <li
           className={`nav-item ${Active === 2 ? "active2" :""}`}
           onClick={(e) => handleClick(2, e)}>
-          <Link data-toggle="tab" to="/m/Sports" className="nav-link navlink1">
+          <Link data-toggle="tab" to="/sports" className="nav-link navlink1">
             Sports
           </Link>
         </li>
@@ -63,9 +63,8 @@ function Mobilenav() {
           </Link>
         </li>
       </ul>
-      <Outlet/>
     </>
-  );
+  )
 }
 
-export default Mobilenav;
+export default DefauilNav

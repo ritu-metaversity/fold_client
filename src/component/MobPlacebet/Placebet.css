@@ -21,6 +21,7 @@ button.stakeactionminus.btn:disabled {
     color: #fff;
     border-color: unset;
     opacity: 1;
+    border: unset;
 }
 
 .place-bet .stakeinput {
@@ -29,6 +30,7 @@ button.stakeactionminus.btn:disabled {
     float: left;
     font-size: 12px;
     font-weight: 600;
+    outline: unset;
 }
 .w-100 {
     width: 100% !important;
@@ -108,3 +110,7 @@ p.place-lodder i {
         margin-top: 28%;
     }
 }
+
+
+
+

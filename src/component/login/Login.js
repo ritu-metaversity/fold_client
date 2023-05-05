@@ -18,8 +18,6 @@ function Login({ Errmessage, Statusmessage }) {
   const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
 
-  // console.log(Statusmessage, "loginpage");
-
   const handleLogin = () => {
     // history.push('/home')
     setIsLoading(true);
@@ -36,10 +34,8 @@ function Login({ Errmessage, Statusmessage }) {
         password: password,
       })
         .then((res) => {
-          // console.log(res.message, "sdfsdgf")
           const token = res.token;
           setMessage(res.message)
-          console.log(res)
           setIsLoading(false);
           localStorage.removeItem("UserName");
           localStorage.removeItem("UserPassword");
@@ -65,6 +61,11 @@ function Login({ Errmessage, Statusmessage }) {
     }
   };
 
+  const handleBackBtn = (e)=>{
+    // e.preventDefault();
+    nav('/');
+  }
+
   useEffect(() => {
     if (localStorage.getItem("token") !== null) {
       nav("/home");
@@ -89,6 +90,8 @@ function Login({ Errmessage, Statusmessage }) {
       setShowModals(true);
     }
   }, []);
+
+
 
   return (
     <>
@@ -166,15 +169,15 @@ function Login({ Errmessage, Statusmessage }) {
                 </button>
               </div>
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
-                <Link
-                  type="submit"
-                  className={`btn btn-primary btn-block ${
-                    statusbtn ? "" : "d-none"
-                  }`}
-                  to="/Register">
-                  Register
-                  <i className="ml-2 fa fa-sign-in"></i>
-                </Link>
+                <button
+                  
+                  onClick={handleBackBtn}
+                  className="btn btn-primary btn-block"
+                  >
+                    <i className="ml-2 fa fa-sign-in" style={{rotate:"180deg"}}></i>
+                  Back
+                  
+                </button>
               </div>
               <small className="recaptchaTerms">
                 This site is protected by reCAPTCHA and the Google{" "}
@@ -185,8 +188,8 @@ function Login({ Errmessage, Statusmessage }) {
               </small>
               <div className="form-group mt-1">
                 <p className="mt-1 text-center">
-                  <Link to="/" className="mail-link">
-                 247diamondexch.com
+                  <Link to="/login" className="mail-link">
+                     247diamondexch.com
                   </Link>
                 </p>
               </div>

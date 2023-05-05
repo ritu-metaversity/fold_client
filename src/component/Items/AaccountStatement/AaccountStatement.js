@@ -7,6 +7,8 @@ import moment from "moment";
 import { UserAPI } from "../../../apis/UserAPI";
 import SearchBet from "./SearchBet";
 import AlertBtn from "../../Alert/AlertBtn";
+
+
 const dateFormat = "YYYY-MM-DD";
 
 function AaccountStatement() {
@@ -124,8 +126,6 @@ function AaccountStatement() {
     if(pageLength - 1 !== pagination){
       setPagination(pagination + 1)
      setActive(pagination+1 );
-    //  setDisable(pagination + 1)
-    console.log(pagination)
   }
   };
 
@@ -134,7 +134,6 @@ function AaccountStatement() {
     if(pagination !== 0){
       setPagination(pagination - 1)
       setActive(pagination-1 );
-      // setDisable(pagination - 1)
     }
   };
 

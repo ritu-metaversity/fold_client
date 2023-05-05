@@ -2,9 +2,6 @@
     max-width: 85% !important;
     flex: 0 0 85%;
 }
-.mb-0, .my-0 {
-    margin-bottom: 0!important;
-}
 
 .container-fluid-5 {
     padding-left: 5px !important;
@@ -65,9 +62,6 @@
 .btn-block {
     display: block;
     width: 100%;
-}
-.mb-0, .my-0 {
-    margin-bottom: 0!important;
 }
 .mx-datepicker {
     position: relative;
@@ -256,7 +250,7 @@ input[type=checkbox], input[type=radio] {
 .custom-control-label::before {
     position: absolute;
     top: 0px;
-    left: -19px;
+    left: -17px;
     display: block;
     width: 1rem;
     height: 1rem;
@@ -269,7 +263,7 @@ input[type=checkbox], input[type=radio] {
 .custom-control-label::after {
     position: absolute;
     top: 0px;
-    left: -19px;
+    left: -17px;
     display: block;
     width: 1rem;
     height: 1rem;
@@ -289,9 +283,6 @@ input[type=checkbox], input[type=radio] {
 }
 .form-group {
     position: relative;
-}
-.mb-0, .my-0 {
-    margin-bottom: 0!important;
 }
 .button-value input {
     height: 34px;
@@ -419,10 +410,10 @@ button.page-link {
         margin-left: -9px;
         padding: 0;
     }
-    .table-responsive {
+    /* .table-responsive {
         width: 99%;
         margin-inline: 7px;
-    }
+    } */
     .button-value.card-body.container-fluid.container-fluid-5 {
         width: 99%;
     }

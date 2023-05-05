@@ -50,14 +50,12 @@ function ChangePassword(props) {
           token: Token,
           oldPassword: currPassword,
         }).then((res) => {
-          // console.log(res.message)
           props.statusMsg(res.status)
           if (res.status === true) {
             setMessege(res.message);
             setTimeout(function () {
               setIsLoading(false)
               AuthorAPI.LOGOUT();
-              console.log("change-pass")
               localStorage.clear();
               nav("/login");
             }, 200);
@@ -72,7 +70,6 @@ function ChangePassword(props) {
             if (res.status === true) {
               setMessege(res.message);
               setTimeout(function () {
-                console.log("change-pass2")
                 setIsLoading(false)
                 localStorage.clear();
                 AuthorAPI.LOGOUT();
