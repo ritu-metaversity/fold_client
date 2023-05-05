@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import moment from "moment";
-import { Link} from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import axios from "axios";
 import Slot from "../Items/Slot/Slot";
 
@@ -34,6 +34,8 @@ function Item({ gameIdForItemPage, spName }) {
   useEffect(()=>{
     setMatchListLength(gameName && gameName?.find((item) =>item?.sportid === gameIdForItemPage)?.matchList?.length);
   })
+
+  const {pathname} = useLocation();
 
 
   return (
@@ -156,8 +158,10 @@ function Item({ gameIdForItemPage, spName }) {
               </div>
             </div>
             
-          </div>
-          <Slot/>
+          </div>{
+            pathname === "/" || pathname === "/in-play"?"":<Slot/>
+          }
+          
         </>
       )}
     </div>

@@ -412,7 +412,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
       <div className="main-div">
         {isLoading ? (
           <p className="lodder">
-            <i className="fa fa-spinner fa-spin"></i>
+            {/* <i className="fa fa-spinner fa-spin"></i> */}
           </p>
         ) : (
           <div className="wrapper">

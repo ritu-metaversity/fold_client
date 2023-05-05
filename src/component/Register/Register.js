@@ -161,10 +161,10 @@ const Register = () => {
             <div className="form-group mb-0" style={{ marginTop: "12px" }}>
               <Link
                 type="submit"
-                to="/login"
+                to="/"
                 className="btn btn-primary btn-block">
                 <i className="ml-2 fa fa-sign-in rotateBtn"></i>
-                Login
+                Back
               </Link>
             </div>
           </form>

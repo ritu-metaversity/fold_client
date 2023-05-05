@@ -25,7 +25,6 @@ import Deposit from "./component/Items/Deposit/Deposit";
 import Withdraw from "./component/Items/Withdrow/Withdraw";
 import Register from "./component/Register/Register";
 import { AuthorAPI } from "./apis/AuthorAPI";
-// import Sport from "./component/Sports/Sport";
 import SportData from "./component/Sports/SportData"; 
 import NavBar from "./component/navBar/NavBar";
 import Mobilenav from "./component/navBar/MobileNav/Mobilenav";
@@ -34,15 +33,9 @@ import Signup1 from './component/Items/SignUpForm/signup1/Signup1'
 import Signup2 from "./component/Items/SignUpForm/signup2/Signup2";
 import Signup4 from "./component/Items/SignUpForm/signup4/Signup4";
 import Signup5 from "./component/Items/SignUpForm/signup5/Signup5";
-// import GameData from "./desktopLayout/gameDetailPage/GameData";
-// import ItemdeskData from "./desktopLayout/itemPageforDesktop/ItemdeskData";
-// import NavbarDesk from "./desktopLayout/Navbarfordesk/NavbarDesk";
-// import AccountStatementDesk from './desktopLayout/AccountStatementforDesktop/AccountStatementDesk'
-// import BetHistorydesk from "./desktopLayout/betHistoryforDesktop/BetHistorydesk";
-// import HomePage from "./desktopLayout/HomePage/HomePage";
-// import CasinoForDesk from "./desktopLayout/CasinoForDesk/CasinoForDesk";
-// import LiveCasino from "./desktopLayout/LiveCasino/LiveCasino";
-// import GamedetailPage from "./desktopLayout/gameDetailPage/GamedetailPage";
+import DefaultPage from "./component/Items/DefaultPage/DefaultPage";
+import DefaultHomePage from "./component/Items/DefaultPage/DefaultHomePage";
+
 
 function App() {
   const [SportId, setSportId] = useState("");
@@ -78,6 +71,7 @@ function App() {
     if (localStorage.getItem("token") === null) {
       localStorage.clear()
       nav("/login");
+
       if(pathname === "/signup3"){
         nav("/signup3");
       }else if(pathname === "/signup1"){
@@ -88,10 +82,22 @@ function App() {
         nav("/signup4")
       }else if(pathname === "/signup5"){
         nav("/signup5")
+      }else if(pathname === "/"){
+        nav("/")
+      }else if(pathname === "/in-play"){
+        nav("/in-play")
+      } else if(pathname === "/register"){
+        nav("/register")
+      }
+      else if(pathname === "/sports"){
+        nav("/sports")
       }
 
     }
-  }, []);
+    else if(pathname === "/"){
+      nav("/login")
+    }
+  }, [nav]);
 
   useEffect(()=>{
   if(pathname!=="/m/setting/changepassword" && localStorage.getItem("Password-type")==="old"){
@@ -111,77 +117,22 @@ function App() {
     setStatusmessage(val)
   }
 
-
-  let width = window.screen.width;
-// console.log(width)
-
   return (
     <div className="App">
-      {/* {
-        width >800 ? (
-          <Routes>  
-             <Route path="" element={<NavbarDesk/>}>
-             <Route path="/home" element={<ItemdeskData/> }/>
-             <Route path="/gamedetail/:id" element={<GamedetailPage/>}/>
-             <Route path="/accountstatement" element={<AccountStatementDesk/>}/>
-             <Route path="/bethistory" element={<BetHistorydesk/>}/>
-             <Route path="/Cricket" element={<HomePage/>}/>
-             <Route path="/Tennis" element={<HomePage/>}/>
-             <Route path="/Football" element={<HomePage/>}/>
-             <Route path="/Kabaddi" element={<HomePage/>}/>
-            <Route  path="/casino/:id" element={<CasinoForDesk />} />
-            <Route  path="/livecasino" element={<LiveCasino />} />
-             </Route>
-          </Routes>
-        ):(
-          <Routes>
-          <Route  path="/login" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
-          <Route  path="/Register" element={<Register />} />
-          <Route  path="/" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
-          <Route exact path="/signup3" element={<Signup3/>} />
-          <Route exact path="/signup1" element={<Signup1/>} />
-          <Route exact path="/signup2" element={<Signup2/>} />
-          <Route exact path="/signup4" element={<Signup4/>} />
-          <Route exact path="/signup5" element={<Signup5/>} />
-          <Route path="" element={<NavBar />}>
-            <Route  path="/deposit" element={<Deposit />} />
-            <Route  path="/withdraw" element={<Withdraw />} />
-            <Route path="/gamedetail/:id" element={<GameHead SportId={SportId} />}/>
-            <Route  path="/casino/:id" element={<Casino />} />
-            <Route path="/m/reports/accountstatement" element={<AaccountStatement />}/>
-            <Route  path="/m/reports/profitloss" element={<ProfitLoss />} />
-            <Route  path="/m/reports/bethistory" element={<BetHistory />} />
-            <Route path="/m/reports/unsetteledbet" element={<UnSetteledBet />}/>
-            <Route path="/m/setting/changebtnvalue" element={<ChangeBtnValue />}/>
-            <Route path="/m/setting/changepassword" element={<ChangePassword  message={message} statusMsg={statusMsg}/>}/>
-            <Route  path="/SignOut" element={<SignOut />} />
-  
-            <Route path="" element={<Mobilenav />}>
-              <Route  path="/Home" element={<Home idddd={idddd} />} />
-              <Route  path="/m/sports" element={<SportData />} />
-              <Route  path="/m/others" element={<Home />} />
-              <Route  path="/m/In-play" element={<Home />} />
-              <Route  path="/m/slot" element={<Slot />} />
-            </Route>
-          </Route>
-  
-          <Route  path="*" element={<Login/>} />
-          
-        </Routes>
-        
-        )
-      } */}
-
+   
         <Routes>
           <Route  path="/login" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
-          <Route  path="/Register" element={<Register />} />
-          <Route  path="/" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
+          <Route  path="/register" element={<Register />} />
+          {/* <Route  path="/" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} /> */}
           <Route exact path="/signup3" element={<Signup3/>} />
           <Route exact path="/signup1" element={<Signup1/>} />
           <Route exact path="/signup2" element={<Signup2/>} />
           <Route exact path="/signup4" element={<Signup4/>} />
           <Route exact path="/signup5" element={<Signup5/>} />
           <Route path="" element={<NavBar />}>
+            <Route  path="/" element={<DefaultHomePage/>}/>
+            <Route  path="/in-play" element={<DefaultHomePage/>}/>
+            <Route  path="/sports" element={<DefaultPage/>}/>
             <Route  path="/deposit" element={<Deposit />} />
             <Route  path="/withdraw" element={<Withdraw />} />
             <Route path="/gamedetail/:id" element={<GameHead SportId={SportId} />}/>
@@ -206,8 +157,6 @@ function App() {
           <Route  path="*" element={<Login/>} />
           
         </Routes>
-
-
     </div>
   );
 }

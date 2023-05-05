@@ -1546,3 +1546,19 @@ background-color: #007bff;
         display: block;
     }    
 }
+
+.login-register{
+    justify-content: end;
+    margin: -11px;
+}
+.login-register a {
+    border: 1px solid #fff;
+    padding: 10px 16px;
+    border-radius: 36px;
+    margin: 6px 8px;
+}
+.login-register a:hover{
+    background:#2c3d50;
+    transition: 0.5s ease;
+}
+
