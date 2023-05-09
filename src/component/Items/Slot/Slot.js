@@ -11,11 +11,11 @@ const Slot = () => {
   const [casinoName, setCasinoName] = useState("Indian Casino");
   const [isLoading, setIsLoading]=useState(true);
 
-  useEffect(() => {
-    GameAPI.CASINO_TYPES().then((res) => {
-      setCasinoList(res);
-    });
-  }, []);
+  // useEffect(() => {
+  //   GameAPI.CASINO_TYPES().then((res) => {
+  //     setCasinoList(res);
+  //   });
+  // }, []);
 
 
   const handleClick = (id, name, e) => {
@@ -45,7 +45,7 @@ const Slot = () => {
       setIsLoading(false)
 
       });
-  }, [casinoListId]);
+  }, []);
 
   const {pathname} = useLocation();
   const nav = useNavigate();
