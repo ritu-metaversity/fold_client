@@ -158,10 +158,8 @@ function Item({ gameIdForItemPage, spName }) {
               </div>
             </div>
             
-          </div>{
-            pathname === "/" || pathname === "/in-play"?"":<Slot/>
-          }
-          
+          </div>
+          <Slot/>
         </>
       )}
     </div>

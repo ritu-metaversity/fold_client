@@ -412,7 +412,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
       <div className="main-div">
         {isLoading ? (
           <p className="lodder">
-            {/* <i className="fa fa-spinner fa-spin"></i> */}
+            <i className="fa fa-spinner fa-spin"></i>
           </p>
         ) : (
           <div className="wrapper">
@@ -459,6 +459,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                     )}
                     <div>
                       {matchodd?.map((item, id1) => {
+                        console.log(item.status, "dsvfdv")
                         return (
                           <div key={item + id1}>
                             <div
@@ -507,7 +508,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                     return (
                                       <div
                                         data-title="ACTIVE"
-                                        className="table-row"
+                                        className={`table-row ${item.status === "SUSPENDED"?"suspended":""}  `}
                                         key={event + index}>
                                         <div className="float-left country-name box-4 box-8">
                                           <span
@@ -519,7 +520,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                             <b className="fanct-title">{event?.name}</b>
                                           </span>
 
-                                          <p>
+                                          <p >
                                             <span
                                               style={{ color: "black" }}
                                               className={`float-left ${profits?.Odds[
@@ -560,7 +561,7 @@ function GameDetail({ getStackValue, SportId, TvHideShow }) {
                                                 onClick={(e) =>
                                                   handleShow(e, id)
                                                 }
-                                                className={`box-1 box-7 float-left  text-center 
+                                                className={`box-1 box-7 float-left   text-center 
                                                 ${id === 1 ? "back-2 ds-none" : id === 2 ? "back-1 ds-none" : "back"} 
                                                  ${e?.price !==
                                                     previousState?.Odds[id1]?.runners[index]?.ex
