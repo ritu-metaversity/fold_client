@@ -7,19 +7,12 @@ import "./GameHead.css";
 function GameHead({ SportId, matchLength }) {
   const [ActiveNavbar, setActiveNavBar] = useState(1);
   const [betLength, setBetlenght] = useState(0);
-  const [TvHideShow, setTvHideShow] = useState(false);
   const [stackValue, setstackValue] = useState([]);
   const handleClick = (val) => {
     setActiveNavBar(val);
   };
 
-  const handleTvHideShow = () => {
-    if (TvHideShow === false) {
-      setTvHideShow(true);
-    } else {
-      setTvHideShow(false);
-    }
-  };
+ 
 
   const stackValDesk = (val)=>{
     stackValue(val)
@@ -45,14 +38,10 @@ function GameHead({ SportId, matchLength }) {
             </button>
           </li>
         </ul>
-        <div className="tv-icon" onClick={handleTvHideShow}>
-          <p className="mb-0">
-            <i className="fa fa-tv"></i>
-          </p>
-        </div>
+        
       </div>
       <div style={{ display: ActiveNavbar === 1 ? "block" : "none" }}>
-        <GameDetail SportId={SportId} TvHideShow={TvHideShow} />
+        <GameDetail SportId={SportId} />
       </div>
       <div style={{ display: ActiveNavbar === 2 ? "block" : "none" }}>
         <MatchBet matchLength={betLength} setMatchLength={setBetlenght} />

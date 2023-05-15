@@ -72,11 +72,7 @@ function Placebet({
       });
   };
 
-  // useEffect(() => {
-  //   GameAPI.Place_Bet().then((res) => {
-  //     setStackVal(res);
-  //   });
-  // }, []);
+  
 
 
   return (

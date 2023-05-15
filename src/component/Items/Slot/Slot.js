@@ -40,7 +40,6 @@ const Slot = () => {
     fetch("https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/diamond.json")
       .then((res) => res.json())
       .then((res) => {
-        // setUserIP(res?.ip);
         setCasinoData(res?.data)
       setIsLoading(false)
 
