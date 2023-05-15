@@ -1563,7 +1563,7 @@ background-color: #007bff;
 }
 
 .suspended:after {
-    width: 60%;
+    width: 40%;
     content: "SUSPENDED";
     font-family: "Roboto Condensed", sans-serif;
     font-size: 16px;

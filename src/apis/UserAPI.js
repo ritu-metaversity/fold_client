@@ -255,6 +255,23 @@ export const UserAPI = {
 
     return response.data;
   },
+
+  USER_CANCEL_WITHDRAW_REQUIEST: async function ( {id}, cancel = false) {
+    const response = await api.request({
+      url: `/enduser/cancel-withdraw-request-eu`,
+      method: "POST",
+      data:{
+        id: id
+      },
+
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+  
 };
 
 const cancelApiObject = defineCancelApiObject(UserAPI);

@@ -40,7 +40,7 @@ button.btn.btn-primary.btn-block.btn-sm.btn-w {
 
 
 .withdraw{
-    height: 89vh;
+    height: 78vh;
     overflow: scroll;
 }
 .withdraw::-webkit-scrollbar {
@@ -99,6 +99,29 @@ button.btn.btn-primary.btn-block.btn-sm.btn-w {
 .select-type{
     margin-top: 3px;
 }
-/* .wrapper.withdraw {
-    height: calc(100vh - 200px);
-} */
+.modalBtn {
+    width: 26%;
+}
+
+.modal-footer {
+    border-top: unset !important;
+}
+.cancelRequest {
+    padding: 4px 12px;
+}
+.cancelRequest div{
+    font-size: 18px;
+}
+.cancelRequest button {
+    color: #fff !important;
+}
+.cancelBtnTd {
+    border: 1px solid #08c;
+    padding: 4px;
+    background: #08c;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500px;
+    border: 1px solid #2c3d50;
+    outline: unset !important;
+}
