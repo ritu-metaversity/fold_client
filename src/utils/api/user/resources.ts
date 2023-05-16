@@ -95,4 +95,8 @@ export const userResources: {
     URL: "enduser/depsosit-request-client",
     METHOD: "POST",
   },
+  CANCEL_WITHDRAWL_REQUEST: {
+    URL: "enduser/cancel-withdraw-request-eu",
+    METHOD: "POST",
+  },
 };
