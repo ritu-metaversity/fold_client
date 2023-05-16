@@ -12,7 +12,7 @@ import { UserAPI } from "../../../apis/UserAPI";
 import { GameAPI } from "../../../apis/gameAPI";
 // import SideBar from "../../sidebar/SideBar";
 
-function GameDetail({ getStackValue, SportId }) {
+function GameDetail({ getStackValue}) {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
@@ -40,7 +40,7 @@ function GameDetail({ getStackValue, SportId }) {
   const [mFancyOdds, setMFancyOdds] = useState();
   // eslint-disable-next-line
   const [errorMsg, setErrorMsg] = useState(false);
-  const [sId, setSid] = useState(SportId);
+  const [sId, setSid] = useState();
   const [OddSocketConnected, setOddSocketConnected] = useState(false);
   const [matchDetail, setMatchDelatil] = useState("");
   const [FancyID, setFancyID] = useState();
@@ -109,13 +109,14 @@ function GameDetail({ getStackValue, SportId }) {
 
   useEffect(() => {
     const SporId = localStorage.getItem("SportId");
-    if (SportId === "") {
+    if (SporId === "") {
       setSid(4);
     } else {
       setSid(SporId);
     }
     // eslint-disable-next-line
-  }, [sId]);
+  }, [localStorage.getItem("SportId")]);
+
 
   const oddFromSocketSlower = (res) => {
     if (res) {
@@ -460,7 +461,7 @@ function GameDetail({ getStackValue, SportId }) {
             )}
             <div className="scoreCard-icon">
               <svg
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
                 focusable="false"
                 aria-hidden="true"
                 viewBox="0 0 24 24"
@@ -469,13 +470,13 @@ function GameDetail({ getStackValue, SportId }) {
               </svg>
               <div>
                 <label
-                  class={`onoffbtn ${toggleBtn1 ? "active" : ""}`}
+                  className={`onoffbtn ${toggleBtn1 ? "active" : ""}`}
                   onClick={handleSwitchInput}>
                   <input type="checkbox" />
                 </label>
               </div>
               <svg
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
                 focusable="false"
                 aria-hidden="true"
                 viewBox="0 0 24 24"
@@ -484,14 +485,14 @@ function GameDetail({ getStackValue, SportId }) {
               </svg>
               <div>
                 <label
-                  class={`onoffbtn ${toggleBtn ? "active" : ""}`}
+                  className={`onoffbtn ${toggleBtn ? "active" : ""}`}
                   onClick={handleSwitchInput1}>
                   <input type="checkbox" />
                 </label>
                 
               </div>
               <div className="" onClick={handleTvHideShow}>
-                  <p className="mb-0">
+                  <p className="mb-0 tvIcon">
                     <i className="fa fa-tv"></i>
                   </p>
                 </div>
@@ -559,7 +560,7 @@ function GameDetail({ getStackValue, SportId }) {
                     <div>
                       {matchodd?.map((item, id1) => {
                         return (
-                          <div key={item + id1}>
+                          <div key={item}>
                             <div
                               className={`market-title mt-1
                             ${item?.runners.length === 0 ? "d-none" : ""}
@@ -668,7 +669,7 @@ function GameDetail({ getStackValue, SportId }) {
                                                   onClick={(e) =>
                                                     handleShow(e, id)
                                                   }
-                                                  className={`box-1 box-7 float-left   text-center 
+                                                  className={`box-1 box-7 float-left text-center 
                                                 ${
                                                   id === 1
                                                     ? "back-2 ds-none"
@@ -711,13 +712,13 @@ function GameDetail({ getStackValue, SportId }) {
                                                   </button>
                                                 </div>
                                               );
-                                            })
-                                            .reverse()}
+                                            }).reverse()
+                                          }
                                         {availableToLay?.length &&
                                           availableToLay?.map((e, id) => {
                                             return (
                                               <div
-                                                key={e?.size + e?.price + id}
+                                                key={e?.size + e?.price}
                                                 onClick={(e) =>
                                                   handleShow(e, id)
                                                 }

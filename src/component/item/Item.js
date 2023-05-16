@@ -85,20 +85,20 @@ function Item({ gameIdForItemPage, spName }) {
                                       }
                                       style={{ verticalAlign: "bottom" }}></span>
                                   </span>
-                                  <span className={`game-icon ${item?.F ? "bm-icon" : "d-none"}`}>
+                                  <span className={`game-icon ${item?.F ? "" : "d-none"}`}>
                                     <i className="fa fa-tv"></i>
                                   </span>
                                   <span className="game-icon">
                                     <img
                                       src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/ic_fancy.png"
                                       alt="game-icon"
-                                      className={item.channelId === "0" ? "d-none" : ""}
+                                      className={item?.F === false ? "d-none" : ""}
                                     />
                                   </span>
                                   <span className="game-icon">
                                     <img
                                       src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/ic_bm.png"
-                                      className={item.bm ? "bm-icon" : "d-none"}
+                                      className={item?.bm ? "bm-icon" : "d-none"}
                                       alt="game-icon"
                                     />
                                   </span>

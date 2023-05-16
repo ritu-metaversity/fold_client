@@ -50,12 +50,12 @@ function Sport({ gameIdForItemPage }) {
                     <p className="no-found">No real-time records found</p>
                   ) : gameName?.length > 0 ? (
                     gameName?.map((item, id) => {
+                      console.log(item)
                       return (
                         <Link to={`/gamedetail/${item.matchId}`} >
                         <div
                           className="game-list pt-1 pb-1 container-fluid"
                           key={id}
-                          // onClick={() => handleData(item?.matchId)}
                           >
                           <div className="row row5">
                             <div className="col-8 game-head">
@@ -85,13 +85,13 @@ function Sport({ gameIdForItemPage }) {
                                   <img
                                     src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/ic_fancy.png"
                                     alt="game-icon"
-                                    className={item.channelId === "0" ? "d-none" : ""}
+                                    className={item?.F === false ? "d-none" : ""}
                                   />
                                 </span>
                                 <span className="game-icon">
                                   <img
                                     src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/ic_bm.png"
-                                    className={item.bm ? "bm-icon" : "d-none"}
+                                    className={item?.bm ? "bm-icon" : "d-none"}
                                     alt="game-icon"
                                   />
                                 </span>

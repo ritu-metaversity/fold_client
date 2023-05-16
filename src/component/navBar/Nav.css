@@ -1569,3 +1569,13 @@ background-color: #007bff;
     font-size: 16px;
     color: #ff3c3c;
 }
+
+@media screen and (min-width: 800px){
+    .suspended:after {
+        width: 60%;
+        content: "SUSPENDED";
+        font-family: "Roboto Condensed", sans-serif;
+        font-size: 16px;
+        color: #ff3c3c;
+    }
+}
