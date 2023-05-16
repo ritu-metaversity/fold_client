@@ -9,7 +9,8 @@ export type columnIds =
   | "time"
   | "accountType"
   | "remark"
-  | "status";
+  | "status"
+  | "action";
 
 export const columns: ColumnsInterface<columnIds>[] = [
   {
@@ -52,5 +53,9 @@ export const columns: ColumnsInterface<columnIds>[] = [
   {
     id: "status",
     label: "Status",
+  },
+  {
+    id: "action",
+    label: "action",
   },
 ];

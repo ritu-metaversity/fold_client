@@ -23,10 +23,14 @@ import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 const Pages = React.lazy(() => import("./components/pages"));
 const CustomizedDialogPassword = React.lazy(
   () => import("./components/layout/user/ResetPasswordDailog")
 );
+
+export const CasinoType1 = 323334;
+export const CasinoType2 = 323335;
 
 interface ModalState {
   login?: boolean;
@@ -214,10 +218,15 @@ function App() {
     };
   }, [isSignedIn, getBalance]);
 
+  useEffect(() => {
+    axios.get("http://23.106.234.25:8083/data-provider/cricket");
+  }, []);
+
   // fetch("http://192.168.0.245:8000/group/get-groups-chats");
   if (isSignedIn === null) {
     return <LoadingBallSvg />;
   }
+
   return (
     <ThemeProvider theme={theme}>
       <Snackbar

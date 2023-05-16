@@ -205,4 +205,11 @@ export const userServices = {
     };
     return await apiHandler(params);
   },
+  cancelWithdrawlRequest: async (id: number) => {
+    const params = {
+      resource: userResources.CANCEL_WITHDRAWL_REQUEST,
+      data: { id },
+    };
+    return await apiWithSnackbar(params);
+  },
 };
