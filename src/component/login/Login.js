@@ -61,8 +61,7 @@ function Login({ Errmessage, Statusmessage }) {
     }
   };
 
-  const handleBackBtn = (e)=>{
-    // e.preventDefault();
+  const handleBackBtn = ()=>{
     nav('/');
   }
 
@@ -170,7 +169,6 @@ function Login({ Errmessage, Statusmessage }) {
               </div>
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
                 <button
-                  
                   onClick={handleBackBtn}
                   className="btn btn-primary btn-block"
                   >

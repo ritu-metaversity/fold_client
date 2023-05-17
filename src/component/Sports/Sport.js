@@ -50,7 +50,6 @@ function Sport({ gameIdForItemPage }) {
                     <p className="no-found">No real-time records found</p>
                   ) : gameName?.length > 0 ? (
                     gameName?.map((item, id) => {
-                      console.log(item)
                       return (
                         <Link to={`/gamedetail/${item.matchId}`} >
                         <div
