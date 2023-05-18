@@ -407,11 +407,8 @@ function GameDetail({ getStackValue}) {
     e.preventDefault();
     if (toggleBtn1 === true) {
       settoggleBtn1(false);
-      settoggleBtn(true);
-      setTvHideShow(false)
     } else {
       settoggleBtn1(true);
-      settoggleBtn(false);
       setTvHideShow(false)
     }
   };
@@ -419,12 +416,9 @@ function GameDetail({ getStackValue}) {
   const handleSwitchInput1 = (e) => {
     e.preventDefault();
     if (toggleBtn === true) {
-      settoggleBtn1(true);
       settoggleBtn(false);
-      setTvHideShow(false)
     } else {
-      settoggleBtn1(false);
-      settoggleBtn(true);      
+      settoggleBtn(true);   
       setTvHideShow(false)
 
     }
@@ -433,8 +427,8 @@ function GameDetail({ getStackValue}) {
   const handleTvHideShow = () => {
     if (TvHideShow === false) {
       setTvHideShow(true);
-      settoggleBtn1(false);
       settoggleBtn(false);
+      settoggleBtn1(false)
     } else {
       setTvHideShow(false);
     }
