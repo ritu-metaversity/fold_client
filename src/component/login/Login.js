@@ -18,6 +18,14 @@ function Login({ Errmessage, Statusmessage }) {
   const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
 
+  // console.log(window.location.host);
+
+
+  const {host} = window.location
+
+
+  // console.log(host)
+
   const handleLogin = () => {
     // history.push('/home')
     setIsLoading(true);
@@ -61,8 +69,7 @@ function Login({ Errmessage, Statusmessage }) {
     }
   };
 
-  const handleBackBtn = (e)=>{
-    // e.preventDefault();
+  const handleBackBtn = ()=>{
     nav('/');
   }
 
@@ -170,7 +177,6 @@ function Login({ Errmessage, Statusmessage }) {
               </div>
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
                 <button
-                  
                   onClick={handleBackBtn}
                   className="btn btn-primary btn-block"
                   >
@@ -188,8 +194,8 @@ function Login({ Errmessage, Statusmessage }) {
               </small>
               <div className="form-group mt-1">
                 <p className="mt-1 text-center">
-                  <Link to="/login" className="mail-link">
-                     247diamondexch.com
+                  <Link to="/" className="mail-link">
+                     {host}
                   </Link>
                 </p>
               </div>

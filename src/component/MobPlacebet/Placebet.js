@@ -194,7 +194,7 @@ function Placebet({
                       <div className="col-4 text-center">
                         <b>
                           <span
-                            style={{ color: "black" }}
+                            style={{ color: "black", fontSize:"12px" }}
                             className={`${
                               profit?.value > 0 ? "text-success" : "text-danger"
                             }`}>
@@ -203,6 +203,7 @@ function Placebet({
                         </b>
                       </div>
                       <div
+                      style={{fontSize:"12px"}}
                         className={`col-4 text-right ${
                           (profit.sid == selectionId
                             ? (profit?.value || 0) +
@@ -240,7 +241,7 @@ function Placebet({
                       <div className="col-4 text-center text-success">
                         <b>
                           <span
-                            style={{ color: "black" }}
+                            style={{ color: "black", fontSize:"12px" }}
                             className={`${
                               profit?.value > 0 ? "text-success" :profit?.value < 0? "text-danger":""
                             }`}>
@@ -249,6 +250,7 @@ function Placebet({
                         </b>
                       </div>
                       <div
+                      style={{fontSize:"12px"}}
                         className={`col-4 text-right ${
                           (profit.sid === selectionId
                             ? profit.value +

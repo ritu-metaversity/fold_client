@@ -56,7 +56,7 @@ const Register = () => {
         .then((res) => {
           localStorage.setItem("UserName", res.username);
           localStorage.setItem("UserPassword", res.password)
-          nav('/');
+          nav('/login');
         })
         .catch((error) => {
           setStatusCode(error.response.status);

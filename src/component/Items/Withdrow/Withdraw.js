@@ -111,36 +111,34 @@ const Withdraw = () => {
   };
 
   const [show, setShow] = useState(false);
-  const [dataId, setDataId] = useState()
+  const [dataId, setDataId] = useState();
   const handleClose = () => setShow(false);
   const handlePending = (val) => {
     setShow(true);
-    setDataId(val)
+    setDataId(val);
   };
-
-
 
   const handleCloseSubmit = () => {
     UserAPI.USER_CANCEL_WITHDRAW_REQUIEST({
       id: dataId,
-    }).then((res) => {
-      setMessage(res.message);
-      setErrorAlert(true);
-      setColorName("success");
-      setShow(false);
-      
+    })
+      .then((res) => {
+        setMessage(res.message);
+        setErrorAlert(true);
+        setColorName("success");
+        setShow(false);
 
-      UserAPI.Withdraw_Request().then((res) => {
-        setWithdrawReq(res.data);
-        setDataLength(res.data.length);
+        UserAPI.Withdraw_Request().then((res) => {
+          setWithdrawReq(res.data);
+          setDataLength(res.data.length);
+        });
+      })
+      .catch((error) => {
+        setErrorAlert(true);
+        setMessage(error.response.data.message);
+        setColorName("danger");
+        setShow(false);
       });
-
-    }).catch((error) => {
-      setErrorAlert(true);
-      setMessage(error.response.data.message);
-      setColorName("danger");
-      setShow(false);
-    });;
   };
 
   return (
@@ -296,8 +294,7 @@ const Withdraw = () => {
                           scope="col"
                           aria-colindex="6"
                           className="text-left"
-                          style={{paddingRight: "82px"}}
-                          >
+                          style={{ paddingRight: "82px" }}>
                           Remark
                         </th>
                         <th
@@ -360,8 +357,7 @@ const Withdraw = () => {
                                 <td
                                   aria-colindex="6"
                                   className="text-lift"
-                                  style={{paddingRight:""}}
-                                  >
+                                  style={{ paddingRight: "" }}>
                                   {item.remark}
                                 </td>
                                 <td
@@ -380,42 +376,38 @@ const Withdraw = () => {
                                   className={`text-left ${
                                     item.status === "Pending" ? "" : "d-none"
                                   }`}
-                                  onClick={()=>handlePending(item?.id)}>
+                                  onClick={() => handlePending(item?.id)}>
                                   <button className="cancelBtnTd">
                                     Cancel
                                   </button>
                                 </td>
                               </tr>
-
-                              <Modal show={show} onHide={handleClose}>
-                                <Modal.Header
-                                  closeButton
-                                  className="cancelRequest">
-                                  <Modal.Title>Cancel Request</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                  Are you sure you want to cancel this request?
-                                </Modal.Body>
-                                <Modal.Footer>
-                                  <Button
-                                    variant="secondary"
-                                    className="modalBtn"
-                                    onClick={handleClose}>
-                                    Close
-                                  </Button>
-                                  <Button
-                                    variant="primary"
-                                    type="button"
-                                    className="modalBtn"
-                                    onClick={handleCloseSubmit}>
-                                    Submit
-                                  </Button>
-                                </Modal.Footer>
-                              </Modal>
                             </>
                           );
-
                         })}
+                      <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton className="cancelRequest">
+                          <Modal.Title>Cancel Request</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          Are you sure you want to cancel this request?
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button
+                            variant="secondary"
+                            className="modalBtn"
+                            onClick={handleClose}>
+                            Close
+                          </Button>
+                          <Button
+                            variant="primary"
+                            type="button"
+                            className="modalBtn"
+                            onClick={handleCloseSubmit}>
+                            Submit
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
                     </tbody>
                     <tbody>
                       <tr

@@ -859,48 +859,43 @@ p.no-found {
     width: 100% !important;
 }
 
-.onoffbtn{
-    /* width:60px;
-    height:30px; */
-    width: 45px;
-    height: 20px;
-
-    border-radius:15px;
+.onoffbtn {
+    width: 30px;
+    height: 16px;
+    border-radius: 15px;
     background: #fff;
-    display:block;
-    position:relative;
-  }
-  .onoffbtn:after{
-    position:absolute;
-    height: 18px;
-    width: 19px;
-    display:block;
-    border-radius:50%;
-    background:#2c3d50;
-    top:1px;
-    left:1px;
-    content:'';
-    -webkit-transition: all 200ms ease-in-out;
-    -moz-transition: all 200ms ease-in-out;
-    -o-transition: all 200ms ease-in-out;
+    display: block;
+    position: relative;
+}
+.onoffbtn.active:after {
+    left: 100%;
+    margin-left: -15px;
+    background: #0088cc;
+    content: '';
+}
+
+.onoffbtn:after {
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    display: block;
+    border-radius: 50%;
+    background: #2c3d50;
+    top: 1px;
+    left: 1px;
+    content: '';
     transition: all 200ms ease-in-out;
-    text-align:center;
-    line-height:29px;
-    color:#fff;
-    font-size:12px;
-  }
-  .onoffbtn.active:after{
-    left:100%;
-    margin-left:-21px;
-    background:#0088cc;;
-    content:'';
-  }
+    text-align: center;
+    line-height: 29px;
+    color: #fff;
+    font-size: 12px;
+}
   .onoffbtn input[type="checkbox"]{
     opacity:0;
   }
 
-  .icon-medium {
-    font-size: 20px;
+.icon-medium {
+    font-size: 18px !important;
 }
 
 .css-vubbuv {
@@ -913,18 +908,24 @@ p.no-found {
     transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     font-size: 1.5rem;
     color: #fff;
-    margin-right: 4px;
+    margin-right: 2px;
+    margin-left: 4px;
+
 }
 .scoreCard-icon{
     position: absolute;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     z-index: 11;
-    top: 118px;
+    top: 123px;
     right: 7px;
 }
 .scoreCard-icon i{
     color: #fff;
     margin-left: 6px;
+}
+.tvIcon{
+    border-left: 2px solid #fff;
+    margin-left: 4px;
 }

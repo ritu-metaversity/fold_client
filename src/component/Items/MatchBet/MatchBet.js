@@ -24,6 +24,7 @@ function MatchBet(props) {
         props.setMatchLength(noOfBets);
       }
     });
+    // eslint-disable-next-line
   },[])
 
   useEffect(() => {
@@ -42,8 +43,9 @@ function MatchBet(props) {
           props.setMatchLength(noOfBets);
         }
       });
-    }, 5000)
+    }, 3000)
     return ()=> clearInterval(time)
+    // eslint-disable-next-line
   }, [id]);
 
   // const { Item } = useWebSocket(
