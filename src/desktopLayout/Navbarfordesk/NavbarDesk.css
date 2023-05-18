@@ -1,0 +1,322 @@
+#load {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed !important;
+    align-items: center;
+    z-index: 9999;
+    position: relative;
+    background-image: linear-gradient(var(--theme1-bg), var(--theme2-bg));
+}
+
+#load-inner {
+    position: relative;
+    text-align: center;
+}
+
+#load-inner img {
+    display: block;
+    height: 65px;
+}
+
+#load-inner i {
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    margin-top: 40px;
+}
+
+.modal-dialog {
+    margin: 1% auto;
+}
+
+/* .modal-header {
+    padding: 10px;
+    background: var(--theme1-bg);
+    color: var(--primary-color);
+    border-radius: 0;
+    border: 0;
+} */
+
+.modal-body {
+    max-height: calc(96vh - 47px);
+    overflow: auto;
+}
+
+.modal-content {
+    border: 0;
+    border-radius: 0;
+}
+
+.modal-header .close {
+    color: var(--primary-color);
+    opacity: 1;
+}
+
+.modal-header .close:focus,
+.modal-header .close:hover {
+    color: var(--primary-color);
+    opacity: 1;
+}
+
+ul {
+    margin-bottom: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.btn-theme {
+    color: var(--primary-color) !important;
+    background-image: linear-gradient( to right, var(--theme1-bg), var(--theme2-bg)) !important;
+    width: 100% !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
+    border: 0 !important;
+    padding: 8px 10px !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+    position: relative;
+}
+
+.suspended {
+    position: relative;
+}
+
+.suspended:after {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: var(--white-color);
+    text-transform: uppercase;
+    font-family: "Font Awesome 5 Free";
+    content: "\f023";
+    font-weight: 900;
+    font-size: 18px;
+    top: 0;
+}
+
+/*Main CSS*/
+
+.main {
+    min-height: calc(100vh - 159px);
+}
+
+.header {
+    background-color: #0088cc;
+    color: #fff;
+    position: relative;
+}
+
+.search .fa-search-plus {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-left: 10px;
+    /*position: absolute;
+    right: 10px;
+    top: 7px;*/
+    float: right;
+    margin-top: 5px;
+}
+
+.header-top {
+    height: 75px;
+    margin-top: 7px;
+}
+
+.header-top ul{
+    padding-top: 10px;
+}
+
+.desk-logo img {
+    width: auto;
+    height: 65px;
+}
+
+.logo-login {
+    max-height: 65px;
+    max-width: 100%;
+}
+
+.search {
+    position: relative;
+    margin-right: 20px;
+    z-index: 10;
+    animation-name: search;
+    /*background-color: var(--primary-bg);*/
+}
+
+.float-right {
+    float: right!important;
+}
+.float-left{
+    float: left!important;
+
+}
+marquee {
+    position: absolute;
+    top: 63%;
+    display: inline-block;
+    width: 55%;
+    font-size: 14px;
+    font-style: italic;
+    bottom: -7px;
+    right: 0;
+}
+
+
+
+ul.list-unstyled.navbar-nav li a {
+    text-decoration: none !important;
+}
+
+
+.ballance,
+.expose,
+.account {
+    margin-left: 15px;
+    margin-top: 0;
+}
+
+.account {
+    margin-top: 5px;
+}
+
+.account ul li a{
+    text-decoration: none;
+}
+
+.account .fa-chevron-down {
+    margin-left: 5px;
+}
+
+.account>span {
+    cursor: pointer;
+    position: relative;
+}
+
+
+.header-top .account ul li {
+    line-height: 24px;
+}
+
+.header-top .account ul li a {
+    font-size: 14px;
+    text-transform: capitalize;
+    padding: 0 8px;
+    color: var(--site-color);
+}
+
+.header-top .account ul h6 {
+    padding: 0 8px;
+    color: var(--site-color);
+}
+
+
+  .nav-b{
+    font-weight: bold;
+  }
+  .search {
+    position: relative;
+    margin-right: 20px;
+    z-index: 10;
+}
+
+
+  .search input  {
+    height: 33px;
+    border: 0;
+    padding: 0;
+    outline: 0;
+    width: 0;
+    border-radius: 2px 2px 0 0;
+    border-radius: 0;
+    box-shadow: 0 0 5px var(--secondary-bg);
+    transition: width 0.4s linear;
+}
+
+.search .search-input-show {
+    height: 33px;
+    width: 300px;
+    transition: width 0.4s linear;
+    padding: 0 10px;
+}
+.list1{
+    padding-left: 8px;
+}
+.modal.fade.show.custom-modal-class {
+    position: absolute;
+    top: 0;
+}
+.modal-box{
+    width: 100%;
+}
+.rule-modal>.modal-dialog.modal-lg{
+    height: 100%;
+
+}
+
+.exp-modal>.modal-dialog.modal-lg{
+    height: 100%;
+}
+.exp-mod>.modal.fade.show.custom-modal-class{
+    position: absolute;
+
+}
+.Mob-view{
+    display: none;
+}
+
+li.ballance.float-left a {
+    color: #fff;
+}
+li.search.float-left a i {
+    color: #fff;
+}
+li.float-left.download-apklink a {
+    color: #fff;
+}
+.exp-modal1{
+    display: none !important;
+}
+.modal-backdrop {
+    --bs-backdrop-zindex: 1050;
+    --bs-backdrop-bg: #000;
+    --bs-backdrop-opacity: 0.2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--bs-backdrop-zindex);
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bs-backdrop-bg);
+}
+
+.desk-view {
+    display: block !important;
+  }
+
+  .desk-viewBtn {
+    padding: 6px 4px;
+    font-size: 14px;
+    margin-left: 4%;
+}
+.overLay {
+    height: 100%;
+    position: fixed;
+    background-color: transparent;
+    left: 0;
+    width: 100vw;
+    z-index: 99;
+}

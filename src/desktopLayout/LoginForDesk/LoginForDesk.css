@@ -1,0 +1,14 @@
+.dia-logo{
+    margin: auto;
+}
+.form-cont{
+    border: 1px solid #ced4da !important;
+}
+.error {
+    padding: 12px 10px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    margin-bottom: 6px;
+    font-weight: 500;
+}

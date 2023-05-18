@@ -1,0 +1,102 @@
+.casino-tables h4 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.text-uppercase {
+    text-transform: uppercase !important;
+}
+
+.casinoicons img {
+    margin-bottom: 9px;
+    width: 130px;
+    height: auto;
+}
+
+.casinoicons .casino-name {
+    background-image: linear-gradient(#0088cc, #2c3e50);
+    color: #fff;
+    padding: 5px;
+    position: absolute;
+    width: 100%;
+    bottom: -15px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 8px;
+}
+
+.casinoicons .new-launch-casino {
+    animation: NAME-YOUR-ANIMATION 1s infinite;
+    position: absolute;
+    right: 0px;
+    top: -14px;
+    padding: 5px;
+    border-radius: 50%;
+    height: 40px;
+    font-size: 12px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: normal;
+    color: #fff;
+    left: 26px;
+}
+
+@keyframes NAME-YOUR-ANIMATION {
+
+    0%,
+    49% {
+        background-color: rgba(215, 43, 43, 0.8);
+    }
+
+    50%,
+    100% {
+        background-color: rgba(0, 15, 255, 0.8);
+    }
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+    .casinoicons {
+        position: relative;
+        box-shadow: 0 25px 8px -8px;
+        border-radius: 4px;
+        margin-bottom: 25px;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .casino-main {
+        background: #f1f5f8;
+    }
+
+.mob-view{
+    display: none;
+}
+.coll-6 {
+    flex: 0 0 auto;
+    width: 25%;
+}
+
+
+@media screen and (max-width: 500px) {
+    .mob-view{
+        display: block;
+    }
+    .desk-view{
+        display: none;
+    }
+    .coll-6 {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+    
+    
+}

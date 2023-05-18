@@ -1,0 +1,11 @@
+ul {
+    margin-bottom: 0;
+    padding: 0;
+}
+.text-white {
+    color: #fff!important;
+}
+.rules-container ul li {
+    padding: 12px 5px;
+    border-bottom: 2px solid #ccc;
+}

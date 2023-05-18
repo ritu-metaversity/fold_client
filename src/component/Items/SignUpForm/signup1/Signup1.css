@@ -1,0 +1,21 @@
+.backgroundImg1 {
+    padding: 5%;
+    background-image: url("/public/images/diamondexchange2.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+@media screen and (min-width: 300px) and (max-width: 800px) {
+    .backgroundImg1 {
+        padding: 5%;
+        background-image: url("/public/images/diamondexch2mob.png");
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+    
+
+}

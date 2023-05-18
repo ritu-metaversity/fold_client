@@ -1,0 +1,317 @@
+.tab-content>.active {
+    display: block;
+}
+
+.coupon-card {
+    margin-bottom: 16px;
+    border-radius: 0 0 2px 2px;
+}
+.row.row5>[class*="col-"] {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.featured-box {
+    padding-top: 5px;
+    max-width: 85% !important;
+    -ms-flex: 0 0 85% !important;
+    flex: 0 0 85% !important;
+}
+.coupon-card .card-header {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    font-size: 12px;
+    padding: 8px;                                                   
+    width: 100%;
+    float: left;
+    color: var(--primary-color);
+    background-color: var(--theme1-bg);
+}
+
+.coupon-card-first .card-header {
+    border-radius: 0;
+}
+.coupon-card-first .card-header {
+    border-radius: 0;
+}
+.coupon-table {
+    margin-bottom: 0;
+}
+
+.coupon-table thead th {
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    padding: 6px 0;
+    padding-left: 0px;
+    color: #303030;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+.td {
+    display: table-cell;
+    vertical-align: inherit;
+}
+.coupon-table thead th:first-child {
+    text-align: left;
+    width: auto;
+    padding-left: 15px;
+    text-indent: 0;
+    padding-right: 15px;
+}
+
+.coupon-table .main-market thead th:first-child {
+    width: 52%;
+}
+
+.coupon-table .bookmaker-market thead th:first-child {
+    width: 68%;
+}
+.coupon-table td:first-child .active {
+    margin-right: 30px;
+    float: right;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: #28a745 !important;
+}
+.coupon-table button {
+    width: 100%;
+    min-width: 40px;
+    height: 31px;
+    margin: 0;
+    text-align: center;
+    display: inline-block;
+    padding: 0px;
+    color: #273a47;
+    border: 0;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.featured-box-detail .coupon-table button {
+    height: auto;
+    min-height: 40px;
+    padding: 4px 0 1px;
+    background: none;
+    color: #273a47;
+    border: 0;
+}
+
+.featured-box-detail .coupon-table button span {
+    /*margin-bottom: 3px;*/
+    font-size: 10px;
+    display: block;
+}
+
+.featured-box-detail .coupon-table button span.odd,
+.featured-box-detail .coupon-table .team-name {
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+.featured-box-detail .coupon-table button span.odd {
+    font-size: 14px;
+    margin-bottom: 1px;
+}
+
+.coupon-table tr td {
+    padding: 0;
+    vertical-align: middle;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+.button, select {
+    text-transform: none;
+}
+
+.table {
+    margin-bottom: 0 !important;
+}
+.coupon-table {
+    margin-bottom: 0;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+}
+table {
+    border-collapse: collapse;
+}
+
+user agent stylesheet
+table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    border-color: grey;
+}
+.lay, .lay-color {
+    background-color: #faa9ba !important;
+}
+.back, .back-color {
+    background-color: #72bbef !important;
+}
+.coupon-table tr td:first-child {
+    padding-left: 15px;
+    vertical-align: middle;
+    padding-right: 15px;
+}
+.coupon-table tr td {
+    padding: 0;
+    vertical-align: middle;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+.game-name {
+    width: 100%;
+    float: left;
+    font-size: 14px;
+        font-weight: bolder;
+}
+.coupon-table tr td {
+    padding: 0;
+    vertical-align: middle;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+.gIcon {
+    float: right;
+    width: 20%;
+    text-align: right;
+}
+.text-dark {
+    color: #090a0b!important;
+}
+.thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+.gIcon .game-icon {
+    width: 25px;
+    text-align: center;
+    margin-top: 2px;
+    display: inline-block;
+}
+.coupon-table td:first-child .active {
+    background-color: #28a745;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+}
+.game-icon .active {
+    display: inline-block !important;
+    float: none !important;
+    vertical-align: middle !important;
+    margin-right: 0 !important;
+}
+.coupon-table td:first-child .active {
+    margin-right: 30px;
+    float: right;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: #28a745;
+}
+.bookmaker-icon, .fancy-icon {
+    height: 12px;
+}
+.ic-card {
+    height: 18px;
+}
+.game-name:hover {
+    text-decoration: underline;
+}
+.mob-view-item{
+    display: none;
+}
+.mobile-view-item{
+    display: none;
+}
+
+.gName{
+    width: unset;
+    font-weight: 500;
+    font-size: 15px;
+}
+.game_name{
+    box-shadow: unset !important;
+    display: table-cell !important;
+}
+.game_name a{
+    font-size: 14px !important;
+}
+.item-table{
+    background-color: #ffffff !important;
+}
+
+.activeList {
+    background: #08c;
+}
+
+.activeList {
+    background: #08c;
+    color: #fff !important;
+    transition-property: left, right;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+.bottom-header li a{
+  color: #fff;
+
+}
+.navbarNav {
+    display: flex;
+    background: #2c3d50;
+    width: 100%;
+    color: #fff;
+}
+
+.navbarNav .nav-link:focus, .navbarNav .nav-link:hover {
+    color: #fff;
+}
+
+.bottom-header li a:before {
+    content: "";
+    position: unset;
+    z-index: unset;
+    left: unset;
+    right: unset;
+    bottom: 0;
+    background: unset;
+    height: unset;
+}
+.header-btm {
+    margin-top: -11px;
+}
+.totalBet {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 4px;
+}
+
+.totalBet p:first-child{
+    margin-right: 11px;
+}
+.totalBet p{
+    font-size: 13px;
+    margin-top: 12px;
+}
+.scrollItem1{
+    height: 35vh;
+    overflow: scroll;
+}

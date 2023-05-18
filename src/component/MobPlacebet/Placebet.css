@@ -1,0 +1,117 @@
+.lay {
+    background-color: #faa9ba !important;
+}
+.float-right {
+    float: right!important;
+}
+.place-bet .stakeactionplus, .place-bet .stakeactionminus {
+    background: #2c3e50;
+    height: 28px;
+    width: 28px;
+    line-height: 28px;
+    padding: 0;
+    float: left;
+    border-radius: 0;
+    color: #fff;
+}
+
+
+button.stakeactionminus.btn:disabled {
+    background: #2c3d50;
+    color: #fff;
+    border-color: unset;
+    opacity: 1;
+    border: unset;
+}
+
+.place-bet .stakeinput {
+    width: 75px;
+    height: 28px;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    outline: unset;
+}
+.w-100 {
+    width: 100% !important;
+}
+.place-bet .btn-primary {
+    height: 28px;
+    line-height: 28px;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+.place-bet .btn-secondary {
+    height: 28px;
+    line-height: 28px;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+.btn-secondary {
+    background-color: #2c3e50;
+    border-color: #2c3e50;
+    color: #fff;
+}
+.text-danger {
+    color: #b71e2d !important;
+}
+.col-5 b {
+    font-size: 13px;
+}
+button.stakeactionminus.btn {
+    margin: 0px;
+}
+.col-4 span {
+    font-size: 12px;
+}
+.text-success {
+    color: #169733 !important;
+}
+.modal-header { 
+    background: #0088cc;
+    color: #fff;
+}
+p.place-lodder {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+    background: #0000006b;
+    left: 0px;
+    top: 0;
+    z-index: 3;
+}
+p.place-lodder i {
+    font-size: 24px;
+    margin-inline: 43%;
+    margin-top: 26%;
+    color: #fff;
+}
+@media screen and (max-width: 375px) {
+    p.place-lodder i {
+        margin-inline: 48%;
+        margin-top: 40%;
+    }
+}
+
+@media screen and (min-width: 376px) and (max-width: 450px) {
+    p.place-lodder i {
+        margin-inline: 47%;
+        margin-top: 35%;
+    }
+}
+
+@media screen and (min-width: 451px) and (max-width: 30000px) {
+    p.place-lodder i {
+        margin-inline: 48%;
+        margin-top: 28%;
+    }
+}
+
+
+
+

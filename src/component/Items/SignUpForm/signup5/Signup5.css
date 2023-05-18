@@ -1,0 +1,413 @@
+.backgroundImg4 {
+    padding: 5%;
+    background-image: url("/public/images/diamondexch5.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.formholder1::before {
+    animation: translate 3000ms infinite reverse;
+    position: absolute;
+    content: "";
+    border-radius: 50%;
+    height: 200px;
+    left: -20%;
+    bottom: -10%;
+    width: 200px;
+   background: linear-gradient(0deg, rgb(197 36 131) 0%, rgb(17 33 72) 100%);
+}
+.formholder1::after {
+
+    animation: translate 3000ms infinite reverse;
+    position: absolute;
+    content: "";
+    border-radius: 50%;
+    height: 200px;
+    right: -20%;
+    top: -10%;
+    width: 200px;
+   background: linear-gradient(0deg, rgb(197 36 131) 0%, rgb(17 33 72) 100%);
+
+}
+
+/* @media screen and (min-width: 300px) and (max-width: 800px) {
+    .backgroundImg4 {
+        padding: 5%;
+        background-image: url("/public/images/diamondexch5mob.png");
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+    .formholder1 {
+        text-align: center;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-top: 5%;
+    z-index: 99;
+    position: relative;
+    isolation: isolate;
+    position: absolute;
+    overflow: hidden;
+    bottom: 0px;
+    left: 0%;
+    width: 98%;
+    margin-inline: 1%;
+    padding: 4%;
+    }
+    .formholder1::after {
+        height: 120px;
+        width: 120px;
+        top: -5%;
+        right: -25%;
+    }
+    .formholder1::before {
+        height: 120px;
+        width: 120px;
+        bottom: -5%;
+        left: -25%;
+    }
+
+} */
+
+
+.formholder1 {
+    text-align: center;
+    padding: 3%;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-top: 5%;
+    z-index: 99;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 39%;
+    float: right;
+}
+
+.heading {
+    font-size: 26px;
+color: rgb(14 78 143);
+font-weight: 800;
+letter-spacing: 2px;
+}
+.formholder1::before {
+    animation: translate 3000ms infinite reverse;
+    position: absolute;
+    content: "";
+    border-radius: 50%;
+    height: 200px;
+    left: -20%;
+    bottom: -10%;
+    width: 200px;
+   background: linear-gradient(0deg, rgb(197 36 131) 0%, rgb(17 33 72) 100%);
+}
+
+.formholder1::after {
+
+    animation: translate 3000ms infinite reverse;
+    position: absolute;
+    content: "";
+    border-radius: 50%;
+    height: 200px;
+    right: -20%;
+    top: -10%;
+    width: 200px;
+   background: linear-gradient(0deg, rgb(197 36 131) 0%, rgb(17 33 72) 100%);
+
+}
+
+.username,
+.password,
+.mobilecode,
+.verificationcode {
+    border-bottom: 1px dashed rgba(251, 75, 2, 1);
+    border-left: 0;
+    padding: 5px;
+    border-right: 0;
+    border-top: 0;
+    margin: 20px auto;
+    -webkit-box-shadow: 10px 10px 6px 0px rgba(240, 240, 240, 1);
+    -moz-box-shadow: 10px 10px 6px 0px rgba(240, 240, 240, 1);
+    box-shadow: 10px 10px 6px 0px rgba(240, 240, 240, 1);
+}
+
+.password {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.mainform {
+    margin: 20px auto;
+    z-index: 99;
+    isolation: isolate;
+}
+
+.mainform input {
+    width: 100%;
+    border: none;
+    padding: 10px;
+
+}
+
+.mainform input:focus {
+    outline: none;
+    border: none;
+}
+
+.eye {
+    text-decoration: none;
+    color: rgba(251, 75, 2, 1);
+    margin-right: 20px;
+}
+
+.eye:hover {
+    color: #000;
+}
+
+.mobilecode {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+._btn {
+    outline: none;
+    display: block;
+    border: none;
+    -webkit-box-shadow: 0px 2px 6px 0px rgba(196, 196, 196);
+    -moz-box-shadow: 0px 2px 6px 0px rgba(196, 196, 196);
+    box-shadow: 0px 2px 6px 0px rgb(196 196 196);
+    padding: 5px 10px;
+    color: #323232;
+    text-transform: capitalize;
+    border-radius: 3px;
+    font-size: 12px;
+    width: 25%;
+}
+
+.signupbuttonholder .signupbtn {
+    font-size: 22px;
+    letter-spacing: .5px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    color: #323232;
+    margin: 20px auto;
+    padding: 2px 40px;
+    text-transform: capitalize;
+    -webkit-box-shadow: 0px 2px 6px 0px rgba(196, 196, 196);
+    -moz-box-shadow: 0px 2px 6px 0px rgba(196, 196, 196);
+    box-shadow: 0px 2px 6px 0px rgb(196 196 196);
+}
+
+.rocketimg {
+    transition: all .3s linear;
+    width: 40px;
+    height: 40px;
+}
+
+.alreadyaccount {
+    margin: 30px auto;
+    text-align: center;
+}
+
+.signin {
+    text-decoration: none;
+    color: rgba(251, 75, 2, 1);
+
+}
+
+/* 7 */
+.custom-btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    outline: none;
+}
+
+.btn-7 {
+   background: linear-gradient(0deg, rgb(197 36 131) 0%, rgb(17 33 72) 100%);
+    line-height: 42px;
+    padding: 0;
+    border: none;
+}
+
+.btn-7 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-7::before,
+.btn-7::after {
+    position: absolute;
+    content: "";
+    right: 0;
+    bottom: 0;
+    background: rgba(251, 75, 2, 1);
+    box-shadow:
+        -7px -7px 20px 0px rgba(255, 255, 255, .9),
+        -4px -4px 5px 0px rgba(255, 255, 255, .9),
+        7px 7px 20px 0px rgba(0, 0, 0, .2),
+        4px 4px 5px 0px rgba(0, 0, 0, .3);
+    transition: all 0.3s ease;
+}
+
+.btn-7:before {
+    height: 0%;
+    width: 2px;
+}
+
+.btn-7:after {
+    width: 0%;
+    height: 2px;
+}
+
+.btn-7:hover {
+    color: rgba(251, 75, 2, 1);
+    background: transparent;
+}
+
+.btn-7:hover:before {
+    height: 100%;
+}
+
+.btn-7:hover:after {
+    width: 100%;
+}
+
+.btn-7 span:before,
+.btn-7 span:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    background: rgba(251, 75, 2, 1);
+    box-shadow:
+        -7px -7px 20px 0px rgba(255, 255, 255, .9),
+        -4px -4px 5px 0px rgba(255, 255, 255, .9),
+        7px 7px 20px 0px rgba(0, 0, 0, .2),
+        4px 4px 5px 0px rgba(0, 0, 0, .3);
+    transition: all 0.3s ease;
+}
+
+.btn-7 span:before {
+    width: 2px;
+    height: 0%;
+}
+
+.btn-7 span:after {
+    height: 2px;
+    width: 0%;
+}
+
+.btn-7 span:hover:before {
+    height: 100%;
+}
+
+.btn-7 span:hover:after {
+    width: 100%;
+}
+
+
+@keyframes translate {
+    0% {
+        transform: translateX(0%);
+    }
+
+    50% {
+        transform: translate(10%);
+    }
+
+    100% {
+        transform: translate(0%);
+    }
+}
+@media screen and (min-width: 300px) and (max-width: 800px) {
+    .backgroundImg4 {
+        padding: 5%;
+        background-image: url("/public/images/diamondexch5mob.png");
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+
+    .alreadyaccount {
+        margin: 11px auto;
+        text-align: center;
+    }
+    .formholder1 {
+        text-align: center;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-top: 5%;
+    z-index: 99;
+    position: relative;
+    isolation: isolate;
+    position: absolute;
+    overflow: hidden;
+    bottom: 0px;
+    left: 0%;
+    width: 98%;
+    margin-inline: 1%;
+    padding: 4%;
+    }
+
+
+    .heading {
+        font-size: 19px;
+    color: rgb(14 78 143);
+    font-weight: 800;
+    letter-spacing: 2px;
+    }
+
+    .formholder1::after {
+        height: 120px;
+        width: 120px;
+        top: -5%;
+        right: -25%;
+    }
+
+    .formholder1::before {
+        height: 120px;
+        width: 120px;
+        bottom: -5%;
+        left: -25%;
+    }
+
+    .username,
+    .password,
+    .mobilecode,
+    .verificationcode {
+        border-bottom: 1px dashed rgba(251, 75, 2, 1);
+        border-left: 0;
+        padding: 5px;
+        border-right: 0;
+        border-top: 0;
+        margin: 14px auto;
+        box-shadow: 10px 10px 6px 0px rgba(240, 240, 240, 1);
+    }
+
+}
+
+

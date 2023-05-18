@@ -1,0 +1,104 @@
+.main-account-containor {
+    display: flex;
+    flex-wrap: wrap;
+}
+.mx-input-wrapper {
+    margin: 7px;
+}
+.account-lable{
+    margin-bottom: 7px;
+}
+.account-input {
+    padding: 8px 2px;
+}
+.withdraw-data{
+    padding-right: 120px !important;
+}
+.account-detail{
+    background-color: #2c3e50;
+    color: #fff;
+}
+.no-record-found{
+    text-align: center;
+}
+.btn-w{
+    margin-top: 21px;
+    padding: 5px 32px;
+}
+.rejected{
+    color: #f44336;
+}
+.approved{
+    color: #66bb6a;
+}
+.pending{
+    color: #ffa726;
+}
+button.btn.btn-primary.btn-block.btn-sm.btn-w {
+    margin-top: 26px;
+}
+
+
+.withdraw{
+    height: 89vh;
+    overflow: scroll;
+}
+.withdraw::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (min-width:300px) and (max-width: 500px) {
+    .main-account-containor {
+        display: block;
+    }
+    input.account-input {
+        width: 100%;
+    }
+  }
+
+
+  @media screen and (min-width: 850px) and (max-width: 3000px) {
+    .wrapper.withdraw {
+        margin-inline: 21px;
+    }
+    select.custom-select.select-type {
+        width: 160%;
+        margin-top: 0px;
+        margin-left: -2px;
+        border-color: #767676;
+    }
+    .main-account-containor {
+        width: 97%;
+        justify-content: center;
+    }
+    .withdrow-table {
+        width: 98%;
+        margin: auto;
+    }
+    .card-header {
+        background: #2c3e50 !important;
+        color: #fff;
+        border-radius: unset !important;
+    }
+    .card-header {
+        padding-top: 8px;
+        padding-bottom: 7px;
+    }
+    .wit{
+        padding-left: 10px;
+        margin-bottom: 15px;
+    }
+    button.btn.btn-primary.btn-block.btn-sm.btn-w {
+        margin-left: 88%;
+        margin-top: 23px;
+        padding: 6px;
+        width: 148%;
+    }
+  
+}
+.select-type{
+    margin-top: 3px;
+}
+/* .wrapper.withdraw {
+    height: calc(100vh - 200px);
+} */
