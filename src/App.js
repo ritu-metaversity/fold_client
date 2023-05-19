@@ -35,6 +35,7 @@ import Signup4 from "./component/Items/SignUpForm/signup4/Signup4";
 import Signup5 from "./component/Items/SignUpForm/signup5/Signup5";
 import DefaultPage from "./component/Items/DefaultPage/DefaultPage";
 import DefaultHomePage from "./component/Items/DefaultPage/DefaultHomePage";
+import { UserAPI } from "./apis/UserAPI";
 
 
 function App() {
@@ -46,6 +47,17 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
+
+    UserAPI.Self_By_App_Url().then((res)=>{
+      let favicon = document.getElementById("favicon");
+      if(!favicon){
+        favicon = document.createElement('link');
+        favicon.rel = 'icon';
+        document.getElementsByTagName('head')[0].appendChild(favicon);
+      }
+      favicon.href = res?.data?.favicon;
+    })
+
     const time = setInterval(() => {
       if (localStorage.getItem("token") !== null) {
         if(localStorage.getItem("Password-type") !== "old"){

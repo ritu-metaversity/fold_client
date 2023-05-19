@@ -19,7 +19,8 @@ function Login({ Errmessage, Statusmessage }) {
   const [showModals, setShowModals] = useState(false);
   const [navLogo, setNavLogo] = useState()
 
-  // console.log(window.location.host);
+ 
+  
 
 
   const {host} = window.location

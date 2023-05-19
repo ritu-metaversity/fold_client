@@ -58,24 +58,6 @@ function GameDetail({ getStackValue}) {
     Bookmaker: [],
     Fancy: [],
   });
-
-  useEffect(() => {
-    const time = setInterval(() => {
-      const token = localStorage.getItem("token");
-      if (token !== null || localStorage.getItem("Password-type" !== "old")) {
-        UserAPI.User_Balance()
-          .then((res) => {
-            setUserbalance(res?.data?.balance);
-          })
-          .catch((error) => {
-            setError(true);
-          });
-      }
-    }, 1000);
-
-    return () => clearInterval(time);
-  }, []);
-
   // Stack Value Api
 
   useEffect(() => {
@@ -599,6 +581,14 @@ function GameDetail({ getStackValue}) {
                                     const availableToLay = [
                                       ...event?.ex?.availableToLay,
                                     ];
+
+                                    const ProfitValue = profits?.Odds[
+                                      Number(item?.marketId)
+                                    ]?.find(
+                                      (profit) =>
+                                        profit?.sid ==
+                                        event?.selectionId
+                                    )?.value
                                     return (
                                       <div
                                         data-title="ACTIVE"
@@ -624,39 +614,24 @@ function GameDetail({ getStackValue}) {
                                             <span
                                               style={{ color: "black" }}
                                               className={`float-left ${
-                                                profits?.Odds[
-                                                  Number(item?.marketId)
-                                                ]?.find(
-                                                  (profit) =>
-                                                    profit?.sid ==
-                                                    event?.selectionId
-                                                )?.value > 0
+                                                ProfitValue > 0
                                                   ? "text-success"
-                                                  : profits?.Odds[
-                                                      Number(item?.marketId)
-                                                    ]?.find(
-                                                      (profit) =>
-                                                        profit?.sid ==
-                                                        event?.selectionId
-                                                    )?.value < 0
+                                                  : ProfitValue < 0
                                                   ? "text-danger"
                                                   : ""
                                               }`}>
-                                              {profits.Odds[
-                                                Number(item?.marketId)
-                                              ]
-                                                ?.find(
-                                                  (profit) =>
-                                                    profit?.sid ==
-                                                    event?.selectionId
-                                                )
-                                                ?.value?.toFixed(2) || 0}
+                                              {parseFloat(ProfitValue)?.toFixed(2) || 0}
                                             </span>
                                           </p>
                                         </div>
                                         {availableToBack?.length &&
                                           availableToBack
                                             ?.map((e, id) => {
+                                              const BlinkClassBack = e?.price !==
+                                              previousState?.Odds[id1]
+                                                ?.runners[index]?.ex
+                                                ?.availableToBack[id]
+                                                ?.price
                                               return (
                                                 <div
                                                   key={e?.size + e?.price + id}
@@ -672,11 +647,7 @@ function GameDetail({ getStackValue}) {
                                                     : "back"
                                                 } 
                                                  ${
-                                                   e?.price !==
-                                                   previousState?.Odds[id1]
-                                                     ?.runners[index]?.ex
-                                                     ?.availableToBack[id]
-                                                     ?.price
+                                                  BlinkClassBack
                                                      ? "blink"
                                                      : ""
                                                  }`}>
@@ -710,6 +681,10 @@ function GameDetail({ getStackValue}) {
                                           }
                                         {availableToLay?.length &&
                                           availableToLay?.map((e, id) => {
+                                            const BlinkClassLay = e?.price !==
+                                            previousState?.Odds[id1]
+                                              ?.runners[index]?.ex
+                                              ?.availableToLay[id]?.price
                                             return (
                                               <div
                                                 key={e?.size + e?.price}
@@ -725,13 +700,7 @@ function GameDetail({ getStackValue}) {
                                                     : "lay"
                                                 }
                                                 ${
-                                                  e?.price !==
-                                                  previousState?.Odds[id1]
-                                                    ?.runners[index]?.ex
-                                                    ?.availableToLay[id]?.price
-                                                    ? "blink"
-                                                    : ""
-                                                } `}>
+                                                  BlinkClassLay? "blink": ""} `}>
                                                 <button
                                                   className="odbtn"
                                                   onClick={() =>
@@ -838,6 +807,8 @@ function GameDetail({ getStackValue}) {
                         <div className="table-body">
                           {fancyOdds?.Bookmaker?.length &&
                             fancyOdds?.Bookmaker?.map((bookmaker, id) => {
+                              const BookmakerProfitVal = profits?.Bookmaker?.find(
+                                (profit) =>profit?.sid === bookmaker?.sid)?.value
                               return (
                                 <>
                                   <div
@@ -861,24 +832,14 @@ function GameDetail({ getStackValue}) {
                                       <p>
                                         <span
                                           className={`float-left ${
-                                            profits?.Bookmaker?.find(
-                                              (profit) =>
-                                                profit?.sid === bookmaker?.sid
-                                            )?.value > 0
+                                            BookmakerProfitVal > 0
                                               ? "text-success"
-                                              : profits.Bookmaker?.find(
-                                                  (profit) =>
-                                                    profit?.sid ===
-                                                    bookmaker?.sid
-                                                )?.value < 0
+                                              :BookmakerProfitVal < 0
                                               ? "text-danger"
                                               : ""
                                           }`}
                                           style={{ color: "black" }}>
-                                          {profits?.Bookmaker?.find(
-                                            (profit) =>
-                                              profit?.sid === bookmaker?.sid
-                                          )?.value?.toFixed(2) || 0}
+                                          {parseFloat(BookmakerProfitVal)?.toFixed(2) || 0}
                                         </span>
                                       </p>
                                     </div>
@@ -1072,6 +1033,7 @@ function GameDetail({ getStackValue}) {
                                     </div>
                                   </div>
                                   {fancyOdds[currentFancy]?.map((item, id) => {
+                                    const FancyProfitValue = fancyOddsPnl?.find((pnl) =>pnl?.marketId === item?.sid)?.pnl
                                     return (
                                       <div
                                         className="table-body"
@@ -1141,26 +1103,14 @@ function GameDetail({ getStackValue}) {
                                                 }>
                                                 <span
                                                   className={`float-left ${
-                                                    fancyOddsPnl?.find(
-                                                      (pnl) =>
-                                                        pnl?.marketId ===
-                                                        item?.sid
-                                                    )?.pnl > 0
+                                                    FancyProfitValue > 0
                                                       ? "sucess"
-                                                      : fancyOddsPnl?.find(
-                                                          (pnl) =>
-                                                            pnl?.marketId ===
-                                                            item?.sid
-                                                        )?.pnl < 0
+                                                      : FancyProfitValue < 0
                                                       ? "danger"
                                                       : ""
                                                   }`}
                                                   style={{ color: "black" }}>
-                                                  {fancyOddsPnl?.find(
-                                                    (pnl) =>
-                                                      pnl?.marketId ===
-                                                      item?.sid
-                                                  )?.pnl || 0}
+                                                  {FancyProfitValue || 0}
                                                 </span>
                                               </p>
                                             </div>

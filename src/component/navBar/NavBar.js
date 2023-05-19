@@ -47,22 +47,6 @@ const NavBar = () => {
       setStatus(res.data.selfAllowed);
       setNavLogo(res?.data?.logo)
     });
-
-    
-    if (pathname !== "/") {
-      
-      if (token !== null || localStorage.getItem("Password-type" !== "old")) {
-        UserAPI.User_Balance()
-          .then((res) => {
-            setUserbalance(res.data.balance);
-            setExp(res?.data?.libality);
-          })
-          .catch((error) => {
-            setError(true);
-          });
-      }
-    }
-
     UserAPI.User_Message().then((res) => {
       setUserMessage(res);
     });
@@ -70,7 +54,29 @@ const NavBar = () => {
     if (localStorage.getItem("token") === null) {
       nav("/login");
     }
-  }, [nav]);
+  }, []);
+
+  // const {pathname} = window.location
+
+  useEffect(()=>{
+    const time = setInterval(() => {
+      const token = localStorage.getItem("token");
+      if (token !== null || localStorage.getItem("Password-type" !== "old")) {
+        UserAPI.User_Balance()
+          .then((res) => {
+            setUserbalance(res?.data?.balance);
+            setExp(res?.data?.libality)
+          })
+          .catch((error) => {
+            setError(true);
+          });
+      }
+    }, 1500);
+
+    return () => clearInterval(time);
+
+  }, [])
+
 
   const handleSignOut = () => {
     if (localStorage.getItem("token") !== null)
