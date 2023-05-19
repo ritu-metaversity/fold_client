@@ -19,6 +19,7 @@ const NavBar = () => {
   const [balanceShow, setBalanceShow] = useState(true);
   const [expShow, setExpShowShow] = useState(true);
   const [showExpModals, setShowExpModals] = useState(false);
+  const [NavLogo, setNavLogo] = useState();
 
   const nav = useNavigate();
   const { pathname } = useLocation();
@@ -42,22 +43,10 @@ const NavBar = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (pathname !== "/") {
-      UserAPI.Self_By_App_Url().then((res) => {
-        setStatus(res.data.selfAllowed);
-      });
-      if (token !== null || localStorage.getItem("Password-type" !== "old")) {
-        UserAPI.User_Balance()
-          .then((res) => {
-            setUserbalance(res.data.balance);
-            setExp(res?.data?.libality);
-          })
-          .catch((error) => {
-            setError(true);
-          });
-      }
-    }
-
+    UserAPI.Self_By_App_Url().then((res) => {
+      setStatus(res.data.selfAllowed);
+      setNavLogo(res?.data?.logo)
+    });
     UserAPI.User_Message().then((res) => {
       setUserMessage(res);
     });
@@ -65,7 +54,29 @@ const NavBar = () => {
     if (localStorage.getItem("token") === null) {
       nav("/login");
     }
-  }, [nav]);
+  }, []);
+
+  // const {pathname} = window.location
+
+  useEffect(()=>{
+    const time = setInterval(() => {
+      const token = localStorage.getItem("token");
+      if (token !== null || localStorage.getItem("Password-type" !== "old")) {
+        UserAPI.User_Balance()
+          .then((res) => {
+            setUserbalance(res?.data?.balance);
+            setExp(res?.data?.libality)
+          })
+          .catch((error) => {
+            setError(true);
+          });
+      }
+    }, 1500);
+
+    return () => clearInterval(time);
+
+  }, [])
+
 
   const handleSignOut = () => {
     if (localStorage.getItem("token") !== null)
@@ -109,7 +120,8 @@ const NavBar = () => {
                     className="router-link-exact-active router-link-active">
                     <i className="fa fa-home mr-1"></i>
                     <img
-                      src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
+                      // src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
+                      src={NavLogo && NavLogo}
                       alt="Exchange"
                       className="img-fluid logo"
                     />
@@ -271,7 +283,7 @@ const NavBar = () => {
                   <div className="d-flex login-register">
                   <Link
                       to="/register"
-                      className=" mt-2 text-white">
+                      className={`mt-2 text-white ${status ? "" : "d-none"}`}>
                       <b>Register</b>
                     </Link>
                     <Link
