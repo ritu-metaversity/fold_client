@@ -46,10 +46,20 @@ function App() {
   const nav = useNavigate();
   const { pathname } = useLocation();
 
+  const hostname = (window.location.host).split(".");
+  document.title= hostname[0];
+
+
+
+
+
+
   useEffect(() => {
 
+
+
     UserAPI.Self_By_App_Url().then((res)=>{
-      let favicon = document.getElementById("favicon");
+      let favicon = document.queryCommandValue("link[rel~={Logo}]");
       if(!favicon){
         favicon = document.createElement('link');
         favicon.rel = 'icon';
