@@ -17,6 +17,7 @@ function Login({ Errmessage, Statusmessage }) {
   const [isLoading, setIsLoading] = useState(false);
   const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
+  const [navLogo, setNavLogo] = useState()
 
   // console.log(window.location.host);
 
@@ -98,6 +99,13 @@ function Login({ Errmessage, Statusmessage }) {
     }
   }, []);
 
+  useEffect(()=>{
+    UserAPI.Self_By_App_Url().then((res) => {
+      setNavLogo(res?.data?.logo)
+    });
+
+  },[])
+
 
 
   return (
@@ -125,7 +133,8 @@ function Login({ Errmessage, Statusmessage }) {
         <div className="login-wrapper">
           <div className="text-center logo-login mb-3">
             <img
-              src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
+              // src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
+              src={navLogo}
               alt=""
             />
           </div>
