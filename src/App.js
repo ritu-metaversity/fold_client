@@ -49,7 +49,7 @@ function App() {
   useEffect(() => {
 
     UserAPI.Self_By_App_Url().then((res)=>{
-      let favicon = document.getElementById("favicon");
+      let favicon = document.queryCommandValue("link[rel~={Logo}]");
       if(!favicon){
         favicon = document.createElement('link');
         favicon.rel = 'icon';
