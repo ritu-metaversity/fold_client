@@ -45,7 +45,7 @@ const NavBar = () => {
     const token = localStorage.getItem("token");
     UserAPI.Self_By_App_Url().then((res) => {
       setStatus(res.data.selfAllowed);
-      setNavLogo(res?.data?.logo)
+      setNavLogo(res?.data?.logo);
     });
     UserAPI.User_Message().then((res) => {
       setUserMessage(res);
@@ -58,14 +58,14 @@ const NavBar = () => {
 
   // const {pathname} = window.location
 
-  useEffect(()=>{
+  useEffect(() => {
     const time = setInterval(() => {
       const token = localStorage.getItem("token");
       if (token !== null || localStorage.getItem("Password-type" !== "old")) {
         UserAPI.User_Balance()
           .then((res) => {
             setUserbalance(res?.data?.balance);
-            setExp(res?.data?.libality)
+            setExp(res?.data?.libality);
           })
           .catch((error) => {
             setError(true);
@@ -74,9 +74,7 @@ const NavBar = () => {
     }, 1500);
 
     return () => clearInterval(time);
-
-  }, [])
-
+  }, []);
 
   const handleSignOut = () => {
     if (localStorage.getItem("token") !== null)
@@ -107,9 +105,39 @@ const NavBar = () => {
     e.preventDefault();
   };
 
+  const [stackySideBar, setStackySideBar] = useState("");
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const controlNavbar = () => {
+    if (pathname.includes("casino") == true) {
+      if (window.scrollY > 30) {
+        setStackySideBar("Nav-fixed");
+      } else {
+        setStackySideBar("");
+      }
+    } else {
+      if (window.scrollY > 200) {
+        setStackySideBar("Nav-fixed");
+      } else {
+        setStackySideBar("");
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", controlNavbar);
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  }, []);
+
   return (
     <>
-      <div className="wrapper">
+      <div className={`wrapper ${stackySideBar}`}>
         <div className="">
           <header className="header">
             <div className="container-fluid">
@@ -129,7 +157,11 @@ const NavBar = () => {
                 </div>
                 <div
                   className={`col-6 text-right bal-expo ${
-                    pathname === "/" || pathname === "/in-play" || pathname ==="/sports" ? "d-none" : ""
+                    pathname === "/" ||
+                    pathname === "/in-play" ||
+                    pathname === "/sports"
+                      ? "d-none"
+                      : ""
                   }`}>
                   <p className={`mb-0 ${!balanceShow ? "d-none" : ""}`}>
                     <i className="fa fa-bank mr-1"></i>
@@ -279,9 +311,16 @@ const NavBar = () => {
                   </div>
                 </div>
 
-                <div className={`col-6 text-right ${pathname === "/" || pathname === "/in-play" || pathname ==="/sports"?"":"d-none"}`}>
+                <div
+                  className={`col-6 text-right ${
+                    pathname === "/" ||
+                    pathname === "/in-play" ||
+                    pathname === "/sports"
+                      ? ""
+                      : "d-none"
+                  }`}>
                   <div className="d-flex login-register">
-                  <Link
+                    <Link
                       to="/register"
                       className={`mt-2 text-white ${status ? "" : "d-none"}`}>
                       <b>Register</b>
@@ -292,7 +331,6 @@ const NavBar = () => {
                       className="mt-2 text-white">
                       <b>Login</b>
                     </Link>
-                    
                   </div>
                 </div>
               </div>
