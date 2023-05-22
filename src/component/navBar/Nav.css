@@ -1579,3 +1579,10 @@ background-color: #007bff;
         color: #ff3c3c;
     }
 }
+
+.Nav-fixed{
+    position: sticky !important;
+    z-index: 1;
+    top: 0;
+    transition: 0.5s;
+}

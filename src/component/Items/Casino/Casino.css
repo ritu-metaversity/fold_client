@@ -8,11 +8,11 @@
 }
 
 @media screen and (max-width: 500px) {
-    .mobile_if{
-        height: 100vh;
+    .mobile_if {
+        height: calc(100vh - 150px);
         display: block;
-    
     }
+    
     .desktop_if{
         display: none;
     }
