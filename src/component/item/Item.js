@@ -16,6 +16,7 @@ function Item({ gameIdForItemPage, spName }) {
   localStorage.setItem("SportId", gameIdForItemPage);
 
   useEffect(() => {
+    setIsLoading(true)
     const token = localStorage.getItem("token");
     axios
       .get("http://43.205.50.127:9000/betfair_api/active_match", {
@@ -33,7 +34,7 @@ function Item({ gameIdForItemPage, spName }) {
         gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList
           ?.length
     );
-  });
+  },[]);
 
   return (
     <div>
@@ -60,10 +61,10 @@ function Item({ gameIdForItemPage, spName }) {
                       ?.find((item) => item?.sportid === gameIdForItemPage)
                       ?.matchList.map((item) => {
                         return (
-                          <Link to={`/gamedetail/${item.matchId}`}>
+                          <Link key={item.matchId} to={`/gamedetail/${item.matchId}`}>
                             <div
                               className="game-list pt-1 pb-1 container-fluid"
-                              key={item.matchId}>
+                              >
                               <div className="row row5">
                                 <div className="col-8 game-head">
                                   <p className="mb-0 game-name">

@@ -9,7 +9,7 @@ const [gameIdForItemPage, setGameIdForItemPage]=useState(4);
 
 const gameId =(id)=>{
   setGameIdForItemPage(id)
-  props.idddd(id)
+  // props.idddd(id)
 }
 
 

@@ -42,9 +42,8 @@ const NavBar = () => {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     UserAPI.Self_By_App_Url().then((res) => {
-      setStatus(res.data.selfAllowed);
+      setStatus(res?.data?.selfAllowed);
       setNavLogo(res?.data?.logo);
     });
     UserAPI.User_Message().then((res) => {
@@ -54,9 +53,7 @@ const NavBar = () => {
     if (localStorage.getItem("token") === null) {
       nav("/login");
     }
-  }, []);
-
-  // const {pathname} = window.location
+  }, [nav]);
 
   useEffect(() => {
     const time = setInterval(() => {
@@ -106,7 +103,6 @@ const NavBar = () => {
   };
 
   const [stackySideBar, setStackySideBar] = useState("");
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -122,7 +118,7 @@ const NavBar = () => {
     } else {
       if (window.scrollY > 200) {
         setStackySideBar("Nav-fixed");
-      } else {
+      } else if(window.scrollY < 3){
         setStackySideBar("");
       }
     }

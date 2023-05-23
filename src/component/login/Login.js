@@ -17,19 +17,11 @@ function Login({ Errmessage, Statusmessage }) {
   const [isLoading, setIsLoading] = useState(false);
   const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
-  const [navLogo, setNavLogo] = useState()
+  const [navLogo, setNavLogo] = useState();
 
- 
-  
-
-
-  const {host} = window.location
-
-
-  // console.log(host)
+  const { host } = window.location;
 
   const handleLogin = () => {
-    // history.push('/home')
     setIsLoading(true);
     if (password === "" && user === "") {
       setStatusVal(false);
@@ -45,7 +37,7 @@ function Login({ Errmessage, Statusmessage }) {
       })
         .then((res) => {
           const token = res.token;
-          setMessage(res.message)
+          setMessage(res.message);
           setIsLoading(false);
           localStorage.removeItem("UserName");
           localStorage.removeItem("UserPassword");
@@ -71,16 +63,18 @@ function Login({ Errmessage, Statusmessage }) {
     }
   };
 
-  const handleBackBtn = ()=>{
-    nav('/');
-  }
+  const handleBackBtn = () => {
+    nav("/");
+  };
 
   useEffect(() => {
     if (localStorage.getItem("token") !== null) {
       nav("/home");
     }
+
     UserAPI.Self_By_App_Url().then((res) => {
-      setStatusBtn(res.data.selfAllowed);
+      setStatusBtn(res?.data?.selfAllowed);
+      setNavLogo(res?.data?.logo);
     });
 
     if (localStorage.getItem("token") === null) {
@@ -99,16 +93,6 @@ function Login({ Errmessage, Statusmessage }) {
       setShowModals(true);
     }
   }, []);
-
-  useEffect(()=>{
-    UserAPI.Self_By_App_Url().then((res) => {
-      setNavLogo(res?.data?.logo)
-    });
-
-  },[])
-
-
-
   return (
     <>
       <div className="wrapper">
@@ -123,7 +107,7 @@ function Login({ Errmessage, Statusmessage }) {
         ) : (
           ""
         )}
-        {StatusVal === false && Statusmessage === false  ? (
+        {StatusVal === false && Statusmessage === false ? (
           <div className="alertBtn">
             <AlertBtn color="danger" popupClose={popupClose} val={message} />
           </div>
@@ -188,11 +172,11 @@ function Login({ Errmessage, Statusmessage }) {
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
                 <button
                   onClick={handleBackBtn}
-                  className="btn btn-primary btn-block"
-                  >
-                    <i className="ml-2 fa fa-sign-in" style={{rotate:"180deg"}}></i>
+                  className="btn btn-primary btn-block">
+                  <i
+                    className="ml-2 fa fa-sign-in"
+                    style={{ rotate: "180deg" }}></i>
                   Back
-                  
                 </button>
               </div>
               <small className="recaptchaTerms">
@@ -205,7 +189,7 @@ function Login({ Errmessage, Statusmessage }) {
               <div className="form-group mt-1">
                 <p className="mt-1 text-center">
                   <Link to="/" className="mail-link">
-                     {host}
+                    {host}
                   </Link>
                 </p>
               </div>

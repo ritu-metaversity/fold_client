@@ -7,7 +7,8 @@ const SportData = (props) => {
 
   const gameId = (id) => {
     setGameIdForItemPage(id);
-    props.idddd(id);
+    // props.idddd(id);
+
   };
   return (
     <>
