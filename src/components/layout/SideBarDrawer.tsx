@@ -146,6 +146,47 @@ export const Drawers = ({
               borderBottom: "1px solid " + colorHex.borderLine,
             }}
           >
+            <ListItemButton
+              onClick={() => {
+                nav("/");
+              }}
+            >
+              <ListItemText
+                primaryTypographyProps={{
+                  fontSize: "0.9rem",
+                }}
+                primary={"DASHBOARD"}
+              />
+            </ListItemButton>
+          </SidebarHeader>
+          <SidebarHeader
+            sx={{
+              borderBottom: "1px solid " + colorHex.borderLine,
+            }}
+          >
+            <ListItemButton
+              onClick={(e) => {
+                if (!isSignedIn) {
+                  e.preventDefault();
+                  setModal && setModal({ login: true });
+                } else {
+                  nav("/casino");
+                }
+              }}
+            >
+              <ListItemText
+                primaryTypographyProps={{
+                  fontSize: "0.9rem",
+                }}
+                primary={"LIVE CASINO"}
+              />
+            </ListItemButton>
+          </SidebarHeader>
+          <SidebarHeader
+            sx={{
+              borderBottom: "1px solid " + colorHex.borderLine,
+            }}
+          >
             <ListItemButton onClick={() => handleClick(0)}>
               <ListItemText
                 primaryTypographyProps={{

@@ -173,6 +173,24 @@ const SideBarCasino = ({
               borderBottom: "1px solid " + colorHex.borderLine,
             }}
           >
+            <ListItemButton
+              onClick={() => {
+                nav("/");
+              }}
+            >
+              <ListItemText
+                primaryTypographyProps={{
+                  fontSize: "0.9rem",
+                }}
+                primary={"DASHBOARD"}
+              />
+            </ListItemButton>
+          </SidebarHeader>
+          <SidebarHeader
+            sx={{
+              borderBottom: "1px solid " + colorHex.borderLine,
+            }}
+          >
             <ListItemButton onClick={handleClick}>
               <ListItemText
                 primaryTypographyProps={{
