@@ -9,7 +9,7 @@
 
 @media screen and (max-width: 500px) {
     .mobile_if {
-        height: calc(100vh - 150px);
+        height: 100vh;
         display: block;
     }
     

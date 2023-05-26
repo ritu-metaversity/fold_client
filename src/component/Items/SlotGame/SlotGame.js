@@ -1,7 +1,7 @@
 import React from 'react'
 import './SlotGame.css'
 import {Link} from 'react-router-dom'
-import Footer from '../../footer/Footer'
+import Footer from '../../FooterForMob/FooterForMob'
 
 
 function SlotGame() {

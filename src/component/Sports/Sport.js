@@ -41,7 +41,7 @@ function Sport({ gameIdForItemPage }) {
         </p>
       ) : (
         <div className="">
-          <div className="tab-pane container pl-0 pr-0">
+          <div className="tab-pane container pl-0 pr-0 max1_height">
             <div
               className="game-listing-container">
               <div>

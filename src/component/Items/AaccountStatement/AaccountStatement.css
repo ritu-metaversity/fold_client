@@ -349,10 +349,10 @@ button.page-link {
     padding: 5px 8px;
 }
 
-.statement{
+/* .statement{
     height: 85vh;
     overflow: scroll;
-}
+} */
 .statement::-webkit-scrollbar{
     display: none;
 }
@@ -723,4 +723,27 @@ div#match_unmatched {
 }
 .lodderr i{
     font-size: 28px;
+}
+.max_height{
+    height: calc(100% - 250px);
+    min-height: calc(100vh - 250px);
+    max-height: calc(100% - 250px);
+}
+.image_section {
+    border-bottom: 1px solid #dddddd4f;
+}
+
+@media screen and (min-width: 700px) {
+    .max_height{
+        height: calc(100% - 228px);
+        min-height: calc(100vh - 228px);
+        max-height: calc(100% - 228px);
+    }
+
+    .max1_height{
+        height: calc(100% - 279px);
+        min-height: calc(100vh - 279px);
+        max-height: calc(100% - 279px);
+    }
+    
 }

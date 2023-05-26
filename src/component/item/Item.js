@@ -29,12 +29,10 @@ function Item({ gameIdForItemPage, spName }) {
   }, []);
 
   useEffect(() => {
-    setMatchListLength(
-      gameName &&
-        gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList
-          ?.length
-    );
-  },[]);
+    var matchData = gameName && gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList?.length
+    setMatchListLength(matchData);
+
+  },[gameName && gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList?.length]);
 
   return (
     <div>
@@ -44,10 +42,10 @@ function Item({ gameIdForItemPage, spName }) {
         </p>
       ) : (
         <>
-          <div className="tab-pane container pl-0 pr-0">
+          <div className="tab-pane container pl-0 pr-0 max_heirht">
             <div
               className={`game-listing-container main-container ${
-                MatchListLength > 3 ? "scrollItem" : ""
+                MatchListLength && MatchListLength > 3 ? "scrollItem" : ""
               }`}>
               <div>
                 <div className="">

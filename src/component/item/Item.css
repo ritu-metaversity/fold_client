@@ -401,9 +401,7 @@ table {
         font-size: 12px;
         font-weight: 100;
     }
-    footer {
-        display: none;
-    }
+
     .mobile-view-item{
         display: block;
     }
@@ -433,6 +431,12 @@ table {
 }
 
 .scrollItem {
-    height: 30vh;
+    height: 32vh;
     overflow: scroll;
+}
+
+.max1_height{
+    height: calc(100% - 303px);
+    min-height: calc(100vh - 303px);
+    max-height: calc(100% - 303px);
 }

@@ -9,7 +9,7 @@ import ExposureModal from "../Items/ExposureModal/ExposureModal";
 const NavBar = () => {
   const [close, setClose] = useState(false);
   const [droup, setDrop] = useState(false);
-  const [userbalance, setUserbalance] = useState("0.00");
+  const [userbalance, setUserbalance] = useState(0);
   // eslint-disable-next-line
   const [userdetail, setUserDetail] = useState(localStorage.getItem("UserId"));
   const [userMessage, setUserMessage] = useState("");
@@ -110,13 +110,13 @@ const NavBar = () => {
 
   const controlNavbar = () => {
     if (pathname.includes("casino") == true) {
-      if (window.scrollY > 30) {
+      if (window.scrollY > 15) {
         setStackySideBar("Nav-fixed");
       } else {
         setStackySideBar("");
       }
     } else {
-      if (window.scrollY > 200) {
+      if (window.scrollY > 150) {
         setStackySideBar("Nav-fixed");
       } else if(window.scrollY < 3){
         setStackySideBar("");
@@ -144,7 +144,6 @@ const NavBar = () => {
                     className="router-link-exact-active router-link-active">
                     <i className="fa fa-home mr-1"></i>
                     <img
-                      // src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
                       src={NavLogo && NavLogo}
                       alt="Exchange"
                       className="img-fluid logo"
@@ -153,18 +152,14 @@ const NavBar = () => {
                 </div>
                 <div
                   className={`col-6 text-right bal-expo ${
-                    pathname === "/" ||
-                    pathname === "/in-play" ||
-                    pathname === "/sports"
+                   localStorage.getItem("token") === null
                       ? "d-none"
                       : ""
                   }`}>
                   <p className={`mb-0 ${!balanceShow ? "d-none" : ""}`}>
                     <i className="fa fa-bank mr-1"></i>
                     <b>
-                      {error
-                        ? "0.00"
-                        : userbalance === ""
+                      {userbalance === ""
                         ? "0.00"
                         : userbalance}
                     </b>
@@ -309,9 +304,7 @@ const NavBar = () => {
 
                 <div
                   className={`col-6 text-right ${
-                    pathname === "/" ||
-                    pathname === "/in-play" ||
-                    pathname === "/sports"
+                  localStorage.getItem("token") === null
                       ? ""
                       : "d-none"
                   }`}>

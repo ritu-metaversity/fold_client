@@ -111,7 +111,7 @@ function ChangePassword(props) {
           {
           isLoading && <p className="change-pass-loading"><i className="fa fa-spinner fa-spin"></i></p>
         }
-          <div className="card-body container-fluid container-fluid-5">
+          <div className="card-body container-fluid container-fluid-5 max_height">
             <div className="row row5 mt-2 acc-stat">
               <div className="col-12 ch-pass">
                 <div className="form-group">

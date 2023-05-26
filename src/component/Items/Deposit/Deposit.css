@@ -184,8 +184,8 @@ css-pw8cd7 .selected {
     border: 1px solid #08c;
     border-radius: 5px;
 }
-.deposit{
-    height: 89vh;
+.deposit {
+    margin-bottom: 32px;
 }
 .deposit::-webkit-scrollbar {
     display: none;

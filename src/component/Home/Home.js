@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Item from "../item/Item";
 import TopNav from "../navBar/TopNav";
+import BannerList from "../BannerSection/BannerList";
+import FooterForMob from "../FooterForMob/FooterForMob";
 
 function Home(props) {
 
@@ -18,6 +20,11 @@ const gameId =(id)=>{
       <div  className="main-gameHead">
         <TopNav gameId={gameId} />
       </div>
+      {
+      
+        localStorage.getItem("token") !== null?"":<BannerList/>
+      }
+
         <Item gameIdForItemPage={gameIdForItemPage}/>
     </div>
   );

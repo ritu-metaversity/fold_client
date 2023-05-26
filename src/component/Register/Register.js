@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthorAPI } from "../../apis/AuthorAPI";
 import AlertBtn from "../Alert/AlertBtn";
 import { Link, useNavigate } from "react-router-dom";
+import { UserAPI } from "../../apis/UserAPI";
 
 const Register = () => {
   const [password, setPassword] = useState();
@@ -11,6 +12,7 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState();
   const [StatusVal, setStatusVal] = useState(true);
   const [StatusCode, setStatusCode] = useState();
+  const [logo, setLogo] = useState()
 
 
 
@@ -39,7 +41,7 @@ const Register = () => {
     
 
     setErrorMsg(error);
-    return Object.keys(error).length === 0;
+    return Object.keys(error).length !== 0;
   }
 
   const nav = useNavigate()
@@ -66,6 +68,12 @@ const Register = () => {
     }
   };
 
+  useEffect(()=>{
+   UserAPI.Self_By_App_Url().then((res)=>{
+    setLogo(res?.data?.logo)
+   }) 
+  },[])
+
 
   const popupClose=(vl)=>{
     setStatusVal(vl)
@@ -84,7 +92,7 @@ const Register = () => {
         )}
         <div className="text-center logo-login mb-3">
           <img
-            src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
+            src={logo}
             alt=""
           />
         </div>

@@ -7,7 +7,7 @@ import "../src/component/login/Login.css";
 import "../src/component/navBar/TopNav.css";
 
 import Login from "./component/login/Login";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation, Router } from "react-router-dom";
 // eslint-disable-next-line
 import SlotGame from "./component/Items/SlotGame/SlotGame";
 import Home from "./component/Home/Home";
@@ -36,6 +36,10 @@ import Signup5 from "./component/Items/SignUpForm/signup5/Signup5";
 import DefaultPage from "./component/Items/DefaultPage/DefaultPage";
 import DefaultHomePage from "./component/Items/DefaultPage/DefaultHomePage";
 import { UserAPI } from "./apis/UserAPI";
+import AboutUsPageForMob from "./component/AboutUsPageForMob/AboutUsPageForMob";
+import FooterForMob from "./component/FooterForMob/FooterForMob";
+import TermAndCondition from "./component/TermAndCondition/TermAndCondition";
+import ResponsibleGaming from "./component/ResponsibleGaming/ResponsibleGaming";
 
 
 function App() {
@@ -55,9 +59,6 @@ function App() {
 
 
   useEffect(() => {
-
-
-
     UserAPI.Self_By_App_Url().then((res)=>{
       let favicon = document.queryCommandValue("link[rel~={Logo}]");
       if(!favicon){
@@ -69,7 +70,7 @@ function App() {
     })
 
     const time = setInterval(() => {
-      if (localStorage.getItem("token") !== null) {
+      if (localStorage.getItem("token") !== null ) {
         if(localStorage.getItem("Password-type") !== "old"){
         AuthorAPI.VALIDATE_JWT()
           .then()
@@ -110,9 +111,17 @@ function App() {
         nav("/in-play")
       } else if(pathname === "/register"){
         nav("/register")
+      }else if(pathname ==="/about-us"){
+        nav("/about-us")
       }
       else if(pathname === "/sports"){
         nav("/sports")
+      }
+      else if(pathname === "/terms-and-conditions"){
+        nav("/terms-and-conditions")
+      }
+      else if(pathname === "/responsible-gaming"){
+        nav("/responsible-gaming")
       }
 
     }
@@ -145,13 +154,17 @@ function App() {
         <Routes>
           <Route  path="/login" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} />
           <Route  path="/register" element={<Register />} />
-          {/* <Route  path="/" element={<Login Errmessage={Errmessage} Statusmessage={Statusmessage} />} /> */}
           <Route exact path="/signup3" element={<Signup3/>} />
           <Route exact path="/signup1" element={<Signup1/>} />
           <Route exact path="/signup2" element={<Signup2/>} />
           <Route exact path="/signup4" element={<Signup4/>} />
           <Route exact path="/signup5" element={<Signup5/>} />
+          
+
           <Route path="" element={<NavBar />}>
+          <Route path="/about-us" element={<AboutUsPageForMob/>} />
+          <Route path="/terms-and-conditions" element={<TermAndCondition/>} />
+          <Route path="/responsible-gaming" element={<ResponsibleGaming/>} />
             <Route  path="/" element={<DefaultHomePage/>}/>
             <Route  path="/in-play" element={<DefaultHomePage/>}/>
             <Route  path="/sports" element={<DefaultPage/>}/>
@@ -175,10 +188,12 @@ function App() {
               <Route  path="/m/slot" element={<Slot />} />
             </Route>
           </Route>
-  
           <Route  path="*" element={<Login/>} />
-          
         </Routes>
+        {
+          pathname === '/login' ?"":<FooterForMob/>
+        }
+        
     </div>
   );
 }

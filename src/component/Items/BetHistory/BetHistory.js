@@ -119,7 +119,7 @@ function BetHistory() {
           <div className="card-header" style={{ marginLeft: "-8px" }}>
             <h4 className="mb-0">Bet History</h4>
           </div>
-          <div className="card-body container-fluid container-fluid-5">
+          <div className="card-body container-fluid container-fluid-5 max_height">
             <div className="row row5 mt-2 acc-stat">
               <div className="col-6">
                 <div className="form-group mb-0">
