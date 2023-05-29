@@ -218,6 +218,7 @@ function App() {
     };
   }, [isSignedIn, getBalance]);
 
+
   useEffect(() => {
     axios.get("http://23.106.234.25:8083/data-provider/cricket");
   }, []);

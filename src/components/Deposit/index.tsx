@@ -7,6 +7,7 @@ import ActivityTable from "../activityLog/activityLogTable";
 import { columns } from "./columns";
 import { colorHex } from "../../utils/constants";
 import ImageModal from "./ImageModal";
+import { useNavigate } from "react-router-dom";
 
 interface DepositListInterface {
   image: string;
@@ -24,13 +25,14 @@ const colorStatus = {
 const Deposit = () => {
   const [depositList, setDepositList] = useState<DepositListInterface[]>([]);
 
+  const nav = useNavigate();
   const getDepositList = async () => {
     const { response } = await userServices.getDepositList();
-    console.log(response, "deposit data");
     if (response.data) {
       setDepositList(response.data);
     }
   };
+
   const [imageSelected, setImageSelected] = useState("");
 
   const handleClose = () => {
@@ -42,6 +44,12 @@ const Deposit = () => {
     return () => {
       setDepositList([]);
     };
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("is_demo")) {
+      nav("/");
+    }
   }, []);
 
   return (

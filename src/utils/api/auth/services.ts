@@ -53,8 +53,15 @@ export const authServices = {
     const params = { resource: authResources.LOGOUT };
     return await apiWithSnackbar(params);
   },
-  isSelfAllowed: async (data:SelfAllowedPayload) => {
-    const params = { resource: authResources.IS_SELF,data };
+  isSelfAllowed: async (data: SelfAllowedPayload) => {
+    const params = { resource: authResources.IS_SELF, data };
     return await apiHandler(params);
+  },
+  demoUserLogin: async (appUrl: string) => {
+    const params = {
+      resource: authResources.DEMO_USER_LOGIN,
+      data: { appUrl },
+    };
+    return await apiWithSnackbar(params);
   },
 };

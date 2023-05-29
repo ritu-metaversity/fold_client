@@ -268,13 +268,7 @@ const Footer = () => {
             </ul>
           </div>{" "}
           <div className="footer-bottom">
-            <span className="ws-pre-wrap">
-              The website is operated by GIT Operations N.V. registered in
-              Curaçao under the registration number 148532, with address at
-              Heelsumstraat 51, Vredenberg, Willemstad, P.O. box Orionweg 5 C,
-              Curaçao. The transactions are processed by GIT Operations N.V.
-              which owns and operates the website {window.location.hostname}.
-            </span>
+            <span className="ws-pre-wrap">{window.location.hostname}.</span>
           </div>
         </div>
         <div className="w-100 copyright">

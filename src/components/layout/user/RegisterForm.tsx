@@ -8,7 +8,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Form } from "react-bootstrap";
 import { colorHex } from "../../../utils/constants";
 import { userServices } from "../../../utils/api/user/services";
@@ -16,6 +16,9 @@ import { userServices } from "../../../utils/api/user/services";
 import phoneCodes from "../../../utils/phoneCodes.json";
 import Loading from "../loading";
 import snackBarUtil from "../snackBarUtil";
+import { authServices } from "../../../utils/api/auth/services";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../App";
 
 interface RegisterInterface {
   username?: string;
@@ -27,7 +30,8 @@ export function RegisterForm() {
     useState<RegisterInterface | null>(null);
   const matches = useMediaQuery("(max-width: 580px)");
   const [loading, setLoading] = useState(false);
-
+  const nav = useNavigate();
+  const { setModal, setIsSignedIn, setUser } = useContext(UserContext);
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       username: "",
@@ -56,6 +60,28 @@ export function RegisterForm() {
       setLoading(false);
     },
   });
+
+  const handleDemoUserLogin = async () => {
+    const { response } = await authServices.demoUserLogin(
+      window.location.hostname
+    );
+    if (response) {
+      localStorage.setItem("is_demo", "true");
+      localStorage.setItem("token", response.token);
+      if (setUser) setUser(response);
+      localStorage.setItem("user", JSON.stringify(response));
+      if (response.passwordtype === "old" && setModal) {
+        setModal({ changePassword: true });
+        setLoading(false);
+        nav({
+          pathname: "/",
+          search: "first-login=true",
+        });
+      } else {
+        if (setIsSignedIn) setIsSignedIn(true);
+      }
+    }
+  };
   if (newCredAfterRegister) {
     return (
       <>
@@ -239,6 +265,17 @@ export function RegisterForm() {
               fullWidth
             >
               Submit
+            </Button>
+
+            <Button
+              sx={{ p: 2.5 }}
+              variant="contained"
+              color="secondary"
+              type="button"
+              fullWidth
+              onClick={handleDemoUserLogin}
+            >
+              Demo Login
             </Button>
             <Typography fontSize={"0.5rem"}>
               This site is protected by reCAPTCHA and the Google Privacy Policy
