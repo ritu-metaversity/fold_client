@@ -13,8 +13,7 @@ const Register = () => {
   const [StatusVal, setStatusVal] = useState(true);
   const [StatusCode, setStatusCode] = useState();
   const [logo, setLogo] = useState()
-
-
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const validateForm =()=>{
@@ -41,13 +40,14 @@ const Register = () => {
     
 
     setErrorMsg(error);
-    return Object.keys(error).length !== 0;
+    return Object.keys(error).length === 0;
   }
 
   const nav = useNavigate()
 
   const handleLogin = () => {
     if(validateForm()) {
+      setIsLoading(true)
       AuthorAPI.Register({
         username: UserName,
         password: password,
@@ -59,8 +59,10 @@ const Register = () => {
           localStorage.setItem("UserName", res.username);
           localStorage.setItem("UserPassword", res.password)
           nav('/login');
+          setIsLoading(false)
         })
         .catch((error) => {
+          setIsLoading(false)
           setStatusCode(error.response.status);
           setErrorMsg(error.response.data.message);
           setStatusVal(false);
@@ -78,6 +80,8 @@ const Register = () => {
   const popupClose=(vl)=>{
     setStatusVal(vl)
   }
+
+
   return (
     <>
       <div className="login-wrapper">
@@ -163,7 +167,11 @@ const Register = () => {
                 className="btn btn-primary btn-block"
                 onClick={handleLogin}>
                 Register
-                <i className="ml-2 fa fa-sign-in"></i>
+                {isLoading ? (
+                    <i className="ml-2 fa fa-spinner fa-spin"></i>
+                  ) : (
+                    <i className="ml-2 fa fa-sign-in"></i>
+                  )}
               </button>
             </div>
             <div className="form-group mb-0" style={{ marginTop: "12px" }}>
