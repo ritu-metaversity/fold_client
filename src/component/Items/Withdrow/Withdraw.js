@@ -108,8 +108,6 @@ const Withdraw = () => {
     });
   }, []);
 
-  console.log(dataLength, "fawfsfsfs")
-
 
   const popupClose = (vl) => {
     setErrorAlert(vl);

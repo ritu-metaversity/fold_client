@@ -101,7 +101,6 @@ function Login({ Errmessage, Statusmessage }) {
       AuthorAPI.LOGIN_WITH_DEMO_USER()
         .then((res) => {
           const token = res?.data?.token;
-          console.log(res, "adfasfgsfd")
           setMessage(res.message);
           setIsLoading1(false);
           localStorage.removeItem("UserName");

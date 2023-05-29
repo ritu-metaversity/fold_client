@@ -20,7 +20,6 @@ const ResponsibleGaming = () => {
       })
       .catch((error) => {
         setIsloading(false);
-        console.log(error);
       });
   }, []);
   return (

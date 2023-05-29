@@ -19,12 +19,10 @@ const TermAndCondition = () => {
         setIsloading(false);
       })
       .catch((error) => {
-        console.log(error);
         setIsloading(false);
       });
   }, []);
 
-  console.log(tncData, "dfsafdsa");
 
   return (
     <>
