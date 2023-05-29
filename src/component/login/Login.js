@@ -15,6 +15,7 @@ function Login({ Errmessage, Statusmessage }) {
   const [StatusVal, setStatusVal] = useState(true);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoading1, setIsLoading1] = useState(false);
   const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
   const [navLogo, setNavLogo] = useState();
@@ -78,7 +79,7 @@ function Login({ Errmessage, Statusmessage }) {
     });
 
     if (localStorage.getItem("token") === null) {
-      nav("/login");
+      nav("/");
     }
   }, [nav]);
 
@@ -93,6 +94,39 @@ function Login({ Errmessage, Statusmessage }) {
       setShowModals(true);
     }
   }, []);
+
+
+  const handleLoginWithDemoAccount = ()=>{
+    setIsLoading1(true);
+      AuthorAPI.LOGIN_WITH_DEMO_USER()
+        .then((res) => {
+          const token = res?.data?.token;
+          console.log(res, "adfasfgsfd")
+          setMessage(res.message);
+          setIsLoading1(false);
+          localStorage.removeItem("UserName");
+          localStorage.removeItem("UserPassword");
+          localStorage.setItem("token", token);
+          api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+          setStatusVal(res.status);
+          setMessage("Invalid Username or password");
+          const uId = res.data?.username;
+          localStorage.setItem("UserId", uId);  
+          if (res.data?.token !== "" && res.status !== false) {
+            nav("/home");
+          }
+          const pType = res?.data?.passwordtype;
+          localStorage.setItem("Password-type", pType);
+          if (pType === "old") {
+            nav("/m/setting/changepassword");
+          }
+        })
+        .catch((error) => {
+          setIsLoading1(false);
+        });
+  }
+
+
   return (
     <>
       <div className="wrapper">
@@ -163,6 +197,18 @@ function Login({ Errmessage, Statusmessage }) {
                   onClick={handleLogin}>
                   Login
                   {isLoading ? (
+                    <i className="ml-2 fa fa-spinner fa-spin"></i>
+                  ) : (
+                    <i className="ml-2 fa fa-sign-in"></i>
+                  )}
+                </button>
+              </div>
+              <div className="form-group mb-0" style={{ marginTop: "12px" }}>
+                <button
+                  onClick={handleLoginWithDemoAccount}
+                  className="btn btn-primary btn-block">
+                  Login with Demo User
+                  {isLoading1 ? (
                     <i className="ml-2 fa fa-spinner fa-spin"></i>
                   ) : (
                     <i className="ml-2 fa fa-sign-in"></i>
