@@ -2,6 +2,10 @@ import { ApiResource } from "../apiService";
 export const authResourcs: {
   [x: string]: ApiResource;
 } = {
+  DEMO_USER_LOGIN: {
+    URL: "login/demo-user-creation-login",
+    METHOD: "POST",
+  },
   LOGIN: {
     URL: "login/client-login",
     METHOD: "POST",

@@ -127,29 +127,31 @@ export default function Header(props: Props) {
         >
           Virtual Casino
         </TopNavLinks>
-        {isSignedIn && appData?.selfAllowed && (
-          <Box
-            height="100%"
-            sx={{ position: "absolute", right: 5, my: 0.3, top: 0 }}
-          >
-            <Button
-              variant="contained"
-              onClick={() => nav("/deposit")}
-              color="success"
-              sx={{ mr: 2, py: 0.2 }}
+        {isSignedIn &&
+          appData?.selfAllowed &&
+          !localStorage.getItem("is_demo") && (
+            <Box
+              height="100%"
+              sx={{ position: "absolute", right: 5, my: 0.3, top: 0 }}
             >
-              Deposit
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => nav("withdraw-request")}
-              color="error"
-              sx={{ mr: 2, py: 0.2 }}
-            >
-              Withdraw
-            </Button>
-          </Box>
-        )}
+              <Button
+                variant="contained"
+                onClick={() => nav("/deposit")}
+                color="success"
+                sx={{ mr: 2, py: 0.2 }}
+              >
+                Deposit
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => nav("withdraw-request")}
+                color="error"
+                sx={{ mr: 2, py: 0.2 }}
+              >
+                Withdraw
+              </Button>
+            </Box>
+          )}
       </CenterBox>
       <StyledAppBar
         position="fixed"

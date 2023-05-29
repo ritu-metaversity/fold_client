@@ -81,7 +81,8 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
       >
         {isSignedIn &&
           matches &&
-          appData?.selfAllowed && [
+          appData?.selfAllowed &&
+          !localStorage.getItem("is_demo") && [
             <MenuItem
               key="avatarmenuitem1"
               disableRipple

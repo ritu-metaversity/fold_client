@@ -9,11 +9,14 @@ import { userServices } from "../../utils/api/user/services";
 import { StatusTypography } from "../Deposit";
 import CustomizedDialog2 from "../common/Dailog2";
 import snackBarUtil from "../layout/snackBarUtil";
+import { useNavigate } from "react-router-dom";
 
 const Withdraw = () => {
   const [withdrawList, setWithdrawList] = useState([]);
 
   const [cancelWithdrawl, setCancelWithdrawl] = useState(0);
+
+  const nav = useNavigate();
   const getWithdrawList = async () => {
     const { response } = await userServices.getWithdrawList();
     if (response.data) {
@@ -42,6 +45,12 @@ const Withdraw = () => {
     }
   };
 
+
+  useEffect(() => {
+    if (localStorage.getItem("is_demo")) {
+      nav("/");
+    }
+  }, []);
   const handleClose = () => setCancelWithdrawl(0);
   return (
     <HomeLayout>
