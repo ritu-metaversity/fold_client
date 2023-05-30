@@ -18,7 +18,7 @@ export const MenuItem = styled(MuiMenuItem)`
 `;
 
 export function AvatarMenu({ anchorEl, open, handleClose }: any) {
-  const { setIsSignedIn, setModal, isSignedIn, appData, setUser } =
+  const { setIsSignedIn, setModal, isSignedIn, appData, user, setUser } =
     useContext(UserContext);
 
   const nav = useNavigate();
@@ -82,7 +82,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         {isSignedIn &&
           matches &&
           appData?.selfAllowed &&
-          !localStorage.getItem("is_demo") && [
+          !(user?.userTypeInfo === 2) && [
             <MenuItem
               key="avatarmenuitem1"
               disableRipple

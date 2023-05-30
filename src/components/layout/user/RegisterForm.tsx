@@ -69,6 +69,7 @@ export function RegisterForm() {
       localStorage.setItem("is_demo", "true");
       localStorage.setItem("token", response.token);
       if (setUser) setUser(response);
+      localStorage.setItem("userType", response.userTypeInfo);
       localStorage.setItem("user", JSON.stringify(response));
       if (response.passwordtype === "old" && setModal) {
         setModal({ changePassword: true });

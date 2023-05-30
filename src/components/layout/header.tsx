@@ -60,7 +60,7 @@ export default function Header(props: Props) {
   };
 
   const { pathname } = useLocation();
-  const { isSignedIn, appData, setModal } = React.useContext(UserContext);
+  const { isSignedIn, appData, user, setModal } = React.useContext(UserContext);
   const matches = useMediaQuery("(min-width:1280px)");
   const drawerWidthLocal = notShowSidebar ? 0 : drawerWidth;
   const drawerWidthXlLocal = notShowSidebar ? 0 : drawerWidthXl;
@@ -127,31 +127,29 @@ export default function Header(props: Props) {
         >
           Virtual Casino
         </TopNavLinks>
-        {isSignedIn &&
-          appData?.selfAllowed &&
-          !localStorage.getItem("is_demo") && (
-            <Box
-              height="100%"
-              sx={{ position: "absolute", right: 5, my: 0.3, top: 0 }}
+        {isSignedIn && appData?.selfAllowed && !(user?.userTypeInfo === 2) && (
+          <Box
+            height="100%"
+            sx={{ position: "absolute", right: 5, my: 0.3, top: 0 }}
+          >
+            <Button
+              variant="contained"
+              onClick={() => nav("/deposit")}
+              color="success"
+              sx={{ mr: 2, py: 0.2 }}
             >
-              <Button
-                variant="contained"
-                onClick={() => nav("/deposit")}
-                color="success"
-                sx={{ mr: 2, py: 0.2 }}
-              >
-                Deposit
-              </Button>
-              <Button
-                variant="contained"
-                onClick={() => nav("withdraw-request")}
-                color="error"
-                sx={{ mr: 2, py: 0.2 }}
-              >
-                Withdraw
-              </Button>
-            </Box>
-          )}
+              Deposit
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => nav("withdraw-request")}
+              color="error"
+              sx={{ mr: 2, py: 0.2 }}
+            >
+              Withdraw
+            </Button>
+          </Box>
+        )}
       </CenterBox>
       <StyledAppBar
         position="fixed"

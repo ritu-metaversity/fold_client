@@ -1,5 +1,5 @@
 import { Box, useMediaQuery } from "@mui/material";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./casinoGame.css";
 import { useNavigate, useParams } from "react-router-dom";
 import HomeLayout from "../../layout/homeLayout";
@@ -7,6 +7,7 @@ import { UserContext } from "../../../App";
 
 const CasinoGame = () => {
   const matches = useMediaQuery("(max-width: 580px)");
+  const [wait, setWait] = useState(false);
   const { id } = useParams();
   const token = localStorage.getItem("token");
   const nav = useNavigate();
@@ -18,6 +19,14 @@ const CasinoGame = () => {
       nav("/");
     }
   }, [id, isSignedIn]);
+
+  useEffect(() => {
+    setWait(true);
+    const timer = setTimeout(() => setWait(false), 5);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [id]);
 
   return (
     <HomeLayout>
@@ -42,14 +51,16 @@ const CasinoGame = () => {
               position="absolute"
               bgcolor="#0f2327"
             ></Box>
-            <iframe
-              src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
-              height="calc(100vh - 100px)"
-              className="mobile_if"
-              width="100%"
-              title="mobile"
-              allowFullScreen={true}
-            ></iframe>
+            {id && token && !wait && (
+              <iframe
+                src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+                height="calc(100vh - 100px)"
+                className="mobile_if"
+                width="100%"
+                title="mobile"
+                allowFullScreen={true}
+              ></iframe>
+            )}
           </>
         ) : (
           <>
@@ -62,8 +73,8 @@ const CasinoGame = () => {
             bgcolor="#0f2327"
           ></Box> */}
             <iframe
-              src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
-              // height="calc(90vh - 10rem)"
+              key={id}
+              src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`} // height="calc(90vh - 10rem)"
               // style={{ height: "2000px", marginTop: -80 }}
               className="desktop_if"
               width="100%"
