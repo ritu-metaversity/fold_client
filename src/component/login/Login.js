@@ -47,6 +47,7 @@ function Login({ Errmessage, Statusmessage }) {
           api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
           setStatusVal(res.status);
           setMessage("Invalid Username or password");
+          localStorage.setItem("UsertypeInfo", res?.userTypeInfo)
           const uId = res.userId;
           localStorage.setItem("UserId", uId);
           if (res.token !== "" && res.status !== false) {
@@ -109,6 +110,7 @@ function Login({ Errmessage, Statusmessage }) {
           api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
           setStatusVal(res.status);
           setMessage("Invalid Username or password");
+          localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo)
           const uId = res.data?.username;
           localStorage.setItem("UserId", uId);  
           if (res.data?.token !== "" && res.status !== false) {

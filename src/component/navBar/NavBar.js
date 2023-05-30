@@ -214,7 +214,7 @@ const NavBar = () => {
                             className="dropdown-item router-link-exact-active router-link-active">
                             Home
                           </Link>
-                          {localStorage.getItem("UserId") === "Demo" ? (
+                          {localStorage.getItem("UsertypeInfo") == 2 ? (
                             ""
                           ) : (
                             <>
