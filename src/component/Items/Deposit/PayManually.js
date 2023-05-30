@@ -37,10 +37,9 @@ const PayManually = (props) => {
     setBitValue((Bitvalue)=>(Number(Bitvalue)||0) + Number(vl));
   };
 
-  const handleStaticAmountInput =(e)=>{
+const handleStaticAmountInput =(e)=>{
 let Inputvalue = e.target.value
-
-setBitValue( parseInt(Inputvalue));
+setBitValue(parseInt(Inputvalue));
 
   }
   useEffect(() => {

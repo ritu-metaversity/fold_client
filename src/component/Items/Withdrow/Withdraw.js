@@ -79,7 +79,7 @@ const Withdraw = () => {
         .then((res) => {
           UserAPI.Withdraw_Request().then((res) => {
             setWithdrawReq(res.data);
-            setDataLength(res.data.length);
+            setDataLength(res?.data?.length);
           });
           setMessage(res.message);
           setErrorAlert(true);
@@ -99,12 +99,15 @@ const Withdraw = () => {
     }
   };
 
+
   useEffect(() => {
     UserAPI.Withdraw_Request().then((res) => {
       setWithdrawReq(res.data);
-      setDataLength(res.data.length);
+      setDataLength(res?.data?.length);
+      // console.log(res.data, "dfsgveg")
     });
   }, []);
+
 
   const popupClose = (vl) => {
     setErrorAlert(vl);
@@ -412,10 +415,10 @@ const Withdraw = () => {
                     <tbody>
                       <tr
                         role="row"
-                        className={`${dataLength === 0 ? "" : "d-none"}`}>
+                        className={`${dataLength === 0 || withdrawReq === null ? "" : "d-none"}`}>
                         <td
                           aria-colindex="1"
-                          colSpan="9"
+                          colSpan="10"
                           className="text-left withdraw-data">
                           <p className="no-record-found">No records found</p>
                         </td>

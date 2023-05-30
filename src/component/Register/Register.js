@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthorAPI } from "../../apis/AuthorAPI";
 import AlertBtn from "../Alert/AlertBtn";
 import { Link, useNavigate } from "react-router-dom";
+import { UserAPI } from "../../apis/UserAPI";
 
 const Register = () => {
   const [password, setPassword] = useState();
@@ -11,8 +12,8 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState();
   const [StatusVal, setStatusVal] = useState(true);
   const [StatusCode, setStatusCode] = useState();
-
-
+  const [logo, setLogo] = useState()
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const validateForm =()=>{
@@ -46,6 +47,7 @@ const Register = () => {
 
   const handleLogin = () => {
     if(validateForm()) {
+      setIsLoading(true)
       AuthorAPI.Register({
         username: UserName,
         password: password,
@@ -57,8 +59,10 @@ const Register = () => {
           localStorage.setItem("UserName", res.username);
           localStorage.setItem("UserPassword", res.password)
           nav('/login');
+          setIsLoading(false)
         })
         .catch((error) => {
+          setIsLoading(false)
           setStatusCode(error.response.status);
           setErrorMsg(error.response.data.message);
           setStatusVal(false);
@@ -66,10 +70,18 @@ const Register = () => {
     }
   };
 
+  useEffect(()=>{
+   UserAPI.Self_By_App_Url().then((res)=>{
+    setLogo(res?.data?.logo)
+   }) 
+  },[])
+
 
   const popupClose=(vl)=>{
     setStatusVal(vl)
   }
+
+
   return (
     <>
       <div className="login-wrapper">
@@ -84,7 +96,7 @@ const Register = () => {
         )}
         <div className="text-center logo-login mb-3">
           <img
-            src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
+            src={logo}
             alt=""
           />
         </div>
@@ -155,7 +167,11 @@ const Register = () => {
                 className="btn btn-primary btn-block"
                 onClick={handleLogin}>
                 Register
-                <i className="ml-2 fa fa-sign-in"></i>
+                {isLoading ? (
+                    <i className="ml-2 fa fa-spinner fa-spin"></i>
+                  ) : (
+                    <i className="ml-2 fa fa-sign-in"></i>
+                  )}
               </button>
             </div>
             <div className="form-group mb-0" style={{ marginTop: "12px" }}>

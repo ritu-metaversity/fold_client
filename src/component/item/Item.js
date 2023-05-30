@@ -16,6 +16,7 @@ function Item({ gameIdForItemPage, spName }) {
   localStorage.setItem("SportId", gameIdForItemPage);
 
   useEffect(() => {
+    setIsLoading(true)
     const token = localStorage.getItem("token");
     axios
       .get("http://43.205.50.127:9000/betfair_api/active_match", {
@@ -28,12 +29,10 @@ function Item({ gameIdForItemPage, spName }) {
   }, []);
 
   useEffect(() => {
-    setMatchListLength(
-      gameName &&
-        gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList
-          ?.length
-    );
-  });
+    var matchData = gameName && gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList?.length
+    setMatchListLength(matchData);
+
+  },[gameName && gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList?.length]);
 
   return (
     <div>
@@ -43,10 +42,10 @@ function Item({ gameIdForItemPage, spName }) {
         </p>
       ) : (
         <>
-          <div className="tab-pane container pl-0 pr-0">
+          <div className="tab-pane container pl-0 pr-0 max_heirht">
             <div
               className={`game-listing-container main-container ${
-                MatchListLength > 3 ? "scrollItem" : ""
+                MatchListLength && MatchListLength > 3 ? "scrollItem" : ""
               }`}>
               <div>
                 <div className="">
@@ -60,10 +59,10 @@ function Item({ gameIdForItemPage, spName }) {
                       ?.find((item) => item?.sportid === gameIdForItemPage)
                       ?.matchList.map((item) => {
                         return (
-                          <Link to={`/gamedetail/${item.matchId}`}>
+                          <Link key={item.matchId} to={`/gamedetail/${item.matchId}`}>
                             <div
                               className="game-list pt-1 pb-1 container-fluid"
-                              key={item.matchId}>
+                              >
                               <div className="row row5">
                                 <div className="col-8 game-head">
                                   <p className="mb-0 game-name">

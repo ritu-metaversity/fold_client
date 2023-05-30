@@ -176,7 +176,7 @@ function AaccountStatement() {
           <div className="card-header">
             <h4 className="mb-0 heading-ch">Account Statement</h4>
           </div>
-          <div className="card-body statement container-fluid container-fluid-5">
+          <div className="card-body statement container-fluid container-fluid-5 max_height">
             <div className="row row5 ">
               <div className="col-6">
                 <div className="form-group mb-0">

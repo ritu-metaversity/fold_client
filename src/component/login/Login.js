@@ -15,21 +15,14 @@ function Login({ Errmessage, Statusmessage }) {
   const [StatusVal, setStatusVal] = useState(true);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoading1, setIsLoading1] = useState(false);
   const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
-  const [navLogo, setNavLogo] = useState()
+  const [navLogo, setNavLogo] = useState();
 
- 
-  
-
-
-  const {host} = window.location
-
-
-  // console.log(host)
+  const { host } = window.location;
 
   const handleLogin = () => {
-    // history.push('/home')
     setIsLoading(true);
     if (password === "" && user === "") {
       setStatusVal(false);
@@ -45,7 +38,7 @@ function Login({ Errmessage, Statusmessage }) {
       })
         .then((res) => {
           const token = res.token;
-          setMessage(res.message)
+          setMessage(res.message);
           setIsLoading(false);
           localStorage.removeItem("UserName");
           localStorage.removeItem("UserPassword");
@@ -54,6 +47,7 @@ function Login({ Errmessage, Statusmessage }) {
           api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
           setStatusVal(res.status);
           setMessage("Invalid Username or password");
+          localStorage.setItem("UsertypeInfo", res?.userTypeInfo)
           const uId = res.userId;
           localStorage.setItem("UserId", uId);
           if (res.token !== "" && res.status !== false) {
@@ -71,20 +65,22 @@ function Login({ Errmessage, Statusmessage }) {
     }
   };
 
-  const handleBackBtn = ()=>{
-    nav('/');
-  }
+  const handleBackBtn = () => {
+    nav("/");
+  };
 
   useEffect(() => {
     if (localStorage.getItem("token") !== null) {
       nav("/home");
     }
+
     UserAPI.Self_By_App_Url().then((res) => {
-      setStatusBtn(res.data.selfAllowed);
+      setStatusBtn(res?.data?.selfAllowed);
+      setNavLogo(res?.data?.logo);
     });
 
     if (localStorage.getItem("token") === null) {
-      nav("/login");
+      nav("/");
     }
   }, [nav]);
 
@@ -100,13 +96,36 @@ function Login({ Errmessage, Statusmessage }) {
     }
   }, []);
 
-  useEffect(()=>{
-    UserAPI.Self_By_App_Url().then((res) => {
-      setNavLogo(res?.data?.logo)
-    });
 
-  },[])
-
+  const handleLoginWithDemoAccount = ()=>{
+    setIsLoading1(true);
+      AuthorAPI.LOGIN_WITH_DEMO_USER()
+        .then((res) => {
+          const token = res?.data?.token;
+          setMessage(res.message);
+          setIsLoading1(false);
+          localStorage.removeItem("UserName");
+          localStorage.removeItem("UserPassword");
+          localStorage.setItem("token", token);
+          api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+          setStatusVal(res.status);
+          setMessage("Invalid Username or password");
+          localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo)
+          const uId = res.data?.username;
+          localStorage.setItem("UserId", uId);  
+          if (res.data?.token !== "" && res.status !== false) {
+            nav("/home");
+          }
+          const pType = res?.data?.passwordtype;
+          localStorage.setItem("Password-type", pType);
+          if (pType === "old") {
+            nav("/m/setting/changepassword");
+          }
+        })
+        .catch((error) => {
+          setIsLoading1(false);
+        });
+  }
 
 
   return (
@@ -123,7 +142,7 @@ function Login({ Errmessage, Statusmessage }) {
         ) : (
           ""
         )}
-        {StatusVal === false && Statusmessage === false  ? (
+        {StatusVal === false && Statusmessage === false ? (
           <div className="alertBtn">
             <AlertBtn color="danger" popupClose={popupClose} val={message} />
           </div>
@@ -187,12 +206,24 @@ function Login({ Errmessage, Statusmessage }) {
               </div>
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
                 <button
+                  onClick={handleLoginWithDemoAccount}
+                  className="btn btn-primary btn-block">
+                  Login with Demo User
+                  {isLoading1 ? (
+                    <i className="ml-2 fa fa-spinner fa-spin"></i>
+                  ) : (
+                    <i className="ml-2 fa fa-sign-in"></i>
+                  )}
+                </button>
+              </div>
+              <div className="form-group mb-0" style={{ marginTop: "12px" }}>
+                <button
                   onClick={handleBackBtn}
-                  className="btn btn-primary btn-block"
-                  >
-                    <i className="ml-2 fa fa-sign-in" style={{rotate:"180deg"}}></i>
+                  className="btn btn-primary btn-block">
+                  <i
+                    className="ml-2 fa fa-sign-in"
+                    style={{ rotate: "180deg" }}></i>
                   Back
-                  
                 </button>
               </div>
               <small className="recaptchaTerms">
@@ -205,7 +236,7 @@ function Login({ Errmessage, Statusmessage }) {
               <div className="form-group mt-1">
                 <p className="mt-1 text-center">
                   <Link to="/" className="mail-link">
-                     {host}
+                    {host}
                   </Link>
                 </p>
               </div>

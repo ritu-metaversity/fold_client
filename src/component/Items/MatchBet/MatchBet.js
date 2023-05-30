@@ -69,7 +69,7 @@ function MatchBet(props) {
 
   return (
     <>
-      <div data-v-4a9e4d9c="" className="tab-content">
+      <div data-v-4a9e4d9c="" className="tab-content max_height">
         <div data-v-4a9e4d9c="" id="matched-bet" className="tab-pane">
           <div
             data-v-4a9e4d9c=""

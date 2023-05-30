@@ -40,7 +40,6 @@ button.btn.btn-primary.btn-block.btn-sm.btn-w {
 
 
 .withdraw{
-    height: 78vh;
     overflow: scroll;
 }
 .withdraw::-webkit-scrollbar {

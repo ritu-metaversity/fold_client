@@ -9,7 +9,7 @@ import ExposureModal from "../Items/ExposureModal/ExposureModal";
 const NavBar = () => {
   const [close, setClose] = useState(false);
   const [droup, setDrop] = useState(false);
-  const [userbalance, setUserbalance] = useState("0.00");
+  const [userbalance, setUserbalance] = useState(0);
   // eslint-disable-next-line
   const [userdetail, setUserDetail] = useState(localStorage.getItem("UserId"));
   const [userMessage, setUserMessage] = useState("");
@@ -42,9 +42,8 @@ const NavBar = () => {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     UserAPI.Self_By_App_Url().then((res) => {
-      setStatus(res.data.selfAllowed);
+      setStatus(res?.data?.selfAllowed);
       setNavLogo(res?.data?.logo);
     });
     UserAPI.User_Message().then((res) => {
@@ -54,13 +53,24 @@ const NavBar = () => {
     if (localStorage.getItem("token") === null) {
       nav("/login");
     }
-  }, []);
-
-  // const {pathname} = window.location
+  }, [nav]);
 
   useEffect(() => {
+
+    const token = localStorage.getItem("token");
+      if (token !== null || localStorage.getItem("Password-type" !== "old")) {
+        UserAPI.User_Balance()
+          .then((res) => {
+            setUserbalance(res?.data?.balance);
+            setExp(res?.data?.libality);
+          })
+          .catch((error) => {
+            setError(true);
+          });
+      }
+
+
     const time = setInterval(() => {
-      const token = localStorage.getItem("token");
       if (token !== null || localStorage.getItem("Password-type" !== "old")) {
         UserAPI.User_Balance()
           .then((res) => {
@@ -106,7 +116,6 @@ const NavBar = () => {
   };
 
   const [stackySideBar, setStackySideBar] = useState("");
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -114,15 +123,15 @@ const NavBar = () => {
 
   const controlNavbar = () => {
     if (pathname.includes("casino") == true) {
-      if (window.scrollY > 30) {
+      if (window.scrollY > 15) {
         setStackySideBar("Nav-fixed");
       } else {
         setStackySideBar("");
       }
     } else {
-      if (window.scrollY > 200) {
+      if (window.scrollY > 150) {
         setStackySideBar("Nav-fixed");
-      } else {
+      } else if (window.scrollY < 3) {
         setStackySideBar("");
       }
     }
@@ -148,7 +157,6 @@ const NavBar = () => {
                     className="router-link-exact-active router-link-active">
                     <i className="fa fa-home mr-1"></i>
                     <img
-                      // src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
                       src={NavLogo && NavLogo}
                       alt="Exchange"
                       className="img-fluid logo"
@@ -157,21 +165,11 @@ const NavBar = () => {
                 </div>
                 <div
                   className={`col-6 text-right bal-expo ${
-                    pathname === "/" ||
-                    pathname === "/in-play" ||
-                    pathname === "/sports"
-                      ? "d-none"
-                      : ""
+                    localStorage.getItem("token") === null ? "d-none" : ""
                   }`}>
                   <p className={`mb-0 ${!balanceShow ? "d-none" : ""}`}>
                     <i className="fa fa-bank mr-1"></i>
-                    <b>
-                      {error
-                        ? "0.00"
-                        : userbalance === ""
-                        ? "0.00"
-                        : userbalance}
-                    </b>
+                    <b>{userbalance === "" ? "0.00" : userbalance}</b>
                   </p>
                   <div className="exp">
                     <span
@@ -216,20 +214,27 @@ const NavBar = () => {
                             className="dropdown-item router-link-exact-active router-link-active">
                             Home
                           </Link>
-                          <Link
-                            to="/deposit"
-                            className={`dropdown-item router-link-exact-active router-link-active depositMNav ${
-                              status ? "" : "d-none"
-                            }`}>
-                            Deposit
-                          </Link>
-                          <Link
-                            to="/withdraw"
-                            className={`dropdown-item router-link-exact-active router-link-active withdrawNav ${
-                              status ? "" : "d-none"
-                            }`}>
-                            Withdraw
-                          </Link>
+                          {localStorage.getItem("UsertypeInfo") == 2 ? (
+                            ""
+                          ) : (
+                            <>
+                              <Link
+                                to="/deposit"
+                                className={`dropdown-item router-link-exact-active router-link-active depositMNav ${
+                                  status ? "" : "d-none"
+                                }`}>
+                                Deposit
+                              </Link>
+                              <Link
+                                to="/withdraw"
+                                className={`dropdown-item router-link-exact-active router-link-active withdrawNav ${
+                                  status ? "" : "d-none"
+                                }`}>
+                                Withdraw
+                              </Link>
+                            </>
+                          )}
+
                           <Link
                             to="/m/reports/accountstatement"
                             className="dropdown-item">
@@ -313,11 +318,7 @@ const NavBar = () => {
 
                 <div
                   className={`col-6 text-right ${
-                    pathname === "/" ||
-                    pathname === "/in-play" ||
-                    pathname === "/sports"
-                      ? ""
-                      : "d-none"
+                    localStorage.getItem("token") === null ? "" : "d-none"
                   }`}>
                   <div className="d-flex login-register">
                     <Link

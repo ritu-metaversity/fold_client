@@ -169,7 +169,7 @@ function CasinoProfit() {
       }
       <div className="report-container Mobile-view-topNav">
         <div className="card">
-          <div className="card-body container-fluid container-fluid-5">
+          <div className="card-body container-fluid container-fluid-5 max1_height">
             <div className="row row5 acc-stat">
               <div className="col-6">
                 <div className="form-group mb-0">

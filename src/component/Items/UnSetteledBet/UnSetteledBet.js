@@ -94,7 +94,7 @@ function UnSetteledBet() {
           <div className="card-header">
             <h4 className="mb-0 heading-ch">Un-Setteled Bet</h4>
           </div>
-          <div className="card-body container-fluid container-fluid-5 unsetteledbet">
+          <div className="card-body container-fluid container-fluid-5 unsetteledbet max_height">
             <div className="row row5 ">
               <div className="col-6">
                 <div
