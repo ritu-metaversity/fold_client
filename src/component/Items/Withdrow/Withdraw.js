@@ -19,6 +19,8 @@ const Withdraw = () => {
   const [errorAlert, setErrorAlert] = useState(false);
   const [message, setMessage] = useState({});
   const [colorName, setColorName] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [userBalance, setUserBalance] = useState();
 
   const validateForm = () => {
     let error = {};
@@ -28,37 +30,44 @@ const Withdraw = () => {
     if (amount === "") {
       setErrorAlert(true);
       setColorName("danger");
+      setIsLoading(false);
       error = "The Amount field is required";
     }
 
     if (bankName === "") {
       setErrorAlert(true);
       setColorName("danger");
+      setIsLoading(false);
       error = "The Bank Name field is required";
     } else if (!letters.test(bankName)) {
       setErrorAlert(true);
       setColorName("danger");
       error = "Invaild Bank Name";
+      setIsLoading(false);
     }
 
     if (ifsc === "") {
       setErrorAlert(true);
       setColorName("danger");
       error = "The IFSC field is required";
+      setIsLoading(false);
     }
 
     if (accountHolderName === "") {
       setErrorAlert(true);
       setColorName("danger");
+      setIsLoading(false);
       error = "The Account Name field is required";
     } else if (!letters.test(accountHolderName)) {
       setErrorAlert(true);
       setColorName("danger");
+      setIsLoading(false);
       error = "Invaild Name";
     }
     if (accountNumber === "") {
       setErrorAlert(true);
       setColorName("danger");
+      setIsLoading(false);
       error = "The Account Number field is required";
     }
 
@@ -67,38 +76,54 @@ const Withdraw = () => {
   };
 
   const handleClick = () => {
-    if (validateForm()) {
-      UserAPI.Self_Withdraw_App({
-        accountHolderName: accountHolderName,
-        bankName: bankName,
-        accountType: accountType,
-        amount: amount,
-        ifsc: ifsc,
-        accountNumber: accountNumber,
-      })
-        .then((res) => {
-          UserAPI.Withdraw_Request().then((res) => {
-            setWithdrawReq(res.data);
-            setDataLength(res?.data?.length);
-          });
-          setMessage(res.message);
-          setErrorAlert(true);
-          setColorName("success");
-          if (res.status === true) {
-            setAmount("");
-            setBankName("");
-            setAccountNumber("");
-            setIFSC("");
-            setAccountHolderName("");
-          }
+    setIsLoading(true);
+    if (userBalance === 0) {
+      setMessage("Insufficient balance ");
+      setErrorAlert(true);
+      setColorName("danger");
+      setIsLoading(false);
+    } else if (userBalance < amount) {
+      setMessage("Insufficient balance ");
+      setErrorAlert(true);
+      setColorName("danger");
+      setIsLoading(false);
+    }
+
+    if (userBalance >= amount) {
+      if (validateForm) {
+        UserAPI.Self_Withdraw_App({
+          accountHolderName: accountHolderName,
+          bankName: bankName,
+          accountType: accountType,
+          amount: amount,
+          ifsc: ifsc,
+          accountNumber: accountNumber,
         })
-        .catch((error) => {
-          setErrorAlert(true);
-          setMessage(error.response.data.message);
-        });
+          .then((res) => {
+            UserAPI.Withdraw_Request().then((res) => {
+              setIsLoading(false);
+              setWithdrawReq(res.data);
+              setDataLength(res?.data?.length);
+            });
+            setMessage(res.message);
+            setErrorAlert(true);
+            setColorName("success");
+            if (res.status === true) {
+              setAmount("");
+              setBankName("");
+              setAccountNumber("");
+              setIFSC("");
+              setAccountHolderName("");
+            }
+          })
+          .catch((error) => {
+            setIsLoading(false);
+            setErrorAlert(true);
+            setMessage(error.response.data.message);
+          });
+      }
     }
   };
-
 
   useEffect(() => {
     UserAPI.Withdraw_Request().then((res) => {
@@ -106,8 +131,13 @@ const Withdraw = () => {
       setDataLength(res?.data?.length);
       // console.log(res.data, "dfsgveg")
     });
+
+    UserAPI.User_Balance().then((res) => {
+      setUserBalance(res?.data?.balance - res?.data?.libality);
+    });
   }, []);
 
+  console.log(userBalance, "qedqwfrwer");
 
   const popupClose = (vl) => {
     setErrorAlert(vl);
@@ -122,10 +152,12 @@ const Withdraw = () => {
   };
 
   const handleCloseSubmit = () => {
+    setIsLoading(true);
     UserAPI.USER_CANCEL_WITHDRAW_REQUIEST({
       id: dataId,
     })
       .then((res) => {
+        setIsLoading(false);
         setMessage(res.message);
         setErrorAlert(true);
         setColorName("success");
@@ -137,6 +169,7 @@ const Withdraw = () => {
         });
       })
       .catch((error) => {
+        setIsLoading(false);
         setErrorAlert(true);
         setMessage(error.response.data.message);
         setColorName("danger");
@@ -155,7 +188,13 @@ const Withdraw = () => {
         <div className="card-header wit">
           <h4 className="mb-0">Withdraw</h4>
         </div>
-
+        {isLoading ? (
+          <p className="lodder depositLoading withdraw_deposit">
+            <i className="fa fa-spinner fa-spin"></i>
+          </p>
+        ) : (
+          ""
+        )}
         <div className="wrapper withdraw">
           <div className="card-body container-fluid container-fluid-5">
             <div className="main-account-containor">
@@ -363,16 +402,17 @@ const Withdraw = () => {
                                   style={{ paddingRight: "" }}>
                                   {item.remark}
                                 </td>
-                                <td
-                                  aria-colindex="6"
-                                  className={`text-left ${
-                                    item.status === "Pending"
-                                      ? "pending"
-                                      : item.status === "APPROVED"
-                                      ? "approved"
-                                      : "rejected"
-                                  }`}>
-                                  {item.status}
+                                <td aria-colindex="6" className="text-left">
+                                  <p
+                                    className={`${
+                                      item.status === "Pending"
+                                        ? "pending"
+                                        : item.status === "APPROVED"
+                                        ? "approved"
+                                        : "rejected"
+                                    }`}>
+                                    {item.status}
+                                  </p>
                                 </td>
                                 <td
                                   aria-colindex="6"
@@ -392,6 +432,13 @@ const Withdraw = () => {
                         <Modal.Header closeButton className="cancelRequest">
                           <Modal.Title>Cancel Request</Modal.Title>
                         </Modal.Header>
+                        {isLoading ? (
+                          <p className="lodder with_modal_loder">
+                            <i className="fa fa-spinner fa-spin"></i>
+                          </p>
+                        ) : (
+                          ""
+                        )}
                         <Modal.Body>
                           Are you sure you want to cancel this request?
                         </Modal.Body>
@@ -415,7 +462,11 @@ const Withdraw = () => {
                     <tbody>
                       <tr
                         role="row"
-                        className={`${dataLength === 0 || withdrawReq === null ? "" : "d-none"}`}>
+                        className={`${
+                          dataLength === 0 || withdrawReq === null
+                            ? ""
+                            : "d-none"
+                        }`}>
                         <td
                           aria-colindex="1"
                           colSpan="10"

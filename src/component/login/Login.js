@@ -26,9 +26,18 @@ function Login({ Errmessage, Statusmessage }) {
     setIsLoading(true);
     if (password === "" && user === "") {
       setStatusVal(false);
-      setMessage("password: length must be between 4 and 30");
+      setMessage("Username and Password are required");
       setIsLoading(false);
-    } else {
+    }else if(user === ""){
+      setStatusVal(false);
+      setMessage("Username is required");
+      setIsLoading(false);
+    }else if(password === ""){
+      setStatusVal(false);
+      setMessage("Password is required");
+      setIsLoading(false);
+    }
+     else {
       setStatusVal(true);
     }
     if (password !== "" && user !== "") {
