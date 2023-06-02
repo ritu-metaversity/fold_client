@@ -53,8 +53,7 @@ const CasinoGame = () => {
             ></Box>
             {id && token && !wait && (
               <iframe
-                src="http://teenpati.s3.ap-northeast-1.amazonaws.com/index.html"
-                // src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+                src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
                 height="calc(100vh - 100px)"
                 className="mobile_if"
                 width="100%"
@@ -74,9 +73,8 @@ const CasinoGame = () => {
             bgcolor="#0f2327"
           ></Box> */}
             <iframe
-              src="http://teenpati.s3.ap-northeast-1.amazonaws.com/index.html"
-              // src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
-              height="calc(90vh - 10rem)"
+              src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+              // height="calc(90vh - 10rem)"
               // style={{ height: "2000px", marginTop: -80 }}
               className="desktop_if"
               width="100%"
