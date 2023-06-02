@@ -6,10 +6,13 @@ import {
   useTheme,
   // useThemeProps,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { colorHex } from "../../../utils/constants";
 import Loading from "../loading";
+import { authServices } from "../../../utils/api/auth/services";
+import { UserContext } from "../../../App";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   loading: boolean;
@@ -31,6 +34,29 @@ function LoginForm({
   reset,
 }: Props) {
   const theme = useTheme();
+  const nav = useNavigate();
+  const { setUser, setModal, setIsSignedIn } = useContext(UserContext);
+  const handleDemoUserLogin = async () => {
+    const { response } = await authServices.demoUserLogin(
+      window.location.hostname
+    );
+    if (response) {
+      localStorage.setItem("is_demo", "true");
+      localStorage.setItem("token", response.token);
+      if (setUser) setUser(response);
+      localStorage.setItem("userType", response.userTypeInfo);
+      localStorage.setItem("user", JSON.stringify(response));
+      if (response.passwordtype === "old" && setModal) {
+        setModal({ changePassword: true });
+        nav({
+          pathname: "/",
+          search: "first-login=true",
+        });
+      } else {
+        if (setIsSignedIn) setIsSignedIn(true);
+      }
+    }
+  };
   useEffect(() => {
     return () => reset();
   }, []);
@@ -127,6 +153,17 @@ function LoginForm({
             fullWidth
           >
             Submit
+          </Button>
+
+          <Button
+            sx={{ p: 2.5 }}
+            variant="contained"
+            color="secondary"
+            type="button"
+            fullWidth
+            onClick={handleDemoUserLogin}
+          >
+            Login With Demo Id
           </Button>
           <Typography fontSize={"0.5rem"}>
             This site is protected by reCAPTCHA and the Google Privacy Policy

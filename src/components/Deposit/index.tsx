@@ -40,6 +40,7 @@ const Deposit = () => {
   const handleClose = () => {
     setImageSelected("");
   };
+
   useEffect(() => {
     getDepositList();
 
@@ -54,6 +55,9 @@ const Deposit = () => {
     }
   }, []);
 
+  if (!user || user.userTypeInfo === 2) {
+    return <></>;
+  }
   return (
     <HomeLayout>
       <Box

@@ -11,6 +11,7 @@ import { sportsTabList } from "../home/sportsTabList";
 import { Box, Collapse, IconButton } from "@mui/material";
 import { UserContext } from "../../App";
 import { colorHex } from "../../utils/constants";
+import InPlaySidebar from "./InPlaySidebar";
 
 export const Drawers = ({
   handleDrawerToggle,
@@ -36,7 +37,10 @@ export const Drawers = ({
 
   useEffect(() => {
     if (activeEventList)
-      setMatchCollapse(activeEventList.map((i: any) => (i ? false : false)));
+      setMatchCollapse([
+        ...activeEventList.map((i: any) => (i ? false : false)),
+        false,
+      ]);
   }, [activeEventList]);
 
   const openLoginModal = () => {
@@ -198,6 +202,7 @@ export const Drawers = ({
             </ListItemButton>
           </SidebarHeader>
           <Collapse in={open[0]}>
+            <InPlaySidebar />
             {activeEventList?.map((sport, index) => (
               <React.Fragment key={sport.sportId + index}>
                 <ListItem
