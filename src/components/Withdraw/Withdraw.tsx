@@ -1,5 +1,5 @@
 import { WithdrawForm } from "./WithdrawForm";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HomeLayout from "../layout/homeLayout";
 import { columns } from "./columns";
 import ActivityTable from "../activityLog/activityLogTable";
@@ -10,6 +10,7 @@ import { StatusTypography } from "../Deposit";
 import CustomizedDialog2 from "../common/Dailog2";
 import snackBarUtil from "../layout/snackBarUtil";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 
 const Withdraw = () => {
   const [withdrawList, setWithdrawList] = useState([]);
@@ -30,7 +31,7 @@ const Withdraw = () => {
       setWithdrawList([]);
     };
   }, []);
-
+  const { user } = useContext(UserContext);
   const handleSubmit = async () => {
     if (cancelWithdrawl) {
       const { response } = await userServices.cancelWithdrawlRequest(
@@ -45,12 +46,12 @@ const Withdraw = () => {
     }
   };
 
-
   useEffect(() => {
-    if (localStorage.getItem("is_demo")) {
+    if (user.userTypeInfo === 2) {
       nav("/");
     }
   }, []);
+
   const handleClose = () => setCancelWithdrawl(0);
   return (
     <HomeLayout>

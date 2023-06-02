@@ -58,6 +58,7 @@ export function AuthBox() {
           localStorage.setItem("token", response.token);
           if (setIsSignedIn) setIsSignedIn(true);
         }
+      localStorage.setItem("userType", response.userTypeInfo);
         if (setUser) setUser(response);
         localStorage.setItem("user", JSON.stringify(response));
       }

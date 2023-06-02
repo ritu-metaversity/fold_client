@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import HomeLayout from "../layout/homeLayout";
 import DepositManually from "./DepositManually";
@@ -8,6 +8,7 @@ import { columns } from "./columns";
 import { colorHex } from "../../utils/constants";
 import ImageModal from "./ImageModal";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 
 interface DepositListInterface {
   image: string;
@@ -24,6 +25,7 @@ const colorStatus = {
 
 const Deposit = () => {
   const [depositList, setDepositList] = useState<DepositListInterface[]>([]);
+  const { user } = useContext(UserContext);
 
   const nav = useNavigate();
   const getDepositList = async () => {
@@ -47,7 +49,7 @@ const Deposit = () => {
   }, []);
 
   useEffect(() => {
-    if (localStorage.getItem("is_demo")) {
+    if (user.userTypeInfo === 2) {
       nav("/");
     }
   }, []);
