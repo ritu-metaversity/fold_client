@@ -55,4 +55,11 @@ export const sportServices = {
     };
     return apiHandler(params);
   },
+  allActiveEvent: () => {
+    const params = {
+      resource: sportsResourses.GET_ALL_ACTIVE_MATCH,
+      betfair: true,
+    };
+    return apiHandler(params);
+  },
 };

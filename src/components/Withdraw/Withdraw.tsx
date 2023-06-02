@@ -52,6 +52,9 @@ const Withdraw = () => {
     }
   }, []);
 
+  if (!user || user.userTypeInfo === 2) {
+    return <></>;
+  }
   const handleClose = () => setCancelWithdrawl(0);
   return (
     <HomeLayout>

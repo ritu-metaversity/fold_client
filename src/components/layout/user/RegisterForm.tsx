@@ -276,7 +276,7 @@ export function RegisterForm() {
               fullWidth
               onClick={handleDemoUserLogin}
             >
-              Demo Login
+              Login With Demo Id
             </Button>
             <Typography fontSize={"0.5rem"}>
               This site is protected by reCAPTCHA and the Google Privacy Policy

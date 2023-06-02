@@ -37,4 +37,8 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     URL: "active_match/:sportId",
     METHOD: "GET",
   },
+  GET_ALL_ACTIVE_MATCH: {
+    URL: "active_match",
+    METHOD: "GET",
+  },
 };
