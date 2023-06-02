@@ -226,8 +226,8 @@ function AaccountStatement() {
                     className="custom-select"
                     onChange={getOptionValue}>
                     <option value="1">All</option>
-                    <option value="2">Deposit/Withdraw Report</option>
-                    <option value="3">Game Report</option>
+                    <option value="2">Game Report</option>
+                    <option value="3">Deposit/Withdraw Report </option>
                   </select>
                 </div>
               </div>

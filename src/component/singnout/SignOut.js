@@ -5,12 +5,11 @@ import { AuthorAPI } from '../../apis/AuthorAPI';
 
 function SignOut() {
     const nav = useNavigate()
-
     useEffect(()=>{
     localStorage.clear();
     AuthorAPI.LOGOUT();
     nav("/login")
-    }, [])
+    },[])
     
     
 }

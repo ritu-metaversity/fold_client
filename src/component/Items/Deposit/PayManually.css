@@ -58,10 +58,6 @@ label.images-section {
     display: block;
     margin-left: -13px;
 }
-.image-body{
-    width: 400px;
-    height: 240px;
-}
 
 @media screen and (min-width:700px) and (max-width: 1600px) {
     .image-text {
@@ -72,4 +68,12 @@ label.images-section {
         display: block;
     }
     
+}
+
+p.lodder.depositLoading {
+    position: absolute;
+    width: 100%;
+    opacity: 0.6;
+    height: calc(100% - 84px);
+    z-index: 1;
 }

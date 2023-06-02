@@ -25,14 +25,27 @@
     margin-top: 21px;
     padding: 5px 32px;
 }
-.rejected{
-    color: #f44336;
+.rejected {
+    color: #DC3545 !important;
+    padding: 9px 18px;
+    font-weight: 600;
+    border-radius: 4px;
+    background: #dc354559;
 }
+
 .approved{
-    color: #66bb6a;
+    font-weight: 600;
+    background: rgb(204, 246, 228);
+    color: rgb(0, 134, 78);
+    border-radius: 4px;
+    padding: 9px 18px;
 }
 .pending{
-    color: #ffa726;
+    color: #d58004;
+    background: #ffa7265e;
+    padding: 9px 18px;
+    font-weight: 600;
+    border-radius: 4px;
 }
 button.btn.btn-primary.btn-block.btn-sm.btn-w {
     margin-top: 26px;
@@ -123,4 +136,24 @@ button.btn.btn-primary.btn-block.btn-sm.btn-w {
     font-weight: 500px;
     border: 1px solid #2c3d50;
     outline: unset !important;
+
+}
+.withdraw_deposit{
+    z-index: 1;
+    height: calc(100% - 263px) !important;
+}
+
+.wrapper.withdraw {
+    min-height: calc(100vh - 200px) !important;
+    height: 100%;
+    max-height: 100%;
+}
+
+p.lodder.with_modal_loder {
+    position: absolute;
+    width: 100%;
+    height: 77%;
+    top: 35px;
+    z-index: 11;
+    background: #f1f5f88c;
 }

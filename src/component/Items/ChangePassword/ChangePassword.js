@@ -14,34 +14,36 @@ function ChangePassword(props) {
   const passType = localStorage.getItem("Password-type");
   const userId = localStorage.getItem("UserId");
   const Token = localStorage.getItem("token");
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const nav = useNavigate();
 
-
   const handleClick = () => {
+    setIsLoading(true);
     if (currPassword === "") {
       setShowError(true);
+      setIsLoading(false);
       setColor("danger");
       setMessege("Current Password is required");
-      setIsLoading(false)
     } else if (newPasswords === "") {
       setShowError(true);
       setColor("danger");
       setMessege("New Password is required");
-      setIsLoading(false)
-    } 
-    else if (newPasswords !== currPassword) {
+      setIsLoading(false);
+    }else if(conformPassword === ""){
+      setShowError(true);
+      setColor("danger");
+      setMessege("Conform Password is required");
+      setIsLoading(false);
+    } else if (newPasswords !== conformPassword) {
       setShowError(true);
       setColor("danger");
       setMessege("New Password and Password Confirmation should be same");
       setIsLoading(false)
     }
-  
-    if (conformPassword !== "" && newPasswords !== "") {
-      setIsLoading(true)
+
+    if (currPassword !== "" || conformPassword !== "" || newPasswords !== "") {
       if (localStorage.getItem("Password-type") === "old") {
-     
         AuthorAPI.FIRST_LOGIN({
           currentPassword: currPassword,
           newPassword: newPasswords,
@@ -49,43 +51,51 @@ function ChangePassword(props) {
           userid: userId,
           token: Token,
           oldPassword: currPassword,
-        }).then((res) => {
-          props.statusMsg(res.status)
-          if (res.status === true) {
-            setMessege(res.message);
-            setTimeout(function () {
-              setIsLoading(false)
-              AuthorAPI.LOGOUT();
-              localStorage.clear();
-              nav("/login");
-            }, 200);
-          }
-        });
-      } else {
-        if (newPasswords === conformPassword) {
-          AuthorAPI.Change_Passwords({
-            currentPassword: currPassword,
-            newPassword: newPasswords,
-          }).then((res) => {
+        })
+          .then((res) => {
+            props.statusMsg(res.status);
             if (res.status === true) {
               setMessege(res.message);
               setTimeout(function () {
-                setIsLoading(false)
-                localStorage.clear();
+                setIsLoading(false);
                 AuthorAPI.LOGOUT();
+                localStorage.clear();
                 nav("/login");
-              }, 200);
+              }, 100);
             }
+          })
+          .catch((error) => {
+            setIsLoading(false);
           });
-        }
+      } else {
+        if(newPasswords === conformPassword){
+        AuthorAPI.Change_Passwords({
+          currentPassword: currPassword,
+          newPassword: newPasswords,
+        }).then((res) => {
+          if (res.status === true) {
+            setMessege(res.message);
+            setTimeout(function () {
+              setIsLoading(false);
+              localStorage.clear();
+              AuthorAPI.LOGOUT();
+              nav("/login");
+            }, 100);
+          }else{
+            setMessege(res.message);
+            setIsLoading(false);
+            setShowError(true)
+            setColor("danger")
+          }
+        });
       }
       // }
     }
-    props.statusMsg(true)
+  }
+    props.statusMsg(true);
   };
 
-
-  props.message(message)
+  props.message(message);
 
   const popupClose = (vl) => {
     setShowError(vl);
@@ -103,14 +113,15 @@ function ChangePassword(props) {
         ""
       )}
       <div className="report-container wrapper">
-        
         <div className="card">
           <div className="card-header">
             <h4 className="mb-0 heading-ch">Change Password</h4>
           </div>
-          {
-          isLoading && <p className="change-pass-loading"><i className="fa fa-spinner fa-spin"></i></p>
-        }
+          {isLoading && (
+            <p className="change-pass-loading">
+              <i className="fa fa-spinner fa-spin"></i>
+            </p>
+          )}
           <div className="card-body container-fluid container-fluid-5 max_height">
             <div className="row row5 mt-2 acc-stat">
               <div className="col-12 ch-pass">

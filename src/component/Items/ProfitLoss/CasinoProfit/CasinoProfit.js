@@ -310,13 +310,13 @@ function CasinoProfit() {
                           className="text-left bg-color">
                           Pnl
                         </th>
-                        <th
+                        {/* <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="4"
                           className="text-left bg-color">
                           Commssion Mila
-                        </th>
+                        </th> */}
                       </tr>
                     </thead>
                     {
@@ -334,15 +334,15 @@ function CasinoProfit() {
                               <td aria-colindex="2" className="text-left">
                                 {res.matchName}
                               </td>
-                              <td aria-colindex="1" className="text-right">
+                              <td aria-colindex="1" className={`text-right ${res?.pnl > 0 ?"text-success" : res?.pnl < 0? "text-danger":""}`}>
                                 {parseFloat(res.pnl).toFixed(2)}
                               </td>
 
-                              <td
+                              {/* <td
                                 aria-colindex="5"
                                 className="text-right text-success">
                                 {res.commssionMila}
-                              </td>
+                              </td> */}
                             </tr>
                           );
                         })}

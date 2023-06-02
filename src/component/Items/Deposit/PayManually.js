@@ -20,8 +20,7 @@ const PayManually = (props) => {
   const [color, setColor] = useState();
   const [messege, setMessege] = useState();
   const [alertBtnshow, setAlertBtnshow] = useState(false);
-
-
+  const [isLoading, setIsLoading] = useState(false);
 
   const [files, setFiles] = useState(null);
 
@@ -29,19 +28,17 @@ const PayManually = (props) => {
     setBitValue(Number(Bitvalue) + 10);
   };
   const decrement = () => {
-    if(Bitvalue !== "0")
-    setBitValue(Number(Bitvalue) - 10);
+    if (Bitvalue != 0 && Bitvalue > 9 ) setBitValue(Number(Bitvalue) - 10);
   };
 
   const handleStaticAmount = (vl) => {
-    setBitValue((Bitvalue)=>(Number(Bitvalue)||0) + Number(vl));
+    setBitValue((Bitvalue) => (Number(Bitvalue) || 0) + Number(vl));
   };
 
-const handleStaticAmountInput =(e)=>{
-let Inputvalue = e.target.value
-setBitValue(parseInt(Inputvalue));
-
-  }
+  const handleStaticAmountInput = (e) => {
+    let Inputvalue = e.target.value;
+    setBitValue(parseInt(Inputvalue));
+  };
   useEffect(() => {
     UserAPI.Get_Payment_Detail_By_Id().then((res) => {
       setPayMethods(res.data.paymentMethods);
@@ -52,29 +49,48 @@ setBitValue(parseInt(Inputvalue));
 
   const handlePaymentDetails = (vl, id) => {
     setPaymentMode(vl);
-    setActive(id)
+    setActive(id);
   };
 
+  console.log(Bitvalue, "dwefwed")
+
+  
+
   const handleSubmit = () => {
+    setIsLoading(true);
+
+    if(Bitvalue == 0){
+      setColor("danger")
+      setMessege("Ammout is Greate then 999");
+      setAlertBtnshow(true)
+      setIsLoading(false)
+    }
+
     const data = new FormData();
     data.append("amount", Bitvalue.toString());
     data.append("image", files || "");
-    UserAPI.Self_Deposit_App({ data }).then((res) => {
-      props.UpdateDetails(true);
-      setMessege(res.message);
-      setColor("success");
-      setAlertBtnshow(true)
-      if(res.status === true){
-        setBitValue(0);
-        setFiles(null);
-        setPaymentMode("UPI");
-        setActive(0)
-      }
-    }).catch((error)=>{
-      setMessege(error.respose.data.message);
-      setColor("danger");
-      setAlertBtnshow(true)
-    });
+    if(Bitvalue != 0){
+    UserAPI.Self_Deposit_App({ data })
+      .then((res) => {
+        setIsLoading(false);
+        props.UpdateDetails(true);
+        setMessege(res.message);
+        setColor("success");
+        setAlertBtnshow(true);
+        if (res.status === true) {
+          setBitValue(0);
+          setFiles(null);
+          setPaymentMode("UPI");
+          setActive(0);
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setMessege(error.respose.data.message);
+        setColor("danger");
+        setAlertBtnshow(true);
+      });
+    }
   };
 
   const handleCloseModal = () => setShowModals(false);
@@ -87,12 +103,20 @@ setBitValue(parseInt(Inputvalue));
     setErrorMsg(vl);
   };
 
-
   return (
     <div>
-      {alertBtnshow?
-         <AlertBtn color={color} val={messege} popupClose={popupClose} />:""
-      }
+      {alertBtnshow ? (
+        <AlertBtn color={color} val={messege} popupClose={popupClose} />
+      ) : (
+        ""
+      )}
+      {isLoading ? (
+        <p className="lodder depositLoading">
+          <i className="fa fa-spinner fa-spin"></i>
+        </p>
+      ) : (
+        ""
+      )}
       <p className="enter-amount">Enter Amount</p>
       <div className="row row5 main-pricecontainor">
         <div className="text-lef col-6 colval price-input">
@@ -163,7 +187,7 @@ setBitValue(parseInt(Inputvalue));
       <div className="paymethods">
         <Container>
           <div className="amount">
-            <h1>Pay {(Bitvalue)||0}/-</h1>
+            <h1>Pay {Bitvalue || 0}/-</h1>
             <p>Pay Manually</p>
           </div>
           <div className="bank-logo">
@@ -171,19 +195,21 @@ setBitValue(parseInt(Inputvalue));
               {payMethods?.length &&
                 payMethods?.map((item, id) => {
                   return (
-                    
-                      <Col
-                        key={item.methodName + id}
-                        onClick={() => handlePaymentDetails(item.methodName, id)}>
-                        <div className={`css-1502y4u ${active===id?"active3":""} `}>
-                          <img
-                            src={item.logo}
-                            className="css-37vfbv"
-                            alt="Bank"
-                          />
-                          <p className="Typography-root ">{item.methodName}</p>
-                        </div>
-                      </Col>
+                    <Col
+                      key={item.methodName + id}
+                      onClick={() => handlePaymentDetails(item.methodName, id)}>
+                      <div
+                        className={`css-1502y4u ${
+                          active === id ? "active3" : ""
+                        } `}>
+                        <img
+                          src={item.logo}
+                          className="css-37vfbv"
+                          alt="Bank"
+                        />
+                        <p className="Typography-root ">{item.methodName}</p>
+                      </div>
+                    </Col>
                   );
                 })}
             </Row>

@@ -159,8 +159,6 @@ function App() {
           <Route exact path="/signup2" element={<Signup2/>} />
           <Route exact path="/signup4" element={<Signup4/>} />
           <Route exact path="/signup5" element={<Signup5/>} />
-          
-
           <Route path="" element={<NavBar />}>
           <Route path="/about-us" element={<AboutUsPageForMob/>} />
           <Route path="/terms-and-conditions" element={<TermAndCondition/>} />
@@ -168,8 +166,14 @@ function App() {
             <Route  path="/" element={<DefaultHomePage/>}/>
             <Route  path="/in-play" element={<DefaultHomePage/>}/>
             <Route  path="/sports" element={<DefaultPage/>}/>
+            {
+              localStorage.getItem("UsertypeInfo") == 1 ?
+            <>
             <Route  path="/deposit" element={<Deposit />} />
             <Route  path="/withdraw" element={<Withdraw />} />
+            </>:""
+            }
+
             <Route path="/gamedetail/:id" element={<GameHead SportId={SportId} />}/>
             <Route  path="/casino/:id" element={<Casino />} />
             <Route path="/m/reports/accountstatement" element={<AaccountStatement />}/>
