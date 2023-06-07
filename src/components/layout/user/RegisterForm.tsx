@@ -31,7 +31,7 @@ export function RegisterForm() {
   const matches = useMediaQuery("(max-width: 580px)");
   const [loading, setLoading] = useState(false);
   const nav = useNavigate();
-  const { setModal, setIsSignedIn, setUser } = useContext(UserContext);
+  const { setModal, setIsSignedIn, setUser, appData } = useContext(UserContext);
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       username: "",
@@ -268,16 +268,18 @@ export function RegisterForm() {
               Submit
             </Button>
 
-            <Button
-              sx={{ p: 2.5 }}
-              variant="contained"
-              color="secondary"
-              type="button"
-              fullWidth
-              onClick={handleDemoUserLogin}
-            >
-              Login With Demo Id
-            </Button>
+            {appData?.selfAllowed && (
+              <Button
+                sx={{ p: 2.5 }}
+                variant="contained"
+                color="secondary"
+                type="button"
+                fullWidth
+                onClick={handleDemoUserLogin}
+              >
+                Login With Demo Id
+              </Button>
+            )}
             <Typography fontSize={"0.5rem"}>
               This site is protected by reCAPTCHA and the Google Privacy Policy
               and Terms of Service apply.

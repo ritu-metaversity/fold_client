@@ -35,7 +35,7 @@ function LoginForm({
 }: Props) {
   const theme = useTheme();
   const nav = useNavigate();
-  const { setUser, setModal, setIsSignedIn } = useContext(UserContext);
+  const { setUser, setModal, setIsSignedIn, appData } = useContext(UserContext);
   const handleDemoUserLogin = async () => {
     const { response } = await authServices.demoUserLogin(
       window.location.hostname
@@ -155,16 +155,18 @@ function LoginForm({
             Submit
           </Button>
 
-          <Button
-            sx={{ p: 2.5 }}
-            variant="contained"
-            color="secondary"
-            type="button"
-            fullWidth
-            onClick={handleDemoUserLogin}
-          >
-            Login With Demo Id
-          </Button>
+          {appData?.selfAllowed && (
+            <Button
+              sx={{ p: 2.5 }}
+              variant="contained"
+              color="secondary"
+              type="button"
+              fullWidth
+              onClick={handleDemoUserLogin}
+            >
+              Login With Demo Id
+            </Button>
+          )}
           <Typography fontSize={"0.5rem"}>
             This site is protected by reCAPTCHA and the Google Privacy Policy
             and Terms of Service apply.
