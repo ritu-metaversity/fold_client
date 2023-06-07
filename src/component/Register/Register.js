@@ -130,9 +130,13 @@ const Register = () => {
       });
   }
 
+  const [statusBtn, setStatusBtn] = useState(false)
+
   useEffect(()=>{
    UserAPI.Self_By_App_Url().then((res)=>{
-    setLogo(res?.data?.logo)
+    setLogo(res?.data?.logo);
+    setStatusBtn(res?.data?.selfAllowed)
+
    }) 
   },[])
 
@@ -238,7 +242,7 @@ const Register = () => {
             <div className="form-group mb-0">
               <button
                 type="submit"
-                className="btn btn-primary btn-block"
+                className={`btn btn-primary btn-block ${statusBtn === true?"":"d-none"}`}
                 onClick={handleLoginDemo}>
                   Login with Demo User
                 {isLoading ? (

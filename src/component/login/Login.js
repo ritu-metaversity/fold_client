@@ -216,7 +216,7 @@ function Login({ Errmessage, Statusmessage }) {
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
                 <button
                   onClick={handleLoginWithDemoAccount}
-                  className="btn btn-primary btn-block">
+                  className={`btn btn-primary btn-block ${statusbtn === true?"":"d-none"}`}>
                   Login with Demo User
                   {isLoading1 ? (
                     <i className="ml-2 fa fa-spinner fa-spin"></i>
