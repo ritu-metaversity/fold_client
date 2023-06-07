@@ -13,6 +13,7 @@ import { MatchInterface } from "../home/match";
 import { UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
+
 const InPlaySidebar = () => {
   const [activeMatches, setActiveMatches] = useState<
     (MatchInterface & { sportId: string })[]
