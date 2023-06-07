@@ -10,6 +10,9 @@ import "./miniScrollbar.css";
 import Loading from "../layout/loading";
 import { BoxWithTitleBox } from "../common/styledComponents";
 import { isMobile } from "react-device-detect";
+import InplaySport from "./InplaySport";
+
+interface SportsInterface {}
 
 const Sports = () => {
   const [value, setValue] = React.useState(0);
@@ -67,7 +70,7 @@ const Sports = () => {
     // };
     const getNewEventOpen = async (useLoading?: boolean) => {
       if (!activeSportList) return;
-      const { sportId } = activeSportList[value];
+      const sportId = value;
       if (!sportId) return;
       useLoading && setLoading(true);
       const { response } = await sportServices.newActiveEvent(sportId);
@@ -91,7 +94,10 @@ const Sports = () => {
   if (!(activeSportList?.length > 0)) {
     return <div></div>;
   }
-  const color = activeSportList[value]?.color;
+
+  const selectedSport = activeSportList.find((i: any) => i.sportId === value);
+  const color = selectedSport?.color;
+
   return (
     <Box color="text.secondary">
       <ScrollableTabsButtonVisible
@@ -100,82 +106,108 @@ const Sports = () => {
         setValue={setValue}
         sports={activeSportList}
       />
-      <Grid
-        container
-        display={{ xs: "none", lg: "flex" }}
-        color="white"
-        fontSize="0.9rem"
-        bgcolor={color}
-      >
-        <Grid
-          item
-          xs={6.6}
-          textAlign="left"
-          alignItems={"center"}
-          display="flex"
-        >
-          <Box pl={2} pt={0.5}>
-            <i className={activeSportList[value]?.iconClass} />
+      {value === 0 && <InplaySport />}
+      {value !== 0 && (
+        <>
+          <SportHeader
+            color={color}
+            name={selectedSport?.name}
+            iconClass={selectedSport?.iconClass}
+          />
+          <Box
+            id={
+              isMobile
+                ? "scrollable-match-list-mobile"
+                : "scrollable-match-list-desktop"
+            }
+            maxHeight={{ xs: "310px", lg: "100%" }}
+            minHeight={{ lg: "calc(100vh - 440px)" }}
+            sx={{
+              overflowY: "overlay",
+              overflowX: "hidden",
+              p: { xs: 0.5, lg: 0 },
+            }}
+          >
+            {loading ? (
+              <Box height={200}>
+                <Loading />
+              </Box>
+            ) : activeEventList.length > 0 ? (
+              activeEventList.map((item) => (
+                <Match
+                  key={"sportlist" + item?.matchId}
+                  sportId={selectedSport?.sportId?.toString()}
+                  matches={item}
+                />
+              ))
+            ) : (
+              <BoxWithTitleBox>No Data Found</BoxWithTitleBox>
+            )}
           </Box>
-          <Box pl={0.5} py={0.5}>
-            {activeSportList[value]?.name}
-          </Box>
-        </Grid>
-        <Grid
-          container
-          item
-          lg={5.4}
-          maxWidth={{ lg: 356, xl: 700 }}
-          ml={{
-            lg: "auto",
-          }}
-          pr={{ lg: 2 }}
-          display="flex"
-          alignItems={"center"}
-        >
-          <Grid item xs={0} pl={2} py={0.5} lg={4}>
-            1
-          </Grid>
-          <Grid item xs={0} pl={2} py={0.5} lg={4}>
-            X
-          </Grid>
-          <Grid item xs={0} pl={2} py={0.5} lg={4}>
-            2
-          </Grid>
-        </Grid>
-      </Grid>
-      <Box
-        id={
-          isMobile
-            ? "scrollable-match-list-mobile"
-            : "scrollable-match-list-desktop"
-        }
-        maxHeight={{ xs: "310px", lg: "100%" }}
-        minHeight={{ lg: "calc(100vh - 440px)" }}
-        sx={{
-          overflowY: "overlay",
-          overflowX: "hidden",
-          p: { xs: 0.5, lg: 0 },
-        }}
-      >
-        {loading ? (
-          <Box height={200}>
-            <Loading />
-          </Box>
-        ) : activeEventList.length > 0 ? (
-          activeEventList.map((item) => (
-            <Match
-              key={"sportlist" + item?.matchId}
-              sportId={activeSportList[value]?.sportId?.toString()}
-              matches={item}
-            />
-          ))
-        ) : (
-          <BoxWithTitleBox>No Data Found</BoxWithTitleBox>
-        )}
-      </Box>
+        </>
+      )}
     </Box>
   );
 };
 
 export default Sports;
+
+export function SportHeader({
+  color,
+  name,
+  iconClass,
+}: {
+  color: string;
+  name: string;
+  iconClass?: string;
+}) {
+  return (
+    <Grid
+      container
+      display={{
+        xs: "none",
+        lg: "flex",
+      }}
+      color="white"
+      fontSize="0.9rem"
+      bgcolor={color}
+    >
+      <Grid item xs={6.6} textAlign="left" alignItems={"center"} display="flex">
+        <Box pl={2} pt={0.5}>
+          <i className={iconClass} />
+        </Box>
+        <Box pl={0.5} py={0.5}>
+          {name}
+        </Box>
+      </Grid>
+      <Grid
+        container
+        item
+        lg={5.4}
+        maxWidth={{
+          lg: 356,
+          xl: 700,
+        }}
+        ml={{
+          lg: "auto",
+        }}
+        pr={{
+          lg: 2,
+        }}
+        display="flex"
+        alignItems={"center"}
+      >
+        <Grid item xs={0} pl={2} py={0.5} lg={4}>
+          1
+        </Grid>
+        <Grid item xs={0} pl={2} py={0.5} lg={4}>
+          X
+        </Grid>
+        <Grid item xs={0} pl={2} py={0.5} lg={4}>
+          2
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+}
+  
