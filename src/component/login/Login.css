@@ -191,6 +191,7 @@ a {
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
+    overflow: auto;
 }
 
 .logo-login {

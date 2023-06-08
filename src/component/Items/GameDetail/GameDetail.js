@@ -483,10 +483,7 @@ function GameDetail({ getStackValue}) {
                   </span>{" "}
                   <span className="float-right">{eTime?.eventTime}</span>
                 </div>
-                {matchDetail?.length === 0 || matchDetail?.length === "" ? (
-                  <p className="no-found">No real-time records found</p>
-                ) : (
-                  <>
+                  
                     {TvHideShow ? (
                       <div id="scoreboard-box">
                         <div className="scorecard scorecard-mobile">
@@ -1219,8 +1216,7 @@ function GameDetail({ getStackValue}) {
                     ) : (
                       ""
                     )}
-                  </>
-                )}
+                  
               </div>
             </div>
           </div>
