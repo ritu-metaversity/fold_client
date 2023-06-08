@@ -25,6 +25,7 @@ export const utilServices = {
     const params = {
       resource: utilResources.GET_IP_ADDRESS,
       noAuth: true,
+      betfair: true,
     };
     return await apiHandler(params);
   },

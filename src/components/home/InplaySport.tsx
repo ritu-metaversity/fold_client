@@ -66,7 +66,7 @@ const InplaySport = () => {
                   : "scrollable-match-list-desktop"
               }
               maxHeight={{ xs: "310px", lg: "100%" }}
-              minHeight={{ lg: "calc(100vh - 440px)" }}
+              // minHeight={{ lg: "calc(100vh - 440px)" }}
               sx={{
                 overflowY: "overlay",
                 overflowX: "hidden",
