@@ -581,12 +581,12 @@ function GameDetail({ getStackValue}) {
                                     ];
 
                                     const ProfitValue = profits?.Odds[
-                                      Number(item?.marketId)
+                                      (item?.marketId)
                                     ]?.find(
                                       (profit) =>
                                         profit?.sid ==
                                         event?.selectionId
-                                    )?.value
+                                    )?.value;
                                     return (
                                       <div
                                         data-title="ACTIVE"
