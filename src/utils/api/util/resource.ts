@@ -13,7 +13,7 @@ export const utilResources: {
   },
   GET_IP_ADDRESS: {
     // URL: "https://api.ipify.org/?format=json",
-    URL: "http://15.207.182.173:3333/",
+    URL: "my-ip",
     METHOD: "GET",
   },
   VALIDATE_JWT: {
