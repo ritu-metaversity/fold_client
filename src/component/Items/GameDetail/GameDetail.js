@@ -492,7 +492,8 @@ function GameDetail({ getStackValue}) {
                         <div className="scorecard scorecard-mobile">
                           <div className="score-inner">
                             <iframe
-                              src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
+                              // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
+                              src={`http://43.205.116.130/tv.php?eventId=${id}`}
                               width="100%"
                               className="score-card"
                               title="scorecord"
