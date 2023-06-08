@@ -147,6 +147,9 @@ function App() {
   const statusMsg=(val)=>{
     setStatusmessage(val)
   }
+  const statusMsgForLogout = (val)=>{
+    setStatusmessage(val);
+  }
 
   return (
     <div className="App">
@@ -182,7 +185,7 @@ function App() {
             <Route path="/m/reports/unsetteledbet" element={<UnSetteledBet />}/>
             <Route path="/m/setting/changebtnvalue" element={<ChangeBtnValue />}/>
             <Route path="/m/setting/changepassword" element={<ChangePassword  message={message} statusMsg={statusMsg}/>}/>
-            <Route  path="/SignOut" element={<SignOut />} />
+            <Route  path="/SignOut" element={<SignOut statusMsgForLogout={statusMsgForLogout} />} />
   
             <Route path="" element={<Mobilenav />}>
               <Route  path="/Home" element={<Home idddd={idddd} />} />
