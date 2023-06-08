@@ -118,6 +118,7 @@ function AaccountStatement() {
   }
 
   const handlePagenation = (val) => {
+    if(pagination !==0)
     setPagination(val);
     setActive(val);
   };
