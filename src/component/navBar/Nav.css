@@ -1337,12 +1337,12 @@ a.router-link-exact-active.router-link-active {
     margin-right: 9px;
 }
 
-@media screen and (min-width: 600px) and (max-width: 750px) {
+@media screen and (min-width: 500px) and (max-width: 750px) {
     .dropdown-menu.show {
-        display: block;
-        margin-right: 9px;
-        height: 75vh;
-        overflow: scroll;
+        display: block !important;
+        margin-right: 9px !important;
+        height: 75vh !important;
+        overflow: scroll !important;
     }
 }
 .custom-control-label::before {

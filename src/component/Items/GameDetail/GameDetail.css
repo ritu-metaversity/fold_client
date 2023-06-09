@@ -917,7 +917,6 @@ p.no-found {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    z-index: 11;
     top: 123px;
     right: 7px;
 }

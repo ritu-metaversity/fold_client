@@ -19,37 +19,6 @@ const Register = () => {
   const [isLoading1, setIsLoading1] = useState(false);
   const [alertBtnColor, setAlertBtnColor] = useState()
 
-
-
-  // const validateForm =()=>{
-  //   let error = {};
-
-  //   if(UserName === ""){
-  //     error= "User Name is required"
-  //     setStatusVal(false)
-  //   }else if(password === ""){
-  //     error = "Password is required"
-  //     setStatusVal(false)
-  //   }else if(confirmPassword !== password){
-  //     error = 'Password and Password Confirmation should be same'
-  //     setStatusVal(false)
-  //   }else if(mobileNumber === ""){
-  //     setStatusVal(false)
-  //     error = "Mobile Number is required"
-  //   }
-  //   setErrorMsg(error);
-  //   return Object.keys(error).length === 0;
-  // }
-
-  // useEffect(()=>{
-  //   setStatusVal(true)
-
-  // }, [])
-
-
-
-  
-
   const nav = useNavigate()
 
   const handleLogin = () => {
@@ -140,11 +109,9 @@ const Register = () => {
    }) 
   },[])
 
-
   const popupClose=(vl)=>{
     setStatusVal(vl)
   }
-
 
   return (
     <>
@@ -177,11 +144,6 @@ const Register = () => {
                 aria-invalid="false"
                 onChange={(e) => setUserName(e.target.value)}
               />
-              <span
-                className="text-danger error-msg"
-                style={{ display: "none" }}>
-                {" "}
-              </span>
             </div>
             <div className="form-group mb-4">
               <input
@@ -242,7 +204,7 @@ const Register = () => {
             <div className="form-group mb-0">
               <button
                 type="submit"
-                className={`btn btn-primary btn-block ${statusBtn === true?"":"d-none"}`}
+                className="btn btn-primary btn-block"
                 onClick={handleLoginDemo}>
                   Login with Demo User
                 {isLoading ? (

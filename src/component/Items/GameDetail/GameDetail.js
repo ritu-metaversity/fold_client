@@ -483,16 +483,14 @@ function GameDetail({ getStackValue}) {
                   </span>{" "}
                   <span className="float-right">{eTime?.eventTime}</span>
                 </div>
-                {matchDetail?.length === 0 || matchDetail?.length === "" ? (
-                  <p className="no-found">No real-time records found</p>
-                ) : (
-                  <>
+                  
                     {TvHideShow ? (
                       <div id="scoreboard-box">
                         <div className="scorecard scorecard-mobile">
                           <div className="score-inner">
                             <iframe
-                              src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
+                              // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
+                              src={`http://43.205.116.130/tv.php?eventId=${id}`}
                               width="100%"
                               className="score-card"
                               title="scorecord"
@@ -583,12 +581,12 @@ function GameDetail({ getStackValue}) {
                                     ];
 
                                     const ProfitValue = profits?.Odds[
-                                      Number(item?.marketId)
+                                      (item?.marketId)
                                     ]?.find(
                                       (profit) =>
                                         profit?.sid ==
                                         event?.selectionId
-                                    )?.value
+                                    )?.value;
                                     return (
                                       <div
                                         data-title="ACTIVE"
@@ -1218,8 +1216,7 @@ function GameDetail({ getStackValue}) {
                     ) : (
                       ""
                     )}
-                  </>
-                )}
+                  
               </div>
             </div>
           </div>

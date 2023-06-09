@@ -135,6 +135,7 @@ function CasinoProfit() {
   //   result[i] = i;
   // }
   const handleClick = (val, id) => {
+    if(pagination !==0)
     setPagination(val);
     setActive(id);
   };

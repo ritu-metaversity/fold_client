@@ -73,6 +73,7 @@ function ChangePassword(props) {
           currentPassword: currPassword,
           newPassword: newPasswords,
         }).then((res) => {
+          props.statusMsg(res.status);
           if (res.status === true) {
             setMessege(res.message);
             setTimeout(function () {
@@ -92,7 +93,7 @@ function ChangePassword(props) {
       // }
     }
   }
-    props.statusMsg(true);
+    // props.statusMsg(true);
   };
 
   props.message(message);
