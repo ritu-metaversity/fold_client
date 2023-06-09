@@ -183,9 +183,7 @@ function App() {
   };
 
   const { pathname } = useLocation();
-  useEffect(() => {
-    console.log("Ran app");
-  }, []);
+
   useEffect(() => {
     const user = localStorage.getItem("user");
     let timer: ReturnType<typeof setInterval>;
