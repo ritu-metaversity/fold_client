@@ -217,9 +217,6 @@ function App() {
   }, [isSignedIn, getBalance]);
 
 
-  useEffect(() => {
-    axios.get("http://23.106.234.25:8083/data-provider/cricket");
-  }, []);
 
   // fetch("http://192.168.0.245:8000/group/get-groups-chats");
   if (isSignedIn === null) {
