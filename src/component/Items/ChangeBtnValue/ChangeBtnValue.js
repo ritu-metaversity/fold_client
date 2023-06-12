@@ -85,7 +85,7 @@ function ChangeBtnValue() {
                 <i className="fa fa-spinner fa-spin"></i>
               </p>
               }
-              <div className="card-body container-fluid container-fluid-5 button-value">
+              <div className="card-body container-fluid container-fluid-5 button-value max_height">
                 <div className="row row5 mb-1 ">
                   <div className="col-6">
                     <div className="button-title">

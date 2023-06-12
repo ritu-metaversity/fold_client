@@ -23,10 +23,38 @@
     color: #fff;
 }
 
+.table-header,
+.table-row {
+    display: flex;
+    border-bottom: 1px solid #fff;
+}
+
+.table-header>div:first-child,
+.table-row>div:first-child {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.table-header>div {
+    border-bottom: 0;
+}
+
+.table-header>div,
+.table-row>div {
+    padding: 5px 0;
+    border: 1px solid #fff;
+    border-right: 0;
+    border-bottom: 0;
+    border-top: 0;
+}
+
 .min-max {
     font-size: 12px;
 }
 
+.table-header>div {
+    border-bottom: 0;
+}
 
 .back,
 .back-color {
@@ -44,6 +72,9 @@
     max-width: 10%;
 }
 
+.table-row {
+    background-color: #f2f2f2;
+}
 
 .team-name {
     display: block;
@@ -62,6 +93,14 @@
     float: left !important;
 }
 
+/* .table-row>div.back,
+.table-row>div.back1,
+.table-row>div.back2,
+.table-row>div.lay,
+.table-row>div.lay1,
+.table-row>div.lay2 {
+    cursor: pointer;
+} */
 .cPointer{
     cursor: pointer;
 }
@@ -242,10 +281,28 @@
     border-bottom: 1px solid #fff;
 }
 
+.table-header,
+.table-row {
+    display: flex;
+    border-bottom: 1px solid #aaa;
+}
+
+.table-header>div,
+.table-row>div {
+    padding: 5px 0;
+    border: 1px solid #fff;
+    border-right: 0;
+    border-bottom: 0;
+    border-top: 0;
+}
 
 .game-detail-mob-view {
     display: none;
 }
+
+
+
+
 
 .game-detail-mob-view {
     display: block;
@@ -326,6 +383,10 @@ button.nav-link.nav2.nav-btn:first-child {
     max-width: 20%;
 }
 
+.table-row {
+    background-color: #f2f2f2;
+    position: relative;
+}
 
 .team-name {
     display: block;
@@ -346,13 +407,30 @@ button.nav-link.nav2.nav-btn:first-child {
     background-color: rgba(114, 187, 239, 0.75);
 }
 
+.table-row>div .odd {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 3px;
+    line-height: 16px;
+}
 
 .d-block {
     display: block !important;
 }
 
+.table-row>div .odd~span {
+    font-size: 12px;
+    line-height: 14px;
+}
 
-
+.table-header>div,
+.table-row>div {
+    padding: 2px 0;
+    border: 1px solid #aaa;
+    border-right: 0;
+    border-bottom: 0;
+    border-top: 0;
+}
 
 .back {
     background-color: #72bbef !important;
@@ -365,6 +443,12 @@ button.nav-link.nav2.nav-btn:first-child {
     padding: 0;
 }
 
+.table-row>div .odd {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 3px;
+    line-height: 16px;
+}
 
 .float-left.country-name.box-4 p span {
     font-size: 12px;
@@ -606,13 +690,13 @@ p.team-name.col-6.text-right {
     color: #ff3c3c;
     font-family: "Roboto Condensed", sans-serif;
 }
-/* .fancy-market .suspended:after {
-    width: 203% !important;
+.fancy-market .suspended:after {
+    width: 201% !important;
     content: attr(data-title);
     font-size: 16px;
     color: #ff3c3c;
     font-family: "Roboto Condensed", sans-serif;
-} */
+}
 
 
 
@@ -775,6 +859,78 @@ p.no-found {
     width: 100% !important;
 }
 
+.onoffbtn {
+    width: 30px;
+    height: 16px;
+    border-radius: 15px;
+    background: #fff;
+    display: block;
+    position: relative;
+}
+.onoffbtn.active:after {
+    left: 100%;
+    margin-left: -15px;
+    background: #0088cc;
+    content: '';
+}
 
+.onoffbtn:after {
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    display: block;
+    border-radius: 50%;
+    background: #2c3d50;
+    top: 1px;
+    left: 1px;
+    content: '';
+    transition: all 200ms ease-in-out;
+    text-align: center;
+    line-height: 29px;
+    color: #fff;
+    font-size: 12px;
+}
+  .onoffbtn input[type="checkbox"]{
+    opacity:0;
+  }
 
+.icon-medium {
+    font-size: 18px !important;
+}
 
+.css-vubbuv {
+    user-select: none;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentcolor;
+    flex-shrink: 0;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-right: 2px;
+    margin-left: 4px;
+
+}
+.scoreCard-icon{
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    top: 123px;
+    right: 7px;
+}
+.scoreCard-icon i{
+    color: #fff;
+    margin-left: 6px;
+}
+.tvIcon{
+    border-left: 2px solid #fff;
+    margin-left: 4px;
+}
+.scoreCard-icon.desk_score.score_card_update {
+    cursor: pointer !important;
+}
+label.onoffbtn {
+    cursor: pointer !important;
+}

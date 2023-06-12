@@ -5,7 +5,8 @@ const RegisterModals = () => {
 
   const pass = localStorage.getItem("UserPassword")
   const userName = localStorage.getItem("UserName")
-    
+
+
   return (
     <>
       <div className={`place-bet pt-2 pb-2`}>

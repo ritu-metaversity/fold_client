@@ -19,6 +19,7 @@ const WithdrawForDesk = () => {
   const [errorAlert, setErrorAlert] = useState(false);
   const [message, setMessage] = useState({});
   const [colorName, setColorName] = useState();
+  const [isLoading, setIsLoading] = useState(false)
 
   const validateForm = () => {
     let error = {};
@@ -119,13 +120,11 @@ const WithdrawForDesk = () => {
     setDataId(val);
   };
 
-  console.log(dataId, "adssf")
-
   const handleCloseSubmit = () => {
-    console.log("heloooo")
     UserAPI.USER_CANCEL_WITHDRAW_REQUIEST({
       id: dataId,
-    }).then((res) => {
+    })
+      .then((res) => {
         setMessage(res.message);
         setErrorAlert(true);
         setColorName("success");
@@ -135,7 +134,8 @@ const WithdrawForDesk = () => {
           setWithdrawReq(res.data);
           setDataLength(res.data.length);
         });
-      }).catch((error) => {
+      })
+      .catch((error) => {
         setErrorAlert(true);
         setMessage(error.response.data.message);
         setColorName("danger");
@@ -152,303 +152,285 @@ const WithdrawForDesk = () => {
       )}
       <div className="main">
         <div className="container-fluid container-fluid-5">
-          <div className="row row5">
-            <div className="sidebar col-md-2">
-              <SideBar />
-            </div>
-
-            <div className="col-md-10 report-main-content m-t-5 desk-top-view">
-              <div className="card">
-                <div className="card-header header-card">
-                  <h4 className="mb-0">Withdraw</h4>
-                </div>
-                <div className="card-body container-fluid container-fluid-5">
-                  <div className="mainAccount">
-                    <div className="mx-input-wrapper account-field">
-                      <label className="account-lable">Amount</label>
-                      <br />
-                      <input
-                        type="number"
-                        className="account-input"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                      />
-                    </div>
-                    <div className="mx-input-wrapper account-field">
-                      <label className="account-lable">Account Number</label>
-                      <br />
-                      <input
-                        type="number"
-                        className="account-input"
-                        value={accountNumber}
-                        onChange={(e) => setAccountNumber(e.target.value)}
-                      />
-                    </div>
-                    <div className="mx-input-wrapper account-field">
-                      <label className="account-lable">Account Name</label>
-                      <br />
-                      <input
-                        type="text"
-                        className="account-input"
-                        value={accountHolderName}
-                        onChange={(e) => setAccountHolderName(e.target.value)}
-                      />
-                    </div>
-                    <div className="mx-input-wrapper account-field">
-                      <label className="account-lable">Bank Name</label>
-                      <br />
-                      <input
-                        type="type"
-                        className="account-input"
-                        value={bankName}
-                        onChange={(e) => setBankName(e.target.value)}
-                      />
-                    </div>
-                    <div className="mx-input-wrapper account-field">
-                      <label className="account-lable">IFSC</label>
-                      <br />
-                      <input
-                        type="type"
-                        className="account-input"
-                        value={ifsc}
-                        onChange={(e) => setIFSC(e.target.value)}
-                      />
-                    </div>
-                    <div className="mx-input-wrapper account-field">
-                      <label className="account-lable">Account Type</label>
-                      <br />
-                      <select
-                        name="reportType"
-                        className="custom-select select-type"
-                        onChange={(e) => setAccountType(e.target.value)}>
-                        <option value="Saving1">Saving</option>
-                        <option value="Current">Current</option>
-                      </select>
-                      <div className="upDownbtn btnSecected">
-                        <i class="fa fa-caret-up"></i>
-                        <i class="fa fa-caret-down"></i>
-                      </div>
-                    </div>
-                    <div className="mx-input-wrapper account-field">
-                      <button
-                        className="btn btn-primary btn-block btn-sm btn-w"
-                        onClick={handleClick}>
-                        Submit
-                      </button>
+          <div className="itemHome">
+            <div className="card">
+              <div className="card-header header-card">
+                <h4 className="mb-0">Withdraw</h4>
+              </div>
+              <div className="card-body container-fluid container-fluid-5">
+                <div className="mainAccount">
+                  <div className="mx-input-wrapper account-field">
+                    <label className="account-lable">Amount</label>
+                    <br />
+                    <input
+                      type="number"
+                      className="account-input"
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
+                    />
+                  </div>
+                  <div className="mx-input-wrapper account-field">
+                    <label className="account-lable">Account Number</label>
+                    <br />
+                    <input
+                      type="number"
+                      className="account-input"
+                      value={accountNumber}
+                      onChange={(e) => setAccountNumber(e.target.value)}
+                    />
+                  </div>
+                  <div className="mx-input-wrapper account-field">
+                    <label className="account-lable">Account Name</label>
+                    <br />
+                    <input
+                      type="text"
+                      className="account-input"
+                      value={accountHolderName}
+                      onChange={(e) => setAccountHolderName(e.target.value)}
+                    />
+                  </div>
+                  <div className="mx-input-wrapper account-field">
+                    <label className="account-lable">Bank Name</label>
+                    <br />
+                    <input
+                      type="type"
+                      className="account-input"
+                      value={bankName}
+                      onChange={(e) => setBankName(e.target.value)}
+                    />
+                  </div>
+                  <div className="mx-input-wrapper account-field">
+                    <label className="account-lable">IFSC</label>
+                    <br />
+                    <input
+                      type="type"
+                      className="account-input"
+                      value={ifsc}
+                      onChange={(e) => setIFSC(e.target.value)}
+                    />
+                  </div>
+                  <div className="mx-input-wrapper account-field">
+                    <label className="account-lable">Account Type</label>
+                    <br />
+                    <select
+                      name="reportType"
+                      className="custom-select select-type"
+                      onChange={(e) => setAccountType(e.target.value)}>
+                      <option value="Saving1">Saving</option>
+                      <option value="Current">Current</option>
+                    </select>
+                    <div className="upDownbtn btnSecected">
+                      <i class="fa fa-caret-up"></i>
+                      <i class="fa fa-caret-down"></i>
                     </div>
                   </div>
+                  <div className="mx-input-wrapper account-field">
+                    <button
+                      className="btn btn-primary btn-block btn-sm btn-w"
+                      onClick={handleClick}>
+                      Submit
+                    </button>
+                  </div>
+                </div>
 
-                  <div className="row row5 mt-2">
-                    <div className="col-12">
-                      <div className="previous-deposite-desk">
-                        <p>Previous Withdraw</p>
-                      </div>
-                      <div className="table-responsive withdrow-table">
-                        <table
-                          role="table"
-                          aria-busy="false"
-                          aria-colcount="6"
-                          className="table b-table table-bordered"
-                          id="__BVID__104">
-                          <thead>
-                            {/* <tr className="previous-deposite">
+                <div className="row row5 mt-2">
+                  <div className="col-12">
+                    <div className="previous-deposite-desk">
+                      <p>Previous Withdraw</p>
+                    </div>
+                    <div className="table-responsive withdrow-table">
+                      <table
+                        role="table"
+                        aria-busy="false"
+                        aria-colcount="6"
+                        className="table b-table table-bordered"
+                        id="__BVID__104">
+                        <thead>
+                          {/* <tr className="previous-deposite">
                               <th colSpan="10">Previous Withdraw</th>
                             </tr> */}
-                            <tr role="row" className="account-detail">
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="1"
-                                className="text-left ">
-                                Account Number
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="2"
-                                className="text-left ">
-                                Account Name
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="3"
-                                className="text-right ">
-                                Amount
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="4"
-                                className="text-left ">
-                                Bank Name/ Address
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="5"
-                                className="text-left ">
-                                IFSC Code
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="6"
-                                className="text-left ">
-                                Account Type / Currency
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="6"
-                                className="text-left withdraw-data">
-                                Date
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="6"
-                                className="text-left"
-                                style={{ paddingRight: "82px" }}>
-                                Remark
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="6"
-                                className="text-left ">
-                                Status
-                              </th>
-                              <th
-                                role="columnheader"
-                                scope="col"
-                                aria-colindex="6"
-                                className="text-left ">
-                                Action
-                              </th>
-                            </tr>
-                          </thead>
+                          <tr role="row" className="account-detail">
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="1"
+                              className="text-left ">
+                              Account Number
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="2"
+                              className="text-left ">
+                              Account Name
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="3"
+                              className="text-right ">
+                              Amount
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="4"
+                              className="text-left ">
+                              Bank Name/ Address
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="5"
+                              className="text-left ">
+                              IFSC Code
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left ">
+                              Account Type / Currency
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left withdraw-data">
+                              Date
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left"
+                              style={{ paddingRight: "82px" }}>
+                              Remark
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-center">
+                              Status
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left ">
+                              Action
+                            </th>
+                          </tr>
+                        </thead>
 
-                          <tbody
-                            className={`${dataLength === 0 ? "d-none" : ""}`}>
-                            {withdrawReq?.length &&
-                              withdrawReq.map((item, index) => {
-                                return (
-                                  <>
-                                    <tr role="row" key={index}>
-                                      <td
-                                        aria-colindex="1"
-                                        className="text-left withdraw-data">
-                                        {item.accountNumber}
-                                      </td>
-                                      <td
-                                        aria-colindex="2"
-                                        className="text-left withdraw-data">
-                                        {item.accountHolderName}
-                                      </td>
-                                      <td
-                                        aria-colindex="3"
-                                        className="text-right ">
-                                        {item.amount}
-                                      </td>
-                                      <td
-                                        aria-colindex="4"
-                                        className="text-left withdraw-data">
-                                        {item.bankName}
-                                      </td>
-                                      <td
-                                        aria-colindex="5"
-                                        className="text-left  withdraw-data">
-                                        {item.ifsc}
-                                      </td>
-                                      <td
-                                        aria-colindex="6"
-                                        className="text-lift withdraw-data">
-                                        {item.accountType}
-                                      </td>
-                                      <td
-                                        aria-colindex="6"
-                                        className="text-lift">
-                                        {moment(item.time).format(
-                                          "YYYY-MM-DD h:mm:s"
-                                        )}
-                                        {}
-                                      </td>
-                                      <td
-                                        aria-colindex="6"
-                                        className="text-lift"
-                                        style={{ paddingRight: "" }}>
-                                        {item.remark}
-                                      </td>
-                                      <td
-                                        aria-colindex="6"
-                                        className={`text-left ${
-                                          item.status === "Pending"
-                                            ? "pending"
-                                            : item.status === "APPROVED"
-                                            ? "approved"
-                                            : "rejected"
-                                        }`}>
-                                        {item.status}
-                                      </td>
-                                      <td
-                                        aria-colindex="6"
-                                        className={`text-left ${
-                                          item.status === "Pending"
-                                            ? ""
-                                            : "d-none"
-                                        }`}
-                                        onClick={() => handlePending(item?.id)}>
-                                        <button className="canBtn">
-                                          Cancel
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  </>
-                                );
-                              })}
-                            <Modal show={show} onHide={handleClose}>
-                              <Modal.Header
-                                closeButton
-                                className="cancelRequest">
-                                <Modal.Title>Cancel Request</Modal.Title>
-                              </Modal.Header>
-                              <Modal.Body>
-                                Are you sure you want to cancel this request?
-                              </Modal.Body>
-                              <Modal.Footer>
-                                <Button
-                                  variant="secondary"
-                                  className="modalBtn"
-                                  onClick={handleClose}>
-                                  Close
-                                </Button>
-                                <Button
-                                  variant="primary"
-                                  type="button"
-                                  className="modalBtn"
-                                  onClick={handleCloseSubmit}>
-                                  Submit
-                                </Button>
-                              </Modal.Footer>
-                            </Modal>
-                          </tbody>
-                          <tbody>
-                            <tr
-                              role="row"
-                              className={`${dataLength === 0 ? "" : "d-none"}`}>
-                              <td
-                                aria-colindex="1"
-                                colSpan="9"
-                                className="text-left withdraw-data">
-                                <p className="no-record-found">
-                                  No records found
-                                </p>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                        <tbody
+                          className={`${dataLength === 0 ? "d-none" : ""}`}>
+                          {withdrawReq?.length &&
+                            withdrawReq.map((item, index) => {
+                              return (
+                                <>
+                                  <tr role="row" key={index}>
+                                    <td
+                                      aria-colindex="1"
+                                      className="text-left withdraw-data">
+                                      {item.accountNumber}
+                                    </td>
+                                    <td
+                                      aria-colindex="2"
+                                      className="text-left withdraw-data">
+                                      {item.accountHolderName}
+                                    </td>
+                                    <td
+                                      aria-colindex="3"
+                                      className="text-right ">
+                                      {item.amount}
+                                    </td>
+                                    <td
+                                      aria-colindex="4"
+                                      className="text-left withdraw-data">
+                                      {item.bankName}
+                                    </td>
+                                    <td
+                                      aria-colindex="5"
+                                      className="text-left  withdraw-data">
+                                      {item.ifsc}
+                                    </td>
+                                    <td
+                                      aria-colindex="6"
+                                      className="text-lift withdraw-data">
+                                      {item.accountType}
+                                    </td>
+                                    <td aria-colindex="6" className="text-lift">
+                                      {moment(item.time).format(
+                                        "YYYY-MM-DD h:mm:s"
+                                      )}
+                                      {}
+                                    </td>
+                                    <td
+                                      aria-colindex="6"
+                                      className="text-lift"
+                                      style={{ paddingRight: "" }}>
+                                      {item.remark}
+                                    </td>
+                                    <td
+                                      aria-colindex="6" className="text-center"
+                                      >
+                                      <p className={`${item.status === "Pending"? "pending": item.status === "APPROVED"? "approved": "rejected"}`}>{item.status}</p>
+                                    </td>
+                                    <td
+                                      aria-colindex="6"
+                                      className={`text-left ${
+                                        item.status === "Pending"
+                                          ? ""
+                                          : "d-none"
+                                      }`}
+                                      onClick={() => handlePending(item?.id)}>
+                                      <button className="canBtn">Cancel</button>
+                                    </td>
+                                  </tr>
+                                </>
+                              );
+                            })}
+                          <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton className="cancelRequest">
+                              <Modal.Title>Cancel Request</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                              Are you sure you want to cancel this request?
+                            </Modal.Body>
+                            <Modal.Footer>
+                              <Button
+                                variant="secondary"
+                                className="modalBtn"
+                                onClick={handleClose}>
+                                Close
+                              </Button>
+                              <Button
+                                variant="primary"
+                                type="button"
+                                className="modalBtn"
+                                onClick={handleCloseSubmit}>
+                                Submit
+                              </Button>
+                            </Modal.Footer>
+                          </Modal>
+                        </tbody>
+                        <tbody>
+                          <tr
+                            role="row"
+                            className={`${dataLength === 0 ? "" : "d-none"}`}>
+                            <td
+                              aria-colindex="1"
+                              colSpan="9"
+                              className="text-left withdraw-data">
+                              <p className="no-record-found">
+                                No records found
+                              </p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>

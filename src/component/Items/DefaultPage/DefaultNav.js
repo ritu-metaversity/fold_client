@@ -1,0 +1,70 @@
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom';
+
+const DefauilNav = () => {
+
+    const [Active, setActive] = useState(1);
+
+  const handleClick = (val, e) => {
+    setActive(val);
+  };
+
+  const {pathname} = useLocation();
+
+
+  useEffect(()=>{
+    if(pathname === '/m/slot'){
+      setActive(3)
+    }else if(pathname === '/sports'){
+      setActive(2)
+    }else if(pathname ==='/in-play'){
+      setActive(1)
+    }else if((pathname ==='/m/Others')){
+      setActive(4)
+    }
+    else if((pathname?.slice(0,7) === '/casino')){
+      setActive(3)
+    }
+    else if(pathname==="/"){
+      setActive(1)
+    }
+
+  },[pathname])
+
+  return (
+    <>
+    <ul className="nav nav-tabs main-gameHead1 game-nav-bar">
+        <li
+          className={`nav-item ${Active === 1 ? "active2" : ""}`}
+          onClick={(e) => handleClick(1, e)}>
+          <Link data-toggle="tab" to="/in-play" className="nav-link navlink1">
+            In-play
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${Active === 2 ? "active2" :""}`}
+          onClick={(e) => handleClick(2, e)}>
+          <Link data-toggle="tab" to="/sports" className="nav-link navlink1">
+            Sports
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${Active === 3 ? "active2" : ""}`}
+          onClick={(e) => handleClick(3, e)}>
+          <Link data-toggle="tab" to="/m/slot" className="nav-link navlink1">
+            Casino+Slot
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${Active === 4 ? "active2" : ""}`}
+          onClick={(e) => handleClick(4, e)}>
+          <Link data-toggle="tab" to="/m/Others" className="nav-link">
+            Others
+          </Link>
+        </li>
+      </ul>
+    </>
+  )
+}
+
+export default DefauilNav

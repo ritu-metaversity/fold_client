@@ -3,6 +3,7 @@ import SideBar from "../sidebar/SideBar";
 import "./ChangePasswordForDesk.css";
 import { AuthorAPI } from "../../apis/AuthorAPI";
 import { useNavigate } from "react-router-dom";
+import AlertBtn from "../../component/Alert/AlertBtn";
 
 const ChangePasswordForDesk = (props) => {
   const [currPassword, setCurrPassword] = useState("");
@@ -19,25 +20,30 @@ const ChangePasswordForDesk = (props) => {
   const nav = useNavigate();
 
   const handleClick = () => {
+    setIsLoading(true);
     if (currPassword === "") {
       setShowError(true);
+      setIsLoading(false);
       setColor("danger");
       setMessege("Current Password is required");
-      setIsLoading(false);
     } else if (newPasswords === "") {
       setShowError(true);
       setColor("danger");
       setMessege("New Password is required");
       setIsLoading(false);
-    } else if (newPasswords !== currPassword) {
+    }else if(conformPassword === ""){
+      setShowError(true);
+      setColor("danger");
+      setMessege("Conform Password is required");
+      setIsLoading(false);
+    } else if (newPasswords !== conformPassword) {
       setShowError(true);
       setColor("danger");
       setMessege("New Password and Password Confirmation should be same");
-      setIsLoading(false);
+      setIsLoading(false)
     }
 
-    if (conformPassword !== "" && newPasswords !== "") {
-      setIsLoading(true);
+    if (currPassword !== "" || conformPassword !== "" || newPasswords !== "") {
       if (localStorage.getItem("Password-type") === "old") {
         AuthorAPI.FIRST_LOGIN({
           currentPassword: currPassword,
@@ -46,53 +52,71 @@ const ChangePasswordForDesk = (props) => {
           userid: userId,
           token: Token,
           oldPassword: currPassword,
-        }).then((res) => {
-          // props.statusMsg(res.status)
-          if (res.status === true) {
-            setMessege(res.message);
-            setTimeout(function () {
-              setIsLoading(false);
-              AuthorAPI.LOGOUT();
-              localStorage.clear();
-              nav("/login");
-            }, 200);
-          }
-        });
-      } else {
-        if (newPasswords === conformPassword) {
-          AuthorAPI.Change_Passwords({
-            currentPassword: currPassword,
-            newPassword: newPasswords,
-          }).then((res) => {
+        })
+          .then((res) => {
+            props.statusMsg(res.status);
             if (res.status === true) {
               setMessege(res.message);
               setTimeout(function () {
                 setIsLoading(false);
-                localStorage.clear();
                 AuthorAPI.LOGOUT();
+                localStorage.clear();
                 nav("/login");
-              }, 200);
+              }, 100);
             }
+          })
+          .catch((error) => {
+            setIsLoading(false);
           });
-        }
+      } else {
+        if(newPasswords === conformPassword){
+        AuthorAPI.Change_Passwords({
+          currentPassword: currPassword,
+          newPassword: newPasswords,
+        }).then((res) => {
+          props.statusMsg(res.status)
+          if (res.status === true) {
+            setMessege(res.message);
+            setTimeout(function () {
+              setIsLoading(false);
+              localStorage.clear();
+              AuthorAPI.LOGOUT();
+              nav("/login");
+            }, 100);
+          }else{
+            setMessege(res.message);
+            setIsLoading(false);
+            setShowError(true)
+            setColor("danger")
+          }
+        });
       }
       // }
     }
-  };
+    
+  }
+};
+props.message(message);
 
   const popupClose = (vl) => {
     setShowError(vl);
   };
-
   return (
     <>
+    {ShowError !== false ? (
+        <AlertBtn
+          color={color}
+          className="change-passwords"
+          popupClose={popupClose}
+          val={message}
+        />
+      ):
+      ""
+      }
+
       <div className="main">
         <div className="container-fluid container-fluid-5">
-          <div className="row row5">
-            <div className="sidebar col-md-2">
-              <SideBar />
-            </div>
-            <div className="col-md-10 report-main-content m-t-5 desk-top-view">
+          <div className="itemHome">
               <div className="card">
                 <div className="card-header header-card">
                   <h4 className="mb-0">Change Password</h4>
@@ -147,7 +171,6 @@ const ChangePasswordForDesk = (props) => {
                   </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>

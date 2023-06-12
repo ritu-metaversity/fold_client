@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { GameAPI } from "../../apis/gameAPI";
-import './Sidebar.css'
-import {IoIosArrowDown, IoIosArrowForward } from 'react-icons/io'
+import "./Sidebar.css";
+import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
+import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
+import Accordion from "react-bootstrap/Accordion";
+
+import axios from "axios";
 
 function SideBar() {
   const [visible, setVisible] = useState(true);
   const [visible2, setVisible2] = useState(true);
-  const [toggle, setToggle] = useState("");
-  const [ulshow, setUlShow] = useState(false);
-  const [subulshow, setSubUlShow] = useState(false);
+  const [toggle, setToggle] = useState();
   const [matchList, setMatchList] = useState("");
+  const [casinoData, setCasinoData] = useState([]);
+  const [SportId, setSportId] = useState();
+  const [show, setShow] = useState(false);
+  const [closeAllSportData, setCloseAllSportData] = useState(true);
 
   function collapse() {
     if (visible === true) {
@@ -26,147 +31,69 @@ function SideBar() {
       setVisible2(true);
     }
   }
-  const handleShowSingleSport = (id) => {
+  const handleSportId = (id, val) => {
     setToggle(id);
-    // toggle === id
-  };
-  // const allSport = [
-  //   "Football",
-  //   "Tennis",
-  //   "Cricket",
-  //   "Ice Hockey",
-  //   "Volleyball",
-  //   "Politics",
-  //   "Basketball",
-  //   "Table Tennis",
-  //   "Darts",
-  //   "Badminton",
-  //   "Kabaddi",
-  //   "Boxing",
-  //   "Mixed Martial Arts",
-  //   "Motor Sport",
-  // ];
-
-  const ulExpended = () => {
-    if (ulshow === true) {
-      setUlShow(false);
-    } else {
-      setUlShow(true);
-    }
+    localStorage.setItem("SportId", val);
+    setSportId(val);
+    setShow(!show);
+    setCloseAllSportData(false);
   };
 
-  const subulExpended = () => {
-    if (subulshow === true) {
-      setSubUlShow(false);
-    } else {
-      setSubUlShow(true);
-    }
-  };
+  useEffect(() => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open"
+      )
+      .then((res) => {
+        setMatchList(res?.data?.data);
+      });
+  }, []);
 
-  useEffect(()=>{
-    GameAPI.Side_Bar_Data().then((res)=>{
-      setMatchList(res)
-    })
+  const [isLoading, setIsLoading] = useState(true);
 
-  },[])
-  
+  useEffect(() => {
+    fetch(
+      "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/diamond.json"
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setCasinoData(res?.data);
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <div className="">
       <div
         data-toggle="collapse"
         data-target=".casino"
         onClick={collapse}
-        className="sidebar-title collapsed"
-        aria-expanded="false">
+        className={`sidebar-title ${visible ? "" : "collapsed"}`}
+        aria-expanded={`${visible ? true : false}`}>
         <h5 className="d-inline-block m-b-0">Others</h5>
         <p className="arrow-line">
-        {
-          visible?<IoIosArrowDown />:<IoIosArrowForward/>
-        }
+          {visible ? <IoIosArrowDown /> : <IoIosArrowForward />}
         </p>
-        
-        
       </div>
-      <nav className={`casino ${visible? "show":"d-none"}`}>
-          <ul>
-            <li className="nav-item">
-              <Link to="/livecasino" className="nav-link">
-                <span className="new-launch-text">Live Casino</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/slotgame" className="nav-link">
-                <span className="new-launch-text">Slot Game</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/race" className="nav-link">
-                <span>Race 20-20</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link  className="nav-link">
-                <span>Casino Queen</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/dtlist" className="nav-link">
-                <span>Dragon Tiger</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/sportcasino" className="nav-link">
-                <span>Sports Casino</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/andarbahar" className="nav-link">
-                <span>Andar Bahar</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/bollywoodtable" className="nav-link">
-                <span>Bollywood Casino</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/casinowar" className="nav-link">
-                <span>Casino War</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/worlilist" className="nav-link">
-                <span>Worli</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/lottery" className="nav-link">
-                <span>Lottery</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/cardjud" className="nav-link">
-                <span>3 Cards Judgement</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/binary" className="nav-link">
-                <span>Binary</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/virtualsports" className="nav-link">
-                <span>Virtual Sports</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/cricketcasino" className="nav-link">
-                <span>Cricket Casino</span>
-              </Link>
-            </li>
-          </ul>
-       
+      <nav className={`casino ${visible ? "collapse show" : "d-none"}`}>
+        <ul>
+          {/* <li className="nav-item">
+            <Link to="/livecasino" className="nav-link">
+              <span className="new-launch-text">Live Casino</span>
+            </Link>
+          </li> */}
+          {casinoData?.map((res, id) => {
+            return (
+              <li className="nav-item" key={id}>
+                <Link to={`/casino/${res?.gameId}`} className="nav-link">
+                  <span className="new-launch-text">{res?.gameName}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </nav>
+
       <div
         className="sidebar-title m-t-5 theme2bg"
         onClick={collapse2}
@@ -175,76 +102,37 @@ function SideBar() {
         role="button">
         <h5 className="text-white d-inline-block m-b-0">All Sports</h5>
         <p className="arrow-line">
-        {
-          visible2?<IoIosArrowDown />:<IoIosArrowForward/>
-        }
+          {visible2 ? <IoIosArrowDown /> : <IoIosArrowForward />}
         </p>
-        {/* <i
-          className={!visible2 ? "fa fa-chevron-right" : "fa fa-chevron-down"}
-          style={{ color: "#fff" }}></i> */}
       </div>
-
-      <div id="events" className="mtree-main collapse show">
-        <div className="ps">
-          {visible2 &&
-            matchList?.length>0 && matchList.map((e, id) => {
-              return (
-                <nav key={id}>
-                  <ul className="mtree transit bubba">
-                    <li className="mtree-node  item">
-                      <div className="text-dark" onClick={ulExpended}>
-                        <span onClick={() => handleShowSingleSport(id)}>
-                          <i
-                            className={
-                              id === toggle && !ulshow
-                                ? "far fa-minus-square"
-                                : "far fa-plus-square"
-                            }></i>
-                        </span>
-                        <span>{e.sportName}</span>
-                      </div>
-                      {toggle === id && !ulshow ? (
-                        <ul className="mtree-level-1" key={id} style={{}}>
-                          <li className="mtree-node text-dark">
-                            <div className="text-dark" onClick={subulExpended}>
-                              <span onClick={() => handleShowSingleSport(id)}>
-                             
-                              {e.matchList.map((event, id)=>{
-                                return(
-                                  <p key={id}><i className="fas fa-caret-right"></i> {event.matchName}</p>
-                                )
-                              })}
-                               </span>
-                            </div> 
-                          </li>
-                        </ul>
-                      ) : (
-                        ""
-                      )}
-                    </li>
-                  </ul>
-                </nav>
-              );
-            })}
-
-          <div className="ps__rail-x" style={{ left: "0px", bottom: "0px" }}>
-            <div
-              className="ps__thumb-x"
-              tabIndex="0"
-              style={{ left: "0px", width: "0px" }}>
-              {" "}
-            </div>
-          </div>
-          <div className="ps__rail-y" style={{ top: "0px", right: "0px" }}>
-            <div
-              className="ps__thumb-y"
-              tabIndex="0"
-              style={{ top: "0px", height: "0px" }}>
-              {" "}
-            </div>
-          </div>
-        </div>
-      </div>
+      {matchList?.length && visible2 &&
+        matchList?.map((e, id) => {
+          return (
+            <Accordion flush className="main_sport_header">
+              <Accordion.Item eventKey={id}>
+                <Accordion.Header onClick={() => handleSportId(id, e?.sportId)} className="sport_header">
+                { toggle === id && show ?<AiOutlineMinusSquare />: <AiOutlinePlusSquare />}
+                   {e?.sportName}
+                </Accordion.Header>
+                {e?.matchList?.map((item, index) => {
+                  return (
+                    <Accordion.Body>
+                      <p className="nav-item" key={index}>
+                        <Link
+                          to={`/gamedetail/${item?.matchId}`}
+                          className="sub-nav-link">
+                          <span className="new-launch-text">
+                            {item?.matchName}
+                          </span>
+                        </Link>
+                      </p>
+                    </Accordion.Body>
+                  );
+                })}
+              </Accordion.Item>
+            </Accordion>
+          );
+        })}
     </div>
   );
 }

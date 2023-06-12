@@ -134,6 +134,7 @@ function SportProfit() {
   };
 
   const handleClick = (val, id) => {
+    if(pagination !==0)
     setPagination(val);
     setActive(id);
   };
@@ -173,7 +174,7 @@ function SportProfit() {
       }
       <div className="report-container statement1">
         <div className="card">
-          <div className="card-body container-fluid container-fluid-5">
+          <div className="card-body container-fluid container-fluid-5 max1_height">
             <div className="row row5 acc-stat">
               <div className="col-6">
                 <div className="form-group mb-0">
@@ -315,16 +316,16 @@ function SportProfit() {
                           role="columnheader"
                           scope="col"
                           aria-colindex="1"
-                          className="text-left bg-color">
+                          className={"text-left bg-color"}>
                           Pnl
                         </th>
-                        <th
+                        {/* <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="4"
                           className="text-left bg-color">
                           Commssion Mila
-                        </th>
+                        </th> */}
                       </tr>
                     </thead>
                     {
@@ -342,14 +343,14 @@ function SportProfit() {
                               <td aria-colindex="2" className="text-left">
                                 {res?.matchName}
                               </td>
-                              <td aria-colindex="1" className="text-right">
+                              <td aria-colindex="1" className={`text-right ${res?.pnl > 0 ?"text-success" : res?.pnl < 0? "text-danger":""}`}>
                                 {parseFloat(res?.pnl).toFixed(2)}
                               </td>
-                              <td
+                              {/* <td
                                 aria-colindex="5"
                                 className="text-right text-success">
                                 {res?.commssionMila}
-                              </td>
+                              </td> */}
                             </tr>
                           )
                         })}

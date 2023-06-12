@@ -36,6 +36,7 @@ const UnsetteledBetForDesk = () => {
   }
 
   const handleClick = (val, id) => {
+    if(pagination !== 0)
     setPagination(val);
     setActive(id);
   };
@@ -46,8 +47,6 @@ const UnsetteledBetForDesk = () => {
      setActive(pagination+1 );
   }
   };
-
-
   const decerement = () => {
     if(pagination !== 0){
       setPagination(pagination - 1)
@@ -80,12 +79,9 @@ const UnsetteledBetForDesk = () => {
     <>
     <div class="main">
         <div class="container-fluid container-fluid-5">
-          <div class="row row5">
-            <div class="sidebar col-md-2">
-              <SideBar />
-            </div>
+          <div class="itemHome">
 
-            <div class="col-md-10 report-main-content m-t-5 desk-top-view">
+            
               <div class="card">
                 <div class="card-header header-card">
                   <h4 class="mb-0">Un-Setteled Bet</h4>
@@ -446,7 +442,6 @@ const UnsetteledBetForDesk = () => {
             </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>

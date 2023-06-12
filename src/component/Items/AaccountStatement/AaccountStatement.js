@@ -118,6 +118,7 @@ function AaccountStatement() {
   }
 
   const handlePagenation = (val) => {
+    if(pagination !==0)
     setPagination(val);
     setActive(val);
   };
@@ -176,7 +177,7 @@ function AaccountStatement() {
           <div className="card-header">
             <h4 className="mb-0 heading-ch">Account Statement</h4>
           </div>
-          <div className="card-body statement container-fluid container-fluid-5">
+          <div className="card-body statement container-fluid container-fluid-5 max_height">
             <div className="row row5 ">
               <div className="col-6">
                 <div className="form-group mb-0">
@@ -226,8 +227,8 @@ function AaccountStatement() {
                     className="custom-select"
                     onChange={getOptionValue}>
                     <option value="1">All</option>
-                    <option value="2">Deposit/Withdraw Report</option>
-                    <option value="3">Game Report</option>
+                    <option value="2">Game Report</option>
+                    <option value="3">Deposit/Withdraw Report </option>
                   </select>
                 </div>
               </div>

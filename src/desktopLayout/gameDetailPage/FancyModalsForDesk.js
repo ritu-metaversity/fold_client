@@ -14,7 +14,6 @@ const FancyModalsForDesk = ({matchId, FancyID}) => {
       });
     }, []);
 
-    console.log(matchId, FancyID);
 
 
 

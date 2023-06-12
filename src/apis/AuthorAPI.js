@@ -92,6 +92,21 @@ export const AuthorAPI = {
       return response
     },
 
+
+    LOGIN_WITH_DEMO_USER: async function (cancel = false) {
+      const response = await api.request({
+        url: `/login/demo-user-creation-login`,
+        method: "POST",
+        data:{
+         appUrl: window.location.hostname
+        },
+
+        signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
+      })
+  
+      return response
+    },
+
   }
 
   const cancelApiObject = defineCancelApiObject(AuthorAPI)

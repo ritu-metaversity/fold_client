@@ -7,14 +7,15 @@
     height: 97vh;
 }
 
-@media screen and (max-width: 500px) {
-    .mobile_if{
+@media screen and (max-width: 800px) {
+    .mobile_if {
+        min-height: 850px;
         height: 100vh;
+        max-height: 100vh;
         display: block;
-    
     }
+    
     .desktop_if{
         display: none;
-    }
-    
+    }   
 }

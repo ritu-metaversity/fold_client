@@ -50,11 +50,6 @@
     font-weight: 900;
     float: right;
 }
-
-.sidebar .sidebar-title.collapsed :before {
-    /* content: "\f105"; */
-}
-
 .sidebar .nav-item .nav-link {
     background: #bbb;
     color: #000;
@@ -152,7 +147,7 @@ ul.mtree.transit li.mtree-node>a::after {
     color: var(--site-color);
 }
 
-.sidebar .report-menu li a i {
+.plusIcon {
     margin-right: 10px;
 }
 
@@ -163,11 +158,11 @@ ul.mtree.transit li.mtree-node>a::after {
 
 .new-launch-text {
     text-decoration: blink;
-	animation-name: blinker;
+	/* animation-name: blinker;
 	animation-duration: 0.6s;
 	animation-iteration-count:infinite;
 	animation-timing-function:ease-in-out;
-	animation-direction: alternate;
+	animation-direction: alternate; */
 }
 .move{
     transform: rotate(272deg); 
@@ -181,8 +176,31 @@ ul.mtree.transit li.mtree-node>a::after {
     padding-right: 4px;
     cursor: pointer;
 }
-p.arrow-line svg {
+.plusIcon {
     font-size: 18px;
     font-weight: bold;
-    color: #fff;
+}
+._bun {
+    padding-left: 19px;
+    line-height: 1.5;
+}
+a.sub-nav-link {
+    color: #000;
+}
+ul.mtree.transit.bubba {
+    cursor: pointer;
+}
+.main_sport_header.accordion {
+    background-color: unset !important;
+    --bs-accordion-bg: unset;
+}
+.main_sport_header .accordion-item .sport_header button {
+    margin: 0px !important;
+    padding: 5px 14px !important;
+}
+.main_sport_header .accordion-item .sport_header button svg{
+    margin-right: 5px;
+}
+.accordion-body p {
+    padding: 6px 36px !important;
 }

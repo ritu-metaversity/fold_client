@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../apis/gameAPI";
 import "./MatchBet.css";
+import { useParams } from "react-router-dom";
 
 function MatchBet(props) {
   const [matchBet, setMatchBet] = useState([]);
   // const [matchLength, setMatchLength] = useState();
-  const Gameid = window.location.pathname;
-  const id = Gameid.slice(12);
+  // const Gameid = window.location.pathname;
+  // const id = Gameid.slice(12);
+
+
+
+  const {id} = useParams("id")
 
 
   useEffect(()=>{
@@ -24,6 +29,7 @@ function MatchBet(props) {
         props.setMatchLength(noOfBets);
       }
     });
+    // eslint-disable-next-line
   },[])
 
   useEffect(() => {
@@ -42,8 +48,9 @@ function MatchBet(props) {
           props.setMatchLength(noOfBets);
         }
       });
-    }, 5000)
+    }, 3000)
     return ()=> clearInterval(time)
+    // eslint-disable-next-line
   }, [id]);
 
   // const { Item } = useWebSocket(
@@ -67,7 +74,7 @@ function MatchBet(props) {
 
   return (
     <>
-      <div data-v-4a9e4d9c="" className="tab-content">
+      <div data-v-4a9e4d9c="" className="tab-content max_height">
         <div data-v-4a9e4d9c="" id="matched-bet" className="tab-pane">
           <div
             data-v-4a9e4d9c=""

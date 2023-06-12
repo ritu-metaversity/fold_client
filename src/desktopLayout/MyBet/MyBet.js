@@ -8,8 +8,7 @@ function MyBet(props) {
   const Gameid = window.location.pathname;
   const id = Gameid.slice(12);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     GameAPI.Match_Bet_List({
       matchId: id,
     }).then((Item) => {
@@ -21,13 +20,13 @@ function MyBet(props) {
         for (let val of vals) {
           noOfBets += val.length;
         }
-        props.setMatchLength(noOfBets);
+        // props.setMatchLength(noOfBets);
       }
     });
-  },[])
+  }, []);
 
   useEffect(() => {
-    const time = setInterval(()=>{
+    const time = setInterval(() => {
       GameAPI.Match_Bet_List({
         matchId: id,
       }).then((Item) => {
@@ -42,31 +41,31 @@ function MyBet(props) {
           props.setMatchLength(noOfBets);
         }
       });
-    }, 5000)
-    return ()=> clearInterval(time)
+    }, 5000);
+    return () => clearInterval(time);
   }, [id]);
-
 
   return (
     <>
-          <>
-           
-                {matchBet?.data &&
-                  Object.keys(matchBet?.data).map((key) => (
-                    <>
-                      {matchBet?.data[key].map((item, id) => {
-                        return (
-                          <tr key={id} className={`myBet ${item?.back === true ? "back" :"lay"}`}>
-                            <td>{item?.nation}</td>
-                            <td className="text-right">{item?.rate}</td>
+      <>
+        {matchBet?.data &&
+          Object.keys(matchBet?.data).map((key) => (
+            <>
+              {matchBet?.data[key].map((item, id) => {
+                return (
+                  <tr
+                    key={id}
+                    className={`myBet ${item?.back === true ? "back" : "lay"}`}>
+                    <td>{item?.nation}</td>
+                    <td className="text-right">{item?.rate}</td>
 
-                            <td className="text-right">{item?.amount}</td>
-                          </tr>
-                        );
-                      })}
-                    </>
-                  ))}
-          </>
+                    <td className="text-right">{item?.amount}</td>
+                  </tr>
+                );
+              })}
+            </>
+          ))}
+      </>
     </>
   );
 }

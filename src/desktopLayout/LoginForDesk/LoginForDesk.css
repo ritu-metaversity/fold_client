@@ -12,3 +12,17 @@
     margin-bottom: 6px;
     font-weight: 500;
 }
+._spin{
+    padding: 0px 2px 0px 0px !important;
+    margin-top: 3px;
+}
+.fadeBtn {
+    background: #ddddddfc;
+}
+.register_head{
+    color: #0088cc !important;
+}
+i.ml-2.fa.fa-sign-in.rotateBtn.p-0 {
+    position: inherit !important;
+    margin-right: 12px !important;
+}

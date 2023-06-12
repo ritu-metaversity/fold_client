@@ -223,6 +223,82 @@ export const GameAPI = {
     return response.data.data;
   },
 
+  BANNER_LIST: async function ({type}, cancel = false) {
+    const response = await api.request({
+      url: "enduser/user-banner-list",
+      method: "POST",
+      data:{
+        type
+      },
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+
+  ABOUT_US: async function (cancel = false) {
+    const response = await api.request({
+      url: "app/getAboutUs",
+      method: "POST",
+      data:{
+        appUrl: window.location.hostname
+      },
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+
+  TERM_CONDITION: async function (cancel = false) {
+    const response = await api.request({
+      url: "app/getTermAndCondition",
+      method: "POST",
+      data:{
+        appUrl: window.location.hostname
+      },
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+
+  RESPONSIBLE: async function (cancel = false) {
+    const response = await api.request({
+      url: "app/getResponsibleGaming",
+      method: "POST",
+      data:{
+        appUrl: window.location.hostname
+      },
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+
+  FOOTER_IMAGESS: async function (cancel = false) {
+    const response = await api.request({
+      url: "api/admin/getData",
+      method: "POST",
+      data:{
+        appUrl: window.location.hostname
+      },
+
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+
 
 };
 

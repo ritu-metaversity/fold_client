@@ -11,14 +11,25 @@ function NewLunch() {
   //   const [casinoName, setCasinoName] = useState("Indian Casino");
   const [isLoading, setIsLoading] = useState(true);
 
+  // useEffect(() => {
+  //   GameAPI.CASINO_LIST_BY_TYPE({
+  //     id: casinoListId,
+  //   }).then((res) => {
+  //     setCasinoData(res);
+  //     setIsLoading(false);
+  //   });
+  // }, [casinoListId]);
+
+
   useEffect(() => {
-    GameAPI.CASINO_LIST_BY_TYPE({
-      id: casinoListId,
-    }).then((res) => {
-      setCasinoData(res);
-      setIsLoading(false);
-    });
-  }, [casinoListId]);
+    fetch("https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/diamond.json")
+      .then((res) => res.json())
+      .then((res) => {
+        setCasinoData(res?.data)
+      setIsLoading(false)
+
+      });
+  }, []);
 
 const nav = useNavigate();
 

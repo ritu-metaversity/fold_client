@@ -2,6 +2,7 @@ import React, {useState } from "react";
 import "./Bet.css";
 import { GameAPI } from "../../apis/gameAPI";
 import MyBet from "../MyBet/MyBet";
+import LiveMatch from "../LiveMatch/LiveMatch";
 
 const Bet = ({
   spanValueRate,
@@ -20,7 +21,8 @@ const Bet = ({
   betModals,
   setBetmodals,
   data,
-  StackValueForProfit
+  StackValueForProfit,
+  matId
 }) => {
   const [betDivClose, setBetdivClose] = useState(true);
   const [updated, setUpdated] = useState(0);
@@ -85,11 +87,12 @@ const Bet = ({
 
   StackValueForProfit(updated)
 
-
-
   return (
     <>
       <div className="sidebar-right-inner">
+      <div className="card m-b-10 my-bet">
+          <LiveMatch matchIdForLiveMatch={matId}/>
+        </div>
         <div className="card m-b-10 place-bet">
           <div className="card-header bet-header">
             <h6 className="card-title d-inline-block">Place Bet</h6>
@@ -143,7 +146,7 @@ const Bet = ({
                               className="amountint"
                               value={spanValueRate}
                               style={{
-                                width: "45px",
+                                width: "35px",
                                 verticalAlign: "middle",
                               }}
                             />
@@ -220,7 +223,6 @@ const Bet = ({
                           style={{ padding: "5px" }}>
                           {StackVal &&
                             Object.values(StackVal)?.map((item, id) => {
-                              // console.log(e, "das")
                               return (
                                 <button
                                   className="btn btn-secondary m-l-5 m-b-5"

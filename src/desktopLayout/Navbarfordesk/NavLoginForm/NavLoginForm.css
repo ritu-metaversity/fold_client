@@ -1,0 +1,30 @@
+
+.input_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -16px;
+}
+.input_box button {
+    border: unset;
+    background: #2c3d50;
+    padding: 9px 12px;
+    color: #fff;
+    margin: 2px;
+    height: 34px;
+    font-weight: 600;
+}
+
+.text_field input {
+    padding: 4px 13px;
+    outline: unset;
+    background-color: #0088cc !important;
+    border: 2px solid #fff;
+    margin: 3px;
+    height: 34px;
+    color: #fff;
+}
+::placeholder { 
+    color: #fff;
+    opacity: 0.8
+  }

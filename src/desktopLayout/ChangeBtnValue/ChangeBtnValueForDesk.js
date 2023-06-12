@@ -72,11 +72,9 @@ const ChangeBtnValueForDesk = () => {
           ""
         )}
         <div className="container-fluid container-fluid-5 ">
-          <div className="row row5">
-            <div className="sidebar col-md-2">
-              <SideBar />
-            </div>
-            <div className="col-md-10 report-main-content m-t-5 desk-top-view">
+          <div className=" itemHome">
+            
+            
               <div className="card">
                 <div className="card-header header-card">
                   <h4 className="mb-0">Change Button Values</h4>
@@ -158,7 +156,7 @@ const ChangeBtnValueForDesk = () => {
                   </>
                 </div>
               </div>
-            </div>
+            
           </div>
         </div>
       </div>

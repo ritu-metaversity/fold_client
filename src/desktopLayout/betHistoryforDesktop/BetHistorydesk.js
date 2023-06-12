@@ -38,11 +38,11 @@ function BetHistorydesk() {
   useEffect(() => {
     GameAPI.ACTIVE_SPORT_LIST().then((res) => {
       setSportType(res);
-      console.log(res, "dscsfd");
     });
   }, []);
 
   const handleClick = (val, id) => {
+    if(pagination !== 0)
     setPagination(val);
     setActive(id);
   };
@@ -116,12 +116,10 @@ function BetHistorydesk() {
     <>
       <div className="main">
         <div className="container-fluid container-fluid-5">
-          <div className="row row5">
-            <div className="sidebar col-md-2">
-              <SideBar />
-            </div>
+          <div className="itemHome">
+           
 
-            <div className="col-md-10 report-main-content m-t-5 desk-top-view">
+            
               <div className="card">
                 <div className="card-header header-card">
                   <h4 className="mb-0">Bet History</h4>
@@ -427,7 +425,6 @@ function BetHistorydesk() {
                   </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>

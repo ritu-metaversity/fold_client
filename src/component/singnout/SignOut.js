@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function SignOut() {
-    const nav = useNavigate()
 
+function SignOut(props) {
+    const nav = useNavigate()
     useEffect(()=>{
     localStorage.clear();
-    nav("/login")
-    }, [])
-    
+    nav("/m/login")
+    },[])
+
+    props.statusMsgForLogout(false)
     
 }
 

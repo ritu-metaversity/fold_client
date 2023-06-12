@@ -123,12 +123,14 @@ const SportPnl = () => {
   };
 
   const handleClick = (val, id) => {
+    if (pagination !== 0){
     setPagination(val);
     setActive(id);
+  }
   };
 
   const increment = () => {
-    if (pageLength - 1 !== pagination) {
+    if (pageLength - 1 !== pagination && pagination !== 0) {
       setPagination(pagination + 1);
       setActive(pagination + 1);
     }
@@ -142,6 +144,7 @@ const SportPnl = () => {
   };
 
   const incrementByLast = () => {
+    if(pagination !== 0)
     setPagination(pageLength - 1);
   };
 
@@ -306,13 +309,13 @@ const SportPnl = () => {
                         className="text-right">
                         Pnl
                       </th>
-                      <th
+                      {/* <th
                         role="columnheader"
                         scope="col"
                         aria-colindex="3"
                         className="text-right">
                         Amount
-                      </th>
+                      </th> */}
                     </tr>
                   </thead>
                   {
@@ -349,11 +352,11 @@ const SportPnl = () => {
                                 }`}>
                                 {parseFloat(res?.pnl).toFixed(2)}
                               </td>
-                              <td
+                              {/* <td
                                 aria-colindex="5"
                                 className="text-right text-success">
                                 {res?.commssionMila}
-                              </td>
+                              </td> */}
                             </tr>
                           );
                         })}

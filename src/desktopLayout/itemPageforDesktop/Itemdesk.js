@@ -3,6 +3,7 @@ import moment from "moment";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Itemdesk.css";
 import axios from "axios";
+import BannerList from "../../component/BannerSection/BannerList";
 
 function Itemdesk({ SportId }) {
   const [gameName, setGameName] = useState("");
@@ -30,8 +31,6 @@ function Itemdesk({ SportId }) {
 
   const tab = pathname.slice(1);
 
-  console.log(pathname);
-
   const handleData = (id) => {
     nav(`/gamedetail/${id}`);
   };
@@ -40,13 +39,17 @@ function Itemdesk({ SportId }) {
     <div>
       <div className="desk-top-view">
         <ul role="tablist" id="home-events" className="nav nav-tabs game_name">
-          <li className="nav-item ">
+          <li className="nav-item" style={{padding:"9px 0px", marginBottom:"3px"}}>
             <Link to={`/${tab}`} data-toggle="tab" className="nav-link">
-              {tab == "home" ? "Cricket" : tab}
+              {tab == "home" || tab === '' ? "Cricket" : tab}
             </Link>
           </li>
         </ul>
-
+        <div style={{margin: "3px 0px"}}>
+      {
+        localStorage.getItem("token") === null? <BannerList/> : ""
+      }
+      </div>
         <div className="tab-content">
           <div className="tab-pane active">
             <div className="coupon-card coupon-card-first">

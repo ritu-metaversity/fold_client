@@ -7,13 +7,8 @@ const LiveCasino = () => {
     <>
       <div className="main">
         <div className="container-fluid container-fluid-5">
-          <div className="row row5">
-            <div className="sidebar col-md-2">
-            <SideBar/>
-            </div>
-            <div className="col-md-10 featured-box load game-page">
+          <div className=" itemHome">
               <NewLunch/>
-            </div>
           </div>
         </div>
       </div>

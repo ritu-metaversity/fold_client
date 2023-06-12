@@ -1,26 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import Mobilenav from "../../navBar/MobileNav/Mobilenav";
 import "./Casino.css";
 
 const Casino = () => {
-  const token = localStorage.getItem("token");
+  const [isLoading, setIsLoading] = useState(true);
 
+  const token = localStorage.getItem("token");
   const Gameid = window.location.pathname;
   const id = Gameid.slice(8);
+
+  const finishLoading = () => {
+    setIsLoading(false);
+  };
+
   return (
     <>
       <Mobilenav />
-      <iframe
-        src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
-        className="mobile_if"
-        width="100%"
-        title="mobile"
-        allowFullScreen={true}></iframe>
+
+      {isLoading ? (
+        <p className="lodder">
+        <i className="fa fa-spinner fa-spin"></i>
+      </p>
+      ) : (
+        <iframe
+          src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+          className="mobile_if"
+          width="100%"
+          title="mobile"
+          allowFullScreen={true}
+          onLoad={finishLoading} />
+      )}
+
       <iframe
         src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
         className="desktop_if"
         width="100%"
         title="desktop"
+        onLoad={finishLoading}
       />
     </>
   );

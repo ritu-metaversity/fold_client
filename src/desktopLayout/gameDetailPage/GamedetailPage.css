@@ -160,7 +160,129 @@
 .card-scor{
     height: 240px !important;
 }
-.tvHeading{
-    /* background: #2c3d50 !important; */
-    padding: 4px 12px;
+.tvHeading {
+    position: relative;
+    padding: 5  px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000 !important;
+}
+
+
+.fade.modal.show {
+    background: #00000073 !important;
+    width: 100% !important;
+    margin: 0px !important;
+}
+
+.fanct-title{
+    font-size: 12px;
+    font-weight: 900;
+}
+.place-value{
+    width: 100%;
+    overflow: hidden;
+}
+.odbtn{
+    width: 100% !important;
+}
+
+.onoffbtn {
+    width: 30px;
+    height: 16px;
+    border-radius: 15px;
+    background: #fff;
+    display: block;
+    position: relative;
+}
+.onoffbtn.active:after {
+    left: 100%;
+    margin-left: -15px;
+    background: #0088cc;
+    content: '';
+}
+
+.onoffbtn:after {
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    display: block;
+    border-radius: 50%;
+    background: #2c3d50;
+    top: 1px;
+    left: 1px;
+    content: '';
+    transition: all 200ms ease-in-out;
+    text-align: center;
+    line-height: 29px;
+    color: #fff;
+    font-size: 12px;
+}
+  .onoffbtn input[type="checkbox"]{
+    opacity:0;
+  }
+
+.icon-medium {
+    font-size: 18px !important;
+}
+
+.css-vubbuv {
+    user-select: none;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentcolor;
+    flex-shrink: 0;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-right: 2px;
+    margin-left: 4px;
+
+}
+.score_card_update{
+    display: flex;
+}
+._tv {
+    color: #fff;
+    font-weight: 900;
+    margin-top: 0px;
+    padding-bottom: 2px;
+}
+ul.nav.nav-tabs.mt-1.dis-none {
+    display: none !important;
+}
+.ps.Po-fixed {
+    position: fixed;
+    width: 25.2%;
+}
+.desk_score {
+    position: unset !important;
+}
+.desk_game_heading {
+    justify-content: space-between;
+    align-items: center;
+}
+.score_detail{
+    display: flex;
+    justify-content: space-between;
+}
+.event_time{
+    border-right: 2px solid #fff;
+    padding-right: 4px;
+}
+.active1{
+    background-color: #fff !important;
+    border-color: transparent !important;
+    color: #fff !important;
+}
+.onoffbtn.active1:after {
+    left: 100%;
+    margin-left: -15px;
+    background: #0088cc;
+    content: '';
+}
+.desk_score_card{
+    margin-top: 0px !important  ;
 }

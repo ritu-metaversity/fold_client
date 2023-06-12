@@ -45,7 +45,19 @@
     padding-left: 0px;
     color: #303030;
 }
-
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+.table td, .table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+.td {
+    display: table-cell;
+    vertical-align: inherit;
+}
 .coupon-table thead th:first-child {
     text-align: left;
     width: auto;
@@ -135,8 +147,30 @@
     text-transform: none;
 }
 
+.table {
+    margin-bottom: 0 !important;
+}
 .coupon-table {
     margin-bottom: 0;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+}
+table {
+    border-collapse: collapse;
+}
+
+user agent stylesheet
+table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    border-color: grey;
 }
 .lay, .lay-color {
     background-color: #faa9ba !important;
@@ -168,6 +202,11 @@
     vertical-align: middle;
     font-size: 14px;
     word-wrap: break-word;
+}
+.table td, .table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
 }
 .game-name {
     width: 100%;
@@ -362,9 +401,7 @@
         font-size: 12px;
         font-weight: 100;
     }
-    footer {
-        display: none;
-    }
+
     .mobile-view-item{
         display: block;
     }
@@ -394,6 +431,12 @@
 }
 
 .scrollItem {
-    height: 30vh;
+    height: 32vh;
     overflow: scroll;
+}
+
+.max1_height{
+    height: calc(100% - 303px);
+    min-height: calc(100vh - 303px);
+    max-height: calc(100% - 303px);
 }

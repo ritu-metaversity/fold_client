@@ -77,7 +77,7 @@ const Deposit = () => {
                       role="columnheader"
                       scope="col"
                       aria-colindex="4"
-                      className="text-right deposit-data">
+                      className="text-center deposit-data">
                       Status
                     </th>
                   </tr>
@@ -118,8 +118,8 @@ const Deposit = () => {
                         </td>
                         <td
                           aria-colindex="4"
-                          className={`text-right ${item.status==="Pending"?"pending":item.status==="APPROVED"?"approved":"rejected"}`}>
-                          {item.status}
+                          className="text-center">
+                          <p className={`${item.status==="Pending"?"pending":item.status==="APPROVED"?"approved":"rejected"}`}>{item.status}</p>
                         </td>
                       </tr>
                     ))}

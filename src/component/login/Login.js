@@ -15,17 +15,29 @@ function Login({ Errmessage, Statusmessage }) {
   const [StatusVal, setStatusVal] = useState(true);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoading1, setIsLoading1] = useState(false);
   const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
+  const [navLogo, setNavLogo] = useState();
+
+  const { host } = window.location;
 
   const handleLogin = () => {
-    // history.push('/home')
     setIsLoading(true);
     if (password === "" && user === "") {
       setStatusVal(false);
-      setMessage("password: length must be between 4 and 30");
+      setMessage("Username and Password are required");
       setIsLoading(false);
-    } else {
+    }else if(user === ""){
+      setStatusVal(false);
+      setMessage("Username is required");
+      setIsLoading(false);
+    }else if(password === ""){
+      setStatusVal(false);
+      setMessage("Password is required");
+      setIsLoading(false);
+    }
+     else {
       setStatusVal(true);
     }
     if (password !== "" && user !== "") {
@@ -35,7 +47,7 @@ function Login({ Errmessage, Statusmessage }) {
       })
         .then((res) => {
           const token = res.token;
-          setMessage(res.message)
+          setMessage(res.message);
           setIsLoading(false);
           localStorage.removeItem("UserName");
           localStorage.removeItem("UserPassword");
@@ -44,10 +56,11 @@ function Login({ Errmessage, Statusmessage }) {
           api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
           setStatusVal(res.status);
           setMessage("Invalid Username or password");
+          localStorage.setItem("UsertypeInfo", res?.userTypeInfo)
           const uId = res.userId;
           localStorage.setItem("UserId", uId);
           if (res.token !== "" && res.status !== false) {
-            nav("/home");
+            nav("/m/home");
           }
           const pType = res.passwordtype;
           localStorage.setItem("Password-type", pType);
@@ -61,16 +74,23 @@ function Login({ Errmessage, Statusmessage }) {
     }
   };
 
+  const handleBackBtn = () => {
+    nav("/");
+  };
+
   useEffect(() => {
+
     if (localStorage.getItem("token") !== null) {
-      nav("/home");
+      nav("/m/home");
     }
+
     UserAPI.Self_By_App_Url().then((res) => {
-      setStatusBtn(res.data.selfAllowed);
+      setStatusBtn(res?.data?.selfAllowed);
+      setNavLogo(res?.data?.logo);
     });
 
     if (localStorage.getItem("token") === null) {
-      nav("/login");
+      nav("/");
     }
   }, [nav]);
 
@@ -86,6 +106,38 @@ function Login({ Errmessage, Statusmessage }) {
     }
   }, []);
 
+
+  const handleLoginWithDemoAccount = ()=>{
+    setIsLoading1(true);
+      AuthorAPI.LOGIN_WITH_DEMO_USER()
+        .then((res) => {
+          const token = res?.data?.token;
+          setMessage(res.message);
+          setIsLoading1(false);
+          localStorage.removeItem("UserName");
+          localStorage.removeItem("UserPassword");
+          localStorage.setItem("token", token);
+          api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+          setStatusVal(res.status);
+          setMessage("Invalid Username or password");
+          localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo)
+          const uId = res.data?.username;
+          localStorage.setItem("UserId", uId);  
+          if (res.data?.token !== "" && res.status !== false) {
+            nav("/m/home");
+          }
+          const pType = res?.data?.passwordtype;
+          localStorage.setItem("Password-type", pType);
+          if (pType === "old") {
+            nav("/m/setting/changepassword");
+          }
+        })
+        .catch((error) => {
+          setIsLoading1(false);
+        });
+  }
+
+
   return (
     <>
       <div className="wrapper">
@@ -100,7 +152,7 @@ function Login({ Errmessage, Statusmessage }) {
         ) : (
           ""
         )}
-        {StatusVal === false && Statusmessage === false  ? (
+        {StatusVal === false && Statusmessage === false ? (
           <div className="alertBtn">
             <AlertBtn color="danger" popupClose={popupClose} val={message} />
           </div>
@@ -111,7 +163,8 @@ function Login({ Errmessage, Statusmessage }) {
         <div className="login-wrapper">
           <div className="text-center logo-login mb-3">
             <img
-              src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
+              // src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
+              src={navLogo}
               alt=""
             />
           </div>
@@ -162,15 +215,26 @@ function Login({ Errmessage, Statusmessage }) {
                 </button>
               </div>
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
-                <Link
-                  type="submit"
-                  className={`btn btn-primary btn-block ${
-                    statusbtn ? "" : "d-none"
-                  }`}
-                  to="/Register">
-                  Register
-                  <i className="ml-2 fa fa-sign-in"></i>
-                </Link>
+                <button
+                  onClick={handleLoginWithDemoAccount}
+                  className="btn btn-primary btn-block">
+                  Login with Demo User
+                  {isLoading1 ? (
+                    <i className="ml-2 fa fa-spinner fa-spin"></i>
+                  ) : (
+                    <i className="ml-2 fa fa-sign-in"></i>
+                  )}
+                </button>
+              </div>
+              <div className="form-group mb-0" style={{ marginTop: "12px" }}>
+                <button
+                  onClick={handleBackBtn}
+                  className="btn btn-primary btn-block">
+                  <i
+                    className="ml-2 fa fa-sign-in"
+                    style={{ rotate: "180deg" }}></i>
+                  Back
+                </button>
               </div>
               <small className="recaptchaTerms">
                 This site is protected by reCAPTCHA and the Google{" "}
@@ -182,7 +246,7 @@ function Login({ Errmessage, Statusmessage }) {
               <div className="form-group mt-1">
                 <p className="mt-1 text-center">
                   <Link to="/" className="mail-link">
-                 247diamondexch.com
+                    {host}
                   </Link>
                 </p>
               </div>

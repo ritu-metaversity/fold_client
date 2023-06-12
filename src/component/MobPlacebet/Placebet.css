@@ -83,7 +83,7 @@ p.place-lodder {
     background: #0000006b;
     left: 0px;
     top: 0;
-    z-index: 3;
+    z-index: 99;
 }
 p.place-lodder i {
     font-size: 24px;
