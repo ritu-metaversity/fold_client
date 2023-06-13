@@ -89,6 +89,8 @@ const NavBar = () => {
   const handleSignOut = () => {
     if (localStorage.getItem("token") !== null)
       AuthorAPI.LOGOUT().then((res) => {});
+      localStorage.clear();
+    nav("/m/login")
   };
 
   const balanceHideShow = (e) => {
