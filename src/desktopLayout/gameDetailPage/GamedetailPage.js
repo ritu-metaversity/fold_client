@@ -149,7 +149,7 @@ function GamedetailPage({ getStackValue, SportId }) {
   }, [id]);
 
   useEffect(() => {
-    fetch("http://15.207.182.173:3333/")
+    fetch("https://oddsapi.247idhub.com/betfair_api/my-ip")
       .then((res) => res.json())
       .then((res) => {
         setUserIP(res?.ip);
