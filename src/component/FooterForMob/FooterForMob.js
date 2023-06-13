@@ -41,37 +41,6 @@ function FooterForMob() {
               <Link to="/responsible-gaming">Responsible Gaming</Link>
             </li>
           </ul>
-
-          <ul className="footer_icon">
-            <li>
-              <img
-                src={footerImage?.u_upi}
-                alt="upi"
-                className="img-fluid"
-              />
-            </li>
-            <li>
-              <img
-                src={footerImage?.u_paytm}
-                alt="paytm"
-                className="img-fluid"
-              />
-            </li>
-            <li>
-              <img
-                src={footerImage?.u_phonePe}
-                alt="phonepe"
-                className="img-fluid"
-              />
-            </li>
-            <li>
-              <img
-                src={footerImage?.u_googlePay}
-                alt="GPay"
-                className="img-fluid"
-              />
-            </li>
-          </ul>
         </div>
         <p className="fotterP">
           © Copyright 2023. All Rights Reserved. Powered by {hostName[0]}.
