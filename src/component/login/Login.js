@@ -60,7 +60,7 @@ function Login({ Errmessage, Statusmessage }) {
           const uId = res.userId;
           localStorage.setItem("UserId", uId);
           if (res.token !== "" && res.status !== false) {
-            nav("/home");
+            nav("/m/home");
           }
           const pType = res.passwordtype;
           localStorage.setItem("Password-type", pType);
@@ -79,8 +79,9 @@ function Login({ Errmessage, Statusmessage }) {
   };
 
   useEffect(() => {
+
     if (localStorage.getItem("token") !== null) {
-      nav("/home");
+      nav("/m/home");
     }
 
     UserAPI.Self_By_App_Url().then((res) => {
@@ -123,7 +124,7 @@ function Login({ Errmessage, Statusmessage }) {
           const uId = res.data?.username;
           localStorage.setItem("UserId", uId);  
           if (res.data?.token !== "" && res.status !== false) {
-            nav("/home");
+            nav("/m/home");
           }
           const pType = res?.data?.passwordtype;
           localStorage.setItem("Password-type", pType);

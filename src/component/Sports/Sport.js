@@ -51,7 +51,7 @@ function Sport({ gameIdForItemPage }) {
                   ) : gameName?.length > 0 ? (
                     gameName?.map((item, id) => {
                       return (
-                        <Link key={id}  to={`/gamedetail/${item.matchId}`} >
+                        <Link key={id}  to={`/m/gamedetail/${item.matchId}`} >
                         <div
                           className="game-list pt-1 pb-1 container-fluid"
                           >

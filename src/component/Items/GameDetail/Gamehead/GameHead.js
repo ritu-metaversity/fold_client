@@ -46,28 +46,7 @@ function GameHead({ SportId, matchLength }) {
       <div style={{ display: ActiveNavbar === 2 ? "block" : "none" }}>
         <MatchBet matchLength={betLength} setMatchLength={setBetlenght} />
       </div>
-      {/* <div className="main">
-        <div className="container-fluid container-fluid-5">
-          <div className="row row5">
-            <div className="sidebar col-md-2">
-            <SideBar/>
-            </div>
-            <div className="col-md-10 featured-box load game-page">
-              <div className="row row5">
-                <div className="col-md-9 featured-box-detail sports-wrapper m-b-10">
-                    <GameDetail stackValDesk={stackValDesk}/>
-                </div>
-                <div id="sidebar-right" className="col-md-3 sidebar-right" style={{position: "relative", top: "0px", right: "0px", width: "25.5%",
-                    }}>
-                    <div className="ps">
-                      <Placebet stackValue={stackValue}/>
-                    </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
+      
     </>
   );
 }

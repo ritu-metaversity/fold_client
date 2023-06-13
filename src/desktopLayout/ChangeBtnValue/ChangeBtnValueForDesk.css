@@ -1,0 +1,11 @@
+.lodding-changeBtn {
+    height: 66vh;
+    width: 48.7%;
+    position: absolute;
+    z-index: 11;
+    background: #f1f5f8a3;
+}
+p.lodding-changeBtn i {
+    padding: 36% 48%;
+    font-size: 32px;
+}

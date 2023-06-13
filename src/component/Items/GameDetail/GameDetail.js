@@ -10,6 +10,7 @@ import FancyModals from "./FancyModals/FancyModals";
 import { createProfits } from "./eventUtil";
 import { UserAPI } from "../../../apis/UserAPI";
 import { GameAPI } from "../../../apis/gameAPI";
+import { useParams } from "react-router-dom";
 // import SideBar from "../../sidebar/SideBar";
 
 function GameDetail({ getStackValue}) {
@@ -66,28 +67,13 @@ function GameDetail({ getStackValue}) {
     });
   }, []);
 
-  const Gameid = window.location.pathname;
-  const id = Gameid.slice(12);
-  const mid = Gameid.slice(12);
+  // const Gameid = window.location.pathname;
+  // const id = Gameid.slice(12);
+  // const mid = Gameid.slice(12);
 
-  // useEffect(() => {
-  //   if(SportId===""){
-  //     setSid(4)
-  //   }else{
-  //     setSid(SportId)
-  //   }
-  //   const token = localStorage.getItem("token");
-  //   axios
-  //     .get(`http://43.205.50.127:9000/betfair_api/fancy/${id}`, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     })
-  //     .then((res) => {
-  //       setMFancyOdds(res.data);
-  //       setMaxBet(res.data.Bookmaker[0]);
-  //       setMinBet(res.data);
-  //     });
-  //   // eslint-disable-next-line
-  // }, []);
+
+  const  {id} = useParams("id")
+  const  mid = id
 
   useEffect(() => {
     const SporId = localStorage.getItem("SportId");
@@ -154,31 +140,6 @@ function GameDetail({ getStackValue}) {
     // eslint-disable-next-line
   }, [id]);
 
-  // const nav = useNavigate();
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token === null) {
-  //     nav("/login");
-  //   }
-  //   // eslint-disable-next-line
-  // }, []);
-
-  // const { lastMessage: lastOddsPnl } = useWebSocket(
-  //   `ws://13.233.248.48:8082/enduserodd/${id}/${token}`,
-  //   { shouldReconnect: (event) => true }
-  // );
-  // useEffect(() => {
-  //   if (lastOddsPnl?.data && JSON.parse(lastOddsPnl?.data))
-  //     if (
-  //       lastOddsPnl?.data &&
-  //       JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data !== null
-  //     ) {
-  //       setOddsPnl(JSON.parse(lastOddsPnl?.data)?.data);
-  //     } else {
-  //       setOddsPnl([]);
-  //     }
-  // }, [lastOddsPnl]);
 
   useEffect(() => {
     fetch("http://15.207.182.173:3333/")
@@ -231,27 +192,7 @@ function GameDetail({ getStackValue}) {
     marketId,
     selectionId,
   ]);
-  // useEffect(() => {
-  //   createProfits({
-  //     fancyOdds,
-  //     fancyPnl: fancyOddsPnl,
-  //     betDetails: {
-  //       isFancy: fancy,
-  //       isBack: cName === "back" ? true : false,
-  //       odds: spanValueRate,
-  //       marketName: "",
-  //       selectionId: parseInt(selectionId),
-  //       priceValue: fancy === false ? spanValueRate : pValue,
-  //       marketId: marketId === "" ? selectionId : marketId,
-  //       matchId: matchId,
-  //     },
-  //     pnl: oddsPnl,
-  //     setProfits,
-  //   });
-  // }, [
-  //   selectionId,
-  //   marketId
-  // ]);
+ 
 
   useEffect(() => {
     UserAPI.USER_FANCY_PNL({
@@ -270,38 +211,7 @@ function GameDetail({ getStackValue}) {
     return () => clearInterval(time);
   }, [id]);
 
-  // const { lastMessage: FoddsPnl } = useWebSocket(
-  //   `ws://13.233.248.48:8082/enduserfancy/${id}/${token}`,
-  //   { shouldReconnect: (event) => true }
-  // );
-  // useEffect(() => {
-  //   if (FoddsPnl?.data && JSON.parse(FoddsPnl?.data)?.data) {
-  //     setFancyOddsPnl(JSON.parse(FoddsPnl?.data)?.data);
-  //   } else {
-  //     setFancyOddsPnl([]);
-  //   }
-  // }, [FoddsPnl]);
-
-  // useEffect(() => {
-  //   const time = setInterval(() => {
-  //     axios.get(`http://89.39.105.69:9001/fancy/${id}`).then((res) => {
-  //       if (fancyOdds) {
-  //         const oldOdds = { ...fancyOdds };
-  //         setPreviousState(oldOdds);
-  //       } else {
-  //         setPreviousState(res.data);
-  //       }
-  //       setIsLoading(false);
-  //       setFancyOdds(res.data);
-  //       setGameName(Object.keys(res.data));
-  //       setMatchodd(res.data.Odds);
-  //       var matchData = res.data.Odds[0];
-  //       setETime(matchData);
-  //       setMatchDelatil(matchData.runners);
-  //     });
-  //   }, 1000);
-  //   return () => clearInterval(time);
-  // }, [id, matchodd,  fancyOdds]);
+  
 
   const handleGameName = (item, id) => {
     setCurrentFancy(item);

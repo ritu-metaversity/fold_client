@@ -59,7 +59,7 @@ function Item({ gameIdForItemPage, spName }) {
                       ?.find((item) => item?.sportid === gameIdForItemPage)
                       ?.matchList.map((item) => {
                         return (
-                          <Link key={item.matchId} to={`/gamedetail/${item.matchId}`}>
+                          <Link key={item.matchId} to={`/m/gamedetail/${item.matchId}`}>
                             <div
                               className="game-list pt-1 pb-1 container-fluid"
                               >

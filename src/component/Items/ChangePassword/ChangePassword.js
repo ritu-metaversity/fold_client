@@ -60,7 +60,7 @@ function ChangePassword(props) {
                 setIsLoading(false);
                 AuthorAPI.LOGOUT();
                 localStorage.clear();
-                nav("/login");
+                nav("/m/login");
               }, 100);
             }
           })
@@ -80,7 +80,7 @@ function ChangePassword(props) {
               setIsLoading(false);
               localStorage.clear();
               AuthorAPI.LOGOUT();
-              nav("/login");
+              nav("/m/login");
             }, 100);
           }else{
             setMessege(res.message);
@@ -93,7 +93,6 @@ function ChangePassword(props) {
       // }
     }
   }
-    // props.statusMsg(true);
   };
 
   props.message(message);

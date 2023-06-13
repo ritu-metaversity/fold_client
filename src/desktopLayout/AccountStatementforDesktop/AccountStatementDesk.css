@@ -1,0 +1,54 @@
+.desk-table-responsive{
+    width: 100% !important;
+    margin-inline: unset !important;
+}
+.mx-input .ant-picker-input input {
+    display: inline-block;
+    width: 100%;
+    padding: 3px 35px;
+    padding-left: 0px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #555;
+    background-color: #fff;
+}
+.mx-input {
+    
+    width: 100% !important;
+    margin-left: -5px !important;
+    padding: 6px 20px !important;
+    padding-left: 10px !important;
+}
+.mt-7 {
+    margin-top: 7px !important;
+}
+.br {
+    border-radius: 4px 4px 0px 0px !important;
+}
+.upDownbtn {
+    position: absolute;
+    right: 10px;
+    top: 11px;
+}
+.upDownbtn i {
+    display: block;
+    line-height: 9px;
+}
+.header-card {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+.header-card:first-child {
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0 !important;
+}
+.acc-result{
+    font-size: 18px;
+    font-weight: 600;
+}
+.head-result {
+    padding: 7px 12px;
+}
+.totalVal{
+    justify-content: end;
+    margin-right: 8px;
+}

@@ -1,0 +1,21 @@
+.depositTable{
+    margin-inline: 1%;
+    width: 98%;
+}
+.status_btn{
+    width: 50%;
+    margin: auto;
+}
+.desk_deposit{
+    overflow: hidden !important;
+}
+.desk_Loading {
+    background: #f1f5f880 !important;
+    height: calc(100% - 210px) !important;
+    opacity: 1 !important;
+    left: 15.2%;
+    width: 84% !important;
+}
+p.lodder.depositLoading.desk_Loading i {
+    margin-top: -2% !important;
+}

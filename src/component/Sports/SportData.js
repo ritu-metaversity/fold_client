@@ -4,7 +4,7 @@ import Sport from "./Sport";
 import BannerList from "../BannerSection/BannerList";
 import FooterForMob from "../FooterForMob/FooterForMob";
 
-const SportData = (props) => {
+const SportData = () => {
   const [gameIdForItemPage, setGameIdForItemPage] = useState("");
 
   const gameId = (id) => {

@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../apis/gameAPI";
 import "./MatchBet.css";
+import { useParams } from "react-router-dom";
 
 function MatchBet(props) {
   const [matchBet, setMatchBet] = useState([]);
   // const [matchLength, setMatchLength] = useState();
-  const Gameid = window.location.pathname;
-  const id = Gameid.slice(12);
+  // const Gameid = window.location.pathname;
+  // const id = Gameid.slice(12);
+
+
+
+  const {id} = useParams("id")
 
 
   useEffect(()=>{

@@ -928,3 +928,9 @@ p.no-found {
     border-left: 2px solid #fff;
     margin-left: 4px;
 }
+.scoreCard-icon.desk_score.score_card_update {
+    cursor: pointer !important;
+}
+label.onoffbtn {
+    cursor: pointer !important;
+}

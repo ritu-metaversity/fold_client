@@ -89,6 +89,8 @@ const NavBar = () => {
   const handleSignOut = () => {
     if (localStorage.getItem("token") !== null)
       AuthorAPI.LOGOUT().then((res) => {});
+      localStorage.clear();
+    nav("/m/login")
   };
 
   const balanceHideShow = (e) => {
@@ -219,14 +221,14 @@ const NavBar = () => {
                           ) : (
                             <>
                               <Link
-                                to="/deposit"
+                                to="/m/reports/deposit"
                                 className={`dropdown-item router-link-exact-active router-link-active depositMNav ${
                                   status ? "" : "d-none"
                                 }`}>
                                 Deposit
                               </Link>
                               <Link
-                                to="/withdraw"
+                                to="/m/reports/withdraw"
                                 className={`dropdown-item router-link-exact-active router-link-active withdrawNav ${
                                   status ? "" : "d-none"
                                 }`}>
@@ -303,7 +305,7 @@ const NavBar = () => {
                             Rules
                           </Link>
                           <Link
-                            to="/SignOut"
+                            to="/m/SignOut"
                             onClick={handleSignOut}
                             className="dropdown-item mt-2 text-danger">
                             <b>Logout</b>
@@ -322,7 +324,7 @@ const NavBar = () => {
                   }`}>
                   <div className="d-flex login-register">
                     <Link
-                      to="/register"
+                      to="/m/register"
                       className={`mt-2 text-white ${status ? "" : "d-none"}`}>
                       <b>Register</b>
                     </Link>
