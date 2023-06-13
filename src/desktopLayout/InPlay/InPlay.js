@@ -82,9 +82,7 @@ const InPlay = () => {
                 <div className="tab-pane">
                   <div className="coupon-card coupon-card-first">
                     <div
-                      className={`card-content ${
-                        MatchListLength > 5 ? "scrollItem1" : ""
-                      }`}>
+                      className="card-content">
                       <table className="table item-table coupon-table">
                         <thead>
                           <tr>

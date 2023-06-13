@@ -43,6 +43,7 @@ const NavLoginForm = () => {
           setStatusVal(res.status);
           setMessage("Invalid Username or password");
           const uId = res.userId;
+          localStorage.setItem("UsertypeInfo", res?.userTypeInfo)
           localStorage.setItem("UserId", uId);
           if (res.token !== "" && res.status !== false) {
             nav("/home");
@@ -91,7 +92,7 @@ const NavLoginForm = () => {
         ""
       )}
       <div className="input_box">
-        {statusBtn === false ? (
+        {statusBtn === true ? (
           <button type="button" onClick={handleRegisterBtn}>
             REGISTER
             <span className="MuiTouchRipple-root css-w0pj6f" />
