@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import "./App.css";
 
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../src/component/navBar/Nav.css";
 import "../src/component/login/Login.css";
 import "../src/component/navBar/TopNav.css";
