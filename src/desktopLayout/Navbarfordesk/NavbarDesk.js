@@ -184,7 +184,7 @@ const NavbarDesk = (props) => {
                       </span>
                       {droup && (
                         <ul className="d-block">
-                          {localStorage.getItem("userTypeInfo") == 1 && (
+                          {localStorage.getItem("userTypeInfo") == 1 || localStorage.getItem("UsertypeInfo") == 1 ? (
                             <>
                               <Link
                                 to="/deposit"
@@ -199,7 +199,7 @@ const NavbarDesk = (props) => {
                                 Withdraw
                               </Link>
                             </>
-                          )}
+                          ):""}
 
                           <li>
                             <Link

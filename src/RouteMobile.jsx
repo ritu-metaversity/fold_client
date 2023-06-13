@@ -40,12 +40,19 @@ const RouteMobile = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
-      nav("/m/login");
+      nav('/m/in-play')
       if (pathname === "/signup3") {
         nav("/signup3");
-      } else if (pathname === "/signup1") {
+      } 
+      else if(pathname === "/login"){
+        nav("/login")
+      }
+      else if (pathname === "/signup1") {
         nav("/signup1");
-      } else if (pathname === "/signup2") {
+      }else if (pathname === "/m/login") {
+        nav("/m/login");
+      }
+       else if (pathname === "/signup2") {
         nav("/signup2");
       } else if (pathname === "/signup4") {
         nav("/signup4");

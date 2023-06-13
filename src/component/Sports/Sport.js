@@ -21,7 +21,7 @@ function Sport({ gameIdForItemPage }) {
       const token = localStorage.getItem("token");
       axios
         .get(
-          `http://43.205.50.127:9000/betfair_api/active_match/${gameIdForItemPage}`,
+          `https://oddsapi.247idhub.com/betfair_api/active_match/${gameIdForItemPage}`,
           {token : token}
         )
         .then((res) => {
