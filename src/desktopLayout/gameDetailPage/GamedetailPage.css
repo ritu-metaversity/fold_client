@@ -286,3 +286,17 @@ ul.nav.nav-tabs.mt-1.dis-none {
 .desk_score_card{
     margin-top: 0px !important  ;
 }
+.nav-tabs1{
+    box-shadow: 0 8px 8px -7px !important;
+    background: #2c3d50 !important;
+    color: #fff !important;
+}
+.nav-tabs1 button{
+    color: #fff !important;
+}
+
+.main.new_main {
+    min-height: 100vh !important;
+    height: 100% !important;
+    max-height: 100% !important;
+}

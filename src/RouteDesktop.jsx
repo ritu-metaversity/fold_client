@@ -23,6 +23,7 @@ import SignoutForDesk from './desktopLayout/SignoutForDesk/SignoutForDesk';
 import WithdrawForDesk from './desktopLayout/WithdrawForDesk/WithdrawForDesk';
 import DepositForDesk from './desktopLayout/DepositForDesk/DepositForDesk';
 import Footer from './desktopLayout/Footer/Footer';
+import NewGameDetailPageDest from './desktopLayout/NewGameDetailPageDest/NewGameDetailPageDest';
 
 const RouteDesktop = () => {
   const [SportId, setSportId] = useState("");
@@ -32,6 +33,9 @@ const RouteDesktop = () => {
   const nav = useNavigate();
 
   const { pathname } = useLocation();
+
+
+  const id = pathname?.slice(13)
 
 
   useEffect(() => {
@@ -61,6 +65,8 @@ const RouteDesktop = () => {
         nav("/responsible-gaming");
       } else if (pathname === "/inplay") {
         nav("/inplay");
+      }else if (pathname.includes("gamedetails")) {
+        nav(`/gamedetails/${id}`);
       }
     } else if (pathname === "/") {
       nav("/");
@@ -96,36 +102,27 @@ const RouteDesktop = () => {
   };
   console.log("hellooo")
   return (
-    <div> <>
-    {pathname === "/login" || pathname === "/register" ? (
+    <div>
+       <>
+    {pathname === "/login" || pathname === "/register" || pathname.includes('gamedetails') ? (
       ""
     ) : (
       <NavbarDesk />
     )}
-
-
     <div
+      className={`${pathname === "/login" || pathname === "/register"? "": "row row5"}`}>
+      {
+        pathname === "/login" || pathname === "/register" || pathname.includes('gamedetails') ? ("") :
+        (<div className="sidebar col-md-2"><SideBar /></div>
+        )
+       }
 
-
-      className={`${
-        pathname === "/login" || pathname === "/register"
-          ? ""
-          : "row row5"
-      } `}>
-      {pathname === "/login" || pathname === "/register" ? ("") :
-       (
-        <div className="sidebar col-md-2"><SideBar /></div>
-      )}
-
-      <div
-        className={`${
-          pathname === "/login" || pathname === "/register"
-            ? ""
-            : "col-md-10 featured-box load game-page"
-        }`}>
+      <div className={`${pathname === "/login" || pathname === "/register" || pathname.includes('gamedetails') ? "": "col-md-10 featured-box load game-page" }`}>
         <Routes>
           <Route path="/" element={<ItemPageForHome />} />
           {/* <Route path="/" element={<LoginForDesk />} /> */}
+          <Route path="/gamedetails/:id" element={<NewGameDetailPageDest/>} />
+
           <Route
             path="/login"
             element={
@@ -168,6 +165,11 @@ const RouteDesktop = () => {
             path="/changebtnvalue"
             element={<ChangeBtnValueForDesk />}
           />
+          <Route>
+
+
+          </Route>
+          
           <Route
             path="/changepassword"
             element={
@@ -183,10 +185,11 @@ const RouteDesktop = () => {
           />
           <Route path="/withdraw" element={<WithdrawForDesk />} />
           <Route path="/deposit" element={<DepositForDesk />} />
+          
         </Routes>
       </div>
     </div>
-    {pathname === "/login" || pathname === "/register" ? "" : <Footer />}
+    {pathname === "/login" || pathname === "/register" ||pathname.includes('gamedetails') ? "" : <Footer />}
   </></div>
   )
 }

@@ -78,21 +78,21 @@ function Login({ Errmessage, Statusmessage }) {
     nav("/");
   };
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (localStorage.getItem("token") !== null) {
-      nav("/m/home");
-    }
+  //   if (localStorage.getItem("token") !== null) {
+  //     nav("/m/home");
+  //   }
 
-    UserAPI.Self_By_App_Url().then((res) => {
-      setStatusBtn(res?.data?.selfAllowed);
-      setNavLogo(res?.data?.logo);
-    });
+  //   UserAPI.Self_By_App_Url().then((res) => {
+  //     setStatusBtn(res?.data?.selfAllowed);
+  //     setNavLogo(res?.data?.logo);
+  //   });
 
-    if (localStorage.getItem("token") === null) {
-      nav("/");
-    }
-  }, [nav]);
+  //   if (localStorage.getItem("token") === null) {
+  //     nav("/");
+  //   }
+  // }, [nav]);
 
   const popupClose = (vl) => {
     setStatusVal(vl);

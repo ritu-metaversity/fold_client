@@ -40,19 +40,16 @@ const RouteMobile = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
-      nav('/m/in-play')
+      nav("/m/in-play");
       if (pathname === "/signup3") {
         nav("/signup3");
-      } 
-      else if(pathname === "/login"){
-        nav("/login")
-      }
-      else if (pathname === "/signup1") {
+      } else if (pathname === "/login") {
+        nav("/login");
+      } else if (pathname === "/signup1") {
         nav("/signup1");
-      }else if (pathname === "/m/login") {
+      } else if (pathname === "/m/login") {
         nav("/m/login");
-      }
-       else if (pathname === "/signup2") {
+      } else if (pathname === "/signup2") {
         nav("/signup2");
       } else if (pathname === "/signup4") {
         nav("/signup4");
@@ -66,17 +63,19 @@ const RouteMobile = () => {
         nav("/m/register");
       } else if (pathname === "/m/sports" || pathname === "/sports") {
         nav("/m/sports");
-      }else if (pathname === "/about-us") {
-      nav("/about-us");
-    } else if (pathname === "/terms-and-conditions") {
-      nav("/terms-and-conditions");
-    } else if (pathname === "/responsible-gaming") {
-      nav("/responsible-gaming");
-    } else if (pathname === "/" && window.innerWidth < 800) {
-      nav("/m/login");
+      } else if (pathname === "/about-us") {
+        nav("/about-us");
+      } else if (pathname === "/terms-and-conditions") {
+        nav("/terms-and-conditions");
+      } else if (pathname === "/responsible-gaming") {
+        nav("/responsible-gaming");
+      }
+      else if (pathname === "/" && window.innerWidth < 800) {
+        nav("/m/login");
+      }
     }
-  }
   }, [pathname]);
+
 
   useEffect(() => {
     if (
@@ -113,9 +112,7 @@ const RouteMobile = () => {
       <>
         <Routes>
           <Route
-            path="/m/login"
-            element={
-              <Login Errmessage={Errmessage} Statusmessage={Statusmessage} />
+            path="/m/login" element={ <Login Errmessage={Errmessage} Statusmessage={Statusmessage} />
             }
           />
           <Route path="/m/register" element={<Register />} />
