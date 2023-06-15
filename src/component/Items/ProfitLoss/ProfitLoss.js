@@ -22,8 +22,8 @@ function ProfitLoss() {
   };
   return (
     <>
-    <div className="card-header">
-          <h4 className="mb-0" style={{marginLeft:"-6px"}}>Profit Loss</h4>
+    <div className="card-header" style={{padding:"4px 5px"}}>
+          <h4 className="mb-0" >Profit Loss</h4>
         </div>
     <Tabs defaultActiveKey="1" items={items} onClick={onChange} />
     </>

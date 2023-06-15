@@ -92,7 +92,7 @@ function UnSetteledBet() {
     <div>
       <div className="report-container wrapper">
         <div className="card">
-          <div className="card-header">
+          <div className="card-header" style={{padding:"4px 5px"}}>
             <h4 className="mb-0 heading-ch">Un-Setteled Bet</h4>
           </div>
           <div className="card-body container-fluid container-fluid-5 unsetteledbet max_height">

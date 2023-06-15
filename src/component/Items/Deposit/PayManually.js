@@ -11,7 +11,7 @@ import AlertBtn from "../../Alert/AlertBtn";
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
   const [UpiDetail, setUpiDetail] = useState();
-  const [Bitvalue, setBitValue] = useState("0");
+  const [Bitvalue, setBitValue] = useState();
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);
@@ -28,7 +28,7 @@ const PayManually = (props) => {
     setBitValue(Number(Bitvalue) + 10);
   };
   const decrement = () => {
-    if (Bitvalue != 0 && Bitvalue > 9 ) setBitValue(Number(Bitvalue) - 10);
+    if (Bitvalue != 0 && Bitvalue > 9) setBitValue(Number(Bitvalue) - 10);
   };
 
   const handleStaticAmount = (vl) => {
@@ -52,44 +52,46 @@ const PayManually = (props) => {
     setActive(id);
   };
 
-  console.log(Bitvalue, "dwefwed")
-
-  
-
   const handleSubmit = () => {
     setIsLoading(true);
 
-    if(Bitvalue == 0){
-      setColor("danger")
-      setMessege("Ammout is Greate then 999");
-      setAlertBtnshow(true)
-      setIsLoading(false)
+    if (Bitvalue == 0) {
+      setColor("danger");
+      setMessege("Amount should be greater than 999");
+      setAlertBtnshow(true);
+      setIsLoading(false);
+    } 
+    else if (Bitvalue <= 99) {
+      setColor("danger");
+      setMessege("Minimum Deposit Amount is 100");
+      setAlertBtnshow(true);
+      setIsLoading(false);
     }
 
     const data = new FormData();
     data.append("amount", Bitvalue.toString());
     data.append("image", files || "");
-    if(Bitvalue != 0){
-    UserAPI.Self_Deposit_App({ data })
-      .then((res) => {
-        setIsLoading(false);
-        props.UpdateDetails(true);
-        setMessege(res.message);
-        setColor("success");
-        setAlertBtnshow(true);
-        if (res.status === true) {
-          setBitValue(0);
-          setFiles(null);
-          setPaymentMode("UPI");
-          setActive(0);
-        }
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        setMessege(error.respose.data.message);
-        setColor("danger");
-        setAlertBtnshow(true);
-      });
+    if (Bitvalue > 99) {
+      UserAPI.Self_Deposit_App({ data })
+        .then((res) => {
+          setIsLoading(false);
+          props.UpdateDetails(true);
+          setMessege(res.message);
+          setColor("success");
+          setAlertBtnshow(true);
+          if (res.status === true) {
+            setBitValue(0);
+            setFiles(null);
+            setPaymentMode("UPI");
+            setActive(0);
+          }
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          setMessege(error.respose.data.message);
+          setColor("danger");
+          setAlertBtnshow(true);
+        });
     }
   };
 
@@ -131,7 +133,7 @@ const PayManually = (props) => {
             </button>
             <input
               type="number"
-              placeholder="Enter Amount"
+              placeholder="0"
               className="priceinput"
               onChange={handleStaticAmountInput}
               value={Number(Bitvalue)}
