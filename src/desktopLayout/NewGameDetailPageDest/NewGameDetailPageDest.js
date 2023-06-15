@@ -3,9 +3,6 @@ import "../gameDetailPage/GamedetailPage.css";
 import moment from "moment";
 import AlertBtn from "../../component/Alert/AlertBtn";
 import { socket } from "../../component/Items/GameDetail/socket";
-import { createProfits } from "../../component/Items/GameDetail/eventUtil";
-import { UserAPI } from "../../apis/UserAPI";
-import { GameAPI } from "../../apis/gameAPI";
 import { useParams } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import FancyModalsForDesk from "../gameDetailPage/FancyModalsForDesk";
@@ -56,30 +53,31 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
     Fancy: [],
   });
 
-  useEffect(() => {
-    const time = setInterval(() => {
-      const token = localStorage.getItem("token");
-      if (token !== null || localStorage.getItem("Password-type" !== "old")) {
-        UserAPI.User_Balance()
-          .then((res) => {
-            setUserbalance(res?.data?.balance);
-          })
-          .catch((error) => {
-            setError(true);
-          });
-      }
-    }, 1000);
+//   useEffect(() => {
+//     const time = setInterval(() => {
+//       const token = localStorage.getItem("token");
+      
+//       if (token !== null || localStorage.getItem("Password-type" !== "old")) {
+//         UserAPI.User_Balance()
+//           .then((res) => {
+//             setUserbalance(res?.data?.balance);
+//           })
+//           .catch((error) => {
+//             setError(true);
+//           });
+//       }
+//     }, 1000);
 
-    return () => clearInterval(time);
-  }, []);
+//     return () => clearInterval(time);
+//   }, []);
 
   // Stack Value Api
 
-  useEffect(() => {
-    GameAPI.Place_Bet().then((res) => {
-      setStackVal(res);
-    });
-  }, []);
+//   useEffect(() => {
+//     GameAPI.Place_Bet().then((res) => {
+//       setStackVal(res);
+//     });
+//   }, []);
 
   const { id } = useParams();
   const matId = id;
@@ -117,40 +115,6 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
   }, [id, matchodd,  fancyOdds]);
 
 
-//   const oddFromSocketSlower = (res) => {
-//     if (res) {
-//       setFancyOdds((fancyOdds) => {
-//         if (fancyOdds) {
-//           const oldOdds = { ...fancyOdds };
-//           setPreviousState(oldOdds);
-//         } else {
-//           setPreviousState(res);
-//         }
-//         return res;
-//       });
-
-//       setMFancyOdds(res);
-//       setMaxBet(res?.Bookmaker[0]);
-//       setMinBet(res);
-//       setIsLoading(false);
-//       setGameName(Object.keys(res));
-//       setMatchodd(res?.Odds);
-//       var matchData = res?.Odds[0];
-//       setETime(matchData);
-//       setMatchDelatil(matchData?.runners);
-//     }
-//   };
-
-//   useEffect(() => {
-//     socket.on("connect", () => {
-//       setOddSocketConnected(false);
-//     });
-//     socket.on("OddsUpdated", oddFromSocketSlower);
-//     socket.on("JoinedSuccessfully", () => {
-//       setOddSocketConnected(true);
-//     });
-//   }, []);
-
   useEffect(() => {
     let timer = setInterval(
       () =>
@@ -177,66 +141,66 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
       });
   }, []);
 
-  useEffect(() => {
-    UserAPI.USER_ODDS_PNL({
-      matchId: id,
-    }).then((res) => {
-      setOddsPnl(res?.data || []);
-    });
-    const time = setInterval(() => {
-      UserAPI.USER_ODDS_PNL({
-        matchId: id,
-      }).then((res) => {
-        setOddsPnl(res?.data || []);
-      });
-    }, 5000);
+//   useEffect(() => {
+//     UserAPI.USER_ODDS_PNL({
+//       matchId: id,
+//     }).then((res) => {
+//       setOddsPnl(res?.data || []);
+//     });
+//     const time = setInterval(() => {
+//       UserAPI.USER_ODDS_PNL({
+//         matchId: id,
+//       }).then((res) => {
+//         setOddsPnl(res?.data || []);
+//       });
+//     }, 5000);
 
-    return () => clearInterval(time);
-  }, [id]);
+//     return () => clearInterval(time);
+//   }, [id]);
 
-  useEffect(() => {
-    createProfits({
-      fancyOdds,
-      fancyPnl: fancyOddsPnl,
-      betDetails: {
-        isFancy: fancy,
-        isBack: cName === "back" ? true : false,
-        odds: spanValueRate,
-        marketName: "",
-        selectionId: parseInt(selectionId),
-        priceValue: fancy === false ? spanValueRate : pValue,
-        marketId: marketId === "" ? selectionId : marketId,
-        matchId: matchId,
-      },
-      rechange: true,
-      pnl: oddsPnl,
-      setProfits,
-    });
-  }, [
-    // spanValueRate,
-    oddsPnl,
-    fancyOddsPnl,
-    isLoading,
-    marketId,
-    selectionId,
-  ]);
+//   useEffect(() => {
+//     createProfits({
+//       fancyOdds,
+//       fancyPnl: fancyOddsPnl,
+//       betDetails: {
+//         isFancy: fancy,
+//         isBack: cName === "back" ? true : false,
+//         odds: spanValueRate,
+//         marketName: "",
+//         selectionId: parseInt(selectionId),
+//         priceValue: fancy === false ? spanValueRate : pValue,
+//         marketId: marketId === "" ? selectionId : marketId,
+//         matchId: matchId,
+//       },
+//       rechange: true,
+//       pnl: oddsPnl,
+//       setProfits,
+//     });
+//   }, [
+//     spanValueRate,
+//     oddsPnl,
+//     fancyOddsPnl,
+//     isLoading,
+//     marketId,
+//     selectionId,
+//   ]);
 
-  useEffect(() => {
-    UserAPI.USER_FANCY_PNL({
-      matchId: id,
-    }).then((res) => {
-      setFancyOddsPnl(res?.data || []);
-    });
-    const time = setInterval(() => {
-      UserAPI.USER_FANCY_PNL({
-        matchId: id,
-      }).then((res) => {
-        setFancyOddsPnl(res?.data || []);
-      });
-    }, 5000);
+//   useEffect(() => {
+//     UserAPI.USER_FANCY_PNL({
+//       matchId: id,
+//     }).then((res) => {
+//       setFancyOddsPnl(res?.data || []);
+//     });
+//     const time = setInterval(() => {
+//       UserAPI.USER_FANCY_PNL({
+//         matchId: id,
+//       }).then((res) => {
+//         setFancyOddsPnl(res?.data || []);
+//       });
+//     }, 5000);
 
-    return () => clearInterval(time);
-  }, [id]);
+//     return () => clearInterval(time);
+//   }, [id]);
 
   const handleGameName = (item, id) => {
     setCurrentFancy(item);
@@ -316,29 +280,8 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
     setErrorMsg(vl);
   };
 
-  const [toggleBtn1, settoggleBtn1] = useState(true);
-  const [toggleBtn, settoggleBtn] = useState(false);
 
-  const handleSwitchInput = (e) => {
-    e.preventDefault();
-    if (toggleBtn1 === true) {
-      settoggleBtn1(false);
 
-    } else {
-      settoggleBtn1(true);
-      settoggleBtn(false)
-    }
-  };
-
-  const handleSwitchInput1 = (e) => {
-    e.preventDefault();
-    if (toggleBtn === true) {
-      settoggleBtn(false);
-    } else {
-      settoggleBtn(true);
-      settoggleBtn1(false)
-    }
-  };
 
   const [stackySideBar, setStackySideBar] = useState("");
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -388,6 +331,9 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
 
   }, [fancyOdds[currentFancy]])
 
+
+  console.log(matchodd,"matchoddmatchodd")
+  
   return (
     <>
       <div className="main new_main">

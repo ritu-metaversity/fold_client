@@ -28,17 +28,14 @@ function Login({ Errmessage, Statusmessage }) {
       setStatusVal(false);
       setMessage("Username and Password are required");
       setIsLoading(false);
-    }else if(user === ""){
+    } else if (user === "") {
       setStatusVal(false);
       setMessage("Username is required");
       setIsLoading(false);
-    }else if(password === ""){
+    } else if (password === "") {
       setStatusVal(false);
       setMessage("Password is required");
       setIsLoading(false);
-    }
-     else {
-      setStatusVal(true);
     }
     if (password !== "" && user !== "") {
       AuthorAPI.Login({
@@ -47,19 +44,22 @@ function Login({ Errmessage, Statusmessage }) {
       })
         .then((res) => {
           const token = res.token;
-          setMessage(res.message);
-          setIsLoading(false);
+          if(res?.status === false){
+            setStatusVal(false);
+            setMessage(res.message);
+            setIsLoading(false);  
+          }
           localStorage.removeItem("UserName");
           localStorage.removeItem("UserPassword");
           axios.defaults.headers.common["Authorization"] = token;
-          localStorage.setItem("token", token);
           api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
           setStatusVal(res.status);
           setMessage("Invalid Username or password");
-          localStorage.setItem("UsertypeInfo", res?.userTypeInfo)
+          localStorage.setItem("UsertypeInfo", res?.userTypeInfo);
           const uId = res.userId;
           localStorage.setItem("UserId", uId);
           if (res.token !== "" && res.status !== false) {
+          localStorage.setItem("token", token);
             nav("/m/home");
           }
           const pType = res.passwordtype;
@@ -106,37 +106,45 @@ function Login({ Errmessage, Statusmessage }) {
     }
   }, []);
 
-
-  const handleLoginWithDemoAccount = ()=>{
+  const handleLoginWithDemoAccount = () => {
     setIsLoading1(true);
-      AuthorAPI.LOGIN_WITH_DEMO_USER()
-        .then((res) => {
-          const token = res?.data?.token;
-          setMessage(res.message);
-          setIsLoading1(false);
-          localStorage.removeItem("UserName");
-          localStorage.removeItem("UserPassword");
-          localStorage.setItem("token", token);
-          api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-          setStatusVal(res.status);
-          setMessage("Invalid Username or password");
-          localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo)
-          const uId = res.data?.username;
-          localStorage.setItem("UserId", uId);  
-          if (res.data?.token !== "" && res.status !== false) {
-            nav("/m/home");
-          }
-          const pType = res?.data?.passwordtype;
-          localStorage.setItem("Password-type", pType);
-          if (pType === "old") {
-            nav("/m/setting/changepassword");
-          }
-        })
-        .catch((error) => {
-          setIsLoading1(false);
-        });
-  }
+    AuthorAPI.LOGIN_WITH_DEMO_USER()
+      .then((res) => {
+        console.log(res.data.token);
+        const token = res.data.token;
+        setMessage(res.message);
+        setIsLoading1(false);
+        localStorage.removeItem("UserName");
+        localStorage.removeItem("UserPassword");
+        api.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${res?.data?.token}`;
+        setStatusVal(res?.data.status);
+        console.log(res?.data?.message)
+        setMessage("Invalid Username or password");
+        localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
+        const uId = res.data?.username;
+        localStorage.setItem("UserId", uId);
+        if (res.data?.token !== "" && res?.data?.token !== undefined  && res?.data.status !== false) {
+        localStorage.setItem("token", token);
 
+          nav("/m/home");
+        }
+        const pType = res?.data?.passwordtype;
+        localStorage.setItem("Password-type", pType);
+        if (pType === "old") {
+          nav("/m/setting/changepassword");
+        }
+        if (res?.data.status === false) {
+          setStatusVal(false);
+          setMessage(res?.data?.message);
+          setIsLoading(false);
+        }
+      })
+      .catch((error) => {
+        setIsLoading1(false);
+      });
+  };
 
   return (
     <>
@@ -152,7 +160,7 @@ function Login({ Errmessage, Statusmessage }) {
         ) : (
           ""
         )}
-        {StatusVal === false && Statusmessage === false ? (
+        {StatusVal === false && Statusmessage === undefined || Statusmessage === false ? (
           <div className="alertBtn">
             <AlertBtn color="danger" popupClose={popupClose} val={message} />
           </div>

@@ -26,11 +26,18 @@ const LoginForDesk = () => {
     setIsLoading(true);
     if (password === "" && user === "") {
       setStatusVal(false);
-      setMessage("password: length must be between 4 and 30");
+      setMessage("Username and Password are required");
       setIsLoading(false);
-    } else {
-      setStatusVal(true);
+    } else if (user === "") {
+      setStatusVal(false);
+      setMessage("Username is required");
+      setIsLoading(false);
+    } else if (password === "") {
+      setStatusVal(false);
+      setMessage("Password is required");
+      setIsLoading(false);
     }
+
     if (password !== "" && user !== "") {
       AuthorAPI.Login({
         userId: user,
@@ -38,12 +45,14 @@ const LoginForDesk = () => {
       })
         .then((res) => {
           const token = res.token;
-          setMessage(res.message);
-          setIsLoading(false);
+          if(res?.status === false){
+            setStatusVal(false);
+            setMessage(res.message);
+            setIsLoading(false);  
+          }
           localStorage.removeItem("UserName");
           localStorage.removeItem("UserPassword");
           axios.defaults.headers.common["Authorization"] = token;
-          localStorage.setItem("token", token);
           api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
           setStatusVal(res.status);
           setMessage("Invalid Username or password");
@@ -51,7 +60,9 @@ const LoginForDesk = () => {
           localStorage.setItem("UserId", uId);
           localStorage.setItem("userTypeInfo", res?.userTypeInfo);
           if (res.token !== "" && res.status !== false) {
+          localStorage.setItem("token", token);
             nav("/home");
+
           }
           const pType = res.passwordtype;
           localStorage.setItem("Password-type", pType);
@@ -104,32 +115,43 @@ console.log("login")
 
 
   const handleLoginWithDemoAccount = ()=>{
-      setIsLoading1(true);
-      AuthorAPI.LOGIN_WITH_DEMO_USER().then((res) => {
-          const token = res?.data?.token;
-          setMessage(res.message);
-          setIsLoading1(false);
-          localStorage.removeItem("UserName");
-          localStorage.removeItem("UserPassword");
-          localStorage.setItem("token", token);
-          api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-          setStatusVal(res.status);
-          setMessage("Invalid Username or password");
-          localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo)
-          const uId = res.data?.username;
-          localStorage.setItem("UserId", uId);  
-          if (res.data?.token !== "" && res.status !== false) {
-            nav("/home");
-          }
-          const pType = res?.data?.passwordtype;
-          localStorage.setItem("Password-type", pType);
-          if (pType === "old") {
-            nav("changepassword");
-          }
-        })
-        .catch((error) => {
-          setIsLoading1(false);
-        });
+    setIsLoading1(true);
+    AuthorAPI.LOGIN_WITH_DEMO_USER()
+      .then((res) => {
+        console.log(res.data.token);
+        const token = res.data.token;
+        setMessage(res.message);
+        setIsLoading1(false);
+        localStorage.removeItem("UserName");
+        localStorage.removeItem("UserPassword");
+        api.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${res?.data?.token}`;
+        setStatusVal(res?.data.status);
+        console.log(res?.data?.message)
+        setMessage("Invalid Username or password");
+        localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
+        const uId = res.data?.username;
+        localStorage.setItem("UserId", uId);
+        if (res.data?.token !== "" && res?.data?.token !== undefined  && res?.data.status !== false) {
+        localStorage.setItem("token", token);
+
+          nav("/m/home");
+        }
+        const pType = res?.data?.passwordtype;
+        localStorage.setItem("Password-type", pType);
+        if (pType === "old") {
+          nav("/m/setting/changepassword");
+        }
+        if (res?.data.status === false) {
+          setStatusVal(false);
+          setMessage(res?.data?.message);
+          setIsLoading(false);
+        }
+      })
+      .catch((error) => {
+        setIsLoading1(false);
+      });
   }
 
   return (
@@ -160,8 +182,7 @@ console.log("login")
                         LOGIN <FaHandPointDown />{" "}
                         <i className="fas fa-hand-point-down"></i>
                       </h4>
-                    
-
+                      {StatusVal === false ? <p className="error">{message}</p> : ""}
                       <form
                         autoComplete="off"
                         onSubmit={(e) => e.preventDefault()}>

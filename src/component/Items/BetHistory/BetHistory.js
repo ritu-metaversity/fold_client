@@ -117,7 +117,7 @@ function BetHistory() {
     <div>
       <div className="report-container wrapper">
         <div className="card">
-          <div className="card-header" style={{ marginLeft: "-8px" }}>
+          <div className="card-header" style={{padding:"4px 5px"}}>
             <h4 className="mb-0">Bet History</h4>
           </div>
           <div className="card-body container-fluid container-fluid-5 max_height">

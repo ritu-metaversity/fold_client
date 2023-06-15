@@ -74,26 +74,37 @@ const RegisterPage = () => {
 
   const handleLoginWithDemoAccount = ()=>{
     setIsLoading1(true);
-    AuthorAPI.LOGIN_WITH_DEMO_USER().then((res) => {
-        const token = res?.data?.token;
+    AuthorAPI.LOGIN_WITH_DEMO_USER()
+      .then((res) => {
+        console.log(res.data.token);
+        const token = res.data.token;
         setMessage(res.message);
         setIsLoading1(false);
         localStorage.removeItem("UserName");
         localStorage.removeItem("UserPassword");
-        localStorage.setItem("token", token);
-        api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        setStatusVal(res.status);
+        api.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${res?.data?.token}`;
+        setStatusVal(res?.data.status);
+        console.log(res?.data?.message)
         setMessage("Invalid Username or password");
-        localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo)
+        localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
         const uId = res.data?.username;
-        localStorage.setItem("UserId", uId);  
-        if (res.data?.token !== "" && res.status !== false) {
-          nav("/home");
+        localStorage.setItem("UserId", uId);
+        if (res.data?.token !== "" && res?.data?.token !== undefined  && res?.data.status !== false) {
+        localStorage.setItem("token", token);
+
+          nav("/m/home");
         }
         const pType = res?.data?.passwordtype;
         localStorage.setItem("Password-type", pType);
         if (pType === "old") {
           nav("/m/setting/changepassword");
+        }
+        if (res?.data.status === false) {
+          setStatusVal(false);
+          setErrorMsg(res?.data?.message);
+          setIsLoading(false);
         }
       })
       .catch((error) => {

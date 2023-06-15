@@ -39,7 +39,7 @@ const RouteMobile = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("token") === null) {
+    if (localStorage.getItem("token") === null || localStorage.getItem("token") === undefined) {
       nav("/m/in-play");
       if (pathname === "/signup3") {
         nav("/signup3");

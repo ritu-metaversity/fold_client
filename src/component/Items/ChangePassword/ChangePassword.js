@@ -114,7 +114,7 @@ function ChangePassword(props) {
       )}
       <div className="report-container wrapper">
         <div className="card">
-          <div className="card-header">
+          <div className="card-header" style={{padding:"4px 5px"}}>
             <h4 className="mb-0 heading-ch">Change Password</h4>
           </div>
           {isLoading && (
