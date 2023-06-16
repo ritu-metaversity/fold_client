@@ -23,6 +23,7 @@ function Login({ Errmessage, Statusmessage }) {
   const { host } = window.location;
 
   const handleLogin = () => {
+    setStatusVal(true);
     setIsLoading(true);
     if (password === "" && user === "") {
       setStatusVal(false);
@@ -107,6 +108,7 @@ function Login({ Errmessage, Statusmessage }) {
   }, []);
 
   const handleLoginWithDemoAccount = () => {
+    setStatusVal(true);
     setIsLoading1(true);
     AuthorAPI.LOGIN_WITH_DEMO_USER()
       .then((res) => {

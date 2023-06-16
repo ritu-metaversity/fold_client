@@ -23,6 +23,7 @@ const LoginForDesk = () => {
   const [logo, setLogo] = useState();
 
   const handleLogin = () => {
+    setStatusVal(true);
     setIsLoading(true);
     if (password === "" && user === "") {
       setStatusVal(false);
@@ -115,6 +116,7 @@ console.log("login")
 
 
   const handleLoginWithDemoAccount = ()=>{
+    setStatusVal(true);
     setIsLoading1(true);
     AuthorAPI.LOGIN_WITH_DEMO_USER()
       .then((res) => {
