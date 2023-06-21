@@ -111,10 +111,6 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
 
   const { host } = window.location;
 
-  console.log(StatusVal,"edawedwed");
-  console.log(Errmessage, 'edawedwed');
-  console.log(Statusmessage, 'edawedwed');
-
 
 
   const handleLoginWithDemoAccount = ()=>{
