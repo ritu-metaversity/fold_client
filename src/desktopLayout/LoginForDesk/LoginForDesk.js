@@ -10,7 +10,7 @@ import Modal from "react-bootstrap/Modal";
 import RegisterModals from "../../component/Register/RegisterModals";
 import AlertBtn from "../../component/Alert/AlertBtn";
 
-const LoginForDesk = () => {
+const LoginForDesk = ({Errmessage, Statusmessage}) => {
   const nav = useNavigate();
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
@@ -97,10 +97,8 @@ const LoginForDesk = () => {
     }
   }, []);
 
-
-console.log("login")
   const popupClose = (vl) => {
-    setStatusVal(vl);
+    // setStatusVal(vl);
   };
 
   const handleCloseModal = () => setShowModals(false);
@@ -112,6 +110,10 @@ console.log("login")
   }, []);
 
   const { host } = window.location;
+
+  console.log(StatusVal,"edawedwed");
+  console.log(Errmessage, 'edawedwed');
+  console.log(Statusmessage, 'edawedwed');
 
 
 
@@ -158,7 +160,15 @@ console.log("login")
 
   return (
     <div>
-    
+     {Statusmessage === true && (
+          <div className="alertBtn">
+            <AlertBtn
+              color="success"
+              popupClose={popupClose}
+              val={Errmessage}
+            />
+        </div>
+      )}
       <div className="deck-top-view">
         <div id="load" style={{ visibility: "hidden" }}>
           <div id="load-inner">
