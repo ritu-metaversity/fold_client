@@ -23,6 +23,7 @@ function Login({ Errmessage, Statusmessage }) {
   const { host } = window.location;
 
   const handleLogin = () => {
+    setStatusVal(true);
     setIsLoading(true);
     if (password === "" && user === "") {
       setStatusVal(false);
@@ -78,22 +79,6 @@ function Login({ Errmessage, Statusmessage }) {
     nav("/");
   };
 
-  // useEffect(() => {
-
-  //   if (localStorage.getItem("token") !== null) {
-  //     nav("/m/home");
-  //   }
-
-  //   UserAPI.Self_By_App_Url().then((res) => {
-  //     setStatusBtn(res?.data?.selfAllowed);
-  //     setNavLogo(res?.data?.logo);
-  //   });
-
-  //   if (localStorage.getItem("token") === null) {
-  //     nav("/");
-  //   }
-  // }, [nav]);
-
   const popupClose = (vl) => {
     setStatusVal(vl);
   };
@@ -107,6 +92,7 @@ function Login({ Errmessage, Statusmessage }) {
   }, []);
 
   const handleLoginWithDemoAccount = () => {
+    setStatusVal(true);
     setIsLoading1(true);
     AuthorAPI.LOGIN_WITH_DEMO_USER()
       .then((res) => {

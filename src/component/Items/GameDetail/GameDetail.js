@@ -11,7 +11,6 @@ import { createProfits } from "./eventUtil";
 import { UserAPI } from "../../../apis/UserAPI";
 import { GameAPI } from "../../../apis/gameAPI";
 import { useParams } from "react-router-dom";
-// import SideBar from "../../sidebar/SideBar";
 
 function GameDetail({ getStackValue}) {
   var curr = new Date();
@@ -50,8 +49,6 @@ function GameDetail({ getStackValue}) {
   const [showFancyModals, setShowFancyModals] = useState(false);
   const [oddsPnl, setOddsPnl] = useState([]);
   const [StackVal, setStackVal] = useState([]);
-  const [userbalance, setUserbalance] = useState("0.00");
-  const [error, setError] = useState(false);
   const [userIP, setUserIP] = useState("");
 
   const [profits, setProfits] = useState({
@@ -67,9 +64,6 @@ function GameDetail({ getStackValue}) {
     });
   }, []);
 
-  // const Gameid = window.location.pathname;
-  // const id = Gameid.slice(12);
-  // const mid = Gameid.slice(12);
 
 
   const  {id} = useParams("id")

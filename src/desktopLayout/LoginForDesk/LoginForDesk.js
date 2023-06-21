@@ -10,7 +10,7 @@ import Modal from "react-bootstrap/Modal";
 import RegisterModals from "../../component/Register/RegisterModals";
 import AlertBtn from "../../component/Alert/AlertBtn";
 
-const LoginForDesk = () => {
+const LoginForDesk = ({Errmessage, Statusmessage}) => {
   const nav = useNavigate();
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
@@ -23,6 +23,7 @@ const LoginForDesk = () => {
   const [logo, setLogo] = useState();
 
   const handleLogin = () => {
+    setStatusVal(true);
     setIsLoading(true);
     if (password === "" && user === "") {
       setStatusVal(false);
@@ -96,10 +97,8 @@ const LoginForDesk = () => {
     }
   }, []);
 
-
-console.log("login")
   const popupClose = (vl) => {
-    setStatusVal(vl);
+    // setStatusVal(vl);
   };
 
   const handleCloseModal = () => setShowModals(false);
@@ -115,6 +114,7 @@ console.log("login")
 
 
   const handleLoginWithDemoAccount = ()=>{
+    setStatusVal(true);
     setIsLoading1(true);
     AuthorAPI.LOGIN_WITH_DEMO_USER()
       .then((res) => {
@@ -156,7 +156,15 @@ console.log("login")
 
   return (
     <div>
-    
+     {Statusmessage === true && (
+          <div className="alertBtn">
+            <AlertBtn
+              color="success"
+              popupClose={popupClose}
+              val={Errmessage}
+            />
+        </div>
+      )}
       <div className="deck-top-view">
         <div id="load" style={{ visibility: "hidden" }}>
           <div id="load-inner">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthorAPI } from "../../apis/AuthorAPI";
 import { FaHandPointDown } from "react-icons/fa";
@@ -10,43 +10,64 @@ const RegisterPage = () => {
   const [UserName, setUserName] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [errorMsg, setErrorMsg] = useState();
-  const [StatusVal, setStatusVal] = useState(true);
+  const [StatusVal, setStatusVal] = useState(false);
   const [StatusCode, setStatusCode] = useState();
   const [logo, setLogo] = useState();
   const [isLoading1, setIsLoading1] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const validateForm = () => {
-    let error = {};
+  // const validateForm = () => {
+  //   let error = {};
 
-    if (UserName === "") {
-      error = "User Name is required";
-      setStatusVal(true);
-    }
+  //   if (UserName === "") {
+  //     error = "User Name is required";
+  //     setStatusVal(true);
+  //   }
 
-    if (password === "") {
-      error = "Password is required";
-      setStatusVal(true);
-    }
-    if (confirmPassword !== password) {
-      error = "Password and Password Confirmation should be same";
-      setStatusVal(true);
-    }
+  //   if (password === "") {
+  //     error = "Password is required";
+  //     setStatusVal(true);
+  //   }
+  //   if (mobileNumber === "" && mobileNumber === undefined) {
+  //     setStatusVal(true);
+  //     error = "Mobile Number is required";
+  //   }
+  //   if (confirmPassword !== password) {
+  //     error = "Password and Password Confirmation should be same";
+  //     setStatusVal(true);
+  //   }
 
-    if (mobileNumber === "") {
-      setStatusVal(true);
-      error = "Mobile Number is required";
-    }
+    
 
-    setErrorMsg(error);
-    return Object.keys(error).length === 0;
-  };
+  //   setErrorMsg(error);
+  //   return Object.keys(error).length === 0;
+  // };
+
+
 
   const nav = useNavigate();
 
-  const handleLogin = () => {
-    if (validateForm()) {
+
+  const handleLogin = (e) => {
+    e.preventDefault()
+    if(UserName === ""){
+      setErrorMsg("User Name is required");
+      setStatusVal(true);
+    }else if(password === ""){
+      setErrorMsg("Password is required");
+      setStatusVal(true);
+    }else if(mobileNumber === "" || mobileNumber === undefined){
+      setErrorMsg("Mobile Number is required");
+      setStatusVal(true)
+    }else if(confirmPassword !== password){
+      setErrorMsg("Password and Password Confirmation should be same");
+      setStatusVal(true)
+    }
+
+    setStatusVal(true);
+
+    if (UserName !== "" && password !== "" && confirmPassword === password && mobileNumber !== "" && mobileNumber !== undefined) {
       setIsLoading(true);
       AuthorAPI.Register({
         username: UserName,
@@ -69,9 +90,6 @@ const RegisterPage = () => {
         });
     }
   };
-
-
-
   const handleLoginWithDemoAccount = ()=>{
     setIsLoading1(true);
     AuthorAPI.LOGIN_WITH_DEMO_USER()
@@ -123,7 +141,7 @@ const RegisterPage = () => {
           <h4 className="text-center register_head">
             REGISTER <FaHandPointDown /> <i className="fas fa-hand-point-down"></i>
           </h4>
-          {StatusVal === false ? <p className="error">{errorMsg}</p> : ""}
+          {StatusVal === true ? <p className="error">{errorMsg}</p> : ""}
           <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
             <div className="form-group mb-4">
               <input
