@@ -94,7 +94,7 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
 
   useEffect(() => {
     const time = setInterval(() => {
-      axios.get(`http://23.106.234.25:8083/fancyRsApi/${id}`).then((res) => {
+      axios.get(`https://23.106.234.25:8083/fancyRsApi/${id}`).then((res) => {
         if (fancyOdds) {
           const oldOdds = { ...fancyOdds };
           setPreviousState(oldOdds);
