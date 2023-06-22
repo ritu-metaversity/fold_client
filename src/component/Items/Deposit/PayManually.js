@@ -52,8 +52,18 @@ const PayManually = (props) => {
     setActive(id);
   };
 
+
+  // console.log(files, "sdasfasd")
+
   const handleSubmit = () => {
     setIsLoading(true);
+    setAlertBtnshow(false)
+    if(files === null){
+      setColor("danger");
+      setMessege("Payment Screenshot is required");
+      setAlertBtnshow(true);
+      setIsLoading(false);
+    }
 
     if (Bitvalue == 0) {
       setColor("danger");

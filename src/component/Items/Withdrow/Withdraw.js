@@ -22,59 +22,6 @@ const Withdraw = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userBalance, setUserBalance] = useState();
 
-  const validateForm = () => {
-    let error = {};
-
-    var letters = /^[A-Za-z]+$/;
-
-    if (amount === "") {
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-      error = "The Amount field is required";
-    }
-
-    if (bankName === "") {
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-      error = "The Bank Name field is required";
-    } else if (!letters.test(bankName)) {
-      setErrorAlert(true);
-      setColorName("danger");
-      error = "Invaild Bank Name";
-      setIsLoading(false);
-    }
-
-    if (ifsc === "") {
-      setErrorAlert(true);
-      setColorName("danger");
-      error = "The IFSC field is required";
-      setIsLoading(false);
-    }
-
-    if (accountHolderName === "") {
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-      error = "The Account Name field is required";
-    } else if (!letters.test(accountHolderName)) {
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-      error = "Invaild Name";
-    }
-    if (accountNumber === "") {
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-      error = "The Account Number field is required";
-    }
-
-    setMessage(error);
-    return Object.keys(error).length === 0;
-  };
-
   const handleClick = () => {
     setIsLoading(true);
     if (userBalance === 0) {
@@ -82,15 +29,44 @@ const Withdraw = () => {
       setErrorAlert(true);
       setColorName("danger");
       setIsLoading(false);
-    } else if (userBalance < amount) {
+    }
+    else if(accountNumber === ""){
+      setMessage("The Account Number is required");
+      setErrorAlert(true);
+      setColorName("danger");
+      setIsLoading(false);
+    }
+    else if(accountHolderName === ""){
+      setMessage("The Account Name field is required");
+      setErrorAlert(true);
+      setColorName("danger");
+      setIsLoading(false);
+    }
+    else if(bankName === ""){
+      setMessage("The Bank Name field is required");
+      setErrorAlert(true);
+      setColorName("danger");
+      setIsLoading(false);
+    }else if(amount === ""){
+      setMessage("The Amount field is required");
+      setErrorAlert(true);
+      setColorName("danger");
+      setIsLoading(false);
+    }else if(ifsc === ""){
+      setMessage("The IFSC field is required");
+      setErrorAlert(true);
+      setColorName("danger");
+      setIsLoading(false);
+    }
+    
+     else if (userBalance < amount) {
       setMessage("Insufficient balance ");
       setErrorAlert(true);
       setColorName("danger");
       setIsLoading(false);
     }
 
-    if (userBalance >= amount) {
-      if (validateForm) {
+    if (userBalance >= amount && amount !=="" && bankName !== "" && ifsc !== "" && accountHolderName !== "" && accountNumber !== "") {
         UserAPI.Self_Withdraw_App({
           accountHolderName: accountHolderName,
           bankName: bankName,
@@ -119,9 +95,10 @@ const Withdraw = () => {
           .catch((error) => {
             setIsLoading(false);
             setErrorAlert(true);
+            setColorName("danger")
             setMessage(error.response.data.message);
           });
-      }
+      
     }
   };
 

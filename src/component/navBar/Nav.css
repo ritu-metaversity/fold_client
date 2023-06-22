@@ -1559,7 +1559,7 @@ background-color: #007bff;
 
 .login-register{
     justify-content: end;
-    margin: -11px;
+    margin: 0px -15px;
 }
 .login-register a {
     border: 1px solid #fff;

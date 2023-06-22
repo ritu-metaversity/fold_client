@@ -54,12 +54,25 @@ const PaymanuallyDesk = (props) => {
 
   const handleSubmit = () => {
     setIsLoading(true);
+    setAlertBtnshow(false)
+
 
     if(Bitvalue == 0){
       setColor("danger")
       setMessege("Ammout is Greate then 999");
       setAlertBtnshow(true)
       setIsLoading(false)
+    }else if (Bitvalue <= 99) {
+      setColor("danger");
+      setMessege("Minimum Deposit Amount is 100");
+      setAlertBtnshow(true);
+      setIsLoading(false);
+    }
+    if(files === null){
+      setColor("danger");
+      setMessege("Payment Screenshot is required");
+      setAlertBtnshow(true);
+      setIsLoading(false);
     }
 
     const data = new FormData();
