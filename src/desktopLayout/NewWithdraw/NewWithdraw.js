@@ -1,207 +1,58 @@
 import React, { useEffect, useState } from "react";
-import SideBar from "../sidebar/SideBar";
-import { UserAPI } from "../../apis/UserAPI";
-import AlertBtn from "../../component/Alert/AlertBtn";
+import "./NewWithdraw.css";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import axios from "axios";
+import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { Button } from "react-bootstrap";
-import moment from "moment";
-import "./WithdrawForDesk.css";
 
-const WithdrawForDesk = () => {
-  const [amount, setAmount] = useState();
-  const [bankName, setBankName] = useState("");
-  const [accountType, setAccountType] = useState("Saving");
-  const [accountNumber, setAccountNumber] = useState();
-  const [ifsc, setIFSC] = useState("");
-  const [accountHolderName, setAccountHolderName] = useState("");
-  const [withdrawReq, setWithdrawReq] = useState();
-  const [dataLength, setDataLength] = useState();
-  const [errorAlert, setErrorAlert] = useState(false);
-  const [message, setMessage] = useState({});
-  const [colorName, setColorName] = useState();
-  const [isLoading, setIsLoading] = useState(false)
-  const [userBalance, setUserBalance] = useState();
+const NewWithdraw = () => {
+  const [withdrawData, setWithdrawData] = useState();
+  const [active, setActive] = useState(0);
+  const [show, setShow] = useState(false);
+  const [withType, setwithType] = useState("");
+  const [withCoinValue, setwithCoinValue] = useState()
+//   const [inputValue, setInputValue] = useState()
 
-useEffect(()=>{
-  UserAPI.User_Balance().then((res) => {
-    setUserBalance(res?.data?.balance - res?.data?.libality);
-  });
-}, []);
+  const handleClose = () => setShow(false);
+  //   const handleShow = () => setShow(true);
 
-  // const validateForm = () => {
-  //   let error = {};
-
-  //   var letters = /^[A-Za-z]+$/;
-
-  //   if (amount === "") {
-  //     setErrorAlert(true);
-  //     setColorName("danger");
-  //     error = "The Amount field is required";
-  //   }
-
-  //   if (bankName === "") {
-  //     setErrorAlert(true);
-  //     setColorName("danger");
-  //     error = "The Bank Name field is required";
-  //   } else if (!letters.test(bankName)) {
-  //     setErrorAlert(true);
-  //     setColorName("danger");
-  //     error = "Invaild Bank Name";
-  //   }
-
-  //   if (ifsc === "") {
-  //     setErrorAlert(true);
-  //     setColorName("danger");
-  //     error = "The IFSC field is required";
-  //   }
-
-  //   if (accountHolderName === "") {
-  //     setErrorAlert(true);
-  //     setColorName("danger");
-  //     error = "The Account Name field is required";
-  //   } else if (!letters.test(accountHolderName)) {
-  //     setErrorAlert(true);
-  //     setColorName("danger");
-  //     error = "Invaild Name";
-  //   }
-  //   if (accountNumber === "") {
-  //     setErrorAlert(true);
-  //     setColorName("danger");
-  //     error = "The Account Number field is required";
-  //   }
-
-  //   setMessage(error);
-  //   return Object.keys(error).length === 0;
-  // };
-
-  const handleClick = () => {
-
-    setIsLoading(true);
-    if (userBalance === 0) {
-      setMessage("Insufficient balance ");
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-    }
-    else if(accountNumber === ""){
-      setMessage("The Account Number is required");
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-    }
-    else if(accountHolderName === ""){
-      setMessage("The Account Name field is required");
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-    }
-    else if(bankName === ""){
-      setMessage("The Bank Name field is required");
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-    }else if(amount === ""){
-      setMessage("The Amount field is required");
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-    }else if(ifsc === ""){
-      setMessage("The IFSC field is required");
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-    }
-    
-     else if (userBalance < amount) {
-      setMessage("Insufficient balance ");
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-    }
-
-    if (userBalance >= amount && amount !=="" && bankName !== "" && ifsc !== "" && accountHolderName !== "" && accountNumber !== "") {
-      UserAPI.Self_Withdraw_App({
-        accountHolderName: accountHolderName,
-        bankName: bankName,
-        accountType: accountType,
-        amount: amount,
-        ifsc: ifsc,
-        accountNumber: accountNumber,
-      })
-        .then((res) => {
-          UserAPI.Withdraw_Request().then((res) => {
-            setWithdrawReq(res.data);
-            setDataLength(res.data.length);
-          });
-          setMessage(res.message);
-          setErrorAlert(true);
-          setColorName("success");
-          if (res.status === true) {
-            setAmount("");
-            setBankName("");
-            setAccountNumber("");
-            setIFSC("");
-            setAccountHolderName("");
-          }
-        })
-        .catch((error) => {
-          setColorName("danger")
-          setErrorAlert(true);
-          setMessage(error.response.data.message);
-        });
-    }
+  const handlePaymentDetails = (val, id) => {
+    setShow(true);
+    setwithType(val);
+    setActive(id);
   };
 
   useEffect(() => {
-    UserAPI.Withdraw_Request().then((res) => {
-      setWithdrawReq(res.data);
-      setDataLength(res.data.length);
-    });
+    const token = localStorage.getItem("token");
+
+    axios
+      .post(
+        "http://192.168.68.158/withtype-subadmin/get",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        setWithdrawData(res?.data?.data);
+      });
   }, []);
 
-  const popupClose = (vl) => {
-    setErrorAlert(vl);
+  const handleStaticAmountInput = (e) => {
+    let Inputvalue = e.target.value;
+    setwithCoinValue(parseInt(Inputvalue));
   };
 
-  const [show, setShow] = useState(false);
-  const [dataId, setDataId] = useState();
-  const handleClose = () => setShow(false);
-
-  const handlePending = (val) => {
-    setShow(true);
-    setDataId(val);
-  };
-
-  const handleCloseSubmit = () => {
-    UserAPI.USER_CANCEL_WITHDRAW_REQUIEST({
-      id: dataId,
-    })
-      .then((res) => {
-        setMessage(res.message);
-        setErrorAlert(true);
-        setColorName("success");
-        setShow(false);
-
-        UserAPI.Withdraw_Request().then((res) => {
-          setWithdrawReq(res.data);
-          setDataLength(res.data.length);
-        });
-      })
-      .catch((error) => {
-        setErrorAlert(true);
-        setMessage(error.response.data.message);
-        setColorName("danger");
-        setShow(false);
-      });
-  };
+  const handleBtnValue = (val)=>{
+    // setwithCoinValue(val)
+    setwithCoinValue((withCoinValue) => (Number(withCoinValue) || 0) + Number(val));
+  }
 
   return (
     <>
-      {errorAlert ? (
-        <AlertBtn color={colorName} popupClose={popupClose} val={message} />
-      ) : (
-        ""
-      )}
       <div className="main">
         <div className="container-fluid container-fluid-5">
           <div className="itemHome">
@@ -210,7 +61,122 @@ useEffect(()=>{
                 <h4 className="mb-0">Withdraw</h4>
               </div>
               <div className="card-body container-fluid container-fluid-5">
-                <div className="mainAccount">
+                <div className="withdrow_coin">
+                  <div className="withdrow_title">
+                    <p style={{marginLeft:"-1px", marginBottom:"10px"}}>Withdraw Coins</p>
+                    <input placeholder="Withdraw Coins" value={withCoinValue} onChange={handleStaticAmountInput} type="number" />
+                  </div>
+                  <div>
+                    <p className="choose_val" style={{ marginLeft: "0px", marginBottom:"10px"}}>
+                      Choose From your favourate transaction{" "}
+                    </p>
+                    <div className="coin_value">
+                      <button onClick={()=>handleBtnValue(100)}>+100</button>
+                      <button onClick={()=>handleBtnValue(500)}>+500</button>
+                      <button onClick={()=>handleBtnValue(1000)}>+1k</button>
+                      <button onClick={()=>handleBtnValue(5000)}>+5k</button>
+                      <button onClick={()=>handleBtnValue(10000)}>+10k</button>
+                      <button onClick={()=>handleBtnValue(25000)}>+25k</button>
+                    </div>
+                  </div>
+                </div>
+                <div className="withdrow_type">
+                  <h5> Select withdraw value</h5>
+                </div>
+
+                <div className="with_paymethod">
+                  <Container>
+                    <div className="bank-logo with_bank_logo">
+                      <Row>
+                        {withdrawData?.map((res, id) => {
+                          return (
+                            <>
+                            <Col 
+                              className="withdraw_image"
+                              onClick={() =>
+                                handlePaymentDetails(res?.withdrawType, id)
+                              }>
+                              <div
+                                className="css-1502y4u"
+                                >
+                                <img
+                                  src={res?.image}
+                                  className="css-37vfbv"
+                                  alt="Bank"
+                                />
+                                <p className="Typography-root ">
+                                  {res?.withdrawType}
+                                </p>
+                              </div>
+                            </Col>
+                            
+                            </>
+                          );
+                        })}
+                      </Row>
+                    </div>
+                  </Container>
+                </div>
+
+                <div className="withdraw_coin_btn">
+                    <button>Withdraw Coins</button>
+                </div>
+
+                {/* <Modal size="md" show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>{withType}</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    {withType === "BANK" && (
+                      <div className="withdraw_table">
+                        <Form.Label htmlFor="inputPassword5">Amount</Form.Label>
+                        <Form.Control type="nimber" id="1" />
+                        <Form.Label htmlFor="inputPassword5">
+                          Account Number
+                        </Form.Label>
+                        <Form.Control type="number" id="2" />
+                        <Form.Label htmlFor="inputPassword5">
+                          Account Name
+                        </Form.Label>
+                        <Form.Control type="text" id="3" />
+                        <Form.Label htmlFor="inputPassword5">
+                          Bank Name
+                        </Form.Label>
+                        <Form.Control type="text" id="4" />
+                        <Form.Label htmlFor="inputPassword5">IFSC</Form.Label>
+                        <Form.Control type="text" id="5" />
+                        <Form.Label htmlFor="inputPassword5">
+                          Account Type
+                        </Form.Label>
+                        <Form.Select aria-label="Default select example">
+                          <option value="1">Saving</option>
+                          <option value="2">Current</option>
+                        </Form.Select>
+                      </div>
+                    )}
+                    {withType === "PAYTM" && (
+                      <div className="withdraw_table">
+                        <Form.Label htmlFor="inputPassword5">Amount</Form.Label>
+                        <Form.Control type="nimber" id="1" />
+                        <Form.Label htmlFor="inputPassword5">
+                          UPI ID
+                        </Form.Label>
+                        <Form.Control disabled type="text" id="2" />
+                        <Form.Label htmlFor="inputPassword5">
+                        Account Holder Name
+                        </Form.Label>
+                        <Form.Control  type="text" id="3" />
+                      </div>
+                    )}
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="primary" onClick={handleClose}>
+                      Submit
+                    </Button>
+                  </Modal.Footer>
+                </Modal> */}
+
+                {/* <div className="mainAccount">
                   <div className="mx-input-wrapper account-field">
                     <label className="account-lable">Amount</label>
                     <br />
@@ -298,9 +264,6 @@ useEffect(()=>{
                         className="table b-table table-bordered"
                         id="__BVID__104">
                         <thead>
-                          {/* <tr className="previous-deposite">
-                              <th colSpan="10">Previous Withdraw</th>
-                            </tr> */}
                           <tr role="row" className="account-detail">
                             <th
                               role="columnheader"
@@ -485,7 +448,7 @@ useEffect(()=>{
                       </table>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -495,4 +458,4 @@ useEffect(()=>{
   );
 };
 
-export default WithdrawForDesk;
+export default NewWithdraw;

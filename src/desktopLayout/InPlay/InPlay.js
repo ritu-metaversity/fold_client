@@ -21,7 +21,7 @@ const InPlay = () => {
     setIsLoading(true);
 
     axios
-      .get("http://43.205.50.127:9000/betfair_api/active_match")
+      .get("https://oddsapi.247idhub.com/betfair_api/active_match")
       .then((res) => {
         setGameName(res?.data?.data);
         setIsLoading(false);

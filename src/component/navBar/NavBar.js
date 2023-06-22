@@ -15,7 +15,7 @@ const NavBar = () => {
   const [userMessage, setUserMessage] = useState("");
   const [status, setStatus] = useState(false);
   const [error, setError] = useState(false);
-  const [Exp, setExp] = useState("");
+  const [Exp, setExp] = useState("0.0");
   const [balanceShow, setBalanceShow] = useState(true);
   const [expShow, setExpShowShow] = useState(true);
   const [showExpModals, setShowExpModals] = useState(false);

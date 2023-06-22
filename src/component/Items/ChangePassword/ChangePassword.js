@@ -30,7 +30,7 @@ function ChangePassword(props) {
       setColor("danger");
       setMessege("New Password is required");
       setIsLoading(false);
-    }else if(conformPassword === ""){
+    } else if (conformPassword === "") {
       setShowError(true);
       setColor("danger");
       setMessege("Conform Password is required");
@@ -39,11 +39,11 @@ function ChangePassword(props) {
       setShowError(true);
       setColor("danger");
       setMessege("New Password and Password Confirmation should be same");
-      setIsLoading(false)
+      setIsLoading(false);
     }
 
-    if (currPassword !== "" || conformPassword !== "" || newPasswords !== "") {
-      if (localStorage.getItem("Password-type") === "old") {
+    if (localStorage.getItem("Password-type") === "old") {
+        if (currPassword !== "" && conformPassword !== "" && newPasswords !== "" && newPasswords === conformPassword) {
         AuthorAPI.FIRST_LOGIN({
           currentPassword: currPassword,
           newPassword: newPasswords,
@@ -62,44 +62,53 @@ function ChangePassword(props) {
                 localStorage.clear();
                 nav("/m/login");
               }, 100);
+            } else {
+              setMessege(res.message);
+              setIsLoading(false);
+              setShowError(true);
+              setColor("danger");
             }
           })
           .catch((error) => {
             setIsLoading(false);
           });
       } else {
-        if(newPasswords === conformPassword){
-        AuthorAPI.Change_Passwords({
-          currentPassword: currPassword,
-          newPassword: newPasswords,
-        }).then((res) => {
-          props.statusMsg(res.status);
-          if (res.status === true) {
-            setMessege(res.message);
-            setTimeout(function () {
+        if (newPasswords === conformPassword && conformPassword !== "") {
+          AuthorAPI.Change_Passwords({
+            currentPassword: currPassword,
+            newPassword: newPasswords,
+          }).then((res) => {
+            props.statusMsg(res.status);
+            if (res.status === true) {
+              setMessege(res.message);
+              setTimeout(function () {
+                setIsLoading(false);
+                localStorage.clear();
+                AuthorAPI.LOGOUT();
+                nav("/m/login");
+              }, 100);
+            } else {
+              setMessege(res.message);
               setIsLoading(false);
-              localStorage.clear();
-              AuthorAPI.LOGOUT();
-              nav("/m/login");
-            }, 100);
-          }else{
-            setMessege(res.message);
-            setIsLoading(false);
-            setShowError(true)
-            setColor("danger")
-          }
-        });
+              setShowError(true);
+              setColor("danger");
+            }
+          });
+        }
+        // }
       }
-      // }
     }
-  }
   };
+
+
 
   props.message(message);
 
   const popupClose = (vl) => {
     setShowError(vl);
   };
+
+  console.log(conformPassword, "sadawefw")
   return (
     <div>
       {ShowError !== false ? (
@@ -114,7 +123,7 @@ function ChangePassword(props) {
       )}
       <div className="report-container wrapper">
         <div className="card">
-          <div className="card-header" style={{padding:"4px 5px"}}>
+          <div className="card-header" style={{ padding: "4px 5px" }}>
             <h4 className="mb-0 heading-ch">Change Password</h4>
           </div>
           {isLoading && (

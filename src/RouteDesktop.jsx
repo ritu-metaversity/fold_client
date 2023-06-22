@@ -24,6 +24,7 @@ import WithdrawForDesk from './desktopLayout/WithdrawForDesk/WithdrawForDesk';
 import DepositForDesk from './desktopLayout/DepositForDesk/DepositForDesk';
 import Footer from './desktopLayout/Footer/Footer';
 import NewGameDetailPageDest from './desktopLayout/NewGameDetailPageDest/NewGameDetailPageDest';
+import NewWithdraw from './desktopLayout/NewWithdraw/NewWithdraw';
 
 const RouteDesktop = () => {
   const [SportId, setSportId] = useState("");
@@ -148,6 +149,7 @@ const RouteDesktop = () => {
           <Route path="/casino/:id" element={<CasinoForDesk />} />
           <Route path="/livecasino" element={<LiveCasino />} />
           <Route path="/profitloss" element={<ProfitLossHome />} />
+          <Route path="/newwithdraw" element={<NewWithdraw/>} />
           <Route
             path="/unsetteledbet"
             element={<UnsetteledBetForDesk />}

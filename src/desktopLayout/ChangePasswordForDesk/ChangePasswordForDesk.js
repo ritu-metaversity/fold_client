@@ -63,8 +63,14 @@ const ChangePasswordForDesk = (props) => {
                 localStorage.clear();
                 nav("/login");
               }, 100);
+            }else{
+              setMessege(res.message);
+              setIsLoading(false);
+              setShowError(true)
+              setColor("danger")
             }
-          })
+          }
+          )
           .catch((error) => {
             setIsLoading(false);
           });
