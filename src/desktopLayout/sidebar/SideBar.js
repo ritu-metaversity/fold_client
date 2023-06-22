@@ -42,7 +42,7 @@ function SideBar() {
   useEffect(() => {
     axios
       .post(
-        "http://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open"
+        "https://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open"
       )
       .then((res) => {
         setMatchList(res?.data?.data);

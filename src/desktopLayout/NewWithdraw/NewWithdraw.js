@@ -27,7 +27,7 @@ const NewWithdraw = () => {
 
     axios
       .post(
-        "http://192.168.68.158/withtype-subadmin/get",
+        "https://192.168.68.158/withtype-subadmin/get",
         {},
         {
           headers: {
