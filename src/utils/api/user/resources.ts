@@ -99,4 +99,24 @@ export const userResources: {
     URL: "enduser/cancel-withdraw-request-eu",
     METHOD: "POST",
   },
+  SELF_WITHDRAW_TEST: {
+    URL: "http://192.168.68.114/self-withdraw-app",
+    METHOD: "POST",
+  },
+  WITHDRAW_STACK: {
+    URL: "http://192.168.68.114/request-stack",
+    METHOD: "POST",
+  },
+  WITHDRAW_TYPES: {
+    URL: "http://192.168.68.114/withtype-subadmin/get",
+    METHOD: "POST",
+  },
+  WITHDRAW_GET_SAVED: {
+    URL: "http://192.168.68.114/get/client-bank",
+    METHOD: "POST",
+  },
+  SAVE_WITHDRAW_METHOD: {
+    URL: "http://192.168.68.114/save/client-bank",
+    METHOD: "POST",
+  },
 };

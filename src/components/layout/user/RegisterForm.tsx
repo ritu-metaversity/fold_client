@@ -268,7 +268,7 @@ export function RegisterForm() {
               Submit
             </Button>
 
-            {appData?.selfAllowed && (
+            {appData?.isDemoIdLoginAllowed && (
               <Button
                 sx={{ p: 2.5 }}
                 variant="contained"

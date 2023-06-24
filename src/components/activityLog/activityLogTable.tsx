@@ -15,15 +15,22 @@ import {
 interface Props {
   columns: ColumnsInterface<any>[];
   rows: any[];
+  minHeight?: number;
+  onRowClick?: (record: any) => void;
 }
-export default function ActivityTable({ columns, rows }: Props) {
+export default function ActivityTable({
+  columns,
+  rows,
+  minHeight,
+  onRowClick,
+}: Props) {
   return (
     <>
       <TableContainer
         component={Paper}
         elevation={0}
         sx={{
-          minHeight: 400,
+          minHeight: minHeight || 400,
           color: "text.secondary",
           m: { lg: 1 },
           bgcolor: "transparent",
@@ -48,12 +55,19 @@ export default function ActivityTable({ columns, rows }: Props) {
               ))}
             </TableRow>
           </TableHead>
-            {!(rows?.length > 0) && (
-              <StyledTableCell colSpan={columns?.length} sx={{margin:"auto",textAlign:"center"}}  width="100%">No Records Found</StyledTableCell>
-            )}
+          {!(rows?.length > 0) && (
+            <StyledTableCell
+              colSpan={columns?.length}
+              sx={{ margin: "auto", textAlign: "center" }}
+              width="100%"
+            >
+              No Records Found
+            </StyledTableCell>
+          )}
           <TableBody>
             {rows.map((row) => (
               <TableRow
+                onClick={() => onRowClick && onRowClick(row)}
                 key={row.ip + row.date}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
