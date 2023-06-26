@@ -23,7 +23,7 @@ const NavbarDesk = (props) => {
 
   const [balanceShow, setBalanceShow] = useState(true);
   const [expShow, setExpShowShow] = useState(true);
-  const [Exp, setExp] = useState("");
+  const [Exp, setExp] = useState("0.00");
 
   function toggle(e) {
     e.preventDefault();
@@ -60,16 +60,34 @@ const NavbarDesk = (props) => {
       setLogo(res?.data?.logo);
     });
 
-    if (token !== null || localStorage.getItem("Password-type" !== "old")) {
+    if (token !== null && localStorage.getItem("Password-type" ) !== "old") {
       UserAPI.User_Balance()
         .then((res) => {
-          setUserbalance(res.data.balance);
+          setUserbalance(res?.data?.balance);
           setExp(res?.data?.libality);
         })
         .catch((error) => {
           setError(true);
+          nav('/login')
         });
     }
+
+
+  const time = setInterval(() => {
+    if (token !== null && localStorage.getItem("Password-type" ) !== "old") {
+      UserAPI.User_Balance()
+        .then((res) => {
+          setUserbalance(res?.data?.balance);
+          setExp(res?.data?.libality);
+        })
+        .catch((error) => {
+          setError(true);
+          nav('/login')
+        });
+    }
+  }, 1500);
+
+  return () => clearInterval(time);
 
     UserAPI.User_Message().then((res) => {
       setUserMessage(res);

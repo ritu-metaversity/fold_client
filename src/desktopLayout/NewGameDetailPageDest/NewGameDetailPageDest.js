@@ -57,7 +57,7 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
 //     const time = setInterval(() => {
 //       const token = localStorage.getItem("token");
       
-//       if (token !== null || localStorage.getItem("Password-type" !== "old")) {
+//       if (token !== null || localStorage.getItem("Password-type")!== "old") {
 //         UserAPI.User_Balance()
 //           .then((res) => {
 //             setUserbalance(res?.data?.balance);

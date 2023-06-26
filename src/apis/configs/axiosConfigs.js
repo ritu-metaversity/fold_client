@@ -4,6 +4,7 @@ const token =  localStorage.getItem("token");
 
 export const api = axios.create({
     baseURL: "https://api.247365.exchange/admin-new-apis",
+    // baseURL: "http://18.143.24.35/admin-new-apis",
     // headers: {
     //     'Authorization': 'Bearer ' + localStorage.getItem("token"),
     // },

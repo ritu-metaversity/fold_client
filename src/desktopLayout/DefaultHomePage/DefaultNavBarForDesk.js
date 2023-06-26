@@ -74,16 +74,37 @@ const DefaultNavBarForDesk = (props) => {
       setLogo(res?.data?.logo)
     });
 
-    if (token !== null || localStorage.getItem("Password-type" !== "old")) {
-      UserAPI.User_Balance()
-        .then((res) => {
-          setUserbalance(res.data.balance);
-          setExp(res?.data?.libality);
-        })
-        .catch((error) => {
-          setError(true);
-        });
-    }
+    // const token = localStorage.getItem("token");
+      if (token !== null && localStorage.getItem("Password-type") !== "old") {
+        UserAPI.User_Balance()
+          .then((res) => {
+            setUserbalance(res?.data?.balance);
+            setExp(res?.data?.libality);
+          })
+          .catch((error) => {
+            setError(true);
+            nav('/login')
+            localStorage.clear()
+          });
+      }
+
+
+    const time = setInterval(() => {
+      if (token !== null && localStorage.getItem("Password-type") !== "old") {
+        UserAPI.User_Balance()
+          .then((res) => {
+            setUserbalance(res?.data?.balance);
+            setExp(res?.data?.libality);
+          })
+          .catch((error) => {
+            setError(true);
+            nav('/login')
+            localStorage.clear()
+          });
+      }
+    }, 1500);
+
+    return () => clearInterval(time);
 
     UserAPI.User_Message().then((res) => {
       setUserMessage(res);

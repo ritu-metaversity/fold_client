@@ -214,7 +214,7 @@ const ExposureModal = () => {
                             role="columnheader"
                             scope="col"
                             aria-colindex="9"
-                            className="text-center bg-color eventName">
+                            className="text-left bg-color eventName">
                             Place Date
                           </th>
                         </tr>
@@ -237,45 +237,87 @@ const ExposureModal = () => {
                                 <td
                                   role="columnheader"
                                   aria-colindex="1"
-                                  className="text-left">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.sportName}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="2"
-                                  className="text-left ">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.eventName}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="3"
-                                  className="text-left">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.marketname}
                                 </td>
 
                                 <td
                                   role="columnheader"
                                   aria-colindex="5"
-                                  className="text-left ">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.nation}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="6"
-                                  className="text-left">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.rate}
                                 </td>
 
                                 <td
                                   role="columnheader"
                                   aria-colindex="8"
-                                  className="text-right">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.amount}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="9"
-                                  className="text-center ">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.time}
                                 </td>
                               </tr>

@@ -18,46 +18,48 @@ const NavLoginForm = () => {
   const nav = useNavigate();
 
   const handleLogin = () => {
-    setIsLoading(true);
-    if (password === "" || userName === "") {
-      setMessage("password: length must be between 4 and 30");
-      setStatusVal(false);
-      setIsLoading(false);
-    } else {
-      setStatusVal(true);
-    }
-    if (password !== "" && userName !== "") {
-      AuthorAPI.Login({
-        userId: userName,
-        password: password,
-      })
-        .then((res) => {
-          const token = res.token;
-          setMessage(res.message);
-          setIsLoading(false);
-          localStorage.removeItem("UserName");
-          localStorage.removeItem("UserPassword");
-          axios.defaults.headers.common["Authorization"] = token;
-          localStorage.setItem("token", token);
-          api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-          setStatusVal(res.status);
-          setMessage("Invalid Username or password");
-          const uId = res.userId;
-          localStorage.setItem("UsertypeInfo", res?.userTypeInfo)
-          localStorage.setItem("UserId", uId);
-          if (res.token !== "" && res.status !== false) {
-            nav("/home");
-          }
-          const pType = res.passwordtype;
-          localStorage.setItem("Password-type", pType);
-          if (pType === "old") {
-            nav("/setting/changepassword");
-          }
-        })
-        .catch((error) => {
-          setIsLoading(false);
-        });
-    }
+
+    nav('/login')
+    // setIsLoading(true);
+    // if (password === "" || userName === "") {
+    //   setMessage("password: length must be between 4 and 30");
+    //   setStatusVal(false);
+    //   setIsLoading(false);
+    // } else {
+    //   setStatusVal(true);
+    // }
+    // if (password !== "" && userName !== "") {
+    //   AuthorAPI.Login({
+    //     userId: userName,
+    //     password: password,
+    //   })
+    //     .then((res) => {
+    //       const token = res.token;
+    //       setMessage(res.message);
+    //       setIsLoading(false);
+    //       localStorage.removeItem("UserName");
+    //       localStorage.removeItem("UserPassword");
+    //       axios.defaults.headers.common["Authorization"] = token;
+    //       localStorage.setItem("token", token);
+    //       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    //       setStatusVal(res.status);
+    //       setMessage("Invalid Username or password");
+    //       const uId = res.userId;
+    //       localStorage.setItem("UsertypeInfo", res?.userTypeInfo)
+    //       localStorage.setItem("UserId", uId);
+    //       if (res.token !== "" && res.status !== false) {
+    //         nav("/home");
+    //       }
+    //       const pType = res.passwordtype;
+    //       localStorage.setItem("Password-type", pType);
+    //       if (pType === "old") {
+    //         nav("/setting/changepassword");
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       setIsLoading(false);
+    //     });
+    // }
   };
 
   useEffect(() => {
@@ -101,7 +103,7 @@ const NavLoginForm = () => {
           ""
         )}
 
-        <div className="text_field">
+        {/* <div className="text_field">
           <input
             type="text"
             placeholder="Username*"
@@ -114,8 +116,8 @@ const NavLoginForm = () => {
             placeholder="Password*"
             onChange={(e) => setPasswords(e.target.value)}
           />
-        </div>
-        <button className="" onClick={handleLogin}>
+        </div> */}
+        <button className="ml-2" onClick={handleLogin}>
           LOGIN
         </button>
       </div>

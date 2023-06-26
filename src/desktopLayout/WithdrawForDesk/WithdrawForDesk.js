@@ -25,6 +25,9 @@ const WithdrawForDesk = () => {
 useEffect(()=>{
   UserAPI.User_Balance().then((res) => {
     setUserBalance(res?.data?.balance - res?.data?.libality);
+  }).catch((error)=>{
+    localStorage.clear();
+    navigator('/login')
   });
 }, []);
 
@@ -75,7 +78,7 @@ useEffect(()=>{
   // };
 
   const handleClick = () => {
-
+    setErrorAlert(false)
     setIsLoading(true);
     if (userBalance === 0) {
       setMessage("Insufficient balance ");

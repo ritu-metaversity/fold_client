@@ -5,6 +5,7 @@ import AlertBtn from "../../Alert/AlertBtn";
 import "./Withdraw.css";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Withdraw = () => {
   // const [tableDatashow, setTabledataShow] = useState(false);
@@ -22,8 +23,18 @@ const Withdraw = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userBalance, setUserBalance] = useState();
 
+
+
   const handleClick = () => {
     setIsLoading(true);
+    setErrorAlert(false);
+
+    if(amount === "" || amount === undefined){
+      setMessage("The Amount field is required");
+      setErrorAlert(true);
+      setColorName("danger");
+      setIsLoading(false);
+    }
     if (userBalance === 0) {
       setMessage("Insufficient balance ");
       setErrorAlert(true);
@@ -44,11 +55,6 @@ const Withdraw = () => {
     }
     else if(bankName === ""){
       setMessage("The Bank Name field is required");
-      setErrorAlert(true);
-      setColorName("danger");
-      setIsLoading(false);
-    }else if(amount === ""){
-      setMessage("The Amount field is required");
       setErrorAlert(true);
       setColorName("danger");
       setIsLoading(false);
@@ -102,6 +108,8 @@ const Withdraw = () => {
     }
   };
 
+  const nav = useNavigate()
+
   useEffect(() => {
     UserAPI.Withdraw_Request().then((res) => {
       setWithdrawReq(res.data);
@@ -111,10 +119,12 @@ const Withdraw = () => {
 
     UserAPI.User_Balance().then((res) => {
       setUserBalance(res?.data?.balance - res?.data?.libality);
+    }).catch((error)=>{
+      localStorage.clear();
+      nav('/login')
     });
   }, []);
 
-  console.log(userBalance, "qedqwfrwer");
 
   const popupClose = (vl) => {
     setErrorAlert(vl);

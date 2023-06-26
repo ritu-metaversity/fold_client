@@ -42,8 +42,13 @@ function ChangePassword(props) {
       setIsLoading(false);
     }
 
-    if (localStorage.getItem("Password-type") === "old") {
-        if (currPassword !== "" && conformPassword !== "" && newPasswords !== "" && newPasswords === conformPassword) {
+    if (
+      currPassword !== "" &&
+      conformPassword !== "" &&
+      newPasswords !== "" &&
+      newPasswords === conformPassword
+    ) {
+      if (localStorage.getItem("Password-type") === "old") {
         AuthorAPI.FIRST_LOGIN({
           currentPassword: currPassword,
           newPassword: newPasswords,
@@ -73,34 +78,36 @@ function ChangePassword(props) {
             setIsLoading(false);
           });
       } else {
-        if (newPasswords === conformPassword && conformPassword !== "") {
+        if (conformPassword !== "") {
           AuthorAPI.Change_Passwords({
             currentPassword: currPassword,
             newPassword: newPasswords,
-          }).then((res) => {
-            props.statusMsg(res.status);
-            if (res.status === true) {
-              setMessege(res.message);
-              setTimeout(function () {
+          })
+            .then((res) => {
+              props.statusMsg(res.status);
+              if (res.status === true) {
+                setMessege(res.message);
+                setTimeout(function () {
+                  setIsLoading(false);
+                  localStorage.clear();
+                  AuthorAPI.LOGOUT();
+                  nav("/m/login");
+                }, 100);
+              } else {
+                setMessege(res.message);
                 setIsLoading(false);
-                localStorage.clear();
-                AuthorAPI.LOGOUT();
-                nav("/m/login");
-              }, 100);
-            } else {
-              setMessege(res.message);
+                setShowError(true);
+                setColor("danger");
+              }
+            })
+            .catch((error) => {
               setIsLoading(false);
-              setShowError(true);
-              setColor("danger");
-            }
-          });
+            });
         }
         // }
       }
     }
   };
-
-
 
   props.message(message);
 
@@ -108,7 +115,6 @@ function ChangePassword(props) {
     setShowError(vl);
   };
 
-  console.log(conformPassword, "sadawefw")
   return (
     <div>
       {ShowError !== false ? (

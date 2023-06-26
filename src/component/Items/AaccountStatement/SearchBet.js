@@ -162,20 +162,20 @@ const SearchBet = (props) => {
                         <tbody>
                           {betListData?.betList?.map((item, id) => {
                             return (
-                              <tr role="row" key={id} className={`bet-details ${item.isback===true?"back":"lay"} `}>
-                                <td  className="text-left">
+                              <tr role="row" key={id} className={`bet-details ${item.isback===true?"back":"lay"}`}>
+                                <td  className={`text-left ${item.isback===true?"back":"lay"}`}>
                                   {item.marketname}
                                 </td>
-                                <td className="text-left">
+                                <td className={`text-left ${item.isback===true?"back":"lay"}`}>
                                   {item.odds}
                                 </td>
-                                <td  className="text-left ">
+                                <td  className={`text-left ${item.isback===true?"back":"lay"}`}>
                                   {item.stack}
                                 </td>
-                                <td  className="text-left">
+                                <td  className={`text-left ${item.isback===true?"back":"lay"}`}>
                                   {parseFloat(item.netpnl).toFixed(2)}
                                 </td>
-                                <td  className="text-left">
+                                <td  className={`text-left ${item.isback===true?"back":"lay"}`}>
                                   {item.matchedtime}
                                 </td>
                                 {/* <td aria-colindex="5" className="text-right ">

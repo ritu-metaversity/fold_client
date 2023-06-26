@@ -18,6 +18,7 @@ function Login({ Errmessage, Statusmessage }) {
   const [isLoading1, setIsLoading1] = useState(false);
   const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
+  const [isDemoIdLoginAllowed, setIsDemoIdLoginAllowed] = useState();
   const [navLogo, setNavLogo] = useState();
 
   const { host } = window.location;
@@ -80,7 +81,7 @@ function Login({ Errmessage, Statusmessage }) {
   };
 
   const popupClose = (vl) => {
-    setStatusVal(vl);
+    setStatusVal(!vl);
   };
 
   const handleCloseModal = () => setShowModals(false);
@@ -96,7 +97,7 @@ function Login({ Errmessage, Statusmessage }) {
     setIsLoading1(true);
     AuthorAPI.LOGIN_WITH_DEMO_USER()
       .then((res) => {
-        console.log(res.data.token);
+        // console.log(res.data.token);
         const token = res.data.token;
         setMessage(res.message);
         setIsLoading1(false);
@@ -106,7 +107,7 @@ function Login({ Errmessage, Statusmessage }) {
           "Authorization"
         ] = `Bearer ${res?.data?.token}`;
         setStatusVal(res?.data.status);
-        console.log(res?.data?.message)
+        // console.log(res?.data?.message)
         setMessage("Invalid Username or password");
         localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
         const uId = res.data?.username;
@@ -131,6 +132,14 @@ function Login({ Errmessage, Statusmessage }) {
         setIsLoading1(false);
       });
   };
+
+
+  useEffect(()=>{
+        UserAPI.Self_By_App_Url().then((res)=>{
+          setIsDemoIdLoginAllowed(res?.data?.selfAllowed)
+          setNavLogo(res?.data?.logo)
+        })
+  },[])
 
   return (
     <>
@@ -208,7 +217,8 @@ function Login({ Errmessage, Statusmessage }) {
                   )}
                 </button>
               </div>
-              <div className="form-group mb-0" style={{ marginTop: "12px" }}>
+              {
+                isDemoIdLoginAllowed ?<div className="form-group mb-0" style={{ marginTop: "12px" }}>
                 <button
                   onClick={handleLoginWithDemoAccount}
                   className="btn btn-primary btn-block">
@@ -219,7 +229,9 @@ function Login({ Errmessage, Statusmessage }) {
                     <i className="ml-2 fa fa-sign-in"></i>
                   )}
                 </button>
-              </div>
+              </div>:""
+              }
+              
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
                 <button
                   onClick={handleBackBtn}

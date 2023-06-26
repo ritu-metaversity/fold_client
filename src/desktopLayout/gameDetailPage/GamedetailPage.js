@@ -6,7 +6,7 @@ import { socket } from "../../component/Items/GameDetail/socket";
 import { createProfits } from "../../component/Items/GameDetail/eventUtil";
 import { UserAPI } from "../../apis/UserAPI";
 import { GameAPI } from "../../apis/gameAPI";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Bet from "../Bet/Bet";
 import Modal from "react-bootstrap/Modal";
 import FancyModalsForDesk from "./FancyModalsForDesk";
@@ -56,16 +56,20 @@ function GamedetailPage({ getStackValue, SportId }) {
     Fancy: [],
   });
 
+  const nav = useNavigate()
+
   useEffect(() => {
     const time = setInterval(() => {
       const token = localStorage.getItem("token");
-      if (token !== null || localStorage.getItem("Password-type" !== "old")) {
+      if (token !== null && localStorage.getItem("Password-type") !== "old") {
         UserAPI.User_Balance()
           .then((res) => {
             setUserbalance(res?.data?.balance);
           })
           .catch((error) => {
+            localStorage.clear()
             setError(true);
+            nav('/login')
           });
       }
     }, 1000);

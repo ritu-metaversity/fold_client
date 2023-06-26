@@ -8,6 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 .coin_value button {
     border: 0.1rem solid #2c3d50;
@@ -104,4 +105,48 @@
     margin-top: 17px;
     text-transform: uppercase;
     font-size: 14px;
+}
+
+.main_withdrow {
+    justify-content: center;
+    margin-top: 44px;
+    /* margin-left: -41px; */
+    margin-bottom: 23px;
+}
+p.lodder.depositLoading.withloading.withdraw_deposit {
+    height: 47px !important;
+    bottom: 12px;
+    width: 229px !important;
+    opacity: 1 !important;
+    background: #f1f5f8ad;
+}
+p.lodder.depositLoading.withloading.withdraw_deposit  i{
+    font-size: 22px !important;
+}
+
+
+@media screen and (max-width:800px) {
+    .withdrow_coin {
+        display: block;
+    }
+    
+    .withdrow_coin {
+        margin: 0;
+    }
+    .coin_value button {
+        width: 44%;
+    }
+    .withdrow_type select {
+        width: 96%;
+        margin-inline: -15px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        margin-left: 6px;
+    }
+    .mx-input-wrapper.account-field {
+        width: 100%;
+    }
+    .card-header.header-card {
+        border-radius: unset !important;
+    }
 }

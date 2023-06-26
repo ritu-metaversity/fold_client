@@ -21,6 +21,8 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
   const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
   const [logo, setLogo] = useState();
+  const [isDemoIdLoginAllowed, setIsDemoIdLoginAllowed] = useState();
+
 
   const handleLogin = () => {
     setStatusVal(true);
@@ -88,7 +90,7 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
     }
 
     UserAPI.Self_By_App_Url().then((res) => {
-      setStatusBtn(res?.data?.selfAllowed);
+      setIsDemoIdLoginAllowed(res?.data?.selfAllowed);
       setLogo(res?.data?.logo);
     });
 
@@ -246,7 +248,8 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
                             )}
                           </button>
                         </div>
-                        <div className="form-group text-center mb-0 mt-2">
+                        {
+                          isDemoIdLoginAllowed? <div className="form-group text-center mb-0 mt-2">
                           <button
                             type="submit"
                             className={`btn btn-submit btn-login ${
@@ -262,7 +265,9 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
                               </i>
                             )}
                           </button>
-                        </div>
+                        </div>:""
+                        }
+                        
                         <div className="form-group text-center mt-2 mb-0">
                           <button
                             type="submit"

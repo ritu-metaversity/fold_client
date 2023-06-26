@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthorAPI } from "../../apis/AuthorAPI";
 import { FaHandPointDown } from "react-icons/fa";
 import { api } from "../../apis/configs/axiosConfigs";
+import { UserAPI } from "../../apis/UserAPI";
 
 const RegisterPage = () => {
   const [password, setPassword] = useState();
@@ -16,33 +17,7 @@ const RegisterPage = () => {
   const [isLoading1, setIsLoading1] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
-
-  // const validateForm = () => {
-  //   let error = {};
-
-  //   if (UserName === "") {
-  //     error = "User Name is required";
-  //     setStatusVal(true);
-  //   }
-
-  //   if (password === "") {
-  //     error = "Password is required";
-  //     setStatusVal(true);
-  //   }
-  //   if (mobileNumber === "" && mobileNumber === undefined) {
-  //     setStatusVal(true);
-  //     error = "Mobile Number is required";
-  //   }
-  //   if (confirmPassword !== password) {
-  //     error = "Password and Password Confirmation should be same";
-  //     setStatusVal(true);
-  //   }
-
-    
-
-  //   setErrorMsg(error);
-  //   return Object.keys(error).length === 0;
-  // };
+  const [isDemoIdLoginAllowed, setIsDemoIdLoginAllowed] = useState();
 
 
 
@@ -50,7 +25,9 @@ const RegisterPage = () => {
 
 
   const handleLogin = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    setStatusVal(false);
+
     if(UserName === ""){
       setErrorMsg("User Name is required");
       setStatusVal(true);
@@ -65,7 +42,6 @@ const RegisterPage = () => {
       setStatusVal(true)
     }
 
-    setStatusVal(true);
 
     if (UserName !== "" && password !== "" && confirmPassword === password && mobileNumber !== "" && mobileNumber !== undefined) {
       setIsLoading(true);
@@ -130,6 +106,13 @@ const RegisterPage = () => {
       });
 }
 
+
+useEffect(()=>{
+  UserAPI.Self_By_App_Url().then((res)=>{
+    setIsDemoIdLoginAllowed(res?.data?.selfAllowed);
+      setLogo(res?.data?.logo);
+  })
+},[])
 
   return (
     <>
@@ -210,7 +193,8 @@ const RegisterPage = () => {
                 )}
               </button>
             </div>
-            <div className="form-group mb-0 mt-2">
+            {
+              isDemoIdLoginAllowed? <div className="form-group mb-0 mt-2">
               <button
                 type="submit"
                 className="btn btn-primary btn-block"
@@ -222,7 +206,9 @@ const RegisterPage = () => {
                   <i className="ml-2 fa fa-sign-in"></i>
                 )}
               </button>
-            </div>
+            </div>:""
+            }
+           
             <div className="form-group mb-0" style={{ marginTop: "12px" }}>
               <Link type="submit" to="/" className="btn btn-primary btn-block">
                 <i className="ml-2 fa fa-sign-in rotateBtn"></i>

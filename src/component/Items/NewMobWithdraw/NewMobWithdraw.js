@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./NewWithdraw.css";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import AlertBtn from "../../component/Alert/AlertBtn";
-import { UserAPI } from "../../apis/UserAPI";
-import { AuthorAPI } from "../../apis/AuthorAPI";
-import { GameAPI } from "../../apis/gameAPI";
+import AlertBtn from "../../Alert/AlertBtn";
+import { UserAPI } from "../../../apis/UserAPI";
 
-const NewWithdraw = () => {
+const NewMobWithdraw = () => {
   const [withdrawData, setWithdrawData] = useState();
   // const [active, setActive] = useState(0);
   const [show, setShow] = useState(false);
@@ -31,7 +28,8 @@ const NewWithdraw = () => {
   const [withdrawType, setWithdrawType] = useState();
   const [getAccountData, setGetAccountData] = useState();
   const [userBalance, setuserBalance] = useState();
-
+  const [dataLenth, setDataLenth] = useState();
+  const [saveModalsShow, setSaveModalsShow] = useState();
 
   const handleClose = () => {
     setShow(false);
@@ -59,6 +57,7 @@ const NewWithdraw = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     axios
       .post(
         "http://api.247365.exchange/admin-new-apis/withtype-subadmin/get",
@@ -90,25 +89,9 @@ const NewWithdraw = () => {
         console.log(res?.data?.data);
       });
 
-    axios
-      .post(
-        "http://api.247365.exchange/admin-new-apis/get/client-bank",
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        setGetAccountData(res?.data?.data);
-      });
-
-    UserAPI.User_Balance().then((res)=>{
-      setuserBalance(res?.data?.balance)
-    })
-
+    UserAPI.User_Balance().then((res) => {
+      setuserBalance(res?.data?.balance);
+    });
   }, []);
 
   const handleStaticAmountInput = (e) => {
@@ -148,6 +131,24 @@ const NewWithdraw = () => {
       });
   };
 
+  useEffect(() => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/get/client-bank",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        setGetAccountData(res?.data?.data);
+        setDataLenth(res?.data?.data?.length);
+      });
+  }, []);
+
   const handleBtnValue = (val) => {
     setwithCoinValue(
       (withCoinValue) => (Number(withCoinValue) || 0) + Number(val)
@@ -167,11 +168,11 @@ const NewWithdraw = () => {
     setErrorAlert(false);
     setIsLoading(true);
 
-    if(userBalance < withCoinValue){
+    if (userBalance < withCoinValue) {
       setMessage("insufficient balance");
-        setErrorAlert(true);
-        setColorName("danger");
-        setIsLoading(false);
+      setErrorAlert(true);
+      setColorName("danger");
+      setIsLoading(false);
     }
 
     if (withType === "BANK") {
@@ -220,7 +221,11 @@ const NewWithdraw = () => {
       }
     }
 
-    if (accountHolderName !== "" && accountNumber !== "" && userBalance >= withCoinValue) {
+    if (
+      accountHolderName !== "" &&
+      accountNumber !== "" &&
+      userBalance >= withCoinValue
+    ) {
       const data = {
         accountHolderName: accountHolderName,
         bankName: bankName,
@@ -241,7 +246,7 @@ const NewWithdraw = () => {
           },
         })
         .then((res) => {
-         if (res?.data?.data?.bankExist === false) {
+          if (res?.data?.data?.bankExist === false) {
             setShow(true);
           }else{
             setMessage(res?.data);
@@ -249,6 +254,8 @@ const NewWithdraw = () => {
             setColorName("success");
             setIsLoading(false);
           }
+          setIsLoading(false);
+          
         })
         .catch((error) => {
           setErrorAlert(true);
@@ -273,7 +280,7 @@ const NewWithdraw = () => {
     setAccountType(accType);
   };
 
-  // const filterData = getAccountData?.filter(getAccountData.)
+  // console.log(ifsc, "dfdsfsdfs")
   return (
     <>
       {errorAlert ? (
@@ -282,12 +289,12 @@ const NewWithdraw = () => {
         ""
       )}
       <div className="main">
+        <div className="card-header header-card">
+          <h4 className="mb-0">Withdraw</h4>
+        </div>
         <div className="container-fluid container-fluid-5">
           <div className="itemHome">
             <div className="card">
-              <div className="card-header header-card">
-                <h4 className="mb-0">Withdraw</h4>
-              </div>
               <div className="card-body container-fluid container-fluid-5">
                 <div className="withdrow_coin">
                   <div className="withdrow_title">
@@ -485,7 +492,7 @@ const NewWithdraw = () => {
                   </div>
                 )}
 
-                <div>
+                <div className={openForm ? "" : "d-none"}>
                   <div className="row row5 mt-2">
                     <div className="col-12">
                       <div className="table-responsive withdrow-table">
@@ -493,7 +500,7 @@ const NewWithdraw = () => {
                           role="table"
                           aria-busy="false"
                           aria-colcount="6"
-                          className={`table b-table table-bordered  ${openForm ? "d-none":""}`}
+                          className="table b-table table-bordered"
                           id="__BVID__104">
                           <thead>
                             <tr role="row" className="account-detail">
@@ -542,7 +549,7 @@ const NewWithdraw = () => {
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="6"
-                                className="text-left ">
+                                className="text-left">
                                 Action
                               </th>
                             </tr>
@@ -550,7 +557,8 @@ const NewWithdraw = () => {
                           {getAccountData?.map((item) => {
                             if (item.withdrawType !== withType) return <></>;
                             return (
-                              <tbody>
+                              <tbody
+                                className={dataLenth === 0 ? "d-none" : ""}>
                                 <tr role="row">
                                   <td
                                     aria-colindex="1"
@@ -595,7 +603,7 @@ const NewWithdraw = () => {
                                       )
                                     }
                                     aria-colindex="5"
-                                    className="text-left  withdraw-data">
+                                    className="text-left">
                                     <div className="custom-control custom-control-inline custom-radio">
                                       <input type="radio" name="radio_btn" />{" "}
                                     </div>
@@ -605,21 +613,20 @@ const NewWithdraw = () => {
                             );
                           })}
 
-                          {/* <tbody>
+                          <tbody>
                             <tr
                               role="row"
-                              // className={`${dataLength === 0 ? "" : "d-none"}`}
-                            >
+                              className={`${dataLenth === 0 ? "" : "d-none"}`}>
                               <td
                                 aria-colindex="1"
-                                colSpan="9"
+                                colSpan="6"
                                 className="text-left withdraw-data">
                                 <p className="no-record-found">
                                   No records found
                                 </p>
                               </td>
                             </tr>
-                          </tbody> */}
+                          </tbody>
                         </table>
                       </div>
                     </div>
@@ -663,4 +670,4 @@ const NewWithdraw = () => {
   );
 };
 
-export default NewWithdraw;
+export default NewMobWithdraw;

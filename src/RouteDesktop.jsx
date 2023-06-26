@@ -101,7 +101,6 @@ const RouteDesktop = () => {
     setStatusmessage(val);
 
   };
-  console.log("hellooo")
   return (
     <div>
        <>
@@ -149,7 +148,7 @@ const RouteDesktop = () => {
           <Route path="/casino/:id" element={<CasinoForDesk />} />
           <Route path="/livecasino" element={<LiveCasino />} />
           <Route path="/profitloss" element={<ProfitLossHome />} />
-          <Route path="/newwithdraw" element={<NewWithdraw/>} />
+          <Route path="/withdraw" element={<NewWithdraw/>} />
           <Route
             path="/unsetteledbet"
             element={<UnsetteledBetForDesk />}
@@ -185,7 +184,7 @@ const RouteDesktop = () => {
             path="/SignOut"
             element={<SignoutForDesk statusMassege={statusMassege} />}
           />
-          <Route path="/withdraw" element={<WithdrawForDesk />} />
+          {/* <Route path="/withdraw" element={<WithdrawForDesk />} /> */}
           <Route path="/deposit" element={<DepositForDesk />} />
           
         </Routes>

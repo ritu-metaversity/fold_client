@@ -21,7 +21,6 @@ function FooterForMob() {
     });
   }, []);
 
-  console.log(footerImage, "dsafawfe");
 
   return (
     <div>

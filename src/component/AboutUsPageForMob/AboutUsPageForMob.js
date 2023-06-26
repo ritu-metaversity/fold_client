@@ -19,7 +19,6 @@ const AboutUsPageForMob = () => {
       setAboutData(res?.data?.aboutus)
     }).catch((error)=>{
       setIsloading(false)
-      console.log(error)
     })
 
   }, []);

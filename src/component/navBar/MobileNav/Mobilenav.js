@@ -13,7 +13,6 @@ function Mobilenav() {
 
   const {pathname} = useLocation();
 
-  console.log(pathname, "efefeferfcer")
 
 
   useEffect(()=>{
@@ -58,7 +57,7 @@ function Mobilenav() {
           className={`nav-item ${Active === 3 ? "active2" : ""}`}
           onClick={(e) => handleClick(3, e)}>
           <Link  to="/m/slot" className="nav-link navlink1">
-            Casino+Slot
+            Casino + Slot
           </Link>
         </li>
         <li
