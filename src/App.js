@@ -41,6 +41,11 @@ function App() {
     }
   }, []);
 
+  // useEffect(()=>{
+  //   if(localStorage.getItem("token") !== null){
+  //     nav('/m/home')
+  //   }
+  // }, [nav])
 
 
 

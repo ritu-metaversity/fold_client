@@ -8,7 +8,7 @@ import { api } from "../../apis/configs/axiosConfigs";
 const Register = () => {
   const [password, setPassword] = useState();
   const [mobileNumber, setMobileNumber] = useState();
-  const [UserName, setUserName] = useState();
+  const [UserName, setUserName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState();
   const [errorMsg, setErrorMsg] = useState();
   const [StatusVal, setStatusVal] = useState(true);
@@ -20,8 +20,11 @@ const Register = () => {
   const [alertBtnColor, setAlertBtnColor] = useState()
 
   const nav = useNavigate()
-
   const handleLogin = () => {
+    
+    setStatusVal(true)
+
+   
 
     if(UserName === ""){
       setAlertBtnColor("danger")
@@ -39,13 +42,11 @@ const Register = () => {
       setAlertBtnColor("danger")
       setErrorMsg("Password and Password Confirmation should be same")
       setStatusVal(false)
-    }else{
-      setStatusVal(true)
     }
 
-    console.log(mobileNumber, "defsfs")
+    // console.log(StatusVal);
 
-    if(confirmPassword === password && mobileNumber !== "") {
+    if(confirmPassword === password && UserName !== "" && mobileNumber !== "") {
       setIsLoading(true)
       AuthorAPI.Register({
         username: UserName,
@@ -112,7 +113,7 @@ const Register = () => {
       });
   }
 
-  const [statusBtn, setStatusBtn] = useState(false)
+  const [statusBtn, setStatusBtn] = useState()
 
   useEffect(()=>{
    UserAPI.Self_By_App_Url().then((res)=>{
@@ -123,9 +124,8 @@ const Register = () => {
   },[])
 
   const popupClose=(vl)=>{
-    setStatusVal(vl)
+    setStatusVal(!vl)
   }
-
   return (
     <>
       <div className="login-wrapper">
@@ -214,7 +214,8 @@ const Register = () => {
                   )}
               </button>
             </div>
-            <div className="form-group mb-0">
+            {
+              statusBtn?<div className="mt-2  form-group mb-0">
               <button
                 type="submit"
                 className="btn btn-primary btn-block"
@@ -226,7 +227,9 @@ const Register = () => {
                     <i className="ml-2 fa fa-sign-in"></i>
                   )}
               </button>
-            </div>
+            </div>:""
+            }
+            
             <div className="form-group mb-0" style={{ marginTop: "12px" }}>
               <Link
                 type="submit"

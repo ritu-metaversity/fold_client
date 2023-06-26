@@ -11,7 +11,7 @@ import AlertBtn from "../../Alert/AlertBtn";
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
   const [UpiDetail, setUpiDetail] = useState();
-  const [Bitvalue, setBitValue] = useState();
+  const [Bitvalue, setBitValue] = useState(0);
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);
@@ -55,22 +55,22 @@ const PayManually = (props) => {
 
   // console.log(files, "sdasfasd")
 
+  console.log(Bitvalue, "dfsdfsdf")
+
   const handleSubmit = () => {
+    setAlertBtnshow(false);
     setIsLoading(true);
-    setAlertBtnshow(false)
-    if(files === null){
+    if (Bitvalue === 0 ){
+      setColor("danger");
+      setMessege("Amount should be greater than 999");
+      setAlertBtnshow(true);
+      setIsLoading(false);
+    } else if(files === null){
       setColor("danger");
       setMessege("Payment Screenshot is required");
       setAlertBtnshow(true);
       setIsLoading(false);
     }
-
-    if (Bitvalue == 0) {
-      setColor("danger");
-      setMessege("Amount should be greater than 999");
-      setAlertBtnshow(true);
-      setIsLoading(false);
-    } 
     else if (Bitvalue <= 99) {
       setColor("danger");
       setMessege("Minimum Deposit Amount is 100");
@@ -79,9 +79,9 @@ const PayManually = (props) => {
     }
 
     const data = new FormData();
-    data.append("amount", Bitvalue.toString());
+    data.append("amount", Bitvalue);
     data.append("image", files || "");
-    if (Bitvalue > 99) {
+    if (Bitvalue > 99 && Bitvalue !== "") {
       UserAPI.Self_Deposit_App({ data })
         .then((res) => {
           setIsLoading(false);

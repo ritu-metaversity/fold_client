@@ -29,6 +29,7 @@ import Home from "./component/Home/Home";
 import SportData from "./component/Sports/SportData";
 import Slot from "./component/Items/Slot/Slot";
 import FooterForMob from "./component/FooterForMob/FooterForMob";
+import NewMobWithdraw from "./component/Items/NewMobWithdraw/NewMobWithdraw";
 
 const RouteMobile = () => {
   const { pathname } = useLocation();
@@ -134,7 +135,7 @@ const RouteMobile = () => {
             {localStorage.getItem("UsertypeInfo") == 1 ? (
               <>
                 <Route path="/m/reports/deposit" element={<Deposit />} />
-                <Route path="/m/reports/withdraw" element={<Withdraw />} />
+                <Route path="/m/reports/withdraw" element={<NewMobWithdraw/>} />
               </>
             ) : (
               ""

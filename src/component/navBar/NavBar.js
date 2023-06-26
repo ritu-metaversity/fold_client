@@ -24,6 +24,43 @@ const NavBar = () => {
   const nav = useNavigate();
   const { pathname } = useLocation();
 
+
+  // const [visible, setVisible] = useState(false);
+  const toggleVisible = () => {
+
+    
+    // const scrolled = document.documentElement.scrollTop;
+    if (document.documentElement.scrollTop >= 200) {
+      setClose(false);
+    }else{
+      setClose(false);
+
+    }
+  };
+
+  const scrollToTop = () => {
+    
+    if (close === false) {
+      setClose(true);
+    } else if(document.documentElement.scrollTop >= 200){
+      window.scrollTo({
+        top: 0,
+        behavior: "auto",
+      });
+    }else{
+      setClose(false);
+
+    }
+
+    
+
+   
+    
+  };
+  window.addEventListener("scroll", toggleVisible);
+
+console.log(close,"jhgvbhuygtv")
+
   function toggle(e) {
     e.preventDefault();
     if (close === false) {
@@ -32,6 +69,7 @@ const NavBar = () => {
       setClose(false);
     }
   }
+  
   function droupMenu(e) {
     e.preventDefault();
     if (droup === false) {
@@ -58,7 +96,7 @@ const NavBar = () => {
   useEffect(() => {
 
     const token = localStorage.getItem("token");
-      if (token !== null || localStorage.getItem("Password-type" !== "old")) {
+      if (token !== null && localStorage.getItem("Password-type") !== "old") {
         UserAPI.User_Balance()
           .then((res) => {
             setUserbalance(res?.data?.balance);
@@ -66,12 +104,14 @@ const NavBar = () => {
           })
           .catch((error) => {
             setError(true);
+            localStorage.clear();
+            nav('/login')
           });
       }
 
 
     const time = setInterval(() => {
-      if (token !== null || localStorage.getItem("Password-type" !== "old")) {
+      if (token !== null && localStorage.getItem("Password-type") !== "old") {
         UserAPI.User_Balance()
           .then((res) => {
             setUserbalance(res?.data?.balance);
@@ -79,12 +119,15 @@ const NavBar = () => {
           })
           .catch((error) => {
             setError(true);
+            nav('/login');
+            localStorage.clear()
           });
       }
     }, 1500);
 
     return () => clearInterval(time);
   }, []);
+
 
   const handleSignOut = () => {
     if (localStorage.getItem("token") !== null)
@@ -202,7 +245,7 @@ const NavBar = () => {
                       onClick={() => setClose(false)}></div>
                     <div
                       className="dropdown d-inline-block"
-                      onClick={(e) => toggle(e)}>
+                      onClick={scrollToTop}>
                       <p data-toggle="dropdown" className="dropdown-toggle">
                         <u>{userdetail?.length && userdetail}</u>
                       </p>
@@ -212,8 +255,8 @@ const NavBar = () => {
                             !close ? "dropdown-menu" : "dropdown-menu show"
                           }>
                           <Link
-                            to="/home"
-                            className="dropdown-item router-link-exact-active router-link-active">
+                            to="/m/home"
+                            className="dropdown-item router-link-exact-active router-link-active" onClick={()=> setClose(false)}>
                             Home
                           </Link>
                           {localStorage.getItem("UsertypeInfo") == 2 ? (
@@ -239,7 +282,9 @@ const NavBar = () => {
 
                           <Link
                             to="/m/reports/accountstatement"
-                            className="dropdown-item">
+                            className="dropdown-item" 
+
+                            >
                             Account Statement
                           </Link>
                           <Link
@@ -301,7 +346,7 @@ const NavBar = () => {
                                 className="custom-control-label"></label>
                             </div>
                           </Link>
-                          <Link to="/home" className="dropdown-item">
+                          <Link to="/m/home" className="dropdown-item">
                             Rules
                           </Link>
                           <Link
@@ -312,7 +357,7 @@ const NavBar = () => {
                           </Link>
                         </div>
                       ) : (
-                        ""
+                       ""
                       )}
                     </div>
                   </div>

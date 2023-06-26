@@ -98,10 +98,10 @@ function MatchBet(props) {
                       {matchBet?.data[key].map((item, id) => {
                         return (
                           <tr key={id} className={`${item?.back === true ? "back" :"lay"}`}>
-                            <td>{item?.nation}</td>
-                            <td className="text-right">{item?.rate}</td>
+                            <td className={`${item?.back === true ? "back" :"lay"}`}>{item?.nation}</td>
+                            <td className={`text-right ${item?.back === true ? "back" :"lay"}`}>{item?.rate}</td>
 
-                            <td className="text-right">{item?.amount}</td>
+                            <td className={`text-right ${item?.back === true ? "back" :"lay"}`}>{item?.amount}</td>
                           </tr>
                         );
                       })}

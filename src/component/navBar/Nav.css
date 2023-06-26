@@ -1083,9 +1083,9 @@ ul#home-events {
     display: flex;
     flex-wrap: wrap;
 }
-li.nav-item {
+/* li.nav-item {
     padding: 2px;
-}
+} */
 .desk-view {
     display: none !important;
 }
@@ -1339,7 +1339,7 @@ a.router-link-exact-active.router-link-active {
     margin-right: 9px;
 }
 
-@media screen and (min-width: 500px) and (max-width: 750px) {
+@media screen and (min-width: 480px) and (max-width: 750px) {
     .dropdown-menu.show {
         display: block !important;
         margin-right: 9px !important;
