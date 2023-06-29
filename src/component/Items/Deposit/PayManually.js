@@ -112,7 +112,7 @@ const PayManually = (props) => {
   };
 
   const popupClose = (vl) => {
-    setErrorMsg(vl);
+    setAlertBtnshow(false);
   };
 
   return (

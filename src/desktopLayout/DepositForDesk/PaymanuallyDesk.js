@@ -51,13 +51,15 @@ const PaymanuallyDesk = (props) => {
     setActive(id);
   };
   
+  console.log(typeof Bitvalue, "dsfdsdgfdgfgg")
+  console.log(alertBtnshow, "dsfdsdgfdgfgg")
+
 
   const handleSubmit = () => {
     setIsLoading(true);
-    setAlertBtnshow(false)
+    setAlertBtnshow(false);
 
-
-    if(Bitvalue == 0){
+    if(Bitvalue == 0 || Bitvalue != "0"){
       setColor("danger")
       setMessege("Ammout is Greate then 999");
       setAlertBtnshow(true)
@@ -78,7 +80,7 @@ const PaymanuallyDesk = (props) => {
     const data = new FormData();
     data.append("amount", Bitvalue.toString());
     data.append("image", files || "");
-    if(Bitvalue != 0){
+    if(Bitvalue != 0 || Bitvalue != "0"){
     UserAPI.Self_Deposit_App({ data })
       .then((res) => {
         setIsLoading(false);
@@ -109,7 +111,7 @@ const PaymanuallyDesk = (props) => {
   };
 
   const popupClose = (vl) => {
-    setErrorMsg(vl);
+    setAlertBtnshow(false);
   };
 
   return (
