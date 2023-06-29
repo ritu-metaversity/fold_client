@@ -51,11 +51,6 @@ const NavBar = () => {
       setClose(false);
 
     }
-
-    
-
-   
-    
   };
   window.addEventListener("scroll", toggleVisible);
 

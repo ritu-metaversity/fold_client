@@ -116,12 +116,16 @@ const NewMobWithdraw = () => {
       withdrawType: bankID,
     };
     axios
-      .post("http://api.247365.exchange/admin-new-apis/save/client-bank", data, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+      .post(
+        "http://api.247365.exchange/admin-new-apis/save/client-bank",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
       .then((res) => {
         setShow(false);
         setErrorAlert(true);
@@ -202,6 +206,23 @@ const NewMobWithdraw = () => {
         setColorName("danger");
         setIsLoading(false);
       }
+    } else if (withType === "PAYTM") {
+      if (withCoinValue === "" || withCoinValue === undefined) {
+        setMessage("The Amount field is required");
+        setErrorAlert(true);
+        setColorName("danger");
+        setIsLoading(false);
+      } else if (accountNumber === "") {
+        setMessage("Mobile Number is required");
+        setErrorAlert(true);
+        setColorName("danger");
+        setIsLoading(false);
+      } else if (accountHolderName === "") {
+        setMessage("The Account Name field is required");
+        setErrorAlert(true);
+        setColorName("danger");
+        setIsLoading(false);
+      }
     } else {
       if (withCoinValue === "" || withCoinValue === undefined) {
         setMessage("The Amount field is required");
@@ -239,23 +260,26 @@ const NewMobWithdraw = () => {
       const token = localStorage.getItem("token");
 
       axios
-        .post("http://api.247365.exchange/admin-new-apis/self-withdraw-app", data, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          if (res?.data?.data?.bankExist === false) {
-            setShow(true);
-          }else{
-            setMessage(res?.data);
-            setErrorAlert(true);
-            setColorName("success");
-            setIsLoading(false);
+        .post(
+          "http://api.247365.exchange/admin-new-apis/self-withdraw-app",
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
           }
+        )
+        .then((res) => {
+          // if (res?.data?.data?.bankExist === false) {
+          setShow(true);
+          // }else{
+          setMessage(res?.data?.message);
+          setErrorAlert(true);
+          setColorName("success");
           setIsLoading(false);
-          
+          // }
+          // setIsLoading(false);
         })
         .catch((error) => {
           setErrorAlert(true);

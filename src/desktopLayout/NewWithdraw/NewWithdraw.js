@@ -201,7 +201,25 @@ const NewWithdraw = () => {
         setColorName("danger");
         setIsLoading(false);
       }
-    } else {
+    } else if(withType === "PAYTM"){
+      if (withCoinValue === "" || withCoinValue === undefined) {
+        setMessage("The Amount field is required");
+        setErrorAlert(true);
+        setColorName("danger");
+        setIsLoading(false);
+      } else if (accountNumber === "") {
+        setMessage("Mobile Number is required");
+        setErrorAlert(true);
+        setColorName("danger");
+        setIsLoading(false);
+      } else if (accountHolderName === "") {
+        setMessage("The Account Name field is required");
+        setErrorAlert(true);
+        setColorName("danger");
+        setIsLoading(false);
+      }
+    }
+    else {
       if (withCoinValue === "" || withCoinValue === undefined) {
         setMessage("The Amount field is required");
         setErrorAlert(true);
@@ -241,14 +259,24 @@ const NewWithdraw = () => {
           },
         })
         .then((res) => {
-         if (res?.data?.data?.bankExist === false) {
+        //  if (res?.data?.data?.bankExist === false) {
+        //     setShow(true);
+        //   }
+        //   else{
+        //     setMessage(res?.data);
+        //     setErrorAlert(true);
+        //     setColorName("success");
+        //     setIsLoading(false);
+        //   }
+        // setMessage(res?.data);
+
+        
+        setMessage(res?.data?.message);
             setShow(true);
-          }else{
-            setMessage(res?.data);
+
             setErrorAlert(true);
-            setColorName("success");
+            setColorName("success");  
             setIsLoading(false);
-          }
         })
         .catch((error) => {
           setErrorAlert(true);
@@ -493,7 +521,7 @@ const NewWithdraw = () => {
                           role="table"
                           aria-busy="false"
                           aria-colcount="6"
-                          className={`table b-table table-bordered  ${openForm ? "d-none":""}`}
+                          className={`table b-table table-bordered  ${openForm ? "":"d-none"}`}
                           id="__BVID__104">
                           <thead>
                             <tr role="row" className="account-detail">
