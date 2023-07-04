@@ -30,9 +30,9 @@ function FooterForMob() {
             <li>
               <Link to="/about-us">About</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/">Rules</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="terms-and-conditions">Terms and Conditions</Link>
             </li>

@@ -114,7 +114,7 @@ const Deposit = () => {
                         </Modal>
                         </td>
                         <td aria-colindex="3" className="text-left">
-                          {moment(item.time).format("YYYY-MM-DD, h:mm:ss")}
+                          {item.time}
                         </td>
                         <td
                           aria-colindex="4"

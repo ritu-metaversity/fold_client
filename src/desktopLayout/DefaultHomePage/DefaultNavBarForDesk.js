@@ -82,9 +82,12 @@ const DefaultNavBarForDesk = (props) => {
             setExp(res?.data?.libality);
           })
           .catch((error) => {
+            if(error?.response?.status === 401){
+              setError(true);
+              nav("/login");
+              localStorage.clear();
+            }
             setError(true);
-            nav('/login')
-            localStorage.clear()
           });
       }
 
@@ -97,9 +100,12 @@ const DefaultNavBarForDesk = (props) => {
             setExp(res?.data?.libality);
           })
           .catch((error) => {
+            if(error?.response?.status === 401){
+              setError(true);
+              nav("/login");
+              localStorage.clear();
+            }
             setError(true);
-            nav('/login')
-            localStorage.clear()
           });
       }
     }, 1500);

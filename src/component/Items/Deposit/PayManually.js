@@ -7,6 +7,7 @@ import "./PayManually.css";
 import { Input } from "antd";
 import Modal from "react-bootstrap/Modal";
 import AlertBtn from "../../Alert/AlertBtn";
+import { setLocale } from "yup";
 
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
@@ -53,16 +54,12 @@ const PayManually = (props) => {
   };
 
 
-  // console.log(files, "sdasfasd")
-
-  console.log(Bitvalue, "dfsdfsdf")
-
   const handleSubmit = () => {
     setAlertBtnshow(false);
     setIsLoading(true);
-    if (Bitvalue === 0 ){
+    if (Bitvalue === 0 || Bitvalue != NaN ){
       setColor("danger");
-      setMessege("Amount should be greater than 999");
+      setMessege("Amount should be greater than 99");
       setAlertBtnshow(true);
       setIsLoading(false);
     } else if(files === null){
@@ -81,7 +78,7 @@ const PayManually = (props) => {
     const data = new FormData();
     data.append("amount", Bitvalue);
     data.append("image", files || "");
-    if (Bitvalue > 99 && Bitvalue !== "") {
+    if (Bitvalue > 99 && Bitvalue !== "" && Bitvalue != NaN ) {
       UserAPI.Self_Deposit_App({ data })
         .then((res) => {
           setIsLoading(false);
@@ -104,6 +101,14 @@ const PayManually = (props) => {
         });
     }
   };
+
+  const [ AllBetData,setAllBetData] =useState([])
+  useEffect(()=>{
+    UserAPI.WITHDRAW_STACK_REQUEST().then((res)=>{
+      setAllBetData(res?.data)
+
+    })
+  },[])
 
   const handleCloseModal = () => setShowModals(false);
   const handleShow = (e) => {
@@ -160,38 +165,18 @@ const PayManually = (props) => {
         </div>
         <div className="col-6 marTop deposit-value">
           <div className="row price-values">
+{AllBetData.map(({value,key}) => (
+
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
                 value="1000"
-                onClick={() => handleStaticAmount(1000)}>
-                +1000
+                onClick={() => handleStaticAmount(value)}>
+                {key}
               </button>
             </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                value="5000"
-                onClick={() => handleStaticAmount(5000)}>
-                +5000
-              </button>
-            </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                value="100000"
-                onClick={() => handleStaticAmount(100000)}>
-                +100000
-              </button>
-            </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                value="500000"
-                onClick={() => handleStaticAmount(500000)}>
-                +500000
-              </button>
-            </div>
+            ))
+          }
           </div>
         </div>
       </div>
@@ -208,6 +193,7 @@ const PayManually = (props) => {
                 payMethods?.map((item, id) => {
                   return (
                     <Col
+                    className={item.methodName === 'Bank'?"d-none":"" }
                       key={item.methodName + id}
                       onClick={() => handlePaymentDetails(item.methodName, id)}>
                       <div
@@ -269,10 +255,11 @@ const PayManually = (props) => {
               </Row>
             </div>
           </Container>
-        ) : (
+        ) : 
+        (
           ""
         )}
-        {paymentMode === "Bank" ? (
+        {/* {paymentMode === "Bank" ? (
           <Container className="bank-detail">
             <Row>
               <Col className="name-d">
@@ -333,7 +320,7 @@ const PayManually = (props) => {
           </Container>
         ) : (
           ""
-        )}
+        )} */}
         {paymentMode === "QR" ? (
           <Container className="bank-detail">
             <Row>

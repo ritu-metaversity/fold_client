@@ -46,10 +46,10 @@ function Login({ Errmessage, Statusmessage }) {
       })
         .then((res) => {
           const token = res.token;
-          if(res?.status === false){
+          if (res?.status === false) {
             setStatusVal(false);
             setMessage(res.message);
-            setIsLoading(false);  
+            setIsLoading(false);
           }
           localStorage.removeItem("UserName");
           localStorage.removeItem("UserPassword");
@@ -61,7 +61,7 @@ function Login({ Errmessage, Statusmessage }) {
           const uId = res.userId;
           localStorage.setItem("UserId", uId);
           if (res.token !== "" && res.status !== false) {
-          localStorage.setItem("token", token);
+            localStorage.setItem("token", token);
             nav("/m/home");
           }
           const pType = res.passwordtype;
@@ -71,6 +71,8 @@ function Login({ Errmessage, Statusmessage }) {
           }
         })
         .catch((error) => {
+          setStatusVal(false);
+          setMessage(error?.response?.data?.message);
           setIsLoading(false);
         });
     }
@@ -112,8 +114,12 @@ function Login({ Errmessage, Statusmessage }) {
         localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
         const uId = res.data?.username;
         localStorage.setItem("UserId", uId);
-        if (res.data?.token !== "" && res?.data?.token !== undefined  && res?.data.status !== false) {
-        localStorage.setItem("token", token);
+        if (
+          res.data?.token !== "" &&
+          res?.data?.token !== undefined &&
+          res?.data.status !== false
+        ) {
+          localStorage.setItem("token", token);
 
           nav("/m/home");
         }
@@ -129,17 +135,20 @@ function Login({ Errmessage, Statusmessage }) {
         }
       })
       .catch((error) => {
+        // console.log(error, "dfsgdf");
         setIsLoading1(false);
+        setStatusVal(false);
+        setMessage(error?.response?.data?.message);
+        setIsLoading(false);
       });
   };
 
-
-  useEffect(()=>{
-        UserAPI.Self_By_App_Url().then((res)=>{
-          setIsDemoIdLoginAllowed(res?.data?.selfAllowed)
-          setNavLogo(res?.data?.logo)
-        })
-  },[])
+  useEffect(() => {
+    UserAPI.Self_By_App_Url().then((res) => {
+      setIsDemoIdLoginAllowed(res?.data?.selfAllowed);
+      setNavLogo(res?.data?.logo);
+    });
+  }, []);
 
   return (
     <>
@@ -155,7 +164,8 @@ function Login({ Errmessage, Statusmessage }) {
         ) : (
           ""
         )}
-        {StatusVal === false && Statusmessage === undefined || Statusmessage === false ? (
+        {(StatusVal === false && Statusmessage === undefined) ||
+        Statusmessage === false ? (
           <div className="alertBtn">
             <AlertBtn color="danger" popupClose={popupClose} val={message} />
           </div>
@@ -217,21 +227,23 @@ function Login({ Errmessage, Statusmessage }) {
                   )}
                 </button>
               </div>
-              {
-                isDemoIdLoginAllowed ?<div className="form-group mb-0" style={{ marginTop: "12px" }}>
-                <button
-                  onClick={handleLoginWithDemoAccount}
-                  className="btn btn-primary btn-block">
-                  Login with Demo User
-                  {isLoading1 ? (
-                    <i className="ml-2 fa fa-spinner fa-spin"></i>
-                  ) : (
-                    <i className="ml-2 fa fa-sign-in"></i>
-                  )}
-                </button>
-              </div>:""
-              }
-              
+              {isDemoIdLoginAllowed ? (
+                <div className="form-group mb-0" style={{ marginTop: "12px" }}>
+                  <button
+                    onClick={handleLoginWithDemoAccount}
+                    className="btn btn-primary btn-block">
+                    Login with Demo User
+                    {isLoading1 ? (
+                      <i className="ml-2 fa fa-spinner fa-spin"></i>
+                    ) : (
+                      <i className="ml-2 fa fa-sign-in"></i>
+                    )}
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
+
               <div className="form-group mb-0" style={{ marginTop: "12px" }}>
                 <button
                   onClick={handleBackBtn}

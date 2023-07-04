@@ -26,8 +26,11 @@ useEffect(()=>{
   UserAPI.User_Balance().then((res) => {
     setUserBalance(res?.data?.balance - res?.data?.libality);
   }).catch((error)=>{
-    localStorage.clear();
-    navigator('/login')
+    
+    if(error?.response?.status === 401){
+      localStorage.clear();
+      navigator('/login')
+    }
   });
 }, []);
 

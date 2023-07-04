@@ -67,9 +67,12 @@ function GamedetailPage({ getStackValue, SportId }) {
             setUserbalance(res?.data?.balance);
           })
           .catch((error) => {
-            localStorage.clear()
+            if(error?.response?.status === 401){
+              setError(true);
+              nav("/login");
+              localStorage.clear();
+            }
             setError(true);
-            nav('/login')
           });
       }
     }, 1000);

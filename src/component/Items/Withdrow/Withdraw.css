@@ -157,3 +157,8 @@ p.lodder.with_modal_loder {
     z-index: 11;
     background: #f1f5f88c;
 }
+
+/* button:disabled,
+button[disabled]{
+  background-color: #0088cc85 !important;
+} */

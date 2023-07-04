@@ -271,6 +271,89 @@ export const UserAPI = {
 
     return response.data;
   },
+
+  SELF_WITHDRAW_APP: async function ( { accountHolderName, bankName, accountType, accountNumber, ifsc, amount, withdrawType, withdrawMode }, cancel = false) {
+    const response = await api.request({
+      url: `/self-withdraw-app`,
+      method: "POST",
+      data:{
+        accountHolderName: accountHolderName,
+        bankName: bankName,
+        accountType: accountType,
+        amount: amount,
+        ifsc: ifsc,
+        accountNumber: accountNumber,
+        withdrawType: withdrawType,
+        withdrawMode: withdrawMode,
+      },
+
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+  SAVE_BANK_DETAIL: async function ( { accountHolderName, bankName, accountType, accountNumber, ifsc, amount, withdrawType }, cancel = false) {
+    const response = await api.request({
+      url: `/save/client-bank`,
+      method: "POST",
+      data:{
+        accountHolderName: accountHolderName,
+        bankName: bankName,
+        accountType: accountType,
+        amount: amount,
+        ifsc: ifsc,
+        accountNumber: accountNumber,
+        withdrawType: withdrawType
+      },
+
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+  GET_BANK_DETAIL: async function (cancel = false) {
+    const response = await api.request({
+      url: `/withtype-subadmin/get`,
+      method: "POST",
+      
+
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+  WITHDRAW_STACK_REQUEST: async function (cancel = false) {
+    const response = await api.request({
+      url: `/request-stack`,
+      method: "POST",
+      
+
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
+  GET_CLIENT_BANK: async function (cancel = false) {
+    const response = await api.request({
+      url: `/get/client-bank`,
+      method: "POST",
+      
+
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
   
 };
 

@@ -120,8 +120,11 @@ const Withdraw = () => {
     UserAPI.User_Balance().then((res) => {
       setUserBalance(res?.data?.balance - res?.data?.libality);
     }).catch((error)=>{
-      localStorage.clear();
-      nav('/login')
+      if(error?.response?.status === 401){
+       
+        nav("/login");
+        localStorage.clear();
+      }
     });
   }, []);
 

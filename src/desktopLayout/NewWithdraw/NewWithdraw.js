@@ -5,17 +5,15 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import AlertBtn from "../../component/Alert/AlertBtn";
-import { UserAPI } from "../../apis/UserAPI";
 import { AuthorAPI } from "../../apis/AuthorAPI";
-import { GameAPI } from "../../apis/gameAPI";
+import { UserAPI } from "../../apis/UserAPI";
 
 const NewWithdraw = () => {
   const [withdrawData, setWithdrawData] = useState();
   // const [active, setActive] = useState(0);
   const [show, setShow] = useState(false);
   const [withType, setwithType] = useState("");
-  const [withCoinValue, setwithCoinValue] = useState(0);
-  // const [userAmount, setUserAmount] = useState();
+  const [withCoinValue, setwithCoinValue] = useState("");
   const [accountNumber, setAccountNumber] = useState();
   const [accountHolderName, setAccountHolderName] = useState();
   const [ifsc, setIFSC] = useState();
@@ -31,7 +29,8 @@ const NewWithdraw = () => {
   const [withdrawType, setWithdrawType] = useState();
   const [getAccountData, setGetAccountData] = useState();
   const [userBalance, setuserBalance] = useState();
-
+  const [dataLenth, setDataLenth] = useState();
+  const [saveModalsShow, setSaveModalsShow] = useState();
 
   const handleClose = () => {
     setShow(false);
@@ -57,58 +56,21 @@ const NewWithdraw = () => {
     setwithCoinValue(0);
   };
 
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-    axios
-      .post(
-        "http://api.247365.exchange/admin-new-apis/withtype-subadmin/get",
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        setWithdrawData(res?.data?.data);
-      });
 
-    axios
-      .post(
-        "http://api.247365.exchange/admin-new-apis/request-stack",
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        setStackValue(res?.data?.data);
-        console.log(res?.data?.data);
-      });
-
-    axios
-      .post(
-        "http://api.247365.exchange/admin-new-apis/get/client-bank",
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        setGetAccountData(res?.data?.data);
-      });
-
-    UserAPI.User_Balance().then((res)=>{
-      setuserBalance(res?.data?.balance)
+    UserAPI.GET_BANK_DETAIL().then((res)=>{
+      setWithdrawData(res?.data)
     })
 
+    UserAPI.WITHDRAW_STACK_REQUEST().then((res)=>{
+      setStackValue(res?.data)
+    })
+
+    UserAPI.User_Balance().then((res) => {
+      setuserBalance(res?.data?.balance);
+    });
   }, []);
 
   const handleStaticAmountInput = (e) => {
@@ -122,8 +84,7 @@ const NewWithdraw = () => {
     setIFSC("");
     setBankName("");
     setwithCoinValue(0);
-
-    const data = {
+    UserAPI.SAVE_BANK_DETAIL({
       accountHolderName: accountHolderName,
       bankName: bankName,
       accountType: AccountType,
@@ -131,22 +92,28 @@ const NewWithdraw = () => {
       ifsc: ifsc,
       accountNumber: accountNumber,
       withdrawType: bankID,
-    };
-    axios
-      .post("http://api.247365.exchange/admin-new-apis/save/client-bank", data, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setShow(false);
+    }).then((res)=>{
+      
+      setShow(false);
         setErrorAlert(true);
         setIsLoading(false);
         setColorName("success");
-        setMessage(res?.data?.message);
-      });
+        setMessage(res?.message);
+    }).catch((error)=>{
+      setErrorAlert(true);
+      setColorName("danger");
+      setMessage(error?.response?.data?.message);
+    })
   };
+
+
+  UserAPI.GET_CLIENT_BANK().then((res)=>{
+    setGetAccountData(res?.data);
+    setDataLenth(res?.data?.length);
+  })
+
+
+
 
   const handleBtnValue = (val) => {
     setwithCoinValue(
@@ -158,132 +125,144 @@ const NewWithdraw = () => {
     setErrorAlert(vl);
   };
 
-  const handleAccountName = (e) => {
-    const result = e.target.value.replace(/[^a-z]/gi, "");
-    setAccountHolderName(e.target.value.replace(/[^a-z]/gi, ""));
-  };
-
-  const handleClick = () => {
-    setErrorAlert(false);
-    setIsLoading(true);
-
-    if(userBalance < withCoinValue){
+  const handleValidate = () => {
+    if (userBalance < withCoinValue) {
       setMessage("insufficient balance");
-        setErrorAlert(true);
-        setColorName("danger");
-        setIsLoading(false);
+      setErrorAlert(true);
+      setColorName("danger");
+      setIsLoading(false);
+      return false;
     }
 
     if (withType === "BANK") {
-      if (withCoinValue === "" || withCoinValue === undefined) {
+      console.log("helooo");
+      if (
+        withCoinValue === "" ||
+        withCoinValue === undefined ||
+        withCoinValue === 0
+      ) {
         setMessage("The Amount field is required");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
+        return false;
       } else if (accountNumber === "") {
         setMessage("The Account Number is required");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
+        return false;
       } else if (accountHolderName === "") {
         setMessage("The Account Name field is required");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
+        return false;
       } else if (bankName === "") {
         setMessage("The Bank Name field is required");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
+        return false;
       } else if (ifsc === "") {
         setMessage("The IFSC field is required");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
+        return false;
       }
-    } else if(withType === "PAYTM"){
-      if (withCoinValue === "" || withCoinValue === undefined) {
+    } else if (withType === "PAYTM") {
+      console.log("heloo");
+      if (
+        withCoinValue === "" ||
+        withCoinValue === undefined ||
+        withCoinValue === 0
+      ) {
         setMessage("The Amount field is required");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
+        return false;
       } else if (accountNumber === "") {
         setMessage("Mobile Number is required");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
+        return false;
       } else if (accountHolderName === "") {
         setMessage("The Account Name field is required");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
+        return false;
       }
-    }
-    else {
-      if (withCoinValue === "" || withCoinValue === undefined) {
+    } else if (withType == "UPI") {
+      console.log("helo");
+      if (
+        withCoinValue === "" ||
+        withCoinValue === undefined ||
+        withCoinValue === 0
+      ) {
         setMessage("The Amount field is required");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
+        return false;
       } else if (accountNumber === "") {
-        setMessage("UPI Number is required");
+        setMessage("UPI ID is required");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
+        return false;
       } else if (accountHolderName === "") {
         setMessage("The Account Name field is required");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
+        return false;
+      } else if (
+        accountNumber.match(/^[a-zA-Z0-9.-]{2,256}@[a-zA-Z][a-zA-Z]{2,64}$/) ===
+        null
+      ) {
+        setMessage("Enter Valid UPI ID");
+        setErrorAlert(true);
+        setColorName("danger");
+        setIsLoading(false);
+        return false;
       }
     }
-
-    if (accountHolderName !== "" && accountNumber !== "" && userBalance >= withCoinValue) {
-      const data = {
+    return true;
+  };
+  const handleClick = () => {
+    setErrorAlert(false);
+    setIsLoading(true);
+    if (handleValidate()) {
+      UserAPI.SELF_WITHDRAW_APP({
         accountHolderName: accountHolderName,
-        bankName: bankName,
+        bankName: bankName ? bankName : "",
         accountType: withType === "BANK" ? AccountType : "",
         amount: withCoinValue,
-        ifsc: ifsc,
+        ifsc: ifsc ? ifsc : "",
         accountNumber: accountNumber,
         withdrawType: bankID,
         withdrawMode: withdrawType,
-      };
-      const token = localStorage.getItem("token");
-
-      axios
-        .post("http://api.247365.exchange/admin-new-apis/self-withdraw-app", data, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-        //  if (res?.data?.data?.bankExist === false) {
-        //     setShow(true);
-        //   }
-        //   else{
-        //     setMessage(res?.data);
-        //     setErrorAlert(true);
-        //     setColorName("success");
-        //     setIsLoading(false);
-        //   }
-        // setMessage(res?.data);
-
-        
-        setMessage(res?.data?.message);
-            setShow(true);
-
-            setErrorAlert(true);
-            setColorName("success");  
-            setIsLoading(false);
-        })
-        .catch((error) => {
+      }).then((res) => {
+        // if (res?.bankExist === false) {
+          setShow(true);
+        // } else {
+          setMessage(res?.message);
           setErrorAlert(true);
+          setColorName("success");
           setIsLoading(false);
-          setColorName("danger");
-          setMessage(error?.response?.data?.message);
-        });
+        // }
+        setIsLoading(false);
+        console.log(res?.message);
+      }).catch((error)=>{
+        setErrorAlert(true);
+        setIsLoading(false);
+        setColorName("danger");
+        setMessage(error?.response?.data?.message);
+      });
     }
   };
 
@@ -300,8 +279,6 @@ const NewWithdraw = () => {
     setIFSC(ifscNum);
     setAccountType(accType);
   };
-
-  // const filterData = getAccountData?.filter(getAccountData.)
   return (
     <>
       {errorAlert ? (

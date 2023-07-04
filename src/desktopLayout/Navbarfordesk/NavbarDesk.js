@@ -67,8 +67,12 @@ const NavbarDesk = (props) => {
           setExp(res?.data?.libality);
         })
         .catch((error) => {
+          if(error?.response?.status === 401){
+            setError(true);
+            nav("/login");
+            localStorage.clear();
+          }
           setError(true);
-          nav('/login')
         });
     }
 
@@ -81,8 +85,12 @@ const NavbarDesk = (props) => {
           setExp(res?.data?.libality);
         })
         .catch((error) => {
+          if(error?.response?.status === 401){
+            setError(true);
+            nav("/login");
+            localStorage.clear();
+          }
           setError(true);
-          nav('/login')
         });
     }
   }, 1500);
