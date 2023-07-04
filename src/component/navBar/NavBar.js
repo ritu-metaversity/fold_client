@@ -20,41 +20,36 @@ const NavBar = () => {
   const [expShow, setExpShowShow] = useState(true);
   const [showExpModals, setShowExpModals] = useState(false);
   const [NavLogo, setNavLogo] = useState();
+  const [searchValue, setSearchValue] = useState("");
 
   const nav = useNavigate();
   const { pathname } = useLocation();
 
-
   // const [visible, setVisible] = useState(false);
   const toggleVisible = () => {
-
-    
     // const scrolled = document.documentElement.scrollTop;
     if (document.documentElement.scrollTop >= 200) {
       setClose(false);
-    }else{
+    } else {
       setClose(false);
-
     }
   };
 
   const scrollToTop = () => {
-    
     if (close === false) {
       setClose(true);
-    } else if(document.documentElement.scrollTop >= 200){
+    } else if (document.documentElement.scrollTop >= 200) {
       window.scrollTo({
         top: 0,
         behavior: "auto",
       });
-    }else{
+    } else {
       setClose(false);
-
     }
   };
   window.addEventListener("scroll", toggleVisible);
 
-console.log(close,"jhgvbhuygtv")
+  console.log(close, "jhgvbhuygtv");
 
   function toggle(e) {
     e.preventDefault();
@@ -64,8 +59,9 @@ console.log(close,"jhgvbhuygtv")
       setClose(false);
     }
   }
-  
+
   function droupMenu(e) {
+    setSearchValue("")
     e.preventDefault();
     if (droup === false) {
       setDrop(true);
@@ -89,21 +85,22 @@ console.log(close,"jhgvbhuygtv")
   }, [nav]);
 
   useEffect(() => {
-
     const token = localStorage.getItem("token");
-      if (token !== null && localStorage.getItem("Password-type") !== "old") {
-        UserAPI.User_Balance()
-          .then((res) => {
-            setUserbalance(res?.data?.balance);
-            setExp(res?.data?.libality);
-          })
-          .catch((error) => {
+    if (token !== null && localStorage.getItem("Password-type") !== "old") {
+      UserAPI.User_Balance()
+        .then((res) => {
+          setUserbalance(res?.data?.balance);
+          setExp(res?.data?.libality);
+        })
+        .catch((error) => {
+          if(error?.response?.status === 401){
             setError(true);
+            nav("/login");
             localStorage.clear();
-            nav('/login')
-          });
-      }
-
+          }
+          setError(true);
+        });
+    }
 
     const time = setInterval(() => {
       if (token !== null && localStorage.getItem("Password-type") !== "old") {
@@ -113,9 +110,13 @@ console.log(close,"jhgvbhuygtv")
             setExp(res?.data?.libality);
           })
           .catch((error) => {
+          if(error?.response?.status === 401){
             setError(true);
-            nav('/login');
-            localStorage.clear()
+            nav("/login");
+            localStorage.clear();
+          }
+          setError(true);
+
           });
       }
     }, 1500);
@@ -123,12 +124,11 @@ console.log(close,"jhgvbhuygtv")
     return () => clearInterval(time);
   }, []);
 
-
   const handleSignOut = () => {
     if (localStorage.getItem("token") !== null)
       AuthorAPI.LOGOUT().then((res) => {});
-      localStorage.clear();
-    nav("/m/login")
+    localStorage.clear();
+    nav("/m/login");
   };
 
   const balanceHideShow = (e) => {
@@ -183,6 +183,8 @@ console.log(close,"jhgvbhuygtv")
       window.removeEventListener("scroll", controlNavbar);
     };
   }, []);
+
+  console.log(searchValue, "SDfdghfyg")
 
   return (
     <>
@@ -251,7 +253,8 @@ console.log(close,"jhgvbhuygtv")
                           }>
                           <Link
                             to="/m/home"
-                            className="dropdown-item router-link-exact-active router-link-active" onClick={()=> setClose(false)}>
+                            className="dropdown-item router-link-exact-active router-link-active"
+                            onClick={() => setClose(false)}>
                             Home
                           </Link>
                           {localStorage.getItem("UsertypeInfo") == 2 ? (
@@ -277,9 +280,7 @@ console.log(close,"jhgvbhuygtv")
 
                           <Link
                             to="/m/reports/accountstatement"
-                            className="dropdown-item" 
-
-                            >
+                            className="dropdown-item">
                             Account Statement
                           </Link>
                           <Link
@@ -352,7 +353,7 @@ console.log(close,"jhgvbhuygtv")
                           </Link>
                         </div>
                       ) : (
-                       ""
+                        ""
                       )}
                     </div>
                   </div>
@@ -384,6 +385,8 @@ console.log(close,"jhgvbhuygtv")
                     <div className="search-box float-left">
                       <input
                         type="text"
+                        onChange={(e)=>setSearchValue(e.target.value)}
+                        value={searchValue}
                         className={
                           !droup
                             ? "search_input"

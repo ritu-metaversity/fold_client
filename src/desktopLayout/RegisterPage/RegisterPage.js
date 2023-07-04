@@ -40,10 +40,13 @@ const RegisterPage = () => {
     }else if(confirmPassword !== password){
       setErrorMsg("Password and Password Confirmation should be same");
       setStatusVal(true)
+    }else if(mobileNumber?.length !== 10 ){
+      setErrorMsg("Please enter valid  Mobile Number");
+      setStatusVal(true)
     }
 
 
-    if (UserName !== "" && password !== "" && confirmPassword === password && mobileNumber !== "" && mobileNumber !== undefined) {
+    if (UserName !== "" && password !== "" && confirmPassword === password && mobileNumber !== "" && mobileNumber !== undefined && mobileNumber?.length === 10) {
       setIsLoading(true);
       AuthorAPI.Register({
         username: UserName,
