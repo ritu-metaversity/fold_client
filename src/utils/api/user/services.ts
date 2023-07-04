@@ -10,13 +10,14 @@ interface ChangePasswordPayload {
   currentPassword: string;
   confirmPassword?: string;
 }
-interface SelfWithdrawPayload {
+export interface SelfWithdrawPayload {
   accountHolderName: string;
-  bankName: string;
-  accountType: string;
+  bankName?: string;
+  accountType?: string;
   accountNumber: string;
-  ifsc: string;
+  ifsc?: string;
   amount: number;
+  withdrawType: string;
 }
 interface FirstLoginPayload {
   newPassword: string;
@@ -172,7 +173,7 @@ export const userServices = {
   },
   selfWithdraw: async (data: SelfWithdrawPayload) => {
     const params = {
-      resource: userResources.SELF_WITHDRAW,
+      resource: userResources.SELF_WITHDRAW_TEST,
       data,
     };
     return await apiWithSnackbar(params);
@@ -209,6 +210,31 @@ export const userServices = {
     const params = {
       resource: userResources.CANCEL_WITHDRAWL_REQUEST,
       data: { id },
+    };
+    return await apiWithSnackbar(params);
+  },
+  getWithdrawStack: async () => {
+    const params = {
+      resource: userResources.WITHDRAW_STACK,
+    };
+    return await apiHandler(params);
+  },
+  getWithdrawTypes: async () => {
+    const params = {
+      resource: userResources.WITHDRAW_TYPES,
+    };
+    return await apiHandler(params);
+  },
+  getWithdrawSaved: async () => {
+    const params = {
+      resource: userResources.WITHDRAW_GET_SAVED,
+    };
+    return await apiHandler(params);
+  },
+  saveWithdrawMethod: async (data: SelfWithdrawPayload) => {
+    const params = {
+      resource: userResources.SAVE_WITHDRAW_METHOD,
+      data,
     };
     return await apiWithSnackbar(params);
   },

@@ -99,4 +99,24 @@ export const userResources: {
     URL: "enduser/cancel-withdraw-request-eu",
     METHOD: "POST",
   },
+  SELF_WITHDRAW_TEST: {
+    URL: "self-withdraw-app",
+    METHOD: "POST",
+  },
+  WITHDRAW_STACK: {
+    URL: "request-stack",
+    METHOD: "POST",
+  },
+  WITHDRAW_TYPES: {
+    URL: "withtype-subadmin/get",
+    METHOD: "POST",
+  },
+  WITHDRAW_GET_SAVED: {
+    URL: "get/client-bank",
+    METHOD: "POST",
+  },
+  SAVE_WITHDRAW_METHOD: {
+    URL: "save/client-bank",
+    METHOD: "POST",
+  },
 };

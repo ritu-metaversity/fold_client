@@ -125,7 +125,7 @@ const Profile = () => {
             Total Balance:
           </Grid>
           <Grid textAlign={"left"} xs={5.8} item>
-            {profileData?.exposure + profileData?.balance}
+            {Number(profileData?.exposure) + Number(profileData?.balance)}
           </Grid>
           <Grid item xs={12}>
             <Divider sx={{ borderColor: "white", borderWidth: "1px" }} />

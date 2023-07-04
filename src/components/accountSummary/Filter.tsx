@@ -121,8 +121,8 @@ const Filter: FC<Props> = ({ searchFilters, setSearchFilters }) => {
             fullWidth
           >
             <MenuItem value="1">All</MenuItem>
-            <MenuItem value="2">Deposit/Withdrawal Report</MenuItem>
-            <MenuItem value="3">Game report</MenuItem>
+            <MenuItem value="3">Deposit/Withdrawal Report</MenuItem>
+            <MenuItem value="2">Game report</MenuItem>
           </Select>
         </Grid>
         <Grid

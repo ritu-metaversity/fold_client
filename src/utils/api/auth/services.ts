@@ -5,9 +5,6 @@ interface LoginPayload {
   userId: string;
   password: string;
   appUrl: string;
-  // userIp: string;
-  // userType: string;
-  // type: string;
 }
 
 interface SelfAllowedPayload {

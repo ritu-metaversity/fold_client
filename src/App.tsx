@@ -72,6 +72,7 @@ const defaultStake = {
 interface AppDataInterface {
   logo: string;
   mobileLogo: string;
+  isDemoIdLoginAllowed: boolean;
   selfAllowed: boolean;
 }
 
@@ -135,7 +136,6 @@ function App() {
 
   const getSelfAllowed = async () => {
     const { response } = await authServices.isSelfAllowed({
-      // appUrl: "11hub.atozscore1234.com",
       appUrl: window.location.hostname,
     });
 
@@ -216,9 +216,6 @@ function App() {
     };
   }, [isSignedIn, getBalance]);
 
-
-
-  // fetch("http://192.168.0.245:8000/group/get-groups-chats");
   if (isSignedIn === null) {
     return <LoadingBallSvg />;
   }

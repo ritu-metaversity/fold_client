@@ -60,20 +60,22 @@ export function PaymentMethods() {
 
   return (
     <>
-      {" "}
       <Typography my={4}>Pay Manually</Typography>
       <CardContainerContainer>
-        {paymentData?.paymentMethods?.map((elem) => (
-          <Card
-            selected={selected === elem.methodName}
-            details={elem}
-            handleClick={() => handleClick(elem.methodName)}
-          />
-        ))}
+        {paymentData?.paymentMethods?.map(
+          (elem) =>
+            elem.methodName.toUpperCase() !== "BANK" && (
+              <Card
+                selected={selected === elem.methodName}
+                details={elem}
+                handleClick={() => handleClick(elem.methodName)}
+              />
+            )
+        )}
       </CardContainerContainer>
-      {selected === "Bank" && (
+      {/* {selected === "Bank" && (
         <BankInfoComponent bankDetails={paymentData?.bankDetail} />
-      )}
+      )} */}
       {selected === "UPI" && <UPIDetails upiDetails={paymentData?.upiDetail} />}
       {selected === "QR" && <QRcodeComponent qrDetails={paymentData?.qrCode} />}
     </>

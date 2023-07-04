@@ -46,7 +46,20 @@ const InplaySport = () => {
     return () => {};
   }, []);
   return (
-    <div>
+    <Box
+      maxHeight={{ xs: "310px", lg: "100%" }}
+      // minHeight={{ lg: "calc(100vh - 440px)" }}
+      sx={{
+        overflowY: "overlay",
+        overflowX: "hidden",
+        p: { xs: 0.5, lg: 0 },
+      }}
+      id={
+        isMobile
+          ? "scrollable-match-list-mobile"
+          : "scrollable-match-list-desktop"
+      }
+    >
       {loading ? (
         <Box height={200}>
           <Loading />
@@ -60,18 +73,13 @@ const InplaySport = () => {
               iconClass={sport.iconClass}
             />
             <Box
-              id={
-                isMobile
-                  ? "scrollable-match-list-mobile"
-                  : "scrollable-match-list-desktop"
-              }
-              maxHeight={{ xs: "310px", lg: "100%" }}
-              // minHeight={{ lg: "calc(100vh - 440px)" }}
-              sx={{
-                overflowY: "overlay",
-                overflowX: "hidden",
-                p: { xs: 0.5, lg: 0 },
-              }}
+            // maxHeight={{ xs: "310px", lg: "100%" }}
+            // // minHeight={{ lg: "calc(100vh - 440px)" }}
+            // sx={{
+            //   overflowY: "overlay",
+            //   overflowX: "hidden",
+            //   p: { xs: 0.5, lg: 0 },
+            // }}
             >
               {sport.matchList?.map((item) => (
                 <Match
@@ -86,7 +94,7 @@ const InplaySport = () => {
       ) : (
         <BoxWithTitleBox>No Data Found</BoxWithTitleBox>
       )}
-    </div>
+    </Box>
   );
 };
 
