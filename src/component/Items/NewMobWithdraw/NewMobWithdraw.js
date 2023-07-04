@@ -29,6 +29,9 @@ const NewMobWithdraw = () => {
   const [userBalance, setuserBalance] = useState();
   const [dataLenth, setDataLenth] = useState();
   const [saveModalsShow, setSaveModalsShow] = useState();
+  const [showWithdraw, setshowWithdraw] = useState(false);
+  const [withdrawReq, setWithdrawReq] = useState();
+  const [dataLength, setDataLength] = useState();
 
   const handleClose = () => {
     setShow(false);
@@ -56,7 +59,7 @@ const NewMobWithdraw = () => {
 
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
 
     UserAPI.GET_BANK_DETAIL().then((res)=>{
       setWithdrawData(res?.data)
@@ -68,6 +71,12 @@ const NewMobWithdraw = () => {
 
     UserAPI.User_Balance().then((res) => {
       setuserBalance(res?.data?.balance);
+    });
+
+    UserAPI.Withdraw_Request().then((res) => {
+      setIsLoading(false);
+      setWithdrawReq(res.data);
+      setDataLength(res?.data?.length);
     });
   }, []);
 
@@ -104,14 +113,45 @@ const NewMobWithdraw = () => {
     })
   };
 
+  useEffect(()=>{
+    UserAPI.GET_CLIENT_BANK().then((res)=>{
+      setGetAccountData(res?.data);
+      setDataLenth(res?.data?.length);
+    })
+  }, [])
+  
 
-  UserAPI.GET_CLIENT_BANK().then((res)=>{
-    setGetAccountData(res?.data);
-    setDataLenth(res?.data?.length);
-  })
+  const [dataId, setDataId] = useState();
+  const handlePending = (val) => {
+    setshowWithdraw(true);
+    setDataId(val);
+  };
 
+  const handleCloseSubmit = () => {
+    setIsLoading(true);
+    UserAPI.USER_CANCEL_WITHDRAW_REQUIEST({
+      id: dataId,
+    })
+      .then((res) => {
+        setIsLoading(false);
+        setMessage(res.message);
+        setErrorAlert(true);
+        setColorName("success");
+        setshowWithdraw(false)
 
-
+        UserAPI.Withdraw_Request().then((res) => {
+          setWithdrawReq(res.data);
+          setDataLength(res.data.length);
+        });
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setErrorAlert(true);
+        setMessage(error.response.data.message);
+        setColorName("danger");
+        setShow(false);
+      });
+  };
 
   const handleBtnValue = (val) => {
     setwithCoinValue(
@@ -263,6 +303,10 @@ const NewMobWithdraw = () => {
       });
     }
   };
+
+const handleClose1 = ()=>{
+  setshowWithdraw(false)
+}
 
   const handleWithdrawData = (
     accNumber,
@@ -641,12 +685,223 @@ const NewMobWithdraw = () => {
                     Withdraw Coins
                   </button>
                 </div>
+
+                {/* <div className="row row5 mt-2">
+              <div className="col-12">
+                <div className="table-responsive withdrow-table">
+                  <table
+                    role="table"
+                    aria-busy="false"
+                    aria-colcount="6"
+                    className="table b-table table-bordered"
+                    id="__BVID__104">
+                    <thead>
+                      <tr className="previous-deposite">
+                        <th colSpan="10">Previous Withdraw</th>
+                      </tr>
+                      <tr role="row" className="account-detail">
+                        <th
+                          role="columnheader"
+                          scope="col"
+                          aria-colindex="1"
+                          className="text-left ">
+                          Account Number
+                        </th>
+                        <th
+                          role="columnheader"
+                          scope="col"
+                          aria-colindex="2"
+                          className="text-left ">
+                          Account Name
+                        </th>
+                        <th
+                          role="columnheader"
+                          scope="col"
+                          aria-colindex="3"
+                          className="text-right ">
+                          Amount
+                        </th>
+                        <th
+                          role="columnheader"
+                          scope="col"
+                          aria-colindex="4"
+                          className="text-left ">
+                          Bank Name/ Address
+                        </th>
+                        <th
+                          role="columnheader"
+                          scope="col"
+                          aria-colindex="5"
+                          className="text-left ">
+                          IFSC Code
+                        </th>
+                        <th
+                          role="columnheader"
+                          scope="col"
+                          aria-colindex="6"
+                          className="text-left ">
+                          Account Type / Currency
+                        </th>
+                        <th
+                          role="columnheader"
+                          scope="col"
+                          aria-colindex="6"
+                          className="text-left withdraw-data">
+                          Date
+                        </th>
+                        <th
+                          role="columnheader"
+                          scope="col"
+                          aria-colindex="6"
+                          className="text-left"
+                          style={{ paddingRight: "82px" }}>
+                          Remark
+                        </th>
+                        <th
+                          role="columnheader"
+                          scope="col"
+                          aria-colindex="6"
+                          className="text-left ">
+                          Status
+                        </th>
+                        <th
+                          role="columnheader"
+                          scope="col"
+                          aria-colindex="6"
+                          className="text-left ">
+                          Action
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody className={`${dataLength === 0 ? "d-none" : ""}`}>
+                      {withdrawReq?.length &&
+                        withdrawReq.map((item, index) => {
+                          console.log(item, "adsafsf")
+                          return (
+                            <>
+                              <tr role="row" key={index}>
+                                <td
+                                  aria-colindex="1"
+                                  className="text-left withdraw-data">
+                                  {item.accountNumber}
+                                </td>
+                                <td
+                                  aria-colindex="2"
+                                  className="text-left withdraw-data">
+                                  {item.accountHolderName}
+                                </td>
+                                <td aria-colindex="3" className="text-right ">
+                                  {item.amount}
+                                </td>
+                                <td
+                                  aria-colindex="4"
+                                  className="text-left withdraw-data">
+                                  {item.bankName}
+                                </td>
+                                <td
+                                  aria-colindex="5"
+                                  className="text-left  withdraw-data">
+                                  {item.ifsc}
+                                </td>
+                                <td
+                                  aria-colindex="6"
+                                  className="text-lift withdraw-data">
+                                  {item.accountType}
+                                </td>
+                                <td aria-colindex="6" className="text-lift">
+                                  {item.time}
+                                  {}
+                                </td>
+                                <td
+                                  aria-colindex="6"
+                                  className="text-lift"
+                                  style={{ paddingRight: "" }}>
+                                  {item.remark}
+                                </td>
+                                <td aria-colindex="6" className="text-left">
+                                  <p
+                                    className={`${
+                                      item.status === "Pending"
+                                        ? "pending"
+                                        : item.status === "APPROVED"
+                                        ? "approved"
+                                        : "rejected"
+                                    }`}>
+                                    {item.status}
+                                  </p>
+                                </td>
+                                <td
+                                  aria-colindex="6"
+                                  className={`text-left ${
+                                    item.status === "Pending" ? "" : "d-none"
+                                  }`}
+                                  onClick={() => handlePending(item?.id)}>
+                                  <button className="cancelBtnTd">
+                                    Cancel
+                                  </button>
+                                </td>
+                              </tr>
+                            </>
+                          );
+                        })}
+                      <Modal show={showWithdraw} onHide={handleClose1}>
+                        <Modal.Header closeButton className="cancelRequest">
+                          <Modal.Title>Cancel Request</Modal.Title>
+                        </Modal.Header>
+                        {isLoading ? (
+                          <p className="lodder with_modal_loder">
+                            <i className="fa fa-spinner fa-spin"></i>
+                          </p>
+                        ) : (
+                          ""
+                        )}
+                        <Modal.Body>
+                          Are you sure you want to cancel this request?
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button
+                            variant="secondary"
+                            className="modalBtn"
+                            onClick={handleClose}>
+                            Close
+                          </Button>
+                          <Button
+                            variant="primary"
+                            type="button"
+                            className="modalBtn"
+                            onClick={handleCloseSubmit}>
+                            Submit
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </tbody>
+                    <tbody>
+                      <tr
+                        role="row"
+                        className={`${
+                          dataLength === 0 || withdrawReq === null
+                            ? ""
+                            : "d-none"
+                        }`}>
+                        <td
+                          aria-colindex="1"
+                          colSpan="10"
+                          className="text-left withdraw-data">
+                          <p className="no-record-found">No records found</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div> */}
               </div>
             </div>
           </div>
         </div>
 
-        <Modal show={show} onHide={handleClose}>
+        {/* <Modal show={show} onHide={handleClose}>
           <Modal.Body>Do you want to save the Bank Details?</Modal.Body>
           <Modal.Footer>
             <Button
@@ -662,7 +917,7 @@ const NewMobWithdraw = () => {
               Save
             </Button>
           </Modal.Footer>
-        </Modal>
+        </Modal> */}
       </div>
     </>
   );

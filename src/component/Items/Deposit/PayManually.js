@@ -53,22 +53,22 @@ const PayManually = (props) => {
     setActive(id);
   };
 
+  console.log(Bitvalue, "adsefgesrt");
 
   const handleSubmit = () => {
     setAlertBtnshow(false);
     setIsLoading(true);
-    if (Bitvalue === 0 || Bitvalue != NaN ){
+    if (Bitvalue === 0 || Bitvalue === NaN) {
       setColor("danger");
       setMessege("Amount should be greater than 99");
       setAlertBtnshow(true);
       setIsLoading(false);
-    } else if(files === null){
+    } else if (files === null) {
       setColor("danger");
       setMessege("Payment Screenshot is required");
       setAlertBtnshow(true);
       setIsLoading(false);
-    }
-    else if (Bitvalue <= 99) {
+    } else if (Bitvalue < 99) {
       setColor("danger");
       setMessege("Minimum Deposit Amount is 100");
       setAlertBtnshow(true);
@@ -78,7 +78,7 @@ const PayManually = (props) => {
     const data = new FormData();
     data.append("amount", Bitvalue);
     data.append("image", files || "");
-    if (Bitvalue > 99 && Bitvalue !== "" && Bitvalue != NaN ) {
+    if (Bitvalue > 99 && Bitvalue !== "" && Bitvalue != NaN) {
       UserAPI.Self_Deposit_App({ data })
         .then((res) => {
           setIsLoading(false);
@@ -102,13 +102,12 @@ const PayManually = (props) => {
     }
   };
 
-  const [ AllBetData,setAllBetData] =useState([])
-  useEffect(()=>{
-    UserAPI.WITHDRAW_STACK_REQUEST().then((res)=>{
-      setAllBetData(res?.data)
-
-    })
-  },[])
+  const [AllBetData, setAllBetData] = useState([]);
+  useEffect(() => {
+    UserAPI.WITHDRAW_STACK_REQUEST().then((res) => {
+      setAllBetData(res?.data);
+    });
+  }, []);
 
   const handleCloseModal = () => setShowModals(false);
   const handleShow = (e) => {
@@ -165,18 +164,16 @@ const PayManually = (props) => {
         </div>
         <div className="col-6 marTop deposit-value">
           <div className="row price-values">
-{AllBetData.map(({value,key}) => (
-
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                value="1000"
-                onClick={() => handleStaticAmount(value)}>
-                {key}
-              </button>
-            </div>
-            ))
-          }
+            {AllBetData.map(({ value, key }) => (
+              <div className="col-3 price-data">
+                <button
+                  className="btn btn-secondary btn-block mb-2"
+                  value="1000"
+                  onClick={() => handleStaticAmount(value)}>
+                  {key}
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -193,7 +190,7 @@ const PayManually = (props) => {
                 payMethods?.map((item, id) => {
                   return (
                     <Col
-                    className={item.methodName === 'Bank'?"d-none":"" }
+                      className={item.methodName === "Bank" ? "d-none" : ""}
                       key={item.methodName + id}
                       onClick={() => handlePaymentDetails(item.methodName, id)}>
                       <div
@@ -255,8 +252,7 @@ const PayManually = (props) => {
               </Row>
             </div>
           </Container>
-        ) : 
-        (
+        ) : (
           ""
         )}
         {/* {paymentMode === "Bank" ? (

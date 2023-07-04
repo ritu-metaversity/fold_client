@@ -49,7 +49,7 @@ const NavBar = () => {
   };
   window.addEventListener("scroll", toggleVisible);
 
-  console.log(close, "jhgvbhuygtv");
+  
 
   function toggle(e) {
     e.preventDefault();
@@ -184,7 +184,6 @@ const NavBar = () => {
     };
   }, []);
 
-  console.log(searchValue, "SDfdghfyg")
 
   return (
     <>
