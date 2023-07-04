@@ -35,6 +35,7 @@ const err = {
   noAccount: "The Account Number field is required",
   invalidAccount:
     "The Account Number field may only contain numeric characters",
+  invalidUpi: "The UPI field format is invalid",
   noAmount: "The Amount field is required",
   invalidAmount: "The Amount field may only contain numeric characters",
 };
@@ -90,19 +91,24 @@ export function WithdrawForm({
     validate: (values) => {
       const newError = {
         accountHolderName: values.accountHolderName
-          ? values.accountHolderName.match(/^[a-zA-Z ]*$/)
+          ? values.accountHolderName?.match(/^[a-zA-Z ]*$/)
             ? undefined
             : err.invalidName
           : err.noName,
         accountNumber: values.accountNumber
-          ? values.accountNumber.match(/^[0-9]*$/) ||
-            values.withdrawType.toLowerCase() === "upi"
+          ? values.withdrawType.toLowerCase() === "upi"
+            ? values.accountNumber?.match(
+                /^[a-zA-Z0-9.-]{2,256}@[a-zA-Z][a-zA-Z]{2,64}$/
+              )
+              ? undefined
+              : err.invalidUpi
+            : values.accountNumber?.match(/^[0-9]*$/)
             ? undefined
             : err.invalidAccount
           : err.noAccount,
 
         amount: values.amount
-          ? values.amount.toString().match(/^[0-9]*$/)
+          ? values.amount.toString()?.match(/^[0-9]*$/)
             ? undefined
             : err.invalidAmount
           : err.noAmount,
@@ -112,7 +118,7 @@ export function WithdrawForm({
             : err.noBank,
         ifsc:
           values.ifsc || values.withdrawType.toLowerCase() !== "bank"
-            ? values.ifsc.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) ||
+            ? values.ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) ||
               values.withdrawType.toLowerCase() !== "bank"
               ? undefined
               : err.invalidIfsc
@@ -139,9 +145,12 @@ export function WithdrawForm({
           ?.id || "";
       setSaveWithdrawData(newValues);
       const { response } = await userServices.selfWithdraw(newValues);
+      console.log(response, "bank");
       if (response) {
+        if (response.data.bankExist === false) {
+          setOpen(true);
+        }
         resetForm();
-        setOpen(true);
         getWithdrawList();
       }
       setLoading(false);
@@ -191,6 +200,8 @@ export function WithdrawForm({
     getStack();
     getSavedInfo();
   }, []);
+
+  console.log(values, "asdfkjajds");
 
   return (
     <>
@@ -455,8 +466,16 @@ export function WithdrawForm({
           <Box my={2}>
             <ActivityTable
               onRowClick={(row: any) => {
-                if (row) {
+                if (row && row.id !== savedCheck) {
                   setSavedCheck(row.id);
+                  setFieldValue("accountHolderName", row.accountHolderName);
+                  setFieldValue("bankName", row.bankName);
+                  setFieldValue("accountType", row.accountType);
+                  setFieldValue("accountNumber", row.accountNumber);
+                  setFieldValue("ifsc", row.ifsc);
+                  setFieldValue("withdrawType", row.withdrawType);
+                } else {
+                  setSavedCheck("");
                   setFieldValue("accountHolderName", row.accountHolderName);
                   setFieldValue("bankName", row.bankName);
                   setFieldValue("accountType", row.accountType);

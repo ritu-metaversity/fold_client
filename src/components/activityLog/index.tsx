@@ -119,6 +119,9 @@ const Activity = () => {
             })
           );
           setPage(1);
+        } else {
+           setOriginalRows([]);
+           setRows([]);
         }
       }
       setLoading(false);

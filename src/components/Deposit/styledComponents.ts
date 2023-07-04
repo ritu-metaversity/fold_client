@@ -49,10 +49,10 @@ export const CardContainerContainer = styled(Box)(({ theme }) => ({
     borderColor: theme.palette.primary.main,
   },
 
-  width: "max-content",
-  [theme.breakpoints.down("sm")]: {
-    width: "100%",
-  },
+  // width: "max-content",
+  // [theme.breakpoints.down("sm")]: {
+  width: "100%",
+  // },
   maxWidth: "100%",
   flexWrap: "wrap",
   padding: "0.5em",

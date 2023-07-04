@@ -51,6 +51,7 @@ export function RegisterForm() {
         snackBarUtil.error("Please agree Terms and Conditions");
         return;
       }
+      values.username = values.username.trim();
       if (loading) return;
       setLoading(true);
       const { response } = await userServices.register(values);

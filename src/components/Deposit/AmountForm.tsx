@@ -1,22 +1,40 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { StyledAmountInput, StyledButtonSmall } from "./styledComponents";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Typography } from "@mui/material";
 import { colorHex } from "../../utils/constants";
+import { userServices } from "../../utils/api/user/services";
 
-const buttonAmountArr = [100, 500, 1000, 5000];
 interface Props {
   amount: number;
   setAmount: Dispatch<SetStateAction<number>>;
 }
 export function AmountForm({ amount, setAmount }: Props) {
+  const [stack, setStack] = useState([]);
+
   const handleMinusClick = () => {
     setAmount((prev) => (prev - 10 > 100 ? prev - 10 : 100));
   };
   const handlePlusClick = () => {
     setAmount((prev) => (prev + 10 > 100 ? prev + 10 : 100));
   };
+
+  const getStack = async () => {
+    const { response } = await userServices.getWithdrawStack();
+    if (response?.data) {
+      setStack(response.data);
+    }
+  };
+  useEffect(() => {
+    getStack();
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (Math.abs(Math.floor(Number(e.target.value)))) {
@@ -75,12 +93,12 @@ export function AmountForm({ amount, setAmount }: Props) {
           </Box>
         </Box>
         <Box display="flex">
-          {buttonAmountArr.map((amount) => (
+          {stack.map(({ key, value }) => (
             <StyledButtonSmall
-              key={`${amount}-button`}
-              onClick={() => setAmount((o) => o + amount)}
+              key={`${value}-button`}
+              onClick={() => setAmount((o) => Number(o) + Number(value))}
             >
-              +{amount}
+              {key}
             </StyledButtonSmall>
           ))}
         </Box>

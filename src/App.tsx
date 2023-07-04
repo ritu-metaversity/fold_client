@@ -216,7 +216,6 @@ function App() {
     };
   }, [isSignedIn, getBalance]);
 
-  // fetch("http://192.168.0.245:8000/group/get-groups-chats");
   if (isSignedIn === null) {
     return <LoadingBallSvg />;
   }

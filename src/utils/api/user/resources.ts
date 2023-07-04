@@ -100,23 +100,23 @@ export const userResources: {
     METHOD: "POST",
   },
   SELF_WITHDRAW_TEST: {
-    URL: "http://192.168.68.114/self-withdraw-app",
+    URL: "self-withdraw-app",
     METHOD: "POST",
   },
   WITHDRAW_STACK: {
-    URL: "http://192.168.68.114/request-stack",
+    URL: "request-stack",
     METHOD: "POST",
   },
   WITHDRAW_TYPES: {
-    URL: "http://192.168.68.114/withtype-subadmin/get",
+    URL: "withtype-subadmin/get",
     METHOD: "POST",
   },
   WITHDRAW_GET_SAVED: {
-    URL: "http://192.168.68.114/get/client-bank",
+    URL: "get/client-bank",
     METHOD: "POST",
   },
   SAVE_WITHDRAW_METHOD: {
-    URL: "http://192.168.68.114/save/client-bank",
+    URL: "save/client-bank",
     METHOD: "POST",
   },
 };
