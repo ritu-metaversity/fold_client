@@ -58,7 +58,7 @@ const PaymanuallyDesk = (props) => {
     setIsLoading(true);
     setAlertBtnshow(false);
 
-    if(Bitvalue == 0 || Bitvalue != "0" || Bitvalue != NaN){
+    if(Bitvalue == 0 || Bitvalue != "0" || Bitvalue === NaN){
       setColor("danger")
       setMessege("Ammout is Greate then 99");
       setAlertBtnshow(true)

@@ -137,13 +137,12 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
         localStorage.setItem("UserId", uId);
         if (res.data?.token !== "" && res?.data?.token !== undefined  && res?.data.status !== false) {
         localStorage.setItem("token", token);
-
-          nav("/m/home");
+          nav("/home");
         }
         const pType = res?.data?.passwordtype;
         localStorage.setItem("Password-type", pType);
         if (pType === "old") {
-          nav("/m/setting/changepassword");
+          nav("/changepassword");
         }
         if (res?.data.status === false) {
           setStatusVal(false);
