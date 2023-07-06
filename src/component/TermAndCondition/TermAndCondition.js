@@ -33,7 +33,7 @@ const TermAndCondition = () => {
       ) : (
         <div className="main_about_section max_height">
           <div className="about_heading">
-          <h3>Term And Condition</h3>
+          <h3>Terms And Conditions</h3>
          </div>
           <div className="tearm_data" dangerouslySetInnerHTML={{ __html: tncData }} />
         </div>

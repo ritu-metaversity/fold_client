@@ -31,6 +31,8 @@ const NewWithdraw = () => {
   const [userBalance, setuserBalance] = useState();
   const [dataLenth, setDataLenth] = useState();
   const [saveModalsShow, setSaveModalsShow] = useState();
+  const [withdrawReq, setWithdrawReq] = useState();
+  const [dataLength, setDataLength] = useState();
 
   const handleClose = () => {
     setShow(false);
@@ -57,9 +59,41 @@ const NewWithdraw = () => {
   };
 
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+  const [showWidthRequest, setshowWidthRequest] = useState(false);
+  const [dataId, setDataId] = useState();
+  const handleWidthCloseClose = () => setshowWidthRequest(false);
 
+  const handlePending = (val) => {
+    setshowWidthRequest(true);
+    setDataId(val);
+  };
+
+
+  const handleCloseSubmit = () => {
+    UserAPI.USER_CANCEL_WITHDRAW_REQUIEST({
+      id: dataId,
+    })
+      .then((res) => {
+        setMessage(res.message);
+        setErrorAlert(true);
+        setColorName("success");
+        setshowWidthRequest(false)
+
+        UserAPI.Withdraw_Request().then((res) => {
+          setWithdrawReq(res.data);
+          setDataLength(res.data.length);
+        });
+      })
+      .catch((error) => {
+        setErrorAlert(true);
+        setMessage(error.response.data.message);
+        setColorName("danger");
+        setshowWidthRequest(false)
+      });
+  };
+
+
+  useEffect(() => {
     UserAPI.GET_BANK_DETAIL().then((res)=>{
       setWithdrawData(res?.data)
     })
@@ -107,10 +141,13 @@ const NewWithdraw = () => {
   };
 
 
-  UserAPI.GET_CLIENT_BANK().then((res)=>{
-    setGetAccountData(res?.data);
-    setDataLenth(res?.data?.length);
-  })
+  useEffect(()=>{
+    UserAPI.GET_CLIENT_BANK().then((res)=>{
+      setGetAccountData(res?.data);
+      setDataLenth(res?.data?.length);
+    })
+  }, [])
+ 
 
 
 
@@ -171,6 +208,13 @@ const NewWithdraw = () => {
         setIsLoading(false);
         return false;
       }
+      else if (ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
+        setMessage("Enter Valid IFSC Code");
+        setErrorAlert(true);
+        setColorName("danger");
+        setIsLoading(false);
+        return false;
+      }
     } else if (withType === "PAYTM") {
       console.log("heloo");
       if (
@@ -191,6 +235,12 @@ const NewWithdraw = () => {
         return false;
       } else if (accountHolderName === "") {
         setMessage("The Account Name field is required");
+        setErrorAlert(true);
+        setColorName("danger");
+        setIsLoading(false);
+        return false;
+      }else if(accountNumber.length !== 10){
+        setMessage("Enter Valid Mobile number");
         setErrorAlert(true);
         setColorName("danger");
         setIsLoading(false);
@@ -265,6 +315,14 @@ const NewWithdraw = () => {
       });
     }
   };
+
+
+  useEffect(() => {
+    UserAPI.Withdraw_Request().then((res) => {
+      setWithdrawReq(res.data);
+      setDataLength(res.data.length);
+    });
+  }, []);
 
   const handleWithdrawData = (
     accNumber,
@@ -391,7 +449,8 @@ const NewWithdraw = () => {
                         value={accountHolderName}
                         onChange={(e) =>
                           setAccountHolderName(
-                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                            e.target.value.match(/^[a-zA-Z ]*$/) &&
+                            setAccountHolderName(e.target.value)
                           )
                         }
                       />
@@ -405,7 +464,8 @@ const NewWithdraw = () => {
                         value={bankName}
                         onChange={(e) =>
                           setBankName(
-                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                            e.target.value.match(/^[a-zA-Z ]*$/) &&
+                          setBankName(e.target.value)
                           )
                         }
                       />
@@ -418,7 +478,7 @@ const NewWithdraw = () => {
                         className="account-input"
                         value={ifsc}
                         onChange={(e) =>
-                          setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, " "))
+                          setIFSC(e.target.value)
                         }
                       />
                     </div>
@@ -458,7 +518,7 @@ const NewWithdraw = () => {
                         />
                       ) : (
                         <input
-                          type="text"
+                          type="number"
                           className="account-input"
                           value={accountNumber}
                           onChange={(e) =>
@@ -506,21 +566,21 @@ const NewWithdraw = () => {
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="1"
-                                className="text-left ">
+                                className="text-left text-white">
                                 Account Number
                               </th>
                               <th
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="2"
-                                className="text-left ">
+                                className="text-left text-white">
                                 Account Name
                               </th>
                               <th
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="4"
-                                className={`text-left ${
+                                className={`text-left text-white ${
                                   withType === "BANK" ? "" : "d-none"
                                 }`}>
                                 Bank Name
@@ -529,7 +589,7 @@ const NewWithdraw = () => {
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="5"
-                                className={`text-left ${
+                                className={`text-left text-white ${
                                   withType === "BANK" ? "" : "d-none"
                                 }`}>
                                 IFSC Code
@@ -538,7 +598,7 @@ const NewWithdraw = () => {
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="6"
-                                className={`text-left ${
+                                className={`text-left text-white ${
                                   withType === "BANK" ? "" : "d-none"
                                 }`}>
                                 Account Type
@@ -547,7 +607,7 @@ const NewWithdraw = () => {
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="6"
-                                className="text-left ">
+                                className="text-left text-white">
                                 Action
                               </th>
                             </tr>
@@ -637,10 +697,211 @@ const NewWithdraw = () => {
                       <i className="fa fa-spinner fa-spin"></i>
                     </p>
                   )}
-                  <button onClick={handleClick} disabled={!openForm}>
+                  <button onClick={handleClick} className={openForm?"":"disable_btn"} disabled={!openForm}>
                     Withdraw Coins
                   </button>
                 </div>
+
+
+                <div className="row row5 mt-2">
+                  <div className="col-12">
+                    <div className="previous-deposite-desk">
+                      <p>Previous Withdraw</p>
+                    </div>
+                    <div className="table-responsive withdrow-table" style={{height:"400px", overflow:"scroll"}}>
+                      <table
+                        role="table"
+                        aria-busy="false"
+                        aria-colcount="6"
+                        className="table b-table table-bordered"
+                        id="__BVID__104">
+                        <thead>
+                         
+                          <tr role="row" className="account-detail">
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="1"
+                              className="text-left bg_color_ch">
+                              Account Number
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="2"
+                              className="text-left bg_color_ch">
+                              Account Name
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="3"
+                              className="text-right bg_color_ch">
+                              Amount
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="4"
+                              className="text-left bg_color_ch">
+                              Bank Name/ Address
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="5"
+                              className="text-left bg_color_ch">
+                              IFSC Code
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left bg_color_ch">
+                              Account Type / Currency
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left withdraw-data bg_color_ch">
+                              Date
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left bg_color_ch"
+                              style={{ paddingRight: "82px" }}>
+                              Remark
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-center bg_color_ch">
+                              Status
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left bg_color_ch">
+                              Action
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody
+                          className={`${dataLength === 0 ? "d-none" : ""}`}>
+                          {withdrawReq?.length &&
+                            withdrawReq.map((item, index) => {
+                              return (
+                                <>
+                                  <tr role="row" key={index}>
+                                    <td
+                                      aria-colindex="1"
+                                      className="text-left withdraw-data">
+                                      {item.accountNumber}
+                                    </td>
+                                    <td
+                                      aria-colindex="2"
+                                      className="text-left withdraw-data">
+                                      {item.accountHolderName}
+                                    </td>
+                                    <td
+                                      aria-colindex="3"
+                                      className="text-right ">
+                                      {item.amount}
+                                    </td>
+                                    <td
+                                      aria-colindex="4"
+                                      className="text-left withdraw-data">
+                                      {item.bankName}
+                                    </td>
+                                    <td
+                                      aria-colindex="5"
+                                      className="text-left  withdraw-data">
+                                      {item.ifsc}
+                                    </td>
+                                    <td
+                                      aria-colindex="6"
+                                      className="text-lift withdraw-data">
+                                      {item.accountType}
+                                    </td>
+                                    <td aria-colindex="6" className="text-lift">
+                                      {item.time}
+                                      {}
+                                    </td>
+                                    <td
+                                      aria-colindex="6"
+                                      className="text-lift"
+                                      style={{ paddingRight: "" }}>
+                                      {item.remark}
+                                    </td>
+                                    <td
+                                      aria-colindex="6" className="text-center"
+                                      >
+                                      <p className={`${item.status === "Pending"? "pending": item.status === "APPROVED"? "approved": "rejected"}`}>{item.status}</p>
+                                    </td>
+                                    <td
+                                      aria-colindex="6"
+                                      className={`text-left ${
+                                        item.status === "Pending"
+                                          ? ""
+                                          : "d-none"
+                                      }`}
+                                      onClick={() => handlePending(item?.id)}>
+                                      <button className="canBtn">Cancel</button>
+                                    </td>
+                                  </tr>
+                                </>
+                              );
+                            })}
+                          <Modal show={showWidthRequest} onHide={handleWidthCloseClose}>
+                            <Modal.Header closeButton className="cancelRequest">
+                              <Modal.Title>Cancel Request</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                              Are you sure you want to cancel this request?
+                            </Modal.Body>
+                            <Modal.Footer>
+                              <Button
+                                variant="secondary"
+                                className="modalBtn"
+                                onClick={handleClose}>
+                                Close
+                              </Button>
+                              <Button
+                                variant="primary"
+                                type="button"
+                                className="modalBtn"
+                                onClick={handleCloseSubmit}>
+                                Submit
+                              </Button>
+                            </Modal.Footer>
+                          </Modal>
+                        </tbody>
+                        <tbody>
+                          <tr
+                            role="row"
+                            className={`${dataLength === 0 ? "" : "d-none"}`}>
+                            <td
+                              aria-colindex="1"
+                              colSpan="9"
+                              className="text-left withdraw-data">
+                              <p className="no-record-found">
+                                No records found
+                              </p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
             </div>
           </div>

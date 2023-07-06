@@ -397,7 +397,7 @@ const PayManually = (props) => {
 
                   {files && (
                     <img
-                      style={{ maxWidth: "90%", margin: "auto" }}
+                      style={{ maxWidth: "90%", margin: "auto", minWidth:"100%" }}
                       src={URL.createObjectURL(files)}
                       alt="uploaded_img"
                     />

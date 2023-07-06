@@ -22,6 +22,7 @@ function SideBar() {
       setVisible(false);
     } else {
       setVisible(true);
+      setVisible2(false)
     }
   }
   function collapse2() {
@@ -29,6 +30,7 @@ function SideBar() {
       setVisible2(false);
     } else {
       setVisible2(true);
+      setVisible(false)
     }
   }
   const handleSportId = (id, val) => {
@@ -105,13 +107,13 @@ function SideBar() {
           {visible2 ? <IoIosArrowDown /> : <IoIosArrowForward />}
         </p>
       </div>
+      <Accordion defaultActiveKey="0"  className="main_sport_header">
       {matchList?.length && visible2 &&
         matchList?.map((e, id) => {
           return (
-            <Accordion flush className="main_sport_header">
-              <Accordion.Item eventKey={id}>
+            <Accordion.Item eventKey={id}>
                 <Accordion.Header onClick={() => handleSportId(id, e?.sportId)} className="sport_header">
-                { toggle === id && show ?<AiOutlineMinusSquare />: <AiOutlinePlusSquare />}
+                { toggle === id ?<AiOutlineMinusSquare />: <AiOutlinePlusSquare />}
                    {e?.sportName}
                 </Accordion.Header>
                 {e?.matchList?.map((item, index) => {
@@ -130,9 +132,9 @@ function SideBar() {
                   );
                 })}
               </Accordion.Item>
-            </Accordion>
           );
         })}
+        </Accordion>
     </div>
   );
 }

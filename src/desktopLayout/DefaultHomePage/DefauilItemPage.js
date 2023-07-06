@@ -87,7 +87,7 @@ const DefauilItemPage = () => {
                       <table className="table item-table coupon-table">
                         <thead>
                           <tr>
-                            <th style={{ width: "63%" }}>Game</th>
+                            <th style={{ width: "63%", fontSize:"14px", fontWeight:"900" }}>Game</th>
                             <th colSpan="2">1</th>
                             <th colSpan="2">X</th>
                             <th colSpan="2">2</th>

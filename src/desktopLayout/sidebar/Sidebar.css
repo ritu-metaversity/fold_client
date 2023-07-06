@@ -204,3 +204,14 @@ ul.mtree.transit.bubba {
 .accordion-body p {
     padding: 6px 36px !important;
 }
+ul.list-unstyled.navbar-nav {
+    margin-top: 2px;
+    margin-left: -11px;
+}
+
+.table>:not(caption)>*>* {
+    padding: 0.5rem 0.5rem;
+    
+    background-color: unset !important;
+    
+}

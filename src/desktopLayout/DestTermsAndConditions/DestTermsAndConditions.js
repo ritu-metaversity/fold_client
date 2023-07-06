@@ -29,7 +29,7 @@ const DestTermsAndConditions = () => {
           <div className="itemHome">
             <div className="card">
               <div className="card-header header-card ">
-                <h4 className="mb-0 pl-0">Term And Condition</h4>
+                <h4 className="mb-0 pl-0">Terms And Conditions</h4>
               </div>
               <div className="card-body container-fluid container-fluid-5 ">
                 {isLoading ? (

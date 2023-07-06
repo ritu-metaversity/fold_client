@@ -13,66 +13,67 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState();
   const [StatusVal, setStatusVal] = useState(true);
   const [StatusCode, setStatusCode] = useState();
-  const [logo, setLogo] = useState()
+  const [logo, setLogo] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading1, setIsLoading1] = useState(false);
-  const [alertBtnColor, setAlertBtnColor] = useState()
+  const [alertBtnColor, setAlertBtnColor] = useState();
 
-  const nav = useNavigate()
+  const nav = useNavigate();
   const handleLogin = () => {
-    
-    setStatusVal(true)
+    setStatusVal(true);
 
-   
-
-    if(UserName === ""){
-      setAlertBtnColor("danger")
-      setErrorMsg("Username is required")
-      setStatusVal(false)
-    }else if(password === ""){
-      setAlertBtnColor("danger")
-      setErrorMsg("Password is required")
-      setStatusVal(false)
-    }else if(mobileNumber === "" || mobileNumber === undefined){
-      setAlertBtnColor("danger")
-      setErrorMsg("Mobile Number is required")
-      setStatusVal(false)
-    }else if(confirmPassword !== password){
-      setAlertBtnColor("danger")
-      setErrorMsg("Password and Password Confirmation should be same")
-      setStatusVal(false)
+    if (UserName === "") {
+      setAlertBtnColor("danger");
+      setErrorMsg("Username is required");
+      setStatusVal(false);
+    } else if (password === "") {
+      setAlertBtnColor("danger");
+      setErrorMsg("Password is required");
+      setStatusVal(false);
+    } else if (mobileNumber === "" || mobileNumber === undefined) {
+      setAlertBtnColor("danger");
+      setErrorMsg("Mobile Number is required");
+      setStatusVal(false);
+    } else if (confirmPassword !== password) {
+      setAlertBtnColor("danger");
+      setErrorMsg("Password and Password Confirmation should be same");
+      setStatusVal(false);
     }
 
     // console.log(StatusVal);
 
-    if(confirmPassword === password && UserName !== "" && mobileNumber !== "") {
-      setIsLoading(true)
+    if (
+      confirmPassword === password &&
+      UserName !== "" &&
+      mobileNumber !== ""
+    ) {
+      setIsLoading(true);
       AuthorAPI.Register({
         username: UserName,
         password: password,
         confirmPassword: confirmPassword,
         mobile: mobileNumber,
-        userId:UserName
+        userId: UserName,
       })
         .then((res) => {
           localStorage.setItem("UserName", res.username);
-          localStorage.setItem("UserPassword", res.password)
-          nav('/login');
-          setIsLoading(false)
+          localStorage.setItem("UserPassword", res.password);
+          nav("/login");
+          setIsLoading(false);
         })
         .catch((error) => {
-          setIsLoading(false)
+          setIsLoading(false);
+          console.log(error.response.data.message)
           setStatusCode(error.response.status);
           setErrorMsg(error.response.data.message);
           setStatusVal(false);
-          setAlertBtnColor("danger")
+          setAlertBtnColor("danger");
         });
     }
   };
 
-
-  const handleLoginDemo = ()=>{
+  const handleLoginDemo = () => {
     setIsLoading1(true);
     AuthorAPI.LOGIN_WITH_DEMO_USER()
       .then((res) => {
@@ -86,13 +87,17 @@ const Register = () => {
           "Authorization"
         ] = `Bearer ${res?.data?.token}`;
         setStatusVal(res?.data.status);
-        console.log(res?.data?.message)
+        console.log(res?.data?.message);
         setMessage("Invalid Username or password");
         localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
         const uId = res.data?.username;
         localStorage.setItem("UserId", uId);
-        if (res.data?.token !== "" && res?.data?.token !== undefined  && res?.data.status !== false) {
-        localStorage.setItem("token", token);
+        if (
+          res.data?.token !== "" &&
+          res?.data?.token !== undefined &&
+          res?.data.status !== false
+        ) {
+          localStorage.setItem("token", token);
 
           nav("/m/home");
         }
@@ -105,45 +110,46 @@ const Register = () => {
           setStatusVal(false);
           setErrorMsg(res?.data?.message);
           setIsLoading(false);
-          setAlertBtnColor("danger")
+          setAlertBtnColor("danger");
         }
       })
       .catch((error) => {
+        setStatusCode(error.response.status);
+        setErrorMsg(error.response.data.message);
+        setStatusVal(false);
+        setAlertBtnColor("danger");
         setIsLoading1(false);
       });
-  }
+  };
 
-  const [statusBtn, setStatusBtn] = useState()
+  const [statusBtn, setStatusBtn] = useState();
 
-  useEffect(()=>{
-   UserAPI.Self_By_App_Url().then((res)=>{
-    setLogo(res?.data?.logo);
-    setStatusBtn(res?.data?.selfAllowed)
+  useEffect(() => {
+    UserAPI.Self_By_App_Url().then((res) => {
+      setLogo(res?.data?.logo);
+      setStatusBtn(res?.data?.selfAllowed);
+    });
+  }, []);
 
-   }) 
-  },[])
-
-  const popupClose=(vl)=>{
-    setStatusVal(!vl)
-  }
+  const popupClose = (vl) => {
+    setStatusVal(!vl);
+  };
   return (
     <>
       <div className="login-wrapper">
-        {!StatusVal? (
+        {!StatusVal ? (
           <div className="alertBtn">
-            <AlertBtn val={errorMsg}  
-            color={alertBtnColor}
-            popupClose={popupClose}
+            <AlertBtn
+              val={errorMsg}
+              color={alertBtnColor}
+              popupClose={popupClose}
             />
           </div>
         ) : (
           ""
         )}
         <div className="text-center logo-login mb-3">
-          <img
-            src={logo}
-            alt=""
-          />
+          <img src={logo} alt="" />
         </div>
         <div className="login-form">
           <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
@@ -208,33 +214,32 @@ const Register = () => {
                 onClick={handleLogin}>
                 Register
                 {isLoading ? (
-                    <i className="ml-2 fa fa-spinner fa-spin"></i>
-                  ) : (
-                    <i className="ml-2 fa fa-sign-in"></i>
-                  )}
+                  <i className="ml-2 fa fa-spinner fa-spin"></i>
+                ) : (
+                  <i className="ml-2 fa fa-sign-in"></i>
+                )}
               </button>
             </div>
-            {
-              statusBtn?<div className="mt-2  form-group mb-0">
-              <button
-                type="submit"
-                className="btn btn-primary btn-block"
-                onClick={handleLoginDemo}>
+            {statusBtn ? (
+              <div className="mt-2  form-group mb-0">
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block"
+                  onClick={handleLoginDemo}>
                   Login with Demo User
-                {isLoading ? (
+                  {isLoading ? (
                     <i className="ml-2 fa fa-spinner fa-spin"></i>
                   ) : (
                     <i className="ml-2 fa fa-sign-in"></i>
                   )}
-              </button>
-            </div>:""
-            }
-            
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+
             <div className="form-group mb-0" style={{ marginTop: "12px" }}>
-              <Link
-                type="submit"
-                to="/"
-                className="btn btn-primary btn-block">
+              <Link type="submit" to="/" className="btn btn-primary btn-block">
                 <i className="ml-2 fa fa-sign-in rotateBtn"></i>
                 Back
               </Link>

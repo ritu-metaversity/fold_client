@@ -49,7 +49,7 @@ const Deposit = () => {
                 id="__BVID__104">
                 <thead>
                   <tr className="previous-deposite">
-                    <th colSpan="4">Previous Deposit</th>
+                    <th colSpan="4" className="text-white">Previous Deposit</th>
                   </tr>
                   <tr role="row" className="deposit-list">
                     <th

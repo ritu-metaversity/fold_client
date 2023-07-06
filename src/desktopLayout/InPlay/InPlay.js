@@ -86,7 +86,7 @@ const InPlay = () => {
                       <table className="table item-table coupon-table">
                         <thead>
                           <tr>
-                            <th style={{ width: "63%" }}>Game</th>
+                            <th style={{ width: "63%", fontSize:"14px", fontWeight:"900" }}>Game</th>
                             <th colSpan="2">1</th>
                             <th colSpan="2">X</th>
                             <th colSpan="2">2</th>
@@ -237,7 +237,7 @@ const InPlay = () => {
                           }`}>
                           <tr className="dest_notFound">
                             <td colSpan="5">
-                              <p>No real-time records found</p>
+                              <p>No Real Data Found</p>
                             </td>
                           </tr>
                         </tbody>

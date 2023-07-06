@@ -1114,7 +1114,7 @@ function GameDetail({ getStackValue}) {
                             </div>
                           </>
                         ) : (
-                          <p className="no-found">No real-time records found</p>
+                          <p className="no-found">No Real Data Found</p>
                         )}
                       </div>
                     ) : (

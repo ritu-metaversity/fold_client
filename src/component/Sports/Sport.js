@@ -47,7 +47,7 @@ function Sport({ gameIdForItemPage }) {
               <div>
                 <div className="">
                   {gameName?.length === 0 ? (
-                    <p className="no-found">No real-time records found</p>
+                    <p className="no-found">No Real Data Found</p>
                   ) : gameName?.length > 0 ? (
                     gameName?.map((item, id) => {
                       return (
