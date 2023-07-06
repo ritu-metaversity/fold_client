@@ -341,9 +341,9 @@ const NavBar = () => {
                                 className="custom-control-label"></label>
                             </div>
                           </Link>
-                          <Link to="/m/home" className="dropdown-item">
+                          {/* <Link to="/m/home" className="dropdown-item">
                             Rules
-                          </Link>
+                          </Link> */}
                           <Link
                             to="/m/SignOut"
                             onClick={handleSignOut}

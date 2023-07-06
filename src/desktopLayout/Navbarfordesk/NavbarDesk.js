@@ -148,11 +148,11 @@ const NavbarDesk = (props) => {
                         <i className="fa fa-search-plus"></i>
                       </Link>
                     </li>
-                    <li className="float-left download-apklink">
+                    {/* <li className="float-left download-apklink">
                       <Link to="/home" onClick={() => setXlShow(true)}>
                         Rules
                       </Link>
-                    </li>
+                    </li> */}
                     <li className="ballance float-left">
                       <div>
                         <span>Balance:</span>{" "}

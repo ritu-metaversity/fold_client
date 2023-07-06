@@ -16,7 +16,7 @@ function Footer() {
         <div className='footer-menu'>
             <ul>
               <li><Link to="/about-us">About</Link></li>
-              <li><Link to="/" >Rules</Link></li>
+              {/* <li><Link to="/" >Rules</Link></li> */}
               <li><Link to="terms-and-conditions">Terms and Conditions</Link></li>
               <li><Link to="/responsible-gaming">Responsible Gaming</Link></li>
             </ul>
