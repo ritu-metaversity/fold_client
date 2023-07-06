@@ -135,6 +135,7 @@ export function WithdrawForm({
       const newValues: SelfWithdrawPayload = { ...values };
       console.log(newValues, "iuytfvbnmkiuytgfv");
       setLoading(true);
+      newValues.ifsc = newValues.ifsc?.toUpperCase();
       if (newValues.withdrawType.toLowerCase() !== "bank") {
         newValues.accountType = "";
         newValues.ifsc = "";
@@ -362,7 +363,7 @@ export function WithdrawForm({
                   IFSC
                 </Typography>
                 <WithdrawInput
-                  value={values.ifsc}
+                  value={values.ifsc.toUpperCase()}
                   name="ifsc"
                   onChange={handleChange}
                   error={Boolean(errors.ifsc)}

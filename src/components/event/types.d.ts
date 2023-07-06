@@ -29,6 +29,7 @@ interface BetsInterface {
     back: boolean;
   }[];
 }
+
 export interface MarketInterface {
   type: string;
   marketId: string;

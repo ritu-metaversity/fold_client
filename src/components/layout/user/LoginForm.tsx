@@ -95,7 +95,7 @@ function LoginForm({
               }}
               required
               name="userId"
-              value={values.userId}
+              value={values.userId.trimStart()}
               onChange={handleChange}
             />
           </Typography>

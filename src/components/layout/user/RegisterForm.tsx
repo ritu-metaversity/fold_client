@@ -154,7 +154,7 @@ export function RegisterForm() {
                 }}
                 required
                 name="username"
-                value={values.username}
+                value={values.username.trimStart()}
                 onChange={handleChange}
               />
             </Grid>

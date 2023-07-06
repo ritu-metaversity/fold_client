@@ -43,6 +43,7 @@ export function AuthBox() {
         snackBarUtil.error("Please agree Terms and Conditions");
         return;
       }
+      values.userId = values.userId.trim();
       setLoading(true);
       const { response } = await authServices.login(values);
       if (response) {
@@ -124,7 +125,7 @@ export function AuthBox() {
               variant="outlined"
               size="small"
               name="userId"
-              value={values.userId}
+              value={values.userId.trimStart()}
               onChange={handleChange}
             />
             <a
