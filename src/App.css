@@ -20,3 +20,6 @@ input[type=number] {
   .back, .back-color {
     background-color: #72bbef !important;
 }
+::-webkit-scrollbar {
+    display: none;
+  }

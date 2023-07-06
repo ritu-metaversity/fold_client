@@ -162,3 +162,25 @@ p.lodder.with_modal_loder {
 button[disabled]{
   background-color: #0088cc85 !important;
 } */
+
+.bg_color_ch {
+    background: #2c3d50 !important;
+    color: #fff !important;
+}
+
+tr {
+    border-right: 1px solid #ddd !important;
+    border-left: 1px solid #ddd;
+}
+
+@media screen and (min-width: 800px) {
+    .previous-deposite {
+        width: 98%;
+        margin-inline: 1%;
+    }
+}
+
+button.disable_btn {
+    background: #0088cc96 !important;
+    cursor: default;
+}

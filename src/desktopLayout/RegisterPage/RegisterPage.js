@@ -63,9 +63,9 @@ const RegisterPage = () => {
         })
         .catch((error) => {
           setIsLoading(false);
-          setStatusCode(error.response.status);
+          setStatusVal(true);
+          // setStatusCode(error.response.status);
           setErrorMsg(error.response.data.message);
-          setStatusVal(false);
         });
     }
   };
@@ -105,6 +105,9 @@ const RegisterPage = () => {
         }
       })
       .catch((error) => {
+          setStatusCode(error.response.status);
+          setErrorMsg(error.response.data.message);
+          setStatusVal(false);
         setIsLoading1(false);
       });
 }

@@ -73,6 +73,9 @@ const ChangePasswordForDesk = (props) => {
           )
           .catch((error) => {
             setIsLoading(false);
+            setMessege(error?.response?.data?.message);
+            setShowError(true);
+            setColor("danger");
           });
       } else {
         if(newPasswords === conformPassword){
@@ -95,6 +98,11 @@ const ChangePasswordForDesk = (props) => {
             setShowError(true)
             setColor("danger")
           }
+        }).catch((error)=>{
+          setIsLoading(false);
+          setMessege(error?.response?.data?.message);
+          setShowError(true);
+          setColor("danger");
         });
       }
       // }

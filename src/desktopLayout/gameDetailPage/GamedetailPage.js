@@ -100,6 +100,7 @@ function GamedetailPage({ getStackValue, SportId }) {
     }
     // eslint-disable-next-line
   }, [sId]);
+  
 
   const oddFromSocketSlower = (res) => {
     if (res) {
@@ -404,15 +405,15 @@ function GamedetailPage({ getStackValue, SportId }) {
                         <div className="event_time">{eTime?.eventTime}</div>
                         <div className="">
                           <div className="scoreCard-icon desk_score score_card_update">
-                            <svg
+                            {/* <svg
                               className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
                               focusable="false"
                               aria-hidden="true"
                               viewBox="0 0 24 24"
                               data-testid="ScoreboardIcon">
                               <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
-                            </svg>
-                            <div>
+                            </svg> */}
+                            <div style={{margin:"0px 12px"}}>
                               <label
                                 className={`onoffbtn ${
                                   toggleBtn1 ? "active1" : ""
@@ -421,14 +422,14 @@ function GamedetailPage({ getStackValue, SportId }) {
                                 <input type="checkbox" />
                               </label>
                             </div>
-                            <svg
+                            {/* <svg
                               className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
                               focusable="false"
                               aria-hidden="true"
                               viewBox="0 0 24 24"
                               data-testid="ScoreboardIcon">
                               <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
-                            </svg>
+                            </svg> */}
                             <div>
                               <label
                                 className={`onoffbtn ${
@@ -485,11 +486,11 @@ function GamedetailPage({ getStackValue, SportId }) {
                                   Min Bet{" "}
                                   <span>{minBet?.Odds[index]?.minBet}</span> Max
                                   Bet <span>{minBet?.Odds[index]?.maxBet}</span>{" "}
-                                  <a href="/" className="game-rules-icon">
+                                  <span  className="game-rules-icon">
                                     <span>
                                       <i className="fa fa-info-circle float-right  ml-2"></i>
                                     </span>
-                                  </a>
+                                  </span>
                                 </span>
                               </div>
                               <div
@@ -691,14 +692,14 @@ function GamedetailPage({ getStackValue, SportId }) {
                           <div>
                             <div className="market-title mt-1">
                               Bookmaker market
-                              <a href="/" className=" game-rules-icon">
+                              <span  className=" game-rules-icon">
                                 <b className="m-r-5">
                                   Min:{maxBet?.minBet} Max:{maxBet?.maxBet}{" "}
                                 </b>
                                 <span>
                                   <i className="fa fa-info-circle float-right"></i>
                                 </span>
-                              </a>
+                              </span>
                             </div>
                             <div className="table-header">
                               <div className="float-left country-name box-4 text-info"></div>
@@ -857,11 +858,11 @@ function GamedetailPage({ getStackValue, SportId }) {
                         <div className={fancyOdds["Fancy2"]?.length === 0? "d-none" : ""}>
                           <div className="market-title mt-1">
                             Session Market
-                            <a href="/" className="m-r-5 game-rules-icon">
+                            <span  className="m-r-5 game-rules-icon">
                               <span>
                                 <i className="fa fa-info-circle float-right"></i>
                               </span>
-                            </a>
+                            </span>
                           </div>
 
                           <div className="table-header">
@@ -995,11 +996,11 @@ function GamedetailPage({ getStackValue, SportId }) {
                       <div className={fancyOdds["Fancy2"]?.length === 0 || fancyOdds["Fancy2"]?.length === 1? "d-none" : ""}>
                           <div className="market-title mt-1">
                             Session Market
-                            <a href="/" className="m-r-5 game-rules-icon">
+                            <span className="m-r-5 game-rules-icon">
                               <span>
                                 <i className="fa fa-info-circle float-right"></i>
                               </span>
-                            </a>
+                            </span>
                           </div>
 
                           <div className="table-header">
@@ -1216,11 +1217,11 @@ function GamedetailPage({ getStackValue, SportId }) {
                                     : currentFancy}{" "}
                                   Market
                                 </span>{" "}
-                                <a href="/" className="m-r-5 game-rules-icon">
+                                <span className="m-r-5 game-rules-icon">
                                   <span>
                                     <i className="fa fa-info-circle float-right"></i>
                                   </span>
-                                </a>
+                                </span>
                               </div>
                               <div className="table-header">
                                 <div className="float-left country-name box-6"></div>
@@ -1368,11 +1369,11 @@ function GamedetailPage({ getStackValue, SportId }) {
                                     : currentFancy}{" "}
                                   Market
                                 </span>{" "}
-                                <a href="/" className="m-r-5 game-rules-icon">
+                                <span className="m-r-5 game-rules-icon">
                                   <span>
                                     <i className="fa fa-info-circle float-right"></i>
                                   </span>
-                                </a>
+                                </span>
                               </div>
                               <div className="table-header">
                                 <div className="float-left country-name box-6"></div>
@@ -1517,7 +1518,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                       </div>
                     ) : (
                       <p className={`no-found ${sId == 4 ? "" : "d-none"}`}>
-                        No real-time records found
+                        No Real Data Found
                       </p>
                     )}
 

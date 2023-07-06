@@ -1409,7 +1409,7 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
                       </div>
                     ) : (
                       <p className={`no-found ${sId == 4 ? "" : "d-none"}`}>
-                        No real-time records found
+                        No Real Data Found
                       </p>
                     )}
 

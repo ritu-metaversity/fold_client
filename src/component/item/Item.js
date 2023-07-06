@@ -52,7 +52,7 @@ function Item({ gameIdForItemPage, spName }) {
                   {gameName?.find((item) => item?.sportid === gameIdForItemPage)
                     ?.matchList?.length === 0 ? (
                     <p className="no-found" style={{ marginBottom: "12px" }}>
-                      No real-time records found
+                      No Real Data Found
                     </p>
                   ) : gameName?.length > 0 ? (
                     gameName

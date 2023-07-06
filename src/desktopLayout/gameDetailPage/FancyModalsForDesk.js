@@ -22,7 +22,7 @@ const FancyModalsForDesk = ({matchId, FancyID}) => {
       
     <div id="__BVID__287___BV_modal_body_">
       <div>
-      { FancyData?.length === 0 ? (<p className="no-found">No real-time records found</p>): (
+      { FancyData?.length === 0 ? (<p className="no-found">No Real Data Found</p>): (
         <div className={`place-bet pt-2 pb-2`}>
           <div className={`container-fluid container-fluid-5`}>
             <div className="row row5">

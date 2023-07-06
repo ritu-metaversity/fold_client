@@ -111,7 +111,7 @@ function MatchBet(props) {
             </table>
             <div className={`${props.matchLength === 0 ? "" : "d-none"}`}>
               <p colSpan="4" className="text-center no-real">
-                No real-time records found
+                No Real Data Found
               </p>
             </div>
           </div>

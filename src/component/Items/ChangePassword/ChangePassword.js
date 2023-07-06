@@ -75,7 +75,11 @@ function ChangePassword(props) {
             }
           })
           .catch((error) => {
+            
             setIsLoading(false);
+              setMessege(error?.response?.data?.message);
+              setShowError(true);
+              setColor("danger");
           });
       } else {
         if (conformPassword !== "") {
@@ -102,6 +106,9 @@ function ChangePassword(props) {
             })
             .catch((error) => {
               setIsLoading(false);
+              setMessege(error?.response?.data?.message);
+              setShowError(true);
+              setColor("danger");
             });
         }
         // }

@@ -54,20 +54,18 @@ const NewMobWithdraw = () => {
     setAccountNumber("");
     setIFSC("");
     setBankName("");
-    setwithCoinValue(0);
   };
-
 
   useEffect(() => {
     // const token = localStorage.getItem("token");
 
-    UserAPI.GET_BANK_DETAIL().then((res)=>{
-      setWithdrawData(res?.data)
-    })
+    UserAPI.GET_BANK_DETAIL().then((res) => {
+      setWithdrawData(res?.data);
+    });
 
-    UserAPI.WITHDRAW_STACK_REQUEST().then((res)=>{
-      setStackValue(res?.data)
-    })
+    UserAPI.WITHDRAW_STACK_REQUEST().then((res) => {
+      setStackValue(res?.data);
+    });
 
     UserAPI.User_Balance().then((res) => {
       setuserBalance(res?.data?.balance);
@@ -99,27 +97,27 @@ const NewMobWithdraw = () => {
       ifsc: ifsc,
       accountNumber: accountNumber,
       withdrawType: bankID,
-    }).then((res)=>{
-      
-      setShow(false);
+    })
+      .then((res) => {
+        setShow(false);
         setErrorAlert(true);
         setIsLoading(false);
         setColorName("success");
         setMessage(res?.message);
-    }).catch((error)=>{
-      setErrorAlert(true);
-      setColorName("danger");
-      setMessage(error?.response?.data?.message);
-    })
+      })
+      .catch((error) => {
+        setErrorAlert(true);
+        setColorName("danger");
+        setMessage(error?.response?.data?.message);
+      });
   };
 
-  useEffect(()=>{
-    UserAPI.GET_CLIENT_BANK().then((res)=>{
+  useEffect(() => {
+    UserAPI.GET_CLIENT_BANK().then((res) => {
       setGetAccountData(res?.data);
       setDataLenth(res?.data?.length);
-    })
-  }, [])
-  
+    });
+  }, []);
 
   const [dataId, setDataId] = useState();
   const handlePending = (val) => {
@@ -137,7 +135,7 @@ const NewMobWithdraw = () => {
         setMessage(res.message);
         setErrorAlert(true);
         setColorName("success");
-        setshowWithdraw(false)
+        setshowWithdraw(false);
 
         UserAPI.Withdraw_Request().then((res) => {
           setWithdrawReq(res.data);
@@ -173,7 +171,6 @@ const NewMobWithdraw = () => {
     }
 
     if (withType === "BANK") {
-      console.log("helooo");
       if (
         withCoinValue === "" ||
         withCoinValue === undefined ||
@@ -208,9 +205,14 @@ const NewMobWithdraw = () => {
         setColorName("danger");
         setIsLoading(false);
         return false;
+      } else if (ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
+        setMessage("Enter Valid IFSC Code");
+        setErrorAlert(true);
+        setColorName("danger");
+        setIsLoading(false);
+        return false;
       }
     } else if (withType === "PAYTM") {
-      console.log("heloo");
       if (
         withCoinValue === "" ||
         withCoinValue === undefined ||
@@ -233,9 +235,14 @@ const NewMobWithdraw = () => {
         setColorName("danger");
         setIsLoading(false);
         return false;
+      }else if(accountNumber.length !== 10){
+        setMessage("Enter Valid Mobile number");
+        setErrorAlert(true);
+        setColorName("danger");
+        setIsLoading(false);
+        return false;
       }
     } else if (withType == "UPI") {
-      console.log("helo");
       if (
         withCoinValue === "" ||
         withCoinValue === undefined ||
@@ -284,29 +291,31 @@ const NewMobWithdraw = () => {
         accountNumber: accountNumber,
         withdrawType: bankID,
         withdrawMode: withdrawType,
-      }).then((res) => {
-        // if (res?.bankExist === false) {
+      })
+        .then((res) => {
+          // if (res?.bankExist === false) {
           setShow(true);
-        // } else {
+          // } else {
           setMessage(res?.message);
           setErrorAlert(true);
           setColorName("success");
           setIsLoading(false);
-        // }
-        setIsLoading(false);
-        console.log(res?.message);
-      }).catch((error)=>{
-        setErrorAlert(true);
-        setIsLoading(false);
-        setColorName("danger");
-        setMessage(error?.response?.data?.message);
-      });
+          // }
+          setIsLoading(false);
+          console.log(res?.message);
+        })
+        .catch((error) => {
+          setErrorAlert(true);
+          setIsLoading(false);
+          setColorName("danger");
+          setMessage(error?.response?.data?.message);
+        });
     }
   };
 
-const handleClose1 = ()=>{
-  setshowWithdraw(false)
-}
+  const handleClose1 = () => {
+    setshowWithdraw(false);
+  };
 
   const handleWithdrawData = (
     accNumber,
@@ -433,9 +442,8 @@ const handleClose1 = ()=>{
                         className="account-input"
                         value={accountHolderName}
                         onChange={(e) =>
-                          setAccountHolderName(
-                            e.target.value.replace(/[^A-Za-z]+$/, " ")
-                          )
+                          e.target.value.match(/^[a-zA-Z ]*$/) &&
+                         setAccountHolderName(e.target.value)
                         }
                       />
                     </div>
@@ -447,9 +455,8 @@ const handleClose1 = ()=>{
                         className="account-input"
                         value={bankName}
                         onChange={(e) =>
-                          setBankName(
-                            e.target.value.replace(/[^A-Za-z]+$/, " ")
-                          )
+                          e.target.value.match(/^[a-zA-Z ]*$/) &&
+                          setBankName(e.target.value)
                         }
                       />
                     </div>
@@ -461,7 +468,7 @@ const handleClose1 = ()=>{
                         className="account-input"
                         value={ifsc}
                         onChange={(e) =>
-                          setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, " "))
+                          setIFSC(e.target.value)
                         }
                       />
                     </div>
@@ -550,21 +557,21 @@ const handleClose1 = ()=>{
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="1"
-                                className="text-left ">
+                                className="text-left bg_color_ch">
                                 Account Number
                               </th>
                               <th
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="2"
-                                className="text-left ">
+                                className="text-left bg_color_ch">
                                 Account Name
                               </th>
                               <th
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="4"
-                                className={`text-left ${
+                                className={`text-left bg_color_ch ${
                                   withType === "BANK" ? "" : "d-none"
                                 }`}>
                                 Bank Name
@@ -573,7 +580,7 @@ const handleClose1 = ()=>{
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="5"
-                                className={`text-left ${
+                                className={`text-left bg_color_ch ${
                                   withType === "BANK" ? "" : "d-none"
                                 }`}>
                                 IFSC Code
@@ -582,7 +589,7 @@ const handleClose1 = ()=>{
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="6"
-                                className={`text-left ${
+                                className={`text-left bg_color_ch ${
                                   withType === "BANK" ? "" : "d-none"
                                 }`}>
                                 Account Type
@@ -591,7 +598,7 @@ const handleClose1 = ()=>{
                                 role="columnheader"
                                 scope="col"
                                 aria-colindex="6"
-                                className="text-left">
+                                className="text-left bg_color_ch">
                                 Action
                               </th>
                             </tr>
@@ -681,227 +688,238 @@ const handleClose1 = ()=>{
                       <i className="fa fa-spinner fa-spin"></i>
                     </p>
                   )}
-                  <button onClick={handleClick} disabled={!openForm}>
+                  <button onClick={handleClick} className={openForm?"":"disable_btn"} disabled={!openForm}>
                     Withdraw Coins
                   </button>
                 </div>
 
-                {/* <div className="row row5 mt-2">
-              <div className="col-12">
-                <div className="table-responsive withdrow-table">
-                  <table
-                    role="table"
-                    aria-busy="false"
-                    aria-colcount="6"
-                    className="table b-table table-bordered"
-                    id="__BVID__104">
-                    <thead>
-                      <tr className="previous-deposite">
-                        <th colSpan="10">Previous Withdraw</th>
-                      </tr>
-                      <tr role="row" className="account-detail">
-                        <th
-                          role="columnheader"
-                          scope="col"
-                          aria-colindex="1"
-                          className="text-left ">
-                          Account Number
-                        </th>
-                        <th
-                          role="columnheader"
-                          scope="col"
-                          aria-colindex="2"
-                          className="text-left ">
-                          Account Name
-                        </th>
-                        <th
-                          role="columnheader"
-                          scope="col"
-                          aria-colindex="3"
-                          className="text-right ">
-                          Amount
-                        </th>
-                        <th
-                          role="columnheader"
-                          scope="col"
-                          aria-colindex="4"
-                          className="text-left ">
-                          Bank Name/ Address
-                        </th>
-                        <th
-                          role="columnheader"
-                          scope="col"
-                          aria-colindex="5"
-                          className="text-left ">
-                          IFSC Code
-                        </th>
-                        <th
-                          role="columnheader"
-                          scope="col"
-                          aria-colindex="6"
-                          className="text-left ">
-                          Account Type / Currency
-                        </th>
-                        <th
-                          role="columnheader"
-                          scope="col"
-                          aria-colindex="6"
-                          className="text-left withdraw-data">
-                          Date
-                        </th>
-                        <th
-                          role="columnheader"
-                          scope="col"
-                          aria-colindex="6"
-                          className="text-left"
-                          style={{ paddingRight: "82px" }}>
-                          Remark
-                        </th>
-                        <th
-                          role="columnheader"
-                          scope="col"
-                          aria-colindex="6"
-                          className="text-left ">
-                          Status
-                        </th>
-                        <th
-                          role="columnheader"
-                          scope="col"
-                          aria-colindex="6"
-                          className="text-left ">
-                          Action
-                        </th>
-                      </tr>
-                    </thead>
+                <div className="row row5 mt-2">
+                  <div className="col-12">
+                    <div className="previous-deposite">
+                      <p style={{ padding: "7px 12px", fontWeight: "500" }}>
+                        Previous Withdraw
+                      </p>
+                    </div>
+                    <div
+                      className="table-responsive withdrow-table"
+                      style={{ height: "400px", overflow: "scroll" }}>
+                      <table
+                        role="table"
+                        aria-busy="false"
+                        aria-colcount="6"
+                        className="table b-table table-bordered"
+                        id="__BVID__104">
+                        <thead>
+                          <tr role="row" className="account-detail">
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="1"
+                              className="text-left bg_color_ch">
+                              Account Number
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="2"
+                              className="text-left bg_color_ch">
+                              Account Name
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="3"
+                              className="text-right bg_color_ch">
+                              Amount
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="4"
+                              className="text-left bg_color_ch">
+                              Bank Name/ Address
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="5"
+                              className="text-left bg_color_ch">
+                              IFSC Code
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left bg_color_ch">
+                              Account Type / Currency
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left withdraw-data bg_color_ch">
+                              Date
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left bg_color_ch"
+                              style={{ paddingRight: "82px" }}>
+                              Remark
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left bg_color_ch">
+                              Status
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="6"
+                              className="text-left bg_color_ch">
+                              Action
+                            </th>
+                          </tr>
+                        </thead>
 
-                    <tbody className={`${dataLength === 0 ? "d-none" : ""}`}>
-                      {withdrawReq?.length &&
-                        withdrawReq.map((item, index) => {
-                          console.log(item, "adsafsf")
-                          return (
-                            <>
-                              <tr role="row" key={index}>
-                                <td
-                                  aria-colindex="1"
-                                  className="text-left withdraw-data">
-                                  {item.accountNumber}
-                                </td>
-                                <td
-                                  aria-colindex="2"
-                                  className="text-left withdraw-data">
-                                  {item.accountHolderName}
-                                </td>
-                                <td aria-colindex="3" className="text-right ">
-                                  {item.amount}
-                                </td>
-                                <td
-                                  aria-colindex="4"
-                                  className="text-left withdraw-data">
-                                  {item.bankName}
-                                </td>
-                                <td
-                                  aria-colindex="5"
-                                  className="text-left  withdraw-data">
-                                  {item.ifsc}
-                                </td>
-                                <td
-                                  aria-colindex="6"
-                                  className="text-lift withdraw-data">
-                                  {item.accountType}
-                                </td>
-                                <td aria-colindex="6" className="text-lift">
-                                  {item.time}
-                                  {}
-                                </td>
-                                <td
-                                  aria-colindex="6"
-                                  className="text-lift"
-                                  style={{ paddingRight: "" }}>
-                                  {item.remark}
-                                </td>
-                                <td aria-colindex="6" className="text-left">
-                                  <p
-                                    className={`${
-                                      item.status === "Pending"
-                                        ? "pending"
-                                        : item.status === "APPROVED"
-                                        ? "approved"
-                                        : "rejected"
-                                    }`}>
-                                    {item.status}
-                                  </p>
-                                </td>
-                                <td
-                                  aria-colindex="6"
-                                  className={`text-left ${
-                                    item.status === "Pending" ? "" : "d-none"
-                                  }`}
-                                  onClick={() => handlePending(item?.id)}>
-                                  <button className="cancelBtnTd">
-                                    Cancel
-                                  </button>
-                                </td>
-                              </tr>
-                            </>
-                          );
-                        })}
-                      <Modal show={showWithdraw} onHide={handleClose1}>
-                        <Modal.Header closeButton className="cancelRequest">
-                          <Modal.Title>Cancel Request</Modal.Title>
-                        </Modal.Header>
-                        {isLoading ? (
-                          <p className="lodder with_modal_loder">
-                            <i className="fa fa-spinner fa-spin"></i>
-                          </p>
-                        ) : (
-                          ""
-                        )}
-                        <Modal.Body>
-                          Are you sure you want to cancel this request?
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button
-                            variant="secondary"
-                            className="modalBtn"
-                            onClick={handleClose}>
-                            Close
-                          </Button>
-                          <Button
-                            variant="primary"
-                            type="button"
-                            className="modalBtn"
-                            onClick={handleCloseSubmit}>
-                            Submit
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-                    </tbody>
-                    <tbody>
-                      <tr
-                        role="row"
-                        className={`${
-                          dataLength === 0 || withdrawReq === null
-                            ? ""
-                            : "d-none"
-                        }`}>
-                        <td
-                          aria-colindex="1"
-                          colSpan="10"
-                          className="text-left withdraw-data">
-                          <p className="no-record-found">No records found</p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                        <tbody
+                          className={`${dataLength === 0 ? "d-none" : ""}`}>
+                          {withdrawReq?.length &&
+                            withdrawReq.map((item, index) => {
+                              console.log(item, "adsafsf");
+                              return (
+                                <>
+                                  <tr role="row" key={index}>
+                                    <td
+                                      aria-colindex="1"
+                                      className="text-left withdraw-data">
+                                      {item.accountNumber}
+                                    </td>
+                                    <td
+                                      aria-colindex="2"
+                                      className="text-left withdraw-data">
+                                      {item.accountHolderName}
+                                    </td>
+                                    <td
+                                      aria-colindex="3"
+                                      className="text-right ">
+                                      {item.amount}
+                                    </td>
+                                    <td
+                                      aria-colindex="4"
+                                      className="text-left withdraw-data">
+                                      {item.bankName}
+                                    </td>
+                                    <td
+                                      aria-colindex="5"
+                                      className="text-left  withdraw-data">
+                                      {item.ifsc}
+                                    </td>
+                                    <td
+                                      aria-colindex="6"
+                                      className="text-lift withdraw-data">
+                                      {item.accountType}
+                                    </td>
+                                    <td aria-colindex="6" className="text-lift">
+                                      {item.time}
+                                      {}
+                                    </td>
+                                    <td
+                                      aria-colindex="6"
+                                      className="text-lift"
+                                      style={{ paddingRight: "" }}>
+                                      {item.remark}
+                                    </td>
+                                    <td aria-colindex="6" className="text-left">
+                                      <p
+                                        className={`${
+                                          item.status === "Pending"
+                                            ? "pending"
+                                            : item.status === "APPROVED"
+                                            ? "approved"
+                                            : "rejected"
+                                        }`}>
+                                        {item.status}
+                                      </p>
+                                    </td>
+                                    <td
+                                      aria-colindex="6"
+                                      className={`text-left ${
+                                        item.status === "Pending"
+                                          ? ""
+                                          : "d-none"
+                                      }`}
+                                      onClick={() => handlePending(item?.id)}>
+                                      <button className="cancelBtnTd">
+                                        Cancel
+                                      </button>
+                                    </td>
+                                  </tr>
+                                </>
+                              );
+                            })}
+                          <Modal show={showWithdraw} onHide={handleClose1}>
+                            <Modal.Header closeButton className="cancelRequest">
+                              <Modal.Title>Cancel Request</Modal.Title>
+                            </Modal.Header>
+                            {isLoading ? (
+                              <p className="lodder with_modal_loder">
+                                <i className="fa fa-spinner fa-spin"></i>
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                            <Modal.Body>
+                              Are you sure you want to cancel this request?
+                            </Modal.Body>
+                            <Modal.Footer>
+                              <Button
+                                variant="secondary"
+                                className="modalBtn"
+                                onClick={handleClose}>
+                                Close
+                              </Button>
+                              <Button
+                                variant="primary"
+                                type="button"
+                                className="modalBtn"
+                                onClick={handleCloseSubmit}>
+                                Submit
+                              </Button>
+                            </Modal.Footer>
+                          </Modal>
+                        </tbody>
+                        <tbody>
+                          <tr
+                            role="row"
+                            className={`${
+                              dataLength === 0 || withdrawReq === null
+                                ? ""
+                                : "d-none"
+                            }`}>
+                            <td
+                              aria-colindex="1"
+                              colSpan="10"
+                              className="text-left withdraw-data">
+                              <p className="no-record-found">
+                                No records found
+                              </p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div> */}
               </div>
             </div>
           </div>
         </div>
 
-        {/* <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose}>
           <Modal.Body>Do you want to save the Bank Details?</Modal.Body>
           <Modal.Footer>
             <Button
@@ -917,7 +935,7 @@ const handleClose1 = ()=>{
               Save
             </Button>
           </Modal.Footer>
-        </Modal> */}
+        </Modal>
       </div>
     </>
   );
