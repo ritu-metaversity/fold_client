@@ -724,10 +724,10 @@ div#match_unmatched {
 .lodderr i{
     font-size: 28px;
 }
-.max_height{
+.max_height {
     height: calc(100% - 250px);
-    min-height: calc(100vh - 250px);
-    max-height: calc(100% - 250px);
+    max-height: calc(100% - 225px);
+    min-height: calc(100vh - 225px);
 }
 .image_section {
     border-bottom: 1px solid #dddddd4f;
