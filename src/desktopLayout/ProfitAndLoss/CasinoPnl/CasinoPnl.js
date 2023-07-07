@@ -305,14 +305,14 @@ const CasinoPnl = () => {
                       role="columnheader"
                       scope="col"
                       aria-colindex="1"
-                      className="text-left">
+                      className="text-left text-white">
                       Event Type
                     </th>
                     <th
                       role="columnheader"
                       scope="col"
                       aria-colindex="2"
-                      className="text-right">
+                      className="text-right text-white">
                       Pnl
                     </th>
                     {/* <th

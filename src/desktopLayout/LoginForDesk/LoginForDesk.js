@@ -109,6 +109,9 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
     if (localStorage.getItem("UserName") !== null) {
       setShowModals(true);
     }
+    if(localStorage.getItem("token") !== null){
+      nav('/home')
+    }
   }, []);
 
   const { host } = window.location;

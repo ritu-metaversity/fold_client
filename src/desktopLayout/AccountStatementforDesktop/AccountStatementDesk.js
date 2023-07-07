@@ -305,42 +305,42 @@ const AccountStatementDesk = () => {
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="1"
-                                  className="text-center">
+                                  className="text-center text-white">
                                   Date
                                 </th>
                                 <th
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="2"
-                                  className="text-right">
+                                  className="text-right text-white">
                                   Sr no
                                 </th>
                                 <th
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="3"
-                                  className="text-right">
+                                  className="text-right text-white">
                                   Credit
                                 </th>
                                 <th
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="4"
-                                  className="text-right">
+                                  className="text-right text-white">
                                   Debit
                                 </th>
                                 <th
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="5"
-                                  className="text-right">
+                                  className="text-right text-white">
                                   Balance
                                 </th>
                                 <th
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="6"
-                                  className="text-left">
+                                  className="text-left text-white">
                                   Remark
                                 </th>
                               </tr>
