@@ -244,7 +244,7 @@ const UnsetteledBetForDesk = () => {
                       className="table b-table table-bordered"
                       id="__BVID__96">
                       <thead className="">
-                        <tr role="row" className="">
+                        <tr role="row" className="" style={{background: "#2c3d50"}}>
                           <th
                             role="columnheader"
                             scope="col"

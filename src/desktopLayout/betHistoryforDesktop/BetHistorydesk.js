@@ -238,35 +238,35 @@ function BetHistorydesk() {
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="1"
-                                  className="text-left">
+                                  className="text-left text-white">
                                   Sport Name
                                 </th>
                                 <th
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="1"
-                                  className="text-left">
+                                  className="text-left text-white">
                                   Event Name
                                 </th>
                                 <th
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="2"
-                                  className="text-left">
+                                  className="text-left text-white">
                                   Market Name
                                 </th>
                                 <th
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="3"
-                                  className="text-left">
+                                  className="text-left text-white">
                                   Nation
                                 </th>
                                 <th
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="4"
-                                  className="text-right"
+                                  className="text-right text-white"
                                   style={{width: "100px"}}
                                   >
                                   User Rate
@@ -275,21 +275,21 @@ function BetHistorydesk() {
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="5"
-                                  className="text-right">
+                                  className="text-right text-white">
                                   Pnl
                                 </th>
                                 <th
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="6"
-                                  className="text-right">
+                                  className="text-right text-white">
                                   Amount
                                 </th>
                                 <th
                                   role="columnheader"
                                   scope="col"
                                   aria-colindex="7"
-                                  className="text-center"
+                                  className="text-center text-white"
                                   style={{width: "200px"}}
                                   >
                                   Time

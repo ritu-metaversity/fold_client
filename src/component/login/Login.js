@@ -91,6 +91,10 @@ function Login({ Errmessage, Statusmessage }) {
   useEffect(() => {
     if (localStorage.getItem("UserName") !== null) {
       setShowModals(true);
+      
+    }
+    if(localStorage.getItem("token") !== null){
+      nav("/m/home")
     }
   }, []);
 

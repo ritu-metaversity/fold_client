@@ -75,6 +75,11 @@ const RouteMobile = () => {
         nav("/m/login");
       }
     }
+    // else{
+    //   if(pathname === "/m/reports/deposit"){
+    //     nav("/m/reports/deposit")
+    //   }
+    // }
   }, [pathname]);
 
 

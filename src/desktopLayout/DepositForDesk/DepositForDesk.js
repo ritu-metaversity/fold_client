@@ -55,7 +55,7 @@ const DepositForDesk = () => {
                         Previous Deposit
                       </th>
                     </tr>
-                    <tr role="row" className="deposit-list">
+                    <tr role="row" className="deposit-list" style={{background: "#2c3d50"}}>
                       <th
                         role="columnheader"
                         scope="col"
