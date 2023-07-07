@@ -748,10 +748,10 @@ div#match_unmatched {
     
 }
 th.text-center.bg-color {
-    background: #2c3d50;
-    color: #fff;
+    background: #2c3d50 !important;
+    color: #fff !important;
 }
 th.text-right.bg-color {
-    background: #2c3d50;
-    color: #fff;
+    background: #2c3d50 !important;
+    color: #fff !important;
 }

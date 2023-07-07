@@ -19,3 +19,6 @@
 p.lodder.depositLoading.desk_Loading i {
     margin-top: -2% !important;
 }
+tr.deposit-list {
+    background: #2c3d50;
+}
