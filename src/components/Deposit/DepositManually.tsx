@@ -54,7 +54,7 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
           <label style={{ width: "100%" }}>
             {files ? (
               <img
-                style={{ maxWidth: "90%", margin: "auto" }}
+                style={{ maxWidth: "90%", margin: "auto", maxHeight: "200px" }}
                 src={URL.createObjectURL(files)}
                 alt="uploaded_img"
               />

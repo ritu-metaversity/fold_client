@@ -41,14 +41,17 @@ export const columns: ColumnsInterface<columnIds>[] = [
   {
     id: "accountType",
     label: "Account Type / Currency",
+    align: "center",
   },
   {
     id: "time",
     label: "Date",
+    align: "center",
   },
   {
     id: "remark",
     label: "Remark",
+    align: "center",
   },
   {
     id: "status",
