@@ -10,7 +10,7 @@ import ResetPasswordForm from "./ResetPasswordForm.tsx";
 function CustomizedDialogPassword() {
   const [open, setOpen] = React.useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const { modal } = React.useContext(UserContext);
+  const { modal, setModal } = React.useContext(UserContext);
 
   React.useEffect(() => {
     if (modal.changePassword) {
@@ -24,7 +24,7 @@ function CustomizedDialogPassword() {
     searchParams.delete("first-login");
     setSearchParams(searchParams);
     setOpen(false);
-    // if (setModal) setModal((prev) => ({ ...prev, changePassword: false }));
+    if (setModal) setModal((prev) => ({ ...prev, changePassword: false }));
   };
 
   return (
