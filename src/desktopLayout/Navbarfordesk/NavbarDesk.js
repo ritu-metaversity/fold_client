@@ -20,13 +20,15 @@ const NavbarDesk = (props) => {
   const [lgShow, setLgShow] = useState(false);
   const [showExpModals, setShowExpModals] = useState(false);
   const [logo, setLogo] = useState();
+  const [SeachDetail, setSeachDetail] = useState("");
 
-  const [balanceShow, setBalanceShow] = useState(true);
-  const [expShow, setExpShowShow] = useState(true);
+  // const [balanceShow, setBalanceShow] = useState(true);
+  // const [expShow, setExpShowShow] = useState(true);
   const [Exp, setExp] = useState("0.00");
 
   function toggle(e) {
     e.preventDefault();
+    setSeachDetail("")
     if (close === false) {
       setClose(true);
     } else {
@@ -142,6 +144,8 @@ const NavbarDesk = (props) => {
                         placeholder="All Events"
                         autoComplete="off"
                         type="text"
+                        value={SeachDetail}
+                        onChange={(e)=>setSeachDetail(e.target.value)}
                         className={!close ? "" : "search-input-show"}
                       />
                       <Link onClick={toggle}>
@@ -209,7 +213,7 @@ const NavbarDesk = (props) => {
                         <i className="fa fa-chevron-down"></i>
                       </span>
                       {droup && (
-                        <ul className="d-block">
+                        <ul className="d-block" style={{top: "65px"}}>
                           {localStorage.getItem("userTypeInfo") == 1 || localStorage.getItem("UsertypeInfo") == 1 ? (
                             <>
                               <Link

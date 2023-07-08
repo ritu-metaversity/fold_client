@@ -13,9 +13,9 @@ const NewMobWithdraw = () => {
   const [withType, setwithType] = useState("");
   const [withCoinValue, setwithCoinValue] = useState("");
   const [accountNumber, setAccountNumber] = useState();
-  const [accountHolderName, setAccountHolderName] = useState();
+  const [accountHolderName, setAccountHolderName] = useState("");
   const [ifsc, setIFSC] = useState();
-  const [bankName, setBankName] = useState();
+  const [bankName, setBankName] = useState("");
   const [AccountType, setAccountType] = useState("Saving");
   const [errorAlert, setErrorAlert] = useState(false);
   const [message, setMessage] = useState();
@@ -32,6 +32,8 @@ const NewMobWithdraw = () => {
   const [showWithdraw, setshowWithdraw] = useState(false);
   const [withdrawReq, setWithdrawReq] = useState();
   const [dataLength, setDataLength] = useState();
+  const [activeBank, setActiveBank] = useState();
+
 
   const handleClose = () => {
     setShow(false);
@@ -46,7 +48,7 @@ const NewMobWithdraw = () => {
     setwithCoinValue(0);
   };
 
-  const handlePaymentDetails = (val, id) => {
+  const handlePaymentDetails = (val, id, id1) => {
     setwithType(val);
     setBankId(id);
     setOpenForm(true);
@@ -54,6 +56,7 @@ const NewMobWithdraw = () => {
     setAccountNumber("");
     setIFSC("");
     setBankName("");
+    setActiveBank(id1)
   };
 
   useEffect(() => {
@@ -84,6 +87,9 @@ const NewMobWithdraw = () => {
   };
 
   const handleSaveDetail = () => {
+    UserAPI.GET_BANK_DETAIL().then((res)=>{
+      setWithdrawData(res?.data)
+    })
     setAccountHolderName("");
     setAccountNumber("");
     setIFSC("");
@@ -99,6 +105,10 @@ const NewMobWithdraw = () => {
       withdrawType: bankID,
     })
       .then((res) => {
+        UserAPI.GET_CLIENT_BANK().then((res)=>{
+          setGetAccountData(res?.data);
+          setDataLenth(res?.data?.length);
+        })
         setShow(false);
         setErrorAlert(true);
         setIsLoading(false);
@@ -293,14 +303,15 @@ const NewMobWithdraw = () => {
         withdrawMode: withdrawType,
       })
         .then((res) => {
-          // if (res?.bankExist === false) {
+          if (res?.data.bankExist === false) {
+           
           setShow(true);
-          // } else {
+          } else {
           setMessage(res?.message);
           setErrorAlert(true);
           setColorName("success");
           setIsLoading(false);
-          // }
+          }
           setIsLoading(false);
           console.log(res?.message);
         })
@@ -389,17 +400,19 @@ const NewMobWithdraw = () => {
                   <Container>
                     <div className="bank-logo with_bank_logo">
                       <Row>
-                        {withdrawData?.map((res, id) => {
+                        {withdrawData?.map((res, id1) => {
                           return (
                             <>
                               <Col
-                                className="withdraw_image"
+                                className={`withdraw_image ${activeBank === id1?"activeBank":""}`}
                                 onClick={() =>
                                   handlePaymentDetails(
                                     res?.withdrawType,
-                                    res?.id
+                                    res?.id,
+                                    id1
                                   )
-                                }>
+                                }
+                                >
                                 <div className="css-1502y4u">
                                   <img
                                     src={res?.image}
@@ -440,10 +453,11 @@ const NewMobWithdraw = () => {
                       <input
                         type="text"
                         className="account-input"
-                        value={accountHolderName}
+                        value={accountHolderName.trimStart()}
                         onChange={(e) =>
-                          e.target.value.match(/^[a-zA-Z ]*$/) &&
-                         setAccountHolderName(e.target.value)
+                          setAccountHolderName(
+                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                          )
                         }
                       />
                     </div>
@@ -453,10 +467,11 @@ const NewMobWithdraw = () => {
                       <input
                         type="type"
                         className="account-input"
-                        value={bankName}
+                        value={bankName.trimStart()}
                         onChange={(e) =>
-                          e.target.value.match(/^[a-zA-Z ]*$/) &&
-                          setBankName(e.target.value)
+                          setBankName(
+                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                          )
                         }
                       />
                     </div>
@@ -530,7 +545,7 @@ const NewMobWithdraw = () => {
                       <input
                         type="text"
                         className="account-input"
-                        value={accountHolderName}
+                        value={accountHolderName.trimStart()}
                         onChange={(e) =>
                           setAccountHolderName(
                             e.target.value.replace(/[^A-Za-z]+$/, " ")
@@ -789,7 +804,6 @@ const NewMobWithdraw = () => {
                           className={`${dataLength === 0 ? "d-none" : ""}`}>
                           {withdrawReq?.length &&
                             withdrawReq.map((item, index) => {
-                              console.log(item, "adsafsf");
                               return (
                                 <>
                                   <tr role="row" key={index}>

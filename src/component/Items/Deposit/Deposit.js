@@ -98,7 +98,19 @@ const Deposit = () => {
                             alt="screenshort-images"
                             
                           />
-                          <Modal
+                          
+                        </td>
+                        <td aria-colindex="3" className="text-left">
+                          {item.time}
+                        </td>
+                        <td
+                          aria-colindex="4"
+                          className="text-center">
+                          <p className={`${item.status==="Pending"?"pending":item.status==="APPROVED"?"approved":"rejected"}`}>{item.status}</p>
+                        </td>
+                      </tr>
+                    ))}
+                    <Modal
                           show={showModals}
                           onHide={handleCloseModal}
                           centered
@@ -112,17 +124,6 @@ const Deposit = () => {
                             <img src={modalImg} width="100%" alt="screen-short"/>
                           </Modal.Body>
                         </Modal>
-                        </td>
-                        <td aria-colindex="3" className="text-left">
-                          {item.time}
-                        </td>
-                        <td
-                          aria-colindex="4"
-                          className="text-center">
-                          <p className={`${item.status==="Pending"?"pending":item.status==="APPROVED"?"approved":"rejected"}`}>{item.status}</p>
-                        </td>
-                      </tr>
-                    ))}
                 </tbody>
               </table>
             </div>

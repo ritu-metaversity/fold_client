@@ -75,11 +75,13 @@ const RouteMobile = () => {
         nav("/m/login");
       }
     }
-    // else{
-    //   if(pathname === "/m/reports/deposit"){
-    //     nav("/m/reports/deposit")
-    //   }
-    // }
+    else{
+      if(pathname === "/m/reports/deposit"){
+        nav("/m/reports/deposit")
+      }else if(pathname === "/m/reports/withdraw"){
+        nav("/m/reports/withdraw");
+      }
+    }
   }, [pathname]);
 
 
@@ -108,19 +110,14 @@ const RouteMobile = () => {
   const statusMsgForLogout = (val) => {
     setStatusmessage(val);
 
-    // console.log(statusMassege, "rwerwrwr");
   };
-  // console.log(alert("hello"), "rwerwrwr");
 
   return (
     <div>
       {" "}
       <>
         <Routes>
-          <Route
-            path="/m/login" element={ <Login Errmessage={Errmessage} Statusmessage={Statusmessage} />
-            }
-          />
+          <Route path="/m/login" element={ <Login Errmessage={Errmessage} Statusmessage={Statusmessage} />}/>
           <Route path="/m/register" element={<Register />} />
           <Route exact path="/signup3" element={<Signup3 />} />
           <Route exact path="/signup1" element={<Signup1 />} />
@@ -129,10 +126,7 @@ const RouteMobile = () => {
           <Route exact path="/signup5" element={<Signup5 />} />
           <Route path="" element={<NavBar />}>
             <Route path="/about-us" element={<AboutUsPageForMob />} />
-            <Route
-              path="/terms-and-conditions"
-              element={<TermAndCondition />}
-            />
+            <Route path="/terms-and-conditions" element={<TermAndCondition />}/>
             <Route path="/responsible-gaming" element={<ResponsibleGaming />} />
             <Route path="/" element={<DefaultHomePage />} />
             <Route path="/in-play" element={<DefaultHomePage />} />
@@ -141,41 +135,16 @@ const RouteMobile = () => {
               <>
                 <Route path="/m/reports/deposit" element={<Deposit />} />
                 <Route path="/m/reports/withdraw" element={<NewMobWithdraw/>} />
-              </>
-            ) : (
-              ""
-            )}
-
-            <Route
-              path="/m/gamedetail/:id"
-              element={<GameHead SportId={SportId} />}
-            />
+              </>): ("")}
+            <Route path="/m/gamedetail/:id" element={<GameHead SportId={SportId} />}/>
             <Route path="/casino/:id" element={<Casino />} />
-            <Route
-              path="/m/reports/accountstatement"
-              element={<AaccountStatement />}
-            />
+            <Route path="/m/reports/accountstatement" element={<AaccountStatement />}/>
             <Route path="/m/reports/profitloss" element={<ProfitLoss />} />
             <Route path="/m/reports/bethistory" element={<BetHistory />} />
-            <Route
-              path="/m/reports/unsetteledbet"
-              element={<UnSetteledBet />}
-            />
-            <Route
-              path="/m/setting/changebtnvalue"
-              element={<ChangeBtnValue />}
-            />
-            <Route
-              path="/m/setting/changepassword"
-              element={
-                <ChangePassword message={message} statusMsg={statusMsg} />
-              }
-            />
-            <Route
-              path="/SignOut"
-              element={<SignOut statusMsgForLogout={statusMsgForLogout} />}
-            />
-
+            <Route path="/m/reports/unsetteledbet" element={<UnSetteledBet />}/>
+            <Route path="/m/setting/changebtnvalue" element={<ChangeBtnValue />}/>
+            <Route path="/m/setting/changepassword" element={ <ChangePassword message={message} statusMsg={statusMsg} />}/>
+            <Route path="/SignOut" element={<SignOut statusMsgForLogout={statusMsgForLogout} />}/>
             <Route path="" element={<Mobilenav />}>
               <Route path="/m/Home" element={<Home idddd={idddd} />} />
               <Route path="/m/sports" element={<SportData />} />
@@ -186,7 +155,7 @@ const RouteMobile = () => {
           </Route>
           <Route path="*" element={<Login />} />
         </Routes>
-        {pathname === "/m/login" ? "" : <FooterForMob />}
+        {pathname === "/login" ? "" : <FooterForMob />}
       </>
     </div>
   );

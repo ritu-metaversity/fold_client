@@ -91,6 +91,7 @@ const PayManually = (props) => {
             setFiles(null);
             setPaymentMode("UPI");
             setActive(0);
+            window.location.reload()
           }
         })
         .catch((error) => {
@@ -118,6 +119,8 @@ const PayManually = (props) => {
   const popupClose = (vl) => {
     setAlertBtnshow(false);
   };
+
+  console.log(files, "dsaasdasdsds")
 
   return (
     <div>

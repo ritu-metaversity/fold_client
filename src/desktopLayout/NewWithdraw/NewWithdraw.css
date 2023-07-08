@@ -58,6 +58,7 @@
     background: #f1f5f8;
     padding: 7px;
     border-radius: 50%;
+   
 }
 .withdraw_image.col .css-1502y4u {
     padding: 12px 0px;
@@ -89,6 +90,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 }
 .withdraw_coin_btn {
     display: flex;
@@ -149,4 +151,7 @@ p.lodder.depositLoading.withloading.withdraw_deposit  i{
     .card-header.header-card {
         border-radius: unset !important;
     }
+}
+.activeBank{
+    border: 1px solid #08c;
 }

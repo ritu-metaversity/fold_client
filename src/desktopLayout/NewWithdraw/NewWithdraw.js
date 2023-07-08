@@ -15,9 +15,9 @@ const NewWithdraw = () => {
   const [withType, setwithType] = useState("");
   const [withCoinValue, setwithCoinValue] = useState("");
   const [accountNumber, setAccountNumber] = useState();
-  const [accountHolderName, setAccountHolderName] = useState();
+  const [accountHolderName, setAccountHolderName] = useState("");
   const [ifsc, setIFSC] = useState();
-  const [bankName, setBankName] = useState();
+  const [bankName, setBankName] = useState("");
   const [AccountType, setAccountType] = useState("Saving");
   const [errorAlert, setErrorAlert] = useState(false);
   const [message, setMessage] = useState();
@@ -33,6 +33,7 @@ const NewWithdraw = () => {
   const [saveModalsShow, setSaveModalsShow] = useState();
   const [withdrawReq, setWithdrawReq] = useState();
   const [dataLength, setDataLength] = useState();
+  const [activeBank, setActiveBank] = useState();
 
   const handleClose = () => {
     setShow(false);
@@ -47,7 +48,7 @@ const NewWithdraw = () => {
     setwithCoinValue(0);
   };
 
-  const handlePaymentDetails = (val, id) => {
+  const handlePaymentDetails = (val, id,  id1) => {
     setwithType(val);
     setBankId(id);
     setOpenForm(true);
@@ -55,7 +56,8 @@ const NewWithdraw = () => {
     setAccountNumber("");
     setIFSC("");
     setBankName("");
-    setwithCoinValue(0);
+    setActiveBank(id1)
+    // setwithCoinValue(0);
   };
 
 
@@ -94,6 +96,7 @@ const NewWithdraw = () => {
 
 
   useEffect(() => {
+    
     UserAPI.GET_BANK_DETAIL().then((res)=>{
       setWithdrawData(res?.data)
     })
@@ -113,6 +116,7 @@ const NewWithdraw = () => {
   };
 
   const handleSaveDetail = () => {
+   
     setAccountHolderName("");
     setAccountNumber("");
     setIFSC("");
@@ -127,7 +131,11 @@ const NewWithdraw = () => {
       accountNumber: accountNumber,
       withdrawType: bankID,
     }).then((res)=>{
-      
+      UserAPI.GET_CLIENT_BANK().then((res)=>{
+        setGetAccountData(res?.data);
+        setDataLenth(res?.data?.length);
+      })
+     
       setShow(false);
         setErrorAlert(true);
         setIsLoading(false);
@@ -283,6 +291,10 @@ const NewWithdraw = () => {
     }
     return true;
   };
+
+  console.log(accountHolderName, "dasdasds");
+  console.log(bankName, "dasdasds")
+
   const handleClick = () => {
     setErrorAlert(false);
     setIsLoading(true);
@@ -297,14 +309,14 @@ const NewWithdraw = () => {
         withdrawType: bankID,
         withdrawMode: withdrawType,
       }).then((res) => {
-        // if (res?.bankExist === false) {
+        if (res?.data.bankExist === false) {
           setShow(true);
-        // } else {
+        } else {
           setMessage(res?.message);
           setErrorAlert(true);
           setColorName("success");
           setIsLoading(false);
-        // }
+        }
         setIsLoading(false);
         console.log(res?.message);
       }).catch((error)=>{
@@ -395,17 +407,19 @@ const NewWithdraw = () => {
                   <Container>
                     <div className="bank-logo with_bank_logo">
                       <Row>
-                        {withdrawData?.map((res, id) => {
+                        {withdrawData?.map((res, id1) => {
                           return (
                             <>
                               <Col
-                                className="withdraw_image"
+                               
                                 onClick={() =>
                                   handlePaymentDetails(
                                     res?.withdrawType,
-                                    res?.id
+                                    res?.id,
+                                    id1
                                   )
-                                }>
+                                }
+                                className={`withdraw_image ${activeBank === id1?"activeBank":""}`}>
                                 <div className="css-1502y4u">
                                   <img
                                     src={res?.image}
@@ -446,11 +460,10 @@ const NewWithdraw = () => {
                       <input
                         type="text"
                         className="account-input"
-                        value={accountHolderName}
+                        value={accountHolderName.trimStart()}
                         onChange={(e) =>
                           setAccountHolderName(
-                            e.target.value.match(/^[a-zA-Z ]*$/) &&
-                            setAccountHolderName(e.target.value)
+                            e.target.value.replace(/[^A-Za-z]+$/, " ")
                           )
                         }
                       />
@@ -461,11 +474,10 @@ const NewWithdraw = () => {
                       <input
                         type="type"
                         className="account-input"
-                        value={bankName}
+                        value={bankName.trimStart()}
                         onChange={(e) =>
                           setBankName(
-                            e.target.value.match(/^[a-zA-Z ]*$/) &&
-                          setBankName(e.target.value)
+                            e.target.value.replace(/[^A-Za-z]+$/, " ")
                           )
                         }
                       />
@@ -518,7 +530,7 @@ const NewWithdraw = () => {
                         />
                       ) : (
                         <input
-                          type="number"
+                          type="text"
                           className="account-input"
                           value={accountNumber}
                           onChange={(e) =>
@@ -539,7 +551,7 @@ const NewWithdraw = () => {
                       <input
                         type="text"
                         className="account-input"
-                        value={accountHolderName}
+                        value={accountHolderName.trimStart()}
                         onChange={(e) =>
                           setAccountHolderName(
                             e.target.value.replace(/[^A-Za-z]+$/, " ")

@@ -254,7 +254,7 @@ const CasinoPnl = () => {
               id="account-statement_length"
               className="dataTables_length cpoint d-flex align-items-center">
               <label
-                style={{ fontSize: "14px", height: "37px" }}
+                style={{ fontSize: "14px" }}
                 className="showEntries">
                 Show
               </label>
@@ -262,7 +262,7 @@ const CasinoPnl = () => {
                 name="account-statement_length"
                 aria-controls="account-statement"
                 className="form-control form-control-sm theme1font optionValue OptionVal"
-                style={{ fontSize: "14px" }}
+                style={{ fontSize: "14px", height: "37px"}}
                 onChange={getIndexValues}>
                 <option value="5">5</option>
                 <option value="10">10</option>

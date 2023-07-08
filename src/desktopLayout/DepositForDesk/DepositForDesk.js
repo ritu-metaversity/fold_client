@@ -55,7 +55,10 @@ const DepositForDesk = () => {
                         Previous Deposit
                       </th>
                     </tr>
-                    <tr role="row" className="deposit-list" style={{background: "#2c3d50"}}>
+                    <tr
+                      role="row"
+                      className="deposit-list"
+                      style={{ background: "#2c3d50" }}>
                       <th
                         role="columnheader"
                         scope="col"
@@ -102,28 +105,9 @@ const DepositForDesk = () => {
                                 className="screenshot"
                                 alt="screenshort-images"
                               />
-                              <Modal
-                                show={showModals}
-                                onHide={handleCloseModal}
-                                centered
-                                style={{
-                                  marginTop: "12px",
-                                  marginInline: "2%",
-                                  width: "95%",
-                                }}>
-                                <Modal.Body>
-                                  {" "}
-                                  <img
-                                    src={modalImg}
-                                    width="100%"
-                                    alt="screen-short"
-                                  />
-                                </Modal.Body>
-                              </Modal>
                             </td>
                             <td aria-colindex="3" className="text-left">
                               {item.time}
-                              
                             </td>
                             <td aria-colindex="4" className="text-center">
                               <p
@@ -140,6 +124,20 @@ const DepositForDesk = () => {
                           </tr>
                         );
                       })}
+                    <Modal
+                      show={showModals}
+                      onHide={handleCloseModal}
+                      centered
+                      style={{
+                        marginTop: "12px",
+                        marginInline: "2%",
+                        width: "95%",
+                      }}>
+                      <Modal.Body>
+                        {" "}
+                        <img src={modalImg} width="100%" alt="screen-short" />
+                      </Modal.Body>
+                    </Modal>
                   </tbody>
                 </table>
               </div>
