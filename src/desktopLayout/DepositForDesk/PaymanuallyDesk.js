@@ -58,12 +58,12 @@ const PaymanuallyDesk = (props) => {
     setIsLoading(true);
     setAlertBtnshow(false);
 
-    if(Bitvalue == 0 || Bitvalue != "0" || Bitvalue === NaN){
+    if(Bitvalue == 0 || Bitvalue === "0" || Bitvalue === NaN){
       setColor("danger")
       setMessege("Ammout is Greate then 99");
       setAlertBtnshow(true)
       setIsLoading(false)
-    }else if (Bitvalue <= 99) {
+    }else if (Bitvalue < 100) {
       setColor("danger");
       setMessege("Minimum Deposit Amount is 100");
       setAlertBtnshow(true);
@@ -92,7 +92,12 @@ const PaymanuallyDesk = (props) => {
           setFiles(null);
           setPaymentMode("UPI");
           setActive(0);
+         
+          
         }
+        setTimeout(()=>{
+          window.location.reload()
+        }, 7000)
       })
       .catch((error) => {
         setIsLoading(false);

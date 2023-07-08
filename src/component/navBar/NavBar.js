@@ -70,7 +70,7 @@ const NavBar = () => {
     }
   }
 
-  useEffect(() => {
+  useEffect(()=>{
     UserAPI.Self_By_App_Url().then((res) => {
       setStatus(res?.data?.selfAllowed);
       setNavLogo(res?.data?.logo);
@@ -78,10 +78,16 @@ const NavBar = () => {
     UserAPI.User_Message().then((res) => {
       setUserMessage(res);
     });
+  },[])
+
+  useEffect(() => {
 
     if (localStorage.getItem("token") === null) {
       nav("/login");
     }
+
+
+
   }, [nav]);
 
   useEffect(() => {
