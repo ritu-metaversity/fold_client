@@ -11,14 +11,16 @@ import Login from "./component/login/Login";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import RouteMobile from "./RouteMobile";
 import RouteDesktop from "./RouteDesktop";
+import { UserAPI } from "./apis/UserAPI";
 
 function App() {
  
   const nav = useNavigate();
   const { pathname } = useLocation();
 
-  const hostname = window.location.host.split(".");
-  document.title = hostname[0];
+  // const hostname = window.location.host.split(".");
+  // document.title = hostname[0];
+
 
   
   const [mobileRoutes, setMoileRoutes] = useState(true);
@@ -41,13 +43,19 @@ function App() {
     }
   }, []);
 
-  // useEffect(()=>{
-  //   if(localStorage.getItem("token") !== null){
-  //     nav('/m/home')
-  //   }
-  // }, [nav])
 
+  useEffect(() => {
 
+    document.title = window.location.hostname;
+    UserAPI.Self_By_App_Url().then((res)=>{
+      if (res?.data.favicon) {
+        let favicon = document.createElement("link")
+        favicon.rel = "icon"
+        document.getElementsByTagName("head")[0].appendChild(favicon)
+        favicon.href = res?.data?.favicon
+      }
+    })
+  }, []);
 
 
   return (
