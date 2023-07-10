@@ -18,6 +18,7 @@ import { colorHex } from "../../utils/constants";
 import { casinoService } from "../../utils/api/casino/service";
 import { CasinoList } from "../casino/Casino";
 import axios from "axios";
+import SidebarSport from "./SidebarSport";
 
 const SideBarCasino = ({
   handleDrawerToggle,
@@ -202,6 +203,7 @@ const SideBarCasino = ({
             </ListItemButton>
           </SidebarHeader>
           {open && matchList}
+          <SidebarSport />
         </List>
       </Box>
     </Box>

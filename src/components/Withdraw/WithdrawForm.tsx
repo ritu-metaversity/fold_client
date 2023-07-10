@@ -135,6 +135,7 @@ export function WithdrawForm({
       const newValues: SelfWithdrawPayload = { ...values };
       console.log(newValues, "iuytfvbnmkiuytgfv");
       setLoading(true);
+      newValues.ifsc = newValues.ifsc?.toUpperCase();
       if (newValues.withdrawType.toLowerCase() !== "bank") {
         newValues.accountType = "";
         newValues.ifsc = "";
@@ -151,6 +152,7 @@ export function WithdrawForm({
           setOpen(true);
         }
         resetForm();
+        setSavedCheck("");
         getWithdrawList();
       }
       setLoading(false);
@@ -243,7 +245,7 @@ export function WithdrawForm({
               placeholder="Amount"
             />
           </Box>
-          <Box>
+          <Box flexWrap={"wrap"} display={"flex"}>
             {stack.map(({ key, value }) => (
               <StyledButtonSmall
                 key={`${key + value}-button`}
@@ -362,7 +364,7 @@ export function WithdrawForm({
                   IFSC
                 </Typography>
                 <WithdrawInput
-                  value={values.ifsc}
+                  value={values.ifsc.toUpperCase()}
                   name="ifsc"
                   onChange={handleChange}
                   error={Boolean(errors.ifsc)}
@@ -466,16 +468,8 @@ export function WithdrawForm({
           <Box my={2}>
             <ActivityTable
               onRowClick={(row: any) => {
-                if (row && row.id !== savedCheck) {
+                if (row) {
                   setSavedCheck(row.id);
-                  setFieldValue("accountHolderName", row.accountHolderName);
-                  setFieldValue("bankName", row.bankName);
-                  setFieldValue("accountType", row.accountType);
-                  setFieldValue("accountNumber", row.accountNumber);
-                  setFieldValue("ifsc", row.ifsc);
-                  setFieldValue("withdrawType", row.withdrawType);
-                } else {
-                  setSavedCheck("");
                   setFieldValue("accountHolderName", row.accountHolderName);
                   setFieldValue("bankName", row.bankName);
                   setFieldValue("accountType", row.accountType);
