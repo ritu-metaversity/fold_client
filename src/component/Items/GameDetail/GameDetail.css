@@ -934,3 +934,6 @@ p.no-found {
 label.onoffbtn {
     cursor: pointer !important;
 }
+th.text-left.nation-name, th.text-left.rate {
+    color: #fff;
+}
