@@ -6,6 +6,7 @@ import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
 import Accordion from "react-bootstrap/Accordion";
 
 import axios from "axios";
+import { Modal } from "react-bootstrap";
 
 function SideBar() {
   const [visible, setVisible] = useState(true);
@@ -14,8 +15,12 @@ function SideBar() {
   const [matchList, setMatchList] = useState("");
   const [casinoData, setCasinoData] = useState([]);
   const [SportId, setSportId] = useState();
-  const [show, setShow] = useState(false);
+  const [ShowCollepes, setShowCollepes] = useState(false);
   const [closeAllSportData, setCloseAllSportData] = useState(true);
+  const [casinoId, setCasinoId] = useState();
+  const [show, setShow] = useState(false);
+  
+  const [SportName, setSportName] = useState("");
 
   function collapse() {
     if (visible === true) {
@@ -37,7 +42,7 @@ function SideBar() {
     setToggle(id);
     localStorage.setItem("SportId", val);
     setSportId(val);
-    setShow(!show);
+    setShowCollepes(!ShowCollepes);
     setCloseAllSportData(false);
   };
 
@@ -64,6 +69,20 @@ function SideBar() {
       });
   }, []);
 
+
+  const token = localStorage.getItem("token");
+  const handleClose = () => setShow(false);
+
+  const finishLoading = () => {
+    setIsLoading(false);
+  };
+  const handleData = (id, gameName, e) => {
+    setCasinoId(id)
+    setSportName(gameName)
+    setShow(true)
+    e.preventDefault();
+  };
+
   return (
     <div className="">
       <div
@@ -86,10 +105,10 @@ function SideBar() {
           </li> */}
           {casinoData?.map((res, id) => {
             return (
-              <li className="nav-item" key={id}>
-                <Link to={`/casino/${res?.gameId}`} className="nav-link">
+              <li className="nav-item c-pointer" key={id} onClick={(e)=>handleData(res.gameId,res.gameName, e)}>
+                <p to={`/casino/${res?.gameId}`} className="nav-link">
                   <span className="new-launch-text">{res?.gameName}</span>
-                </Link>
+                </p>
               </li>
             );
           })}
@@ -135,6 +154,38 @@ function SideBar() {
           );
         })}
         </Accordion>
+
+        <Modal show={show} size="xl" className="slot-modal" onHide={handleClose}>
+      <Modal.Header className="mob_none" closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          {SportName}
+        </Modal.Title>
+      </Modal.Header>
+        <button  onClick={()=>setShow(false)} className="close_btn desk_none">X</button>
+        <Modal.Body>
+        {isLoading ? (
+        <p className="lodder">
+        <i className="fa fa-spinner fa-spin"></i>
+      </p>
+      ) : (
+        <iframe
+          src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
+          className="mobile_if"
+          width="100%"
+          title="mobile"
+          allowFullScreen={true}
+          onLoad={finishLoading} />
+      )}
+
+      <iframe
+        src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
+        className="desktop_if"
+        width="100%"
+        title="desktop"
+        onLoad={finishLoading}
+      />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

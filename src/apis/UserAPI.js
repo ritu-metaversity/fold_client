@@ -354,6 +354,20 @@ export const UserAPI = {
 
     return response.data;
   },
+
+  NEW_DEPOSITE_API: async function (cancel = false) {
+    const response = await api.request({
+      url: `/deposit-type/get_sub`,
+      method: "POST",
+      
+
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
   
 };
 

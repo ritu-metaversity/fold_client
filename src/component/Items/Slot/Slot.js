@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../apis/gameAPI";
 import "./Slot.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+import { Button } from "antd";
 
 const Slot = () => {
   const [casinoList, setCasinoList] = useState("");
@@ -10,6 +12,18 @@ const Slot = () => {
   const [casinoData, setCasinoData] = useState("");
   const [casinoName, setCasinoName] = useState("Indian Casino");
   const [isLoading, setIsLoading]=useState(true);
+  const [show, setShow] = useState(false);
+  const [casinoId, setCasinoId] = useState();
+  const [SportName, setSportName] = useState("");
+
+  const token = localStorage.getItem("token");
+
+  const finishLoading = () => {
+    setIsLoading(false);
+  };
+
+  const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
 
   // useEffect(() => {
   //   GameAPI.CASINO_TYPES().then((res) => {
@@ -22,6 +36,7 @@ const Slot = () => {
     setCasinoListId(id);
     setActiveClass(id);
     setCasinoName(name);
+    setShow(true)
     e.preventDefault();
   };
 
@@ -42,14 +57,15 @@ const Slot = () => {
       .then((res) => {
         setCasinoData(res?.data)
       setIsLoading(false)
-
       });
   }, []);
 
   const {pathname} = useLocation();
   const nav = useNavigate();
-  const handleData = (id, e) => {
-    nav(`/casino/${id}`);
+  const handleData = (id,gameName, e) => {
+    setCasinoId(id)
+    setSportName(gameName)
+    setShow(true)
     e.preventDefault();
   };
 
@@ -108,7 +124,7 @@ const Slot = () => {
                           {casinoData?.length > 0 &&
                             casinoData.map((item, id) => {
                               return (
-                                <div key={item.gameId} className="col-3 text-center" onClick={(e)=>handleData(item.gameId, e)}>
+                                <div key={item.gameId} className="col-3 text-center" onClick={(e)=>handleData(item.gameId,item.gameName, e)}>
                                   <div className="casinoicons" >
                                     <a href="/">
                                       <img
@@ -154,6 +170,38 @@ const Slot = () => {
       </div>
       }
       </>
+
+      <Modal show={show} size="xl" className="slot-modal" onHide={handleClose}>
+      <Modal.Header className="mob_none" closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          {SportName}
+        </Modal.Title>
+      </Modal.Header>
+        <button  onClick={()=>setShow(false)} className="close_btn desk_none">X</button>
+        <Modal.Body>
+        {isLoading ? (
+        <p className="lodder">
+        <i className="fa fa-spinner fa-spin"></i>
+      </p>
+      ) : (
+        <iframe
+          src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
+          className="mobile_if"
+          width="100%"
+          title="mobile"
+          allowFullScreen={true}
+          onLoad={finishLoading} />
+      )}
+
+      <iframe
+        src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
+        className="desktop_if"
+        width="100%"
+        title="desktop"
+        onLoad={finishLoading}
+      />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };
