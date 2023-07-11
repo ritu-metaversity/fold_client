@@ -48,7 +48,7 @@ const NewWithdraw = () => {
     setwithCoinValue(0);
   };
 
-  const handlePaymentDetails = (val, id,  id1) => {
+  const handlePaymentDetails = (val, id, id1) => {
     setwithType(val);
     setBankId(id);
     setOpenForm(true);
@@ -56,10 +56,13 @@ const NewWithdraw = () => {
     setAccountNumber("");
     setIFSC("");
     setBankName("");
-    setActiveBank(id1)
+    setActiveBank(id1);
     // setwithCoinValue(0);
   };
 
+  const handleCancel = () => {
+    setshowWidthRequest(false);
+  };
 
   const [showWidthRequest, setshowWidthRequest] = useState(false);
   const [dataId, setDataId] = useState();
@@ -70,7 +73,6 @@ const NewWithdraw = () => {
     setDataId(val);
   };
 
-
   const handleCloseSubmit = () => {
     UserAPI.USER_CANCEL_WITHDRAW_REQUIEST({
       id: dataId,
@@ -79,7 +81,7 @@ const NewWithdraw = () => {
         setMessage(res.message);
         setErrorAlert(true);
         setColorName("success");
-        setshowWidthRequest(false)
+        setshowWidthRequest(false);
 
         UserAPI.Withdraw_Request().then((res) => {
           setWithdrawReq(res.data);
@@ -90,20 +92,18 @@ const NewWithdraw = () => {
         setErrorAlert(true);
         setMessage(error.response.data.message);
         setColorName("danger");
-        setshowWidthRequest(false)
+        setshowWidthRequest(false);
       });
   };
 
-
   useEffect(() => {
-    
-    UserAPI.GET_BANK_DETAIL().then((res)=>{
-      setWithdrawData(res?.data)
-    })
+    UserAPI.GET_BANK_DETAIL().then((res) => {
+      setWithdrawData(res?.data);
+    });
 
-    UserAPI.WITHDRAW_STACK_REQUEST().then((res)=>{
-      setStackValue(res?.data)
-    })
+    UserAPI.WITHDRAW_STACK_REQUEST().then((res) => {
+      setStackValue(res?.data);
+    });
 
     UserAPI.User_Balance().then((res) => {
       setuserBalance(res?.data?.balance);
@@ -116,7 +116,6 @@ const NewWithdraw = () => {
   };
 
   const handleSaveDetail = () => {
-   
     setAccountHolderName("");
     setAccountNumber("");
     setIFSC("");
@@ -130,35 +129,32 @@ const NewWithdraw = () => {
       ifsc: ifsc,
       accountNumber: accountNumber,
       withdrawType: bankID,
-    }).then((res)=>{
-      UserAPI.GET_CLIENT_BANK().then((res)=>{
-        setGetAccountData(res?.data);
-        setDataLenth(res?.data?.length);
-      })
-     
-      setShow(false);
+    })
+      .then((res) => {
+        UserAPI.GET_CLIENT_BANK().then((res) => {
+          setGetAccountData(res?.data);
+          setDataLenth(res?.data?.length);
+        });
+
+        setShow(false);
         setErrorAlert(true);
         setIsLoading(false);
         setColorName("success");
         setMessage(res?.message);
-    }).catch((error)=>{
-      setErrorAlert(true);
-      setColorName("danger");
-      setMessage(error?.response?.data?.message);
-    })
+      })
+      .catch((error) => {
+        setErrorAlert(true);
+        setColorName("danger");
+        setMessage(error?.response?.data?.message);
+      });
   };
 
-
-  useEffect(()=>{
-    UserAPI.GET_CLIENT_BANK().then((res)=>{
+  useEffect(() => {
+    UserAPI.GET_CLIENT_BANK().then((res) => {
       setGetAccountData(res?.data);
       setDataLenth(res?.data?.length);
-    })
-  }, [])
- 
-
-
-
+    });
+  }, []);
 
   const handleBtnValue = (val) => {
     setwithCoinValue(
@@ -215,8 +211,7 @@ const NewWithdraw = () => {
         setColorName("danger");
         setIsLoading(false);
         return false;
-      }
-      else if (ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
+      } else if (ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
         setMessage("Enter Valid IFSC Code");
         setErrorAlert(true);
         setColorName("danger");
@@ -247,7 +242,7 @@ const NewWithdraw = () => {
         setColorName("danger");
         setIsLoading(false);
         return false;
-      }else if(accountNumber.length !== 10){
+      } else if (accountNumber.length !== 10) {
         setMessage("Enter Valid Mobile number");
         setErrorAlert(true);
         setColorName("danger");
@@ -292,9 +287,6 @@ const NewWithdraw = () => {
     return true;
   };
 
-  console.log(accountHolderName, "dasdasds");
-  console.log(bankName, "dasdasds")
-
   const handleClick = () => {
     setErrorAlert(false);
     setIsLoading(true);
@@ -308,26 +300,27 @@ const NewWithdraw = () => {
         accountNumber: accountNumber,
         withdrawType: bankID,
         withdrawMode: withdrawType,
-      }).then((res) => {
-        if (res?.data.bankExist === false) {
-          setShow(true);
-        } else {
-          setMessage(res?.message);
-          setErrorAlert(true);
-          setColorName("success");
+      })
+        .then((res) => {
+          if (res?.data.bankExist === false) {
+            setShow(true);
+          } else {
+            setMessage(res?.message);
+            setErrorAlert(true);
+            setColorName("success");
+            setIsLoading(false);
+          }
           setIsLoading(false);
-        }
-        setIsLoading(false);
-        console.log(res?.message);
-      }).catch((error)=>{
-        setErrorAlert(true);
-        setIsLoading(false);
-        setColorName("danger");
-        setMessage(error?.response?.data?.message);
-      });
+          console.log(res?.message);
+        })
+        .catch((error) => {
+          setErrorAlert(true);
+          setIsLoading(false);
+          setColorName("danger");
+          setMessage(error?.response?.data?.message);
+        });
     }
   };
-
 
   useEffect(() => {
     UserAPI.Withdraw_Request().then((res) => {
@@ -411,7 +404,6 @@ const NewWithdraw = () => {
                           return (
                             <>
                               <Col
-                               
                                 onClick={() =>
                                   handlePaymentDetails(
                                     res?.withdrawType,
@@ -419,7 +411,9 @@ const NewWithdraw = () => {
                                     id1
                                   )
                                 }
-                                className={`withdraw_image ${activeBank === id1?"activeBank":""}`}>
+                                className={`withdraw_image ${
+                                  activeBank === id1 ? "activeBank" : ""
+                                }`}>
                                 <div className="css-1502y4u">
                                   <img
                                     src={res?.image}
@@ -489,9 +483,7 @@ const NewWithdraw = () => {
                         type="type"
                         className="account-input"
                         value={ifsc}
-                        onChange={(e) =>
-                          setIFSC(e.target.value)
-                        }
+                        onChange={(e) => setIFSC(e.target.value)}
                       />
                     </div>
                     <div className="mx-input-wrapper account-field">
@@ -570,7 +562,9 @@ const NewWithdraw = () => {
                           role="table"
                           aria-busy="false"
                           aria-colcount="6"
-                          className={`table b-table table-bordered  ${openForm ? "":"d-none"}`}
+                          className={`table b-table table-bordered  ${
+                            openForm ? "" : "d-none"
+                          }`}
                           id="__BVID__104">
                           <thead>
                             <tr role="row" className="account-detail">
@@ -709,18 +703,22 @@ const NewWithdraw = () => {
                       <i className="fa fa-spinner fa-spin"></i>
                     </p>
                   )}
-                  <button onClick={handleClick} className={openForm?"":"disable_btn"} disabled={!openForm}>
+                  <button
+                    onClick={handleClick}
+                    className={openForm ? "" : "disable_btn"}
+                    disabled={!openForm}>
                     Withdraw Coins
                   </button>
                 </div>
-
 
                 <div className="row row5 mt-2">
                   <div className="col-12">
                     <div className="previous-deposite-desk">
                       <p>Previous Withdraw</p>
                     </div>
-                    <div className="table-responsive withdrow-table" style={{height:"400px", overflow:"scroll"}}>
+                    <div
+                      className="table-responsive withdrow-table"
+                      style={{ height: "400px", overflow: "scroll" }}>
                       <table
                         role="table"
                         aria-busy="false"
@@ -728,7 +726,6 @@ const NewWithdraw = () => {
                         className="table b-table table-bordered"
                         id="__BVID__104">
                         <thead>
-                         
                           <tr role="row" className="account-detail">
                             <th
                               role="columnheader"
@@ -852,9 +849,18 @@ const NewWithdraw = () => {
                                       {item.remark}
                                     </td>
                                     <td
-                                      aria-colindex="6" className="text-center"
-                                      >
-                                      <p className={`${item.status === "Pending"? "pending": item.status === "APPROVED"? "approved": "rejected"}`}>{item.status}</p>
+                                      aria-colindex="6"
+                                      className="text-center">
+                                      <p
+                                        className={`${
+                                          item.status === "Pending"
+                                            ? "pending"
+                                            : item.status === "APPROVED"
+                                            ? "approved"
+                                            : "rejected"
+                                        }`}>
+                                        {item.status}
+                                      </p>
                                     </td>
                                     <td
                                       aria-colindex="6"
@@ -870,7 +876,9 @@ const NewWithdraw = () => {
                                 </>
                               );
                             })}
-                          <Modal show={showWidthRequest} onHide={handleWidthCloseClose}>
+                          <Modal
+                            show={showWidthRequest}
+                            onHide={handleWidthCloseClose}>
                             <Modal.Header closeButton className="cancelRequest">
                               <Modal.Title>Cancel Request</Modal.Title>
                             </Modal.Header>
@@ -881,7 +889,7 @@ const NewWithdraw = () => {
                               <Button
                                 variant="secondary"
                                 className="modalBtn"
-                                onClick={handleClose}>
+                                onClick={handleCancel}>
                                 Close
                               </Button>
                               <Button
@@ -912,8 +920,6 @@ const NewWithdraw = () => {
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>

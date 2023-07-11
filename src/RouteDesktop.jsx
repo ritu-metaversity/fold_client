@@ -145,7 +145,7 @@ const RouteDesktop = () => {
           <Route path="/Tennis" element={<HomePage />} />
           <Route path="/Football" element={<HomePage />} />
           <Route path="/Kabaddi" element={<HomePage />} />
-          <Route path="/casino/:id" element={<CasinoForDesk />} />
+          {/* <Route path="/casino/:id" element={<CasinoForDesk />} /> */}
           <Route path="/livecasino" element={<LiveCasino />} />
           <Route path="/profitloss" element={<ProfitLossHome />} />
           <Route path="/withdraw" element={<NewWithdraw/>} />

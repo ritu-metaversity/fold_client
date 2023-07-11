@@ -64,24 +64,25 @@
     height: auto;
 }
 
-    .casinoicons {
-        position: relative;
-        box-shadow: 0 25px 8px -8px;
-        border-radius: 4px;
-        margin-bottom: 25px;
-        width: 100%;
-        cursor: pointer;
-        color: #007bff;
+.casinoicons {
+    position: relative;
+    box-shadow: 0 25px 8px -8px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    width: 100%;
+    cursor: pointer;
+    color: #007bff;
 
-    }
+}
 
-    .casino-main {
-        background: #f1f5f8;
-    }
+.casino-main {
+    background: #f1f5f8;
+}
 
-.mob-view{
+.mob-view {
     display: none;
 }
+
 .coll-6 {
     flex: 0 0 auto;
     width: 25%;
@@ -89,16 +90,76 @@
 
 
 @media screen and (max-width: 500px) {
-    .mob-view{
+    .mob-view {
         display: block;
     }
-    .desk-view{
+
+    .desk-view {
         display: none;
     }
+
     .coll-6 {
         flex: 0 0 auto;
         width: 50%;
     }
-    
-    
 }
+
+@media screen and (min-width: 800px) {
+    .slot-modal .modal-dialog {
+        width: 100%;
+        min-width: 98% !important;
+    }
+}
+
+    .slot-modal .modal-content {
+        height: 97vh !important;
+        position: relative;
+    }
+    .slot-modal .modal-dialog {
+        margin: 14px;
+    }
+    .slot-modal .modal-body {
+        height: 98vh!important;
+        max-height: 100vh!important;
+        padding: 0;
+    }
+    button.close_btn {
+        position: absolute;
+        z-index: 222;
+        right: -9px;
+        font-size: 21px;
+        padding: 9px;
+        border: unset;
+        outline: unset;
+        top: -9px;
+        font-weight: 900;
+    }
+
+.desk_none{
+    display: none;
+}
+
+
+    @media screen and (max-width: 800px) {
+        .mob_none{
+            display: none;
+        }
+        .desk_none{
+            display: block;
+        }
+
+    }
+
+    .btn-close {
+        background: none;
+      }
+      
+      .btn-close:after {
+        content: "x";
+        position: relative;
+        left: -3px;
+        top: -3px;
+        font-size: 27px;
+        color: #fff;
+        opacity: 1;
+      }

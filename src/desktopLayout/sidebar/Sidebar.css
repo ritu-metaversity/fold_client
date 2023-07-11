@@ -215,3 +215,6 @@ ul.list-unstyled.navbar-nav {
     background-color: unset !important;
     
 }
+.c-pointer{
+    cursor: pointer;
+}

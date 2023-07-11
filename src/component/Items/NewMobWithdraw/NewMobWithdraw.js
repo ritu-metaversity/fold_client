@@ -59,6 +59,9 @@ const NewMobWithdraw = () => {
     setActiveBank(id1)
   };
 
+  // const handleCancel = () => {
+  //   setshowWidthRequest(false);
+  // };
   useEffect(() => {
     // const token = localStorage.getItem("token");
 
@@ -325,6 +328,9 @@ const NewMobWithdraw = () => {
   };
 
   const handleClose1 = () => {
+    setshowWithdraw(false);
+  };
+  const handleCancel = () => {
     setshowWithdraw(false);
   };
 
@@ -893,7 +899,7 @@ const NewMobWithdraw = () => {
                               <Button
                                 variant="secondary"
                                 className="modalBtn"
-                                onClick={handleClose}>
+                                onClick={handleCancel}>
                                 Close
                               </Button>
                               <Button

@@ -137,7 +137,7 @@ const RouteMobile = () => {
                 <Route path="/m/reports/withdraw" element={<NewMobWithdraw/>} />
               </>): ("")}
             <Route path="/m/gamedetail/:id" element={<GameHead SportId={SportId} />}/>
-            <Route path="/casino/:id" element={<Casino />} />
+            {/* <Route path="/casino/:id" element={<Casino />} /> */}
             <Route path="/m/reports/accountstatement" element={<AaccountStatement />}/>
             <Route path="/m/reports/profitloss" element={<ProfitLoss />} />
             <Route path="/m/reports/bethistory" element={<BetHistory />} />

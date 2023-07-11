@@ -8,6 +8,7 @@ import { Input } from "antd";
 import Modal from "react-bootstrap/Modal";
 import AlertBtn from "../../Alert/AlertBtn";
 import { setLocale } from "yup";
+import axios from "axios";
 
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
@@ -42,15 +43,18 @@ const PayManually = (props) => {
   };
   useEffect(() => {
     UserAPI.Get_Payment_Detail_By_Id().then((res) => {
-      setPayMethods(res.data.paymentMethods);
-      setUpiDetail(res.data.upiDetail);
-      setAllDatataa(res.data);
+      setPayMethods(res?.data?.paymentMethods);
+      setUpiDetail(res?.data?.upiDetail);
+      setAllDatataa(res?.data);
     });
   }, []);
 
-  const handlePaymentDetails = (vl, id) => {
+  const [DepositType, setDepositeType] = useState();
+
+  const handlePaymentDetails = (vl, id, dtype) => {
     setPaymentMode(vl);
     setActive(id);
+    setDepositeType(dtype);
   };
 
   console.log(Bitvalue, "adsefgesrt");
@@ -91,7 +95,6 @@ const PayManually = (props) => {
             setFiles(null);
             setPaymentMode("UPI");
             setActive(0);
-            window.location.reload()
           }
         })
         .catch((error) => {
@@ -120,7 +123,25 @@ const PayManually = (props) => {
     setAlertBtnshow(false);
   };
 
-  console.log(files, "dsaasdasdsds")
+  // console.log(files, "dsaasdasdsds")
+
+  // useEffect(() => {
+  //   axios
+  //     .post(
+  //       "http://192.168.68.130/admin-new-apis/deposit-type/get_sub",
+  //       {},
+  //       {
+  //         headers: {
+  //           Authorization: "Bearer " + localStorage.getItem("token"),
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log(res?.data?.data);
+  //       setPayMethods(res?.data?.data);
+  //     });
+  // }, []);
+
 
   return (
     <div>
@@ -191,17 +212,25 @@ const PayManually = (props) => {
             <Row>
               {payMethods?.length &&
                 payMethods?.map((item, id) => {
+                  console.log(item, "dsfdsf");
                   return (
                     <Col
                       className={item.methodName === "Bank" ? "d-none" : ""}
                       key={item.methodName + id}
-                      onClick={() => handlePaymentDetails(item.methodName, id)}>
+                      onClick={() =>
+                        handlePaymentDetails(
+                          item.methodName,
+                          id,
+                          item?.depositType
+                        )
+                      }>
                       <div
                         className={`css-1502y4u ${
                           active === id ? "active3" : ""
                         } `}>
                         <img
                           src={item.logo}
+                          // src={item.image}
                           className="css-37vfbv"
                           alt="Bank"
                         />
@@ -214,6 +243,118 @@ const PayManually = (props) => {
           </div>
         </Container>
       </div>
+
+      {/* {payMethods?.map((res) => {
+        console.log(res);
+        if (DepositType !== res?.depositType) return <></>;
+        return (
+          <>
+            {DepositType === "QR" && (
+              <Container className="bank-detail mt-4">
+              <Row>
+                <p>QR Code For Payment</p>
+                <Col className="name-d">
+                  <div className="">
+                    <img
+                      src={res?.accountNumber && res?.accountNumber}
+                      style={{ width: "150px" }}
+                      onClick={(e) => handleShow(e)}
+                      alt="QR-Code"
+                    />
+                  </div>
+                </Col>
+                <Modal
+                  show={showModals}
+                  onHide={handleCloseModal}
+                  centered
+                  style={{
+                    marginTop: "12px",
+                    marginInline: "2%",
+                    width: "95%",
+                  }}>
+                  <Modal.Body className="image-body">
+                    {" "}
+                    <img
+                      src={res?.accountNumber && res?.accountNumber}
+                      className="modals-image"
+                      alt="QR-code"
+                    />
+                  </Modal.Body>
+                </Modal>
+                <Col className="qr-payment">
+                  <Row>
+                    <Col>
+                      <div className="">
+                        <p>Display Name</p>
+                        <Input
+                          value={
+                            res?.accountHolderName && res?.accountHolderName
+                          }
+                          readOnly
+                          type="text"
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              </Container>
+            )}
+          </>
+        );
+      })} */}
+
+      {/* {payMethods?.map((res) => {
+        if (DepositType !== res?.depositType) return <></>;
+        return (
+          <>
+            {DepositType === "UPI" && (
+              <Container className="mt-4">
+                <div className="bank-logo mode">
+                  <Row className="upi-detail head-deposit">
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root ">Mode</p>
+                      </div>
+                    </Col>
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root ">Display Name</p>
+                      </div>
+                    </Col>
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root ">UPI Detail</p>
+                      </div>
+                    </Col>
+                  </Row>
+
+                  <Row className="upi-detail">
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root ">{res?.depositType}</p>
+                      </div>
+                    </Col>
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root ">
+                          {res?.accountHolderName}
+                        </p>
+                      </div>
+                    </Col>
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root">{res?.accountNumber}</p>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+              </Container>
+            )}
+          </>
+        );
+      })} */}
+
       <div className="paymethods">
         {paymentMode === "UPI" ? (
           <Container>
@@ -319,7 +460,7 @@ const PayManually = (props) => {
           </Container>
         ) : (
           ""
-        )} */}
+        )}  */}
         {paymentMode === "QR" ? (
           <Container className="bank-detail">
             <Row>
@@ -348,7 +489,6 @@ const PayManually = (props) => {
                   width: "95%",
                 }}>
                 <Modal.Body className="image-body">
-                  {" "}
                   <img
                     src={
                       allDatataa &&
@@ -400,7 +540,11 @@ const PayManually = (props) => {
 
                   {files && (
                     <img
-                      style={{ maxWidth: "90%", margin: "auto", minWidth:"100%" }}
+                      style={{
+                        maxWidth: "90%",
+                        margin: "auto",
+                        minWidth: "100%",
+                      }}
                       src={URL.createObjectURL(files)}
                       alt="uploaded_img"
                     />
