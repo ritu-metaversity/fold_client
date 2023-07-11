@@ -3,7 +3,7 @@
 }
 
 .mobile_if {
-  height: calc(100vh - 110px);
+  height: calc(100vh - 2rem);
   /* position: absolute; */
   top: 0;
   left: 0;
@@ -19,19 +19,23 @@
 }
 
 .desktop_if {
-  height: calc(100vh);
+  height: calc(100vh - 8rem);
+  /* height: calc(100vh - 110px); */
   /* height: 2000px; */
   /* margin-top: -9rem; */
 }
 @media (min-width: 900px) {
   .desktop_if {
     /* margin-top: -8.5rem; */
-    height: calc(100vh - 110px);
+    /* height: calc(100vh - 110px); */
   }
 }
 @media (min-width: 1024px) {
+  
   .desktop_if {
+  height: calc(100vh - 6rem);
+
     /* margin-top: -6.9rem; */
-    height: calc(100vh - 110px);
+    /* height: calc(100vh - 110px); */
   }
 }

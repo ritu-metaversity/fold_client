@@ -5,6 +5,7 @@ import {
   tabClasses,
   useMediaQuery,
   Typography,
+  Modal,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useContext, useEffect, useState } from "react";
@@ -15,6 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { casinoService } from "../../utils/api/casino/service";
 import { UserContext } from "../../App";
 import axios from "axios";
+import CasinoGame from "./game/CasinoGame";
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: "20px",
@@ -46,7 +48,7 @@ const Casino = () => {
       name: string;
     }[]
   >([]);
-
+  const [open, setOpen] = useState(0);
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
 
   const nav = useNavigate();
@@ -173,13 +175,24 @@ const Casino = () => {
               }}
               m="auto"
             >
-              <Link to={"/casino/" + item.gameId}>
-                <StyledGameThumb src={item.imageUrl} alt="thumb" />{" "}
-              </Link>
+              {/* <Link to={"/casino/" + item.gameId}> */}
+              <StyledGameThumb
+                onClick={() => setOpen(item.gameId)}
+                src={item.imageUrl}
+                alt="thumb"
+              />{" "}
+              {/* </Link> */}
             </Box>
           ))}
         </Box>
       </Box>
+      {open && (
+        <CasinoGame
+          name={casinoList.find((i) => i.gameId === open)?.gameName}
+          id={open}
+          handleClose={() => setOpen(0)}
+        />
+      )}
     </HomeLayout>
   );
 };
