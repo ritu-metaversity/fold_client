@@ -47,7 +47,7 @@ const Pages = () => {
               <Route path="currentbets" element={<CurrentBets />} />
             </Route>
             <Route path="/casino" element={<Casino />} />
-            <Route path="/casino/:id" element={<CasinoGame />} />
+            {/* <Route path="/casino/:id" element={<CasinoGame />} /> */}
             <Route path="/virtual-casino" element={<Casino />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/deposit" element={<Deposit />} />

@@ -19,12 +19,14 @@ import { casinoService } from "../../utils/api/casino/service";
 import { CasinoList } from "../casino/Casino";
 import axios from "axios";
 import SidebarSport from "./SidebarSport";
+import CasinoGame from "../casino/game/CasinoGame";
 
 const SideBarCasino = ({
   handleDrawerToggle,
 }: {
   handleDrawerToggle: () => void;
 }) => {
+  const [id, setId] = useState(0);
   const [open, setOpen] = useState(true);
   const { isSignedIn, setModal, casinoId, appData } = useContext(UserContext);
 
@@ -86,7 +88,10 @@ const SideBarCasino = ({
         >
           <ListItemButton
             onClick={() =>
-              isSignedIn ? nav(`/casino/${casino.gameId}`) : openLoginModal()
+              isSignedIn
+                ? setId(casino.gameId)
+                : // nav(`/casino/${casino.gameId}`)
+                  openLoginModal()
             }
             sx={{
               height: 28,
@@ -206,6 +211,14 @@ const SideBarCasino = ({
           <SidebarSport />
         </List>
       </Box>
+
+      {id && (
+        <CasinoGame
+          name={casinoList.find((i) => i.gameId === id)?.gameName}
+          id={id}
+          handleClose={() => setId(0)}
+        />
+      )}
     </Box>
   );
 };
