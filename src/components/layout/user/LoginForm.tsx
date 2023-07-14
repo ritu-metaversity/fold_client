@@ -13,6 +13,7 @@ import Loading from "../loading";
 import { authServices } from "../../../utils/api/auth/services";
 import { UserContext } from "../../../App";
 import { useNavigate } from "react-router-dom";
+import { FormikErrors } from "formik";
 
 interface Props {
   loading: boolean;
@@ -21,6 +22,12 @@ interface Props {
     password: string;
     checked: boolean;
   };
+  errors: FormikErrors<{
+    userId: string;
+    password: string;
+    checked: boolean;
+    appUrl: string;
+  }>;
   handleChange: (e: React.ChangeEvent<any>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   reset: () => void;
@@ -32,6 +39,7 @@ function LoginForm({
   handleSubmit,
   loading,
   reset,
+  errors,
 }: Props) {
   const theme = useTheme();
   const nav = useNavigate();
@@ -89,14 +97,19 @@ function LoginForm({
               placeholder="Enter Username"
               fullWidth
               margin="dense"
-              sx={{
-                bgcolor: colorHex.bg4,
-                mt: -0.3,
+              sx={{}}
+              InputProps={{
+                sx: {
+                  mt: -0.3,
+                  bgcolor: colorHex.bg4,
+                },
               }}
               required
               name="userId"
               value={values.userId.trimStart()}
               onChange={handleChange}
+              error={!!errors.userId}
+              helperText={errors.userId}
             />
           </Typography>
           <Typography fontWeight={700}>
@@ -105,15 +118,19 @@ function LoginForm({
               placeholder="Enter Password"
               fullWidth
               margin="dense"
-              sx={{
-                bgcolor: colorHex.bg4,
-                mt: -0.3,
+              InputProps={{
+                sx: {
+                  mt: -0.3,
+                  bgcolor: colorHex.bg4,
+                },
               }}
               required
               type="password"
               name="password"
               value={values.password}
               onChange={handleChange}
+              error={!!errors.password}
+              helperText={errors.password}
             />
             <a
               href="https://wa.me/17168156061"

@@ -194,6 +194,12 @@ export const userServices = {
     };
     return await apiHandler(params);
   },
+  getPaymentDetailNew: async () => {
+    const params = {
+      resource: userResources.PAYMENT_DETAILS_NEW,
+    };
+    return await apiHandler(params);
+  },
   getWithdrawList: async () => {
     const params = {
       resource: userResources.WITHDRAW_LIST,

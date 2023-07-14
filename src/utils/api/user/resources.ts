@@ -87,6 +87,10 @@ export const userResources: {
     URL: "enduser/get-paymnet-detail-app-id-wise",
     METHOD: "POST",
   },
+  PAYMENT_DETAILS_NEW: {
+    URL: "deposit-type/get_sub",
+    METHOD: "POST",
+  },
   WITHDRAW_LIST: {
     URL: "enduser/withdraw-request-client",
     METHOD: "POST",
