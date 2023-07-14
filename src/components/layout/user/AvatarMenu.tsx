@@ -4,6 +4,7 @@ import {
   Divider,
   Menu,
   MenuItem as MuiMenuItem,
+  Paper,
   useMediaQuery,
 } from "@mui/material";
 import React, { useContext } from "react";
@@ -11,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
 import { authServices } from "../../../utils/api/auth/services";
 import CustomizedDialogStack from "./StackDailog";
+import "./avatarMenu.css";
 
 export const MenuItem = styled(MuiMenuItem)`
   font-size: 14px;
@@ -47,7 +49,6 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
     }
   };
 
-
   const [openStake, setOpenStake] = React.useState(false);
   const handleStakeOpen = () => {
     handleClose();
@@ -62,7 +63,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
   return (
     <>
       <CustomizedDialogStack open={openStake} handleClose={handleStakeClose} />
-      <Menu
+      {/* <Menu
         id="basic-menu"
         elevation={0}
         anchorEl={anchorEl}
@@ -79,56 +80,70 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
         }} // transitionDuration={500}
         // TransitionComponent={Collapse}
       >
-        {isSignedIn &&
-          matches &&
-          appData?.selfAllowed &&
-          !(user?.userTypeInfo === 2) && [
-            <MenuItem
-              key="avatarmenuitem1"
-              disableRipple
-              sx={{ justifyContent: "center" }}
-            >
-              <Button
-                variant="contained"
-                color="success"
-                sx={{
-                  mr: 1,
-                  px: 0.5,
-                  minWidth: "unset",
-                  color: "white",
-                  py: 0.2,
-                }}
-                onClick={() => closeAndNav("/deposit")}
-              >
-                Deposit
-              </Button>
-              <Button
-                variant="contained"
-                onClick={() => closeAndNav("/withdraw-request")}
-                color="error"
-                sx={{ py: 0.2, px: 0.5, minWidth: "unset" }}
-              >
-                Withdrawal
-              </Button>
-            </MenuItem>,
-            <Divider key="avatarmenuitem2" sx={{ borderColor: "gray" }} />,
-          ]}
-        <MenuItem onClick={() => closeAndNav("/profile")}>Profile</MenuItem>
-        <MenuItem onClick={() => closeAndNav("/report/accountstatement")}>
-          Account Statement
-        </MenuItem>
-        <MenuItem onClick={() => closeAndNav("/report/currentbets")}>
-          Current Bets
-        </MenuItem>
-        <MenuItem onClick={() => closeAndNav("/report/activity")}>
-          Activity Log
-        </MenuItem>
-        <MenuItem onClick={handleStakeOpen}>Set Button Value</MenuItem>
+      </Menu> */}
+      <div className={`menu-custom ${open ? " active " : ""}`}>
+        {open && (
+          <>
+            <div className="my-backdrop" onClick={handleClose}></div>
+            <Paper className={`${open ? " active " : ""}`}>
+              {isSignedIn &&
+                matches &&
+                appData?.selfAllowed &&
+                !(user?.userTypeInfo === 2) && [
+                  <MenuItem
+                    key="avatarmenuitem1"
+                    disableRipple
+                    sx={{ justifyContent: "center" }}
+                  >
+                    <Button
+                      variant="contained"
+                      color="success"
+                      sx={{
+                        mr: 1,
+                        px: 0.5,
+                        minWidth: "unset",
+                        color: "white",
+                        py: 0.2,
+                      }}
+                      onClick={() => closeAndNav("/deposit")}
+                    >
+                      Deposit
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => closeAndNav("/withdraw-request")}
+                      color="error"
+                      sx={{ py: 0.2, px: 0.5, minWidth: "unset" }}
+                    >
+                      Withdrawal
+                    </Button>
+                  </MenuItem>,
+                  <Divider
+                    key="avatarmenuitem2"
+                    sx={{ borderColor: "gray" }}
+                  />,
+                ]}
+              <MenuItem onClick={() => closeAndNav("/profile")}>
+                Profile
+              </MenuItem>
+              <MenuItem onClick={() => closeAndNav("/report/accountstatement")}>
+                Account Statement
+              </MenuItem>
+              <MenuItem onClick={() => closeAndNav("/report/currentbets")}>
+                Current Bets
+              </MenuItem>
+              <MenuItem onClick={() => closeAndNav("/report/activity")}>
+                Activity Log
+              </MenuItem>
+              <MenuItem onClick={handleStakeOpen}>Set Button Value</MenuItem>
 
-        <MenuItem onClick={handleClickOpen}>Change Password</MenuItem>
-        <Divider sx={{ borderColor: "gray" }} />
-        <MenuItem onClick={logout}>Log out</MenuItem>
-      </Menu>
+              <MenuItem onClick={handleClickOpen}>Change Password</MenuItem>
+              <Divider sx={{ borderColor: "gray" }} />
+              <MenuItem onClick={logout}>Log out</MenuItem>
+            </Paper>
+          </>
+        )}
+      </div>
     </>
   );
 }
