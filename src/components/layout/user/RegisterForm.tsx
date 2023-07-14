@@ -19,12 +19,12 @@ import snackBarUtil from "../snackBarUtil";
 import { authServices } from "../../../utils/api/auth/services";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
+import * as yup from "yup";
 
 interface RegisterInterface {
   username?: string;
   password?: string;
 }
-
 export function RegisterForm() {
   const [newCredAfterRegister, setNewCredAfterRegister] =
     useState<RegisterInterface | null>(null);
@@ -32,7 +32,7 @@ export function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const nav = useNavigate();
   const { setModal, setIsSignedIn, setUser, appData } = useContext(UserContext);
-  const { values, handleChange, handleSubmit } = useFormik({
+  const { values, handleChange, errors, handleSubmit } = useFormik({
     initialValues: {
       username: "",
       password: "",
@@ -41,7 +41,32 @@ export function RegisterForm() {
       checked: true,
       appUrl: window.location.hostname || "atozscore.com",
     },
-
+    validateOnChange: true,
+    validationSchema: yup.object().shape({
+      username: yup
+        .string()
+        .min(4, "Minimum 4 letters required.")
+        .max(8, "Maximum 8 letters required.")
+        .matches(/^[a-zA-Z0-9]*$/, "Only number and alphabet are allowed.")
+        .required("This field is required."),
+      password: yup
+        .string()
+        .min(8, "Minimum 8 letters required.")
+        .max(12, "Maximum 12 letters required.")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+          "Password should contain atleast one number and one lower case , one upper case."
+        )
+        .required("This field is required."),
+      confirmPassword: yup
+        .string()
+        .oneOf([yup.ref("password"), ""], "Password must be equal."),
+      mobile: yup
+        .number()
+        .min(7, "Must be minimum 7 digit")
+        .max(10, "Must be maximum 10 digit")
+        .required("Mobile number must not be empty."),
+    }),
     onSubmit: async () => {
       if (values.confirmPassword !== values.password) {
         snackBarUtil.error("Password should be same.");
@@ -152,7 +177,8 @@ export function RegisterForm() {
                     bgcolor: colorHex.bg4,
                   },
                 }}
-                required
+                error={!!errors.username}
+                helperText={errors.username}
                 name="username"
                 value={values.username.trimStart()}
                 onChange={handleChange}
@@ -206,6 +232,8 @@ export function RegisterForm() {
                   name="mobile"
                   onChange={handleChange}
                   value={values.mobile}
+                  error={!!errors.mobile}
+                  helperText={errors.mobile}
                 />
               </Box>
             </Grid>
@@ -219,11 +247,12 @@ export function RegisterForm() {
                 InputProps={{
                   sx: { bgcolor: colorHex.bg4 },
                 }}
-                required
                 name="password"
                 type="password"
                 value={values.password}
                 onChange={handleChange}
+                error={!!errors.password}
+                helperText={errors.password}
               />
             </Grid>
             <Grid item xs={12} sm={5.76}>
@@ -237,10 +266,11 @@ export function RegisterForm() {
                 InputProps={{
                   sx: { bgcolor: colorHex.bg4 },
                 }}
-                required
                 name="confirmPassword"
                 value={values.confirmPassword}
                 onChange={handleChange}
+                error={!!errors.confirmPassword}
+                helperText={errors.confirmPassword}
               />
             </Grid>
             <Grid item xs={12}>

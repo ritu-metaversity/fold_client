@@ -22,6 +22,8 @@ import { Form } from "react-bootstrap";
 import snackBarUtil from "../snackBarUtil";
 import { RegisterForm } from "./RegisterForm";
 import CustomizedDialogPassword from "./ResetPasswordDailog";
+import * as yup from "yup";
+import { error } from "console";
 
 export function AuthBox() {
   const theme = useTheme();
@@ -30,7 +32,7 @@ export function AuthBox() {
     useContext(UserContext);
   const nav = useNavigate();
 
-  const { values, handleChange, handleSubmit, resetForm } = useFormik({
+  const { values, handleChange, errors, handleSubmit, resetForm } = useFormik({
     initialValues: {
       userId: "",
       password: "",
@@ -38,6 +40,23 @@ export function AuthBox() {
       // appUrl: "atozscore.com",
       appUrl: window.location.hostname,
     },
+    validationSchema: yup.object().shape({
+      userId: yup
+        .string()
+        .min(4, "Minimum 4 letters required.")
+        .max(8, "Maximum 8 letters required.")
+        .matches(/^[a-zA-Z0-9]*$/, "Only number and alphabet are allowed.")
+        .required("This field is required."),
+      // password: yup
+      //   .string()
+      //   .min(8, "Minimum 8 letters required.")
+      //   .max(12, "Maximum 12 letters required.")
+      //   .matches(
+      //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+      //     "Password should contain atleast one number and one lower case , one upper case."
+      //   )
+      //   .required("This field is required."),
+    }),
     onSubmit: async () => {
       if (!values.checked) {
         snackBarUtil.error("Please agree Terms and Conditions");
@@ -59,7 +78,7 @@ export function AuthBox() {
           localStorage.setItem("token", response.token);
           if (setIsSignedIn) setIsSignedIn(true);
         }
-      localStorage.setItem("userType", response.userTypeInfo);
+        localStorage.setItem("userType", response.userTypeInfo);
         if (setUser) setUser(response);
         localStorage.setItem("user", JSON.stringify(response));
       }
@@ -127,6 +146,8 @@ export function AuthBox() {
               name="userId"
               value={values.userId.trimStart()}
               onChange={handleChange}
+              error={!!errors.userId}
+              helperText={errors.userId}
             />
             <a
               href="https://wa.me/17168156061"
@@ -156,6 +177,8 @@ export function AuthBox() {
               variant="outlined"
               size="small"
               value={values.password}
+              error={!!errors.password}
+              helperText={errors.password}
               {...textFieldProps}
             />
             <Form.Check
@@ -213,6 +236,7 @@ export function AuthBox() {
       >
         <LoginForm
           loading={loading}
+          errors={errors}
           values={values}
           reset={resetForm}
           handleSubmit={handleSubmit}

@@ -7,6 +7,7 @@ import snackBarUtil from "../layout/snackBarUtil";
 import UPIDetailsNew from "./UPIDetailsNew";
 import { DepositTypeItem } from "./types";
 import QRcodeComponentNew from "./QRcodeComponentNew";
+import BankInfoComponentNew from "./BankInfoComponentNew";
 
 export interface BankDetailInterface {
   bankName: string;
@@ -89,23 +90,29 @@ export function PaymentMethods() {
            // )
          )} */}
         {paymentDataNew?.map(
-          (elem) =>
-            elem.depositType.toUpperCase() !== "BANK" && (
-              <Card
-                selected={selected === elem.depositType}
-                details={{ logo: elem.image, methodName: elem.depositType }}
-                handleClick={() => handleClick(elem.depositType)}
-              />
-            )
+          (elem) => (
+            // elem.depositType.toUpperCase() !== "BANK" && (
+            <Card
+              selected={selected === elem.depositType}
+              details={{ logo: elem.image, methodName: elem.depositType }}
+              handleClick={() => handleClick(elem.depositType)}
+            />
+          )
+          // )
         )}
       </CardContainerContainer>
       {/* {selected === "Bank" && (
         <BankInfoComponent bankDetails={paymentData?.bankDetail} />
       )} */}
+      {selected.toUpperCase() === "BANK" && (
+        <BankInfoComponentNew
+          bankDetails={paymentDataNew?.find((i) => i.depositType === selected)}
+        />
+      )}
       {/* {selected === "UPI" && (
          <UPIDetails upiDetails={paymentData?.upiDetail} />
        )} */}
-      {selected === "UPI" && (
+      {selected.toUpperCase() === "UPI" && (
         <UPIDetailsNew
           upiDetails={paymentDataNew?.find((i) => i.depositType === "UPI")}
         />
@@ -113,7 +120,7 @@ export function PaymentMethods() {
       {/* {selected === "QR" && (
          <QRcodeComponent qrDetails={paymentData?.qrCode} />
        )} */}
-      {selected === "QR" && (
+      {selected.toUpperCase() === "QR" && (
         <QRcodeComponentNew
           qrDetails={paymentDataNew.find((i) => i.depositType === "QR")}
         />

@@ -3,6 +3,7 @@ import { Button, Divider, Grid, Typography } from "@mui/material";
 import React, { FC } from "react";
 import { WithdrawInput } from "../Withdraw/styledComponent";
 import { PaymentDetailContainer, QrImg } from "./styledComponents";
+import { DepositTypeItem } from "./types";
 
 interface Props {
   qrDetails?: DepositTypeItem;

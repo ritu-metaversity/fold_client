@@ -10,6 +10,7 @@ import { UserContext } from "../../../App";
 import snackBarUtil from "../snackBarUtil";
 import { useFormik } from "formik";
 import Loading from "../loading";
+import * as yup from "yup";
 
 const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
   const [searchParams] = useSearchParams();
@@ -46,25 +47,51 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
       currentPassword: "",
     },
     validateOnChange: false,
-    validate: async (values) => {
-      const newError = {
-        newPassword:
-          values?.newPassword === "" ? "Please enter new Password" : undefined,
-        confirmPassword:
-          values?.confirmPassword === ""
-            ? "Please enter confirm Password"
-            : values?.confirmPassword !== values?.newPassword
-            ? "New password and confirm Password does not match"
-            : undefined,
-        currentPassword:
-          values?.currentPassword === ""
-            ? "Please enter Current Password"
-            : undefined,
-      };
-      return Object.fromEntries(
-        Object.entries(newError).filter(([_, v]) => v != null)
-      );
-    },
+    validationSchema: yup.object().shape({
+      newPassword: yup
+        .string()
+        .min(8, "Minimum 8 letters required.")
+        .max(12, "Maximum 12 letters required.")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+          "Password should contain atleast one number and one lower case , one upper case."
+        )
+        .required("Please enter new Password"),
+      currentPassword: yup
+        .string()
+        // .min(8, "Minimum 8 letters required.")
+        // .max(12, "Maximum 12 letters required.")
+        // .matches(
+        //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+        //   "Password should contain atleast one number and one lower case , one upper case."
+        // )
+        .required("Please enter Current Password"),
+      confirmPassword: yup
+        .string()
+        .oneOf(
+          [yup.ref("password"), ""],
+          "New password and confirm Password does not match"
+        ),
+    }),
+    // validate: async (values) => {
+    //   const newError = {
+    //     newPassword:
+    //       values?.newPassword === "" ? "Please enter new Password" : undefined,
+    //     confirmPassword:
+    //       values?.confirmPassword === ""
+    //         ? "Please enter confirm Password"
+    //         : values?.confirmPassword !== values?.newPassword
+    //         ? "New password and confirm Password does not match"
+    //         : undefined,
+    //     currentPassword:
+    //       values?.currentPassword === ""
+    //         ? "Please enter Current Password"
+    //         : undefined,
+    //   };
+    //   return Object.fromEntries(
+    //     Object.entries(newError).filter(([_, v]) => v != null)
+    //   );
+    // },
     onSubmit: async (values) => {
       if (values.newPassword !== values.confirmPassword) {
         snackBarUtil.error("Password does not match.");
