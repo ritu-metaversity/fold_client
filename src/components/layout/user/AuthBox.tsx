@@ -41,21 +41,21 @@ export function AuthBox() {
       appUrl: window.location.hostname,
     },
     validationSchema: yup.object().shape({
-      userId: yup
-        .string()
-        .min(4, "Minimum 4 letters required.")
-        .max(8, "Maximum 8 letters required.")
-        .matches(/^[a-zA-Z0-9]*$/, "Only number and alphabet are allowed.")
-        .required("This field is required."),
+      // userId: yup
+      // .string()
+      //   .min(4, "Minimum 4 letters required.")
+      //   .max(8, "Maximum 8 letters required.")
+      //   .matches(/^[a-zA-Z0-9]*$/, "Only number and alphabet are allowed.")
+      // .required("This field is required."),
       // password: yup
-      //   .string()
+      // .string()
       //   .min(8, "Minimum 8 letters required.")
       //   .max(12, "Maximum 12 letters required.")
       //   .matches(
       //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
       //     "Password should contain atleast one number and one lower case , one upper case."
       //   )
-      //   .required("This field is required."),
+      // .required("This field is required."),
     }),
     onSubmit: async () => {
       if (!values.checked) {

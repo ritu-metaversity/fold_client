@@ -46,7 +46,7 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
       confirmPassword: "",
       currentPassword: "",
     },
-    validateOnChange: false,
+    validateOnChange: true,
     validationSchema: yup.object().shape({
       newPassword: yup
         .string()
@@ -148,7 +148,7 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
           size="small"
           //required
           margin="dense"
-          error={Boolean(errors?.currentPassword)}
+          error={!!errors?.currentPassword}
           helperText={errors?.currentPassword}
           label="Old Password"
           name={"currentPassword"}
