@@ -69,7 +69,7 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
       confirmPassword: yup
         .string()
         .oneOf(
-          [yup.ref("password"), ""],
+          [yup.ref("newPassword"), ""],
           "New password and confirm Password does not match"
         ),
     }),
