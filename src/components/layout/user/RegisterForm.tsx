@@ -62,10 +62,11 @@ export function RegisterForm() {
         .string()
         .oneOf([yup.ref("password"), ""], "Password must be equal."),
       mobile: yup
-        .number()
+        .string()
         .min(7, "Must be minimum 7 digit")
         .max(10, "Must be maximum 10 digit")
-        .required("Mobile number must not be empty."),
+        .matches(/^[0-9]*$/, "Invalid Phone Number")
+        .required("Mobile number is required."),
     }),
     onSubmit: async () => {
       if (values.confirmPassword !== values.password) {
