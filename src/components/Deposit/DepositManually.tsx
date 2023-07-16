@@ -65,6 +65,7 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
               </ImageUploadContainer>
             )}
             <input
+              accept="image/*"
               onChange={(e) => e.target.files && setFiles(e.target.files[0])}
               type="file"
               style={{ display: "none" }}
