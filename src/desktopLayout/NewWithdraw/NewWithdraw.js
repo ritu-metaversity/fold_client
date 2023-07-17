@@ -176,7 +176,6 @@ const NewWithdraw = () => {
     }
 
     if (withType === "BANK") {
-      console.log("helooo");
       if (
         withCoinValue === "" ||
         withCoinValue === undefined ||
@@ -219,7 +218,7 @@ const NewWithdraw = () => {
         return false;
       }
     } else if (withType === "PAYTM") {
-      console.log("heloo");
+   
       if (
         withCoinValue === "" ||
         withCoinValue === undefined ||
@@ -250,7 +249,7 @@ const NewWithdraw = () => {
         return false;
       }
     } else if (withType == "UPI") {
-      console.log("helo");
+   
       if (
         withCoinValue === "" ||
         withCoinValue === undefined ||

@@ -114,7 +114,6 @@ const Withdraw = () => {
     UserAPI.Withdraw_Request().then((res) => {
       setWithdrawReq(res.data);
       setDataLength(res?.data?.length);
-      // console.log(res.data, "dfsgveg")
     });
 
     UserAPI.User_Balance().then((res) => {

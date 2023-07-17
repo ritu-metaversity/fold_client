@@ -8,7 +8,6 @@ function Mobilenav() {
   const handleClick = (val, e) => {
     // e.preventDefault()
     setActive(val);
-    // console.log(val, "fewfwfdwefdf")
   };
 
   const {pathname} = useLocation();

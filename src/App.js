@@ -34,7 +34,6 @@ function App() {
         nav("/home");
       }
 
-      // console.log("mobile")
     } else {
       setMoileRoutes(false);
       nav("/m/home");

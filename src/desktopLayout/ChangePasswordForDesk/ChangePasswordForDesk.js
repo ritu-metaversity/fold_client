@@ -20,7 +20,6 @@ const ChangePasswordForDesk = (props) => {
   const nav = useNavigate();
 
 
-  console.log(currPassword, "dsdfsdfsd")
 
   const handleChangeValidation = () => {
     setIsLoading(false);

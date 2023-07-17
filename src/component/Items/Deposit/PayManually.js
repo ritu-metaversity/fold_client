@@ -198,7 +198,6 @@ const PayManually = (props) => {
             <Row>
               {payMethods?.length &&
                 payMethods?.map((item, id) => {
-                  console.log(item, "dsfdsf");
                   return (
                     <Col
                       className={item.methodName === "Bank" ? "d-none" : ""}
@@ -231,7 +230,6 @@ const PayManually = (props) => {
       </div>
 
       {payMethods?.map((res) => {
-        console.log(res);
         if (DepositType !== res?.depositType) return <></>;
         return (
           <>
@@ -593,7 +591,7 @@ const PayManually = (props) => {
                       e.target.files && setFiles(e.target.files[0])
                     }
                     type="file"
-                    accept="image/png, image/jpeg"
+                    accept="image/*"
                     hidden
                   />
                 </label>

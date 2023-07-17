@@ -102,7 +102,6 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
           setPreviousState(res?.data);
         }
         setIsLoading(false);
-        console.log(res?.data, "eerfewrwe")
         setFancyOdds(res.data);
         setGameName(Object?.keys(res?.data));
         setMatchodd(res?.data?.Odds);
@@ -332,7 +331,6 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
   }, [fancyOdds[currentFancy]])
 
 
-  console.log(matchodd,"matchoddmatchodd")
   
   return (
     <>
