@@ -16,14 +16,16 @@ const NavBar = () => {
   const [status, setStatus] = useState(false);
   const [error, setError] = useState(false);
   const [Exp, setExp] = useState("0.0");
-  const [balanceShow, setBalanceShow] = useState(true);
-  const [expShow, setExpShowShow] = useState(true);
+  const [balanceShow, setBalanceShow] = useState(localStorage.getItem("balanceShow") !== "false");
+  const [expShow, setExpShowShow] = useState(localStorage.getItem("expShow") !== "false");
   const [showExpModals, setShowExpModals] = useState(false);
   const [NavLogo, setNavLogo] = useState();
   const [searchValue, setSearchValue] = useState("");
 
   const nav = useNavigate();
   const { pathname } = useLocation();
+
+  console.log(localStorage.getItem("balanceShow") !== "false")
 
   // const [visible, setVisible] = useState(false);
   const toggleVisible = () => {
@@ -48,8 +50,6 @@ const NavBar = () => {
     }
   };
   window.addEventListener("scroll", toggleVisible);
-
-  
 
   function toggle(e) {
     e.preventDefault();
@@ -139,20 +139,17 @@ const NavBar = () => {
 
   const balanceHideShow = (e) => {
     e.preventDefault();
-    if (balanceShow === true) {
-      setBalanceShow(false);
-    } else {
-      setBalanceShow(true);
-    }
+    const showbal=localStorage.getItem("balanceShow")==="true"
+    setBalanceShow(!showbal)
+    localStorage.setItem("balanceShow", !showbal);
   };
 
   const expHideShow = (e) => {
     e.preventDefault();
-    if (expShow === true) {
-      setExpShowShow(false);
-    } else {
-      setExpShowShow(true);
-    }
+    const exbal=localStorage.getItem("expShow")==="true"
+
+    setExpShowShow(!exbal);
+    localStorage.setItem("expShow", !exbal);
   };
 
   const handleExpModal = () => setShowExpModals(false);
@@ -322,6 +319,7 @@ const NavBar = () => {
                                 defaultChecked
                                 type="checkbox"
                                 id="customCheck"
+                                style={{display:"none"}}
                                 className={
                                   balanceShow ? "custom-control-input" : ""
                                 }
@@ -338,6 +336,8 @@ const NavBar = () => {
                                 type="checkbox"
                                 defaultChecked
                                 id="customCheck1"
+                                style={{display:"none"}}
+
                                 className={
                                   expShow ? "custom-control-input" : ""
                                 }

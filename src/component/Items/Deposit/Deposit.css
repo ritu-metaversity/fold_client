@@ -28,6 +28,9 @@
     padding-bottom: 22px;
     padding-top: 2px;
     background-color: #2c3d50;
+    border: unset;
+    outline: unset;
+    padding: 0px 11px;
 
 }
 
@@ -55,8 +58,12 @@
 
 .enter-amount {
     margin-top: 12px;
-    margin-left: 9px;
+    margin-left: 6px;
     margin-bottom: -8px;
+}
+
+.float-left.d-flex.inputfield {
+    margin-left: 5px;
 }
 
 .bank-logo {
@@ -127,12 +134,25 @@ css-pw8cd7 .selected {
     margin-left: -10px;
     border-radius: 5px 5px 0px 0px;
 }
+.head-deposit1{
+    background-color: #2c3d50;
+    color: #fff;
+    margin-top: -12px;
+    border-radius: 5px 5px 0px 0px;
+}
 
 .bank-detail {
     border: 1px solid #ddd;
     width: 93%;
     border-radius: 5px;
     padding: 12px;
+}
+
+@media screen and (min-width: 800px) {
+    .bank-detail {
+        width: 30.5%;
+        margin: auto;
+    }
 }
 
 .text-left {
@@ -151,14 +171,14 @@ css-pw8cd7 .selected {
     }
 
     .price-data {
-
         margin-top: 12px;
+        margin-bottom: -13px;
     }
 
     .row.price-values {
         display: flex;
-        width: 209%;
-        margin-inline: 1px;
+        width: 201%;
+        margin-left: 2px;
     }
 
     .priceinput {
@@ -184,12 +204,14 @@ css-pw8cd7 .selected {
     border: 1px solid #08c;
     border-radius: 5px;
 }
+
 .deposit {
     margin-bottom: 32px;
 }
+
 .deposit::-webkit-scrollbar {
     display: none;
-  }
+}
 
 .approved {
     color: #66bb6a;
@@ -197,15 +219,17 @@ css-pw8cd7 .selected {
 
 
 @media screen and (min-width: 500px) and (max-width: 800px) {
-    
-    
-    .colval{
+
+
+    .colval {
         width: 26%;
         margin-right: 10px;
     }
+
     .marTop {
         margin-top: -9px;
     }
+
     .col-3.price-data button {
         padding: 4px;
         margin-top: 6px;
@@ -215,37 +239,46 @@ css-pw8cd7 .selected {
 
 
 @media screen and (min-width: 800px) and (max-width: 3000px) {
-    .colval{
+    .colval {
         width: 22%;
         margin-right: 10px;
     }
+
     .marTop {
         margin-top: -9px;
     }
+
     .col-3.price-data button {
         padding: 4px;
         margin-top: 6px;
     }
+
     .wrapper.main-conatiner.deposit {
         margin-inline: 35px;
     }
+
     button.stakeactionminus.priceminus.btn {
         border-radius: unset;
     }
+
     .col-3.price-data {
         margin-left: 6px;
         width: 15%;
     }
+
     .paymethods {
         width: 32%;
     }
+
     .images-section img {
         width: 100%;
     }
+
     button.btn.btn-primary.btn-block.btn-sm.deposit-button {
         width: 30%;
         margin: auto;
     }
+
     .head-deposit {
         width: unset;
     }
@@ -258,3 +291,10 @@ css-pw8cd7 .selected {
 /* .wrapper.main-conatiner.deposit {
     height: calc(100vh - 200px);
 } */
+
+
+:not(.btn-check)+.btn:active {
+    color: unset !important;
+    background-color: unset !important;
+    border-color: unset !important;
+}

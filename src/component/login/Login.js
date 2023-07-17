@@ -156,7 +156,7 @@ function Login({ Errmessage, Statusmessage }) {
 
   return (
     <>
-      <div className="wrapper">
+      <div className="wrapper login_main_section">
         {Statusmessage === true ? (
           <div className="alertBtn">
             <AlertBtn
@@ -177,7 +177,7 @@ function Login({ Errmessage, Statusmessage }) {
           ""
         )}
 
-        <div className="login-wrapper">
+        <div className="login-wrapper1">
           <div className="text-center logo-login mb-3">
             <img
               // src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"

@@ -14,3 +14,36 @@
 /* .statement1::-webkit-scrollbar{
     display: none;
 } */
+
+
+
+.ant-picker{
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 36px;
+    border-radius: 3px;
+    margin-left: -7px;
+}
+
+@media screen and (max-width: 350px) {
+    .ant-picker {
+        width: 89%;
+        min-width: 74%;
+        max-width: 74%;
+        height: 36px;
+        border-radius: 3px;
+        margin-left: -8px;
+    }
+}
+
+@media screen and (min-width: 351px) and (max-width: 420px) {
+    .ant-picker {
+        width: 89%;
+        min-width: 87%;
+        max-width: 87%;
+        height: 36px;
+        border-radius: 3px;
+        margin-left: -8px;
+    }
+}

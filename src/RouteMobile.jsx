@@ -71,8 +71,17 @@ const RouteMobile = () => {
       } else if (pathname === "/responsible-gaming") {
         nav("/responsible-gaming");
       }
+      else if (pathname === "/m/slot") {
+        nav("/login");
+      }
+      else if (pathname === "/m/Others") {
+        nav("/login");
+      }
+      else if (pathname.includes("/m/gamedetail")) {
+        nav("/login");
+      }
       else if (pathname === "/" && window.innerWidth < 800) {
-        nav("/m/login");
+        nav("/login");
       }
     }
     else{
@@ -155,7 +164,7 @@ const RouteMobile = () => {
           </Route>
           <Route path="*" element={<Login />} />
         </Routes>
-        {pathname === "/login" ? "" : <FooterForMob />}
+        {pathname === "/login" || pathname === "/m/register" ? "" : <FooterForMob />}
       </>
     </div>
   );

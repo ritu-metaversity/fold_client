@@ -14,8 +14,8 @@ const PaymanuallyDesk = (props) => {
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);
-  const [active, setActive] = useState(0);
-  const [errorMsg, setErrorMsg] = useState(false);
+  const [active, setActive] = useState();
+  // const [errorMsg, setErrorMsg] = useState(false);
   const [color, setColor] = useState();
   const [messege, setMessege] = useState();
   const [alertBtnshow, setAlertBtnshow] = useState(false);
@@ -26,8 +26,9 @@ const PaymanuallyDesk = (props) => {
   const increment = () => {
     setBitValue(Number(Bitvalue) + 10);
   };
+  
   const decrement = () => {
-    if (Bitvalue != 0 && Bitvalue > 9 ) setBitValue(Number(Bitvalue) - 10);
+    if (Bitvalue != 0 && Bitvalue > 9) setBitValue(Number(Bitvalue) - 10);
   };
 
   const handleStaticAmount = (vl) => {
@@ -38,38 +39,46 @@ const PaymanuallyDesk = (props) => {
     let Inputvalue = e.target.value;
     setBitValue(parseInt(Inputvalue));
   };
+  // useEffect(() => {
+  //   UserAPI.Get_Payment_Detail_By_Id().then((res) => {
+  //     setPayMethods(res.data.paymentMethods);
+  //     setUpiDetail(res.data.upiDetail);
+  //     setAllDatataa(res.data);
+  //   });
+  // }, []);
+
   useEffect(() => {
-    UserAPI.Get_Payment_Detail_By_Id().then((res) => {
-      setPayMethods(res.data.paymentMethods);
-      setUpiDetail(res.data.upiDetail);
-      setAllDatataa(res.data);
+    UserAPI.NEW_DEPOSITE_API().then((res) => {
+      setPayMethods(res?.data);
+      setUpiDetail(res?.data);
+      setAllDatataa(res?.data);
     });
   }, []);
 
-  const handlePaymentDetails = (vl, id) => {
+  const [DepositType, setDepositeType] = useState();
+
+  const handlePaymentDetails = (vl, id, dtype) => {
     setPaymentMode(vl);
     setActive(id);
+    setDepositeType(dtype);
   };
-  
-
-
 
   const handleSubmit = () => {
     setIsLoading(true);
     setAlertBtnshow(false);
 
-    if(Bitvalue == 0 || Bitvalue === "0" || Bitvalue === NaN){
-      setColor("danger")
+    if (Bitvalue == 0 || Bitvalue === "0" || Bitvalue === NaN) {
+      setColor("danger");
       setMessege("Ammout is Greate then 99");
-      setAlertBtnshow(true)
-      setIsLoading(false)
-    }else if (Bitvalue < 100) {
+      setAlertBtnshow(true);
+      setIsLoading(false);
+    } else if (Bitvalue <= 99) {
       setColor("danger");
       setMessege("Minimum Deposit Amount is 100");
       setAlertBtnshow(true);
       setIsLoading(false);
     }
-    if(files === null){
+    if (files === null) {
       setColor("danger");
       setMessege("Payment Screenshot is required");
       setAlertBtnshow(true);
@@ -79,34 +88,31 @@ const PaymanuallyDesk = (props) => {
     const data = new FormData();
     data.append("amount", Bitvalue.toString());
     data.append("image", files || "");
-    if(Bitvalue != 0 && Bitvalue != "0" && Bitvalue != NaN && Bitvalue > 99){
-    UserAPI.Self_Deposit_App({ data })
-      .then((res) => {
-        setIsLoading(false);
-        props.UpdateDetails(true);
-        setMessege(res.message);
-        setColor("success");
-        setAlertBtnshow(true);
-        if (res.status === true) {
-          setBitValue(0);
-          setFiles(null);
-          setPaymentMode("UPI");
-          setActive(0);
-         
-          
-        }
-        setTimeout(()=>{
-          window.location.reload()
-        }, 7000)
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        setMessege(error.respose.data.message);
-        setColor("danger");
-        setAlertBtnshow(true);
-      });
+    if (Bitvalue != 0 && Bitvalue != "0" && Bitvalue != NaN && Bitvalue > 99) {
+      UserAPI.Self_Deposit_App({ data })
+        .then((res) => {
+          setIsLoading(false);
+          props.UpdateDetails(true);
+          setMessege(res.message);
+          setColor("success");
+          setAlertBtnshow(true);
+          if (res.status === true) {
+            setBitValue(0);
+            setFiles(null);
+            setPaymentMode("UPI");
+            setActive(0);
+          }
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          setMessege(error.respose.data.message);
+          setColor("danger");
+          setAlertBtnshow(true);
+        });
     }
   };
+
+  console.log(files, "dsadasdasd");
 
   const handleCloseModal = () => setShowModals(false);
   const handleShow = (e) => {
@@ -117,13 +123,12 @@ const PaymanuallyDesk = (props) => {
   const popupClose = (vl) => {
     setAlertBtnshow(false);
   };
-  const [ AllBetData,setAllBetData] =useState([])
-  useEffect(()=>{
-    UserAPI.WITHDRAW_STACK_REQUEST().then((res)=>{
-      setAllBetData(res?.data)
-
-    })
-  },[])
+  const [AllBetData, setAllBetData] = useState([]);
+  useEffect(() => {
+    UserAPI.WITHDRAW_STACK_REQUEST().then((res) => {
+      setAllBetData(res?.data);
+    });
+  }, []);
   return (
     <div>
       {alertBtnshow ? (
@@ -169,19 +174,16 @@ const PaymanuallyDesk = (props) => {
         </div>
         <div className="col-6 marTop deposit-value">
           <div className="row price-values">
-          {AllBetData.map(({value,key}) => (
-
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                value="1000"
-                onClick={() => handleStaticAmount(value)}>
-                {key}
-              </button>
-            </div>
-            ))
-          }
-           
+            {AllBetData.map(({ value, key }) => (
+              <div className="col-3 price-data">
+                <button
+                  className="btn btn-secondary btn-block mb-2"
+                  value="1000"
+                  onClick={() => handleStaticAmount(value)}>
+                  {key}
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -198,15 +200,18 @@ const PaymanuallyDesk = (props) => {
                 payMethods?.map((item, id) => {
                   return (
                     <Col
-                    className={item.methodName === 'Bank'?"d-none":"" }
+                      className={item.methodName === "Bank" ? "d-none" : ""}
                       key={item.methodName + id}
-                      onClick={() => handlePaymentDetails(item.methodName, id)}>
+                      onClick={() => handlePaymentDetails(item.methodName,
+                        id,
+                        item?.depositType)}>
                       <div
                         className={`css-1502y4u ${
                           active === id ? "active3" : ""
                         } `}>
                         <img
-                          src={item.logo}
+                          // src={item.logo}
+                          src={item.image}
                           className="css-37vfbv"
                           alt="Bank"
                         />
@@ -219,7 +224,171 @@ const PaymanuallyDesk = (props) => {
           </div>
         </Container>
       </div>
-      <div className="paymethods">
+
+      {payMethods?.map((res) => {
+        console.log(res);
+        if (DepositType !== res?.depositType) return <></>;
+        return (
+          <>
+            {DepositType === "QR" && (
+              <Container className="bank-detail mt-4">
+                <Row>
+                  <p>QR Code For Payment</p>
+                  <Col className="name-d">
+                    <div className="">
+                      <img
+                        src={res?.accountNumber && res?.accountNumber}
+                        style={{ width: "150px" }}
+                        onClick={(e) => handleShow(e)}
+                        alt="QR-Code"
+                      />
+                    </div>
+                  </Col>
+                  <Modal
+                    show={showModals}
+                    onHide={handleCloseModal}
+                    centered
+                    style={{
+                      marginTop: "12px",
+                      marginInline: "2%",
+                      width: "95%",
+                    }}>
+                    <Modal.Body className="image-body">
+                      {" "}
+                      <img
+                        src={res?.accountNumber && res?.accountNumber}
+                        className="modals-image"
+                        alt="QR-code"
+                      />
+                    </Modal.Body>
+                  </Modal>
+                  <Col className="qr-payment">
+                    <Row>
+                      <Col>
+                        <div className="">
+                          <p>Display Name</p>
+                          <Input
+                            value={
+                              res?.accountHolderName && res?.accountHolderName
+                            }
+                            readOnly
+                            type="text"
+                          />
+                        </div>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+              </Container>
+            )}
+            {DepositType === "UPI" && (
+              <Container className="mt-4 bank-detail">
+                <div className=" mode">
+                  <Row className="upi-detail head-deposit1">
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root ">Mode</p>
+                      </div>
+                    </Col>
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root ">Display Name</p>
+                      </div>
+                    </Col>
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root ">UPI Detail</p>
+                      </div>
+                    </Col>
+                  </Row>
+
+                  <Row className="upi-detail">
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root ">{res?.depositType}</p>
+                      </div>
+                    </Col>
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root ">
+                          {res?.accountHolderName}
+                        </p>
+                      </div>
+                    </Col>
+                    <Col className="name-d">
+                      <div className="">
+                        <p className="Typography-root">{res?.accountNumber}</p>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+              </Container>
+            )}
+            {DepositType === "BANK" && (
+              <Container className="bank-detail mt-4">
+                <Row>
+                  <Col className="name-d">
+                    <div className="">
+                      <p className="Typography-root root">Bank Name</p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="">
+                      <p className="Typography-root text-right">
+                        {res?.bankName}
+                      </p>
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="name-d">
+                    <div className="">
+                      <p className="Typography-root root">Account Number</p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="">
+                      <p className="Typography-root text-right">
+                        {res?.accountNumber}
+                      </p>
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="name-d">
+                    <div className="">
+                      <p className="Typography-root root">IFSC Code</p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="">
+                      <p className="Typography-root text-right">{res?.ifsc}</p>
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="name-d">
+                    <div className="">
+                      <p className="Typography-root root">
+                        Account Holder Name
+                      </p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="">
+                      <p className="Typography-root text-right">
+                        {res?.accountHolderName}
+                      </p>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            )}
+          </>
+        );
+      })}
+
+      {/* <div className="paymethods">
         {paymentMode === "UPI" ? (
           <Container>
             <div className="bank-logo mode">
@@ -388,7 +557,7 @@ const PaymanuallyDesk = (props) => {
         ) : (
           ""
         )}
-      </div>
+      </div> */}
 
       <div className="paymethods">
         <Container>
@@ -405,18 +574,22 @@ const PaymanuallyDesk = (props) => {
 
                   {files && (
                     <img
-                      style={{ maxWidth: "90%", margin: "auto", minWidth:"100%" }}
+                      style={{
+                        maxWidth: "90%",
+                        margin: "auto",
+                        minWidth: "100%",
+                      }}
                       src={URL.createObjectURL(files)}
                       alt="uploaded_img"
                     />
                   )}
                   <input
+                    value={""}
                     onChange={(e) =>
-                      e.target.files && setFiles(e.target.files[0])
+                      e.target.files.length && setFiles(e.target.files[0])
                     }
-                    readOnly
+                    hidden
                     type="file"
-                    style={{ display: "none" }}
                   />
                 </label>
               </Col>

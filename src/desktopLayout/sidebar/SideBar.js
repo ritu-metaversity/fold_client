@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
@@ -76,10 +76,16 @@ function SideBar() {
   const finishLoading = () => {
     setIsLoading(false);
   };
+
+  const nav = useNavigate()
   const handleData = (id, gameName, e) => {
     setCasinoId(id)
     setSportName(gameName)
-    setShow(true)
+    if(localStorage.getItem("token") !== null){
+      setShow(true)
+    }else{
+      nav('/login')
+    }
     e.preventDefault();
   };
 

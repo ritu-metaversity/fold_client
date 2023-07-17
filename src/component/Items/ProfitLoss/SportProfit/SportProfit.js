@@ -179,8 +179,7 @@ function SportProfit() {
               <div className="col-6">
                 <div className="form-group mb-0">
                   <div
-                    className="mx-datepicker"
-                    style={{ width: "auto" }}>
+                    className="mx-datepicker">
                     <div className="mx-input-wrapper">
                       <DatePicker
                         defaultValue={dayjs(startDate)}
@@ -199,9 +198,7 @@ function SportProfit() {
               <div className="col-6 ">
                 <div className="form-group mb-0">
                   <div
-                    className="mx-datepicker"
-
-                    style={{ width: "auto" }}>
+                    className="mx-datepicker">
                     <div className="mx-input-wrapper">
                       <DatePicker
                         defaultValue={dayjs}

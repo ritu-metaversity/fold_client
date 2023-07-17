@@ -41,13 +41,22 @@ const PayManually = (props) => {
     let Inputvalue = e.target.value;
     setBitValue(parseInt(Inputvalue));
   };
+  // useEffect(() => {
+  //   UserAPI.Get_Payment_Detail_By_Id().then((res) => {
+  //     setPayMethods(res?.data?.paymentMethods);
+  //     setUpiDetail(res?.data?.upiDetail);
+  //     setAllDatataa(res?.data);
+  //   });
+  // }, []);
+
   useEffect(() => {
-    UserAPI.Get_Payment_Detail_By_Id().then((res) => {
-      setPayMethods(res?.data?.paymentMethods);
-      setUpiDetail(res?.data?.upiDetail);
+    UserAPI.NEW_DEPOSITE_API().then((res) => {
+      setPayMethods(res?.data);
+      setUpiDetail(res?.data);
       setAllDatataa(res?.data);
     });
   }, []);
+
 
   const [DepositType, setDepositeType] = useState();
 
@@ -56,9 +65,6 @@ const PayManually = (props) => {
     setActive(id);
     setDepositeType(dtype);
   };
-
-  console.log(Bitvalue, "adsefgesrt");
-
   const handleSubmit = () => {
     setAlertBtnshow(false);
     setIsLoading(true);
@@ -72,7 +78,7 @@ const PayManually = (props) => {
       setMessege("Payment Screenshot is required");
       setAlertBtnshow(true);
       setIsLoading(false);
-    } else if (Bitvalue < 99) {
+    } else if (Bitvalue <= 99) {
       setColor("danger");
       setMessege("Minimum Deposit Amount is 100");
       setAlertBtnshow(true);
@@ -123,26 +129,6 @@ const PayManually = (props) => {
     setAlertBtnshow(false);
   };
 
-  // console.log(files, "dsaasdasdsds")
-
-  // useEffect(() => {
-  //   axios
-  //     .post(
-  //       "http://192.168.68.130/admin-new-apis/deposit-type/get_sub",
-  //       {},
-  //       {
-  //         headers: {
-  //           Authorization: "Bearer " + localStorage.getItem("token"),
-  //         },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       console.log(res?.data?.data);
-  //       setPayMethods(res?.data?.data);
-  //     });
-  // }, []);
-
-
   return (
     <div>
       {alertBtnshow ? (
@@ -162,7 +148,7 @@ const PayManually = (props) => {
         <div className="text-lef col-6 colval price-input">
           <div className="float-left d-flex inputfield">
             <button
-              className="stakeactionminus priceminus btn"
+              className="stakeactionminus priceminus deBtn"
               onClick={decrement}>
               <span
                 className="fa fa-minus"
@@ -177,7 +163,7 @@ const PayManually = (props) => {
               value={Number(Bitvalue)}
             />
             <button
-              className="stakeactionminus priceminus btn"
+              className="stakeactionminus priceminus deBtn"
               onClick={increment}>
               <span
                 className="fa fa-plus"
@@ -229,8 +215,8 @@ const PayManually = (props) => {
                           active === id ? "active3" : ""
                         } `}>
                         <img
-                          src={item.logo}
-                          // src={item.image}
+                          // src={item.logo}
+                          src={item.image}
                           className="css-37vfbv"
                           alt="Bank"
                         />
@@ -244,7 +230,7 @@ const PayManually = (props) => {
         </Container>
       </div>
 
-      {/* {payMethods?.map((res) => {
+      {payMethods?.map((res) => {
         console.log(res);
         if (DepositType !== res?.depositType) return <></>;
         return (
@@ -300,14 +286,6 @@ const PayManually = (props) => {
               </Row>
               </Container>
             )}
-          </>
-        );
-      })} */}
-
-      {/* {payMethods?.map((res) => {
-        if (DepositType !== res?.depositType) return <></>;
-        return (
-          <>
             {DepositType === "UPI" && (
               <Container className="mt-4">
                 <div className="bank-logo mode">
@@ -351,11 +329,71 @@ const PayManually = (props) => {
                 </div>
               </Container>
             )}
+            {
+              DepositType === "BANK" && <Container className="bank-detail">
+              <Row>
+                <Col className="name-d">
+                  <div className="">
+                    <p className="Typography-root root">Bank Name</p>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="">
+                    <p className="Typography-root text-right">
+                      {res?.bankName}
+                    </p>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="name-d">
+                  <div className="">
+                    <p className="Typography-root root">Account Number</p>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="">
+                    <p className="Typography-root text-right">
+                      {res?.accountNumber}
+                    </p>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="name-d">
+                  <div className="">
+                    <p className="Typography-root root">IFSC Code</p>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="">
+                    <p className="Typography-root text-right">
+                      {res?.ifsc}
+                    </p>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="name-d">
+                  <div className="">
+                    <p className="Typography-root root">Account Holder Name</p>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="">
+                    <p className="Typography-root text-right">
+                      {res?.accountHolderName}
+                    </p>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+            }
           </>
         );
-      })} */}
+      })}
 
-      <div className="paymethods">
+      {/* <div className="paymethods">
         {paymentMode === "UPI" ? (
           <Container>
             <div className="bank-logo mode">
@@ -399,7 +437,7 @@ const PayManually = (props) => {
         ) : (
           ""
         )}
-        {/* {paymentMode === "Bank" ? (
+        {paymentMode === "Bank" ? (
           <Container className="bank-detail">
             <Row>
               <Col className="name-d">
@@ -460,7 +498,7 @@ const PayManually = (props) => {
           </Container>
         ) : (
           ""
-        )}  */}
+        )}  
         {paymentMode === "QR" ? (
           <Container className="bank-detail">
             <Row>
@@ -523,7 +561,7 @@ const PayManually = (props) => {
         ) : (
           ""
         )}
-      </div>
+      </div> */}
 
       <div className="paymethods">
         <Container>
@@ -550,12 +588,13 @@ const PayManually = (props) => {
                     />
                   )}
                   <input
+                   value={""}
                     onChange={(e) =>
                       e.target.files && setFiles(e.target.files[0])
                     }
-                    readOnly
                     type="file"
-                    style={{ display: "none" }}
+                    accept="image/png, image/jpeg"
+                    hidden
                   />
                 </label>
               </Col>

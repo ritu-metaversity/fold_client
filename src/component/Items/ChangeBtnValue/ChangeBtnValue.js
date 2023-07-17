@@ -78,7 +78,7 @@ function ChangeBtnValue() {
             )}
             <div className="card">
               <div className="card-header" style={{padding:"4px 5px"}}>
-                <h4 className="mb-0 heading-ch">Change Button Values</h4>
+                <h4 className="mb-0 heading-ch">Set Button Values</h4>
               </div>
               {
                 isLoadingonChange && <p className="place-lodder stack-change">

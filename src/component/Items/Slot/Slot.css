@@ -112,11 +112,11 @@
 }
 
     .slot-modal .modal-content {
-        height: 97vh !important;
+        height: 99.4vh !important;
         position: relative;
     }
     .slot-modal .modal-dialog {
-        margin: 14px;
+        margin: 3px;
     }
     .slot-modal .modal-body {
         height: 98vh!important;
@@ -126,17 +126,26 @@
     button.close_btn {
         position: absolute;
         z-index: 222;
-        right: -9px;
-        font-size: 21px;
-        padding: 9px;
+        right: 0;
+        font-size: 18px;
+        padding: 5px 7px;
         border: unset;
         outline: unset;
-        top: -9px;
+        top: 1px;
         font-weight: 900;
+        background: #fff;
+        border-radius: 50%;
     }
 
 .desk_none{
     display: none;
+}
+
+
+@media screen and (min-width: 470px){
+    .modal-dialog.modal-xl {
+        margin: auto;
+    }
 }
 
 

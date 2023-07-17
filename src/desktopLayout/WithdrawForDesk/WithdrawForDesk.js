@@ -278,8 +278,8 @@ useEffect(()=>{
                       <option value="Current">Current</option>
                     </select>
                     <div className="upDownbtn btnSecected">
-                      <i class="fa fa-caret-up"></i>
-                      <i class="fa fa-caret-down"></i>
+                      <i className="fa fa-caret-up"></i>
+                      <i className="fa fa-caret-down"></i>
                     </div>
                   </div>
                   <div className="mx-input-wrapper account-field">

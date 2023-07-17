@@ -302,6 +302,10 @@ const NewWithdraw = () => {
         withdrawMode: withdrawType,
       })
         .then((res) => {
+          UserAPI.Withdraw_Request().then((res) => {
+            setWithdrawReq(res.data);
+            setDataLength(res.data.length);
+          });
           if (res?.data.bankExist === false) {
             setShow(true);
           } else {
@@ -311,7 +315,6 @@ const NewWithdraw = () => {
             setIsLoading(false);
           }
           setIsLoading(false);
-          console.log(res?.message);
         })
         .catch((error) => {
           setErrorAlert(true);
@@ -373,7 +376,7 @@ const NewWithdraw = () => {
                     <p
                       className="choose_val"
                       style={{ marginLeft: "0px", marginBottom: "10px" }}>
-                      Choose From your favourate transaction{" "}
+                      Choose From your favourite transaction{" "}
                     </p>
                     <div className="coin_value">
                       {stackValue?.map((res) => {
@@ -444,8 +447,10 @@ const NewWithdraw = () => {
                       <input
                         type="number"
                         className="account-input"
-                        value={accountNumber}
-                        onChange={(e) => setAccountNumber(e.target.value)}
+                        value={accountNumber?.toString().replace(".","")}
+                        onChange={(e) => 
+                          e.target.value.match(/^[0-9]*$/) &&
+                          setAccountNumber(e.target.value)}
                       />
                     </div>
                     <div className="mx-input-wrapper account-field">
@@ -456,8 +461,9 @@ const NewWithdraw = () => {
                         className="account-input"
                         value={accountHolderName.trimStart()}
                         onChange={(e) =>
+                          e.target.value.match(/^[a-zA-Z ]*$/) &&
                           setAccountHolderName(
-                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                            e.target.value
                           )
                         }
                       />
@@ -470,8 +476,9 @@ const NewWithdraw = () => {
                         className="account-input"
                         value={bankName.trimStart()}
                         onChange={(e) =>
+                          e.target.value.match(/^[a-zA-Z ]*$/) &&
                           setBankName(
-                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                            e.target.value
                           )
                         }
                       />
@@ -497,8 +504,8 @@ const NewWithdraw = () => {
                         <option value="Current">Current</option>
                       </select>
                       <div className="upDownbtn btnSecected">
-                        <i class="fa fa-caret-up"></i>
-                        <i class="fa fa-caret-down"></i>
+                        <i className="fa fa-caret-up"></i>
+                        <i className="fa fa-caret-down"></i>
                       </div>
                     </div>
                   </div>
@@ -517,8 +524,10 @@ const NewWithdraw = () => {
                         <input
                           type="number"
                           className="account-input"
-                          value={accountNumber}
-                          onChange={(e) => setAccountNumber(e.target.value)}
+                          value={accountNumber?.toString().replace(".","")}
+                          onChange={(e) => 
+                            e.target.value.match(/^[0-9]*$/) &&
+                            setAccountNumber(e.target.value)}
                         />
                       ) : (
                         <input
@@ -545,8 +554,9 @@ const NewWithdraw = () => {
                         className="account-input"
                         value={accountHolderName.trimStart()}
                         onChange={(e) =>
+                          e.target.value.match(/^[a-zA-Z ]*$/) &&
                           setAccountHolderName(
-                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                            e.target.value
                           )
                         }
                       />

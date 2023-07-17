@@ -11,10 +11,10 @@
 }
 .desk_Loading {
     background: #f1f5f880 !important;
-    height: calc(100% - 210px) !important;
+    height: calc(100% - 150px) !important;
     opacity: 1 !important;
-    left: 15.2%;
-    width: 84% !important;
+    left: 15%;
+    width: 85% !important;
 }
 p.lodder.depositLoading.desk_Loading i {
     margin-top: -2% !important;

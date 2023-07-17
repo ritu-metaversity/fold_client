@@ -183,7 +183,7 @@ a {
 }
 
 .login-wrapper {
-    background-image: linear-gradient(#0088cc, #2c3e50);
+    background-image: linear-gradient(#0088cc, #2c3e50); 
     height: 100vh;
     background-size: cover;
     display: flex;
@@ -273,4 +273,23 @@ i.ml-2.fa {
     margin-inline: 6%;
     top: 2%;
     left: -6%;
+}
+
+
+@media (orientation: landscape) {
+    .login-wrapper1 {
+        height: 100vh;
+        padding: 12px;
+    }
+}
+
+.wrapper.login_main_section {
+    background-image: linear-gradient(#0088cc, #2c3e50);
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto !important;
 }

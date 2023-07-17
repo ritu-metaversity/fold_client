@@ -16,14 +16,10 @@ const NavbarDesk = (props) => {
   const [error, setError] = useState(false);
   const [userMessage, setUserMessage] = useState("");
   const [status, setStatus] = useState(false);
-  const [xlShow, setXlShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
   const [showExpModals, setShowExpModals] = useState(false);
   const [logo, setLogo] = useState();
   const [SeachDetail, setSeachDetail] = useState("");
-
-  // const [balanceShow, setBalanceShow] = useState(true);
-  // const [expShow, setExpShowShow] = useState(true);
   const [Exp, setExp] = useState("0.00");
 
   function toggle(e) {
@@ -62,6 +58,15 @@ const NavbarDesk = (props) => {
       setLogo(res?.data?.logo);
     });
 
+    UserAPI.User_Message().then((res) => {
+      setUserMessage(res);
+    });
+
+    if (localStorage.getItem("token") === null) {
+      nav("/login");
+    }
+
+
     if (token !== null && localStorage.getItem("Password-type" ) !== "old") {
       UserAPI.User_Balance()
         .then((res) => {
@@ -99,13 +104,7 @@ const NavbarDesk = (props) => {
 
   return () => clearInterval(time);
 
-    UserAPI.User_Message().then((res) => {
-      setUserMessage(res);
-    });
-
-    if (localStorage.getItem("token") === null) {
-      nav("/login");
-    }
+   
   }, [nav]);
 
   const handleSportId = (sportid) => {

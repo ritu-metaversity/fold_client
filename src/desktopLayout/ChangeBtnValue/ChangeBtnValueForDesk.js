@@ -77,7 +77,7 @@ const ChangeBtnValueForDesk = () => {
             
               <div className="card">
                 <div className="card-header header-card">
-                  <h4 className="mb-0">Change Button Values</h4>
+                  <h4 className="mb-0">Set Button Values</h4>
                 </div>
                 <div className="card-body container-fluid container-fluid-5 button-value">
                   <div className="row row5 mb-1 ">
