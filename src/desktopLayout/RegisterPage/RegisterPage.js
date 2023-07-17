@@ -21,14 +21,16 @@ const RegisterPage = () => {
 
 
 
+
+
   const nav = useNavigate();
 
   const handleValidation = () => {
-    if (UserName === "" && mobileNumber === 0  && password === 0) {
+    if (UserName === "" && mobileNumber === 0 && password === 0) {
       setUserNameError("User Name is required");
       setPasswordError("Password is required.");
       setmobileNumberError("Mobile number must not be empty.");
-      return false
+      return false;
     } else if (UserName === "") {
       setUserNameError("User Name is required");
       return false;
@@ -40,14 +42,23 @@ const RegisterPage = () => {
       return false;
     } else if (confirmPassword !== password) {
       return false;
-    } else if (mobileNumber?.length > 10) {
-      return false;
-    } else if (mobileNumber?.length < 7) {
+    } else if (mobileNumber?.length !== 10) {
       return false;
     } else if (
-      password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$#!%*?&_]{8,12}$/) ===
-      null
+      password.match(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$#!%*?&_]{8,12}$/
+      ) === null
     ) {
+      return false;
+    } else if (UserName?.length < 4) {
+      return false;
+    } else if (UserName?.length > 8) {
+      return false;
+    } else if (UserName?.match(/^[a-zA-Z0-9]+$/) === null) {
+      return false;
+    } else if (password?.length < 8) {
+      return false;
+    } else if (password.length > 12) {
       return false;
     }
     return true;
@@ -93,10 +104,8 @@ const RegisterPage = () => {
     setMobileNumber(e.target.value);
     if (e.target.value === "") {
       setmobileNumberError("Mobile number must not be empty.");
-    } else if (e.target.value?.length < 7) {
-      setmobileNumberError("Must be minimum 7 digit");
-    } else if (e.target.value?.length > 10) {
-      setmobileNumberError("Must be maximum 10 digit");
+    } else if (e.target.value?.length !== 10) {
+      setmobileNumberError("Mobile Number Must be 10 digit");
     } else {
       setmobileNumberError("");
     }
@@ -117,7 +126,7 @@ const RegisterPage = () => {
       setUserNameError("");
     }
 
-    console.log(userData?.match(/^[a-zA-Z0-9]{4,8}$/) === null, "dsdsdsa");
+    
   };
 
   const handleLogin = (e) => {
@@ -150,7 +159,6 @@ const RegisterPage = () => {
     setIsLoading1(true);
     AuthorAPI.LOGIN_WITH_DEMO_USER()
       .then((res) => {
-        console.log(res.data.token);
         const token = res.data.token;
         setMessage(res.message);
         setIsLoading1(false);
@@ -160,7 +168,6 @@ const RegisterPage = () => {
           "Authorization"
         ] = `Bearer ${res?.data?.token}`;
         setStatusVal(res?.data.status);
-        console.log(res?.data?.message)
         setMessage("Invalid Username or password");
         localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
         const uId = res.data?.username;
@@ -192,7 +199,7 @@ const RegisterPage = () => {
 
 useEffect(()=>{
   UserAPI.Self_By_App_Url().then((res)=>{
-    setIsDemoIdLoginAllowed(res?.data?.selfAllowed);
+    setIsDemoIdLoginAllowed(res?.data?.isDemoIdLoginAllowed);
       setLogo(res?.data?.logo);
   })
 },[])

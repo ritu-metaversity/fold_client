@@ -321,7 +321,6 @@ const NewMobWithdraw = () => {
           setIsLoading(false);
           }
           setIsLoading(false);
-          console.log(res?.message);
         })
         .catch((error) => {
           setErrorAlert(true);
@@ -353,8 +352,6 @@ const NewMobWithdraw = () => {
     setAccountType(accType);
   };
 
-
-  console.log(accountHolderName, "adasdasdf")
 
   return (
     <>

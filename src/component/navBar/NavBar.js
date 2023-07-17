@@ -25,7 +25,6 @@ const NavBar = () => {
   const nav = useNavigate();
   const { pathname } = useLocation();
 
-  console.log(localStorage.getItem("balanceShow") !== "false")
 
   // const [visible, setVisible] = useState(false);
   const toggleVisible = () => {
@@ -371,7 +370,8 @@ const NavBar = () => {
                   <div className="d-flex login-register">
                     <Link
                       to="/m/register"
-                      className={`mt-2 text-white ${status ? "" : "d-none"}`}>
+                      className={`mt-2 text-white ${status ? "" : "d-none"}`}
+                      >
                       <b>Register</b>
                     </Link>
                     <Link

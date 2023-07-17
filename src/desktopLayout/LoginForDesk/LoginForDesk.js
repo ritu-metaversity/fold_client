@@ -90,7 +90,7 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
     }
 
     UserAPI.Self_By_App_Url().then((res) => {
-      setIsDemoIdLoginAllowed(res?.data?.selfAllowed);
+      setIsDemoIdLoginAllowed(res?.data?.isDemoIdLoginAllowed);
       setLogo(res?.data?.logo);
     });
 
@@ -123,7 +123,6 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
     setIsLoading1(true);
     AuthorAPI.LOGIN_WITH_DEMO_USER()
       .then((res) => {
-        console.log(res.data.token);
         const token = res.data.token;
         setMessage(res.message);
         setIsLoading1(false);
@@ -133,7 +132,6 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
           "Authorization"
         ] = `Bearer ${res?.data?.token}`;
         setStatusVal(res?.data.status);
-        console.log(res?.data?.message)
         setMessage("Invalid Username or password");
         localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
         const uId = res.data?.username;

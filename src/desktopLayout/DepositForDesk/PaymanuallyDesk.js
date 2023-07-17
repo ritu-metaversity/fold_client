@@ -112,7 +112,6 @@ const PaymanuallyDesk = (props) => {
     }
   };
 
-  console.log(files, "dsadasdasd");
 
   const handleCloseModal = () => setShowModals(false);
   const handleShow = (e) => {
@@ -226,7 +225,6 @@ const PaymanuallyDesk = (props) => {
       </div>
 
       {payMethods?.map((res) => {
-        console.log(res);
         if (DepositType !== res?.depositType) return <></>;
         return (
           <>
@@ -589,6 +587,7 @@ const PaymanuallyDesk = (props) => {
                       e.target.files.length && setFiles(e.target.files[0])
                     }
                     hidden
+                    accept="image/*"
                     type="file"
                   />
                 </label>
