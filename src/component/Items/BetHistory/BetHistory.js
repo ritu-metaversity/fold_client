@@ -155,7 +155,7 @@ function BetHistory() {
             <div className="row row5 mt-2 acc-stat">
               <div className="col-6">
                 <div className="form-group mb-0">
-                  <div className="mx-datepicker" style={{ width: "auto" }}>
+                  <div className="mx-datepicker" >
                     <div className="mx-input-wrapper">
                       <DatePicker
                         defaultValue={dayjs(startDate)}
@@ -175,7 +175,7 @@ function BetHistory() {
               </div>
               <div className="col-6">
                 <div className="form-group mb-0">
-                  <div className="mx-datepicker" style={{ width: "auto" }}>
+                  <div className="mx-datepicker" >
                     <div className="mx-input-wrapper">
                       <DatePicker
                         defaultValue={dayjs}

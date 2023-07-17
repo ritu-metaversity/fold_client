@@ -1,7 +1,7 @@
-.main_about_section{
-    height: calc(100% - 204px);
-    min-height: calc(100vh - 204px);
-    max-height: calc(100% - 204px);
+.main_about_section1 {
+    height: calc(100% - 193px);
+    min-height: calc(100vh - 193px);
+    max-height: calc(100% - 193px);
 }
 .image_section img{
     width: 180px;
@@ -9,14 +9,14 @@
     padding: 12px 0px;
     display: block;
 }
-.lodder_footer{
-    height: calc(100% - 240px);
-    min-height: calc(100vh - 240px);
-    max-height: calc(100% - 240px);
+.lodder_footer {
+    height: calc(100% - 234px);
+    min-height: calc(100vh - 234px);
+    max-height: calc(100% - 234px);
 }
 .lodder_footer i{
     /* color: #fff; */
-    font-size: 50px;
+    font-size: 30px;
 }
 .tearm_data{
     padding: 12px 18px;

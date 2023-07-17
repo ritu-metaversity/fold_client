@@ -29,7 +29,7 @@ const AboutPageForDesk = () => {
           <div className="itemHome">
             <div className="card">
               <div className="card-header header-card ">
-                <h4 className="mb-0">About US</h4>
+                <h4 className="mb-0">About</h4>
               </div>
               <div className="card-body container-fluid container-fluid-5 ">
                 {isLoading ? (

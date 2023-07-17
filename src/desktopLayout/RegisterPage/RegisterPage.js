@@ -6,9 +6,9 @@ import { api } from "../../apis/configs/axiosConfigs";
 import { UserAPI } from "../../apis/UserAPI";
 
 const RegisterPage = () => {
-  const [password, setPassword] = useState();
-  const [mobileNumber, setMobileNumber] = useState();
-  const [UserName, setUserName] = useState();
+  const [password, setPassword] = useState(0);
+  const [mobileNumber, setMobileNumber] = useState(0);
+  const [UserName, setUserName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState();
   const [errorMsg, setErrorMsg] = useState();
   const [StatusVal, setStatusVal] = useState(false);
@@ -23,30 +23,107 @@ const RegisterPage = () => {
 
   const nav = useNavigate();
 
+  const handleValidation = () => {
+    if (UserName === "" && mobileNumber === 0  && password === 0) {
+      setUserNameError("User Name is required");
+      setPasswordError("Password is required.");
+      setmobileNumberError("Mobile number must not be empty.");
+      return false
+    } else if (UserName === "") {
+      setUserNameError("User Name is required");
+      return false;
+    } else if (password === 0) {
+      setPasswordError("Password is required.");
+      return false;
+    } else if (mobileNumber === 0 || mobileNumber === undefined) {
+      setmobileNumberError("Mobile number must not be empty.");
+      return false;
+    } else if (confirmPassword !== password) {
+      return false;
+    } else if (mobileNumber?.length > 10) {
+      return false;
+    } else if (mobileNumber?.length < 7) {
+      return false;
+    } else if (
+      password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
+      null
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [mobileNumberError, setmobileNumberError] = useState("");
+  const [userNameError, setUserNameError] = useState("");
+
+    const handlePassWordsValidation = (e) => {
+    setPassword(e.target.value);
+    const passData = e.target.value;
+    if (passData === "") {
+      setPasswordError("Password is required.");
+    } else if (passData?.length < 8) {
+      setPasswordError("Minimum 8 letters required.");
+    } else if (passData?.length > 13) {
+      setPasswordError("Maximum 12 letters required");
+    } else if (
+      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
+      null
+    ) {
+      setPasswordError(
+        "Password should contain atleast one number and one lower case and one upper case."
+      );
+    } else {
+      setPasswordError("");
+    }
+  };
+
+  const handleConfirmPasswordsValidation = (e) => {
+    setConfirmPassword(e.target.value);
+    const confirmPass = e.target.value;
+    if (password !== confirmPass) {
+      setConfirmPasswordError("Password must be equal.");
+    } else {
+      setConfirmPasswordError("");
+    }
+  };
+
+  const handleMobileNumber = (e) => {
+    setMobileNumber(e.target.value);
+    if (e.target.value === "") {
+      setmobileNumberError("Mobile number must not be empty.");
+    } else if (e.target.value?.length < 7) {
+      setmobileNumberError("Must be minimum 7 digit");
+    } else if (e.target.value?.length > 10) {
+      setmobileNumberError("Must be maximum 10 digit");
+    } else {
+      setmobileNumberError("");
+    }
+  };
+
+  const handleUserName = (e) => {
+    setUserName(e.target.value);
+    const userData = e.target.value;
+    if (userData === "") {
+      setUserNameError("User Name is required");
+    } else if (userData?.length < 4) {
+      setUserNameError("Minimum 4 letters required.");
+    } else if (userData?.length > 8) {
+      setUserNameError("Maximum 8 letters required.");
+    } else if (userData?.match(/^[a-zA-Z0-9]+$/) === null) {
+      setUserNameError("Only number and alphabet are allowed.");
+    } else {
+      setUserNameError("");
+    }
+
+    console.log(userData?.match(/^[a-zA-Z0-9]{4,8}$/) === null, "dsdsdsa");
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
     setStatusVal(false);
-
-    if(UserName === ""){
-      setErrorMsg("User Name is required");
-      setStatusVal(true);
-    }else if(password === ""){
-      setErrorMsg("Password is required");
-      setStatusVal(true);
-    }else if(mobileNumber === "" || mobileNumber === undefined){
-      setErrorMsg("Mobile Number is required");
-      setStatusVal(true)
-    }else if(confirmPassword !== password){
-      setErrorMsg("Password and Password Confirmation should be same");
-      setStatusVal(true)
-    }else if(mobileNumber?.length !== 10 ){
-      setErrorMsg("Please enter valid  Mobile Number");
-      setStatusVal(true)
-    }
-
-
-    if (UserName !== "" && password !== "" && confirmPassword === password && mobileNumber !== "" && mobileNumber !== undefined && mobileNumber?.length === 10) {
+    if (handleValidation()) {
       setIsLoading(true);
       AuthorAPI.Register({
         username: UserName,
@@ -140,25 +217,31 @@ useEffect(()=>{
                 className="form-control form-cont"
                 aria-required="true"
                 aria-invalid="false"
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={handleUserName}
+                onFocus={handleUserName}
               />
-              <span
-                className="text-danger error-msg"
-                style={{ display: "none" }}>
-                {" "}
-              </span>
+             <p
+                style={{ marginTop: "12px", fontSize: "12px", marginLeft:"3px" }}
+                className="text-danger error-msg">
+                {userNameError}
+              </p>
             </div>
             <div className="form-group mb-4">
               <input
-                name="User Name"
+                name="Mobile Number"
                 type="Number"
                 placeholder="Mobile Number"
                 className="form-control form-cont"
                 aria-required="true"
                 aria-invalid="false"
-                onChange={(e) => setMobileNumber(e.target.value)}
+               onChange={handleMobileNumber}
+                onFocus={handleMobileNumber}
               />
-             
+             <p
+                style={{ marginTop: "12px", fontSize: "12px" , marginLeft:"3px"}}
+                className="text-danger error-msg">
+                {mobileNumberError}
+              </p>
             </div>
             <div className="form-group mb-4">
               <input
@@ -168,9 +251,14 @@ useEffect(()=>{
                 className="form-control form-cont"
                 aria-required="true"
                 aria-invalid="false"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePassWordsValidation}
+                onFocus={handlePassWordsValidation}
               />
-
+                <p
+                style={{ marginTop: "12px", fontSize: "12px" , marginLeft:"3px"}}
+                className="text-danger error-msg">
+                {passwordError}
+              </p>
             </div>
             <div className="form-group mb-4">
               <input
@@ -180,11 +268,14 @@ useEffect(()=>{
                 className="form-control form-cont"
                 aria-required="true"
                 aria-invalid="false"
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={handleConfirmPasswordsValidation}
+                onFocus={handleConfirmPasswordsValidation}
               />
-              <span
-                className="text-danger error-msg"
-                style={{ display: "none" }}></span>
+              <p
+                style={{ marginTop: "12px", marginLeft:"3px",fontSize: "12px" }}
+                className="text-danger error-msg">
+                {confirmPasswordError}
+              </p>
             </div>
             <div className="form-group mb-0">
               <button

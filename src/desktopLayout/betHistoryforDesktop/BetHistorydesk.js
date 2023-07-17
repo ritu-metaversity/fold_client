@@ -141,8 +141,8 @@ function BetHistorydesk() {
                           })}
                         </select>
                         <div className="upDownbtn">
-                          <i class="fa fa-caret-up"></i>
-                          <i class="fa fa-caret-down"></i>
+                          <i className="fa fa-caret-up"></i>
+                          <i className="fa fa-caret-down"></i>
                         </div>
                       </div>
                     </div>
@@ -159,16 +159,15 @@ function BetHistorydesk() {
                           <option value="true">Deleted</option>
                         </select>
                         <div className="upDownbtn">
-                          <i class="fa fa-caret-up"></i>
-                          <i class="fa fa-caret-down"></i>
+                          <i className="fa fa-caret-up"></i>
+                          <i className="fa fa-caret-down"></i>
                         </div>
                       </div>
                     </div>
                     <div className="col-2">
                       <div className="form-group mb-0">
                         <div
-                          className="mx-datepicker"
-                          style={{ width: "auto" }}>
+                          className="mx-datepicker">
                           <div className="mx-input-wrapper">
                             <DatePicker
                               defaultValue={dayjs(startDate)}

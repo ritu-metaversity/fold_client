@@ -161,7 +161,7 @@ const SportPnl = () => {
           <div className="row row5">
             <div className="col-2">
               <div className="form-group mb-0">
-                <div className="mx-datepicker" style={{ width: "auto" }}>
+                <div className="mx-datepicker" >
                   <div className="mx-input-wrapper">
                     <DatePicker
                       defaultValue={dayjs(startDate)}
@@ -180,7 +180,7 @@ const SportPnl = () => {
             </div>
             <div className="col-2">
               <div className="form-group mb-0">
-                <div className="mx-datepicker" style={{ width: "auto" }}>
+                <div className="mx-datepicker" >
                   <div className="mx-input-wrapper">
                     <DatePicker
                       defaultValue={dayjs}
@@ -214,8 +214,8 @@ const SportPnl = () => {
                     })}
                 </select>
                 <div className="upDownbtn">
-                  <i class="fa fa-caret-up"></i>
-                  <i class="fa fa-caret-down"></i>
+                  <i className="fa fa-caret-up"></i>
+                  <i className="fa fa-caret-down"></i>
                 </div>
               </div>
             </div>
@@ -237,8 +237,8 @@ const SportPnl = () => {
                     })}
                 </select>
                 <div className="upDownbtn">
-                  <i class="fa fa-caret-up"></i>
-                  <i class="fa fa-caret-down"></i>
+                  <i className="fa fa-caret-up"></i>
+                  <i className="fa fa-caret-down"></i>
                 </div>
               </div>
             </div>

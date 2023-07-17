@@ -36,7 +36,10 @@ const Slot = () => {
     setCasinoListId(id);
     setActiveClass(id);
     setCasinoName(name);
-    setShow(true)
+
+    if(localStorage.getItem("token") !== null){
+      setShow(true)
+    }
     e.preventDefault();
   };
 
@@ -65,7 +68,12 @@ const Slot = () => {
   const handleData = (id,gameName, e) => {
     setCasinoId(id)
     setSportName(gameName)
-    setShow(true)
+    if(localStorage.getItem("token") !== null){
+
+      setShow(true)
+    }else{
+      nav("/login")
+    }
     e.preventDefault();
   };
 
@@ -136,7 +144,7 @@ const Slot = () => {
                                         {item.gameName}
                                       </div>
                                       {/* {
-                                        id===0?<div class="new-launch-casino">New Launch</div>:""
+                                        id===0?<div className="new-launch-casino">New Launch</div>:""
                                       } */}
                                       
                                     </a>

@@ -24,21 +24,22 @@ const ResponsibleGaming = () => {
   }, []);
   return (
     <>
-      {isLoading ? (
+      
+        <div className="main_about_section1">
+          <div className="about_heading">
+            <h3>Responsible Gaming</h3>
+          </div>
+          {isLoading ? (
         <p className="lodder lodder_footer">
           <i className="fa fa-spinner fa-spin"></i>
         </p>
       ) : (
-        <div className="main_about_section max_height">
-          <div className="about_heading">
-            <h3>Responsible Gaming</h3>
-          </div>
           <div
             className="tearm_data"
             dangerouslySetInnerHTML={{ __html: resData }}
-          />
+          />)}
         </div>
-      )}
+      
     </>
   );
 };

@@ -77,16 +77,16 @@ const UnsetteledBetForDesk = () => {
     
   return (
     <>
-    <div class="main">
-        <div class="container-fluid container-fluid-5">
-          <div class="itemHome">
+    <div className="main">
+        <div className="container-fluid container-fluid-5">
+          <div className="itemHome">
 
             
-              <div class="card">
-                <div class="card-header header-card">
-                  <h4 class="mb-0">Un-Setteled Bet</h4>
+              <div className="card">
+                <div className="card-header header-card">
+                  <h4 className="mb-0">Un-Setteled Bet</h4>
                 </div>
-                <div class="card-body container-fluid container-fluid-5 unsetteledbet">
+                <div className="card-body container-fluid container-fluid-5 unsetteledbet">
                 <div className="row row5 ">
               <div className="col-6">
                 <div

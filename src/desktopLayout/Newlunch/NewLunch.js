@@ -46,7 +46,11 @@ const handleCasino = (id, gameName)=>{
     // nav(`/casino/${id}`);
     setCasinoId(id)
     setSportName(gameName)
-    setShow(true)
+    if(localStorage.getItem("token") !== null){
+      setShow(true)
+    }else{
+      nav("/login")
+    }
 }
 
   return (

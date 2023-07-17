@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { UserAPI } from "../../../apis/UserAPI";
-import ExpNav from "../../../component/Items/ExposureModal/ExpNav";
-import SportExp from "./SportExp/SportExp";
-import CasinoExp from "./CasinoExp/CasinoExp";
+import React, { useEffect, useState } from 'react'
+import { UserAPI } from '../../../../apis/UserAPI';
 
-const ExpForDesk = () => {
-  const [DataList, setDataList] = useState("");
+const CasinoExp = ({spType}) => {
+    const [DataList, setDataList] = useState("");
   const [ListLength, setListLength] = useState("");
   const [BetDetail, setBetDetail] = useState();
   // const [pagination, setPagination] = useState(0);
   const [betExpValue, setBetExpValue] = useState(1);
   const [deleteVal, setDeleteVal] = useState(1);
   const [currentPage, setCurrentPage] = useState();
-  const [spType, setSpType] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
-  const sporttype = (val) => {
-    setSpType(val);
-  };
+ 
 
   useEffect(() => {
     UserAPI.Unsetteled_bet({
@@ -34,16 +28,9 @@ const ExpForDesk = () => {
     });
     // eslint-disable-next-line
   }, [betExpValue, spType]);
-
   return (
-    <>
-      <div className="report-container wrapper main-exp-containor">
-        <div className="card">
-          <ExpNav sporttype={sporttype} />
-          {
-            spType === 1? <SportExp spType={spType}/> : <CasinoExp spType={spType}/>
-          }
-          {/* <div className="card-body container-fluid container-fluid-5 exposre">
+    <div>
+         <div className="card-body container-fluid container-fluid-5 exposre">
             {isLoading ? (
               <p className="lodder-exp">
                 <i className="fa fa-spinner fa-spin"></i>
@@ -113,6 +100,7 @@ const ExpForDesk = () => {
                                   }
                                   value="3"
                                 />
+                                {/* <input type="radio"/> */}
                                 <label
                                   htmlFor="Lay_exp"
                                   className="custom-control-label control-label1">
@@ -127,21 +115,35 @@ const ExpForDesk = () => {
                   </div>
                   <div className="col-6">
                     <div
-                      className="totalBet">
-                     
-                        <p className="betInfo">
-                          Total Bets:{" "}
-                          <span className="betColor">
-                            {BetDetail?.totalBets}
-                          </span>
-                        </p>{" "}
-                        <p className="betInfo">
-                          Total Amount:{" "}
-                          <span className="betColor">
-                            {BetDetail?.totalStake}
-                          </span>
-                        </p>
-                      
+                      className="form-group mb-0"
+                      style={{ marginTop: "12px" }}>
+                      <div className="row row5 mt-2">
+                        <div className="col-12">
+                          <div className="form-group mb-0">
+                            <div
+                              id="match_unmatched_delete"
+                              role="radiogroup"
+                              tabIndex="-1">
+                              <div className="custom-control custom-control-inline custom-radio">
+                                <div>
+                                  <span className="betInfo">
+                                    Total Bets:{" "}
+                                    <span className="betColor">
+                                      {BetDetail?.totalBets}
+                                    </span>
+                                  </span>{" "}
+                                  <span className="betInfo">
+                                    Total Amount:{" "}
+                                    <span className="betColor">
+                                      {BetDetail?.totalStake}
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -160,28 +162,28 @@ const ExpForDesk = () => {
                             scope="col"
                             aria-colindex="1"
                             className="text-left bg-color">
-                            Sport Name
+                            Event Name
                           </th>
-                          <th
+                          {/* <th
                             role="columnheader"
                             scope="col"
                             aria-colindex="3"
-                            className="text-left bg-color eventName">
-                            Event Name
-                          </th>
-                          <th
+                            className="text-left bg-color ">
+                            Nation
+                          </th> */}
+                          {/* <th
                             role="columnheader"
                             scope="col"
                             aria-colindex="3"
                             className="text-left bg-color">
                             Market Name
-                          </th>
+                          </th> */}
 
                           <th
                             role="columnheader"
                             scope="col"
                             aria-colindex="5"
-                            className="text-left bg-color eventName">
+                            className="text-left bg-color ">
                             Nation
                           </th>
                           <th
@@ -203,7 +205,7 @@ const ExpForDesk = () => {
                             role="columnheader"
                             scope="col"
                             aria-colindex="9"
-                            className="text-center bg-color eventName">
+                            className="text-left bg-color ">
                             Place Date
                           </th>
                         </tr>
@@ -226,45 +228,87 @@ const ExpForDesk = () => {
                                 <td
                                   role="columnheader"
                                   aria-colindex="1"
-                                  className="text-left">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.sportName}
                                 </td>
-                                <td
+                                {/* <td
                                   role="columnheader"
                                   aria-colindex="2"
-                                  className="text-left ">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.eventName}
-                                </td>
-                                <td
+                                </td> */}
+                                {/* <td
                                   role="columnheader"
                                   aria-colindex="3"
-                                  className="text-left">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.marketname}
-                                </td>
+                                </td> */}
 
                                 <td
                                   role="columnheader"
                                   aria-colindex="5"
-                                  className="text-left ">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.nation}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="6"
-                                  className="text-left">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.rate}
                                 </td>
 
                                 <td
                                   role="columnheader"
                                   aria-colindex="8"
-                                  className="text-right">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.amount}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="9"
-                                  className="text-center ">
+                                  className={`text-left ${
+                                    item?.isback === true
+                                      ? "back"
+                                      : item?.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item?.time}
                                 </td>
                               </tr>
@@ -290,11 +334,9 @@ const ExpForDesk = () => {
                 </div>
               </div>
             )}
-          </div> */}
-        </div>
-      </div>
-    </>
-  );
-};
+          </div>
+    </div>
+  )
+}
 
-export default ExpForDesk;
+export default CasinoExp

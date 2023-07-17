@@ -108,10 +108,11 @@ const NewMobWithdraw = () => {
       withdrawType: bankID,
     })
       .then((res) => {
-        UserAPI.GET_CLIENT_BANK().then((res)=>{
-          setGetAccountData(res?.data);
-          setDataLenth(res?.data?.length);
-        })
+        UserAPI.Withdraw_Request().then((res) => {
+          setIsLoading(false);
+          setWithdrawReq(res.data);
+          setDataLength(res?.data?.length);
+        });
         setShow(false);
         setErrorAlert(true);
         setIsLoading(false);
@@ -218,7 +219,7 @@ const NewMobWithdraw = () => {
         setColorName("danger");
         setIsLoading(false);
         return false;
-      } else if (ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
+      } else if (ifsc?.match(/^[A-Z]{4}0[A-Z0-9]{6}$/) === null) {
         setMessage("Enter Valid IFSC Code");
         setErrorAlert(true);
         setColorName("danger");
@@ -306,6 +307,10 @@ const NewMobWithdraw = () => {
         withdrawMode: withdrawType,
       })
         .then((res) => {
+          UserAPI.Withdraw_Request().then((res) => {
+            setWithdrawReq(res.data);
+            setDataLength(res.data.length);
+          });
           if (res?.data.bankExist === false) {
            
           setShow(true);
@@ -348,6 +353,9 @@ const NewMobWithdraw = () => {
     setAccountType(accType);
   };
 
+
+  console.log(accountHolderName, "adasdasdf")
+
   return (
     <>
       {errorAlert ? (
@@ -379,7 +387,7 @@ const NewMobWithdraw = () => {
                     <p
                       className="choose_val"
                       style={{ marginLeft: "0px", marginBottom: "10px" }}>
-                      Choose From your favourate transaction{" "}
+                      Choose From your favourite transaction{" "}
                     </p>
                     <div className="coin_value">
                       {stackValue?.map((res) => {
@@ -401,7 +409,6 @@ const NewMobWithdraw = () => {
                     <option value="Instant">Instant</option>
                   </select>
                 </div>
-
                 <div className="with_paymethod">
                   <Container>
                     <div className="bank-logo with_bank_logo">
@@ -447,10 +454,11 @@ const NewMobWithdraw = () => {
                       <label className="account-lable">Account Number</label>
                       <br />
                       <input
-                        type="number"
                         className="account-input"
-                        value={accountNumber}
-                        onChange={(e) => setAccountNumber(e.target.value)}
+                        value={accountNumber?.toString().replace(".","")}
+                        onChange={(e) => 
+                          e.target.value.match(/^[0-9]*$/) &&
+                          setAccountNumber(Number(e.target.value))}
                       />
                     </div>
                     <div className="mx-input-wrapper account-field">
@@ -461,8 +469,9 @@ const NewMobWithdraw = () => {
                         className="account-input"
                         value={accountHolderName.trimStart()}
                         onChange={(e) =>
+                          e.target.value.match(/^[a-zA-Z ]*$/) &&
                           setAccountHolderName(
-                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                            e.target.value
                           )
                         }
                       />
@@ -475,8 +484,9 @@ const NewMobWithdraw = () => {
                         className="account-input"
                         value={bankName.trimStart()}
                         onChange={(e) =>
+                          e.target.value.match(/^[a-zA-Z ]*$/) &&
                           setBankName(
-                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                            e.target.value
                           )
                         }
                       />
@@ -504,8 +514,8 @@ const NewMobWithdraw = () => {
                         <option value="Current">Current</option>
                       </select>
                       <div className="upDownbtn btnSecected">
-                        <i class="fa fa-caret-up"></i>
-                        <i class="fa fa-caret-down"></i>
+                        <i className="fa fa-caret-up"></i>
+                        <i className="fa fa-caret-down"></i>
                       </div>
                     </div>
                   </div>
@@ -524,7 +534,7 @@ const NewMobWithdraw = () => {
                         <input
                           type="number"
                           className="account-input"
-                          value={accountNumber}
+                          value={accountNumber?.toString().replace(".","")}
                           onChange={(e) => setAccountNumber(e.target.value)}
                         />
                       ) : (
@@ -553,8 +563,9 @@ const NewMobWithdraw = () => {
                         className="account-input"
                         value={accountHolderName.trimStart()}
                         onChange={(e) =>
+                          e.target.value.match(/^[a-zA-Z ]*$/) &&
                           setAccountHolderName(
-                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                            e.target.value
                           )
                         }
                       />
@@ -722,8 +733,7 @@ const NewMobWithdraw = () => {
                       </p>
                     </div>
                     <div
-                      className="table-responsive withdrow-table"
-                      style={{ height: "400px", overflow: "scroll" }}>
+                      className="table-responsive withdrow-table">
                       <table
                         role="table"
                         aria-busy="false"

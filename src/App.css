@@ -23,3 +23,32 @@ input[type=number] {
 ::-webkit-scrollbar {
     display: none;
   }
+
+
+  .rejected {
+    color: #DC3545 !important;
+    padding: 9px 18px;
+    font-weight: 600;
+    border-radius: 4px;
+    background: #dc354559;
+}
+.approved{
+    font-weight: 600;
+    background: rgb(204, 246, 228);
+    color: rgb(0, 134, 78);
+    border-radius: 4px;
+    padding: 9px 18px;
+}
+.pending{
+    color: #D58004;
+    background: #ffa7265e;
+    padding: 9px 18px;
+    font-weight: 600;
+    border-radius: 4px;
+}
+td{
+    white-space: nowrap ;
+}
+th{
+    white-space: nowrap ;
+}

@@ -459,6 +459,7 @@ button.btn.btn-primary.btn-block.btn-sm {
 div#account-statement_length {
     margin-top: -3px;
     margin-left: 6px;
+    margin-left: 12px;
 }
 .page-item.disabled .page-link {
     color: #6c757d;
@@ -754,4 +755,14 @@ th.text-center.bg-color {
 th.text-right.bg-color {
     background: #2c3d50 !important;
     color: #fff !important;
+}
+
+th.text-left.amount {
+    color: #fff;
+}
+th.text-left.win {
+    color: #fff;
+}
+th.text-left.date {
+    color: #fff;
 }
