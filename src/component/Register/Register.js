@@ -102,7 +102,7 @@ const Register = () => {
     if (e.target.value === "") {
       setmobileNumberError("Mobile number must not be empty.");
     } else if (e.target.value?.length !== 10) {
-      setmobileNumberError("Mobile Number Must be 10 digit");
+      setmobileNumberError("Mobile number must be 10 digit number");
     } else {
       setmobileNumberError("");
     }
