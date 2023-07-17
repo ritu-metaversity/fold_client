@@ -102,7 +102,11 @@ export function WithdrawForm({
               )
               ? undefined
               : err.invalidUpi
-            : values.accountNumber?.match(/^[0-9]*$/)
+            : values.withdrawType.toLowerCase() === "paytm"
+            ? values.accountNumber?.match(/^[0-9]{10}$/)
+              ? undefined
+              : "Mobile no should be 10 digits."
+            : values.accountNumber?.match(/^[0-9]{12,16}$/)
             ? undefined
             : err.invalidAccount
           : err.noAccount,
@@ -113,8 +117,12 @@ export function WithdrawForm({
             : err.invalidAmount
           : err.noAmount,
         bankName:
-          values.bankName || values.withdrawType.toLowerCase() !== "bank"
+          values.withdrawType.toLowerCase() !== "bank"
             ? undefined
+            : values.bankName
+            ? values.bankName.match(/^(?=.*[a-zA-Z])[a-zA-Z\d]*$/)
+              ? undefined
+              : "Password should contain atleast one alphabet."
             : err.noBank,
         ifsc:
           values.ifsc || values.withdrawType.toLowerCase() !== "bank"
@@ -236,7 +244,7 @@ export function WithdrawForm({
               Amount
             </Typography>
             <WithdrawInput
-              value={values.amount}
+              value={Number(values.amount) || ""}
               name="amount"
               error={Boolean(errors.amount)}
               helperText={errors.amount}
@@ -250,7 +258,7 @@ export function WithdrawForm({
               <StyledButtonSmall
                 key={`${key + value}-button`}
                 onClick={() =>
-                  setFieldValue("amount", values.amount + Number(value))
+                  setFieldValue("amount", Number(values.amount) + Number(value))
                 }
               >
                 {key}
@@ -291,9 +299,14 @@ export function WithdrawForm({
                   methodName: elem.withdrawType,
                   logo: elem.image,
                 }}
-                handleClick={() =>
-                  setFieldValue("withdrawType", elem.withdrawType)
-                }
+                handleClick={() => {
+                  setFieldValue("accountHolderName", "");
+                  setFieldValue("bankName", "");
+                  setFieldValue("accountType", "");
+                  setFieldValue("accountNumber", "");
+                  setFieldValue("ifsc", "");
+                  setFieldValue("withdrawType", elem.withdrawType);
+                }}
               />
             );
           })}

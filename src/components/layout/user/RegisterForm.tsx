@@ -20,6 +20,7 @@ import { authServices } from "../../../utils/api/auth/services";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
 import * as yup from "yup";
+import { passwordRegex } from "../../../utils/regex";
 
 interface RegisterInterface {
   username?: string;
@@ -39,7 +40,7 @@ export function RegisterForm() {
       confirmPassword: "",
       mobile: "",
       checked: true,
-      appUrl: window.location.hostname || "atozscore.com",
+      appUrl: window.location.hostname.replace("www.", "") || "atozscore.com",
     },
     validateOnChange: true,
     validationSchema: yup.object().shape({
@@ -54,7 +55,7 @@ export function RegisterForm() {
         .min(8, "Minimum 8 letters required.")
         .max(12, "Maximum 12 letters required.")
         .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+          passwordRegex,
           "Password should contain atleast one number and one lower case , one upper case."
         )
         .required("This field is required."),
@@ -63,9 +64,9 @@ export function RegisterForm() {
         .oneOf([yup.ref("password"), ""], "Password must be equal."),
       mobile: yup
         .string()
+        .matches(/^[0-9]{10}$/, "Invalid Phone Number")
         .min(7, "Must be minimum 7 digit")
         .max(10, "Must be maximum 10 digit")
-        .matches(/^[0-9]*$/, "Invalid Phone Number")
         .required("Mobile number is required."),
     }),
     onSubmit: async () => {
@@ -90,7 +91,7 @@ export function RegisterForm() {
 
   const handleDemoUserLogin = async () => {
     const { response } = await authServices.demoUserLogin(
-      window.location.hostname
+      window.location.hostname.replace("www.", "")
     );
     if (response) {
       localStorage.setItem("is_demo", "true");
@@ -228,7 +229,7 @@ export function RegisterForm() {
                   InputProps={{
                     sx: { bgcolor: colorHex.bg4 },
                   }}
-                  type="number"
+                  // type="number"
                   size={matches ? "small" : "medium"}
                   name="mobile"
                   onChange={handleChange}

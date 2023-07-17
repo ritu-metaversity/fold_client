@@ -243,12 +243,13 @@ export const BetSlip: FC<Props> = ({
         >
           {betId.isBack ? <AmountInputBGBack /> : <AmountInputBGLay />}
           <AmountInput
-            type="number"
+            // type="number"
             min={0}
-            value={betId.stake}
-            onChange={(e) =>
-              setBetId({ ...betId, stake: Number(e.target.value) })
-            }
+            value={Number(betId?.stake) || ""}
+            onChange={(e) => {
+              e.preventDefault();
+              setBetId({ ...betId, stake: Number(e.target.value) });
+            }}
             placeholder="Amount"
           />
         </Box>

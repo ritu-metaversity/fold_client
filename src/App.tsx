@@ -136,7 +136,7 @@ function App() {
 
   const getSelfAllowed = async () => {
     const { response } = await authServices.isSelfAllowed({
-      appUrl: window.location.hostname,
+      appUrl: window.location.hostname.replace("www.", ""),
     });
 
     if (response?.data) {

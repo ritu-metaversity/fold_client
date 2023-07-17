@@ -11,7 +11,7 @@ export const casinoService = {
   getCasinoListByType: async (id: number) => {
     const params = {
       resource: casinoResource.CASINO_LIST_BY_TYPE,
-      data: { id, appUrl: window.location.hostname },
+      data: { id, appUrl: window.location.hostname.replace("www.", "") },
     };
     return await apiHandler(params);
   },

@@ -46,7 +46,7 @@ function LoginForm({
   const { setUser, setModal, setIsSignedIn, appData } = useContext(UserContext);
   const handleDemoUserLogin = async () => {
     const { response } = await authServices.demoUserLogin(
-      window.location.hostname
+      window.location.hostname.replace("www.", "")
     );
     if (response) {
       localStorage.setItem("is_demo", "true");
