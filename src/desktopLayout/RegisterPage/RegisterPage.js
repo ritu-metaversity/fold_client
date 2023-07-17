@@ -45,7 +45,7 @@ const RegisterPage = () => {
     } else if (mobileNumber?.length < 7) {
       return false;
     } else if (
-      password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
+      password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$#!%*?&_]{8,12}$/) ===
       null
     ) {
       return false;
@@ -68,7 +68,7 @@ const RegisterPage = () => {
     } else if (passData?.length > 13) {
       setPasswordError("Maximum 12 letters required");
     } else if (
-      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
+      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$#!%*?&_]{8,12}$/) ===
       null
     ) {
       setPasswordError(
