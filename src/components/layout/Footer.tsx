@@ -268,7 +268,9 @@ const Footer = () => {
             </ul>
           </div>{" "}
           <div className="footer-bottom">
-            <span className="ws-pre-wrap">{window.location.hostname}.</span>
+            <span className="ws-pre-wrap">
+              {window.location.hostname.replace("www.", "")}.
+            </span>
           </div>
         </div>
         <div className="w-100 copyright">

@@ -38,7 +38,7 @@ export function AuthBox() {
       password: "",
       checked: true,
       // appUrl: "atozscore.com",
-      appUrl: window.location.hostname,
+      appUrl: window.location.hostname.replace("www.", ""),
     },
     validationSchema: yup.object().shape({
       // userId: yup

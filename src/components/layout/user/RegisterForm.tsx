@@ -40,7 +40,7 @@ export function RegisterForm() {
       confirmPassword: "",
       mobile: "",
       checked: true,
-      appUrl: window.location.hostname || "atozscore.com",
+      appUrl: window.location.hostname.replace("www.", "") || "atozscore.com",
     },
     validateOnChange: true,
     validationSchema: yup.object().shape({
@@ -91,7 +91,7 @@ export function RegisterForm() {
 
   const handleDemoUserLogin = async () => {
     const { response } = await authServices.demoUserLogin(
-      window.location.hostname
+      window.location.hostname.replace("www.", "")
     );
     if (response) {
       localStorage.setItem("is_demo", "true");
