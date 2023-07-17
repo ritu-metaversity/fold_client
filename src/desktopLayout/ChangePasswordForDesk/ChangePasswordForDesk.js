@@ -43,7 +43,7 @@ const ChangePasswordForDesk = (props) => {
     } else if (newPasswords !== conformPassword) {
       setIsLoading(false);
       return false;
-    }else if (newPasswords.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) === null){
+    }else if (newPasswords.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$#!%*?&_]{8,12}$/) === null){
       setIsLoading(false);
       return false;
     }else if (newPasswords?.length < 8){
@@ -70,7 +70,7 @@ const ChangePasswordForDesk = (props) => {
     } else if (newPass?.length > 13) {
       setPasswordError("Maximum 12 letters required");
     } else if (
-      newPass?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
+      newPass?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$#!%*?&_]{8,12}$/) ===
       null
     ) {setPasswordError("Password should contain atleast one number and one lower case and one upper case.");
     } else {
