@@ -14,16 +14,17 @@ const QRcodeComponentNew: FC<Props> = ({ qrDetails }) => {
     <PaymentDetailContainer>
       <Typography textAlign="left">QR code for payment</Typography>
       <Divider />
-      <Grid container>
-        <Grid item xs={12} md={6}>
+      <Grid container gap={{ md: "3.33%" }}>
+        <Grid item xs={12} md={5.8}>
           <QrImg src={qrDetails.accountNumber} />
         </Grid>
-        <Grid xs={12} md={6} py={2} textAlign="left">
+        <Grid xs={12} md={5.8} py={2} textAlign="left">
           <Typography m={1} variant="caption">
             Display Name
           </Typography>
           <WithdrawInput
             fullWidth
+            disabled
             value={qrDetails.accountHolderName}
             sx={{ width: "100% !important" }}
             placeholder="Display Name"

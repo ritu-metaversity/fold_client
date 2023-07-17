@@ -11,6 +11,7 @@ import snackBarUtil from "../snackBarUtil";
 import { useFormik } from "formik";
 import Loading from "../loading";
 import * as yup from "yup";
+import { passwordRegex } from "../../../utils/regex";
 
 const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
   const [searchParams] = useSearchParams();
@@ -53,7 +54,7 @@ const ResetPasswordForm = ({ handleClose }: { handleClose: () => void }) => {
         .min(8, "Minimum 8 letters required.")
         .max(12, "Maximum 12 letters required.")
         .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+          passwordRegex,
           "Password should contain atleast one number and one lower case , one upper case."
         )
         .required("Please enter new Password"),
