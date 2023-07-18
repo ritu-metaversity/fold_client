@@ -58,6 +58,13 @@ interface SavedWithdrawItem {
   withdrawType: string | null;
   withdrawMode: string;
 }
+
+const regexByType = {
+  bank: /^[0-9]*$/,
+  paytm: /^[0-9]*$/,
+  upi: /^[a-zA-Z0-9@._-]*$/,
+};
+
 export function WithdrawForm({
   getWithdrawList,
 }: {
@@ -120,9 +127,9 @@ export function WithdrawForm({
           values.withdrawType.toLowerCase() !== "bank"
             ? undefined
             : values.bankName
-            ? values.bankName.match(/^(?=.*[a-zA-Z])[a-zA-Z\d]*$/)
+            ? values.bankName.match(/^(?=.*[a-zA-Z])[a-zA-Z\d ]*$/)
               ? undefined
-              : "Bankname should contain atleast one alphabet."
+              : "Bank name should contain atleast one alphabet."
             : err.noBank,
         ifsc:
           values.ifsc || values.withdrawType.toLowerCase() !== "bank"
@@ -337,7 +344,9 @@ export function WithdrawForm({
                 <WithdrawInput
                   value={values.accountNumber}
                   name="accountNumber"
-                  onChange={handleChange}
+                  onChange={(e) =>
+                    e.target.value.match(regexByType.bank) && handleChange(e)
+                  }
                   error={Boolean(errors.accountNumber)}
                   helperText={errors.accountNumber}
                   margin="dense"
@@ -349,7 +358,7 @@ export function WithdrawForm({
                   Account Name
                 </Typography>
                 <WithdrawInput
-                  value={values.accountHolderName}
+                  value={values.accountHolderName.trimStart()}
                   name="accountHolderName"
                   onChange={handleChange}
                   error={Boolean(errors.accountHolderName)}
@@ -419,7 +428,9 @@ export function WithdrawForm({
                 <WithdrawInput
                   value={values.accountNumber}
                   name="accountNumber"
-                  onChange={handleChange}
+                  onChange={(e) =>
+                    e.target.value.match(regexByType.upi) && handleChange(e)
+                  }
                   error={Boolean(errors.accountNumber)}
                   helperText={errors.accountNumber}
                   margin="dense"
@@ -431,7 +442,7 @@ export function WithdrawForm({
                   Account Name
                 </Typography>
                 <WithdrawInput
-                  value={values.accountHolderName}
+                  value={values.accountHolderName.trimStart()}
                   name="accountHolderName"
                   onChange={handleChange}
                   error={Boolean(errors.accountHolderName)}
@@ -451,7 +462,9 @@ export function WithdrawForm({
                 <WithdrawInput
                   value={values.accountNumber}
                   name="accountNumber"
-                  onChange={handleChange}
+                  onChange={(e) =>
+                    e.target.value.match(regexByType.paytm) && handleChange(e)
+                  }
                   error={Boolean(errors.accountNumber)}
                   helperText={errors.accountNumber}
                   margin="dense"
@@ -463,7 +476,7 @@ export function WithdrawForm({
                   Account Name
                 </Typography>
                 <WithdrawInput
-                  value={values.accountHolderName}
+                  value={values.accountHolderName.trimStart()}
                   name="accountHolderName"
                   onChange={handleChange}
                   error={Boolean(errors.accountHolderName)}
