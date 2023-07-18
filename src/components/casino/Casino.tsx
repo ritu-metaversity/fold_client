@@ -12,7 +12,7 @@ import React, { useContext, useEffect, useState } from "react";
 import HomeLayout from "../layout/homeLayout";
 import { CasinoIcon, StyledGameThumb } from "./styledComponent";
 import { colorHex } from "../../utils/constants";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { casinoService } from "../../utils/api/casino/service";
 import { UserContext } from "../../App";
 import axios from "axios";
@@ -186,7 +186,7 @@ const Casino = () => {
           ))}
         </Box>
       </Box>
-      {open && (
+      {!!open && (
         <CasinoGame
           name={casinoList.find((i) => i.gameId === open)?.gameName}
           id={open}

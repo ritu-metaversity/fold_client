@@ -61,12 +61,15 @@ export function RegisterForm() {
         .required("This field is required."),
       confirmPassword: yup
         .string()
-        .oneOf([yup.ref("password"), ""], "Password must be equal."),
+        .oneOf(
+          [yup.ref("password"), ""],
+          "Confirm password should be same as password."
+        )
+        .required("This field is required."),
       mobile: yup
         .string()
-        .matches(/^[0-9]{10}$/, "Invalid Phone Number")
-        .min(7, "Must be minimum 7 digit")
-        .max(10, "Must be maximum 10 digit")
+        .matches(/^[0-9]*$/, "Invalid Phone Number")
+        .length(10, "Must be 10 digit")
         .required("Mobile number is required."),
     }),
     onSubmit: async () => {

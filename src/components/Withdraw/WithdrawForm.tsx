@@ -106,7 +106,7 @@ export function WithdrawForm({
             ? values.accountNumber?.match(/^[0-9]{10}$/)
               ? undefined
               : "Mobile no should be 10 digits."
-            : values.accountNumber?.match(/^[0-9]{12,16}$/)
+            : values.accountNumber?.match(/^[0-9]{8,16}$/)
             ? undefined
             : err.invalidAccount
           : err.noAccount,
@@ -122,7 +122,7 @@ export function WithdrawForm({
             : values.bankName
             ? values.bankName.match(/^(?=.*[a-zA-Z])[a-zA-Z\d]*$/)
               ? undefined
-              : "Password should contain atleast one alphabet."
+              : "Bankname should contain atleast one alphabet."
             : err.noBank,
         ifsc:
           values.ifsc || values.withdrawType.toLowerCase() !== "bank"
