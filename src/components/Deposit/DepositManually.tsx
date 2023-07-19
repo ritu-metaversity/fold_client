@@ -66,7 +66,15 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
             )}
             <input
               accept="image/*"
-              onChange={(e) => e.target.files && setFiles(e.target.files[0])}
+              onChange={(e) => {
+                if (e.target.files?.length) {
+                  if (e.target.files[0]?.type.includes("image")) {
+                    setFiles(e.target.files[0]);
+                  } else {
+                    snackBarUtil.error("Only image files allowed.");
+                  }
+                }
+              }}
               type="file"
               style={{ display: "none" }}
             />
