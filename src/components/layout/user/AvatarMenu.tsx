@@ -59,7 +59,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
     setOpenStake(false);
   };
 
-  const matches = useMediaQuery("(max-width : 1280px)");
+  const matches = useMediaQuery("(min-width : 1280px)");
   return (
     <>
       <CustomizedDialogStack open={openStake} handleClose={handleStakeClose} />
@@ -87,7 +87,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
             <div className="my-backdrop" onClick={handleClose}></div>
             <Paper className={`${open ? " active " : ""}`}>
               {isSignedIn &&
-                matches &&
+                !matches &&
                 appData?.selfAllowed &&
                 !(user?.userTypeInfo === 2) && [
                   <MenuItem
