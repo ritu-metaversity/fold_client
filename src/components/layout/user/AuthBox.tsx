@@ -76,6 +76,7 @@ export function AuthBox() {
           localStorage.setItem("token", response.token);
         } else {
           localStorage.setItem("token", response.token);
+          snackBarUtil.success("Login Successful !!");
           if (setIsSignedIn) setIsSignedIn(true);
         }
         localStorage.setItem("userType", response.userTypeInfo);
