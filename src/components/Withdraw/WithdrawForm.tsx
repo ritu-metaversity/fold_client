@@ -33,8 +33,7 @@ const err = {
   noIfsc: "The IFSC field is required",
   invalidIfsc: "The IFSC field format is invalid",
   noAccount: "The Account Number field is required",
-  invalidAccount:
-    "The Account Number field may only contain numeric characters",
+  invalidAccount: "The Account Number field may only contain 8 to 16 digits",
   invalidUpi: "The UPI field format is invalid",
   noAmount: "The Amount field is required",
   invalidAmount: "The Amount field may only contain numeric characters",
