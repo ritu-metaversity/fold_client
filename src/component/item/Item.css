@@ -436,7 +436,7 @@ table {
 }
 
 .max1_height{
-    height: calc(100% - 303px);
-    min-height: calc(100vh - 303px);
-    max-height: calc(100% - 303px);
+    height: calc(100% - 284px);
+    min-height: calc(100vh - 284px);
+    max-height: calc(100% - 284px);
 }

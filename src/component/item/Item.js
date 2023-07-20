@@ -50,7 +50,8 @@ function Item({ gameIdForItemPage, spName }) {
               <div>
                 <div className="">
                   {gameName?.find((item) => item?.sportid === gameIdForItemPage)
-                    ?.matchList?.length === 0 ? (
+                    ?.matchList?.length === 0 ||gameName?.find((item) => item?.sportid === gameIdForItemPage)
+                    ?.matchList?.length === undefined ? (
                     <p className="no-found" style={{ marginBottom: "12px" }}>
                       No Real Data Found
                     </p>

@@ -10,7 +10,6 @@ import NavLoginForm from "./NavLoginForm/NavLoginForm";
 const NavbarDesk = (props) => {
   const [close, setClose] = useState(false);
   const [droup, setDrop] = useState(false);
-  const [userdetail, setUserDetail] = useState();
   const [userbalance, setUserbalance] = useState("0.00");
   const [ActiveSport, setActiveSport] = useState([]);
   const [error, setError] = useState(false);
@@ -334,7 +333,7 @@ const NavbarDesk = (props) => {
                       className="nav-item list1"
                       onClick={() => handleSportId(res?.sportId)}>
                       <Link
-                        to={`/${res?.sportName}`}
+                        to={`/${res?.sportName.replace(" ", "")}`}
                         className="nav-link active nav-b hover_nav"
                         //   onClick={() => {
                         //     handleShowSingleSpor(e,id);

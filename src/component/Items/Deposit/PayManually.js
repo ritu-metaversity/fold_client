@@ -57,7 +57,6 @@ const PayManually = (props) => {
     });
   }, []);
 
-
   const [DepositType, setDepositeType] = useState();
 
   const handlePaymentDetails = (vl, id, dtype) => {
@@ -235,53 +234,53 @@ const PayManually = (props) => {
           <>
             {DepositType === "QR" && (
               <Container className="bank-detail mt-4">
-              <Row>
-                <p>QR Code For Payment</p>
-                <Col className="name-d">
-                  <div className="">
-                    <img
-                      src={res?.accountNumber && res?.accountNumber}
-                      style={{ width: "150px" }}
-                      onClick={(e) => handleShow(e)}
-                      alt="QR-Code"
-                    />
-                  </div>
-                </Col>
-                <Modal
-                  show={showModals}
-                  onHide={handleCloseModal}
-                  centered
-                  style={{
-                    marginTop: "12px",
-                    marginInline: "2%",
-                    width: "95%",
-                  }}>
-                  <Modal.Body className="image-body">
-                    {" "}
-                    <img
-                      src={res?.accountNumber && res?.accountNumber}
-                      className="modals-image"
-                      alt="QR-code"
-                    />
-                  </Modal.Body>
-                </Modal>
-                <Col className="qr-payment">
-                  <Row>
-                    <Col>
-                      <div className="">
-                        <p>Display Name</p>
-                        <Input
-                          value={
-                            res?.accountHolderName && res?.accountHolderName
-                          }
-                          readOnly
-                          type="text"
-                        />
-                      </div>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
+                <Row>
+                  <p>QR Code For Payment</p>
+                  <Col className="name-d">
+                    <div className="">
+                      <img
+                        src={res?.accountNumber && res?.accountNumber}
+                        style={{ width: "150px" }}
+                        onClick={(e) => handleShow(e)}
+                        alt="QR-Code"
+                      />
+                    </div>
+                  </Col>
+                  <Modal
+                    show={showModals}
+                    onHide={handleCloseModal}
+                    centered
+                    style={{
+                      marginTop: "12px",
+                      marginInline: "2%",
+                      width: "95%",
+                    }}>
+                    <Modal.Body className="image-body">
+                      {" "}
+                      <img
+                        src={res?.accountNumber && res?.accountNumber}
+                        className="modals-image"
+                        alt="QR-code"
+                      />
+                    </Modal.Body>
+                  </Modal>
+                  <Col className="qr-payment">
+                    <Row>
+                      <Col>
+                        <div className="">
+                          <p>Display Name</p>
+                          <Input
+                            value={
+                              res?.accountHolderName && res?.accountHolderName
+                            }
+                            readOnly
+                            type="text"
+                          />
+                        </div>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
               </Container>
             )}
             {DepositType === "UPI" && (
@@ -327,66 +326,66 @@ const PayManually = (props) => {
                 </div>
               </Container>
             )}
-            {
-              DepositType === "BANK" && <Container className="bank-detail">
-              <Row>
-                <Col className="name-d">
-                  <div className="">
-                    <p className="Typography-root root">Bank Name</p>
-                  </div>
-                </Col>
-                <Col>
-                  <div className="">
-                    <p className="Typography-root text-right">
-                      {res?.bankName}
-                    </p>
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="name-d">
-                  <div className="">
-                    <p className="Typography-root root">Account Number</p>
-                  </div>
-                </Col>
-                <Col>
-                  <div className="">
-                    <p className="Typography-root text-right">
-                      {res?.accountNumber}
-                    </p>
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="name-d">
-                  <div className="">
-                    <p className="Typography-root root">IFSC Code</p>
-                  </div>
-                </Col>
-                <Col>
-                  <div className="">
-                    <p className="Typography-root text-right">
-                      {res?.ifsc}
-                    </p>
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="name-d">
-                  <div className="">
-                    <p className="Typography-root root">Account Holder Name</p>
-                  </div>
-                </Col>
-                <Col>
-                  <div className="">
-                    <p className="Typography-root text-right">
-                      {res?.accountHolderName}
-                    </p>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
-            }
+            {DepositType === "BANK" && (
+              <Container className="bank-detail">
+                <Row>
+                  <Col className="name-d">
+                    <div className="">
+                      <p className="Typography-root root">Bank Name</p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="">
+                      <p className="Typography-root text-right">
+                        {res?.bankName}
+                      </p>
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="name-d">
+                    <div className="">
+                      <p className="Typography-root root">Account Number</p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="">
+                      <p className="Typography-root text-right">
+                        {res?.accountNumber}
+                      </p>
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="name-d">
+                    <div className="">
+                      <p className="Typography-root root">IFSC Code</p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="">
+                      <p className="Typography-root text-right">{res?.ifsc}</p>
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="name-d">
+                    <div className="">
+                      <p className="Typography-root root">
+                        Account Holder Name
+                      </p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="">
+                      <p className="Typography-root text-right">
+                        {res?.accountHolderName}
+                      </p>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            )}
           </>
         );
       })}
@@ -586,10 +585,19 @@ const PayManually = (props) => {
                     />
                   )}
                   <input
-                   value={""}
-                    onChange={(e) =>
-                      e.target.files && setFiles(e.target.files[0])
-                    }
+                    value={""}
+                    onChange={(e) => {
+                      if (e.target.files?.length) {
+                        if (e.target.files[0]?.type.includes("image")) {
+                          setFiles(e.target.files[0]);
+                        } else {
+                          setColor("danger");
+                          setMessege("Only image files allowed.");
+                          setAlertBtnshow(true);
+                          setIsLoading(false);
+                        }
+                      }
+                    }}
                     type="file"
                     accept="image/*"
                     hidden

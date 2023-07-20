@@ -34,6 +34,7 @@ const NewWithdraw = () => {
   const [withdrawReq, setWithdrawReq] = useState();
   const [dataLength, setDataLength] = useState();
   const [activeBank, setActiveBank] = useState();
+  const [maxWidthValue, setMaxWidthValue] = useState(0);
 
   const handleClose = () => {
     setShow(false);
@@ -103,6 +104,7 @@ const NewWithdraw = () => {
 
     UserAPI.WITHDRAW_STACK_REQUEST().then((res) => {
       setStackValue(res?.data);
+      setMaxWidthValue(res?.data[res?.data?.length-1].value);
     });
 
     UserAPI.User_Balance().then((res) => {
@@ -173,6 +175,12 @@ const NewWithdraw = () => {
       setColorName("danger");
       setIsLoading(false);
       return false;
+    }else if(withCoinValue > maxWidthValue){
+      setMessage(`Amount exceeded maximum withdrawal limit ${maxWidthValue}.`);
+      setErrorAlert(true);
+      setColorName("danger");
+      setIsLoading(false);
+      return false
     }
 
     if (withType === "BANK") {
@@ -521,9 +529,8 @@ const NewWithdraw = () => {
 
                       {withType === "PAYTM" ? (
                         <input
-                          type="number"
                           className="account-input"
-                          value={accountNumber?.toString().replace(".","")}
+                          value={accountNumber}
                           onChange={(e) => 
                             e.target.value.match(/^[0-9]*$/) &&
                             setAccountNumber(e.target.value)}

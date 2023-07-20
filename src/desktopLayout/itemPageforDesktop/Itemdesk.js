@@ -39,17 +39,21 @@ function Itemdesk({ SportId }) {
     <div>
       <div className="desk-top-view">
         <ul role="tablist" id="home-events" className="nav nav-tabs game_name">
-          <li className="nav-item" style={{padding:"9px 0px", marginBottom:"3px"}}>
+          <li
+            className="nav-item"
+            style={{ padding: "9px 0px", marginBottom: "3px" }}>
             <Link to={`/${tab}`} data-toggle="tab" className="nav-link">
-              {tab == "home" || tab === '' ? "Cricket" : tab}
+              {tab == "home" || tab === ""
+                ? "Cricket"
+                : tab === "Horseracing"
+                ? "Horse Racing"
+                : tab}
             </Link>
           </li>
         </ul>
-        <div style={{margin: "3px 0px"}}>
-      {
-        localStorage.getItem("token") === null? <BannerList/> : ""
-      }
-      </div>
+        <div style={{ margin: "3px 0px" }}>
+          {localStorage.getItem("token") === null ? <BannerList /> : ""}
+        </div>
         <div className="tab-content">
           <div className="tab-pane active">
             <div className="coupon-card coupon-card-first">
@@ -57,7 +61,14 @@ function Itemdesk({ SportId }) {
                 <table className="table item-table coupon-table">
                   <thead>
                     <tr>
-                      <th style={{ width: "63%", fontSize:"14px", fontWeight:"900" }}>Game</th>
+                      <th
+                        style={{
+                          width: "63%",
+                          fontSize: "14px",
+                          fontWeight: "900",
+                        }}>
+                        Game
+                      </th>
                       <th colSpan="2">1</th>
                       <th colSpan="2">X</th>
                       <th colSpan="2">2</th>
@@ -100,7 +111,9 @@ function Itemdesk({ SportId }) {
                                     <img
                                       src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/front/img/icons/ic_fancy.png"
                                       alt=""
-                                      className={`fancy-icon ${item?.F?"":"d-none"}`}
+                                      className={`fancy-icon ${
+                                        item?.F ? "" : "d-none"
+                                      }`}
                                     />
                                   </span>
                                   <span className="game-icon">
@@ -172,6 +185,16 @@ function Itemdesk({ SportId }) {
                         })}
                     </tbody>
                   )}
+                  {
+                   ( gameName?.length === undefined || gameName?.length === 0 ) && <tbody class="">
+                    <tr class="dest_notFound">
+                      <td colspan="5">
+                        <p>No Real Data Found</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                  }
+                  
                 </table>
               </div>
             </div>
