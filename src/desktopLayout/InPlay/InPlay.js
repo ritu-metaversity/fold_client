@@ -233,7 +233,7 @@ const InPlay = () => {
 
                         <tbody
                           className={`${
-                            MatchListLength === 0 ? "" : "d-none"
+                            MatchListLength === 0 || MatchListLength === undefined ? "" : "d-none"
                           }`}>
                           <tr className="dest_notFound">
                             <td colSpan="5">

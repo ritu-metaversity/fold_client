@@ -7,7 +7,7 @@ import { UserAPI } from "../../apis/UserAPI";
 
 const RegisterPage = () => {
   const [password, setPassword] = useState(0);
-  const [mobileNumber, setMobileNumber] = useState(0);
+  const [mobileNumber, setMobileNumber] = useState();
   const [UserName, setUserName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState();
   const [errorMsg, setErrorMsg] = useState();
@@ -101,7 +101,8 @@ const RegisterPage = () => {
   };
 
   const handleMobileNumber = (e) => {
-    setMobileNumber(e.target.value);
+    if(e.target.value.match(/^[0-9]*$/) !== null){
+      setMobileNumber(e.target.value);}
     if (e.target.value === "") {
       setmobileNumberError("Mobile number must not be empty.");
     } else if (e.target.value?.length !== 10) {
@@ -236,7 +237,8 @@ useEffect(()=>{
             <div className="form-group mb-4">
               <input
                 name="Mobile Number"
-                type="Number"
+                type="text"
+                  value={mobileNumber}
                 placeholder="Mobile Number"
                 className="form-control form-cont"
                 aria-required="true"

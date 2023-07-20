@@ -583,9 +583,18 @@ const PaymanuallyDesk = (props) => {
                   )}
                   <input
                     value={""}
-                    onChange={(e) =>
-                      e.target.files.length && setFiles(e.target.files[0])
-                    }
+                    onChange={(e) =>{
+                      if (e.target.files?.length) {
+                        if (e.target.files[0]?.type.includes("image")) {
+                          setFiles(e.target.files[0]);
+                        } else {
+                          setColor("danger");
+                          setMessege("Only image files allowed.");
+                          setAlertBtnshow(true);
+                          setIsLoading(false);
+                        }
+                      }
+                    }}
                     hidden
                     accept="image/*"
                     type="file"
