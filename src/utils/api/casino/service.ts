@@ -15,4 +15,10 @@ export const casinoService = {
     };
     return await apiHandler(params);
   },
+  singleUserValue: async () => {
+    const params = {
+      resource: casinoResource.SINGLE_USER_VALUE,
+    };
+    return await apiHandler(params);
+  },
 };

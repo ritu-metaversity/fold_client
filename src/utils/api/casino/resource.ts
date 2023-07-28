@@ -9,4 +9,8 @@ export const casinoResource: { [x: string]: ApiResource } = {
     URL: "casino/casino-tables-by-types",
     METHOD: "POST",
   },
+  SINGLE_USER_VALUE: {
+    URL: "bet-modifier/single-user-value",
+    METHOD: "POST",
+  },
 };
