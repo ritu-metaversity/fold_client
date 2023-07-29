@@ -298,6 +298,21 @@ export const GameAPI = {
 
     return response.data;
   },
+  SINGLE_USER_VALUE: async function (cancel = false) {
+    const response = await api.request({
+      url: "bet-modifier/single-user-value",
+      method: "POST",
+      data:{
+        appUrl: window.location.hostname
+      },
+
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
 
 
 };
