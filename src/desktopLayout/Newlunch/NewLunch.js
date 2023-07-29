@@ -3,26 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { GameAPI } from "../../apis/gameAPI";
 import "./NewLunch.css"
 import { Modal } from "react-bootstrap";
+import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
 
 function NewLunch() {
-  // const [casinoList, setCasinoList] = useState("");
-  //   const [ActiveClass, setActiveClass] = useState(323334);
   const [casinoListId, setCasinoListId] = useState(323334);
   const [casinoData, setCasinoData] = useState([]);
-  //   const [casinoName, setCasinoName] = useState("Indian Casino");
   const [isLoading, setIsLoading] = useState(true);
   const [show, setShow] = useState(false);
   const [casinoId, setCasinoId] = useState();
   const [SportName, setSportName] = useState("");
-
-  // useEffect(() => {
-  //   GameAPI.CASINO_LIST_BY_TYPE({
-  //     id: casinoListId,
-  //   }).then((res) => {
-  //     setCasinoData(res);
-  //     setIsLoading(false);
-  //   });
-  // }, [casinoListId]);
+  const [Casinoshow, setCasinoShow] = useState(false);
 
 
   useEffect(() => {
@@ -41,9 +31,8 @@ function NewLunch() {
 
 const nav = useNavigate();
 const token = localStorage.getItem("token");
-const handleClose = () => setShow(false);
+const handleClose = () => setCasinoShow(false);
 const handleCasino = (id, gameName)=>{
-    // nav(`/casino/${id}`);
     setCasinoId(id)
     setSportName(gameName)
     if(localStorage.getItem("token") !== null){
@@ -51,6 +40,11 @@ const handleCasino = (id, gameName)=>{
     }else{
       nav("/login")
     }
+}
+
+const handleAgree=()=>{
+  setCasinoShow(true)
+  setShow(false)
 }
 
   return (
@@ -92,7 +86,21 @@ const handleCasino = (id, gameName)=>{
           </div>
         </div>
       </div>
-      <Modal show={show} size="xl" className="slot-modal" onHide={handleClose}>
+
+
+
+      <Modal centered show={show}   onHide={handleClose}>
+        <Modal.Body className="casino_modals_body">
+          <CasinoModals/>
+          <div className="agree_btn">
+            <button onClick={handleAgree}>Ok I Agree</button>
+            <button onClick={()=>setShow(false)}>No, I Don't Agree</button>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+
+      <Modal show={Casinoshow} size="xl" className="slot-modal" onHide={handleClose}>
       <Modal.Header className="mob_none" closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           {SportName}
@@ -105,6 +113,7 @@ const handleCasino = (id, gameName)=>{
         <i className="fa fa-spinner fa-spin"></i>
       </p>
       ) : (
+        <>
         <iframe
           src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
           className="mobile_if"
@@ -112,7 +121,7 @@ const handleCasino = (id, gameName)=>{
           title="mobile"
           allowFullScreen={true}
           onLoad={finishLoading} />
-      )}
+    
 
       <iframe
         src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
@@ -121,6 +130,8 @@ const handleCasino = (id, gameName)=>{
         title="desktop"
         onLoad={finishLoading}
       />
+      </>
+      )}
         </Modal.Body>
       </Modal>
     </div>

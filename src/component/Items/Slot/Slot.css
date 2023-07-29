@@ -111,64 +111,132 @@
     }
 }
 
-    .slot-modal .modal-content {
-        height: 99.4vh !important;
-        position: relative;
-    }
-    .slot-modal .modal-dialog {
-        margin: 3px;
-    }
-    .slot-modal .modal-body {
-        height: 98vh!important;
-        max-height: 100vh!important;
-        padding: 0;
-    }
-    button.close_btn {
-        position: absolute;
-        z-index: 222;
-        right: 0;
-        font-size: 18px;
-        padding: 5px 7px;
-        border: unset;
-        outline: unset;
-        top: 1px;
-        font-weight: 900;
-        background: #fff;
-        border-radius: 50%;
-    }
+.slot-modal .modal-content {
+    height: 99.4vh !important;
+    position: relative;
+}
 
-.desk_none{
+.slot-modal .modal-dialog {
+    margin: 3px;
+}
+
+.slot-modal .modal-body {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    padding: 0;
+    min-height: 100vh;
+}
+
+button.close_btn {
+    position: absolute;
+    z-index: 222;
+    right: 0;
+    font-size: 18px;
+    padding: 5px 7px;
+    border: unset;
+    outline: unset;
+    top: 1px;
+    font-weight: 900;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.desk_none {
     display: none;
 }
 
 
-@media screen and (min-width: 470px){
+@media screen and (min-width: 470px) {
     .modal-dialog.modal-xl {
         margin: auto;
     }
 }
 
 
-    @media screen and (max-width: 800px) {
-        .mob_none{
-            display: none;
-        }
-        .desk_none{
-            display: block;
-        }
-
+@media screen and (max-width: 800px) {
+    .mob_none {
+        display: none;
     }
 
-    .btn-close {
-        background: none;
-      }
-      
-      .btn-close:after {
-        content: "x";
-        position: relative;
-        left: -3px;
-        top: -3px;
-        font-size: 27px;
-        color: #fff;
-        opacity: 1;
-      }
+    .desk_none {
+        display: block;
+    }
+
+}
+
+.btn-close {
+    background: none;
+}
+
+.btn-close:after {
+    content: "x";
+    position: relative;
+    left: -3px;
+    top: -3px;
+    font-size: 27px;
+    color: #fff;
+    opacity: 1;
+}
+
+.casino_modals_body {
+    overflow: visible !important;
+}
+
+.main_casino_modals {
+    position: relative;
+}
+
+.casino_images_modals img {
+    position: absolute;
+    backdrop-filter: blur(1px);
+}
+
+.casino_message .please_note {
+    margin-top: 110px;
+    text-align: center;
+    color: #08c;
+    font-weight: 600;
+    font-size: 16px;
+
+}
+
+.casino_message .points {
+    text-align: center;
+    font-size: 26px;
+    margin: 18px 0px;
+
+}
+.casino_dis p{
+    text-align: center;
+    margin: 12px;
+}
+.casino_dis p span{
+    color: #08c;
+}
+.agree_btn{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.agree_btn button{
+    border: unset;
+    background-color: #0088cc;
+    padding: 8px 16px;
+    width: 48%;
+    color: #fff;
+}
+.agree_btn button:nth-child(2){
+    border: unset;
+    background-color: #2c3e50 !important;
+    padding: 8px 16px;
+    width: 48%;
+    color: #fff;
+}
+
+.casino_images_modals {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 13px;
+}

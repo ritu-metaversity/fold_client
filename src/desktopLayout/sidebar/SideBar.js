@@ -7,6 +7,7 @@ import Accordion from "react-bootstrap/Accordion";
 
 import axios from "axios";
 import { Modal } from "react-bootstrap";
+import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
 
 function SideBar() {
   const [visible, setVisible] = useState(true);
@@ -19,6 +20,7 @@ function SideBar() {
   const [closeAllSportData, setCloseAllSportData] = useState(true);
   const [casinoId, setCasinoId] = useState();
   const [show, setShow] = useState(false);
+  const [Casinoshow, setCasinoShow] = useState(false);
   
   const [SportName, setSportName] = useState("");
 
@@ -71,7 +73,7 @@ function SideBar() {
 
 
   const token = localStorage.getItem("token");
-  const handleClose = () => setShow(false);
+  const handleClose = () => setCasinoShow(false);
 
   const finishLoading = () => {
     setIsLoading(false);
@@ -88,6 +90,13 @@ function SideBar() {
     }
     e.preventDefault();
   };
+
+  const handleAgree=()=>{
+    setCasinoShow(true)
+    setShow(false)
+  }
+
+
 
   return (
     <div className="">
@@ -161,7 +170,19 @@ function SideBar() {
         })}
         </Accordion>
 
-        <Modal show={show} size="xl" className="slot-modal" onHide={handleClose}>
+
+        <Modal centered show={show}   onHide={handleClose}>
+        <Modal.Body className="casino_modals_body">
+          <CasinoModals/>
+          <div className="agree_btn">
+            <button onClick={handleAgree}>Ok I Agree</button>
+            <button onClick={()=>setShow(false)}>No, I Don't Agree</button>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+
+        <Modal show={Casinoshow} size="xl" className="slot-modal" onHide={handleClose}>
       <Modal.Header className="mob_none" closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           {SportName}
