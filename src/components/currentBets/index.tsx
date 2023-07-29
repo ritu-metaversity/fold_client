@@ -35,6 +35,7 @@ const CurrentBets = () => {
       noOfRecords: searchFilters.pageSize,
       index: searchFilters.index,
       sportType: searchFilters.category,
+      isDeleted: searchFilters.status === "deleted",
     };
     const { response } = await userServices.currentBets(payload);
     if (response?.data) {
@@ -60,6 +61,7 @@ const CurrentBets = () => {
     searchFilters.pageSize,
     searchFilters.index,
     searchFilters.category,
+    searchFilters.status,
   ]);
 
   return (
