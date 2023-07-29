@@ -19,21 +19,21 @@ const ExpForDesk = () => {
     setSpType(val);
   };
 
-  useEffect(() => {
-    UserAPI.Unsetteled_bet({
-      noOfRecords: 100,
-      index: 0,
-      sportType: spType,
-      betType: betExpValue,
-    }).then((res) => {
-      // setPageLength(res.data.totalPages);
-      setIsLoading(false);
-      setBetDetail(res?.data);
-      setCurrentPage(res.data.currentPage);
-      setDataList(res.data.dataList);
-    });
-    // eslint-disable-next-line
-  }, [betExpValue, spType]);
+  // useEffect(() => {
+  //   UserAPI.Unsetteled_bet({
+  //     noOfRecords: 100,
+  //     index: 0,
+  //     sportType: spType,
+  //     betType: betExpValue,
+  //   }).then((res) => {
+  //     // setPageLength(res.data.totalPages);
+  //     setIsLoading(false);
+  //     setBetDetail(res?.data);
+  //     setCurrentPage(res.data.currentPage);
+  //     setDataList(res.data.dataList);
+  //   });
+  //   // eslint-disable-next-line
+  // }, [betExpValue, spType]);
 
   return (
     <>
@@ -41,7 +41,7 @@ const ExpForDesk = () => {
         <div className="card">
           <ExpNav sporttype={sporttype} />
           {
-            spType === 1? <SportExp spType={spType}/> : <CasinoExp spType={spType}/>
+            spType === 1? <SportExp spType={spType} /> : <CasinoExp spType={spType} />
           }
           {/* <div className="card-body container-fluid container-fluid-5 exposre">
             {isLoading ? (

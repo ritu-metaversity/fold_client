@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { UserAPI } from '../../../../apis/UserAPI';
 
-const CasinoExp = ({spType}) => {
+const CasinoExp = ({spType, isDeleted: deleted}) => {
     const [DataList, setDataList] = useState("");
   const [ListLength, setListLength] = useState("");
   const [BetDetail, setBetDetail] = useState();
@@ -19,6 +19,7 @@ const CasinoExp = ({spType}) => {
       index: 0,
       sportType: spType,
       betType: betExpValue,
+      isDeleted:false
     }).then((res) => {
       // setPageLength(res.data.totalPages);
       setIsLoading(false);

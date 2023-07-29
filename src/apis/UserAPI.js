@@ -60,7 +60,7 @@ export const UserAPI = {
   // Unsetteled bet  Api
 
   Unsetteled_bet: async function (
-    { noOfRecords, index, sportType, betType },
+    { noOfRecords, index, sportType, betType, isDeleted },
     cancel = false
   ) {
     const response = await api.request({
@@ -71,6 +71,7 @@ export const UserAPI = {
         index: index,
         sportType: sportType,
         betType: betType,
+        isDeleted:isDeleted,
       },
       signal: cancel
         ? cancelApiObject[this.get.name].handleRequestCancellation().signal
