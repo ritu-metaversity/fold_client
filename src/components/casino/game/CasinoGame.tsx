@@ -101,7 +101,7 @@ const CasinoGame: FC<Props> = ({ handleClose, id, name }) => {
                   <Close />
                 </IconButton>
               </Box>
-              <Box
+              {/* <Box
                 left={26}
                 top={16}
                 width={50}
@@ -109,7 +109,7 @@ const CasinoGame: FC<Props> = ({ handleClose, id, name }) => {
                 height={44}
                 position="absolute"
                 bgcolor="#0f2327"
-              ></Box>
+              ></Box> */}
               {id && token && !wait && (
                 <iframe
                   src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
