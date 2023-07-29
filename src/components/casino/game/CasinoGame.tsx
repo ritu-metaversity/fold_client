@@ -1,5 +1,7 @@
 import {
   Box,
+  Dialog,
+  DialogContent,
   DialogTitle,
   IconButton,
   Modal,
@@ -12,6 +14,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../../App";
 import { Close } from "@mui/icons-material";
 import { colorHex } from "../../../utils/constants";
+import CustomizedDialogs from "../../common/Dailog";
+import { casinoService } from "../../../utils/api/casino/service";
+import CustomizedDialog2 from "../../common/Dailog2";
+import CasinoConfirmationModal from "./CasinoConfirmationModal";
 
 interface Props {
   id?: number;
@@ -21,6 +27,9 @@ interface Props {
 const CasinoGame: FC<Props> = ({ handleClose, id, name }) => {
   const matches = useMediaQuery("(max-width: 580px)");
   const [wait, setWait] = useState(false);
+  const [open, setOpen] = useState(true);
+  const [openCasino, setOpenCasino] = useState(false);
+
   // const { id } = useParams();
   const token = localStorage.getItem("token");
   const nav = useNavigate();
@@ -35,77 +44,87 @@ const CasinoGame: FC<Props> = ({ handleClose, id, name }) => {
 
   useEffect(() => {
     setWait(true);
+    setOpen(true);
     const timer = setTimeout(() => setWait(false), 5);
     return () => {
       clearTimeout(timer);
     };
   }, [id]);
 
+  const handleAgree = () => {
+    setOpen(false);
+    setOpenCasino(true);
+  };
+  const handleNotAgree = () => {
+    handleClose();
+    setOpen(false);
+  };
   return (
     // <HomeLayout>
-    <Modal
-      onClose={handleClose}
-      open={Boolean(id)}
-      sx={{ padding: { xs: 2, lg: 6 } }}
-    >
-      <Box mt={{ lg: 0 }} height="calc(100vh - 110px)">
-        <DialogTitle
-          display={{ xs: "none", md: "block" }}
-          color="primary.main"
-          position={"relative"}
-          bgcolor={"secondary.light"}
-        >
-          {name}
-          <IconButton
-            onClick={handleClose}
-            sx={{ position: "absolute", right: 16 }}
+    <>
+      <Modal
+        onClose={handleClose}
+        open={Boolean(openCasino && id)}
+        sx={{ padding: { xs: 2, lg: 6 } }}
+      >
+        <Box mt={{ lg: 0 }} height="calc(100vh - 110px)">
+          <DialogTitle
+            display={{ xs: "none", md: "block" }}
+            color="primary.main"
+            position={"relative"}
+            bgcolor={"secondary.light"}
           >
-            <Close />
-          </IconButton>
-        </DialogTitle>
-
-        {matches ? (
-          <>
-            <Box
-              right={16}
-              top={16}
-              width={100}
-              height={50}
-              position="absolute"
-              // zIndex={999999 + 1}
-              bgcolor="#0f2327"
+            {name}
+            <IconButton
+              onClick={handleClose}
+              sx={{ position: "absolute", right: 16 }}
             >
-              <IconButton
-                onClick={handleClose}
-                sx={{ ml: "auto", mr: 1, mt: -1, display: "block" }}
+              <Close />
+            </IconButton>
+          </DialogTitle>
+
+          {matches ? (
+            <>
+              <Box
+                right={16}
+                top={16}
+                width={100}
+                height={50}
+                position="absolute"
+                // zIndex={999999 + 1}
+                bgcolor="#0f2327"
               >
-                <Close />
-              </IconButton>
-            </Box>
-            <Box
-              left={26}
-              top={16}
-              width={50}
-              // zIndex={999999 + 1}
-              height={44}
-              position="absolute"
-              bgcolor="#0f2327"
-            ></Box>
-            {id && token && !wait && (
-              <iframe
-                src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
-                // height="calc(100vh - 100px)"
-                height={"100vh"}
-                className="mobile_if"
-                width="100%"
-                title="mobile"
-                allowFullScreen={true}
-              ></iframe>
-            )}
-          </>
-        ) : (
-          <>
-            {/* <Box
+                <IconButton
+                  onClick={handleClose}
+                  sx={{ ml: "auto", mr: 1, mt: -1, display: "block" }}
+                >
+                  <Close />
+                </IconButton>
+              </Box>
+              {/* <Box
+                left={26}
+                top={16}
+                width={50}
+                // zIndex={999999 + 1}
+                height={44}
+                position="absolute"
+                bgcolor="#0f2327"
+              ></Box> */}
+              {id && token && !wait && (
+                <iframe
+                  src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+                  // height="calc(100vh - 100px)"
+                  height={"100vh"}
+                  className="mobile_if"
+                  width="100%"
+                  title="mobile"
+                  allowFullScreen={true}
+                ></iframe>
+              )}
+            </>
+          ) : (
+            <>
+              {/* <Box
             right={5}
             top={95}
             width={340}
@@ -113,18 +132,38 @@ const CasinoGame: FC<Props> = ({ handleClose, id, name }) => {
             position="absolute"
             bgcolor="#0f2327"
           ></Box> */}
-            <iframe
-              src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
-              // height="calc(90vh - 10rem)"
-              // style={{ height: "2000px", marginTop: -80 }}
-              className="desktop_if"
-              width="100%"
-              title="desktop"
-            />
-          </>
-        )}
-      </Box>
-    </Modal>
+              <iframe
+                src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+                // height="calc(90vh - 10rem)"
+                // style={{ height: "2000px", marginTop: -80 }}
+                className="desktop_if"
+                width="100%"
+                title="desktop"
+              />
+            </>
+          )}
+        </Box>
+      </Modal>
+      {/* <CustomizedDialog2
+        title="Attention"
+        handleClose={() => setOpen(false)}
+        open={open}
+      >
+        {singleUserValue.message}
+      </CustomizedDialog2> */}
+      <Dialog
+        PaperProps={{ sx: { overflow: "visible" } }}
+        open={true}
+        fullWidth
+      >
+        <DialogContent>
+          <CasinoConfirmationModal
+            handleAgree={handleAgree}
+            handleNotAgree={handleNotAgree}
+          />
+        </DialogContent>
+      </Dialog>
+    </>
 
     // </HomeLayout>
   );

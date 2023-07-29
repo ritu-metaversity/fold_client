@@ -17,7 +17,11 @@
   overflow: hidden;
   z-index: 1000;
 }
-
+.upper_left_icon{
+  position: absolute;
+  top:-100px;
+  margin: 0 auto;
+}
 .desktop_if {
   width: 100%;
   height: calc(100vh - 8rem);
