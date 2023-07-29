@@ -399,7 +399,7 @@ function GameDetail({ getStackValue}) {
                               className="score-card"
                               title="scorecord"
                               allowFullScreen={true}></iframe>
-                          </div>
+                          </div>  
                         </div>
                       </div>
                     ) : (

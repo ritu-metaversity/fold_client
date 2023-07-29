@@ -115,11 +115,12 @@ const NewMobWithdraw = () => {
           setWithdrawReq(res.data);
           setDataLength(res?.data?.length);
         });
+        setMessage("Withdraw Request Submited Successfully");
         setShow(false);
         setErrorAlert(true);
         setIsLoading(false);
         setColorName("success");
-        setMessage(res?.message);
+        // setMessage(res?.message);
       })
       .catch((error) => {
         setErrorAlert(true);

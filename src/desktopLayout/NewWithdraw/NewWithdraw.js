@@ -137,7 +137,7 @@ const NewWithdraw = () => {
           setGetAccountData(res?.data);
           setDataLenth(res?.data?.length);
         });
-
+        setMessage("Withdraw Request Submited Successfully");
         setShow(false);
         setErrorAlert(true);
         setIsLoading(false);

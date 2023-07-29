@@ -212,7 +212,7 @@ const NavbarDesk = (props) => {
                       </span>
                       {droup && (
                         <ul className="d-block" style={{top: "65px"}}>
-                          {localStorage.getItem("userTypeInfo") == 1 || localStorage.getItem("UsertypeInfo") == 1 ? (
+                          {status === true && localStorage.getItem("UsertypeInfo") == 1 ? (
                             <>
                               <Link
                                 to="/deposit"
