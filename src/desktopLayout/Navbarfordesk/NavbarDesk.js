@@ -111,8 +111,10 @@ const NavbarDesk = (props) => {
   };
 
   const handleExpModal = () => setShowExpModals(false);
-  const handleExpShow = (e) => {
+  const [isDeleted, setIsDeleted] = useState(false)
+  const handleExpShow = (e, val) => {
     setShowExpModals(true);
+    setIsDeleted(val)
     e.preventDefault();
   };
 
@@ -168,7 +170,7 @@ const NavbarDesk = (props) => {
                           </span>
                         </b>
                       </div>
-                      <div onClick={(e) => handleExpShow(e)}>
+                      <div onClick={(e) => handleExpShow(e, false)}>
                         <p className="cPointer" onClick={() => setLgShow(true)}>
                           <u>
                             <span className="t-underline">Exposure:</span>{" "}
@@ -200,7 +202,7 @@ const NavbarDesk = (props) => {
                           </Modal.Title>
                         </Modal.Header>
                         <Modal.Body className="account-popup">
-                          <ExpForDesk />
+                          <ExpForDesk isDeleted={isDeleted} />
                         </Modal.Body>
                       </Modal>
                     </li>

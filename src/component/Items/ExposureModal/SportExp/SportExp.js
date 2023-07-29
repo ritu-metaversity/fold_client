@@ -19,8 +19,8 @@ const SportExp = ({spType}) => {
       index: 0,
       sportType: spType,
       betType: betExpValue,
+      isDeleted:false
     }).then((res) => {
-      // setPageLength(res.data.totalPages);
       setIsLoading(false);
       setBetDetail(res?.data);
       setCurrentPage(res.data.currentPage);

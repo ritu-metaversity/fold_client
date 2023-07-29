@@ -12,6 +12,7 @@ function UnSetteledBet() {
   const [deleteVal, setDeleteVal] = useState(1);
   const [currentPage, setCurrentPage] = useState();
   const [Active, setActive] = useState(1);
+  const [Deleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
     UserAPI.Unsetteled_bet({
@@ -19,6 +20,7 @@ function UnSetteledBet() {
       index: 0,
       sportType: 1,
       betType: parseInt(betValue),
+      isDeleted: Deleted,
     }).then((res) => {
       setPageLength(res.data.totalPages);
       setCurrentPage(res.data.currentPage);
@@ -26,7 +28,7 @@ function UnSetteledBet() {
       setDataList(res.data.dataList);
     });
     // eslint-disable-next-line
-  }, [betValue, betValue, recordValue]);
+  }, [betValue, betValue, recordValue, Deleted]);
 
   // const submit = () => {
   //   UserAPI.Unsetteled_bet({
@@ -40,6 +42,8 @@ function UnSetteledBet() {
   //     setDataList(res.data.dataList);
   //   });
   // };
+
+  // console.log(Deleted, "sdsfsd")
 
   const result = [];
   for (var i = 1; i < pageLength; i++) {
@@ -102,7 +106,7 @@ function UnSetteledBet() {
                   id="match_unmatched_delete"
                   role="radiogroup"
                   tabIndex="-1">
-                  <div className="custom-control custom-control-inline custom-radio">
+                  <div className="custom-control custom-control-inline custom-radio" onClick={()=>setIsDeleted(false)}>
                     <input
                       id="matched"
                       type="radio"
@@ -119,7 +123,7 @@ function UnSetteledBet() {
                       <span>Matched</span>
                     </label>
                   </div>
-                  <div className="custom-control custom-control-inline custom-radio">
+                  <div className="custom-control custom-control-inline custom-radio" onClick={()=>setIsDeleted(true)}>
                     <input
                       id="deleteed"
                       type="radio"
