@@ -190,8 +190,6 @@ function Login({ Errmessage, Statusmessage }) {
                   type="text"
                   placeholder="Username"
                   className="form-control"
-                  aria-required="true"
-                  aria-invalid="false"
                   onChange={(e) => setUser(e.target.value)}
                 />
 
@@ -207,8 +205,6 @@ function Login({ Errmessage, Statusmessage }) {
                   type="password"
                   placeholder="Password"
                   className="form-control"
-                  aria-required="true"
-                  aria-invalid="false"
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <span

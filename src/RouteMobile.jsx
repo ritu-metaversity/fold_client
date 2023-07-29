@@ -30,12 +30,14 @@ import SportData from "./component/Sports/SportData";
 import Slot from "./component/Items/Slot/Slot";
 import FooterForMob from "./component/FooterForMob/FooterForMob";
 import NewMobWithdraw from "./component/Items/NewMobWithdraw/NewMobWithdraw";
+import { UserAPI } from "./apis/UserAPI";
 
 const RouteMobile = () => {
   const { pathname } = useLocation();
   const [SportId, setSportId] = useState("");
   const [Errmessage, setErrMessege] = useState("");
   const [Statusmessage, setStatusmessage] = useState(false);
+  const [ItselfAllowed, setItselfAllowed] = useState()
 
   const nav = useNavigate();
 
@@ -94,6 +96,12 @@ const RouteMobile = () => {
   }, [pathname]);
 
 
+  useEffect(()=>{
+    UserAPI.Self_By_App_Url().then((res)=>{
+      setItselfAllowed(res?.data?.selfAllowed)
+    })
+  }, [ItselfAllowed])
+
   useEffect(() => {
     if (
       pathname !== "/m/setting/changepassword" &&
@@ -140,7 +148,7 @@ const RouteMobile = () => {
             <Route path="/" element={<DefaultHomePage />} />
             <Route path="/in-play" element={<DefaultHomePage />} />
             <Route path="/sports" element={<DefaultPage />} />
-            {localStorage.getItem("UsertypeInfo") == 1 ? (
+            {localStorage.getItem("UsertypeInfo") == 1 && ItselfAllowed === true ? (
               <>
                 <Route path="/m/reports/deposit" element={<Deposit />} />
                 <Route path="/m/reports/withdraw" element={<NewMobWithdraw/>} />
