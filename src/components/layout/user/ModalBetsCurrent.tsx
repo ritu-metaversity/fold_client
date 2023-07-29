@@ -24,6 +24,7 @@ const CurrentBetsForModal = () => {
       sportType: searchFilters.category,
       noOfRecords: 1000,
       index: 0,
+      isDeleted: false,
     };
     const { response } = await userServices.currentBets(payload);
     if (response?.data) {
