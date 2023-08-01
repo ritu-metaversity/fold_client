@@ -300,3 +300,7 @@ ul.nav.nav-tabs.mt-1.dis-none {
     height: 100% !important;
     max-height: 100% !important;
 }
+
+span.team-name {
+    font-size: 14px;
+}

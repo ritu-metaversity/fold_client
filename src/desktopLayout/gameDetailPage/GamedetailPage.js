@@ -892,7 +892,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                       className="float-left country-name box-6"
                                       style={{ borderBottom: "0px" }}>
                                       <p className="m-b-0">
-                                        <a href="/">{e.nation}</a>
+                                        <p style={{fontSize: "13px"}}>{e.nation}</p>
                                       </p>
                                       <span
                                         onClick={() =>
@@ -1030,7 +1030,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                       className="float-left country-name box-6"
                                       style={{ borderBottom: "0px" }}>
                                       <p className="m-b-0">
-                                        <a href="/">{e.nation}</a>
+                                        <p style={{fontSize: "13px",}}>{e.nation}</p>
                                       </p>
                                       <span
                                         onClick={() =>
@@ -1247,7 +1247,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                             className="float-left country-name box-6"
                                             style={{ borderBottom: "0px" }}>
                                             <p className="m-b-0">
-                                              <span>{item?.nation}</span>
+                                              <span style={{fontSize: "13px"}}>{item?.nation}</span>
                                             </p>
                                             <p
                                               className="m-b-0"
@@ -1399,7 +1399,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                             className="float-left country-name box-6"
                                             style={{ borderBottom: "0px" }}>
                                             <p className="m-b-0">
-                                              <span>{item?.nation}</span>
+                                              <span style={{fontSize: "13px"}}>{item?.nation}</span>
                                             </p>
                                             <p
                                               className="m-b-0"

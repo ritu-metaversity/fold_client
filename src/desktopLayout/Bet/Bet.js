@@ -134,7 +134,7 @@ const Bet = ({
                             <i className="fa fa-times"></i>
                           </button>
                         </td>
-                        <td>{spanValueName}</td>
+                        <td style={{whiteSpace:"initial"}}>{spanValueName}</td>
                         <td className="bet-odds">
                           <div className="form-group">
                             <input
@@ -169,7 +169,8 @@ const Bet = ({
                             <input
                               maxlength="10"
                               required="required"
-                              type="text"
+                              type="number"
+                              onChange={(e)=>setUpdated(e.target.value)}
                               value={updated}
                             />
                           </div>

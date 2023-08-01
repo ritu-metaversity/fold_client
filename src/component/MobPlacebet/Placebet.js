@@ -97,7 +97,7 @@ function Placebet({
                     <span className="fa fa-minus"></span>
                   </button>{" "}
                   <input
-                    type="text"
+                    type="number"
                     placeholder="15"
                     className="stakeinput"
                     onChange={(e) => setgetBetValu(e.target.value)}

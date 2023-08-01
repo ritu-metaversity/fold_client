@@ -410,7 +410,7 @@ function GameDetail({ getStackValue}) {
                         <div className="scorecard scorecard-mobile">
                           <div className="score-inner">
                             <iframe
-                              src={`http://15.207.182.173:3050/event/${id}?theme=crazy-diamond `}
+                              src={`http://15.207.182.173:3050/event/${id}?theme=crazy-diamond`}
                               width="100%"
                               className="score-card"
                               title="scorecord"
