@@ -64,6 +64,21 @@ function AaccountStatement() {
     });
     // eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    UserAPI.Account_Statement({
+      noOfRecords: IndexValue,
+      index: 0,
+      fromDate: timeBefore,
+      toDate: time,
+      type: 1,
+    }).then((res) => {
+      setIsLoading(false);
+      setPageLength(res.totalPages);
+      setDataList(res.dataList);
+      setDataListLength(res.dataList.length);
+    });
+    // eslint-disable-next-line
+  }, [IndexValue]);
 
   const handleCloseModal = () => setShowModals(false);
   const handleShow = (e, remark, marketId) => {

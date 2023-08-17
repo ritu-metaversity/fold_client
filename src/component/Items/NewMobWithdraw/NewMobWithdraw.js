@@ -24,17 +24,18 @@ const NewMobWithdraw = () => {
   const [bankID, setBankId] = useState();
   const [stackValue, setStackValue] = useState();
   const [openForm, setOpenForm] = useState(false);
-  const [withdrawType, setWithdrawType] = useState();
+  const [withdrawType, setWithdrawType] = useState("Normal");
   const [getAccountData, setGetAccountData] = useState();
   const [userBalance, setuserBalance] = useState();
   const [dataLenth, setDataLenth] = useState();
-  const [saveModalsShow, setSaveModalsShow] = useState();
+  const [saveDetailMessage, setSaveDetailMessage] = useState(false);
   const [showWithdraw, setshowWithdraw] = useState(false);
   const [withdrawReq, setWithdrawReq] = useState();
   const [dataLength, setDataLength] = useState();
   const [activeBank, setActiveBank] = useState();
   const [maxWidthValue, setMaxWidthValue] = useState(0);
-
+  const [bankSaveMessage, setBankSaveMessage] = useState("");
+  const [symbolsArrUpiId] = useState(["."]);
 
   const handleClose = () => {
     setShow(false);
@@ -57,7 +58,7 @@ const NewMobWithdraw = () => {
     setAccountNumber("");
     setIFSC("");
     setBankName("");
-    setActiveBank(id1)
+    setActiveBank(id1);
   };
 
   // const handleCancel = () => {
@@ -72,7 +73,7 @@ const NewMobWithdraw = () => {
 
     UserAPI.WITHDRAW_STACK_REQUEST().then((res) => {
       setStackValue(res?.data);
-      setMaxWidthValue(res?.data[res?.data?.length-1].value);
+      setMaxWidthValue(res?.data[res?.data?.length - 1].value);
     });
 
     UserAPI.User_Balance().then((res) => {
@@ -92,9 +93,9 @@ const NewMobWithdraw = () => {
   };
 
   const handleSaveDetail = () => {
-    UserAPI.GET_BANK_DETAIL().then((res)=>{
-      setWithdrawData(res?.data)
-    })
+    UserAPI.GET_BANK_DETAIL().then((res) => {
+      setWithdrawData(res?.data);
+    });
     setAccountHolderName("");
     setAccountNumber("");
     setIFSC("");
@@ -115,12 +116,17 @@ const NewMobWithdraw = () => {
           setWithdrawReq(res.data);
           setDataLength(res?.data?.length);
         });
-        setMessage("Withdraw Request Submited Successfully");
         setShow(false);
+        setSaveDetailMessage(true);
         setErrorAlert(true);
         setIsLoading(false);
         setColorName("success");
-        // setMessage(res?.message);
+        setAccountHolderName("");
+        setAccountNumber("");
+        setIFSC("");
+        setBankName("");
+        // setBankSaveMessage(res?.message);
+        setMessage(`Withdraw Request Submited Successfully and ${res?.message}`);
       })
       .catch((error) => {
         setErrorAlert(true);
@@ -185,12 +191,12 @@ const NewMobWithdraw = () => {
       setColorName("danger");
       setIsLoading(false);
       return false;
-    }else if(withCoinValue > maxWidthValue){
+    } else if (withCoinValue > maxWidthValue) {
       setMessage(`Amount exceeded maximum withdrawal limit ${maxWidthValue}.`);
       setErrorAlert(true);
       setColorName("danger");
       setIsLoading(false);
-      return false
+      return false;
     }
 
     if (withType === "BANK") {
@@ -258,7 +264,7 @@ const NewMobWithdraw = () => {
         setColorName("danger");
         setIsLoading(false);
         return false;
-      }else if(accountNumber.length !== 10){
+      } else if (accountNumber.length !== 10) {
         setMessage("Enter Valid Mobile number");
         setErrorAlert(true);
         setColorName("danger");
@@ -319,15 +325,19 @@ const NewMobWithdraw = () => {
           UserAPI.Withdraw_Request().then((res) => {
             setWithdrawReq(res.data);
             setDataLength(res.data.length);
+            
           });
           if (res?.data.bankExist === false) {
-           
-          setShow(true);
+            setShow(true);
           } else {
-          setMessage(res?.message);
-          setErrorAlert(true);
-          setColorName("success");
-          setIsLoading(false);
+            setMessage(res?.message);
+            setErrorAlert(true);
+            setColorName("success");
+            setIsLoading(false);
+            setAccountHolderName("");
+            setAccountNumber("");
+            setIFSC("");
+            setBankName("");
           }
           setIsLoading(false);
         })
@@ -361,11 +371,16 @@ const NewMobWithdraw = () => {
     setAccountType(accType);
   };
 
-
   return (
     <>
       {errorAlert ? (
         <AlertBtn color={colorName} popupClose={popupClose} val={message} />
+      ) : (
+        ""
+      )}
+      <br/>
+       {saveDetailMessage ? (
+        <AlertBtn className="savemessage" color={colorName} popupClose={popupClose} val={bankSaveMessage} />
       ) : (
         ""
       )}
@@ -385,6 +400,7 @@ const NewMobWithdraw = () => {
                     <input
                       placeholder="0"
                       value={withCoinValue}
+                      onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
                       onChange={handleStaticAmountInput}
                       type="number"
                     />
@@ -410,7 +426,6 @@ const NewMobWithdraw = () => {
                   className="withdrow_type"
                   style={{ marginBottom: "12px", width: "100%" }}>
                   <select onChange={(e) => setWithdrawType(e.target.value)}>
-                    <option selected>Select Withdraw Type</option>
                     <option value="Normal">Normal</option>
                     <option value="Instant">Instant</option>
                   </select>
@@ -423,15 +438,16 @@ const NewMobWithdraw = () => {
                           return (
                             <>
                               <Col
-                                className={`withdraw_image ${activeBank === id1?"activeBank":""}`}
+                                className={`withdraw_image ${
+                                  activeBank === id1 ? "activeBank" : ""
+                                }`}
                                 onClick={() =>
                                   handlePaymentDetails(
                                     res?.withdrawType,
                                     res?.id,
                                     id1
                                   )
-                                }
-                                >
+                                }>
                                 <div className="css-1502y4u">
                                   <img
                                     src={res?.image}
@@ -461,10 +477,12 @@ const NewMobWithdraw = () => {
                       <br />
                       <input
                         className="account-input"
-                        value={accountNumber?.toString().replace(".","")}
-                        onChange={(e) => 
+                        value={accountNumber?.toString().replace(".", "")}
+                        onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
+                        onChange={(e) =>
                           e.target.value.match(/^[0-9]*$/) &&
-                          setAccountNumber(Number(e.target.value))}
+                          setAccountNumber(Number(e.target.value))
+                        }
                       />
                     </div>
                     <div className="mx-input-wrapper account-field">
@@ -474,11 +492,10 @@ const NewMobWithdraw = () => {
                         type="text"
                         className="account-input"
                         value={accountHolderName.trimStart()}
+                        onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
                         onChange={(e) =>
                           e.target.value.match(/^[a-zA-Z ]*$/) &&
-                          setAccountHolderName(
-                            e.target.value
-                          )
+                          setAccountHolderName(e.target.value)
                         }
                       />
                     </div>
@@ -489,11 +506,10 @@ const NewMobWithdraw = () => {
                         type="type"
                         className="account-input"
                         value={bankName.trimStart()}
+                        onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
                         onChange={(e) =>
                           e.target.value.match(/^[a-zA-Z ]*$/) &&
-                          setBankName(
-                            e.target.value
-                          )
+                          setBankName(e.target.value)
                         }
                       />
                     </div>
@@ -503,10 +519,9 @@ const NewMobWithdraw = () => {
                       <input
                         type="type"
                         className="account-input"
-                        value={ifsc}
-                        onChange={(e) =>
-                          setIFSC(e.target.value)
-                        }
+                        value={ifsc.trim()}
+                        onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
+                        onChange={(e) => setIFSC(e.target.value)}
                       />
                     </div>
                     <div className="mx-input-wrapper account-field">
@@ -515,7 +530,8 @@ const NewMobWithdraw = () => {
                       <select
                         name="reportType"
                         className="custom-select select-type"
-                        onChange={(e) => setAccountType(e.target.value)}>
+                        onChange={(e) => setAccountType(e.target.value)}
+                        value={AccountType}>
                         <option value="Saving">Saving</option>
                         <option value="Current">Current</option>
                       </select>
@@ -541,22 +557,22 @@ const NewMobWithdraw = () => {
                           type="text"
                           className="account-input"
                           value={accountNumber}
-                          onChange={(e) => 
+                          onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
+                          onChange={(e) =>
                             e.target.value.match(/^[0-9]*$/) &&
-                            setAccountNumber(e.target.value)}
+                            setAccountNumber(e.target.value)
+                          }
                         />
                       ) : (
                         <input
                           type="text"
                           className="account-input"
                           value={accountNumber}
+                          onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
                           onChange={(e) =>
+                            e.target.value.match(/^[a-zA-Z0-9@_]*$/)&&
                             setAccountNumber(
-                              e.target.value.replace(
-                                /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/,
-                                ""
-                              )
-                            )
+                              e.target.value)
                           }
                         />
                       )}
@@ -570,11 +586,10 @@ const NewMobWithdraw = () => {
                         type="text"
                         className="account-input"
                         value={accountHolderName.trimStart()}
+                        onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
                         onChange={(e) =>
                           e.target.value.match(/^[a-zA-Z ]*$/) &&
-                          setAccountHolderName(
-                            e.target.value
-                          )
+                          setAccountHolderName(e.target.value)
                         }
                       />
                     </div>
@@ -728,7 +743,10 @@ const NewMobWithdraw = () => {
                       <i className="fa fa-spinner fa-spin"></i>
                     </p>
                   )}
-                  <button onClick={handleClick} className={openForm?"":"disable_btn"} disabled={!openForm}>
+                  <button
+                    onClick={handleClick}
+                    className={openForm ? "" : "disable_btn"}
+                    disabled={!openForm}>
                     Withdraw Coins
                   </button>
                 </div>
@@ -740,8 +758,7 @@ const NewMobWithdraw = () => {
                         Previous Withdraw
                       </p>
                     </div>
-                    <div
-                      className="table-responsive withdrow-table">
+                    <div className="table-responsive withdrow-table">
                       <table
                         role="table"
                         aria-busy="false"

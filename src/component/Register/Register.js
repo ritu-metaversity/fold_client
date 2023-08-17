@@ -86,6 +86,11 @@ const Register = () => {
     } else {
       setPasswordError("");
     }
+    if (passData !== confirmPassword) {
+      setConfirmPasswordError("Password must be equal.");
+    } else {
+      setConfirmPasswordError("");
+    }
   };
 
   const handleConfirmPasswordsValidation = (e) => {
@@ -244,6 +249,7 @@ const Register = () => {
                   aria-invalid="false"
                   onChange={handleUserName}
                   onFocus={handleUserName}
+                  autoComplete="off"
                 />
                 <p
                   style={{ marginTop: "12px", fontSize: "12px" }}
@@ -260,6 +266,7 @@ const Register = () => {
                   className="form-control"
                   onChange={handleMobileNumber}
                   onFocus={handleMobileNumber}
+                  autoComplete="off"
                 />
                 <p
                   style={{ marginTop: "12px", fontSize: "12px" }}
@@ -277,6 +284,7 @@ const Register = () => {
                   aria-invalid="false"
                   onChange={handlePassWordsValidation}
                   onFocus={handlePassWordsValidation}
+                  autoComplete="off"
                 />
 
                 <p
@@ -295,6 +303,7 @@ const Register = () => {
                   aria-invalid="false"
                   onChange={handleConfirmPasswordsValidation}
                   onFocus={handleConfirmPasswordsValidation}
+                  autoComplete="off"
                   // onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <p

@@ -20,7 +20,6 @@ import Casino from "./component/Items/Casino/Casino";
 import AaccountStatement from "./component/Items/AaccountStatement/AaccountStatement";
 import BetHistory from "./component/Items/BetHistory/BetHistory";
 import ProfitLoss from "./component/Items/ProfitLoss/ProfitLoss";
-import UnSetteledBet from "./component/Items/UnSetteledBet/UnSetteledBet";
 import ChangeBtnValue from "./component/Items/ChangeBtnValue/ChangeBtnValue";
 import ChangePassword from "./component/Items/ChangePassword/ChangePassword";
 import SignOut from "./component/singnout/SignOut";
@@ -31,6 +30,7 @@ import Slot from "./component/Items/Slot/Slot";
 import FooterForMob from "./component/FooterForMob/FooterForMob";
 import NewMobWithdraw from "./component/Items/NewMobWithdraw/NewMobWithdraw";
 import { UserAPI } from "./apis/UserAPI";
+import UnSetteledBetHome from "./component/Items/UnSetteledBet/UnSetteledBetHome";
 
 const RouteMobile = () => {
   const { pathname } = useLocation();
@@ -158,7 +158,7 @@ const RouteMobile = () => {
             <Route path="/m/reports/accountstatement" element={<AaccountStatement />}/>
             <Route path="/m/reports/profitloss" element={<ProfitLoss />} />
             <Route path="/m/reports/bethistory" element={<BetHistory />} />
-            <Route path="/m/reports/unsetteledbet" element={<UnSetteledBet />}/>
+            <Route path="/m/reports/unsetteledbet" element={<UnSetteledBetHome />}/>
             <Route path="/m/setting/changebtnvalue" element={<ChangeBtnValue />}/>
             <Route path="/m/setting/changepassword" element={ <ChangePassword message={message} statusMsg={statusMsg} />}/>
             <Route path="/SignOut" element={<SignOut statusMsgForLogout={statusMsgForLogout} />}/>

@@ -10,7 +10,7 @@ import { UserAPI } from "../../apis/UserAPI";
 const PaymanuallyDesk = (props) => {
   const [payMethods, setPayMethods] = useState();
   const [UpiDetail, setUpiDetail] = useState();
-  const [Bitvalue, setBitValue] = useState("0");
+  const [Bitvalue, setBitValue] = useState();
   const [allDatataa, setAllDatataa] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
   const [showModals, setShowModals] = useState(false);
@@ -67,9 +67,9 @@ const PaymanuallyDesk = (props) => {
     setIsLoading(true);
     setAlertBtnshow(false);
 
-    if (Bitvalue == 0 || Bitvalue === "0" || Bitvalue === NaN) {
+    if (Bitvalue == 0 || Bitvalue === "0" || Bitvalue === NaN || Bitvalue === undefined) {
       setColor("danger");
-      setMessege("Ammout is Greate then 99");
+      setMessege("Amount is Greate then 99");
       setAlertBtnshow(true);
       setIsLoading(false);
     } else if (Bitvalue <= 99) {
@@ -86,7 +86,7 @@ const PaymanuallyDesk = (props) => {
     }
 
     const data = new FormData();
-    data.append("amount", Bitvalue.toString());
+    data.append("amount", Bitvalue);
     data.append("image", files || "");
     if (Bitvalue != 0 && Bitvalue != "0" && Bitvalue != NaN && Bitvalue > 99) {
       UserAPI.Self_Deposit_App({ data })

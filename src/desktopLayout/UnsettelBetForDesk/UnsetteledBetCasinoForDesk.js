@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { UserAPI } from "../../../apis/UserAPI";
-import "../AaccountStatement/AaccountStatement.css";
+import React, { useEffect, useState } from 'react'
+import { UserAPI } from '../../apis/UserAPI';
 
-function UnSetteledBet() {
-  const [recordValue, setRecordValue] = useState(100);
+const UnsetteledBetCasinoForDesk = () => {
+
+    const [recordValue, setRecordValue] = useState(100);
   const [DataList, setDataList] = useState("");
   const [ListLength, setListLength] = useState("");
   const [pageLength, setPageLength] = useState(0);
@@ -14,11 +14,12 @@ function UnSetteledBet() {
   const [Active, setActive] = useState(1);
   const [Deleted, setIsDeleted] = useState(false);
 
+
   useEffect(() => {
     UserAPI.Unsetteled_bet({
       noOfRecords: parseInt(recordValue),
       index: 0,
-      sportType: 1,
+      sportType: 2,
       betType: parseInt(betValue),
       isDeleted: Deleted,
     }).then((res) => {
@@ -30,20 +31,6 @@ function UnSetteledBet() {
     // eslint-disable-next-line
   }, [betValue, betValue, recordValue, Deleted]);
 
-  // const submit = () => {
-  //   UserAPI.Unsetteled_bet({
-  //     noOfRecords: parseInt(recordValue),
-  //     index: 0,
-  //     sportType: 1,
-  //     betType: parseInt(betValue),
-  //   }).then((res) => {
-  //     setPageLength(res.data.totalPages);
-  //     setListLength(res.data.dataList.length);
-  //     setDataList(res.data.dataList);
-  //   });
-  // };
-
-  // console.log(Deleted, "sdsfsd")
 
   const result = [];
   for (var i = 1; i < pageLength; i++) {
@@ -62,8 +49,6 @@ function UnSetteledBet() {
      setActive(pagination+1 );
   }
   };
-
-
   const decerement = () => {
     if(pagination !== 0){
       setPagination(pagination - 1)
@@ -84,57 +69,58 @@ function UnSetteledBet() {
       UserAPI.Unsetteled_bet({
         noOfRecords: parseInt(recordValue),
         index: pagination,
-        sportType: 1,
+        sportType: 2,
         betType: parseInt(betValue),
       }).then((res) => {
         setDataList(res.data.dataList);
       });
     }
   }, [pagination]);
-
+    
   return (
-    <div>
-      <div className="report-container wrapper">
-        <div className="card">
-          <div className="card-header" style={{padding:"4px 5px"}}>
-            <h4 className="mb-0 heading-ch">Un-Setteled Bet</h4>
-          </div>
-          <div className="card-body container-fluid container-fluid-5 unsetteledbet max_height">
-            <div className="row row5 ">
+    <>
+    <div className="main">
+        <div className="container-fluid container-fluid-5">
+          <div className="itemHome">
+
+            
+              <div className="card">
+                <div className="card-body container-fluid container-fluid-5 unsetteledbet">
+                <div className="row row5 ">
               <div className="col-6">
                 <div
-                  id="match_unmatched_delete"
+                  id="match_casino_delete"
                   role="radiogroup"
                   tabIndex="-1">
                   <div className="custom-control custom-control-inline custom-radio" onClick={()=>setIsDeleted(false)}>
                     <input
-                      id="matched"
+                      id="casinomatched"
                       type="radio"
                       defaultChecked
-                      name="match_unmatched_delete"
+                      name="match_casino_delete"
                       autoComplete="off"
                       value="1"
                       className="custom-control-input"
                       onChange={(e) => setDeleteVal(e.target.value)}
                     />{" "}
                     <label
-                      htmlFor="matched"
+                      htmlFor="casinomatched"
                       className="custom-control-label control-label1">
                       <span>Matched</span>
                     </label>
                   </div>
                   <div className="custom-control custom-control-inline custom-radio" onClick={()=>setIsDeleted(true)}>
                     <input
-                      id="deleteed"
+                      id="casinodeleteed"
                       type="radio"
-                      name="match_unmatched_delete"
+                      name="match_casino_delete"
                       autoComplete="off"
                       value="2"
                       className="custom-control-input"
                       onChange={(e) => setDeleteVal(e.target.value)}
                     />
                     <label
-                      htmlFor="deleteed"
+                      htmlFor="casinodeleteed"
                       className="custom-control-label control-label1 deletedBtn">
                       <span>Deleted</span>
                     </label>
@@ -144,7 +130,7 @@ function UnSetteledBet() {
             </div>
             <div className={`${deleteVal === "2" ? "d-none" : ""}`}>
               <div className="row row5 mt-2 match_unmatched">
-                <div className="col-6">
+                <div className="col-3">
                   <div
                     className="form-group mb-0"
                     style={{ marginTop: "-6px" }}>
@@ -158,9 +144,9 @@ function UnSetteledBet() {
                             tabIndex="-1">
                             <div className="custom-control custom-control-inline custom-radio">
                               <input
-                                id="all"
+                                id="all_casino"
                                 type="radio"
-                                name="match"
+                                name="all_match"
                                 autoComplete="off"
                                 className="custom-control-input"
                                 onChange={(e) => setBetValue(e.target.value)}
@@ -168,32 +154,32 @@ function UnSetteledBet() {
                                 defaultChecked
                               />{" "}
                               <label
-                                htmlFor="all"
+                                htmlFor="all_casino"
                                 className="custom-control-label control-label1">
                                 <span>All</span>
                               </label>
                             </div>
                             <div className="custom-control custom-control-inline custom-radio">
                               <input
-                                id="Back"
+                                id="casino_Back"
                                 type="radio"
-                                name="match"
+                                name="all_match"
                                 autoComplete="off"
                                 className="custom-control-input"
                                 onChange={(e) => setBetValue(e.target.value)}
                                 value="2"
                               />
                               <label
-                                htmlFor="Back"
+                                htmlFor="casino_Back"
                                 className="custom-control-label control-label1">
                                 <span>Back</span>
                               </label>
                             </div>
                             <div className="custom-control custom-control-inline custom-radio">
                               <input
-                                id="Lay"
+                                id="casino_Lay"
                                 type="radio"
-                                name="match"
+                                name="all_match"
                                 autoComplete="off"
                                 className="custom-control-input"
                                 onChange={(e) => setBetValue(e.target.value)}
@@ -201,7 +187,7 @@ function UnSetteledBet() {
                               />
                               {/* <input type="radio"/> */}
                               <label
-                                htmlFor="Lay"
+                                htmlFor="casino_Lay"
                                 className="custom-control-label control-label1">
                                 <span>Lay</span>
                               </label>
@@ -212,12 +198,10 @@ function UnSetteledBet() {
                     </div>
                   </div>
                 </div>
-                {/* onChange={(e) => setRecordValue(e.target.value)} */}
-              </div>
-              <div className="" style={{marginLeft: "8px"}}>
+                <div className='col-6'>
                 <div
                   id="account-statement_length"
-                  className="dataTables_length cpoint d-flex align-items-center">
+                  className="dataTables_length cpoint d-flex align-items-center mt-7">
                   <label style={{ fontSize: "14px" }} className="showEntries">Show</label>
                   <select 
                     name="account-statement_length"
@@ -242,7 +226,13 @@ function UnSetteledBet() {
                   <i className="fa fa-angle-down arrowBtn"></i>
                   <label className="entries">entries</label>
                 </div>
+                </div>
+                
+                {/* onChange={(e) => setRecordValue(e.target.value)} */}
               </div>
+              {/* <div className="" style={{marginLeft: "8px"}}>
+                
+              </div> */}
               <div className="row row5 mt-2 ">
                 <div className="col-12">
                   <div className="table-responsive unsetTable">
@@ -253,14 +243,14 @@ function UnSetteledBet() {
                       className="table b-table table-bordered"
                       id="__BVID__96">
                       <thead className="">
-                        <tr role="row" className="">
-                          <th
+                        <tr role="row" className="" style={{background: "#2c3d50"}}>
+                          {/* <th
                             role="columnheader"
                             scope="col"
                             aria-colindex="1"
                             className="text-left bg-color">
                             Sport Name
-                          </th>
+                          </th> */}
                           <th
                             role="columnheader"
                             scope="col"
@@ -268,13 +258,13 @@ function UnSetteledBet() {
                             className="text-left bg-color">
                             Event Name
                           </th>
-                          <th
+                          {/* <th
                             role="columnheader"
                             scope="col"
                             aria-colindex="3"
                             className="text-left bg-color">
                             Market Name
-                          </th>
+                          </th> */}
 
                           <th
                             role="columnheader"
@@ -302,7 +292,7 @@ function UnSetteledBet() {
                             role="columnheader"
                             scope="col"
                             aria-colindex="9"
-                            className="text- bg-color text-left">
+                            className="text- bg-color text-center">
                             Place Date
                           </th>
                             {/* <th
@@ -328,90 +318,49 @@ function UnSetteledBet() {
                                     ? "lay"
                                     : ""
                                 }`}>
-                                <td
+                                {/* <td
                                   role="columnheader"
                                   aria-colindex="1"
-                                  className={`text-left ${
-                                    item.isback === true
-                                      ? "back"
-                                      : item.isback === false
-                                      ? "lay"
-                                      : ""
-                                  }`}>
+                                  className="text-left"
+                                  >
                                   {item.sportName}
-                                </td>
+                                </td> */}
                                 <td
                                   role="columnheader"
                                   aria-colindex="2"
-                                  className={`text-left ${
-                                    item.isback === true
-                                      ? "back"
-                                      : item.isback === false
-                                      ? "lay"
-                                      : ""
-                                  }`}>
+                                  className="text-left">
                                   {item.eventName}
                                 </td>
-                                <td
+                                {/* <td
                                   role="columnheader"
                                   aria-colindex="3"
-                                  className={`text-left ${
-                                    item.isback === true
-                                      ? "back"
-                                      : item.isback === false
-                                      ? "lay"
-                                      : ""
-                                  }`}>
+                                  className="text-left">
                                   {item.marketname}
-                                </td>
+                                </td> */}
 
                                 <td
                                   role="columnheader"
                                   aria-colindex="5"
-                                  className={`text-left ${
-                                    item.isback === true
-                                      ? "back"
-                                      : item.isback === false
-                                      ? "lay"
-                                      : ""
-                                  }`}>
+                                  className="text-left">
                                   {item.nation}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="6"
-                                  className={`text-left ${
-                                    item.isback === true
-                                      ? "back"
-                                      : item.isback === false
-                                      ? "lay"
-                                      : ""
-                                  }`}>
+                                  className="text-right">
                                   {item.rate}
                                 </td>
 
                                 <td
                                   role="columnheader"
                                   aria-colindex="8"
-                                  className={`text-left ${
-                                    item.isback === true
-                                      ? "back"
-                                      : item.isback === false
-                                      ? "lay"
-                                      : ""
-                                  }`}>
+                                  className="text-right">
                                   {item.amount}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="9"
-                                  className={`text-left ${
-                                    item.isback === true
-                                      ? "back"
-                                      : item.isback === false
-                                      ? "lay"
-                                      : ""
-                                  }`}>
+                                  className="text-center">
                                   {item.time}
                                 </td>
                               </tr>
@@ -486,11 +435,13 @@ function UnSetteledBet() {
                 <p className="text-center record-delete">No Records Found</p>
               </div>
             </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </>
+  )
 }
 
-export default UnSetteledBet;
+export default UnsetteledBetCasinoForDesk

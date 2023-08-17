@@ -44,7 +44,6 @@ function App() {
 
 
   useEffect(() => {
-
     document.title = window.location.hostname;
     UserAPI.Self_By_App_Url().then((res)=>{
       if (res?.data.favicon) {

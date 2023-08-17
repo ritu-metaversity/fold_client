@@ -26,7 +26,7 @@ const NewWithdraw = () => {
   const [bankID, setBankId] = useState();
   const [stackValue, setStackValue] = useState();
   const [openForm, setOpenForm] = useState(false);
-  const [withdrawType, setWithdrawType] = useState();
+  const [withdrawType, setWithdrawType] = useState("Normal");
   const [getAccountData, setGetAccountData] = useState();
   const [userBalance, setuserBalance] = useState();
   const [dataLenth, setDataLenth] = useState();
@@ -35,6 +35,7 @@ const NewWithdraw = () => {
   const [dataLength, setDataLength] = useState();
   const [activeBank, setActiveBank] = useState();
   const [maxWidthValue, setMaxWidthValue] = useState(0);
+  const [symbolsArrUpiId] = useState(["."]);
 
   const handleClose = () => {
     setShow(false);
@@ -104,7 +105,7 @@ const NewWithdraw = () => {
 
     UserAPI.WITHDRAW_STACK_REQUEST().then((res) => {
       setStackValue(res?.data);
-      setMaxWidthValue(res?.data[res?.data?.length-1].value);
+      setMaxWidthValue(res?.data[res?.data?.length - 1].value);
     });
 
     UserAPI.User_Balance().then((res) => {
@@ -137,12 +138,17 @@ const NewWithdraw = () => {
           setGetAccountData(res?.data);
           setDataLenth(res?.data?.length);
         });
-        setMessage("Withdraw Request Submited Successfully");
+        setMessage(`Withdraw Request Submited Successfully and ${res?.message}`);
         setShow(false);
         setErrorAlert(true);
         setIsLoading(false);
         setColorName("success");
         setMessage(res?.message);
+        setAccountHolderName("");
+        setAccountNumber("");
+        setBankName();
+        setIFSC();
+        setAccountType();
       })
       .catch((error) => {
         setErrorAlert(true);
@@ -175,12 +181,12 @@ const NewWithdraw = () => {
       setColorName("danger");
       setIsLoading(false);
       return false;
-    }else if(withCoinValue > maxWidthValue){
+    } else if (withCoinValue > maxWidthValue) {
       setMessage(`Amount exceeded maximum withdrawal limit ${maxWidthValue}.`);
       setErrorAlert(true);
       setColorName("danger");
       setIsLoading(false);
-      return false
+      return false;
     }
 
     if (withType === "BANK") {
@@ -226,7 +232,6 @@ const NewWithdraw = () => {
         return false;
       }
     } else if (withType === "PAYTM") {
-   
       if (
         withCoinValue === "" ||
         withCoinValue === undefined ||
@@ -257,7 +262,6 @@ const NewWithdraw = () => {
         return false;
       }
     } else if (withType == "UPI") {
-   
       if (
         withCoinValue === "" ||
         withCoinValue === undefined ||
@@ -320,6 +324,11 @@ const NewWithdraw = () => {
             setErrorAlert(true);
             setColorName("success");
             setIsLoading(false);
+            setAccountHolderName("");
+            setAccountNumber("");
+            setBankName();
+            setIFSC();
+            setAccountType();
           }
           setIsLoading(false);
         })
@@ -375,6 +384,7 @@ const NewWithdraw = () => {
                     <input
                       placeholder="Withdraw Coins"
                       value={withCoinValue}
+                      onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
                       onChange={handleStaticAmountInput}
                       type="number"
                     />
@@ -400,8 +410,9 @@ const NewWithdraw = () => {
                   className="withdrow_type"
                   style={{ marginBottom: "12px", width: "100%" }}>
                   <select onChange={(e) => setWithdrawType(e.target.value)}>
-                    <option selected>Select Withdraw Type</option>
-                    <option value="Normal">Normal</option>
+                    <option selected value="Normal">
+                      Normal
+                    </option>
                     <option value="Instant">Instant</option>
                   </select>
                 </div>
@@ -454,24 +465,25 @@ const NewWithdraw = () => {
                       <input
                         type="number"
                         className="account-input"
-                        value={accountNumber?.toString().replace(".","")}
-                        onChange={(e) => 
+                        onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
+                        value={accountNumber?.toString().replace(".", "")}
+                        onChange={(e) =>
                           e.target.value.match(/^[0-9]*$/) &&
-                          setAccountNumber(e.target.value)}
+                          setAccountNumber(e.target.value)
+                        }
                       />
                     </div>
                     <div className="mx-input-wrapper account-field">
                       <label className="account-lable">Account Name</label>
                       <br />
                       <input
+                      onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
                         type="text"
                         className="account-input"
                         value={accountHolderName.trimStart()}
                         onChange={(e) =>
                           e.target.value.match(/^[a-zA-Z ]*$/) &&
-                          setAccountHolderName(
-                            e.target.value
-                          )
+                          setAccountHolderName(e.target.value)
                         }
                       />
                     </div>
@@ -481,12 +493,11 @@ const NewWithdraw = () => {
                       <input
                         type="type"
                         className="account-input"
+                        onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
                         value={bankName.trimStart()}
                         onChange={(e) =>
                           e.target.value.match(/^[a-zA-Z ]*$/) &&
-                          setBankName(
-                            e.target.value
-                          )
+                          setBankName(e.target.value)
                         }
                       />
                     </div>
@@ -496,7 +507,8 @@ const NewWithdraw = () => {
                       <input
                         type="type"
                         className="account-input"
-                        value={ifsc}
+                        onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
+                        value={ifsc.trim()}
                         onChange={(e) => setIFSC(e.target.value)}
                       />
                     </div>
@@ -531,21 +543,22 @@ const NewWithdraw = () => {
                         <input
                           className="account-input"
                           value={accountNumber}
-                          onChange={(e) => 
+                          onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
+                          onChange={(e) =>
                             e.target.value.match(/^[0-9]*$/) &&
-                            setAccountNumber(e.target.value)}
+                            setAccountNumber(e.target.value)
+                          }
                         />
                       ) : (
                         <input
                           type="text"
                           className="account-input"
                           value={accountNumber}
+                          onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
                           onChange={(e) =>
+                            e.target.value.match(/^[a-zA-Z0-9@_]*$/)&&
                             setAccountNumber(
-                              e.target.value.replace(
-                                /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/
-                              )
-                            )
+                              e.target.value)
                           }
                         />
                       )}
@@ -559,11 +572,10 @@ const NewWithdraw = () => {
                         type="text"
                         className="account-input"
                         value={accountHolderName.trimStart()}
+                        onKeyDown={(e)=>symbolsArrUpiId.includes(e.key) && e.preventDefault()}
                         onChange={(e) =>
                           e.target.value.match(/^[a-zA-Z ]*$/) &&
-                          setAccountHolderName(
-                            e.target.value
-                          )
+                          setAccountHolderName(e.target.value)
                         }
                       />
                     </div>

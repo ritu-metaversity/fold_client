@@ -75,6 +75,11 @@ const ChangePasswordForDesk = (props) => {
     } else {
       setPasswordError("");
     }
+    if(newPass !== conformPassword){
+      setConPasswordError("Password must be equal.")
+    }else{
+      setConPasswordError("")
+    }
   };
 
   const handleConformPassword = (e)=>{
