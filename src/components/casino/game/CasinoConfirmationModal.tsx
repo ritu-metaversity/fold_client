@@ -29,7 +29,7 @@ const CasinoConfirmationModal: FC<Props> = ({
     })();
   }, []);
   return (
-    <Box textAlign={"center"} overflow={"visible"} paddingTop={8}>
+    <Box textAlign={"center"} overflow={"visible"} paddingTop={20}>
       {/* {singleUserValue.message} */}
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <img className="upper_left_icon" src="/assets/images/casino.png"></img>
