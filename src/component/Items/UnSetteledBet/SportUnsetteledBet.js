@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import SideBar from '../sidebar/SideBar'
-import { UserAPI } from '../../apis/UserAPI';
+import React, { useEffect, useState } from "react";
+import { UserAPI } from "../../../apis/UserAPI";
+import "../AaccountStatement/AaccountStatement.css";
 
-const UnsetteledBetForDesk = () => {
-
-    const [recordValue, setRecordValue] = useState(100);
+function SportUnsetteledBet() {
+  const [recordValue, setRecordValue] = useState(100);
   const [DataList, setDataList] = useState("");
   const [ListLength, setListLength] = useState("");
   const [pageLength, setPageLength] = useState(0);
@@ -14,7 +13,6 @@ const UnsetteledBetForDesk = () => {
   const [currentPage, setCurrentPage] = useState();
   const [Active, setActive] = useState(1);
   const [Deleted, setIsDeleted] = useState(false);
-
 
   useEffect(() => {
     UserAPI.Unsetteled_bet({
@@ -32,6 +30,20 @@ const UnsetteledBetForDesk = () => {
     // eslint-disable-next-line
   }, [betValue, betValue, recordValue, Deleted]);
 
+  // const submit = () => {
+  //   UserAPI.Unsetteled_bet({
+  //     noOfRecords: parseInt(recordValue),
+  //     index: 0,
+  //     sportType: 1,
+  //     betType: parseInt(betValue),
+  //   }).then((res) => {
+  //     setPageLength(res.data.totalPages);
+  //     setListLength(res.data.dataList.length);
+  //     setDataList(res.data.dataList);
+  //   });
+  // };
+
+  // console.log(Deleted, "sdsfsd")
 
   const result = [];
   for (var i = 1; i < pageLength; i++) {
@@ -50,6 +62,8 @@ const UnsetteledBetForDesk = () => {
      setActive(pagination+1 );
   }
   };
+
+
   const decerement = () => {
     if(pagination !== 0){
       setPagination(pagination - 1)
@@ -77,20 +91,13 @@ const UnsetteledBetForDesk = () => {
       });
     }
   }, [pagination]);
-    
-  return (
-    <>
-    <div className="main">
-        <div className="container-fluid container-fluid-5">
-          <div className="itemHome">
 
-            
-              <div className="card">
-                <div className="card-header header-card">
-                  <h4 className="mb-0">Un-Setteled Bet</h4>
-                </div>
-                <div className="card-body container-fluid container-fluid-5 unsetteledbet">
-                <div className="row row5 ">
+  return (
+    <div>
+      <div className="report-container wrapper">
+        <div className="card">
+          <div className="card-body container-fluid container-fluid-5 unsetteledbet max_height">
+            <div className="row row5 ">
               <div className="col-6">
                 <div
                   id="match_unmatched_delete"
@@ -134,7 +141,7 @@ const UnsetteledBetForDesk = () => {
             </div>
             <div className={`${deleteVal === "2" ? "d-none" : ""}`}>
               <div className="row row5 mt-2 match_unmatched">
-                <div className="col-3">
+                <div className="col-6">
                   <div
                     className="form-group mb-0"
                     style={{ marginTop: "-6px" }}>
@@ -202,10 +209,12 @@ const UnsetteledBetForDesk = () => {
                     </div>
                   </div>
                 </div>
-                <div className='col-6'>
+                {/* onChange={(e) => setRecordValue(e.target.value)} */}
+              </div>
+              <div className="" style={{marginLeft: "8px"}}>
                 <div
                   id="account-statement_length"
-                  className="dataTables_length cpoint d-flex align-items-center mt-7">
+                  className="dataTables_length cpoint d-flex align-items-center">
                   <label style={{ fontSize: "14px" }} className="showEntries">Show</label>
                   <select 
                     name="account-statement_length"
@@ -230,13 +239,7 @@ const UnsetteledBetForDesk = () => {
                   <i className="fa fa-angle-down arrowBtn"></i>
                   <label className="entries">entries</label>
                 </div>
-                </div>
-                
-                {/* onChange={(e) => setRecordValue(e.target.value)} */}
               </div>
-              {/* <div className="" style={{marginLeft: "8px"}}>
-                
-              </div> */}
               <div className="row row5 mt-2 ">
                 <div className="col-12">
                   <div className="table-responsive unsetTable">
@@ -247,7 +250,7 @@ const UnsetteledBetForDesk = () => {
                       className="table b-table table-bordered"
                       id="__BVID__96">
                       <thead className="">
-                        <tr role="row" className="" style={{background: "#2c3d50"}}>
+                        <tr role="row" className="">
                           <th
                             role="columnheader"
                             scope="col"
@@ -296,7 +299,7 @@ const UnsetteledBetForDesk = () => {
                             role="columnheader"
                             scope="col"
                             aria-colindex="9"
-                            className="text- bg-color text-center">
+                            className="text- bg-color text-left">
                             Place Date
                           </th>
                             {/* <th
@@ -325,50 +328,87 @@ const UnsetteledBetForDesk = () => {
                                 <td
                                   role="columnheader"
                                   aria-colindex="1"
-                                  className="text-left"
-                                  style={
-                                    {
-                                      // border:"5px solid "
-                                    }
-                                  }>
+                                  className={`text-left ${
+                                    item.isback === true
+                                      ? "back"
+                                      : item.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item.sportName}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="2"
-                                  className="text-left">
+                                  className={`text-left ${
+                                    item.isback === true
+                                      ? "back"
+                                      : item.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item.eventName}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="3"
-                                  className="text-left">
+                                  className={`text-left ${
+                                    item.isback === true
+                                      ? "back"
+                                      : item.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item.marketname}
                                 </td>
 
                                 <td
                                   role="columnheader"
                                   aria-colindex="5"
-                                  className="text-left">
+                                  className={`text-left ${
+                                    item.isback === true
+                                      ? "back"
+                                      : item.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item.nation}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="6"
-                                  className="text-right">
+                                  className={`text-left ${
+                                    item.isback === true
+                                      ? "back"
+                                      : item.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item.rate}
                                 </td>
 
                                 <td
                                   role="columnheader"
                                   aria-colindex="8"
-                                  className="text-right">
+                                  className={`text-left ${
+                                    item.isback === true
+                                      ? "back"
+                                      : item.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item.amount}
                                 </td>
                                 <td
                                   role="columnheader"
                                   aria-colindex="9"
-                                  className="text-center">
+                                  className={`text-left ${
+                                    item.isback === true
+                                      ? "back"
+                                      : item.isback === false
+                                      ? "lay"
+                                      : ""
+                                  }`}>
                                   {item.time}
                                 </td>
                               </tr>
@@ -443,13 +483,11 @@ const UnsetteledBetForDesk = () => {
                 <p className="text-center record-delete">No Records Found</p>
               </div>
             </div>
-                </div>
-              </div>
           </div>
         </div>
       </div>
-    </>
-  )
+    </div>
+  );
 }
 
-export default UnsetteledBetForDesk
+export default SportUnsetteledBet;

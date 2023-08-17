@@ -13,7 +13,7 @@ import HomePage from "./desktopLayout/HomePage/HomePage";
 import CasinoForDesk from "./desktopLayout/CasinoForDesk/CasinoForDesk";
 import LiveCasino from "./desktopLayout/LiveCasino/LiveCasino";
 import ProfitLossHome from "./desktopLayout/ProfitAndLoss/ProfitLossHome/ProfitLossHome";
-import UnsetteledBetForDesk from "./desktopLayout/UnsettelBetForDesk/UnsetteledBetForDesk";
+// import UnsetteledBetForDesk from "./desktopLayout/UnsettelBetForDesk/UnsetteledBetForDesk";
 import AboutPageForDesk from "./desktopLayout/AboutPageForDesk/AboutPageForDesk";
 import DestTermsAndConditions from "./desktopLayout/DestTermsAndConditions/DestTermsAndConditions";
 import DestResponsibleGaming from "./desktopLayout/DestResponsibleGaming/DestResponsibleGaming";
@@ -26,6 +26,7 @@ import Footer from "./desktopLayout/Footer/Footer";
 import NewGameDetailPageDest from "./desktopLayout/NewGameDetailPageDest/NewGameDetailPageDest";
 import NewWithdraw from "./desktopLayout/NewWithdraw/NewWithdraw";
 import { UserAPI } from "./apis/UserAPI";
+import UnsetteledBetDeskHome from "./desktopLayout/UnsettelBetForDesk/UnsetteledBetDeskHome";
 
 const RouteDesktop = () => {
   const [SportId, setSportId] = useState("");
@@ -175,7 +176,7 @@ const RouteDesktop = () => {
               <Route path="/livecasino" element={<LiveCasino />} />
               <Route path="/profitloss" element={<ProfitLossHome />} />
 
-              <Route path="/unsetteledbet" element={<UnsetteledBetForDesk />} />
+              <Route path="/unsetteledbet" element={<UnsetteledBetDeskHome/>} />
               <Route path="/about-us" element={<AboutPageForDesk />} />
               <Route
                 path="/terms-and-conditions"

@@ -230,7 +230,7 @@ const Slot = () => {
             </p>
           ) : (
             <iframe
-              src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
+              src={`https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
               className="mobile_if"
               width="100%"
               title="mobile"
@@ -240,7 +240,7 @@ const Slot = () => {
           )}
 
           <iframe
-            src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
+            src={`https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
             className="desktop_if"
             width="100%"
             title="desktop"

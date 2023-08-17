@@ -112,7 +112,7 @@
 }
 
 .slot-modal .modal-content {
-    height: 99.4vh !important;
+    /* height: 99.4vh !important; */
     position: relative;
 }
 
@@ -151,8 +151,6 @@ button.close_btn {
         margin: auto;
     }
 }
-
-
 @media screen and (max-width: 800px) {
     .mob_none {
         display: none;
@@ -180,6 +178,8 @@ button.close_btn {
 
 .casino_modals_body {
     overflow: visible !important;
+    height: 100% !important;
+    max-height: 100% !important;
 }
 
 .main_casino_modals {
@@ -187,12 +187,10 @@ button.close_btn {
 }
 
 .casino_images_modals img {
-    position: absolute;
     backdrop-filter: blur(1px);
 }
 
 .casino_message .please_note {
-    margin-top: 110px;
     text-align: center;
     color: #08c;
     font-weight: 600;

@@ -14,13 +14,13 @@ const CasinoForDesk = () => {
           <div className="">
             <div className="col-md-12 featured-box-detail sports-wrapper m-b-10">
               <iframe
-                src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+                src={`https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
                 className="mobile_if"
                 width="100%"
                 title="mobile"
                 allowFullScreen={true}></iframe>
               <iframe
-                src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+                src={`https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
                 className="desktop_if"
                 width="100%"
                 title="desktop"

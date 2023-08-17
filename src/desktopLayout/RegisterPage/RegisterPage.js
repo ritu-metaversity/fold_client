@@ -69,7 +69,20 @@ const RegisterPage = () => {
   const [mobileNumberError, setmobileNumberError] = useState("");
   const [userNameError, setUserNameError] = useState("");
 
-    const handlePassWordsValidation = (e) => {
+   
+
+  const handleConfirmPasswordsValidation = (e) => {
+    setConfirmPassword(e.target.value);
+    const confirmPass = e.target.value;
+    if (password !== confirmPass) {
+      setConfirmPasswordError("Password must be equal.");
+    } else {
+      setConfirmPasswordError("");
+    }
+  };
+
+
+  const handlePassWordsValidation = (e) => {
     setPassword(e.target.value);
     const passData = e.target.value;
     if (passData === "") {
@@ -88,12 +101,7 @@ const RegisterPage = () => {
     } else {
       setPasswordError("");
     }
-  };
-
-  const handleConfirmPasswordsValidation = (e) => {
-    setConfirmPassword(e.target.value);
-    const confirmPass = e.target.value;
-    if (password !== confirmPass) {
+    if (passData !== confirmPassword) {
       setConfirmPasswordError("Password must be equal.");
     } else {
       setConfirmPasswordError("");
@@ -227,6 +235,7 @@ useEffect(()=>{
                 aria-invalid="false"
                 onChange={handleUserName}
                 onFocus={handleUserName}
+                autoComplete="off"
               />
              <p
                 style={{ marginTop: "12px", fontSize: "12px", marginLeft:"3px" }}
@@ -245,6 +254,7 @@ useEffect(()=>{
                 aria-invalid="false"
                onChange={handleMobileNumber}
                 onFocus={handleMobileNumber}
+                autoComplete="off"
               />
              <p
                 style={{ marginTop: "12px", fontSize: "12px" , marginLeft:"3px"}}
@@ -262,6 +272,7 @@ useEffect(()=>{
                 aria-invalid="false"
                 onChange={handlePassWordsValidation}
                 onFocus={handlePassWordsValidation}
+                autoComplete="off"
               />
                 <p
                 style={{ marginTop: "12px", fontSize: "12px" , marginLeft:"3px"}}
@@ -279,6 +290,7 @@ useEffect(()=>{
                 aria-invalid="false"
                 onChange={handleConfirmPasswordsValidation}
                 onFocus={handleConfirmPasswordsValidation}
+                autoComplete="off"
               />
               <p
                 style={{ marginTop: "12px", marginLeft:"3px",fontSize: "12px" }}
