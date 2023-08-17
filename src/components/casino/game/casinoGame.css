@@ -19,7 +19,7 @@
 }
 .upper_left_icon{
   position: absolute;
-  top:-100px;
+  top:0px;
   margin: 0 auto;
 }
 .desktop_if {
