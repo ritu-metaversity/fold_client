@@ -127,6 +127,20 @@ export default function Header(props: Props) {
         >
           Virtual Casino
         </TopNavLinks>
+        {isSignedIn && <Circle />}
+        <TopNavLinks
+          style={
+            pathname === "/games"
+              ? {
+                  color: "#fdcf13",
+                  borderBottom: "2px solid #fdcf13",
+                }
+              : {}
+          }
+          to="/games"
+        >
+          Games
+        </TopNavLinks>
         {isSignedIn && appData?.selfAllowed && !(user?.userTypeInfo === 2) && (
           <Box
             height="100%"
