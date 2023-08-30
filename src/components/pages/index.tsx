@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "../layout";
 import Loading from "../layout/loading";
 import { NewLayout, ThrowToLogin } from "../terms";
+import Games from "../games/Games";
 // import Aboutus from "./aboutus";
 // import ResponsibleGaming from "./responsibleGaming";
 // import Terms from "./terms";
@@ -23,6 +24,10 @@ const Event = React.lazy(() => import("../event"));
 const Home = React.lazy(() => import("../home"));
 const Profile = React.lazy(() => import("../profile/Profile"));
 const Deposit = React.lazy(() => import("../Deposit/index"));
+const QtechGames = React.lazy(() => import("../qtechGames/QtechGames"));
+const ProviderGames = React.lazy(
+  () => import("../providerGames/ProviderGames")
+);
 
 const Pages = () => {
   useEffect(() => {
@@ -40,6 +45,9 @@ const Pages = () => {
         <Routes>
           <Route path="" element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/games" element={<Games />} />
+            <Route path="/q-tech-games" element={<QtechGames />} />
+            <Route path="/provider/:name" element={<ProviderGames />} />
             <Route path="/sports/details/" element={<Event />} />
             <Route path="/report">
               <Route path="accountstatement" element={<Account />} />
