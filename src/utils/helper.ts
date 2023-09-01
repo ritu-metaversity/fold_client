@@ -1,5 +1,7 @@
-export const PROVIDERS_NAME = {
+export const PROVIDERS_NAME: { [key: string]: string } = {
   Q_TECH_GAMES: "q-tech-games",
-  AV_GAMES: "av-games",
-  GR_GAMES: "gr-games",
+  EVOLUTION: "evolution",
+  EVOLUTION_GAMES_PROVIDER: "EVO",
+  YIELD_GUILD: "yield-guild",
+  YIELD_GUILD_GAMES_PROVIDER: "YGG",
 };

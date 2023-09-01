@@ -10,12 +10,12 @@ function QtechGames() {
 
     const { response } = await qTechServices.gameLobby({
       // for real mode
-      playerId: "12341234",
-      currency: "INR",
-      country: "IN",
-      gender: "M",
-      birthDate: "1986-01-01",
-      lang: "en_IN",
+      // playerId: "12341234",
+      // currency: "INR",
+      // country: "IN",
+      // gender: "M",
+      // birthDate: "1986-01-01",
+      // lang: "en_IN",
       mode: "real",
       device: "desktop",
       walletSessionId: sessionToken,

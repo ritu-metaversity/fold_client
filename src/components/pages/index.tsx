@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "../layout";
 import Loading from "../layout/loading";
 import { NewLayout, ThrowToLogin } from "../terms";
-import Games from "../games/Games";
+import Games from "../qTech/games/Games";
 // import Aboutus from "./aboutus";
 // import ResponsibleGaming from "./responsibleGaming";
 // import Terms from "./terms";
