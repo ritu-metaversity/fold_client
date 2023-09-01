@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import classes from "./GamePortal.module.css";
 import { createPortal } from "react-dom";
 import CloseIcon from "@mui/icons-material/Close";
-import { qTechServices } from "../../utils/api/qTechGames/services";
+import { qTechServices } from "../../../utils/api/qTechGames/services";
 
 interface Props {
   gameName: string;
