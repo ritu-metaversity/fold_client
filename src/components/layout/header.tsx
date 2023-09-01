@@ -129,6 +129,12 @@ export default function Header(props: Props) {
         </TopNavLinks>
         {isSignedIn && <Circle />}
         <TopNavLinks
+          onClick={(e) => {
+            if (!isSignedIn) {
+              e.preventDefault();
+              setModal && setModal({ login: true });
+            }
+          }}
           style={
             pathname === "/games"
               ? {
