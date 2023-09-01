@@ -24,9 +24,9 @@ const Event = React.lazy(() => import("../event"));
 const Home = React.lazy(() => import("../home"));
 const Profile = React.lazy(() => import("../profile/Profile"));
 const Deposit = React.lazy(() => import("../Deposit/index"));
-const QtechGames = React.lazy(() => import("../qtechGames/QtechGames"));
+const QtechGames = React.lazy(() => import("../qTech/qtechGames/QtechGames"));
 const ProviderGames = React.lazy(
-  () => import("../providerGames/ProviderGames")
+  () => import("../qTech/providerGames/ProviderGames")
 );
 
 const Pages = () => {

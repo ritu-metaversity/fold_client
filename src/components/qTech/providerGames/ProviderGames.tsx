@@ -1,8 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
-import { qTechServices } from "../../utils/api/qTechGames/services";
+import { qTechServices } from "../../../utils/api/qTechGames/services";
 import { useParams } from "react-router-dom";
-import { PROVIDERS_NAME } from "../../utils/helper";
-import Loading from "../layout/loading";
+import { PROVIDERS_NAME } from "../../../utils/helper";
+import Loading from "../../layout/loading";
 import classes from "./ProviderGames.module.css";
 import { GameListInterface } from ".";
 import GamePortal from "../gamePortal/GamePortal";

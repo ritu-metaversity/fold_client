@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { qTechServices } from "../../utils/api/qTechGames/services";
-import Loading from "../layout/loading";
+import { qTechServices } from "../../../utils/api/qTechGames/services";
+import Loading from "../../layout/loading";
 
 function QtechGames() {
   const [GameLobbyUrl, setGameLobbyUrl] = useState<string | null>(null);
