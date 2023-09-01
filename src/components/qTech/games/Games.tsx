@@ -1,4 +1,4 @@
-import ProviderCard from "../common/providerCard/ProviderCard";
+import ProviderCard from "../../common/providerCard/ProviderCard";
 import classes from "./Games.module.css";
 import { useNavigate } from "react-router-dom";
 import { gamesProviders } from "./provider";

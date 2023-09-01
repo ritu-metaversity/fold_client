@@ -13,9 +13,10 @@ function ProviderGames() {
   const [ShowPortal, setShowPortal] = useState<boolean>(false);
   const [SelectedGame, setSelectedGame] = useState<string | null>(null);
 
-  const getGameLists = async (token: string) => {
+  const getGameLists = async (token: string, provider?: string) => {
     const { response } = await qTechServices.gameLists({
       token,
+      provider,
     });
 
     if (
@@ -33,23 +34,35 @@ function ProviderGames() {
     setShowPortal(!ShowPortal);
   };
 
+  function getKeyByValue<T extends object>(object: T, value: string) {
+    return Object.keys(object).find(
+      (key) => object[key as keyof object] === value
+    );
+  }
+
   const authenticationHandler = async () => {
     const { response } = await qTechServices.authentication();
 
     if (!!response && response?.data && response?.data?.access_token) {
       const { access_token } = response?.data;
-
+      const name = params.name!;
       window.localStorage.setItem("qtech_access_token", access_token);
-      await getGameLists(access_token);
+      const key = getKeyByValue(PROVIDERS_NAME, name);
+
+      if (key) {
+        const providerGameName = PROVIDERS_NAME[key + "_GAMES_PROVIDER"];
+        await getGameLists(access_token, providerGameName);
+      } else {
+        if (name === PROVIDERS_NAME.Q_TECH_GAMES) {
+          await getGameLists(access_token);
+        }
+      }
     }
   };
 
   useEffect(() => {
     if (!!params && params?.name) {
-      const name = params.name;
-      if (name === PROVIDERS_NAME.Q_TECH_GAMES) {
-        authenticationHandler();
-      }
+      authenticationHandler();
     }
   }, []);
 
@@ -60,7 +73,7 @@ function ProviderGames() {
       ) : null}
       <div className={"mid_container"}>
         <div className={classes["card_container"]}>
-          {!GameLists ? <Loading /> : null}
+          {!GameLists.length ? <Loading /> : null}
           <div className={classes["grid_container"]}>
             {!!GameLists && GameLists.length
               ? GameLists.map((elm) => (
