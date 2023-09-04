@@ -8,7 +8,7 @@ import {
   // Modal,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import HomeLayout from "../layout/homeLayout";
 import { CasinoIcon, StyledGameThumb } from "./styledComponent";
 import { colorHex } from "../../utils/constants";
@@ -51,6 +51,7 @@ const Casino = () => {
   >([]);
   const [open, setOpen] = useState(0);
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
+  const urlPathName = window.location.pathname.split("/")[1];
 
   const nav = useNavigate();
   const { isSignedIn, setCasinoId } = useContext(UserContext);
@@ -101,57 +102,60 @@ const Casino = () => {
   }, []);
 
   const matches = useMediaQuery("(max-width: 1279px)");
+
   return (
     <HomeLayout>
-      {casinoTypes?.length > 0 && (
-        <Tabs
-          variant="scrollable"
-          scrollButtons={true}
-          TabScrollButtonProps={{
-            sx: {
-              opacity: "1 !important",
-              bgcolor: colorHex.bg2,
-              borderRadius: "50%",
-              width: "40px",
-              margin: "auto",
-              height: "40px",
-              marginRight: "10px",
-            },
-          }}
-          TabIndicatorProps={{ sx: { display: "none" } }}
-          sx={{
-            position: "sticky",
-            top: matches ? 50 : 80,
-            paddingY: "0.8rem",
-            backgroundColor: colorHex.bg6,
-          }}
-          value={value}
-          onChange={(e, value) => {
-            setValue(value);
-            if (setCasinoId) setCasinoId(value);
-          }}
-        >
-          {casinoTypes.map((item) => (
-            <StyledTab
-              icon={<CasinoIcon src={item.logo} />}
-              iconPosition="start"
-              value={item.id}
-              label={item.name}
-            />
-          ))}
-          <StyledTab
-            icon={
-              <CasinoIcon
-                src={
-                  "https://wver.sprintstaticdata.com/v14/static/front/img/icons/26.png"
+      {urlPathName !== "slot" && (
+        <Fragment>
+          {casinoTypes?.length > 0 && (
+            <Tabs
+              variant="scrollable"
+              scrollButtons={true}
+              TabScrollButtonProps={{
+                sx: {
+                  opacity: "1 !important",
+                  bgcolor: colorHex.bg2,
+                  borderRadius: "50%",
+                  width: "40px",
+                  margin: "auto",
+                  height: "40px",
+                  marginRight: "10px",
+                },
+              }}
+              TabIndicatorProps={{ sx: { display: "none" } }}
+              sx={{
+                position: "sticky",
+                top: matches ? 50 : 80,
+                paddingY: "0.8rem",
+                backgroundColor: colorHex.bg6,
+              }}
+              value={value}
+              onChange={(e, value) => {
+                setValue(value);
+                if (setCasinoId) setCasinoId(value);
+              }}
+            >
+              {casinoTypes.map((item) => (
+                <StyledTab
+                  icon={<CasinoIcon src={item.logo} />}
+                  iconPosition="start"
+                  value={item.id}
+                  label={item.name}
+                />
+              ))}
+              <StyledTab
+                icon={
+                  <CasinoIcon
+                    src={
+                      "https://wver.sprintstaticdata.com/v14/static/front/img/icons/26.png"
+                    }
+                  />
                 }
+                iconPosition="start"
+                value={"Games"} // change into the nunber once this is dynamic
+                label={"Games"}
               />
-            }
-            iconPosition="start"
-            value={"Games"} // change into the nunber once this is dynamic
-            label={"Games"}
-          />
-          {/* <StyledTab
+              {/* <StyledTab
           icon={<CasinoIcon src="/assets/images/casino.png" />}
           iconPosition="start"
           value="2"
@@ -163,9 +167,11 @@ const Casino = () => {
           value="3"
           label="Our Virtual"
         /> */}
-        </Tabs>
+            </Tabs>
+          )}
+        </Fragment>
       )}
-      {value === "Games" ? (
+      {value === "Games" || urlPathName === "slot" ? (
         <ProviderTabsWithGames />
       ) : (
         <Box bgcolor={colorHex.bg1}>

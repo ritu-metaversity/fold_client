@@ -136,6 +136,26 @@ export default function Header(props: Props) {
             }
           }}
           style={
+            pathname === "/slot"
+              ? {
+                  color: "#fdcf13",
+                  borderBottom: "2px solid #fdcf13",
+                }
+              : {}
+          }
+          to="/slot"
+        >
+          Slot
+        </TopNavLinks>
+        {isSignedIn && <Circle />}
+        <TopNavLinks
+          onClick={(e) => {
+            if (!isSignedIn) {
+              e.preventDefault();
+              setModal && setModal({ login: true });
+            }
+          }}
+          style={
             pathname === "/games"
               ? {
                   color: "#fdcf13",

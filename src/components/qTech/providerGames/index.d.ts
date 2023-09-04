@@ -12,4 +12,5 @@ export interface GameListInterface {
   currencies: CurrenciesInterface[];
   clientTypes: string[];
   images: ImagesInterface[];
+  category: string;
 }
