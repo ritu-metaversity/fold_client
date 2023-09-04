@@ -15,7 +15,7 @@ const ResponsibleGaming = React.lazy(
   () => import("../terms/responsibleGaming")
 );
 const Aboutus = React.lazy(() => import("../terms/aboutus"));
-const CasinoGame = React.lazy(() => import("../casino/game/CasinoGame"));
+// const CasinoGame = React.lazy(() => import("../casino/game/CasinoGame"));
 const Withdraw = React.lazy(() => import("../Withdraw/Withdraw"));
 const Activity = React.lazy(() => import("../activityLog"));
 const Casino = React.lazy(() => import("../casino/Casino"));
