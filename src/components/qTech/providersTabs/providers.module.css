@@ -11,20 +11,26 @@
 
 .tab {
   width: 100%;
-  padding: 1rem 0;
+  padding: 0.7rem 0;
   border-radius: 5px;
   border: 1px solid var(--light-dark);
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.active {
+  border-color: var(--main-cl);
 }
 
 .tab img {
   width: auto;
-  height: 30px;
+  height: 22px;
   margin-bottom: 0.5rem;
 }
 
 .tab p {
   margin: 0;
+  font-weight: bold;
 }
 
 @media (max-width: 1000px) {
