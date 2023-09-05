@@ -23,7 +23,7 @@ import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
+
 const Pages = React.lazy(() => import("./components/pages"));
 const CustomizedDialogPassword = React.lazy(
   () => import("./components/layout/user/ResetPasswordDailog")

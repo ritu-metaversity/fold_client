@@ -167,6 +167,26 @@ export default function Header(props: Props) {
         >
           Games
         </TopNavLinks>
+        {isSignedIn && <Circle />}
+        <TopNavLinks
+          onClick={(e) => {
+            if (!isSignedIn) {
+              e.preventDefault();
+              setModal && setModal({ login: true });
+            }
+          }}
+          style={
+            pathname === "/fantasy"
+              ? {
+                  color: "#fdcf13",
+                  borderBottom: "2px solid #fdcf13",
+                }
+              : {}
+          }
+          to="/fantasy"
+        >
+          Fantasy Games
+        </TopNavLinks>
         {isSignedIn && appData?.selfAllowed && !(user?.userTypeInfo === 2) && (
           <Box
             height="100%"

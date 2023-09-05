@@ -1,15 +1,15 @@
 import classes from "./providers.module.css";
-import { data } from "./providers.data";
 
 interface Props {
   getName: (value: string) => void;
   value: string;
+  providerList: { name: string; logo: string; filterType: string }[];
 }
 
-function ProvidersTabs({ getName, value }: Props) {
+function ProvidersTabs({ getName, value, providerList }: Props) {
   return (
     <div className={classes["contianer"]}>
-      {data.map((el) => (
+      {providerList.map((el) => (
         <div
           onClick={() => getName(el?.filterType)}
           key={el?.name}

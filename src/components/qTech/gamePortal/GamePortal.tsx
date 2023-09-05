@@ -3,6 +3,7 @@ import classes from "./GamePortal.module.css";
 import { createPortal } from "react-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { qTechServices } from "../../../utils/api/qTechGames/services";
+import { isMobile, isBrowser } from "react-device-detect";
 
 interface Props {
   gameName: string;
@@ -12,11 +13,12 @@ interface Props {
 function GamePortal({ gameName, close }: Props) {
   const [GameUrl, setGameUrl] = useState<string | null>(null);
 
+  console.log(gameName);
+
   const getSingleGame = async () => {
     const access_token = window.localStorage.getItem("qtech_access_token");
     const sessionToken = window.localStorage.getItem("token");
 
-    console.log(access_token);
     if (access_token) {
       const { response } = await qTechServices.singleGame({
         playerId: "121212",
@@ -26,7 +28,7 @@ function GamePortal({ gameName, close }: Props) {
         birthDate: "1986-01-01",
         lang: "en_IN",
         mode: "real",
-        device: "desktop",
+        device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
         returnUrl: "http://playindia.app",
         walletSessionId: sessionToken,
         token: access_token,
@@ -39,6 +41,8 @@ function GamePortal({ gameName, close }: Props) {
       }
     }
   };
+
+  console.log({ isMobile, isBrowser });
 
   useEffect(() => {
     getSingleGame();
