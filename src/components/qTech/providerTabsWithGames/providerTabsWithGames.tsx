@@ -6,6 +6,7 @@ import { GameListInterface } from "../providerGames";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material";
 import GamePortal from "../gamePortal/GamePortal";
+import { data } from "./providers.data";
 
 function ProviderTabsWithGames() {
   const [GameLists, setGameLists] = useState<GameListInterface[]>([]);
@@ -106,6 +107,7 @@ function ProviderTabsWithGames() {
         <GamePortal gameName={SelectedGame || ""} close={showAndHideHandler} />
       ) : null}
       <ProvidersTabs
+        providerList={data}
         getName={getProviderValue}
         value={SelectedProvider || ""}
       />

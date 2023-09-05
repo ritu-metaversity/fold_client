@@ -5,6 +5,7 @@ import Layout from "../layout";
 import Loading from "../layout/loading";
 import { NewLayout, ThrowToLogin } from "../terms";
 import Games from "../qTech/games/Games";
+
 // import Aboutus from "./aboutus";
 // import ResponsibleGaming from "./responsibleGaming";
 // import Terms from "./terms";
@@ -28,6 +29,7 @@ const QtechGames = React.lazy(() => import("../qTech/qtechGames/QtechGames"));
 const ProviderGames = React.lazy(
   () => import("../qTech/providerGames/ProviderGames")
 );
+const Fantasy = React.lazy(() => import("../qTech/fantasy/fantasy"));
 
 const Pages = () => {
   useEffect(() => {
@@ -55,6 +57,7 @@ const Pages = () => {
               <Route path="currentbets" element={<CurrentBets />} />
             </Route>
             <Route path="/casino" element={<Casino />} />
+            <Route path="/fantasy" element={<Fantasy />} />
             <Route path="/slot" element={<Casino />} />
             {/* <Route path="/casino/:id" element={<CasinoGame />} /> */}
             <Route path="/virtual-casino" element={<Casino />} />

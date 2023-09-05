@@ -8,7 +8,7 @@ import {
   // Modal,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import HomeLayout from "../layout/homeLayout";
 import { CasinoIcon, StyledGameThumb } from "./styledComponent";
 import { colorHex } from "../../utils/constants";
@@ -106,7 +106,7 @@ const Casino = () => {
   return (
     <HomeLayout>
       {urlPathName !== "slot" && (
-        <Fragment>
+        <div>
           {casinoTypes?.length > 0 && (
             <Tabs
               variant="scrollable"
@@ -169,7 +169,7 @@ const Casino = () => {
         /> */}
             </Tabs>
           )}
-        </Fragment>
+        </div>
       )}
       {value === "Games" || urlPathName === "slot" ? (
         <ProviderTabsWithGames />
@@ -209,7 +209,6 @@ const Casino = () => {
           </Box>
         </Box>
       )}
-
       {!!open && (
         <CasinoGame
           name={casinoList.find((i) => i.gameId === open)?.gameName}
