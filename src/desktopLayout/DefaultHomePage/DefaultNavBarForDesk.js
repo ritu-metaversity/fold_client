@@ -324,7 +324,10 @@ const DefaultNavBarForDesk = (props) => {
               <ul className="list-unstyled navbar-nav">
                 <li className="nav-item list1">
                   <Link to="/home" className="nav-link active nav-b">
+                    <b>
+
                     Home
+                    </b>
                   </Link>
                 </li>
                 {ActiveSport.map((res, id) => {
@@ -339,7 +342,10 @@ const DefaultNavBarForDesk = (props) => {
                         //     handleShowSingleSpor(e,id);
                         //   }}
                       >
+                        <b>
+
                         {res?.sportName}
+                        </b>
                       </Link>
                     </li>
                   );

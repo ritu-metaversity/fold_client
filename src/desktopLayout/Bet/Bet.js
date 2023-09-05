@@ -264,7 +264,7 @@ const Bet = ({
           <div className="card-header bet-header">
             <h6 className="card-title d-inline-block">My Bet</h6>
           </div>
-          <div className="card-body" style={{ padding: "6px" }}>
+          <div className="card-body" style={{ padding: "0px" }}>
             <table className="coupon-table table  table-borderedless">
               <thead>
                 <tr>

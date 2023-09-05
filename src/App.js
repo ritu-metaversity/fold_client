@@ -18,14 +18,10 @@ function App() {
   const nav = useNavigate();
   const { pathname } = useLocation();
 
-  // const hostname = window.location.host.split(".");
-  // document.title = hostname[0];
 
 
   
   const [mobileRoutes, setMoileRoutes] = useState(true);
-
-  // let screenWidth = window.innerWidth;
 
   useEffect(() => {
     if (window.innerWidth > 1000) {

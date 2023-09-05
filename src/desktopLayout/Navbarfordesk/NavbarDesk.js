@@ -170,16 +170,16 @@ const NavbarDesk = (props) => {
                           </span>
                         </b>
                       </div>
-                      <div onClick={(e) => handleExpShow(e, false)}>
+                      <div className="mt-1" onClick={(e) => handleExpShow(e, false)}>
                         <p className="cPointer" onClick={() => setLgShow(true)}>
-                          <u>
-                            <span className="t-underline">Exposure:</span>{" "}
+                         
+                            <span className="t-underline">Exp:</span>{" "}
                             <b>
                               <span className="t-underline">
                                 {parseFloat(Exp)?.toFixed(2)}
                               </span>
                             </b>
-                          </u>
+                         
                         </p>
                       </div>
 
@@ -208,7 +208,7 @@ const NavbarDesk = (props) => {
                     </li>
 
                     <li className="account float-left">
-                      <span onClick={droupMenu}>
+                      <span style={{fontWeight:"600"}} onClick={droupMenu}>
                         {localStorage.getItem("UserId")}
                         <i className="fa fa-chevron-down"></i>
                       </span>
@@ -319,12 +319,12 @@ const NavbarDesk = (props) => {
             <div className="collapse navbar-collapse">
               <ul className="list-unstyled navbar-nav">
                 <li className="nav-item list1">
-                  <Link to="/home" className="nav-link active nav-b">
+                  <Link to="/home" className="">
                     Home
                   </Link>
                 </li>
                 <li className="nav-item list1">
-                  <Link to="/inplay" className="nav-link active nav-b">
+                  <Link to="/inplay" className="">
                     In-Play
                   </Link>
                 </li>
@@ -336,10 +336,7 @@ const NavbarDesk = (props) => {
                       onClick={() => handleSportId(res?.sportId)}>
                       <Link
                         to={`/${res?.sportName.replace(" ", "")}`}
-                        className="nav-link active nav-b hover_nav"
-                        //   onClick={() => {
-                        //     handleShowSingleSpor(e,id);
-                        //   }}
+                        className=""
                       >
                         {res?.sportName}
                       </Link>

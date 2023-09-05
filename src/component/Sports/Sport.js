@@ -85,7 +85,7 @@ function Sport({ gameIdForItemPage }) {
                                   </span>
                                   <span className="game-icon">
                                     <img
-                                      src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/ic_fancy.png"
+                                      src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/front/img/icons/ic_fancy.png"
                                       alt="game-icon"
                                       className={
                                         item?.F === false ? "d-none" : ""

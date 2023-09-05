@@ -329,7 +329,7 @@ const NavBar = () => {
                             </div>
                           </Link>
                           <Link className="dropdown-item" onClick={expHideShow}>
-                            Exposure
+                            Exp
                             <div className="custom-control custom-checkbox float-right">
                               <input
                                 type="checkbox"

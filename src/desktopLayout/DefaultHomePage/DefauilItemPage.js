@@ -84,10 +84,10 @@ const DefauilItemPage = () => {
                       className={`card-content ${
                         MatchListLength > 5 ? "scrollItem1" : ""
                       }`}>
-                      <table className="table item-table coupon-table">
+                      <table className="table item-table coupon-table change_background">
                         <thead>
-                          <tr>
-                            <th style={{ width: "63%", fontSize:"14px", fontWeight:"900" }}>Game</th>
+                          <tr className='bet-table-header'>
+                            <th style={{ width: "63%", fontSize:"14px", fontWeight:"900" }}><b>Game</b></th>
                             <th colSpan="2">1</th>
                             <th colSpan="2">X</th>
                             <th colSpan="2">2</th>

@@ -39,32 +39,6 @@
     padding: 4px;
 }
 
-.coupon-table thead th:first-child {
-    text-align: left;
-    width: auto;
-    padding-left: 15px;
-    text-indent: 0;
-    padding-right: 15px;
-}
-.coupon-table thead th {
-    font-size: 12px;
-    font-weight: 700;
-    text-align: center;
-    padding: 6px 0;
-    padding-left: 0px;
-    color: #303030;
-}
-.coupon-table tr td {
-    padding: 0;
-    vertical-align: middle;
-    font-size: 14px;
-    word-wrap: break-word;
-}
-.coupon-table tr td:first-child {
-    padding-left: 15px;
-    vertical-align: middle;
-    padding-right: 15px;
-}
 .place-bet .coupon-table tr td {
     padding: 4px;
     font-weight: bold;
@@ -90,21 +64,7 @@
 .value-buttons button {
     margin-right: 3px;
 }
-.coupon-table button {
-    width: 100%;
-    min-width: 40px;
-    height: 25px;
-    margin: 0;
-    text-align: center;
-    display: inline-block;
-    padding: 0px;
-    color: #273a47;
-    border: 0;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-right: -17px;
-}
+
 .btn-danger {
     color: #fff;
     background-color: #dc3545;

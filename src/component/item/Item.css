@@ -38,8 +38,8 @@
 }
 
 .coupon-table thead th {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 900;
     text-align: center;
     padding: 6px 0;
     padding-left: 0px;
@@ -61,7 +61,7 @@
 .coupon-table thead th:first-child {
     text-align: left;
     width: auto;
-    padding-left: 15px;
+    padding-left: 5px;
     text-indent: 0;
     padding-right: 15px;
 }
@@ -84,7 +84,7 @@
 .coupon-table button {
     width: 100%;
     min-width: 40px;
-    height: 25px;
+    height: 23px;
     margin: 0;
     text-align: center;
     display: inline-block;
@@ -129,20 +129,7 @@
     word-wrap: break-word;
 }
 
-.coupon-table button {
-    width: 100%;
-    min-width: 40px;
-    height: 25px;
-    margin: 0;
-    text-align: center;
-    display: inline-block;
-    padding: 0px;
-    color: #273a47;
-    border: 0;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer; 
-}
+
 .button, select {
     text-transform: none;
 }
@@ -175,34 +162,10 @@ table {
 .lay, .lay-color {
     background-color: #faa9ba !important;
 }
-.coupon-table button {
-    width: 100%;
-    min-width: 40px;
-    height: 25px;
-    margin: 0;
-    text-align: center;
-    display: inline-block;
-    padding: 0px;
-    color: #273a47;
-    border: 0;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-}
 .back, .back-color {
     background-color: #72bbef !important;
 }
-.coupon-table tr td:first-child {
-    padding-left: 15px;
-    vertical-align: middle;
-    padding-right: 15px;
-}
-.coupon-table tr td {
-    padding: 0;
-    vertical-align: middle;
-    font-size: 14px;
-    word-wrap: break-word;
-}
+
 .table td, .table th {
     padding: 0.75rem;
     vertical-align: top;
@@ -214,19 +177,13 @@ table {
     font-size: 14px;
         font-weight: bolder;
 }
-.coupon-table tr td {
-    padding: 0;
-    vertical-align: middle;
-    font-size: 14px;
-    word-wrap: break-word;
-}
 .game-icons {
     float: right;
     width: 20%;
     text-align: right;
 }
 .text-dark {
-    color: #090a0b!important;
+    color: #000000 !important;
 }
 .thead {
     display: table-header-group;
@@ -336,7 +293,7 @@ table {
         display: inline-block;
     }
     .active-icon {
-        background-color: #97cc00;
+        background-color: #28a745;
         height: 12px;
         width: 12px;
         border-radius: 50%;
@@ -347,12 +304,12 @@ table {
     } */
     .game-icon .fa-tv {
         color: #000;
-        font-size: 12px;
+        font-size: 14px;
         margin-top: 6px;
         vertical-align: top;
     }
     .game-icons img {
-        width: 15px;
+        width: 18px;
         vertical-align: top;
         margin-top: 5px;
     }
@@ -373,7 +330,7 @@ table {
         height: 24px;
         line-height: 24px;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 900;
         float: left;
         cursor: pointer;
         width: 50%;
@@ -391,15 +348,15 @@ table {
     }
     .main {
         min-height: 0px;
-        background: #f1f5f8;
+        /* background: #f1f5f8; */
     }
     .row.row5 {
         margin-left: -10px;
         margin-right: -10px;
     }
     .text-center.game-col.game-home {
-        font-size: 12px;
-        font-weight: 100;
+        font-size: 14px;
+        margin-top: 3px;
     }
 
     .mobile-view-item{
@@ -439,4 +396,23 @@ table {
     height: calc(100% - 284px);
     min-height: calc(100vh - 284px);
     max-height: calc(100% - 284px);
+}
+
+
+
+@media screen and (max-width: 800px) {
+    .game-icon .fa-tv {
+        font-size: 10px;
+    }
+    .game-icons img {
+        width: 18px;
+        vertical-align: top;
+        margin-top: 5px;
+    }
+    .game-icon {
+        width: 20px !important;
+    }
+    .game-listing-container.main-container {
+        background: #f7f7f7 !important;
+    }
 }
