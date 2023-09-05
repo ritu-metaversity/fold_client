@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { GameAPI } from "../../apis/gameAPI";
 import BannerList from "../../component/BannerSection/BannerList";
 import moment from "moment";
-import './InPlay.css'
+import "./InPlay.css";
 
 const InPlay = () => {
   const [gameName, setGameName] = useState("");
@@ -54,18 +54,20 @@ const InPlay = () => {
       <div className="container-fluid container-fluid-5">
         <div className="row itemHome">
           <div className="header-btm">
-            <nav className="navbar navbar-expand-md btco-hover-menu">
+            <nav className="navbar navbar-expand-md top_navbar btco-hover-menu">
               <div className="collapse navbar-collapse">
-                <ul className="list-unstyled .header-bottom navbarNav">
+                <ul className="list-unstyled nav_desk ">
                   {activeSportList?.length &&
                     activeSportList?.map((res) => {
+                      console.log(res, "dsadasdas");
                       return (
                         <li
-                          className={`nav-item ${
-                            active === res?.sportId ? "activeList" : ""
-                          } `}
+                          className="nav-item"
                           onClick={() => handleSportId(res?.sportId)}>
-                          <Link className="nav-link  nav-b">
+                          <Link
+                            className={`nav-pills nav-b ${
+                              active === res?.sportId ? "activeNav" : ""
+                            }`}>
                             {res?.sportName}
                           </Link>
                         </li>
@@ -81,12 +83,18 @@ const InPlay = () => {
               <div className="tab-content">
                 <div className="tab-pane">
                   <div className="coupon-card coupon-card-first">
-                    <div
-                      className="card-content">
-                      <table className="table item-table coupon-table">
+                    <div className="card-content">
+                      <table className="table item-table coupon-table change_background">
                         <thead>
-                          <tr>
-                            <th style={{ width: "63%", fontSize:"14px", fontWeight:"900" }}>Game</th>
+                          <tr className='bet-table-header'>
+                            <th
+                              style={{
+                                width: "63%",
+                                fontSize: "14px",
+                                fontWeight: "900",
+                              }}>
+                             <b>Game</b>
+                            </th>
                             <th colSpan="2">1</th>
                             <th colSpan="2">X</th>
                             <th colSpan="2">2</th>
@@ -139,6 +147,7 @@ const InPlay = () => {
                                               </span>
                                               <span className="game-icon">
                                                 <i className="fa fa-tv v-m icon-tv"></i>
+                                                
                                               </span>
                                               <span className="game-icon">
                                                 <img
@@ -233,10 +242,13 @@ const InPlay = () => {
 
                         <tbody
                           className={`${
-                            MatchListLength === 0 || MatchListLength === undefined ? "" : "d-none"
+                            MatchListLength === 0 ||
+                            MatchListLength === undefined
+                              ? ""
+                              : "d-none"
                           }`}>
                           <tr className="dest_notFound">
-                            <td colSpan="5">
+                            <td colSpan="6">
                               <p>No Real Data Found</p>
                             </td>
                           </tr>

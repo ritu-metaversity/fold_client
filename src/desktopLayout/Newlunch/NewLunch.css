@@ -116,7 +116,8 @@
 }
 
 .newLunch-icon .casinoicon{
-    margin: 12px;
+    margin: 5px;
+    width: calc(10% - 10px);
 }
 .newLunchName{
     font-size: 11px !important;

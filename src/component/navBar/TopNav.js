@@ -50,9 +50,14 @@ function TopNav({ gameId }) {
                         src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/66.png"
                         alt=""
                       />
-                    ) : (
+                    ) :res.sportId === 2 ? (
                       <img
                         src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/2.png"
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/gameImg/10.png"
                         alt=""
                       />
                     )}

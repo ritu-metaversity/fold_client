@@ -112,9 +112,9 @@
     font-weight: bold;
 }
 
-.sports .nav-tabs .nav-link.active {
+/* .sports .nav-tabs .nav-link.active {
     background-color: #0088cc !important;
-}
+} */
 /* .main-gameHead {
     position: sticky;
     top: 150px;
@@ -122,4 +122,13 @@
 
 .sport_name{
     font-size: 12px;
+    font-weight: 900;
+    line-height: 1;
 }
+
+a.nav-link.nav1 {
+    padding: 9px 19px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+

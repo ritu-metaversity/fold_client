@@ -48,7 +48,7 @@ function Item({ gameIdForItemPage, spName }) {
                 MatchListLength && MatchListLength > 3 ? "scrollItem" : ""
               }`}>
               <div>
-                <div className="">
+                <div className="pt-2">
                   {gameName?.find((item) => item?.sportid === gameIdForItemPage)
                     ?.matchList?.length === 0 ||gameName?.find((item) => item?.sportid === gameIdForItemPage)
                     ?.matchList?.length === undefined ? (
@@ -99,7 +99,7 @@ function Item({ gameIdForItemPage, spName }) {
                                     </span>
                                     <span className="game-icon">
                                       <img
-                                        src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/mobile/img/ic_fancy.png"
+                                        src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/front/img/icons/ic_fancy.png"
                                         alt="game-icon"
                                         className={
                                           item?.F === false ? "d-none" : ""

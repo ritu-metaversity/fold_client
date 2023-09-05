@@ -483,9 +483,9 @@ function GamedetailPage({ getStackValue, SportId }) {
                                 }`}>
                                 {item.Name}
                                 <span className="float-right">
-                                  Min Bet{" "}
+                                  Min Bet:{" "}
                                   <span>{minBet?.Odds[index]?.minBet}</span> Max
-                                  Bet <span>{minBet?.Odds[index]?.maxBet}</span>{" "}
+                                  Bet: <span>{minBet?.Odds[index]?.maxBet}</span>{" "}
                                   <span  className="game-rules-icon">
                                     <span>
                                       <i className="fa fa-info-circle float-right  ml-2"></i>

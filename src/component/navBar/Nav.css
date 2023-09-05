@@ -816,10 +816,10 @@ p {
 
 .search .fa-search-plus {
     color: var(--primary-color);
-    font-size: 24px;
+    font-size: 26px;
     margin-left: 10px;
     float: right;
-    margin-top: 5px;
+    margin-top: 2px;
 }
 
 .header-top {
@@ -1020,7 +1020,7 @@ ul.list-unstyled.navbar-nav li a {
 }
 
 .list1 {
-    padding-left: 8px;
+    padding-left: 4px;
 }
 
 .modal.fade.show.custom-modal-class {
@@ -1256,7 +1256,7 @@ input[type=radio] {
 .search-box-container {
     position: absolute;
     left: 4px;
-    top: 0;
+    top: -24px;
     z-index: 10;
     width: calc(100% - 10px);
 }
@@ -1601,5 +1601,18 @@ background-color: #007bff;
         margin-right: 9px !important;
         height: calc(100vh - 50px) !important;
         overflow: scroll !important;
+    }
+  }
+
+
+  @media screen and (max-width: 800px) {
+    .header-bottom marquee {
+        width: 98%;
+        position: absolute;
+        margin-top: -10px;
+        padding-left: 5px;
+        font-weight: bold;
+        right: 0;
+        font-size: 12px;
     }
   }

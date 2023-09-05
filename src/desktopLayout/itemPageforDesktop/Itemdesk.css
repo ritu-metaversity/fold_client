@@ -37,14 +37,6 @@
     margin-bottom: 0;
 }
 
-.coupon-table thead th {
-    font-size: 12px;
-    font-weight: 700;
-    text-align: center;
-    padding: 6px 0;
-    padding-left: 0px;
-    color: #303030;
-}
 .table thead th {
     vertical-align: bottom;
     border-bottom: 2px solid #dee2e6;
@@ -53,13 +45,7 @@
     display: table-cell;
     vertical-align: inherit;
 }
-.coupon-table thead th:first-child {
-    text-align: left;
-    width: auto;
-    padding-left: 15px;
-    text-indent: 0;
-    padding-right: 15px;
-}
+
 
 .coupon-table .main-market thead th:first-child {
     width: 52%;
@@ -76,20 +62,7 @@
     border-radius: 50%;
     background-color: #28a745 !important;
 }
-.coupon-table button {
-    width: 100%;
-    min-width: 40px;
-    height: 31px;
-    margin: 0;
-    text-align: center;
-    display: inline-block;
-    padding: 0px;
-    color: #273a47;
-    border: 0;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-}
+
 .featured-box-detail .coupon-table button {
     height: auto;
     min-height: 40px;
@@ -115,13 +88,6 @@
 .featured-box-detail .coupon-table button span.odd {
     font-size: 14px;
     margin-bottom: 1px;
-}
-
-.coupon-table tr td {
-    padding: 0;
-    vertical-align: middle;
-    font-size: 14px;
-    word-wrap: break-word;
 }
 
 .button, select {
@@ -160,15 +126,9 @@ table {
     background-color: #72bbef !important;
 }
 .coupon-table tr td:first-child {
-    padding-left: 15px;
+    padding-left: 5px;
     vertical-align: middle;
     padding-right: 15px;
-}
-.coupon-table tr td {
-    padding: 0;
-    vertical-align: middle;
-    font-size: 14px;
-    word-wrap: break-word;
 }
 .game-name {
     width: 100%;
@@ -176,31 +136,17 @@ table {
     font-size: 14px;
         font-weight: bolder;
 }
-.coupon-table tr td {
-    padding: 0;
-    vertical-align: middle;
-    font-size: 14px;
-    word-wrap: break-word;
-}
 .gIcon {
     float: right;
     width: 20%;
     text-align: right;
-}
-.text-dark {
-    color: #090a0b!important;
 }
 .thead {
     display: table-header-group;
     vertical-align: middle;
     border-color: inherit;
 }
-.a {
-    color: #007bff;
-    text-decoration: none;
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
-}
+
 .gIcon .game-icon {
     width: 25px;
     text-align: center;
@@ -314,4 +260,16 @@ table {
 .scrollItem1{
     height: 35vh;
     overflow: scroll;
+}
+
+.change_background tbody tr{
+    background-color: #f2f2f2;
+}
+
+.bet-table-header {
+    width: 100%;
+    border-bottom: 1px solid #c7c8ca;
+    border-top: 1px solid #c7c8ca;
+    padding: 5px 0;
+    background-color: #f7f7f7;
 }

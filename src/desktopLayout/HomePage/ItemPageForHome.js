@@ -7,6 +7,7 @@ import { GameAPI } from "../../apis/gameAPI";
 import NewLunch from "../Newlunch/NewLunch";
 import BannerList from "../../component/BannerSection/BannerList";
 import Itemdesk from "../itemPageforDesktop/Itemdesk";
+import DeskMainPage from "../itemPageforDesktop/DeskMainPage";
 
 function ItemPageForHome() {
   
@@ -15,7 +16,7 @@ function ItemPageForHome() {
     <div className="main">
     <div className="container-fluid container-fluid-5">
       <div className="row itemHome">
-        <Itemdesk SportId="4" />
+        <DeskMainPage />
       <NewLunch />
       </div>
     </div>

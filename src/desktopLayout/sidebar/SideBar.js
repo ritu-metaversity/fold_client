@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
-import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
 import Accordion from "react-bootstrap/Accordion";
 
@@ -104,15 +104,14 @@ function SideBar() {
         data-toggle="collapse"
         data-target=".casino"
         onClick={collapse}
-        className={`sidebar-title ${visible ? "" : "collapsed"}`}
-        aria-expanded={`${visible ? true : false}`}>
+        className={`sidebar-title ${visible ? "" : "collapsed"}`} aria-expanded={`${visible ? true : false}`}>
         <h5 className="d-inline-block m-b-0">Others</h5>
         <p className="arrow-line">
-          {visible ? <IoIosArrowDown /> : <IoIosArrowForward />}
+          {visible ? <IoIosArrowDown /> : <IoIosArrowUp />}
         </p>
       </div>
       <nav className={`casino ${visible ? "collapse show" : "d-none"}`}>
-        <ul>
+        <ul className="live_casino">
           {/* <li className="nav-item">
             <Link to="/livecasino" className="nav-link">
               <span className="new-launch-text">Live Casino</span>
@@ -138,7 +137,7 @@ function SideBar() {
         role="button">
         <h5 className="text-white d-inline-block m-b-0">All Sports</h5>
         <p className="arrow-line">
-          {visible2 ? <IoIosArrowDown /> : <IoIosArrowForward />}
+          {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
         </p>
       </div>
       <Accordion defaultActiveKey="0"  className="main_sport_header">

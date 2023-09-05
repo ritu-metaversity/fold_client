@@ -4,26 +4,38 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Itemdesk.css";
 import axios from "axios";
 import BannerList from "../../component/BannerSection/BannerList";
+import { GameAPI } from "../../apis/gameAPI";
 
-function Itemdesk({ SportId }) {
+function DeskMainPage({ SportId }) {
   const [gameName, setGameName] = useState("");
   const [SportIdd, setSportIdd] = useState(4);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeSportList, setactiveSportList] = useState({});
+  const [active, setActive] = useState(4);
+
+  const handleSportId = (id) => {
+    setSportIdd(id);
+    setActive(id);
+  };
 
   useEffect(() => {
     setIsLoading(true);
     axios
       .get(
-        `https://oddsapi.247idhub.com/betfair_api/active_match/${
-          SportId === undefined ? 4 : SportId
-        }`,
+        `https://oddsapi.247idhub.com/betfair_api/active_match/${SportIdd}`,
         { token: localStorage.getItem("token") }
       )
       .then((res) => {
         setGameName(res?.data?.data);
         setIsLoading(false);
       });
-  }, [SportId]);
+  }, [SportIdd]);
+
+  useEffect(() => {
+    GameAPI.ACTIVE_SPORT_LIST().then((res) => {
+      setactiveSportList(res);
+    });
+  }, []);
 
   const nav = useNavigate();
 
@@ -38,19 +50,27 @@ function Itemdesk({ SportId }) {
   return (
     <div>
       <div className="desk-top-view">
-        {/* <ul role="tablist" id="home-events" className="nav nav-tabs game_name">
-          <li
-            className="nav-item"
-            style={{ padding: "9px 0px", marginBottom: "3px" }}>
-            <Link to={`/${tab}`} data-toggle="tab" className="nav-link">
-              {tab == "home" || tab === ""
-                ? "Cricket"
-                : tab === "Horseracing"
-                ? "Horse Racing"
-                : tab}
-            </Link>
-          </li>
-        </ul> */}
+        <nav className="navbar navbar-expand-md  btco-hover-menu">
+          <div className="collapse navbar-collapse">
+            <ul className="list-unstyled nav_desk ">
+              {activeSportList?.length &&
+                activeSportList?.map((res) => {
+                  return (
+                    <li
+                      className="nav-item"
+                      onClick={() => handleSportId(res?.sportId)}>
+                      <Link
+                        className={`nav-pills nav-b ${
+                          active === res?.sportId ? "activeNav" : ""
+                        }`}>
+                        {res?.sportName}
+                      </Link>
+                    </li>
+                  );
+                })}
+            </ul>
+          </div>
+        </nav>
         <div style={{ margin: "3px 0px" }}>
           {localStorage.getItem("token") === null ? <BannerList /> : ""}
         </div>
@@ -67,7 +87,7 @@ function Itemdesk({ SportId }) {
                           fontSize: "14px",
                           fontWeight: "900",
                         }}>
-                        <b>Game</b>
+                       <b>Game</b>
                       </th>
                       <th colSpan="2">1</th>
                       <th colSpan="2">X</th>
@@ -106,6 +126,7 @@ function Itemdesk({ SportId }) {
                                   </span>
                                   <span className="game-icon">
                                     <i className="fa fa-tv v-m icon-tv"></i>
+                                    
                                   </span>
                                   <span className="game-icon">
                                     <img
@@ -185,15 +206,16 @@ function Itemdesk({ SportId }) {
                         })}
                     </tbody>
                   )}
-                  {
-                   ( gameName?.length === undefined || gameName?.length === 0 ) && <tbody class="">
-                    <tr class="dest_notFound">
-                      <td colspan="6">
-                        <p>No Real Data Found</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                  }
+                  {(gameName?.length === undefined ||
+                    gameName?.length === 0) && (
+                    <tbody class="">
+                      <tr class="dest_notFound">
+                        <td colspan="6">
+                          <p>No Real Data Found</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  )}
                 </table>
               </div>
             </div>
@@ -204,4 +226,4 @@ function Itemdesk({ SportId }) {
   );
 }
 
-export default Itemdesk;
+export default DeskMainPage;
