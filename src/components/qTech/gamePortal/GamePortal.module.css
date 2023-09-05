@@ -15,7 +15,7 @@
   /* padding-top: 45.5%; */
   width: 97%;
   position: relative;
-  height: 96vh;
+  height: 94vh;
 }
 
 .responsive-iframe {
@@ -40,11 +40,11 @@
   color: var(--over-lay);
 }
 
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
   .main_div {
     height: 97vh;
   }
-}
+} */
 
 /* @media (max-width: 600px) {
   .main_div {
@@ -60,7 +60,7 @@
 
 @media (max-width: 450px) {
   .main_div {
-    height: 94vh;
+    height: 93vh;
   }
 }
 
