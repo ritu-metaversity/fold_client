@@ -10,7 +10,6 @@ export const AuthorAPI = {
             userId: userId,
             password: password,
             appUrl: window.location.hostname
-            // appUrl: "247diamondexch.com"
         },
         signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
       })
