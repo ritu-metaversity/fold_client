@@ -24,7 +24,6 @@ export const StyledMain = styled(Box)(({ theme }) => ({
 }));
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
-
   return (
     <div>
       <Header></Header>
