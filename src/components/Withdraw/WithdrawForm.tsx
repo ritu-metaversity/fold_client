@@ -27,8 +27,8 @@ import CustomizedDialogs from "../common/Dailog";
 
 const err = {
   invalidName:
-    "The Account Name field may only contain alphabetic characters as well as spaces",
-  noName: "The Account Name field is required",
+    "The Account Holder Name field may only contain alphabetic characters as well as spaces",
+  noName: "The Account Holder Name field is required",
   noBank: "The Bank Name field is required",
   noIfsc: "The IFSC field is required",
   invalidIfsc: "The IFSC field format is invalid",
@@ -255,6 +255,12 @@ export function WithdrawForm({
               error={Boolean(errors.amount)}
               helperText={errors.amount}
               onChange={handleChange}
+              onKeyDown={(e) => {
+                if ([".", " "].includes(e.key)) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }
+              }}
               margin="dense"
               placeholder="Amount"
             />
@@ -354,7 +360,7 @@ export function WithdrawForm({
               </Box>
               <Box>
                 <Typography variant="caption" m={1}>
-                  Account Name
+                  Account Holder Name
                 </Typography>
                 <WithdrawInput
                   value={values.accountHolderName.trimStart()}
@@ -363,7 +369,7 @@ export function WithdrawForm({
                   error={Boolean(errors.accountHolderName)}
                   helperText={errors.accountHolderName}
                   margin="dense"
-                  placeholder="Account Name"
+                  placeholder="Account Holder Name"
                 />
               </Box>
               <Box>
@@ -438,7 +444,7 @@ export function WithdrawForm({
               </Box>
               <Box>
                 <Typography variant="caption" m={1}>
-                  Account Name
+                  Account Holder Name
                 </Typography>
                 <WithdrawInput
                   value={values.accountHolderName.trimStart()}
@@ -447,7 +453,7 @@ export function WithdrawForm({
                   error={Boolean(errors.accountHolderName)}
                   helperText={errors.accountHolderName}
                   margin="dense"
-                  placeholder="Account Name"
+                  placeholder="Account Holder Name"
                 />
               </Box>
             </>
@@ -472,7 +478,7 @@ export function WithdrawForm({
               </Box>
               <Box>
                 <Typography variant="caption" m={1}>
-                  Account Name
+                  Account Holder Name
                 </Typography>
                 <WithdrawInput
                   value={values.accountHolderName.trimStart()}
@@ -481,7 +487,7 @@ export function WithdrawForm({
                   error={Boolean(errors.accountHolderName)}
                   helperText={errors.accountHolderName}
                   margin="dense"
-                  placeholder="Account Name"
+                  placeholder="Account Holder Name"
                 />
               </Box>
             </>

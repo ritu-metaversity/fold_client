@@ -16,7 +16,7 @@ export const savedColumns: ColumnsInterface<columnIds>[] = [
   },
   {
     id: "accountHolderName",
-    label: "Account Name",
+    label: "Account Holder Name",
   },
   {
     id: "bankName",
