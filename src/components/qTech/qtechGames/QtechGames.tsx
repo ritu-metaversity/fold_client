@@ -16,7 +16,7 @@ function QtechGames() {
       // gender: "M",
       // birthDate: "1986-01-01",
       // lang: "en_IN",
-      mode: "real",
+      mode: "demo",
       device: "desktop",
       walletSessionId: sessionToken,
       token,
