@@ -4,7 +4,7 @@ export const qTechGamesResourcs: {
 } = {
   Q_TECH_AUTH: {
     URL: `${process.env.REACT_APP_Q_TECH_DEMO_URL}/api/qtech/authentication`,
-    METHOD: "POST",
+    METHOD: "GET",
   },
   Q_GAME_LISTS: {
     URL: `${process.env.REACT_APP_Q_TECH_DEMO_URL}/api/qtech/gamelist`,
