@@ -4,11 +4,12 @@ interface Props {
   getName: (value: string) => void;
   value: string;
   providerList: { name: string; logo: string; filterType: string }[];
+  cls?: string;
 }
 
-function ProvidersTabs({ getName, value, providerList }: Props) {
+function ProvidersTabs({ getName, value, providerList, cls }: Props) {
   return (
-    <div className={classes["contianer"]}>
+    <div className={!cls ? classes["contianer"] : classes[cls!]}>
       {providerList.map((el) => (
         <div
           onClick={() => getName(el?.filterType)}

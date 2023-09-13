@@ -5,7 +5,6 @@ import {
   tabClasses,
   useMediaQuery,
   Typography,
-  // Modal,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useContext, useEffect, useState } from "react";
@@ -17,7 +16,6 @@ import { casinoService } from "../../utils/api/casino/service";
 import { UserContext } from "../../App";
 import axios from "axios";
 import CasinoGame from "./game/CasinoGame";
-import ProviderTabsWithGames from "../qTech/providerTabsWithGames/providerTabsWithGames";
 import { supernowaServices } from "../../utils/api/supernowa/services";
 
 const StyledTab = styled(Tab)(({ theme }) => ({
@@ -158,123 +156,103 @@ const Casino = () => {
 
   return (
     <HomeLayout>
-      {urlPathName !== "slot" && (
-        <div>
-          {casinoTypes?.length > 0 && (
-            <Tabs
-              variant="scrollable"
-              scrollButtons={true}
-              TabScrollButtonProps={{
-                sx: {
-                  opacity: "1 !important",
-                  bgcolor: colorHex.bg2,
-                  borderRadius: "50%",
-                  width: "40px",
-                  margin: "auto",
-                  height: "40px",
-                  marginRight: "10px",
-                },
-              }}
-              TabIndicatorProps={{ sx: { display: "none" } }}
-              sx={{
-                position: "sticky",
-                top: matches ? 50 : 80,
-                paddingY: "0.8rem",
-                backgroundColor: colorHex.bg6,
-              }}
-              value={value}
-              onChange={(e, value) => {
-                setValue(value);
-                if (setCasinoId) setCasinoId(value);
-              }}
-            >
-              {casinoTypes.map((item) => (
-                <StyledTab
-                  icon={<CasinoIcon src={item.logo} />}
-                  iconPosition="start"
-                  value={item.id}
-                  label={item.name}
-                />
-              ))}
-              <StyledTab
-                icon={
-                  <CasinoIcon
-                    src={
-                      "https://wver.sprintstaticdata.com/v14/static/front/img/icons/26.png"
-                    }
-                  />
+      {casinoTypes?.length > 0 && (
+        <Tabs
+          variant="scrollable"
+          scrollButtons={true}
+          TabScrollButtonProps={{
+            sx: {
+              opacity: "1 !important",
+              bgcolor: colorHex.bg2,
+              borderRadius: "50%",
+              width: "40px",
+              margin: "auto",
+              height: "40px",
+              marginRight: "10px",
+            },
+          }}
+          TabIndicatorProps={{ sx: { display: "none" } }}
+          sx={{
+            position: "sticky",
+            top: matches ? 50 : 80,
+            paddingY: "0.8rem",
+            backgroundColor: colorHex.bg6,
+          }}
+          value={value}
+          onChange={(e, value) => {
+            setValue(value);
+            if (setCasinoId) setCasinoId(value);
+          }}
+        >
+          {casinoTypes.map((item) => (
+            <StyledTab
+              icon={<CasinoIcon src={item.logo} />}
+              iconPosition="start"
+              value={item.id}
+              label={item.name}
+            />
+          ))}
+          <StyledTab
+            icon={
+              <CasinoIcon
+                src={
+                  "https://wver.sprintstaticdata.com/v14/static/front/img/icons/26.png"
                 }
-                iconPosition="start"
-                value={"Games"} // change into the nunber once this is dynamic
-                label={"Games"}
               />
-              {/* <StyledTab
-          icon={<CasinoIcon src="/assets/images/casino.png" />}
-          iconPosition="start"
-          value="2"
-          label="Indian Casino"
-        />
-        <StyledTab
-          icon={<CasinoIcon src="/assets/images/casino.png" />}
-          iconPosition="start"
-          value="3"
-          label="Our Virtual"
-        /> */}
-            </Tabs>
+            }
+            iconPosition="start"
+            value={"Games"} // change into the nunber once this is dynamic
+            label={"Games"}
+          />
+        </Tabs>
+      )}
+      <Box bgcolor={colorHex.bg1}>
+        <Box m={"10px"} display={"flex"} flexWrap="wrap" gap={"10px"}>
+          {!(casinoList?.length > 0) && (
+            <Typography
+              textAlign={"center"}
+              sx={{ verticalAlign: "center" }}
+              flex={1}
+            >
+              NO Casino Found
+            </Typography>
           )}
-        </div>
-      )}
-      {value === "Games" || urlPathName === "slot" ? (
-        <ProviderTabsWithGames />
-      ) : (
-        <Box bgcolor={colorHex.bg1}>
-          <Box m={"10px"} display={"flex"} flexWrap="wrap" gap={"10px"}>
-            {!(casinoList?.length > 0) && (
-              <Typography
-                textAlign={"center"}
-                sx={{ verticalAlign: "center" }}
-                flex={1}
-              >
-                NO Casino Found
-              </Typography>
-            )}
-            {casinoList.map((item) => (
-              <Box
-                width={{
-                  xs: "calc(50% - 10px)",
-                  sm: "calc(50% - 10px)",
-                  md: "calc(25% - 10px)",
-                  lg: "calc(20% - 10px)",
-                }}
-                m="auto"
-              >
-                <StyledGameThumb
-                  onClick={() => setOpen(item.gameId)}
-                  src={item.imageUrl}
-                  alt="thumb"
-                />
-              </Box>
-            ))}
-            {supernowaGamesList.map((item) => (
-              <Box
-                width={{
-                  xs: "calc(50% - 10px)",
-                  sm: "calc(50% - 10px)",
-                  md: "calc(25% - 10px)",
-                  lg: "calc(20% - 10px)",
-                }}
-                m="auto"
-              >
-                <StyledGameThumb
-                  onClick={() => authHandler(item)}
-                  src={item.thumb}
-                  alt="thumb"
-                />
-              </Box>
-            ))}
-          </Box>
+          {casinoList.map((item) => (
+            <Box
+              width={{
+                xs: "calc(50% - 10px)",
+                sm: "calc(50% - 10px)",
+                md: "calc(25% - 10px)",
+                lg: "calc(20% - 10px)",
+              }}
+              m="auto"
+            >
+              <StyledGameThumb
+                onClick={() => setOpen(item.gameId)}
+                src={item.imageUrl}
+                alt="thumb"
+              />
+            </Box>
+          ))}
+          {supernowaGamesList.map((item) => (
+            <Box
+              width={{
+                xs: "calc(50% - 10px)",
+                sm: "calc(50% - 10px)",
+                md: "calc(25% - 10px)",
+                lg: "calc(20% - 10px)",
+              }}
+              m="auto"
+            >
+              <StyledGameThumb
+                onClick={() => authHandler(item)}
+                src={item.thumb}
+                alt="thumb"
+              />
+            </Box>
+          ))}
         </Box>
-      )}
+      </Box>
       {!!open && (
         <CasinoGame
           name={casinoList.find((i) => i.gameId === open)?.gameName}

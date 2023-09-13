@@ -17,6 +17,22 @@ code {
   --gray-cl: #cacaca;
   --over-lay: #000000ca;
   --light-dark: #898989;
+  --bg-body: #23292e;
+  --text-body: #aaafb5;
+  --bg-sidebar: #16191c;
+  --text-sidebar: #aaafb5;
+  --bg-table: #2e3439;
+  --text-table: #aaafb5;
+  --bg-table-header: #3c444b;
+  --text-table-header: #aaafb5;
+  --text-highlight: #ffffff;
+  --text-fancy: #fdcf13;
+  --btn-primary: #03b37f;
+  --btn-secondary: #03b37f52;
+  --btn-reset: #fc4242;
+  --bg-tabs: #03b37f33;
+  --bg-news: #005a40;
+  --text-white: #ffffff;
 }
 
 .mid_container {

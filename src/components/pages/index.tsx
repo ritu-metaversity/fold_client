@@ -30,6 +30,8 @@ const ProviderGames = React.lazy(
   () => import("../qTech/providerGames/ProviderGames")
 );
 const Fantasy = React.lazy(() => import("../qTech/fantasy/fantasy"));
+const Slot = React.lazy(() => import("../qTech/slot/Slot"));
+const LiveCasino = React.lazy(() => import("../qTech/liveCasino/LiveCasino"));
 
 const Pages = () => {
   useEffect(() => {
@@ -56,9 +58,9 @@ const Pages = () => {
               <Route path="activity" element={<Activity />} />
               <Route path="currentbets" element={<CurrentBets />} />
             </Route>
-            <Route path="/casino" element={<Casino />} />
+            <Route path="/casino" element={<LiveCasino />} />
             <Route path="/fantasy" element={<Fantasy />} />
-            <Route path="/slot" element={<Casino />} />
+            <Route path="/slot" element={<Slot />} />
             {/* <Route path="/casino/:id" element={<CasinoGame />} /> */}
             <Route path="/virtual-casino" element={<Casino />} />
             <Route path="/profile" element={<Profile />} />
