@@ -5,6 +5,7 @@ import { UserAPI } from "../../apis/UserAPI";
 import { AuthorAPI } from "../../apis/AuthorAPI";
 import Modal from "react-bootstrap/Modal";
 import ExposureModal from "../Items/ExposureModal/ExposureModal";
+import LatestEvent from "../../common/LatestEvent";
 
 const NavBar = () => {
   const [close, setClose] = useState(false);
@@ -410,8 +411,14 @@ const NavBar = () => {
                   <marquee scrollamount="3" className="searchClose">
                     {userMessage}
                   </marquee>
+                  
                 </div>
+                
               </div>
+              {/* {
+                (pathname === "/" || pathname === "/m/In-play" || pathname ==="/m/sports" ) && <LatestEvent/>
+              } */}
+              
             </div>
           </header>
         </div>

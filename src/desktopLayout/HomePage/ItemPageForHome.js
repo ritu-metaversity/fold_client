@@ -8,19 +8,19 @@ import NewLunch from "../Newlunch/NewLunch";
 import BannerList from "../../component/BannerSection/BannerList";
 import Itemdesk from "../itemPageforDesktop/Itemdesk";
 import DeskMainPage from "../itemPageforDesktop/DeskMainPage";
+import LatestEvent from "../../common/LatestEvent";
 
 function ItemPageForHome() {
-  
-
   return (
     <div className="main">
-    <div className="container-fluid container-fluid-5">
-      <div className="row itemHome">
-        <DeskMainPage />
-      <NewLunch />
+      <div className="container-fluid container-fluid-5">
+        <div className="row itemHome">
+          {/* <LatestEvent /> */}
+          <DeskMainPage />
+          <NewLunch />
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 

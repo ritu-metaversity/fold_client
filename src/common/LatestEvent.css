@@ -1,0 +1,79 @@
+@media screen and (max-width: 1199px) {
+    .latest-event {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        margin-bottom: 0 !important;
+        white-space: nowrap !important;
+        background-color: #0088cc !important;
+    }
+
+    .latest-event-item {
+        min-width: 50% !important;
+        width: auto;
+        max-width: 100% !important;
+        height: 100% !important;
+    }
+}
+
+.latest-event {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 5px;
+    background: #0088cc;
+    background-color: transparent;
+    padding: 0;
+    align-items: flex-start;
+}
+
+.latest-event-item {
+    flex: 1;
+    max-width: 100%;
+    min-width: calc(20% - 10px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background: #2c3e50;
+    margin-right: 5px;
+    border-radius: 4px;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.latest-event-item a {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: #fff;
+    padding: 4px 0px;
+}
+
+.blink_me {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+.latest-event-item a span {
+    margin-left: 5px;
+    white-space: nowrap;
+    height: auto;
+    max-width: calc(100% - 42px);
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
