@@ -54,6 +54,7 @@ function Fantasy() {
         providerList={data}
         getName={getProviderValue}
         value={SelectedProvider || ""}
+        cls={"provider"}
       />
       <div>
         <div className={classes["games_container"]}>

@@ -35,6 +35,8 @@ const linksWithoutSideBar = [
   "/report/accountstatement",
   "/report/activity",
   "/report/currentbets",
+  "/slot",
+  "/casino",
 ];
 
 export const topNavHeight = "1.9rem";

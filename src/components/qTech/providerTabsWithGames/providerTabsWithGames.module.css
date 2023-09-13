@@ -4,7 +4,7 @@
 
 .games_container {
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 0 0px 1rem;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
@@ -14,19 +14,44 @@
 }
 
 .games_card {
-  /* height: 140px; */
   padding: 0.5rem;
 }
 
 .games_card img {
   width: 100%;
-  /* height: 100%; */
   cursor: pointer;
+}
+
+.slide_div {
+  display: flex;
+}
+
+.side_provider_list {
+  width: 23%;
+}
+
+.games_div {
+  width: 100%;
+}
+
+@media (max-width: 1400px) {
+  .side_provider_list {
+    width: 40%;
+  }
 }
 
 @media (max-width: 1000px) {
   .games_container {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1300px) {
+  .slide_div {
+    display: block;
+  }
+  .side_provider_list {
+    width: 100%;
   }
 }
 

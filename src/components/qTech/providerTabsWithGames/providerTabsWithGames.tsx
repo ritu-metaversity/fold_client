@@ -8,12 +8,11 @@ import { Box } from "@mui/material";
 import GamePortal from "../gamePortal/GamePortal";
 import { casinoProviderList, slotProviderList } from "./providers.data";
 
-function ProviderTabsWithGames() {
+function ProviderTabsWithGames({ filter }: { filter: string }) {
   const [GameLists, setGameLists] = useState<GameListInterface[]>([]);
   const [SelectedProvider, setSelectedProvider] = useState<string | null>(null);
   const [ShowPortal, setShowPortal] = useState<boolean>(false);
   const [SelectedGame, setSelectedGame] = useState<string | null>(null);
-  const urlPathName = window.location.pathname.split("/")[1];
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [Category, setCategory] = useState<string[]>([]);
   const [filterValue, setFilterValue] = useState<string | null>(null);
@@ -29,8 +28,7 @@ function ProviderTabsWithGames() {
     const { response } = await qTechServices.gameLists({
       token,
       provider: SelectedProvider || "",
-      gameCategory:
-        urlPathName === "slot" ? urlPathName.toUpperCase() : "LIVECASINO",
+      gameCategory: filter === "slot" ? filter.toUpperCase() : "LIVECASINO",
     });
     setIsLoading(false);
 
@@ -61,7 +59,6 @@ function ProviderTabsWithGames() {
     if (!!response && response?.data && response?.data?.access_token) {
       const { access_token } = response?.data;
       window.localStorage.setItem("qtech_access_token", access_token);
-
       await getGameLists(access_token);
     }
   };
@@ -99,73 +96,80 @@ function ProviderTabsWithGames() {
     setGameLists([]);
     setCategory([]);
     authenticationHandler();
-  }, [SelectedProvider, urlPathName]);
+  }, [SelectedProvider, filter]);
 
   return (
     <div className={classes["container"]}>
       {!!ShowPortal ? (
         <GamePortal gameName={SelectedGame || ""} close={showAndHideHandler} />
       ) : null}
-      <ProvidersTabs
-        providerList={
-          urlPathName === "slot" ? slotProviderList : casinoProviderList
-        }
-        getName={getProviderValue}
-        value={SelectedProvider || ""}
-      />
-      {!!Category && Category?.length ? (
-        <div className={classes["category_filter_div"]}>
-          {Category.map((el) => (
-            <div
-              onClick={() => filterHandler(el)}
-              className={classes["wrapper"]}
-            >
-              <div
-                key={el}
-                className={`${classes["cr"]} ${
-                  classes[el === filterValue ? "active" : "unactive"]
-                } `}
-              >
-                <p>{el}</p>
-              </div>
-            </div>
-          ))}
+      <div className={classes["slide_div"]}>
+        <div className={classes["side_provider_list"]}>
+          <ProvidersTabs
+            providerList={
+              filter === "slot" ? slotProviderList : casinoProviderList
+            }
+            getName={getProviderValue}
+            value={SelectedProvider || ""}
+          />
         </div>
-      ) : null}
-      {isLoading && (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <CircularProgress />
-        </Box>
-      )}
-      <div className={classes["games_container"]}>
-        {(!!filterGamesList && filterGamesList?.length) ||
-        (!!GameLists && GameLists.length)
-          ? (!!filterGamesList && filterGamesList?.length
-              ? filterGamesList
-              : GameLists
-            ).map((el) => (
-              <div
-                onClick={() => {
-                  setSelectedGame(el?.id);
-                  showAndHideHandler();
-                }}
-                key={el?.id}
-                className={classes["games_card"]}
-              >
-                <img src={el?.images?.[1]?.url} alt={el?.name} />
-              </div>
-            ))
-          : null}
+        <div className={classes["games_div"]}>
+          {!!Category && Category?.length ? (
+            <div className={classes["category_filter_div"]}>
+              {Category.map((el) => (
+                <div
+                  onClick={() => filterHandler(el)}
+                  className={classes["wrapper"]}
+                >
+                  <div
+                    key={el}
+                    className={`${classes["cr"]} ${
+                      classes[el === filterValue ? "active" : "unactive"]
+                    } `}
+                  >
+                    <p>{el}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
+          {isLoading && (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: "50px",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          )}
+          <div className={classes["games_container"]}>
+            {(!!filterGamesList && filterGamesList?.length) ||
+            (!!GameLists && GameLists.length)
+              ? (!!filterGamesList && filterGamesList?.length
+                  ? filterGamesList
+                  : GameLists
+                ).map((el) => (
+                  <div
+                    onClick={() => {
+                      setSelectedGame(el?.id);
+                      showAndHideHandler();
+                    }}
+                    key={el?.id}
+                    className={classes["games_card"]}
+                  >
+                    <img src={el?.images?.[1]?.url} alt={el?.name} />
+                  </div>
+                ))
+              : null}
+          </div>
+          {!isLoading && !GameLists.length && (
+            <p className={classes["cnt"]}>No Games found</p>
+          )}
+        </div>
       </div>
-      {!isLoading && !GameLists.length && (
-        <p className={classes["cnt"]}>No Games found</p>
-      )}
     </div>
   );
 }

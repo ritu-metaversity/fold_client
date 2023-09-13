@@ -60,7 +60,7 @@ export const slotProviderList: ProviderInterface[] = [
     filterType: "AUX",
   },
   {
-    name: "BIG TIME GAMING",
+    name: "BIG TIME",
     logo: "https://images.squarespace-cdn.com/content/v1/60aedd95a74c4c4033f9d064/1623895434956-BV0PANOPBDWZ2FMFV53V/BTG_Logo_White.png?format=1500w",
     filterType: "BTG",
   },
