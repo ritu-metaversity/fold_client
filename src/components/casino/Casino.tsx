@@ -18,6 +18,7 @@ import { UserContext } from "../../App";
 import axios from "axios";
 import CasinoGame from "./game/CasinoGame";
 import ProviderTabsWithGames from "../qTech/providerTabsWithGames/providerTabsWithGames";
+import { supernowaServices } from "../../utils/api/supernowa/services";
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: "20px",
@@ -40,6 +41,14 @@ export interface CasinoList {
   imageUrl: string;
 }
 
+export interface SuperNowaGameInterface {
+  name: string;
+  code: string;
+  thumb: string;
+  providerName: string;
+  providerCode: string;
+}
+
 const Casino = () => {
   const [value, setValue] = useState("323334");
   const [casinoTypes, setCasinoTypes] = useState<
@@ -49,9 +58,14 @@ const Casino = () => {
       name: string;
     }[]
   >([]);
+  const [supernowaGamesList, setSupernowaGamesList] = useState<
+    SuperNowaGameInterface[]
+  >([]);
   const [open, setOpen] = useState(0);
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
   const urlPathName = window.location.pathname.split("/")[1];
+  const token = localStorage.getItem("token");
+  const [gameLaunchURL, setGameLaunchURL] = useState<string | null>(null);
 
   const nav = useNavigate();
   const { isSignedIn, setCasinoId } = useContext(UserContext);
@@ -78,11 +92,50 @@ const Casino = () => {
     // }
   };
 
+  const getSuperNowaGameList = async () => {
+    const { response } = await supernowaServices.gameLists({
+      providerCode: "SN",
+    });
+
+    if (
+      response &&
+      response?.data &&
+      response?.data?.games &&
+      response?.data?.games.length
+    ) {
+      const { games } = response?.data;
+      setSupernowaGamesList(games);
+    }
+  };
+
+  const authHandler = async (item: SuperNowaGameInterface) => {
+    setOpen(1);
+
+    const { response } = await supernowaServices.authentication({
+      game: {
+        gameCode: item?.code,
+        providerCode: item?.providerCode,
+      },
+      timestamp: new Date().getTime(),
+      user: {
+        currency: "INR",
+        backUrl: "http://maggibook.com",
+      },
+    });
+
+    if (response && response?.data && response?.data?.launchURL) {
+      const { launchURL } = response?.data;
+      setGameLaunchURL(launchURL);
+    }
+  };
+
   useEffect(() => {
     getCasinoList();
   }, [value, isSignedIn]);
 
   useEffect(() => {
+    getSuperNowaGameList();
+
     const getCasinoTypes = async () => {
       if (!isSignedIn) {
         nav("/");
@@ -180,7 +233,6 @@ const Casino = () => {
               <Typography
                 textAlign={"center"}
                 sx={{ verticalAlign: "center" }}
-                // height={"50vh"}
                 flex={1}
               >
                 NO Casino Found
@@ -193,17 +245,31 @@ const Casino = () => {
                   sm: "calc(50% - 10px)",
                   md: "calc(25% - 10px)",
                   lg: "calc(20% - 10px)",
-                  // xl: "calc(20% - 10px)",
                 }}
                 m="auto"
               >
-                {/* <Link to={"/casino/" + item.gameId}> */}
                 <StyledGameThumb
                   onClick={() => setOpen(item.gameId)}
                   src={item.imageUrl}
                   alt="thumb"
-                />{" "}
-                {/* </Link> */}
+                />
+              </Box>
+            ))}
+            {supernowaGamesList.map((item) => (
+              <Box
+                width={{
+                  xs: "calc(50% - 10px)",
+                  sm: "calc(50% - 10px)",
+                  md: "calc(25% - 10px)",
+                  lg: "calc(20% - 10px)",
+                }}
+                m="auto"
+              >
+                <StyledGameThumb
+                  onClick={() => authHandler(item)}
+                  src={item.thumb}
+                  alt="thumb"
+                />
               </Box>
             ))}
           </Box>
@@ -214,6 +280,14 @@ const Casino = () => {
           name={casinoList.find((i) => i.gameId === open)?.gameName}
           id={open}
           handleClose={() => setOpen(0)}
+          desktopUrl={
+            gameLaunchURL ||
+            `https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`
+          }
+          mobileUrl={
+            gameLaunchURL ||
+            `https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`
+          }
         />
       )}
     </HomeLayout>
