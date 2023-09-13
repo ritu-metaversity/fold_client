@@ -160,7 +160,7 @@ table {
     border-color: grey;
 }
 .lay, .lay-color {
-    background-color: #faa9ba !important;
+    background-color: #faa9ba;
 }
 .back, .back-color {
     background-color: #72bbef !important;

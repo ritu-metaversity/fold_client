@@ -75,14 +75,6 @@ const RouteDesktop = () => {
     // }
   }, [pathname]);
 
-  // useEffect(() => {   1234567890
-  //   if (
-  //     pathname !== "/setting/changepassword" &&
-  //     localStorage.getItem("Password-type") === "old"
-  //   ) {
-  //     nav("/setting/changepassword");
-  //   }
-  // }, [pathname]);
   const idddd = (id) => {
     setSportId(id);
   };
@@ -107,7 +99,6 @@ const RouteDesktop = () => {
     });
   }, []);
 
-  console.log(ItselfAllowed !== true, "Sdasdasd");
 
   return (
     <div>

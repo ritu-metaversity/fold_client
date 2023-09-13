@@ -63,7 +63,7 @@
 
 .lay,
 .lay-color {
-    background-color: #faa9ba !important;
+    background-color: #faa9ba ;
 }
 
 .box-1 {
@@ -702,7 +702,7 @@ p.team-name.col-6.text-right {
 
 .blink {
     animation: blinking 5s infinite !important;
-    background-color: #ffc01a !important;
+    background-color: #f9c235 !important;
 }
 
 
@@ -854,6 +854,7 @@ p.no-found {
 .place-value{
     width: 100%;
     overflow: hidden;
+    padding: 0px;
 }
 .odbtn{
     width: 100% !important;

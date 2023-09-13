@@ -27,7 +27,7 @@
        }      
     }
     .lay{
-    background-color: #faa9ba  !important;
+    background-color: #faa9ba;
 }
     .back-2{
     
@@ -183,6 +183,7 @@
 .place-value{
     width: 100%;
     overflow: hidden;
+    padding: 0px;
 }
 .odbtn{
     width: 100% !important;

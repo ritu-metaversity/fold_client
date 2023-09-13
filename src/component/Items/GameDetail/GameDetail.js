@@ -536,7 +536,7 @@ function GameDetail({ getStackValue}) {
                                                 ?.price
                                               return (
                                                 <div
-                                                  key={e?.size + e?.price + id}
+                                                  key={id+"back"}
                                                   onClick={(e) =>
                                                     handleShow(e, id)
                                                   }
@@ -589,7 +589,7 @@ function GameDetail({ getStackValue}) {
                                               ?.availableToLay[id]?.price
                                             return (
                                               <div
-                                                key={e?.size + e?.price}
+                                                key={id+"lay"}
                                                 onClick={(e) =>
                                                   handleShow(e, id)
                                                 }
