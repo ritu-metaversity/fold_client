@@ -27,7 +27,7 @@ function GamePortal({ gameName, close }: Props) {
         gender: "M",
         birthDate: "1986-01-01",
         lang: "en_IN",
-        mode: "demo",
+        mode: "real",
         device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
         returnUrl: "http://playindia.app",
         walletSessionId: sessionToken,
