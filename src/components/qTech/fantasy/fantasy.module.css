@@ -24,6 +24,27 @@
   cursor: pointer;
 }
 
+.gam_ls {
+  display: flex;
+}
+
+.tl {
+  width: 23%;
+}
+
+.game_cr {
+  width: 100%;
+}
+
+@media (max-width: 1300px) {
+  .gam_ls {
+    display: block;
+  }
+  .tl {
+    width: 100%;
+  }
+}
+
 @media (max-width: 1000px) {
   .games_container {
     grid-template-columns: repeat(4, 1fr);
