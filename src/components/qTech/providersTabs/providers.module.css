@@ -1,6 +1,6 @@
 .contianer {
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 0 0 1rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   position: relative;
@@ -15,12 +15,12 @@
 }
 
 .tab_container {
-  padding: 0.3rem;
+  padding: 0.2rem;
 }
 
 .tab {
   width: 100%;
-  padding: 0.7rem 0;
+  padding: 0.6rem 0;
   cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid var(--text-body);
@@ -44,6 +44,7 @@
 
 @media (max-width: 1300px) {
   .contianer {
+    padding: 1rem;
     grid-template-columns: repeat(8, 1fr);
   }
 }

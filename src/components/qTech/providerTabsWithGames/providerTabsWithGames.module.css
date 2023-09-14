@@ -4,7 +4,7 @@
 
 .games_container {
   width: 100%;
-  padding: 1rem 0 0px 1rem;
+  padding: 0.2rem 0 0px 1rem;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
@@ -53,6 +53,12 @@
   .side_provider_list {
     width: 100%;
   }
+  .category_filter_div {
+    padding: 1rem;
+  }
+  .games_container {
+    padding: 1rem;
+  }
 }
 
 @media (max-width: 800px) {
@@ -75,7 +81,7 @@
 
 .category_filter_div {
   display: flex;
-  padding: 1rem;
+  padding: 1rem 0 0 1rem;
   flex-wrap: wrap;
 }
 
@@ -86,8 +92,15 @@
 .category_filter_div .cr {
   padding: 0.5rem;
   cursor: pointer;
-  border: 1px solid var(--light-dark);
+  /* border: 1px solid var(--light-dark); */
   border-radius: 5px;
+  min-width: 62px;
+  transition: all 0.4s ease;
+}
+
+.category_filter_div .cr img {
+  width: 16px;
+  height: auto;
 }
 
 .category_filter_div p {

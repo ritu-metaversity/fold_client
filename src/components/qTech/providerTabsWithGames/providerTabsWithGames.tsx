@@ -47,6 +47,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
       const uniqueArrayValues: string[] = Array.from(new Set(categories));
       if (!!uniqueArrayValues && !!uniqueArrayValues.length) {
         uniqueArrayValues.unshift("All");
+
         setCategory(uniqueArrayValues);
       }
       setGameLists(items);
@@ -75,6 +76,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
         const category = GameLists[i]?.category;
         const categoryAr = category.split("/");
         const lastElm = categoryAr[categoryAr.length - 1];
+
         if (lastElm === value) {
           filterGameLists.push(GameLists[i]);
         }
@@ -118,15 +120,25 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
             <div className={classes["category_filter_div"]}>
               {Category.map((el) => (
                 <div
+                  key={el}
                   onClick={() => filterHandler(el)}
                   className={classes["wrapper"]}
                 >
                   <div
-                    key={el}
                     className={`${classes["cr"]} ${
                       classes[el === filterValue ? "active" : "unactive"]
                     } `}
                   >
+                    <img
+                      src={
+                        filter == "slot"
+                          ? el == "All" || el === "OTHER"
+                            ? `/assets/Icons/slot/${el}.png`
+                            : "/assets/Icons/slot/slot.png"
+                          : `/assets/Icons/casino/${el}.png`
+                      }
+                      alt={el}
+                    />
                     <p>{el}</p>
                   </div>
                 </div>
