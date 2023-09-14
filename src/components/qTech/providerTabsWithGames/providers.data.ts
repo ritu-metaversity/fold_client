@@ -10,7 +10,6 @@ export const casinoProviderList: ProviderInterface[] = [
     logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/5.png",
     filterType: "EVO",
   },
-
   {
     name: "VIVO GAMING",
     logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/21.png",
@@ -113,5 +112,95 @@ export const slotProviderList: ProviderInterface[] = [
     name: "GAME FISH",
     logo: "https://nuxgame.com/img/logo_Nuxgame_2023.webp",
     filterType: "GFG",
+  },
+  {
+    logo: "https://www.yggdrasilgaming.com/w/files/2022/02/logo-header.svg",
+    name: "YGGDRASIL",
+    filterType: "YGG",
+  },
+  {
+    logo: "https://www.woohoogames.com/themes/woohoo/images/logo.svg",
+    name: "WOOHOO",
+    filterType: "WOO",
+  },
+  {
+    logo: "https://www.triple-pg.com/wp-content/uploads/2023/05/logo-wh.svg",
+    name: "TRIPLE",
+    filterType: "TPG",
+  },
+  {
+    logo: "https://www.thunderkick.com/wp-content/uploads/2021/04/thunderkick-logo-horizontal-white.svg",
+    name: "THUNDER",
+    filterType: "TPG",
+  },
+  // {
+  //   logo: "https://www.thunderkick.com/wp-content/uploads/2021/04/thunderkick-logo-horizontal-white.svg",
+  //   name: "Splitrock Gaming",
+  //   filterType: "TPG",
+  // },
+  // {
+  //   logo: "https://wazdan.com/wp-content/themes/wazdan/assets/images/logo.svg",
+  //   name: "WAZDAN",
+  //   filterType: "WAZ",
+  // },
+  {
+    logo: "https://www.gamblerspick.com/uploads/set_resources_3/84c1e40ea0e759e3f1505eb1788ddf3c_logo.png",
+    name: "SPLITROCK",
+    filterType: "SPR",
+  },
+  {
+    logo: "https://spearheadstudios.com/wp-content/themes/spearheadstudios/assets/img/logo.svg?v=1",
+    name: "SPEAR HEAD",
+    filterType: "SHS",
+  },
+  {
+    logo: "https://slotmill.com/wp-content/themes/slotmill-v2/assets/img/slotmill-logo-header.svg",
+    name: "SLOT MILL",
+    filterType: "SM",
+  },
+  {
+    logo: "https://www.skywindgroup.com/assets/site/images/skywind_white.svg",
+    name: "SKYWIND",
+    filterType: "SWC",
+  },
+  {
+    logo: "https://revolvergaming.com/wp-content/themes/RevolverGames/images/logo-middle.png",
+    name: "REVOLVER",
+    filterType: "RG",
+  },
+  {
+    logo: "https://www.reloadedgaming.com/rel-230217/images/logo2.png",
+    name: "RELOADED",
+    filterType: "RLG",
+  },
+  {
+    logo: "https://cf-cdn.relax-gaming.com/static/img/logo.svg",
+    name: "RELAX",
+    filterType: "RLX",
+  },
+  {
+    logo: "https://uploads-ssl.webflow.com/5ad9ea8824e99a21e272dacd/5ae73184a9e2a25942fb74a1_Tiger.svg",
+    name: "RED TIGER",
+    filterType: "RED",
+  },
+  {
+    logo: "https://rtgslots.com/wp-content/uploads/2020/09/RTG-SLOTS-logo.png",
+    name: "RTG SLOT",
+    filterType: "RTG",
+  },
+  {
+    logo: "https://quickspin.com/wp-content/themes/quickspin/img/quickspin-logo.svg",
+    name: "QUICK SPIN",
+    filterType: "QS",
+  },
+  {
+    logo: "https://www.pushgaming.com/i/logo-v2-light.png",
+    name: "PUSH",
+    filterType: "PUG",
+  },
+  {
+    logo: "https://www.pragmaticplay.com/wp-content/themes/gp-theme-basic/libs/dist/images/PP-white-logo.svg",
+    name: "PRAGMATIC",
+    filterType: "PPC",
   },
 ];
