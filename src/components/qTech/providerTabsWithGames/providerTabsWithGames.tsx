@@ -47,7 +47,6 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
       const uniqueArrayValues: string[] = Array.from(new Set(categories));
       if (!!uniqueArrayValues && !!uniqueArrayValues.length) {
         uniqueArrayValues.unshift("All");
-
         setCategory(uniqueArrayValues);
       }
       setGameLists(items);
@@ -97,6 +96,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   useEffect(() => {
     setGameLists([]);
     setCategory([]);
+    setFilterValue(null);
     authenticationHandler();
   }, [SelectedProvider, filter]);
 
