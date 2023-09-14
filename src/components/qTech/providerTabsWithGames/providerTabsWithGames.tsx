@@ -101,88 +101,93 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   }, [SelectedProvider, filter]);
 
   return (
-    <div className={classes["container"]}>
-      {!!ShowPortal ? (
-        <GamePortal gameName={SelectedGame || ""} close={showAndHideHandler} />
-      ) : null}
-      <div className={classes["slide_div"]}>
-        <div className={classes["side_provider_list"]}>
-          <ProvidersTabs
-            providerList={
-              filter === "slot" ? slotProviderList : casinoProviderList
-            }
-            getName={getProviderValue}
-            value={SelectedProvider || ""}
+    <>
+      <div className={classes["container"]}>
+        {!!ShowPortal ? (
+          <GamePortal
+            gameName={SelectedGame || ""}
+            close={showAndHideHandler}
           />
-        </div>
-        <div className={classes["games_div"]}>
-          {!!Category && Category?.length ? (
-            <div className={classes["category_filter_div"]}>
-              {Category.map((el) => (
-                <div
-                  key={el}
-                  onClick={() => filterHandler(el)}
-                  className={classes["wrapper"]}
-                >
-                  <div
-                    className={`${classes["cr"]} ${
-                      classes[el === filterValue ? "active" : "unactive"]
-                    } `}
-                  >
-                    <img
-                      src={
-                        filter == "slot"
-                          ? el == "All" || el === "OTHER"
-                            ? `/assets/Icons/slot/${el}.png`
-                            : "/assets/Icons/slot/slot.png"
-                          : `/assets/Icons/casino/${el}.png`
-                      }
-                      alt={el}
-                    />
-                    <p>{el}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : null}
-          {isLoading && (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginTop: "50px",
-              }}
-            >
-              <CircularProgress />
-            </Box>
-          )}
-          <div className={classes["games_container"]}>
-            {(!!filterGamesList && filterGamesList?.length) ||
-            (!!GameLists && GameLists.length)
-              ? (!!filterGamesList && filterGamesList?.length
-                  ? filterGamesList
-                  : GameLists
-                ).map((el) => (
-                  <div
-                    onClick={() => {
-                      setSelectedGame(el?.id);
-                      showAndHideHandler();
-                    }}
-                    key={el?.id}
-                    className={classes["games_card"]}
-                  >
-                    <img src={el?.images?.[1]?.url} alt={el?.name} />
-                  </div>
-                ))
-              : null}
+        ) : null}
+        <div className={classes["slide_div"]}>
+          <div className={classes["side_provider_list"]}>
+            <ProvidersTabs
+              providerList={
+                filter === "slot" ? slotProviderList : casinoProviderList
+              }
+              getName={getProviderValue}
+              value={SelectedProvider || ""}
+            />
           </div>
-          {!isLoading && !GameLists.length && (
-            <p className={classes["cnt"]}>No Games found</p>
-          )}
+          <div className={classes["games_div"]}>
+            {!!Category && Category?.length ? (
+              <div className={classes["category_filter_div"]}>
+                {Category.map((el) => (
+                  <div
+                    key={el}
+                    onClick={() => filterHandler(el)}
+                    className={classes["wrapper"]}
+                  >
+                    <div
+                      className={`${classes["cr"]} ${
+                        classes[el === filterValue ? "active" : "unactive"]
+                      } `}
+                    >
+                      <img
+                        src={
+                          filter == "slot"
+                            ? el == "All" || el === "OTHER"
+                              ? `/assets/Icons/slot/${el}.png`
+                              : "/assets/Icons/slot/slot.png"
+                            : `/assets/Icons/casino/${el}.png`
+                        }
+                        alt={el}
+                      />
+                      <p>{el}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+            {isLoading && (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: "50px",
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            )}
+            <div className={classes["games_container"]}>
+              {(!!filterGamesList && filterGamesList?.length) ||
+              (!!GameLists && GameLists.length)
+                ? (!!filterGamesList && filterGamesList?.length
+                    ? filterGamesList
+                    : GameLists
+                  ).map((el) => (
+                    <div
+                      onClick={() => {
+                        setSelectedGame(el?.id);
+                        showAndHideHandler();
+                      }}
+                      key={el?.id}
+                      className={classes["games_card"]}
+                    >
+                      <img src={el?.images?.[1]?.url} alt={el?.name} />
+                    </div>
+                  ))
+                : null}
+            </div>
+            {!isLoading && !GameLists.length && (
+              <p className={classes["cnt"]}>No Games found</p>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
