@@ -394,7 +394,8 @@ function GameDetail({ getStackValue}) {
                           <div className="score-inner">
                             <iframe
                               // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
-                              src={`http://43.205.116.130/tv.php?eventId=${id}`}
+                              // src={`http://43.205.116.130/tv.php?eventId=${id}`}
+                              src={`https://sqmrtv.in/btv.php?eventId=${id}`}
                               width="100%"
                               className="score-card"
                               title="scorecord"
