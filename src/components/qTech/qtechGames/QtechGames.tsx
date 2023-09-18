@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { qTechServices } from "../../../utils/api/qTechGames/services";
 import Loading from "../../layout/loading";
+import { isMobile, isBrowser } from "react-device-detect";
 
 function QtechGames() {
   const [GameLobbyUrl, setGameLobbyUrl] = useState<string | null>(null);
@@ -17,7 +18,7 @@ function QtechGames() {
       // birthDate: "1986-01-01",
       // lang: "en_IN",
       mode: "real",
-      device: "desktop",
+      device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
       walletSessionId: sessionToken,
       token,
     });
@@ -28,20 +29,23 @@ function QtechGames() {
     }
   };
 
-  const authenticationHandler = async () => {
-    const { response } = await qTechServices.authentication();
+  // const authenticationHandler = async () => {
+  //   const { response } = await qTechServices.authentication();
 
-    if (!!response && response?.data && response?.data?.access_token) {
-      const { access_token } = response?.data;
+  //   if (!!response && response?.data && response?.data?.access_token) {
+  //     const { access_token } = response?.data;
 
-      window.localStorage.setItem("qtech_access_token", access_token);
+  //     window.localStorage.setItem("qtech_access_token", access_token);
 
-      await getGameLobbyHandler(access_token);
-    }
-  };
+  //     await getGameLobbyHandler(access_token);
+  //   }
+  // };
 
   useEffect(() => {
-    authenticationHandler();
+    const accessToken = window.localStorage.getItem("qtech_access_token");
+    if (accessToken) {
+      getGameLobbyHandler(accessToken);
+    }
   }, []);
 
   return (

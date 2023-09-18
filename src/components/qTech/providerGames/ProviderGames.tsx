@@ -41,14 +41,14 @@ function ProviderGames() {
   }
 
   const authenticationHandler = async () => {
-    const { response } = await qTechServices.authentication();
+    // const { response } = await qTechServices.authentication();
 
-    if (!!response && response?.data && response?.data?.access_token) {
-      const { access_token } = response?.data;
-      const name = params.name!;
-      window.localStorage.setItem("qtech_access_token", access_token);
-      const key = getKeyByValue(PROVIDERS_NAME, name);
+    // if (!!response && response?.data && response?.data?.access_token) {
+    const access_token = window.localStorage.getItem("qtech_access_token");
+    const name = params.name!;
+    const key = getKeyByValue(PROVIDERS_NAME, name);
 
+    if (access_token) {
       if (key) {
         const providerGameName = PROVIDERS_NAME[key + "_GAMES_PROVIDER"];
         await getGameLists(access_token, providerGameName);
@@ -58,6 +58,7 @@ function ProviderGames() {
         }
       }
     }
+    // }
   };
 
   useEffect(() => {

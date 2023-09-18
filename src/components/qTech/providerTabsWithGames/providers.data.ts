@@ -2,6 +2,8 @@ interface ProviderInterface {
   name: string;
   logo: string;
   filterType: string;
+  customFilter?: boolean;
+  games?: { id: string; images: { url: string }[]; name: string }[];
 }
 
 export const casinoProviderList: ProviderInterface[] = [
@@ -40,6 +42,41 @@ export const casinoProviderList: ProviderInterface[] = [
     logo: "https://www.pragmaticplay.com/wp-content/themes/gp-theme-basic/libs/dist/images/PP-white-logo.svg",
     filterType: "PPL",
   },
+  {
+    name: "BETTER LIVE",
+    logo: "https://live.beter.co/wp-content/themes/artit/assets/images/logo.svg",
+    filterType: "BTL",
+  },
+  {
+    name: "BET GAMES",
+    logo: "https://www.betgames.tv/api/uploads/BG_Logo_White_Horizontal_Lock_Up_dcca475d41.png",
+    filterType: "BTV",
+  },
+  {
+    name: " EBET",
+    logo: "https://ebet.gg/wp-content/uploads/2022/05/EBET-logo.png",
+    filterType: "EBT",
+  },
+  // {
+  //   name: "INTERNATIONAL SLASHERS",
+  //   logo: "https://www.worldslashercup.ph/wp-content/themes/wsc/assets/images/sc-logo.png",
+  //   filterType: "ISC",
+  //   customFilter: true,
+  //   games: [
+  //     {
+  //       id: "ISC-cockfighting",
+  //       images: [
+  //         {
+  //           url: "https://images.pexels.com/photos/5303957/pexels-photo-5303957.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+  //         },
+  //         {
+  //           url: "https://images.pexels.com/photos/5303957/pexels-photo-5303957.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+  //         },
+  //       ],
+  //       name: "cockfighting",
+  //     },
+  //   ],
+  // },
 ];
 
 export const slotProviderList: ProviderInterface[] = [

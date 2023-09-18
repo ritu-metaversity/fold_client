@@ -1,4 +1,4 @@
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, Button, useMediaQuery } from "@mui/material";
 import CurrentBetTable from "../../currentBets/table";
 import { userServices } from "../../../utils/api/user/services";
 import { useEffect, useState } from "react";
@@ -7,6 +7,8 @@ import { betTypes } from "../../currentBets";
 import { Form } from "react-bootstrap";
 import Filter from "./Filter";
 import { columnCasino, columnSports } from "../../currentBets/columns";
+import { qTechServices } from "../../../utils/api/qTechGames/services";
+import GamePortal from "../../qTech/gamePortal/GamePortal";
 
 const CurrentBetsForModal = () => {
   const matches = useMediaQuery("(min-width:1280px)");
@@ -18,6 +20,29 @@ const CurrentBetsForModal = () => {
     category: 1,
     status: "matched",
   });
+  const [ShowPortal, setShowPortal] = useState<boolean>(false);
+  const [SelectedGame, setSelectedGame] = useState<string | null>(null);
+
+  // const authenticationHandler = async () => {
+  //   const { response } = await qTechServices.authentication();
+  //   if (!!response && response?.data && response?.data?.access_token) {
+  //     const { access_token } = response?.data;
+  //     window.localStorage.setItem("qtech_access_token", access_token);
+  //   }
+  // };
+
+  const showAndHideHandler = function () {
+    setShowPortal(!ShowPortal);
+  };
+
+  const playHandler = async function (eventName: string) {
+    // authenticationHandler();
+    if (eventName) {
+      setSelectedGame(eventName);
+      showAndHideHandler();
+    }
+  };
+
   const getList = async () => {
     const payload = {
       betType: betTypes.indexOf(searchFilters.type),
@@ -30,7 +55,20 @@ const CurrentBetsForModal = () => {
     if (response?.data) {
       setSportsRow(
         response.data.dataList?.map((row: any) => {
-          row.action = <Form.Check type="checkbox" />;
+          row.action = (
+            <Box display={"flex"} gap={4} alignItems={"center"}>
+              <Form.Check type="checkbox" />
+              {row?.sportId === 323337 ? (
+                <Button
+                  onClick={() => playHandler(row?.eventName)}
+                  variant="contained"
+                  size="small"
+                >
+                  Re-play
+                </Button>
+              ) : null}
+            </Box>
+          );
           return row;
         }) || []
       );
@@ -42,6 +80,7 @@ const CurrentBetsForModal = () => {
       //   });
     }
   };
+
   useEffect(() => {
     getList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,6 +88,9 @@ const CurrentBetsForModal = () => {
 
   return (
     <>
+      {!!ShowPortal ? (
+        <GamePortal gameName={SelectedGame || ""} close={showAndHideHandler} />
+      ) : null}
       <Box minHeight="calc(100vh - 60px)">
         <Filter
           searchFilters={searchFilters}
