@@ -161,10 +161,12 @@ function App() {
   }, [isSignedIn]);
 
   const authenticationHandler = async () => {
-    const { response } = await qTechServices.authentication();
-    if (!!response && response?.data && response?.data?.access_token) {
-      const { access_token } = response?.data;
-      window.localStorage.setItem("qtech_access_token", access_token);
+    if (isSignedIn) {
+      const { response } = await qTechServices.authentication();
+      if (!!response && response?.data && response?.data?.access_token) {
+        const { access_token } = response?.data;
+        window.localStorage.setItem("qtech_access_token", access_token);
+      }
     }
   };
 
@@ -188,12 +190,6 @@ function App() {
     getAnnouncement();
     getSelfAllowed();
     getNewEventOpen();
-
-    const timer = setInterval(() => {
-      authenticationHandler();
-    }, 5000);
-
-    return () => clearTimeout(timer);
   }, []);
 
   const getButtonValue = async () => {
@@ -222,6 +218,7 @@ function App() {
   useEffect(() => {
     const time = setInterval(() => {
       getBalance();
+      authenticationHandler();
     }, 5000);
     return () => clearInterval(time);
   }, [isSignedIn, getBalance]);
@@ -230,6 +227,7 @@ function App() {
     if (isSignedIn) {
       getButtonValue();
       getBalance();
+      authenticationHandler();
     }
 
     return () => {
