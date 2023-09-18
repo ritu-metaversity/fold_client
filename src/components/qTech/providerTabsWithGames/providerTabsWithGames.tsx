@@ -8,6 +8,12 @@ import { Box } from "@mui/material";
 import GamePortal from "../gamePortal/GamePortal";
 import { casinoProviderList, slotProviderList } from "./providers.data";
 
+export interface GameInterface {
+  id: string;
+  images: { url: string }[];
+  name: string;
+}
+
 function ProviderTabsWithGames({ filter }: { filter: string }) {
   const [GameLists, setGameLists] = useState<GameListInterface[]>([]);
   const [SelectedProvider, setSelectedProvider] = useState<string | null>(null);
@@ -19,12 +25,16 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   const [filterGamesList, setFilterGamesList] = useState<GameListInterface[]>(
     []
   );
+  const [CustomGameList, setCustomGameList] = useState<GameInterface[] | null>(
+    null
+  );
 
   const showAndHideHandler = function () {
     setShowPortal(!ShowPortal);
   };
 
   const getGameLists = async (token: string, provider?: string) => {
+    setIsLoading(true);
     const { response } = await qTechServices.gameLists({
       token,
       provider: SelectedProvider || "",
@@ -53,15 +63,15 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     }
   };
 
-  const authenticationHandler = async () => {
-    setIsLoading(true);
-    const { response } = await qTechServices.authentication();
-    if (!!response && response?.data && response?.data?.access_token) {
-      const { access_token } = response?.data;
-      window.localStorage.setItem("qtech_access_token", access_token);
-      await getGameLists(access_token);
-    }
-  };
+  // const authenticationHandler = async () => {
+  //   setIsLoading(true);
+  //   const { response } = await qTechServices.authentication();
+  //   if (!!response && response?.data && response?.data?.access_token) {
+  //     const { access_token } = response?.data;
+  //     window.localStorage.setItem("qtech_access_token", access_token);
+  //     await getGameLists(access_token);
+  //   }
+  // };
 
   const filterHandler = function (value: string) {
     setFilterValue(value);
@@ -85,10 +95,20 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     }
   };
 
-  const getProviderValue = function (value: string) {
+  const getProviderValue = function (
+    value: string,
+    customFilter?: boolean,
+    games?: GameInterface[]
+  ) {
     if (value !== SelectedProvider) {
       setGameLists([]);
       setFilterGamesList([]);
+
+      if (!!games && games.length && customFilter) {
+        setCustomGameList(games);
+      } else {
+        setCustomGameList(null);
+      }
     }
     setSelectedProvider(value);
   };
@@ -97,7 +117,11 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     setGameLists([]);
     setCategory([]);
     setFilterValue(null);
-    authenticationHandler();
+    const accessToken = window.localStorage.getItem("qtech_access_token");
+    // authenticationHandler();
+    if (accessToken) {
+      getGameLists(accessToken);
+    }
   }, [SelectedProvider, filter]);
 
   return (
@@ -120,7 +144,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
             />
           </div>
           <div className={classes["games_div"]}>
-            {!!Category && Category?.length ? (
+            {!CustomGameList && !!Category && Category?.length ? (
               <div className={classes["category_filter_div"]}>
                 {Category.map((el) => (
                   <div
@@ -149,7 +173,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                 ))}
               </div>
             ) : null}
-            {isLoading && (
+            {!CustomGameList && isLoading && (
               <Box
                 sx={{
                   display: "flex",
@@ -162,9 +186,12 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
               </Box>
             )}
             <div className={classes["games_container"]}>
-              {(!!filterGamesList && filterGamesList?.length) ||
+              {(!!CustomGameList && CustomGameList.length) ||
+              (!!filterGamesList && filterGamesList?.length) ||
               (!!GameLists && GameLists.length)
-                ? (!!filterGamesList && filterGamesList?.length
+                ? (!!CustomGameList && CustomGameList.length
+                    ? CustomGameList
+                    : !!filterGamesList && filterGamesList?.length
                     ? filterGamesList
                     : GameLists
                   ).map((el) => (

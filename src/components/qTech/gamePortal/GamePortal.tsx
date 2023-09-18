@@ -13,8 +13,6 @@ interface Props {
 function GamePortal({ gameName, close }: Props) {
   const [GameUrl, setGameUrl] = useState<string | null>(null);
 
-  console.log(gameName);
-
   const getSingleGame = async () => {
     const access_token = window.localStorage.getItem("qtech_access_token");
     const sessionToken = window.localStorage.getItem("token");
@@ -41,8 +39,6 @@ function GamePortal({ gameName, close }: Props) {
       }
     }
   };
-
-  console.log({ isMobile, isBrowser });
 
   useEffect(() => {
     getSingleGame();

@@ -11,6 +11,7 @@ function Games() {
     if (prefix) urlStr = prefix + "/" + url;
     else urlStr = url;
     navigation(urlStr);
+    // window.open(urlStr);
   };
 
   return (
