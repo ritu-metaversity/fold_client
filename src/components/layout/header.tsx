@@ -20,6 +20,7 @@ import { colorHex } from "../../utils/constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import styled from "@emotion/styled";
+import { LinkandLabel } from "../home/buttonTabs";
 export const drawerWidth = 220;
 export const drawerWidthXl = 270;
 
@@ -83,21 +84,26 @@ export default function Header(props: Props) {
           zIndex: 100,
         }}
       >
-        <TopNavLinks
-          to="/"
-          style={
-            pathname !== "/casino" && pathname !== "/virtual-casino"
-              ? {
-                  color: "#fdcf13",
-                  borderBottom: "2px solid #fdcf13",
-                }
-              : {}
-          }
-        >
-          Exchange
-        </TopNavLinks>
-        {isSignedIn && <Circle />}
-        <TopNavLinks
+        {LinkandLabel.map((item, index) => (
+          <>
+            <TopNavLinks
+              to={item.link}
+              style={
+                pathname === item.link
+                  ? {
+                      color: "#fdcf13",
+                      borderBottom: "2px solid #fdcf13",
+                    }
+                  : {}
+              }
+            >
+              {item.label}
+            </TopNavLinks>
+            {isSignedIn && index + 1 !== LinkandLabel.length && <Circle />}
+          </>
+        ))}
+
+        {/* <TopNavLinks
           onClick={(e) => {
             if (!isSignedIn) {
               e.preventDefault();
@@ -189,7 +195,7 @@ export default function Header(props: Props) {
           to="/fantasy"
         >
           Fantasy Games
-        </TopNavLinks>
+        </TopNavLinks> */}
         {isSignedIn && appData?.selfAllowed && !(user?.userTypeInfo === 2) && (
           <Box
             height="100%"
