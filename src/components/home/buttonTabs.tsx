@@ -28,8 +28,39 @@ const selectedSx = {
   borderColor: "unset !important",
 };
 
+export const LinkandLabel = [
+  {
+    label: "Lottery",
+    link: "/cumming",
+  },
+  {
+    label: "SportsBook1",
+    link: "/cumming",
+  },
+  {
+    label: "Exchange",
+    link: "/",
+  },
+  {
+    label: "Live Casino",
+    link: "/casino",
+  },
+  // {
+  //   label: "Virtual Casino",
+  //   link: "/virtual-casino",
+  // },
+  {
+    label: "Slots",
+    link: "/slot",
+  },
+  {
+    label: "Fantasy Game",
+    link: "/fantasy",
+  },
+];
+
 export function ButtonTabs() {
-  const [current, setCurrent] = useState("exchange");
+  const [current, setCurrent] = useState("/");
   const { isSignedIn, setModal } = useContext(UserContext);
   const nav = useNavigate();
   return (
@@ -50,20 +81,22 @@ export function ButtonTabs() {
         color="secondary"
         variant="contained"
       >
-        <Button
-          onClick={() => {
-            if (isSignedIn) {
-              nav("/");
-              setCurrent("exchange");
-            } else if (setModal) {
-              setModal({ login: true });
-            }
-          }}
-          sx={current === "exchange" ? selectedSx : unSelectedSx}
-        >
-          Exchange
-        </Button>
-        <Button
+        {LinkandLabel.map((item) => (
+          <Button
+            onClick={() => {
+              if (isSignedIn) {
+                nav(item.link);
+                setCurrent(item.link);
+              } else if (setModal) {
+                setModal({ login: true });
+              }
+            }}
+            sx={current === item.link ? selectedSx : unSelectedSx}
+          >
+            {item.label}
+          </Button>
+        ))}
+        {/* <Button
           onClick={() => {
             if (isSignedIn) {
               nav("/casino");
@@ -114,7 +147,7 @@ export function ButtonTabs() {
           sx={current === "fantasy" ? selectedSx : unSelectedSx}
         >
           Fantasy Games
-        </Button>
+        </Button> */}
         {/* <Button sx={unSelectedSx}>Slot</Button>
         <Button sx={unSelectedSx}>Fantasy Games</Button> */}
       </ButtonGroup>
