@@ -9,11 +9,22 @@ const unSelectedSx = {
   bgcolor: colorHex.bg2,
   borderColor: "unset !important",
   color: "text.primary",
+  width: "max-content",
+  display: "block",
+  flex: 1,
+  lineHeight: 1,
+  padding: "16px 16px",
 };
 
 const selectedSx = {
   // bgcolor: "secondary.main",
   color: "white",
+  padding: "16px 16px",
+  flex: 1,
+
+  lineHeight: 1,
+  display: "block",
+  width: "max-content",
   borderColor: "unset !important",
 };
 
@@ -22,13 +33,18 @@ export function ButtonTabs() {
   const { isSignedIn, setModal } = useContext(UserContext);
   const nav = useNavigate();
   return (
-    <Box width={"calc(100% - 16px)"} m="auto">
+    <Box
+      width={"calc(100% - 16px)"}
+      className="button_tabs_container"
+      overflow={"auto"}
+      m="auto"
+    >
       <ButtonGroup
-        fullWidth
         sx={{
           display: {
             lg: "none",
           },
+          minWidth: "100%",
           fontSize: "0.8rem",
         }}
         color="secondary"
@@ -59,6 +75,45 @@ export function ButtonTabs() {
           sx={current === "live-casino" ? selectedSx : unSelectedSx}
         >
           Live Casino
+        </Button>
+        <Button
+          onClick={() => {
+            if (isSignedIn) {
+              nav("/virtual-casino");
+              setCurrent("virtual-casino");
+            } else if (setModal) {
+              setModal({ login: true });
+            }
+          }}
+          sx={current === "virtual-casino" ? selectedSx : unSelectedSx}
+        >
+          Virtual Casino
+        </Button>
+        <Button
+          onClick={() => {
+            if (isSignedIn) {
+              nav("/slot");
+              setCurrent("slot");
+            } else if (setModal) {
+              setModal({ login: true });
+            }
+          }}
+          sx={current === "slot" ? selectedSx : unSelectedSx}
+        >
+          Slot
+        </Button>
+        <Button
+          onClick={() => {
+            if (isSignedIn) {
+              nav("/fantasy");
+              setCurrent("fantasy");
+            } else if (setModal) {
+              setModal({ login: true });
+            }
+          }}
+          sx={current === "fantasy" ? selectedSx : unSelectedSx}
+        >
+          Fantasy Games
         </Button>
         {/* <Button sx={unSelectedSx}>Slot</Button>
         <Button sx={unSelectedSx}>Fantasy Games</Button> */}
