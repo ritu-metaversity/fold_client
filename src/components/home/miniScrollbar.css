@@ -17,3 +17,15 @@
   background-color: transparent;
   width: 0px;
 }
+.button_tabs_container::-webkit-scrollbar {
+  width:0px;
+  padding: 0px;
+  display: none;
+}
+
+.button_tabs_container::-webkit-scrollbar-track {
+  background-color: transparent;
+  width: 0px;
+  display: none;
+
+}
