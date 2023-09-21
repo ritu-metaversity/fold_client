@@ -31,7 +31,7 @@ const selectedSx = {
 export const LinkandLabel = [
   {
     label: "Lottery",
-    link: "/cumming",
+    link: "/lottery",
   },
   {
     label: "SportsBook1",

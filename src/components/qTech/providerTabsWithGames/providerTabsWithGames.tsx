@@ -6,7 +6,11 @@ import { GameListInterface } from "../providerGames";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material";
 import GamePortal from "../gamePortal/GamePortal";
-import { casinoProviderList, slotProviderList } from "./providers.data";
+import {
+  casinoProviderList,
+  slotProviderList,
+  lotteryprovidersList,
+} from "./providers.data";
 import axios from "axios";
 import { StyledGameThumb } from "../../casino/styledComponent";
 import { Typography } from "@mui/material";
@@ -70,7 +74,10 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     const { response } = await qTechServices.gameLists({
       token,
       provider: SelectedProvider || "",
-      gameCategory: filter === "slot" ? filter.toUpperCase() : "LIVECASINO",
+      gameCategory:
+        filter === "slot" || filter === "lottery"
+          ? filter.toUpperCase()
+          : "LIVECASINO",
     });
     setIsLoading(false);
 
@@ -232,7 +239,11 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
           <div className={classes["side_provider_list"]}>
             <ProvidersTabs
               providerList={
-                filter === "slot" ? slotProviderList : casinoProviderList
+                filter === "slot"
+                  ? slotProviderList
+                  : filter === "lottery"
+                  ? lotteryprovidersList
+                  : casinoProviderList
               }
               getName={getProviderValue}
               value={SelectedProvider || ""}
@@ -254,7 +265,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                     >
                       <img
                         src={
-                          filter == "slot"
+                          filter == "slot" || filter == "lottery"
                             ? el == "All" || el === "OTHER"
                               ? `/assets/Icons/slot/${el}.png`
                               : "/assets/Icons/slot/slot.png"

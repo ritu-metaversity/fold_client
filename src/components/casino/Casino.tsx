@@ -16,7 +16,7 @@ import { casinoService } from "../../utils/api/casino/service";
 import { UserContext } from "../../App";
 import axios from "axios";
 import CasinoGame from "./game/CasinoGame";
-import { supernowaServices } from "../../utils/api/supernowa/services";
+// import { supernowaServices } from "../../utils/api/supernowa/services";
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: "20px",

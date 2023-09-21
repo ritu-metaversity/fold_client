@@ -39,6 +39,7 @@ const linksWithoutSideBar = [
   "/slot",
   "/casino",
   "/fantasy",
+  "/lottery",
 ];
 
 export const topNavHeight = "1.9rem";
