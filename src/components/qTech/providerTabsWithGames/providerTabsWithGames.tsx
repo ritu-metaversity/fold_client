@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { qTechServices } from "../../../utils/api/qTechGames/services";
 import ProvidersTabs from "../providersTabs/providersTabs";
 import classes from "./providerTabsWithGames.module.css";
@@ -7,11 +7,36 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material";
 import GamePortal from "../gamePortal/GamePortal";
 import { casinoProviderList, slotProviderList } from "./providers.data";
+import axios from "axios";
+import { StyledGameThumb } from "../../casino/styledComponent";
+import { Typography } from "@mui/material";
+import { colorHex } from "../../../utils/constants";
+import CasinoGame from "../../casino/game/CasinoGame";
+import { supernowaServices } from "../../../utils/api/supernowa/services";
 
 export interface GameInterface {
   id: string;
   images: { url: string }[];
   name: string;
+}
+
+export interface CustomProviderGameInterface {
+  gameCode: string;
+  gameId: number;
+  gameName: string;
+  imageUrl: string;
+  thumb?: string;
+  code?: string;
+  name?: string;
+  providerCode?: string;
+}
+
+export interface SuperNowaGameInterface {
+  name: string;
+  code: string;
+  thumb: string;
+  providerName: string;
+  providerCode: string;
 }
 
 function ProviderTabsWithGames({ filter }: { filter: string }) {
@@ -28,6 +53,13 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   const [CustomGameList, setCustomGameList] = useState<GameInterface[] | null>(
     null
   );
+  const [customGameProvider, setCustomGameProvider] = useState<boolean>(false);
+  const [customProviderGames, setCustomProviderGames] = useState<
+    CustomProviderGameInterface[]
+  >([]);
+  const [open, setOpen] = useState(0);
+  const [gameLaunchURL, setGameLaunchURL] = useState<string | null>(null);
+  const token = localStorage.getItem("token");
 
   const showAndHideHandler = function () {
     setShowPortal(!ShowPortal);
@@ -73,6 +105,27 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   //   }
   // };
 
+  const authHandler = async (code: string, providerCode: string) => {
+    setOpen(1);
+
+    const { response } = await supernowaServices.authentication({
+      game: {
+        gameCode: code,
+        providerCode: providerCode,
+      },
+      timestamp: new Date().getTime(),
+      user: {
+        currency: "INR",
+        backUrl: "http://maggibook.com",
+      },
+    });
+
+    if (response && response?.data && response?.data?.launchURL) {
+      const { launchURL } = response?.data;
+      setGameLaunchURL(launchURL);
+    }
+  };
+
   const filterHandler = function (value: string) {
     setFilterValue(value);
     let filterGameLists: GameListInterface[] = [];
@@ -95,19 +148,61 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     }
   };
 
+  const getSuperNowaGameList = async () => {
+    const { response } = await supernowaServices.gameLists({
+      providerCode: "SN",
+    });
+
+    if (
+      response &&
+      response?.data &&
+      response?.data?.games &&
+      response?.data?.games.length
+    ) {
+      const { games } = response?.data;
+      setCustomProviderGames(games);
+      setIsLoading(false);
+    }
+  };
+
+  const getCustomGameProviderLists = async (
+    apiUrl?: string,
+    value?: number
+  ) => {
+    setIsLoading(true);
+    setCustomProviderGames([]);
+    if (value === 323334 && apiUrl) {
+      axios.get(apiUrl).then((res) => setCustomProviderGames(res?.data?.data));
+      setIsLoading(false);
+    } else {
+      getSuperNowaGameList();
+    }
+  };
+
   const getProviderValue = function (
     value: string,
     customFilter?: boolean,
-    games?: GameInterface[]
+    games?: GameInterface[],
+    type?: string,
+    apiUrl?: string,
+    providerId?: number
   ) {
-    if (value !== SelectedProvider) {
-      setGameLists([]);
-      setFilterGamesList([]);
+    if (!!type && type == "custom") {
+      setCustomGameProvider(true);
+      if (providerId) {
+        getCustomGameProviderLists(apiUrl, providerId);
+      }
+    } else {
+      setCustomGameProvider(false);
+      if (value !== SelectedProvider) {
+        setGameLists([]);
+        setFilterGamesList([]);
 
-      if (!!games && games.length && customFilter) {
-        setCustomGameList(games);
-      } else {
-        setCustomGameList(null);
+        if (!!games && games.length && customFilter) {
+          setCustomGameList(games);
+        } else {
+          setCustomGameList(null);
+        }
       }
     }
     setSelectedProvider(value);
@@ -119,7 +214,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     setFilterValue(null);
     const accessToken = window.localStorage.getItem("qtech_access_token");
     // authenticationHandler();
-    if (accessToken) {
+    if (accessToken && !customGameProvider) {
       getGameLists(accessToken);
     }
   }, [SelectedProvider, filter]);
@@ -186,8 +281,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
               </Box>
             )}
             <div className={classes["games_container"]}>
-              {(!!CustomGameList && CustomGameList.length) ||
-              (!!filterGamesList && filterGamesList?.length) ||
+              {(!!filterGamesList && filterGamesList?.length) ||
               (!!GameLists && GameLists.length)
                 ? (!!CustomGameList && CustomGameList.length
                     ? CustomGameList
@@ -208,9 +302,69 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                   ))
                 : null}
             </div>
-            {!isLoading && !GameLists.length && (
-              <p className={classes["cnt"]}>No Games found</p>
-            )}
+            {customGameProvider
+              ? null
+              : !isLoading &&
+                !GameLists.length && (
+                  <p className={classes["cnt"]}>No Games found</p>
+                )}
+            {!!customGameProvider ? (
+              <Fragment>
+                <Box bgcolor={colorHex.bg1}>
+                  <Box m={"10px"} display={"flex"} flexWrap="wrap" gap={"10px"}>
+                    {!(customProviderGames?.length > 0) && (
+                      <Typography
+                        textAlign={"center"}
+                        sx={{ verticalAlign: "center" }}
+                        flex={1}
+                      >
+                        NO Casino Found
+                      </Typography>
+                    )}
+                    {customProviderGames.map((item) => (
+                      <Box
+                        width={{
+                          xs: "calc(50% - 10px)",
+                          sm: "calc(50% - 10px)",
+                          md: "calc(25% - 10px)",
+                          lg: "calc(20% - 10px)",
+                        }}
+                        m="auto"
+                      >
+                        <StyledGameThumb
+                          onClick={
+                            item?.providerCode === "SN"
+                              ? () =>
+                                  authHandler(item?.code!, item.providerCode!)
+                              : () => setOpen(item.gameId)
+                          }
+                          src={item?.thumb || item?.imageUrl}
+                          alt="thumb"
+                        />
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+                {!!open && (
+                  <CasinoGame
+                    name={
+                      customProviderGames.find((i) => i.gameId === open)
+                        ?.gameName
+                    }
+                    id={open}
+                    handleClose={() => setOpen(0)}
+                    desktopUrl={
+                      gameLaunchURL ||
+                      `https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`
+                    }
+                    mobileUrl={
+                      gameLaunchURL ||
+                      `https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`
+                    }
+                  />
+                )}
+              </Fragment>
+            ) : null}
           </div>
         </div>
       </div>

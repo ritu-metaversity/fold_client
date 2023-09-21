@@ -121,8 +121,8 @@ export default function Header(props: Props) {
           to="/casino"
         >
           Live Casino
-        </TopNavLinks>
-        {isSignedIn && <Circle />}
+        </TopNavLinks> */}
+        {/* {isSignedIn && <Circle />}
         <TopNavLinks
           style={
             pathname === "/virtual-casino"
@@ -135,8 +135,8 @@ export default function Header(props: Props) {
           to="/virtual-casino"
         >
           Virtual Casino
-        </TopNavLinks>
-        {isSignedIn && <Circle />}
+        </TopNavLinks> */}
+        {/* {isSignedIn && <Circle />}
         <TopNavLinks
           onClick={(e) => {
             if (!isSignedIn) {
@@ -155,8 +155,8 @@ export default function Header(props: Props) {
           to="/slot"
         >
           Slot
-        </TopNavLinks>
-        {isSignedIn && <Circle />}
+        </TopNavLinks> */}
+        {/* {isSignedIn && <Circle />}
         <TopNavLinks
           onClick={(e) => {
             if (!isSignedIn) {
@@ -176,8 +176,8 @@ export default function Header(props: Props) {
         >
           Games
         </TopNavLinks>
-        {isSignedIn && <Circle />}
-        <TopNavLinks
+        {isSignedIn && <Circle />} */}
+        {/* <TopNavLinks
           onClick={(e) => {
             if (!isSignedIn) {
               e.preventDefault();

@@ -1,20 +1,18 @@
 import { GameInterface } from "../providerTabsWithGames/providerTabsWithGames";
+import { ProviderInterface } from "../providerTabsWithGames/providers.data";
 import classes from "./providers.module.css";
 
 interface Props {
   getName: (
     value: string,
     customFilter?: boolean,
-    games?: GameInterface[]
+    games?: GameInterface[],
+    type?: string,
+    apiUrl?: string,
+    providerId?: number
   ) => void;
   value: string;
-  providerList: {
-    name: string;
-    logo: string;
-    filterType: string;
-    customFilter?: boolean;
-    games?: GameInterface[];
-  }[];
+  providerList: ProviderInterface[];
   cls?: string;
 }
 
@@ -23,7 +21,16 @@ function ProvidersTabs({ getName, value, providerList, cls }: Props) {
     <div className={!cls ? classes["contianer"] : classes[cls!]}>
       {providerList.map((el) => (
         <div
-          onClick={() => getName(el?.filterType, el?.customFilter, el?.games)}
+          onClick={() =>
+            getName(
+              el?.filterType,
+              el?.customFilter,
+              el?.games,
+              el?.type,
+              el?.apiUrl,
+              el?.providerId
+            )
+          }
           key={el?.name}
           className={classes["tab_container"]}
         >
