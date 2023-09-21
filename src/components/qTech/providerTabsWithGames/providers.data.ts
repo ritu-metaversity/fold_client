@@ -1,12 +1,31 @@
-interface ProviderInterface {
+export interface ProviderInterface {
   name: string;
   logo: string;
   filterType: string;
   customFilter?: boolean;
   games?: { id: string; images: { url: string }[]; name: string }[];
+  type?: string;
+  apiUrl?: string;
+  providerId?: number;
 }
 
 export const casinoProviderList: ProviderInterface[] = [
+  {
+    name: "AURA GAME",
+    logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
+    filterType: "AURA",
+    type: "custom",
+    apiUrl:
+      "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/wolf.json",
+    providerId: 323334,
+  },
+  {
+    name: "SUPER NOWA",
+    logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
+    filterType: "NOWA",
+    type: "custom",
+    providerId: 323335,
+  },
   {
     name: "EVOLUTION",
     logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/5.png",

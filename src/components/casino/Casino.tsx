@@ -90,49 +90,49 @@ const Casino = () => {
     // }
   };
 
-  const getSuperNowaGameList = async () => {
-    const { response } = await supernowaServices.gameLists({
-      providerCode: "SN",
-    });
+  // const getSuperNowaGameList = async () => {
+  //   const { response } = await supernowaServices.gameLists({
+  //     providerCode: "SN",
+  //   });
 
-    if (
-      response &&
-      response?.data &&
-      response?.data?.games &&
-      response?.data?.games.length
-    ) {
-      const { games } = response?.data;
-      setSupernowaGamesList(games);
-    }
-  };
+  //   if (
+  //     response &&
+  //     response?.data &&
+  //     response?.data?.games &&
+  //     response?.data?.games.length
+  //   ) {
+  //     const { games } = response?.data;
+  //     setSupernowaGamesList(games);
+  //   }
+  // };
 
-  const authHandler = async (item: SuperNowaGameInterface) => {
-    setOpen(1);
+  // const authHandler = async (item: SuperNowaGameInterface) => {
+  //   setOpen(1);
 
-    const { response } = await supernowaServices.authentication({
-      game: {
-        gameCode: item?.code,
-        providerCode: item?.providerCode,
-      },
-      timestamp: new Date().getTime(),
-      user: {
-        currency: "INR",
-        backUrl: "http://maggibook.com",
-      },
-    });
+  //   const { response } = await supernowaServices.authentication({
+  //     game: {
+  //       gameCode: item?.code,
+  //       providerCode: item?.providerCode,
+  //     },
+  //     timestamp: new Date().getTime(),
+  //     user: {
+  //       currency: "INR",
+  //       backUrl: "http://maggibook.com",
+  //     },
+  //   });
 
-    if (response && response?.data && response?.data?.launchURL) {
-      const { launchURL } = response?.data;
-      setGameLaunchURL(launchURL);
-    }
-  };
+  //   if (response && response?.data && response?.data?.launchURL) {
+  //     const { launchURL } = response?.data;
+  //     setGameLaunchURL(launchURL);
+  //   }
+  // };
 
   useEffect(() => {
     getCasinoList();
   }, [value, isSignedIn]);
 
   useEffect(() => {
-    getSuperNowaGameList();
+    // getSuperNowaGameList();
 
     const getCasinoTypes = async () => {
       if (!isSignedIn) {
@@ -192,7 +192,7 @@ const Casino = () => {
               label={item.name}
             />
           ))}
-          <StyledTab
+          {/* <StyledTab
             icon={
               <CasinoIcon
                 src={
@@ -203,7 +203,7 @@ const Casino = () => {
             iconPosition="start"
             value={"Games"} // change into the nunber once this is dynamic
             label={"Games"}
-          />
+          /> */}
         </Tabs>
       )}
       <Box bgcolor={colorHex.bg1}>
@@ -234,7 +234,7 @@ const Casino = () => {
               />
             </Box>
           ))}
-          {supernowaGamesList.map((item) => (
+          {/* {supernowaGamesList.map((item) => (
             <Box
               width={{
                 xs: "calc(50% - 10px)",
@@ -250,7 +250,7 @@ const Casino = () => {
                 alt="thumb"
               />
             </Box>
-          ))}
+          ))} */}
         </Box>
       </Box>
       {!!open && (
