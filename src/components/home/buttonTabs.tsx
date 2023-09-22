@@ -32,6 +32,7 @@ export const LinkandLabel = [
   {
     label: "Lottery",
     link: "/lottery",
+    require: true,
   },
   {
     label: "SportsBook1",
@@ -44,6 +45,7 @@ export const LinkandLabel = [
   {
     label: "Live Casino",
     link: "/casino",
+    require: true,
   },
   // {
   //   label: "Virtual Casino",
@@ -52,10 +54,12 @@ export const LinkandLabel = [
   {
     label: "Slots",
     link: "/slot",
+    require: true,
   },
   {
     label: "Fantasy Game",
     link: "/fantasy",
+    require: true,
   },
 ];
 

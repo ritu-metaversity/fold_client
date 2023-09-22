@@ -88,6 +88,12 @@ export default function Header(props: Props) {
         {LinkandLabel.map((item, index) => (
           <>
             <TopNavLinks
+              onClick={(e) => {
+                if (!isSignedIn && item?.require) {
+                  e.preventDefault();
+                  setModal && setModal({ login: true });
+                }
+              }}
               to={item.link}
               style={
                 pathname === item.link
