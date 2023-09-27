@@ -51,10 +51,12 @@ export const theme = createTheme({
   components: {
     MuiToolbar: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           backgroundColor: "#23292D",
-          marginBottom: 32,
-        },
+          [theme.breakpoints.down("lg")]: {
+            marginBottom: 32,
+          },
+        }),
       },
     },
     MuiPaper: {
