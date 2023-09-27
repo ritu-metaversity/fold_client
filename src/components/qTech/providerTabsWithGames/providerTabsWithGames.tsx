@@ -276,9 +276,9 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                         src={
                           filter == "slot" || filter == "lottery"
                             ? el == "All" || el === "OTHER"
-                              ? `/assets/Icons/slot/${el}.png`
-                              : "/assets/Icons/slot/slot.png"
-                            : `/assets/Icons/casino/${el}.png`
+                              ? `/assets/Icon/slot/${el}.png`
+                              : "/assets/Icon/slot/slot.png"
+                            : `/assets/Icon/casino/${el}.png`
                         }
                         alt={el}
                       />
