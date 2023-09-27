@@ -36,6 +36,7 @@ const SideBarCasino = ({
   const handleClick = () => {
     setOpen((o) => !o);
   };
+  const token = localStorage.getItem("token");
 
   const getCasinoList = useCallback(async () => {
     if (!isSignedIn) return;
@@ -217,6 +218,8 @@ const SideBarCasino = ({
           name={casinoList.find((i) => i.gameId === id)?.gameName}
           id={id}
           handleClose={() => setId(0)}
+          desktopUrl={`https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+          mobileUrl={`https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
         />
       )}
     </Box>

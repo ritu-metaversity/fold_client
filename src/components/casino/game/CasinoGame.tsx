@@ -23,8 +23,16 @@ interface Props {
   id?: number;
   handleClose: () => void;
   name?: string;
+  desktopUrl?: string;
+  mobileUrl?: string;
 }
-const CasinoGame: FC<Props> = ({ handleClose, id, name }) => {
+const CasinoGame: FC<Props> = ({
+  handleClose,
+  id,
+  name,
+  desktopUrl,
+  mobileUrl,
+}) => {
   const matches = useMediaQuery("(max-width: 580px)");
   const [wait, setWait] = useState(false);
   const [open, setOpen] = useState(true);
@@ -112,7 +120,7 @@ const CasinoGame: FC<Props> = ({ handleClose, id, name }) => {
               ></Box> */}
               {id && token && !wait && (
                 <iframe
-                  src={`https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+                  src={desktopUrl}
                   // height="calc(100vh - 100px)"
                   height={"100vh"}
                   className="mobile_if"
@@ -133,7 +141,7 @@ const CasinoGame: FC<Props> = ({ handleClose, id, name }) => {
             bgcolor="#0f2327"
           ></Box> */}
               <iframe
-                src={`https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+                src={mobileUrl}
                 // height="calc(90vh - 10rem)"
                 // style={{ height: "2000px", marginTop: -80 }}
                 className="desktop_if"

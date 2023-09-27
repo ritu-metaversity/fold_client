@@ -23,7 +23,9 @@ import { utilServices } from "./utils/api/util/services";
 import { BalanceDataInterface } from "./components/layout/user/UserBox";
 import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
+import { FaHeadphones } from "react-icons/fa";
+import { qTechServices } from "./utils/api/qTechGames/services";
+
 const Pages = React.lazy(() => import("./components/pages"));
 const CustomizedDialogPassword = React.lazy(
   () => import("./components/layout/user/ResetPasswordDailog")
@@ -110,6 +112,7 @@ function App() {
     null
   );
   const [userIp, setUserIp] = useState("");
+  const [dheerajOpen, setDheerajOpen] = useState(false);
 
   useEffect(() => {
     const getIpy = async () => {
@@ -144,6 +147,10 @@ function App() {
     }
   };
 
+  const showAndHideHandler = () => {
+    setDheerajOpen((o) => !o);
+  };
+
   const validateJwt = useCallback(async () => {
     const { response } = await utilServices.validateToken();
     const user = localStorage.getItem("user");
@@ -152,6 +159,16 @@ function App() {
       setIsSignedIn(true);
     }
   }, [isSignedIn]);
+
+  const authenticationHandler = async () => {
+    if (isSignedIn) {
+      const { response } = await qTechServices.authentication();
+      if (!!response && response?.data && response?.data?.access_token) {
+        const { access_token } = response?.data;
+        window.localStorage.setItem("qtech_access_token", access_token);
+      }
+    }
+  };
 
   useEffect(() => {
     const getNewEventOpen = async () => {
@@ -201,6 +218,7 @@ function App() {
   useEffect(() => {
     const time = setInterval(() => {
       getBalance();
+      authenticationHandler();
     }, 5000);
     return () => clearInterval(time);
   }, [isSignedIn, getBalance]);
@@ -209,6 +227,7 @@ function App() {
     if (isSignedIn) {
       getButtonValue();
       getBalance();
+      authenticationHandler();
     }
 
     return () => {
@@ -268,6 +287,17 @@ function App() {
             </Box>
             <Pages />
           </UserContext.Provider>
+          <iframe
+            className={"dheeraj_iframe " + (!dheerajOpen ? " none " : "")}
+            src="http://15.207.226.246:10004?clientId=1a07c68d-1c26-43d1-880b-3a9e5deb2e93"
+          />
+          <Box
+            className={`chat_icon_div shadow`}
+            sx={{ bgcolor: "secondary.main" }}
+            onClick={showAndHideHandler}
+          >
+            <FaHeadphones className="text-white" />
+          </Box>
         </div>
         <SnackbarUtilsConfigurator />
       </SnackbarProvider>

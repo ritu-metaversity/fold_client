@@ -5,10 +5,9 @@ import {
   tabClasses,
   useMediaQuery,
   Typography,
-  Modal,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import HomeLayout from "../layout/homeLayout";
 import { CasinoIcon, StyledGameThumb } from "./styledComponent";
 import { colorHex } from "../../utils/constants";
@@ -17,6 +16,7 @@ import { casinoService } from "../../utils/api/casino/service";
 import { UserContext } from "../../App";
 import axios from "axios";
 import CasinoGame from "./game/CasinoGame";
+import { supernowaServices } from "../../utils/api/supernowa/services";
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: "20px",
@@ -39,6 +39,14 @@ export interface CasinoList {
   imageUrl: string;
 }
 
+export interface SuperNowaGameInterface {
+  name: string;
+  code: string;
+  thumb: string;
+  providerName: string;
+  providerCode: string;
+}
+
 const Casino = () => {
   const [value, setValue] = useState("323334");
   const [casinoTypes, setCasinoTypes] = useState<
@@ -48,8 +56,14 @@ const Casino = () => {
       name: string;
     }[]
   >([]);
+  const [supernowaGamesList, setSupernowaGamesList] = useState<
+    SuperNowaGameInterface[]
+  >([]);
   const [open, setOpen] = useState(0);
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
+  const urlPathName = window.location.pathname.split("/")[1];
+  const token = localStorage.getItem("token");
+  const [gameLaunchURL, setGameLaunchURL] = useState<string | null>(null);
 
   const nav = useNavigate();
   const { isSignedIn, setCasinoId } = useContext(UserContext);
@@ -76,11 +90,50 @@ const Casino = () => {
     // }
   };
 
+  // const getSuperNowaGameList = async () => {
+  //   const { response } = await supernowaServices.gameLists({
+  //     providerCode: "SN",
+  //   });
+
+  //   if (
+  //     response &&
+  //     response?.data &&
+  //     response?.data?.games &&
+  //     response?.data?.games.length
+  //   ) {
+  //     const { games } = response?.data;
+  //     setSupernowaGamesList(games);
+  //   }
+  // };
+
+  // const authHandler = async (item: SuperNowaGameInterface) => {
+  //   setOpen(1);
+
+  //   const { response } = await supernowaServices.authentication({
+  //     game: {
+  //       gameCode: item?.code,
+  //       providerCode: item?.providerCode,
+  //     },
+  //     timestamp: new Date().getTime(),
+  //     user: {
+  //       currency: "INR",
+  //       backUrl: "http://maggibook.com",
+  //     },
+  //   });
+
+  //   if (response && response?.data && response?.data?.launchURL) {
+  //     const { launchURL } = response?.data;
+  //     setGameLaunchURL(launchURL);
+  //   }
+  // };
+
   useEffect(() => {
     getCasinoList();
   }, [value, isSignedIn]);
 
   useEffect(() => {
+    // getSuperNowaGameList();
+
     const getCasinoTypes = async () => {
       if (!isSignedIn) {
         nav("/");
@@ -100,6 +153,7 @@ const Casino = () => {
   }, []);
 
   const matches = useMediaQuery("(max-width: 1279px)");
+
   return (
     <HomeLayout>
       {casinoTypes?.length > 0 && (
@@ -139,17 +193,17 @@ const Casino = () => {
             />
           ))}
           {/* <StyledTab
-          icon={<CasinoIcon src="/assets/images/casino.png" />}
-          iconPosition="start"
-          value="2"
-          label="Indian Casino"
-        />
-        <StyledTab
-          icon={<CasinoIcon src="/assets/images/casino.png" />}
-          iconPosition="start"
-          value="3"
-          label="Our Virtual"
-        /> */}
+            icon={
+              <CasinoIcon
+                src={
+                  "https://wver.sprintstaticdata.com/v14/static/front/img/icons/26.png"
+                }
+              />
+            }
+            iconPosition="start"
+            value={"Games"} // change into the nunber once this is dynamic
+            label={"Games"}
+          /> */}
         </Tabs>
       )}
       <Box bgcolor={colorHex.bg1}>
@@ -158,7 +212,6 @@ const Casino = () => {
             <Typography
               textAlign={"center"}
               sx={{ verticalAlign: "center" }}
-              // height={"50vh"}
               flex={1}
             >
               NO Casino Found
@@ -171,19 +224,33 @@ const Casino = () => {
                 sm: "calc(50% - 10px)",
                 md: "calc(25% - 10px)",
                 lg: "calc(20% - 10px)",
-                // xl: "calc(20% - 10px)",
               }}
               m="auto"
             >
-              {/* <Link to={"/casino/" + item.gameId}> */}
               <StyledGameThumb
                 onClick={() => setOpen(item.gameId)}
                 src={item.imageUrl}
                 alt="thumb"
-              />{" "}
-              {/* </Link> */}
+              />
             </Box>
           ))}
+          {/* {supernowaGamesList.map((item) => (
+            <Box
+              width={{
+                xs: "calc(50% - 10px)",
+                sm: "calc(50% - 10px)",
+                md: "calc(25% - 10px)",
+                lg: "calc(20% - 10px)",
+              }}
+              m="auto"
+            >
+              <StyledGameThumb
+                onClick={() => authHandler(item)}
+                src={item.thumb}
+                alt="thumb"
+              />
+            </Box>
+          ))} */}
         </Box>
       </Box>
       {!!open && (
@@ -191,6 +258,14 @@ const Casino = () => {
           name={casinoList.find((i) => i.gameId === open)?.gameName}
           id={open}
           handleClose={() => setOpen(0)}
+          desktopUrl={
+            gameLaunchURL ||
+            `https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`
+          }
+          mobileUrl={
+            gameLaunchURL ||
+            `https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`
+          }
         />
       )}
     </HomeLayout>

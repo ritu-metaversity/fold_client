@@ -20,6 +20,7 @@ import { colorHex } from "../../utils/constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import styled from "@emotion/styled";
+import { LinkandLabel } from "../home/buttonTabs";
 export const drawerWidth = 220;
 export const drawerWidthXl = 270;
 
@@ -35,6 +36,9 @@ const linksWithoutSideBar = [
   "/report/accountstatement",
   "/report/activity",
   "/report/currentbets",
+  "/slot",
+  "/casino",
+  "/fantasy",
 ];
 
 export const topNavHeight = "1.9rem";
@@ -80,21 +84,26 @@ export default function Header(props: Props) {
           zIndex: 100,
         }}
       >
-        <TopNavLinks
-          to="/"
-          style={
-            pathname !== "/casino" && pathname !== "/virtual-casino"
-              ? {
-                  color: "#fdcf13",
-                  borderBottom: "2px solid #fdcf13",
-                }
-              : {}
-          }
-        >
-          Exchange
-        </TopNavLinks>
-        {isSignedIn && <Circle />}
-        <TopNavLinks
+        {LinkandLabel.map((item, index) => (
+          <>
+            <TopNavLinks
+              to={item.link}
+              style={
+                pathname === item.link
+                  ? {
+                      color: "#fdcf13",
+                      borderBottom: "2px solid #fdcf13",
+                    }
+                  : {}
+              }
+            >
+              {item.label}
+            </TopNavLinks>
+            {isSignedIn && index + 1 !== LinkandLabel.length && <Circle />}
+          </>
+        ))}
+
+        {/* <TopNavLinks
           onClick={(e) => {
             if (!isSignedIn) {
               e.preventDefault();
@@ -112,8 +121,8 @@ export default function Header(props: Props) {
           to="/casino"
         >
           Live Casino
-        </TopNavLinks>
-        {isSignedIn && <Circle />}
+        </TopNavLinks> */}
+        {/* {isSignedIn && <Circle />}
         <TopNavLinks
           style={
             pathname === "/virtual-casino"
@@ -126,7 +135,67 @@ export default function Header(props: Props) {
           to="/virtual-casino"
         >
           Virtual Casino
+        </TopNavLinks> */}
+        {/* {isSignedIn && <Circle />}
+        <TopNavLinks
+          onClick={(e) => {
+            if (!isSignedIn) {
+              e.preventDefault();
+              setModal && setModal({ login: true });
+            }
+          }}
+          style={
+            pathname === "/slot"
+              ? {
+                  color: "#fdcf13",
+                  borderBottom: "2px solid #fdcf13",
+                }
+              : {}
+          }
+          to="/slot"
+        >
+          Slot
+        </TopNavLinks> */}
+        {/* {isSignedIn && <Circle />}
+        <TopNavLinks
+          onClick={(e) => {
+            if (!isSignedIn) {
+              e.preventDefault();
+              setModal && setModal({ login: true });
+            }
+          }}
+          style={
+            pathname === "/games"
+              ? {
+                  color: "#fdcf13",
+                  borderBottom: "2px solid #fdcf13",
+                }
+              : {}
+          }
+          to="/games"
+        >
+          Games
         </TopNavLinks>
+        {isSignedIn && <Circle />} */}
+        {/* <TopNavLinks
+          onClick={(e) => {
+            if (!isSignedIn) {
+              e.preventDefault();
+              setModal && setModal({ login: true });
+            }
+          }}
+          style={
+            pathname === "/fantasy"
+              ? {
+                  color: "#fdcf13",
+                  borderBottom: "2px solid #fdcf13",
+                }
+              : {}
+          }
+          to="/fantasy"
+        >
+          Fantasy Games
+        </TopNavLinks> */}
         {isSignedIn && appData?.selfAllowed && !(user?.userTypeInfo === 2) && (
           <Box
             height="100%"
