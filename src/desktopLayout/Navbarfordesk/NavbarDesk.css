@@ -334,9 +334,9 @@ p.arrow-line svg {
 .bottom-header {
     background: #2c3d50;
     margin-top: 0px;
-    min-height: 33px !important;
+    min-height: 41px !important;
     /* height: 33px; */
-    padding: 6px 15px;
+    padding: 9px 15px;
 }   
 .main_header{
     display: flex;
@@ -366,10 +366,8 @@ p.arrow-line svg {
     vertical-align: middle;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    -webkit-backface-visibility: hidden;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);   
     backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
     position: relative;
     overflow: hidden;
     text-align: center;

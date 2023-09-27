@@ -193,7 +193,7 @@ const NavBar = () => {
       <div className={`wrapper ${stackySideBar}`}>
         <div className="">
           <header className="header">
-            <div className="container-fluid">
+            <div className="nav_main_container">
               <div className="row row5 pt-1 pb-1 mb-4">
                 <div className="logo col-6">
                   <Link
@@ -211,15 +211,15 @@ const NavBar = () => {
                   className={`col-6 text-right bal-expo ${
                     localStorage.getItem("token") === null ? "d-none" : ""
                   }`}>
-                  <p className={`mb-0 ${!balanceShow ? "d-none" : ""}`}>
+                  <p className={`mb-0 ${!balanceShow ? "d-none" : ""}`} style={{fontSize:"12px"}}>
                     <i className="fa fa-bank mr-1"></i>
                     <b>{userbalance === "" ? "0.00" : userbalance}</b>
                   </p>
                   <div className="exp">
                     <span
                       onClick={(e) => handleExpShow(e)}
-                      className={expShow ? "" : "d-none"}>
-                      <u>Exp: {parseFloat(Exp)?.toFixed(2)}</u>
+                      className={expShow ? "" : "d-none"} style={{fontSize:"12px", marginRight:"8px"}}>
+                      <b> Exp: {parseFloat(Exp)?.toFixed(2)}</b>
                     </span>
 
                     <Modal
@@ -246,7 +246,7 @@ const NavBar = () => {
                       className="dropdown d-inline-block"
                       onClick={scrollToTop}>
                       <p data-toggle="dropdown" className="dropdown-toggle">
-                        <u>{userdetail?.length && userdetail}</u>
+                        <b>{userdetail?.length && userdetail}</b>
                       </p>
                       {close ? (
                         <div
@@ -416,7 +416,7 @@ const NavBar = () => {
                 
               </div>
               {/* {
-                (pathname === "/" || pathname === "/m/In-play" || pathname ==="/m/sports" ) && <LatestEvent/>
+                (pathname === "/" || pathname === "/m/In-play" || pathname ==="/m/sports" || pathname === "/m/home" ) && <LatestEvent/>
               } */}
               
             </div>

@@ -751,35 +751,6 @@ function GamedetailPage({ getStackValue, SportId }) {
                                               color: "black",
                                               fontSize: "12px",
                                             }}>
-                                            {/* {
-                                              bookmaker.mid.includes("BM") || bookmaker.mid.includes("Bm") || bookmaker.mid.includes("bm")?
-                                            (() => {
-                                              const profit =
-                                                profits?.Bookmaker?.find(
-                                                  (profit) =>
-                                                    profit?.sid === bookmaker?.sid
-                                                );
-                                              if (profit)
-                                                return selectionId ==
-                                                  bookmaker?.sid
-                                                  ? (
-                                                      (profit?.value || 0) +
-                                                      ((cName === "back"
-                                                        ? 1
-                                                        : -1) *
-                                                        spanValueRate *
-                                                        updated) /
-                                                        100
-                                                    ).toFixed(2)
-                                                  : (
-                                                      (profit?.value || 0) +
-                                                      (cName === "back"
-                                                        ? -1
-                                                        : 1) *
-                                                        updated
-                                                    ).toFixed(2);
-                                              else return null;
-                                            })():""} */}
                                             {parseFloat(BookmakerProfitVal)?.toFixed(2) || 0}
                                           </span>
                                         </p>

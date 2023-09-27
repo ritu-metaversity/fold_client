@@ -22,13 +22,7 @@
     display: flex;
 }
 
-.nav-tabs .nav-item {
-    display: table-cell;
-}
 
-.nav-tabs .nav-item {
-    margin-bottom: -1px;
-}
 
 .nav-tabs .nav-link {
     border-radius: 0;
@@ -94,7 +88,7 @@
 }
 
 .sports .nav-tabs li img {
-    height: 18px;
+    height: 13px;
     margin-bottom: 5px;
 }
 

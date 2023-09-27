@@ -130,6 +130,7 @@ p {
 .suspended {
     position: relative;
 }
+
 .ballrunning {
     position: relative;
 }
@@ -151,6 +152,7 @@ p {
     font-size: 18px;
     top: 0;
 }
+
 .sports-wrapper .main-market .ballrunning:after {
     width: 60%;
     content: "BALL RUNNING";
@@ -791,9 +793,8 @@ p {
 
 
 .header-bottom {
-    background-color: #2c3e50;
-    margin-top: 10px;
-    padding: 9px 0;
+    position: relative;
+    height: 35px;
 }
 
 .header-bottom li a {
@@ -803,12 +804,9 @@ p {
     font-size: 14px;
     display: inline-block;
     vertical-align: middle;
-    -webkit-transform: translateZ(0);
     transform: translateZ(0);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -1083,68 +1081,84 @@ ul#home-events {
     display: flex;
     flex-wrap: wrap;
 }
+
 /* li.nav-item {
     padding: 2px;
 } */
 .desk-view {
     display: none !important;
 }
+
 .Mob-view {
     display: block;
 }
+
 .header .logo {
     width: 111px;
 }
+
 .pb-1,
 .py-1 {
     padding-bottom: 0.25rem !important;
 }
+
 .pt-1,
 .py-1 {
     padding-top: 0.25rem !important;
 }
+
 a,
 a:focus,
 a:hover,
 a:active {
     text-decoration: none;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
+
 .header .fa-home {
     font-size: 23px;
     vertical-align: middle;
     color: #fff;
 }
+
 .mr-1,
 .mx-1 {
     margin-right: 0.25rem !important;
 }
+
 .img-fluid {
     max-width: 100%;
     height: auto;
 }
+
 .logo img {
     width: auto;
     height: unset;
 }
+
 .header .bal-expo {
     font-size: 14px;
 }
+
 .text-right {
     text-align: right !important;
 }
+
 .mb-0,
 .my-0 {
     margin-bottom: 0 !important;
 }
+
 .mr-1,
 .mx-1 {
     margin-right: 0.25rem !important;
 }
+
 .d-inline-block {
     display: inline-block !important;
 }
@@ -1248,10 +1262,6 @@ input[type=radio] {
     cursor: pointer;
 }
 
-.header-bottom {
-    position: relative;
-    min-height: 35px;
-}
 
 .search-box-container {
     position: absolute;
@@ -1307,21 +1317,10 @@ a.router-link-exact-active.router-link-active {
     align-items: center;
 }
 
-.header-bottom {
-    background-color: unset;
-    margin-top: 10px;
-    padding: 9px 0;
-}
-
-.header-bottom {
-    position: relative;
-    min-height: 35px;
-}
-
 .header-bottom marquee {
     width: 87%;
     position: absolute;
-    margin-top: -10px;
+    margin-top: -9px;
     padding-left: 5px;
     font-weight: bold;
     right: 0;
@@ -1336,7 +1335,7 @@ a.router-link-exact-active.router-link-active {
 
 .dropdown-menu.show {
     display: block;
-    margin-right: 9px;
+    margin-right: 12px;
 }
 
 
@@ -1412,13 +1411,13 @@ a.search_icon {
 
 .nav-tabs .nav-item {
     margin-bottom: 0;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .game-nav-bar.nav-tabs .navlink1 {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 16px;
+    padding-right: 16px;
     height: 100%;
 }
 
@@ -1488,40 +1487,47 @@ a {
     margin-right: 8px;
     cursor: pointer;
 }
-.mb-4{
+
+.mb-4 {
     margin-top: -4px;
 }
-.betInfo{
+
+.betInfo {
     font-size: 12px;
 }
-.betColor{
+
+.betColor {
     color: #0088cc !important;
 }
-.exposre{
+
+.exposre {
     margin-top: -12px;
 }
-.overlayopen{
+
+.overlayopen {
     position: absolute;
     top: 0;
     left: 0%;
-    width:100%;
-    height:100vh;
+    width: 100%;
+    height: 100vh;
     z-index: 30;
     display: flex;
     justify-content: flex-end;
 }
-.overlayclose{
-display: none;
+
+.overlayclose {
+    display: none;
 }
 
-.list{
-width: 100px;
-height: 340px;
-background-color: #007bff;
+.list {
+    width: 100px;
+    height: 340px;
+    background-color: #007bff;
 
 
 }
-.depositMNav{
+
+.depositMNav {
     background-color: #59CE72 !important;
     color: #fff;
     width: 85%;
@@ -1531,7 +1537,8 @@ background-color: #007bff;
     margin-bottom: 6px;
     padding-left: 5px;
 }
-.withdrawNav{
+
+.withdrawNav {
     background-color: #DC3545 !important;
     color: #fff;
     width: 85%;
@@ -1543,24 +1550,26 @@ background-color: #007bff;
 }
 
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 400px) {
     span.betInfo {
         display: block;
-    }    
+    }
 }
 
-.login-register{
+.login-register {
     justify-content: end;
     margin: 0px -15px;
 }
+
 .login-register a {
     border: 1px solid #fff;
     padding: 10px 16px;
     border-radius: 36px;
     margin: 6px 8px;
 }
-.login-register a:hover{
-    background:#2c3d50;
+
+.login-register a:hover {
+    background: #2c3d50;
     transition: 0.5s ease;
 }
 
@@ -1572,7 +1581,7 @@ background-color: #007bff;
     color: #ff3c3c;
 }
 
-@media screen and (min-width: 800px){
+@media screen and (min-width: 800px) {
     .suspended:after {
         width: 60%;
         content: "SUSPENDED";
@@ -1581,6 +1590,7 @@ background-color: #007bff;
         color: #ff3c3c;
     }
 }
+
 .card-header.wit {
     padding: 4px 5px;
 }
@@ -1602,17 +1612,23 @@ background-color: #007bff;
         height: calc(100vh - 50px) !important;
         overflow: scroll !important;
     }
-  }
+}
 
 
-  @media screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
     .header-bottom marquee {
-        width: 98%;
+        width: 96%;
         position: absolute;
-        margin-top: -10px;
+        margin-top: -9px;
         padding-left: 5px;
         font-weight: bold;
         right: 0;
         font-size: 12px;
+        margin-left: 7px;
+        margin-right: 7px;
     }
-  }
+}
+
+.nav_main_container {
+    padding: 0px 3px;
+}
