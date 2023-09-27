@@ -97,7 +97,9 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
       const uniqueArrayValues: string[] = Array.from(new Set(categories));
       if (!!uniqueArrayValues && !!uniqueArrayValues.length) {
         uniqueArrayValues.unshift("All");
-        setCategory(uniqueArrayValues);
+        const newAr = uniqueArrayValues.filter((el) => el !== "OTHER");
+        newAr.push("OTHER");
+        setCategory(newAr);
       }
       setGameLists(items);
     }
@@ -348,6 +350,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                           lg: "calc(20% - 10px)",
                         }}
                         m="auto"
+                        className="games"
                       >
                         <StyledGameThumb
                           onClick={

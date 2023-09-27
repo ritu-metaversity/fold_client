@@ -49,3 +49,7 @@ code {
     margin-left: auto;
   }
 }
+
+.games {
+  cursor: pointer;
+}
