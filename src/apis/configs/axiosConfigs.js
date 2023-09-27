@@ -9,6 +9,10 @@ export const api = axios.create({
     //     'Authorization': 'Bearer ' + localStorage.getItem("token"),
     // },
 })
+export const casinoApi = axios.create({
+    baseURL: "https://api.playindia.app/api/qtech",
+     
+})
 
 api.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`
 

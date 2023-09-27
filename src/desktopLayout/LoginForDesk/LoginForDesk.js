@@ -9,6 +9,7 @@ import { AuthorAPI } from "../../apis/AuthorAPI";
 import Modal from "react-bootstrap/Modal";
 import RegisterModals from "../../component/Register/RegisterModals";
 import AlertBtn from "../../component/Alert/AlertBtn";
+import { CasinoApi } from "../../apis/CasinoApi";
 
 const LoginForDesk = ({Errmessage, Statusmessage}) => {
   const nav = useNavigate();
@@ -63,7 +64,11 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
           localStorage.setItem("UserId", uId);
           localStorage.setItem("userTypeInfo", res?.userTypeInfo);
           if (res.token !== "" && res.status !== false) {
-          localStorage.setItem("token", token);
+            localStorage.setItem("token", token);
+            // console.log("authentication");
+            // CasinoApi.Casino_Authentication({}).then((item)=>{
+            //   console.log(item, "fsfsdfsdf")
+            // });
             nav("/home");
 
           }
@@ -115,9 +120,6 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
   }, []);
 
   const { host } = window.location;
-
-
-
   const handleLoginWithDemoAccount = ()=>{
     setStatusVal(true);
     setIsLoading1(true);
@@ -137,7 +139,10 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
         const uId = res.data?.username;
         localStorage.setItem("UserId", uId);
         if (res.data?.token !== "" && res?.data?.token !== undefined  && res?.data.status !== false) {
-        localStorage.setItem("token", token);
+          localStorage.setItem("token", token);
+          // CasinoApi.Casino_Authentication({}).then((item)=>{
+          // localStorage.setItem("gameToken", item?.data?.data?.access_token);
+          // });
           nav("/home");
         }
         const pType = res?.data?.passwordtype;
@@ -160,11 +165,7 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
     <div>
      {Statusmessage === true && (
           <div className="alertBtn">
-            <AlertBtn
-              color="success"
-              popupClose={popupClose}
-              val={Errmessage}
-            />
+            <AlertBtn color="success" popupClose={popupClose} val={Errmessage} />
         </div>
       )}
       <div className="deck-top-view">

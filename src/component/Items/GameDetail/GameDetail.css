@@ -221,15 +221,9 @@
 
 .nav-tabs .nav-item {
     display: table-cell;
-}
-
-.nav-tabs .nav-item {
-    display: table-cell;
-}
-
-.nav-tabs .nav-item {
     margin-bottom: -1px;
 }
+
 
 .game-page .nav-tabs .nav-link.active {
     background-color: #0088cc !important;
@@ -525,7 +519,7 @@ button.nav-link.nav2.nav-btn:first-child {
     white-space: nowrap;
     text-transform: uppercase;
     border-radius: 0;
-    padding-top: 0;
+    padding-top: 2px;
     padding-bottom: 0;
     border-right: 1px solid #fff;
     font-size: 12px;

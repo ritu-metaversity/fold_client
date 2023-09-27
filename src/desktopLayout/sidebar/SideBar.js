@@ -12,6 +12,7 @@ import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
 function SideBar() {
   const [visible, setVisible] = useState(true);
   const [visible2, setVisible2] = useState(true);
+  const [visible3, setVisible3] = useState(true);
   const [toggle, setToggle] = useState();
   const [matchList, setMatchList] = useState("");
   const [casinoData, setCasinoData] = useState([]);
@@ -29,7 +30,9 @@ function SideBar() {
       setVisible(false);
     } else {
       setVisible(true);
-      setVisible2(false)
+      setVisible2(false);
+      setVisible3(false);
+
     }
   }
   function collapse2() {
@@ -37,9 +40,21 @@ function SideBar() {
       setVisible2(false);
     } else {
       setVisible2(true);
-      setVisible(false)
+      setVisible(false);
+      setVisible3(false);
     }
   }
+  function collapse3() {
+    if (visible3 === true) {
+      setVisible3(false);
+      setVisible3(false);
+    } else {
+      setVisible3(true);
+      setVisible(false);
+      setVisible2(false);
+    }
+  }
+
   const handleSportId = (id, val) => {
     setToggle(id);
     localStorage.setItem("SportId", val);
@@ -121,7 +136,7 @@ function SideBar() {
             return (
               <li className="nav-item c-pointer" key={id} onClick={(e)=>handleData(res.gameId,res.gameName, e)}>
                 <p to={`/casino/${res?.gameId}`} className="nav-link">
-                  <span className="new-launch-text">{res?.gameName}</span>
+                  <span className="">{res?.gameName}</span>
                 </p>
               </li>
             );
@@ -129,19 +144,63 @@ function SideBar() {
         </ul>
       </nav>
 
-      <div
+      {/* <div
         className="sidebar-title m-t-5 theme2bg"
         onClick={collapse2}
         aria-controls="events"
         aria-expanded="true"
         role="button">
-        <h5 className="text-white d-inline-block m-b-0">All Sports</h5>
+        <h5 className="text-white d-inline-block m-b-0">Racing Game</h5>
         <p className="arrow-line">
           {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
         </p>
+      </div> */}
+      <Accordion defaultActiveKey="0"  className="main_sport_header">
+      <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
+        <ul className="live_casino">
+          <li className="nav-item">
+            <Link to="/livecasino" className="nav-link">
+              <span className="new-launch-text">Our Casino</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/livecasino" className="nav-link">
+              <span className="new-launch-text">Our Virtual</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/livecasino" className="nav-link">
+              <span className="">Live Casino</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/livecasino" className="nav-link">
+              <span className="">Slot</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/livecasino" className="nav-link">
+              <span className="">Fantasy Game</span>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+        </Accordion>
+
+
+        <div
+        className="sidebar-title m-t-5 theme2bg"
+        onClick={collapse3}
+        aria-controls="events"
+        aria-expanded="true"
+        role="button">
+        <h5 className="text-white d-inline-block m-b-0">All Sports</h5>
+        <p className="arrow-line">
+          {visible3 ? <IoIosArrowDown /> : <IoIosArrowUp />}
+        </p>
       </div>
       <Accordion defaultActiveKey="0"  className="main_sport_header">
-      {matchList?.length && visible2 &&
+      {matchList?.length && visible3 &&
         matchList?.map((e, id) => {
           return (
             <Accordion.Item eventKey={id}>
