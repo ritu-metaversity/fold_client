@@ -8,6 +8,7 @@ import {
   styled as MuiStyled,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { colorHex } from "../../utils/constants";
 
 export const CenterBox = styled(Box)`
   display: flex;
@@ -24,7 +25,7 @@ export const BlinkImage = styled.img`
 export const TopNavLinks = styled(Link)`
   font-weight: 900;
   text-decoration: none;
-  color: #aaafb5;
+  color: white;
   margin: 0 0.8em;
   padding-bottom: 0;
   font-size: 0.9rem;
@@ -44,12 +45,12 @@ export const SidebarHeader = styled(ListSubheader)`
 `;
 export const AnnouncementBox = styled(Box)`
   flex: 1;
-  background-color: rgba(112, 49, 86, 0.4);
+  background-color: #444;
   padding: 10px;
   height: 2.2rem;
   @media (max-width: 1279px) {
     padding-block: 2px;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     margin: 5px;
     height: initial;
   }
@@ -102,6 +103,7 @@ export const StyledAppBar = styled(AppBar)`
 `;
 export const LoginButton = MuiStyled(Button)(({ theme }) => ({
   borderRadius: 0,
+
   [theme.breakpoints.down("lg")]: {
     width: 80,
     height: "2rem",
@@ -112,9 +114,14 @@ export const LoginButton = MuiStyled(Button)(({ theme }) => ({
   },
 }));
 
-
-
 export const UserContainer = styled(Box)`
-  display:flex;
-  margin-left:auto;
+  display: flex;
+  margin-left: auto;
+  justify-content: flex-end;
 `;
+
+export const ButtonSmallStyled = styled(Button)({
+  borderRadius: 0,
+  height: 24,
+  color: "white",
+});

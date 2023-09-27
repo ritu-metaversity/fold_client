@@ -1,9 +1,12 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
 import React, { useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 import { colorHex } from "../../utils/constants";
 import "./live.css";
+
+const greyDash = <span style={{ color: "#aaafb5" }}>—</span>;
+const whiteDash = <span style={{ color: "white" }}>—</span>;
 
 export interface MatchInterface {
   matchName: string;
@@ -32,8 +35,8 @@ const buttonGridProps = {
   item: true,
   xl: 1.7,
   lg: 1.8,
-  xs: 1.8,
-  borderRadius: 1,
+  xs: 1.85,
+  // borderRadius: 1,
 };
 
 const days = [
@@ -72,9 +75,10 @@ const ButtonPropps = {
   sx: {
     fullWidth: true,
     minWidth: "",
-    fontSize: "0.9rem",
+    fontSize: "0.94rem",
     p: { xs: 0.5, lg: 0 },
     width: { xl: "4rem" },
+    height: { xs: 32, lg: 22 },
     mx: -0.25,
     color: "#000",
     fontWeight: 700,
@@ -94,6 +98,7 @@ const Match = ({ matches, sportId }: Props) => {
       matches.channelId && matches.channelId.toString() !== "0" ? true : false,
     [matches.channelId]
   );
+  const theme = useTheme();
   return (
     <Grid
       container
@@ -117,26 +122,39 @@ const Match = ({ matches, sportId }: Props) => {
         lg={6.6}
         bgcolor={colorHex.bg1}
         display="flex"
-        fontSize={"0.8rem"}
+        lineHeight={1}
+        fontSize={"0.75rem"}
         alignItems={"center"}
         p={{ xs: 1, lg: 1 }}
         maxWidth={{ lg: "unset" }}
         flex={{ lg: 1 }}
       >
-        <Box>
+        <Box width={{ xs: "14%", md: "unset" }}>
           {matches.inPlay ? (
-            <Typography
-              component={"div"}
-              maxWidth={"min-content"}
-              overflow="hidden"
-              color="secondary.main"
-              mx={2}
+            <Box
+              sx={{
+                height: 30,
+                [theme.breakpoints.down("md")]: {
+                  borderRight: `1px solid ${colorHex.borderLine}`,
+                },
+                display: "flex",
+                alignItems: "center",
+              }}
             >
-              Live
-              <Box className="live-under">
-                <Box className="live-under-under"></Box>
-              </Box>
-            </Typography>
+              <Typography
+                component={"div"}
+                maxWidth={"min-content"}
+                overflow="hidden"
+                color="#03B37F"
+                mx={2}
+                fontSize={"0.75rem"}
+              >
+                Live
+                <Box className="live-under">
+                  <Box className="live-under-under"></Box>
+                </Box>
+              </Typography>
+            </Box>
           ) : (
             <Box
               display="flex"
@@ -145,7 +163,9 @@ const Match = ({ matches, sportId }: Props) => {
                 opacity: 0.6,
                 pr: 2,
                 flexDirection: { xs: "column", lg: "row" },
-                borderRight: `1px solid ${colorHex.borderLine}`,
+                [theme.breakpoints.up("md")]: {
+                  borderRight: `1px solid ${colorHex.borderLine}`,
+                },
               }}
               justifyContent={"space-between"}
             >
@@ -154,22 +174,22 @@ const Match = ({ matches, sportId }: Props) => {
             </Box>
           )}
         </Box>
-        <Box textAlign="left" pl={2}>
+        <Box textAlign="left" fontSize={"0.82rem"} pl={2}>
           {matches.matchName}
         </Box>
         <Box
           textAlign="left"
           ml={"auto"}
-          fontSize={"0.85rem"}
+          fontSize={{ xs: "0.75rem", lg: "0.85rem" }}
           width={{ lg: "6rem" }}
           fontWeight={900}
           whiteSpace="nowrap"
           sx={{ wordSpacing: "0.2rem" }}
         >
+          {matches.F && "F   "}
           {matches.bm && "BM   "}
           {matches.GM && "GM   "}
           {matches.SM && "SM   "}
-          {matches.F && "F   "}
           {isChannelAvailable && <i className="icon-tv d-icon "></i>}
         </Box>
       </Grid>
@@ -193,27 +213,37 @@ const Match = ({ matches, sportId }: Props) => {
           marginLeft={{ xs: 0, md: "auto", lg: 0, xl: "auto" }}
           bgcolor="#72BBEF"
         >
-          <Button {...ButtonPropps}>{matches.team1Back || "—"} </Button>
-        </Grid>{" "}
+          <Button {...ButtonPropps}>{matches.team1Back || whiteDash} </Button>
+        </Grid>
         <Grid {...buttonGridProps} marginRight="auto" bgcolor="#F994BA">
-          <Button {...ButtonPropps}>{matches.team1Lay || "—"} </Button>
+          <Button {...ButtonPropps}>{matches.team1Lay || whiteDash} </Button>
+        </Grid>
+        <Grid
+          {...buttonGridProps}
+          marginLeft="auto"
+          border={"1px solid " + colorHex.bg2}
+          bgcolor={matches.drawBack ? "#72BBEF" : colorHex.bg1}
+        >
+          <Button {...ButtonPropps}>{matches.drawBack || greyDash}</Button>
+        </Grid>
+        <Grid
+          {...buttonGridProps}
+          marginRight="auto"
+          border={"1px solid " + colorHex.bg2}
+          bgcolor={matches.drawBack ? "#F994BA" : colorHex.bg1}
+        >
+          <Button {...ButtonPropps}>{matches.drawLay || greyDash}</Button>
         </Grid>
         <Grid {...buttonGridProps} marginLeft="auto" bgcolor="#72BBEF">
-          <Button {...ButtonPropps}>{matches.drawBack || "—"}</Button>
-        </Grid>{" "}
-        <Grid {...buttonGridProps} marginRight="auto" bgcolor="#F994BA">
-          <Button {...ButtonPropps}>{matches.drawLay || "—"}</Button>
-        </Grid>
-        <Grid {...buttonGridProps} marginLeft="auto" bgcolor="#72BBEF">
-          <Button {...ButtonPropps}>{matches.team2Back || "—"} </Button>
+          <Button {...ButtonPropps}>{matches.team2Back || whiteDash} </Button>
         </Grid>
         <Grid
           {...buttonGridProps}
           marginRight={{ xs: 0, md: "auto", lg: 0, xl: "auto" }}
           bgcolor="#F994BA"
         >
-          <Button {...ButtonPropps}>{matches.team2Lay || "—"} </Button>
-        </Grid>{" "}
+          <Button {...ButtonPropps}>{matches.team2Lay || whiteDash} </Button>
+        </Grid>
       </Grid>
     </Grid>
   );

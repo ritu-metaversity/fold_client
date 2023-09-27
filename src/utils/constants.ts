@@ -1,6 +1,6 @@
 export const colorHex = {
   bg1: "#2e3438",
-  bg2: "#3c444b",
+  bg2: "#666",
   bg3: "#17191C",
   bg4: "#333",
   sec: "#03B37F",

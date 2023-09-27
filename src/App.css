@@ -3,7 +3,9 @@
     font-size: 18px;
   }
 }
-
+*{
+  transition: all 0.5s;
+}
 .App {
   text-align: center;
 }
