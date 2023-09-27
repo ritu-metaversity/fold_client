@@ -45,6 +45,7 @@ export const SidebarHeader = styled(ListSubheader)`
 `;
 export const AnnouncementBox = styled(Box)`
   flex: 1;
+  margin: auto;
   background-color: #444;
   padding: 10px;
   height: 2.2rem;

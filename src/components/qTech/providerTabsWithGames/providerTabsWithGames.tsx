@@ -281,11 +281,10 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
               </Box>
             )}
             <div className={classes["games_container"]}>
-              {(!!filterGamesList && filterGamesList?.length) ||
-              (!!GameLists && GameLists.length)
-                ? (!!CustomGameList && CustomGameList.length
+              {filterGamesList?.length || GameLists?.length
+                ? (CustomGameList?.length
                     ? CustomGameList
-                    : !!filterGamesList && filterGamesList?.length
+                    : filterGamesList?.length
                     ? filterGamesList
                     : GameLists
                   ).map((el) => (
