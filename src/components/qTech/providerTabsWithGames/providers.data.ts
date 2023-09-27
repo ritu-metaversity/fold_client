@@ -135,7 +135,7 @@ export const slotProviderList: ProviderInterface[] = [
     filterType: "CQC",
   },
   {
-    name: "DRAGOON SOFT",
+    name: "DRAGOON",
     logo: "https://www.dragoonsoft.com/img/ds_header_logo.31834161.png",
     filterType: "DS",
   },

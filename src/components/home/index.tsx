@@ -81,7 +81,9 @@ const Home = () => {
 
   return (
     <HomeLayout sideWidth={250} sideWidthXl={300} rightMenu={homeRightMenu}>
+      {/* {!isSignedIn && */}
       <Hero />
+      {/* } */}
       <ButtonTabs />
       <Sports />
       <TopCasinoHero sideBanner={sideBanner} />

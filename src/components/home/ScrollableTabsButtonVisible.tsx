@@ -2,9 +2,10 @@ import React, { Dispatch, SetStateAction } from "react";
 import Box from "@mui/material/Box";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import Tab, { tabClasses } from "@mui/material/Tab";
-import { useMediaQuery } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 import { colorHex } from "../../utils/constants";
 import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
+import { TabStyled } from "./styledComponents";
 
 interface TabsProps {
   value: number;
@@ -25,7 +26,7 @@ export function ScrollableTabsButtonVisible({
 
   const matches = useMediaQuery("(min-width:1280px)");
   console.log(sports[0], "index");
-
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -58,31 +59,22 @@ export function ScrollableTabsButtonVisible({
           },
         }}
       >
-        <Tab
+        <TabStyled
           value={0}
           label={"In Play"}
           key={"inplaygray"}
           icon={<AccessAlarmsIcon fontSize="small" />}
           iconPosition={matches ? "start" : "top"}
-          sx={{
-            py: 0,
-            my: { xs: -1.5, lg: -2.5 },
-            bgcolor: 0 === value ? "gray" : "",
-          }}
+          sx={{ bgcolor: 0 === value ? "gray" : "" }}
         />
-        {sports.map((s, index) => (
-          <Tab
+        {sports.map((s) => (
+          <TabStyled
             value={s.sportId}
             label={s.name}
             icon={s.iconClass ? <i className={s.iconClass}></i> : s.icon}
             key={s.name + s.color}
             iconPosition={matches ? "start" : "top"}
-            sx={{
-              py: 0,
-              my: { xs: -1.5, lg: -2.5 },
-              bgcolor: s.sportId === value ? color : "",
-              borderLeft: "0.5px solid rgb(60,68,75)",
-            }}
+            sx={{ bgcolor: s.sportId === value ? color : "" }}
           />
         ))}
       </Tabs>

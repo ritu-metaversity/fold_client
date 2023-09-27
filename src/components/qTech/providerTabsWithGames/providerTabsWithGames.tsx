@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 import { qTechServices } from "../../../utils/api/qTechGames/services";
 import ProvidersTabs from "../providersTabs/providersTabs";
 import classes from "./providerTabsWithGames.module.css";
@@ -64,6 +64,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   const [open, setOpen] = useState(0);
   const [gameLaunchURL, setGameLaunchURL] = useState<string | null>(null);
   const token = localStorage.getItem("token");
+  const screenRef = useRef<HTMLDivElement | null>(null);
 
   const showAndHideHandler = function () {
     setShowPortal(!ShowPortal);
@@ -194,6 +195,12 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     apiUrl?: string,
     providerId?: number
   ) {
+    setTimeout(() => {
+      if (screenRef?.current) {
+        screenRef.current.scrollIntoView(true);
+      }
+    }, 500);
+
     if (!!type && type == "custom") {
       setCustomGameProvider(true);
       if (providerId) {
@@ -291,7 +298,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                 <CircularProgress />
               </Box>
             )}
-            <div className={classes["games_container"]}>
+            <div className={classes["games_container"]} ref={screenRef}>
               {(!!filterGamesList && filterGamesList?.length) ||
               (!!GameLists && GameLists.length)
                 ? (!!CustomGameList && CustomGameList.length

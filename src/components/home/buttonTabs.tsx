@@ -4,6 +4,7 @@ import { Button, ButtonGroup } from "@mui/material";
 import { Box } from "@mui/system";
 import { colorHex } from "../../utils/constants";
 import { UserContext } from "../../App";
+import { ButtonTabStyledButton } from "./styledComponents";
 
 const unSelectedSx = {
   bgcolor: colorHex.bg2,
@@ -69,7 +70,7 @@ export function ButtonTabs() {
   const nav = useNavigate();
   return (
     <Box
-      width={"calc(100% - 16px)"}
+      width={"calc(100% - 8px)"}
       className="button_tabs_container"
       overflow={"auto"}
       m="auto"
@@ -80,13 +81,13 @@ export function ButtonTabs() {
             lg: "none",
           },
           minWidth: "100%",
-          fontSize: "0.8rem",
+          fontSize: "0.75rem",
         }}
         color="secondary"
         variant="contained"
       >
         {LinkandLabel.map((item) => (
-          <Button
+          <ButtonTabStyledButton
             onClick={() => {
               if (isSignedIn) {
                 nav(item.link);
@@ -95,10 +96,10 @@ export function ButtonTabs() {
                 setModal({ login: true });
               }
             }}
-            sx={current === item.link ? selectedSx : unSelectedSx}
+            color={current === item.link ? "primary" : undefined}
           >
             {item.label}
-          </Button>
+          </ButtonTabStyledButton>
         ))}
         {/* <Button
           onClick={() => {

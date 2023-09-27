@@ -1,18 +1,15 @@
-import styled from "@mui/system/styled";
-import { Typography } from "@mui/material";
+import { Typography, styled } from "@mui/material";
 import { Box } from "@mui/system";
 
 export const Title = styled(Typography)(({ theme }) => ({
-  backgroundColor: "#3c444b",
-  color: "#AAAFB4",
+  // color: "#AAAFB4",
   fontWeight: 900,
   textAlign: "left",
   padding: 2,
   width: "100%",
-  [theme.breakpoints.down("lg")]: {
-    backgroundColor: "#03b37f",
-    color: "white",
-  },
+
+  color: "white",
+  backgroundColor: theme.palette.tertiary.main,
 }));
 
 export const BoxWithTitleBox = styled(Box)({

@@ -1,6 +1,15 @@
 
-import { createTheme } from "@mui/material";
+import { createTheme, Theme } from "@mui/material";
 export const font = '"Noto Sans"';
+declare module "@mui/material/styles" {
+  interface Palette {
+    tertiary: Palette["primary"];
+  }
+
+  interface PaletteOptions {
+    tertiary?: PaletteOptions["primary"];
+  }
+}
 export const theme = createTheme({
   breakpoints: {
     values: {
@@ -21,7 +30,12 @@ export const theme = createTheme({
       main: "#fdcf13",
     },
     secondary: {
-      main: "#03B37F",
+      contrastText: "white",
+      main: "#0E684E",
+    },
+    tertiary: {
+      contrastText: "white",
+      main: "#762E56",
     },
     text: {
       primary: "#aaafb5",
@@ -37,9 +51,12 @@ export const theme = createTheme({
   components: {
     MuiToolbar: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           backgroundColor: "#23292D",
-        },
+          [theme.breakpoints.down("lg")]: {
+            marginBottom: 32,
+          },
+        }),
       },
     },
     MuiPaper: {

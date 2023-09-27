@@ -34,7 +34,7 @@ const HomeLayout: FC<Props> = ({
           flexDirection: "column",
         }}
       >
-        {!matches && <Announcement />}
+        {/* {!matches && <Announcement />} */}
         {children}
         <Footer />
       </Box>
