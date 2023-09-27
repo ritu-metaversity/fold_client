@@ -1,15 +1,15 @@
 import { Toolbar, useMediaQuery } from "@mui/material";
 import ProviderTabsWithGames from "../providerTabsWithGames/providerTabsWithGames";
 
-function LiveCasino() {
+const Lottery = () => {
   const isMobile = useMediaQuery("(max-width: 1210px)");
 
   return (
     <div>
       {!!isMobile ? null : <Toolbar />}
-      <ProviderTabsWithGames filter={"casino"} />
+      <ProviderTabsWithGames filter={"lottery"} />
     </div>
   );
-}
+};
 
-export default LiveCasino;
+export default Lottery;

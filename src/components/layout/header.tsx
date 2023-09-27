@@ -40,6 +40,7 @@ const linksWithoutSideBar = [
   "/slot",
   "/casino",
   "/fantasy",
+  "/lottery",
 ];
 
 export const topNavHeight = "1.9rem";
@@ -88,6 +89,12 @@ export default function Header(props: Props) {
         {LinkandLabel.map((item, index) => (
           <>
             <TopNavLinks
+              onClick={(e) => {
+                if (!isSignedIn && item?.require) {
+                  e.preventDefault();
+                  setModal && setModal({ login: true });
+                }
+              }}
               to={item.link}
               style={
                 pathname === item.link

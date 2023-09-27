@@ -45,29 +45,43 @@
 @media (max-width: 1300px) {
   .contianer {
     padding: 1rem;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(7, 1fr);
   }
 }
 
 @media (max-width: 1000px) {
   .contianer {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
 @media (max-width: 800px) {
   .contianer {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .tab img {
+    height: 13px;
+  }
+
+  .tab p {
+    font-size: 13px;
   }
 }
 
 @media (max-width: 700px) {
   .contianer {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (max-width: 500px) {
+  .contianer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 350px) {
   .contianer {
     grid-template-columns: repeat(2, 1fr);
   }

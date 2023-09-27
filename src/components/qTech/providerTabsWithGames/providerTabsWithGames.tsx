@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 import { qTechServices } from "../../../utils/api/qTechGames/services";
 import ProvidersTabs from "../providersTabs/providersTabs";
 import classes from "./providerTabsWithGames.module.css";
@@ -6,7 +6,11 @@ import { GameListInterface } from "../providerGames";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material";
 import GamePortal from "../gamePortal/GamePortal";
-import { casinoProviderList, slotProviderList } from "./providers.data";
+import {
+  casinoProviderList,
+  slotProviderList,
+  lotteryprovidersList,
+} from "./providers.data";
 import axios from "axios";
 import { StyledGameThumb } from "../../casino/styledComponent";
 import { Typography } from "@mui/material";
@@ -60,6 +64,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   const [open, setOpen] = useState(0);
   const [gameLaunchURL, setGameLaunchURL] = useState<string | null>(null);
   const token = localStorage.getItem("token");
+  const screenRef = useRef<HTMLDivElement | null>(null);
 
   const showAndHideHandler = function () {
     setShowPortal(!ShowPortal);
@@ -70,7 +75,10 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     const { response } = await qTechServices.gameLists({
       token,
       provider: SelectedProvider || "",
-      gameCategory: filter === "slot" ? filter.toUpperCase() : "LIVECASINO",
+      gameCategory:
+        filter === "slot" || filter === "lottery"
+          ? filter.toUpperCase()
+          : "LIVECASINO",
     });
     setIsLoading(false);
 
@@ -89,7 +97,9 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
       const uniqueArrayValues: string[] = Array.from(new Set(categories));
       if (!!uniqueArrayValues && !!uniqueArrayValues.length) {
         uniqueArrayValues.unshift("All");
-        setCategory(uniqueArrayValues);
+        const newAr = uniqueArrayValues.filter((el) => el !== "OTHER");
+        newAr.push("OTHER");
+        setCategory(newAr);
       }
       setGameLists(items);
     }
@@ -187,6 +197,12 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     apiUrl?: string,
     providerId?: number
   ) {
+    setTimeout(() => {
+      if (screenRef?.current) {
+        screenRef.current.scrollIntoView(true);
+      }
+    }, 500);
+
     if (!!type && type == "custom") {
       setCustomGameProvider(true);
       if (providerId) {
@@ -232,7 +248,11 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
           <div className={classes["side_provider_list"]}>
             <ProvidersTabs
               providerList={
-                filter === "slot" ? slotProviderList : casinoProviderList
+                filter === "slot"
+                  ? slotProviderList
+                  : filter === "lottery"
+                  ? lotteryprovidersList
+                  : casinoProviderList
               }
               getName={getProviderValue}
               value={SelectedProvider || ""}
@@ -254,11 +274,11 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                     >
                       <img
                         src={
-                          filter == "slot"
+                          filter == "slot" || filter == "lottery"
                             ? el == "All" || el === "OTHER"
-                              ? `/assets/Icons/slot/${el}.png`
-                              : "/assets/Icons/slot/slot.png"
-                            : `/assets/Icons/casino/${el}.png`
+                              ? `/assets/Icon/slot/${el}.png`
+                              : "/assets/Icon/slot/slot.png"
+                            : `/assets/Icon/casino/${el}.png`
                         }
                         alt={el}
                       />
@@ -329,6 +349,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                           lg: "calc(20% - 10px)",
                         }}
                         m="auto"
+                        className="games"
                       >
                         <StyledGameThumb
                           onClick={

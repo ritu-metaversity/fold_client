@@ -4,7 +4,7 @@ import { data, gameData, GameDataInterface } from "./data";
 import ProvidersTabs from "../providersTabs/providersTabs";
 import GamePortal from "../gamePortal/GamePortal";
 import { qTechServices } from "../../../utils/api/qTechGames/services";
-import { Toolbar } from "@mui/material";
+import { Toolbar, useMediaQuery } from "@mui/material";
 
 function Fantasy() {
   const [SelectedProvider, setSelectedProvider] = useState<string | null>(
@@ -13,6 +13,7 @@ function Fantasy() {
   const [GameLists, setGameLists] = useState<GameDataInterface[]>([]);
   const [SelectedGame, setSelectedGame] = useState<string | null>(null);
   const [ShowPortal, setShowPortal] = useState<boolean>(false);
+  const isMobile = useMediaQuery("(max-width: 1210px)");
 
   const showAndHideHandler = function () {
     setShowPortal(!ShowPortal);
@@ -48,7 +49,7 @@ function Fantasy() {
 
   return (
     <div>
-      <Toolbar />
+      {!!isMobile ? null : <Toolbar />}
       {!!ShowPortal ? (
         <GamePortal gameName={SelectedGame || ""} close={showAndHideHandler} />
       ) : null}
