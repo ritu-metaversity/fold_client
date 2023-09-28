@@ -15,7 +15,7 @@
   /* padding-top: 45.5%; */
   width: 97%;
   position: relative;
-  height: 94vh;
+  height: 90vh;
 }
 
 .responsive-iframe {
@@ -60,12 +60,12 @@
 
 @media (max-width: 450px) {
   .main_div {
-    height: 93vh;
+    height: 86vh;
   }
 }
 
 @media (max-width: 400px) {
   .main_div {
-    height: 92vh;
+    height: 84vh;
   }
 }
