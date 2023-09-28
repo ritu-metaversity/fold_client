@@ -27,7 +27,7 @@ function GamePortal({ gameName, close }: Props) {
         lang: "en_IN",
         mode: "real",
         device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
-        returnUrl: "http://247idhub.com:3043",
+        returnUrl: "http://playindia.app",
         walletSessionId: sessionToken,
         token: access_token,
         gameName,

@@ -288,7 +288,8 @@ function App() {
             <Pages />
           </UserContext.Provider>
           <iframe
-            className={"dheeraj_iframe " + (!dheerajOpen ? " none " : "")}
+            style={{ display: dheerajOpen ? "flex" : "none" }}
+            className={"dheeraj_iframe"}
             src="http://15.207.226.246:10004?clientId=1a07c68d-1c26-43d1-880b-3a9e5deb2e93"
           />
           <Box
