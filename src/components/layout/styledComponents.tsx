@@ -43,15 +43,15 @@ export const SidebarHeader = styled(ListSubheader)`
   font-size: 0.8rem !important;
   text-decoration: underline;
 `;
-export const AnnouncementBox = styled(Box)`
+export const AnnouncementBox = styled(Box)<{ isSignedIn: boolean }>`
   flex: 1;
-  margin: auto;
+  margin: ${(props) => (props.isSignedIn ? "auto" : 0)};
   background-color: #444;
   padding: 10px;
   height: 2.2rem;
   @media (max-width: 1279px) {
     padding-block: 2px;
-    /* border-radius: 5px; */
+    border-radius: 5px;
     margin: 5px;
     height: initial;
   }

@@ -57,7 +57,7 @@ export const casinoProviderList: ProviderInterface[] = [
     filterType: "SAG",
   },
   {
-    name: "PRAGMATIC PLAY",
+    name: "PRAGMATIC",
     logo: "https://www.pragmaticplay.com/wp-content/themes/gp-theme-basic/libs/dist/images/PP-white-logo.svg",
     filterType: "PPL",
   },

@@ -4,9 +4,9 @@ import Marquee from "react-fast-marquee";
 import { UserContext } from "../../App";
 import { AnnouncementBox, SpeakerIcon } from "./styledComponents";
 export function Announcement() {
-  const { announcement } = useContext(UserContext);
+  const { announcement, isSignedIn } = useContext(UserContext);
   return (
-    <AnnouncementBox>
+    <AnnouncementBox isSignedIn={!!isSignedIn}>
       <Marquee
         gradient={false}
         speed={50}

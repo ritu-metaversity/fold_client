@@ -2,7 +2,6 @@ import LoginForm from "./LoginForm";
 import {
   Box,
   CircularProgress,
-  // Button,
   TextField,
   Tooltip,
   Typography,
@@ -38,26 +37,8 @@ export function AuthBox() {
       userId: "",
       password: "",
       checked: true,
-      // appUrl: "atozscore.com",
       appUrl: window.location.hostname.replace("www.", ""),
     },
-    validationSchema: yup.object().shape({
-      // userId: yup
-      // .string()
-      //   .min(4, "Minimum 4 letters required.")
-      //   .max(8, "Maximum 8 letters required.")
-      //   .matches(/^[a-zA-Z0-9]*$/, "Only number and alphabet are allowed.")
-      // .required("This field is required."),
-      // password: yup
-      // .string()
-      //   .min(8, "Minimum 8 letters required.")
-      //   .max(12, "Maximum 12 letters required.")
-      //   .matches(
-      //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-      //     "Password should contain atleast one number and one lower case , one upper case."
-      //   )
-      // .required("This field is required."),
-    }),
     onSubmit: async () => {
       if (!values.checked) {
         snackBarUtil.error("Please agree Terms and Conditions");
@@ -93,7 +74,7 @@ export function AuthBox() {
       borderRadius: 0,
       "& fieldset": { outline: "none", border: "none", padding: 0 },
       border: "1px solid white",
-      height: "2rem",
+      height: "2.2rem",
     },
     required: true,
     inputProps: {
@@ -261,6 +242,7 @@ export function AuthBox() {
                   <CircularProgress size={"0.8em"} color="error" />
                 ) : undefined
               }
+              sx={{ display: { xs: "none", lg: "block" } }}
               disabled={demoLoading}
               variant="contained"
               onClick={handleDemoUserLogin}
@@ -269,9 +251,6 @@ export function AuthBox() {
             </LoginButton>
           </Box>
         </form>
-        {/* <Typography color=" rgba(112, 49, 86, 0.4)">
-          Login With Demo ID
-        </Typography> */}
         <CustomizedDialogs
           title="Login"
           maxWidth="xs"

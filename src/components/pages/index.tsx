@@ -5,6 +5,7 @@ import Layout from "../layout";
 import Loading from "../layout/loading";
 import { NewLayout, ThrowToLogin } from "../terms";
 import Games from "../qTech/games/Games";
+import ComingSoon from "../comingSoon/ComingSoon";
 
 // import Aboutus from "./aboutus";
 // import ResponsibleGaming from "./responsibleGaming";
@@ -68,6 +69,7 @@ const Pages = () => {
             <Route path="/deposit" element={<Deposit />} />
             <Route path="/withdraw-request" element={<Withdraw />} />
             <Route path="/lottery" element={<Lottery />} />
+            <Route path="/cumming" element={<ComingSoon />} />
           </Route>
           <Route path="" element={<NewLayout />}>
             <Route path="terms-and-conditions" element={<Terms />} />
