@@ -41,11 +41,11 @@ export const casinoProviderList: ProviderInterface[] = [
     logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/1.png",
     filterType: "EZU",
   },
-  {
-    name: "BGAMING",
-    logo: "https://global-uploads.webflow.com/63b2c230b49fa188ad86ffec/63f4c9689497e0d7c32f4a31_BGaming_logo.svg",
-    filterType: "BGM",
-  },
+  // {
+  //   name: "BGAMING",
+  //   logo: "https://global-uploads.webflow.com/63b2c230b49fa188ad86ffec/63f4c9689497e0d7c32f4a31_BGaming_logo.svg",
+  //   filterType: "BGM",
+  // },
   {
     name: "SKY WIND",
     logo: "https://skywindgroup.com/assets/site/images/skywind_white.svg",
@@ -57,7 +57,7 @@ export const casinoProviderList: ProviderInterface[] = [
     filterType: "SAG",
   },
   {
-    name: "PRAGMATIC PLAY",
+    name: "PRAGMATIC",
     logo: "https://www.pragmaticplay.com/wp-content/themes/gp-theme-basic/libs/dist/images/PP-white-logo.svg",
     filterType: "PPL",
   },
@@ -71,11 +71,11 @@ export const casinoProviderList: ProviderInterface[] = [
     logo: "https://www.betgames.tv/api/uploads/BG_Logo_White_Horizontal_Lock_Up_dcca475d41.png",
     filterType: "BTV",
   },
-  {
-    name: " EBET",
-    logo: "https://ebet.gg/wp-content/uploads/2022/05/EBET-logo.png",
-    filterType: "EBT",
-  },
+  // {
+  //   name: " EBET",
+  //   logo: "https://ebet.gg/wp-content/uploads/2022/05/EBET-logo.png",
+  //   filterType: "EBT",
+  // },
   // {
   //   name: "INTERNATIONAL SLASHERS",
   //   logo: "https://www.worldslashercup.ph/wp-content/themes/wsc/assets/images/sc-logo.png",
