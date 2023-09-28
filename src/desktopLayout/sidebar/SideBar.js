@@ -155,7 +155,7 @@ function SideBar() {
           {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
         </p>
       </div> */}
-      <Accordion defaultActiveKey="0"  className="main_sport_header">
+      {/* <Accordion defaultActiveKey="0"  className="main_sport_header">
       <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
         <ul className="live_casino">
           <li className="nav-item">
@@ -185,7 +185,7 @@ function SideBar() {
           </li>
         </ul>
       </nav>
-        </Accordion>
+        </Accordion> */}
 
 
         <div
