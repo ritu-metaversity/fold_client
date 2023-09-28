@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Button } from "@mui/material";
 
 export const StyledComing = styled.div`
   height: calc(100vh - 100px);
@@ -20,4 +21,21 @@ export const CasinoIcon = styled.img`
   @media (max-width: 768px) {
     height: 20px;
   }
+`;
+export const CasinoActionContainer = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  flex-direction: row;
+  @media (max-width: 450px) {
+    row-gap: 10px;
+
+    flex-direction: column;
+  }
+`;
+export const CasinoAction = styled(Button)`
+  flex: 1;
+  /* @media (max-width: 450px) {
+    width: 100%;
+  } */
 `;

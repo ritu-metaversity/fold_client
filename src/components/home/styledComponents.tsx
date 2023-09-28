@@ -5,6 +5,7 @@ import {
   Theme,
   tabClasses,
   styled as muiStyled,
+  buttonClasses,
 } from "@mui/material";
 import { colorHex } from "../../utils/constants";
 
@@ -73,7 +74,11 @@ export const TabStyled = muiStyled(Tab)(({ theme }) => ({
 }));
 export const ButtonTabStyledButton = muiStyled(Button)(({ color, theme }) => ({
   background: color === "primary" ? "#444" : colorHex.bg2,
-
+  "&:hover": {
+    background: color === "primary" ? "#444" : colorHex.bg2,
+    backgroundColor:
+      (color === "primary" ? "#444 " : colorHex.bg2) + " !important",
+  },
   borderColor: "#999 !important",
   color: "#ddd",
   // width: "max-content !important",

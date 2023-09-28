@@ -129,7 +129,7 @@ const Match = ({ matches, sportId }: Props) => {
         maxWidth={{ lg: "unset" }}
         flex={{ lg: 1 }}
       >
-        <Box width={{ xs: "14%", md: "unset" }}>
+        <Box width={{ xs: 70, md: "unset" }}>
           {matches.inPlay ? (
             <Box
               sx={{
@@ -146,7 +146,9 @@ const Match = ({ matches, sportId }: Props) => {
                 maxWidth={"min-content"}
                 overflow="hidden"
                 color="#03B37F"
-                mx={2}
+                // mx={2}
+                margin="auto"
+                align="center"
                 fontSize={"0.75rem"}
               >
                 Live

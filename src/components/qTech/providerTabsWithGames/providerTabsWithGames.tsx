@@ -300,12 +300,11 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                 <CircularProgress />
               </Box>
             )}
-            <div className={classes["games_container"]} ref={screenRef}>
-              {(!!filterGamesList && filterGamesList?.length) ||
-              (!!GameLists && GameLists.length)
-                ? (!!CustomGameList && CustomGameList.length
+            <div className={classes["games_container"]}>
+              {filterGamesList?.length || GameLists?.length
+                ? (CustomGameList?.length
                     ? CustomGameList
-                    : !!filterGamesList && filterGamesList?.length
+                    : filterGamesList?.length
                     ? filterGamesList
                     : GameLists
                   ).map((el) => (

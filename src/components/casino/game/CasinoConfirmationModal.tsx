@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { casinoService } from "../../../utils/api/casino/service";
 import { Box, Button, DialogActions, Typography } from "@mui/material";
+import { CasinoAction, CasinoActionContainer } from "../styledComponent";
 
 interface SingleUserValue {
   message: string;
@@ -57,17 +58,18 @@ const CasinoConfirmationModal: FC<Props> = ({
         {100 * singleUserValue.value} होगी।
       </Typography>
       <DialogActions>
-        <Button variant="contained" onClick={handleAgree} sx={{ width: "50%" }}>
-          Ok I Agree
-        </Button>
-        <Button
-          variant="contained"
-          onClick={handleNotAgree}
-          color="error"
-          sx={{ width: "50%" }}
-        >
-          No, I Dont Agree
-        </Button>
+        <CasinoActionContainer>
+          <CasinoAction variant="contained" onClick={handleAgree}>
+            Ok I Agree
+          </CasinoAction>
+          <CasinoAction
+            variant="contained"
+            onClick={handleNotAgree}
+            color="error"
+          >
+            No, I Dont Agree
+          </CasinoAction>
+        </CasinoActionContainer>
       </DialogActions>
     </Box>
   );

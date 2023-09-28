@@ -207,24 +207,31 @@ export default function Header(props: Props) {
         {isSignedIn && appData?.selfAllowed && !(user?.userTypeInfo === 2) && (
           <Box
             height="100%"
-            sx={{ position: "absolute", right: 5, my: 0.3, top: 0 }}
+            sx={{
+              position: "absolute",
+              right: 10,
+              my: 0.3,
+              top: 0,
+              gap: "5px",
+              display: "flex",
+            }}
           >
-            <Button
+            <ButtonSmallStyled
               variant="contained"
               onClick={() => nav("/deposit")}
               color="success"
-              sx={{ mr: 2, py: 0.2 }}
+              size="small"
             >
               Deposit
-            </Button>
-            <Button
+            </ButtonSmallStyled>
+            <ButtonSmallStyled
               variant="contained"
               onClick={() => nav("withdraw-request")}
               color="error"
-              sx={{ mr: 2, py: 0.2 }}
+              size="small"
             >
               Withdraw
-            </Button>
+            </ButtonSmallStyled>
           </Box>
         )}
       </CenterBox>
@@ -280,31 +287,38 @@ export default function Header(props: Props) {
         <IconSmall onClick={() => nav("/")} src={appData?.logo} />
         {matches && <Announcement />}
         {isSignedIn ? <UserBox /> : <AuthBox />}
-        <Box width={"100%"} display={"flex"} gap={"2px"} alignItems={"center"}>
-          {!matches && <Announcement />}
-          {isSignedIn &&
-            appData?.selfAllowed &&
-            !(user?.userTypeInfo === 2) && (
-              <>
-                <ButtonSmallStyled
-                  variant="contained"
-                  onClick={() => nav("/deposit")}
-                  color="success"
-                  size="small"
-                >
-                  Deposit
-                </ButtonSmallStyled>
-                <ButtonSmallStyled
-                  variant="contained"
-                  onClick={() => nav("withdraw-request")}
-                  color="error"
-                  size="small"
-                >
-                  Withdraw
-                </ButtonSmallStyled>
-              </>
-            )}
-        </Box>
+        {!matches && (
+          <Box
+            width={"100%"}
+            display={"flex"}
+            gap={"2px"}
+            alignItems={"center"}
+          >
+            {!matches && <Announcement />}
+            {isSignedIn &&
+              appData?.selfAllowed &&
+              !(user?.userTypeInfo === 2) && (
+                <>
+                  <ButtonSmallStyled
+                    variant="contained"
+                    onClick={() => nav("/deposit")}
+                    color="success"
+                    size="small"
+                  >
+                    Deposit
+                  </ButtonSmallStyled>
+                  <ButtonSmallStyled
+                    variant="contained"
+                    onClick={() => nav("withdraw-request")}
+                    color="error"
+                    size="small"
+                  >
+                    Withdraw
+                  </ButtonSmallStyled>
+                </>
+              )}
+          </Box>
+        )}
       </StyledAppBar>
       {!notShowSidebar && (
         <Sidebar
