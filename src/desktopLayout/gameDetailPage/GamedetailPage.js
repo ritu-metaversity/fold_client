@@ -1196,7 +1196,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                               </div>
                               <div className="table-header">
                                 <div className="float-left country-name box-6"></div>
-                                <div className="back box-d-1 float-left lay text-center">
+                                <div className="box-d-1 float-left lay text-center">
                                   <b>No</b>
                                 </div>
                                 <div className="box-d-1 float-left back text-center">
@@ -1348,7 +1348,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                               </div>
                               <div className="table-header">
                                 <div className="float-left country-name box-6"></div>
-                                <div className="back box-d-1 float-left lay text-center">
+                                <div className="box-d-1 float-left lay text-center">
                                   <b>No</b>
                                 </div>
                                 <div className="box-d-1 float-left back text-center">
