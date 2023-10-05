@@ -114,6 +114,7 @@
 .slot-modal .modal-content {
     /* height: 99.4vh !important; */
     position: relative;
+    background: transparent;
 }
 
 .slot-modal .modal-dialog {
@@ -137,7 +138,9 @@ button.close_btn {
     outline: unset;
     top: 1px;
     font-weight: 900;
-    background: #fff;
+    color: #fff;
+    /* background: #fff; */
+    background: transparent;
     border-radius: 50%;
 }
 

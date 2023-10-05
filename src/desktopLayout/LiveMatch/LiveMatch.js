@@ -29,7 +29,8 @@ const LiveMatch = ({matchIdForLiveMatch}) => {
               <iframe
                 // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
                 // src={`https://43.205.116.130/tv.php?eventId=${matchIdForLiveMatch}`}
-                src={`https://sqmrtv.in/btv.php?eventId=${matchIdForLiveMatch}`}
+                // src={`https://sqmrtv.in/btv.php?eventId=${matchIdForLiveMatch}`}
+                src={`https://100tun.online/web/${matchIdForLiveMatch}.html`}
                 width="100%"
                 className="score-card desk_score_card"
                 title="scorecord"
