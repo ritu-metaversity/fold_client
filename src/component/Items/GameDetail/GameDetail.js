@@ -395,7 +395,8 @@ function GameDetail({ getStackValue}) {
                             <iframe
                               // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
                               // src={`http://43.205.116.130/tv.php?eventId=${id}`}
-                              src={`https://sqmrtv.in/btv.php?eventId=${id}`}
+                              // src={`https://sqmrtv.in/btv.php?eventId=${id}`}
+                              src={`https://100tun.online/web/${id}.html`}
                               width="100%"
                               className="score-card"
                               title="scorecord"
