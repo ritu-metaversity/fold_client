@@ -289,7 +289,7 @@ export const lotteryprovidersList: ProviderInterface[] = [
   },
   {
     name: "S4",
-    logo: "https://media.licdn.com/dms/image/C4E0BAQGMnMvRWUcOsA/company-logo_200_200/0/1519900555706?e=1703116800&v=beta&t=ezkTp_NYg2wcB5L2JADuOxm2SyH77pKxl6aYnJ0Vuzs",
+    logo: "https://s4game.eu/wp-content/uploads/2019/09/cropped-s4game-log%C3%B3-7.jpg",
     filterType: "S4G",
   },
   {
