@@ -9,6 +9,7 @@ const CasinoModals = ({type}) => {
         GameAPI.SINGLE_USER_VALUE().then((res)=>{
           setSingleUserValue(res?.data?.aura)
           setNowaValue(res?.data?.supernowa);
+
         })
     }, [])
 
