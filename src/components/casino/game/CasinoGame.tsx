@@ -158,6 +158,7 @@ const CasinoGame: FC<Props> = ({ handleClose, id, name }) => {
       >
         <DialogContent>
           <CasinoConfirmationModal
+            type="aura"
             handleAgree={handleAgree}
             handleNotAgree={handleNotAgree}
           />
