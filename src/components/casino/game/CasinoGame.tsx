@@ -102,7 +102,7 @@ const CasinoGame: FC<Props> = ({
                 height={50}
                 position="absolute"
                 // zIndex={999999 + 1}
-                bgcolor="#0f2327"
+                bgcolor={type === "aura" ? "#0f2327" : ""}
               >
                 <IconButton
                   onClick={handleClose}
