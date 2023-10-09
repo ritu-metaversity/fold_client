@@ -61,7 +61,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   const [customProviderGames, setCustomProviderGames] = useState<
     CustomProviderGameInterface[]
   >([]);
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState<string | number>(0);
   const [gameLaunchURL, setGameLaunchURL] = useState<string | null>(null);
   const token = localStorage.getItem("token");
   const screenRef = useRef<HTMLDivElement | null>(null);
@@ -116,7 +116,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   // };
 
   const authHandler = async (code: string, providerCode: string) => {
-    setOpen(1);
+    setOpen(code);
 
     const { response } = await supernowaServices.authentication({
       game: {
@@ -170,7 +170,13 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
       response?.data?.games.length
     ) {
       const { games } = response?.data;
-      setCustomProviderGames(games);
+      setCustomProviderGames(
+        games.map((item: any) => ({
+          ...item,
+          gameName: item.name,
+          gameId: item.code,
+        }))
+      );
       setIsLoading(false);
     }
   };
@@ -234,7 +240,6 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
       getGameLists(accessToken);
     }
   }, [SelectedProvider, filter]);
-
 
   return (
     <>
@@ -357,7 +362,12 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                             item?.providerCode === "SN"
                               ? () =>
                                   authHandler(item?.code!, item.providerCode!)
-                              : () => setOpen(item.gameId)
+                              : () => {
+                                  setOpen(item.gameId);
+                                  setGameLaunchURL(
+                                    `https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${item.gameId}`
+                                  );
+                                }
                           }
                           src={item?.thumb || item?.imageUrl}
                           alt="thumb"
@@ -381,14 +391,8 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                         : "qtech"
                     }
                     handleClose={() => setOpen(0)}
-                    desktopUrl={
-                      gameLaunchURL ||
-                      `https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`
-                    }
-                    mobileUrl={
-                      gameLaunchURL ||
-                      `https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`
-                    }
+                    desktopUrl={gameLaunchURL?.replace("/m.fawk", "/d.fawk")}
+                    mobileUrl={gameLaunchURL || ""}
                   />
                 )}
               </Fragment>

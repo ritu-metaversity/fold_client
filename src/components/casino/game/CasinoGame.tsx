@@ -20,7 +20,7 @@ import CustomizedDialog2 from "../../common/Dailog2";
 import CasinoConfirmationModal from "./CasinoConfirmationModal";
 
 interface Props {
-  id?: number;
+  id?: number | string;
   handleClose: () => void;
   name?: string;
   desktopUrl?: string;
@@ -122,7 +122,7 @@ const CasinoGame: FC<Props> = ({
               ></Box> */}
               {id && token && !wait && (
                 <iframe
-                  src={desktopUrl}
+                  src={mobileUrl}
                   // height="calc(100vh - 100px)"
                   height={"100vh"}
                   className="mobile_if"
@@ -143,7 +143,7 @@ const CasinoGame: FC<Props> = ({
             bgcolor="#0f2327"
           ></Box> */}
               <iframe
-                src={mobileUrl}
+                src={desktopUrl}
                 // height="calc(90vh - 10rem)"
                 // style={{ height: "2000px", marginTop: -80 }}
                 className="desktop_if"
