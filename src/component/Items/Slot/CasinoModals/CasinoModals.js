@@ -6,7 +6,8 @@ const CasinoModals = () => {
 
     useEffect(()=>{
         GameAPI.SINGLE_USER_VALUE().then((res)=>{
-            setSingleUserValue(res?.data?.value)
+          // console.log(res?.data?.aura, "dssasasada")
+            setSingleUserValue(res?.data?.aura)
         })
     }, [])
 
