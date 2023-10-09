@@ -300,7 +300,7 @@ export const GameAPI = {
   },
   SINGLE_USER_VALUE: async function (cancel = false) {
     const response = await api.request({
-      url: "bet-modifier/single-user-value",
+      url: "/api/getOneUserBetResult",
       method: "POST",
       data:{
         appUrl: window.location.hostname
