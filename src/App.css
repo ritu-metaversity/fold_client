@@ -71,15 +71,15 @@ a {
   }
 }
 
-.dheeraj_iframe {
+._iframe {
   position: fixed;
   right: 0;
-  bottom: 0;
-  height: 600px;
-  max-width: 600px;
+  bottom: 30px;
+  height: 630px;
+  max-width: 700px;
   min-width: 300px;
 }
-.dheeraj_iframe.none {
+._iframe.none {
   visibility: hidden;
 }
 .chat_icon_div {
