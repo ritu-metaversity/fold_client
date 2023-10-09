@@ -45,11 +45,11 @@ export function AmountForm({ amount, setAmount }: Props) {
   };
   return (
     <>
-      {amount < 100 && amount !== 0 && (
+      {/* {amount < 100 && amount !== 0 && (
         <Typography textAlign={"left"} color="error.main">
           Amount Should be more than or equal to 100.
         </Typography>
-      )}
+      )} */}
       <Box
         display={"flex"}
         marginY={2}

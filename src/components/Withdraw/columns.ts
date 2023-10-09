@@ -19,7 +19,7 @@ export const columns: ColumnsInterface<columnIds>[] = [
   },
   {
     id: "accountHolderName",
-    label: "Account Name",
+    label: "Account Holder Name",
   },
 
   {

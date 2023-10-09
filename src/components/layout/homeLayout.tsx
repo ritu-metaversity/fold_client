@@ -23,6 +23,7 @@ const HomeLayout: FC<Props> = ({
       <Box
         sx={{
           display: "flex",
+          width: "100%",
           // flexGrow: 1,
           maxWidth: {
             lg: `calc(100% - ${sideWidth}px)`,
@@ -33,7 +34,7 @@ const HomeLayout: FC<Props> = ({
           flexDirection: "column",
         }}
       >
-        {!matches && <Announcement />}
+        {/* {!matches && <Announcement />} */}
         {children}
         <Footer />
       </Box>

@@ -1,45 +1,44 @@
-@media (min-width:1600px) {
+@media (min-width: 1600px) {
   :root {
     font-size: 18px;
   }
 }
-
 .App {
   text-align: center;
 }
 ::-webkit-scrollbar {
   width: 8px;
-} 
-html{
- scroll-behavior: smooth;
+}
+html {
+  scroll-behavior: smooth;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #2E3438; 
+  background: #2e3438;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #3c444b; 
+  background: #3c444b;
 }
 /* 
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 } */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;400;500;600;700;800;900&display=swap");
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 .toolbar-padding {
-  padding-right: 0!important;
-  padding-top: 8px!important;
-  padding-left: 0!important;
+  padding-right: 0 !important;
+  padding-top: 8px !important;
+  padding-left: 0 !important;
 }
 
 a {
-  color : #03B37F;
+  color: #03b37f;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -47,7 +46,6 @@ a {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 
 .App-header {
   background-color: #282c34;
@@ -71,4 +69,35 @@ a {
   to {
     transform: rotate(360deg);
   }
+}
+
+._iframe {
+  position: fixed;
+  right: 0;
+  bottom: 30px;
+  height: 630px;
+  max-width: 700px;
+  min-width: 300px;
+}
+._iframe.none {
+  visibility: hidden;
+}
+.chat_icon_div {
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 200;
+  svg {
+    font-size: 20px;
+  }
+}
+.chat_icon_div svg {
+  font-size: 20px;
 }

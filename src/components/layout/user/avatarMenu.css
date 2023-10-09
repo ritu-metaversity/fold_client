@@ -2,7 +2,13 @@
     position: absolute;
     top:50px;
     right: 10px;
+    z-index: 1200;
     height: auto;
+}
+.menu-custom .active{
+    background-color: black;
+    color:white;
+    
 }
 
 .menu-custom .my-backdrop {

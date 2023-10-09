@@ -20,6 +20,7 @@
 .upper_left_icon{
   position: absolute;
   top:0px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .desktop_if {

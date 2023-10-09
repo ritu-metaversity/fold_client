@@ -1,0 +1,88 @@
+.contianer {
+  width: 100%;
+  padding: 1rem 0 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
+}
+
+.provider {
+  width: 100%;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  position: relative;
+}
+
+.tab_container {
+  padding: 0.2rem;
+}
+
+.tab {
+  width: 100%;
+  padding: 0.6rem 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid var(--text-body);
+}
+
+.active {
+  border: 1px solid var(--text-white);
+}
+
+.tab img {
+  width: auto;
+  height: 18px;
+  margin-bottom: 0.5rem;
+}
+
+.tab p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+@media (max-width: 1300px) {
+  .contianer {
+    padding: 1rem;
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+@media (max-width: 1000px) {
+  .contianer {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .contianer {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .tab img {
+    height: 13px;
+  }
+
+  .tab p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 700px) {
+  .contianer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .contianer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 350px) {
+  .contianer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

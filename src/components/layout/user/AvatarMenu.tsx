@@ -86,7 +86,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
           <>
             <div className="my-backdrop" onClick={handleClose}></div>
             <Paper className={`${open ? " active " : ""}`}>
-              {isSignedIn &&
+              {/* {isSignedIn &&
                 !matches &&
                 appData?.selfAllowed &&
                 !(user?.userTypeInfo === 2) && [
@@ -122,7 +122,7 @@ export function AvatarMenu({ anchorEl, open, handleClose }: any) {
                     key="avatarmenuitem2"
                     sx={{ borderColor: "gray" }}
                   />,
-                ]}
+                ]} */}
               <MenuItem onClick={() => closeAndNav("/profile")}>
                 Profile
               </MenuItem>
