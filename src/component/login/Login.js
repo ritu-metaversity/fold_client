@@ -7,6 +7,7 @@ import { api } from "../../apis/configs/axiosConfigs";
 import { UserAPI } from "../../apis/UserAPI";
 import Modal from "react-bootstrap/Modal";
 import RegisterModals from "../Register/RegisterModals";
+import { CasinoApi } from "../../apis/CasinoApi";
 
 function Login({ Errmessage, Statusmessage }) {
   const nav = useNavigate();
@@ -62,6 +63,17 @@ function Login({ Errmessage, Statusmessage }) {
           localStorage.setItem("UserId", uId);
           if (res.token !== "" && res.status !== false) {
             localStorage.setItem("token", token);
+
+            // setInterval(
+            //   () =>
+            //     CasinoApi.Casino_Authentication({}).then((item) => {
+            //       localStorage.setItem(
+            //         "gameToken",
+            //         item?.data?.data?.access_token
+            //       );
+            //     }),
+            //   1000
+            // );
             nav("/m/home");
           }
           const pType = res.passwordtype;
@@ -91,10 +103,9 @@ function Login({ Errmessage, Statusmessage }) {
   useEffect(() => {
     if (localStorage.getItem("UserName") !== null) {
       setShowModals(true);
-      
     }
-    if(localStorage.getItem("token") !== null){
-      nav("/m/home")
+    if (localStorage.getItem("token") !== null) {
+      nav("/m/home");
     }
   }, []);
 
@@ -122,7 +133,16 @@ function Login({ Errmessage, Statusmessage }) {
           res?.data.status !== false
         ) {
           localStorage.setItem("token", token);
-
+          // setInterval(
+          //   () =>
+          //     CasinoApi.Casino_Authentication({}).then((item) => {
+          //       localStorage.setItem(
+          //         "gameToken",
+          //         item?.data?.data?.access_token
+          //       );
+          //     }),
+          //   1000
+          // );
           nav("/m/home");
         }
         const pType = res?.data?.passwordtype;

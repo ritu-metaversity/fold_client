@@ -115,7 +115,7 @@ function SideBar() {
 
   return (
     <div className="">
-      <div
+      {/* <div
         data-toggle="collapse"
         data-target=".casino"
         onClick={collapse}
@@ -127,11 +127,11 @@ function SideBar() {
       </div>
       <nav className={`casino ${visible ? "collapse show" : "d-none"}`}>
         <ul className="live_casino">
-          {/* <li className="nav-item">
+          <li className="nav-item">
             <Link to="/livecasino" className="nav-link">
               <span className="new-launch-text">Live Casino</span>
             </Link>
-          </li> */}
+          </li>
           {casinoData?.map((res, id) => {
             return (
               <li className="nav-item c-pointer" key={id} onClick={(e)=>handleData(res.gameId,res.gameName, e)}>
@@ -142,50 +142,57 @@ function SideBar() {
             );
           })}
         </ul>
-      </nav>
+      </nav> */}
 
-      {/* <div
+      <div
         className="sidebar-title m-t-5 theme2bg"
         onClick={collapse2}
         aria-controls="events"
         aria-expanded="true"
         role="button">
-        <h5 className="text-white d-inline-block m-b-0">Racing Game</h5>
+        <h5 className="text-white d-inline-block m-b-0">Others Game</h5>
         <p className="arrow-line">
           {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
         </p>
-      </div> */}
-      {/* <Accordion defaultActiveKey="0"  className="main_sport_header">
+      </div>
+      <Accordion defaultActiveKey="0"  className="main_sport_header">
       <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
         <ul className="live_casino">
+          
           <li className="nav-item">
-            <Link to="/livecasino" className="nav-link">
-              <span className="new-launch-text">Our Casino</span>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/livecasino" className="nav-link">
+            <Link to="/sportbook" className="nav-link">
               <span className="new-launch-text">Our Virtual</span>
             </Link>
           </li>
+          
           <li className="nav-item">
-            <Link to="/livecasino" className="nav-link">
-              <span className="">Live Casino</span>
+            <Link to="/sportbook" className="nav-link">
+              <span className="new-launch-text">Live Casino</span>
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/livecasino" className="nav-link">
+            <Link to="/indiancasino" className="nav-link">
+              <span className="">Indian Casino</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/sportbook" className="nav-link">
               <span className="">Slot</span>
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/livecasino" className="nav-link">
+            <Link to="/sportbook" className="nav-link">
               <span className="">Fantasy Game</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/sportbook" className="nav-link">
+              <span className="">Sport Book</span>
             </Link>
           </li>
         </ul>
       </nav>
-        </Accordion> */}
+        </Accordion>
 
 
         <div
@@ -215,7 +222,7 @@ function SideBar() {
                         <Link
                           to={`/gamedetail/${item?.matchId}`}
                           className="sub-nav-link">
-                          <span className="new-launch-text">
+                          <span className="">
                             {item?.matchName}
                           </span>
                         </Link>
@@ -229,9 +236,9 @@ function SideBar() {
         </Accordion>
 
 
-        <Modal centered show={show}   onHide={handleClose}>
+      <Modal centered show={show}   onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals/>
+          <CasinoModals type={1}/>
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={()=>setShow(false)}>No, I Don't Agree</button>

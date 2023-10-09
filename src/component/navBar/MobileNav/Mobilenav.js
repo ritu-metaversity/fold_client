@@ -23,8 +23,21 @@ function Mobilenav() {
     }
     else if(pathname ==='/m/In-play'){
       setActive(1)
-    }else if((pathname ==='/m/Others')){
+    }
+    else if((pathname ==='/m/sportbook')){
+      setActive(7)
+    }
+    else if((pathname ==='/m/livecasino')){
       setActive(4)
+    }
+    else if((pathname ==='/m/slots')){
+      setActive(3)
+    }
+    else if((pathname ==='/m/fantsy')){
+      setActive(5)
+    }
+    else if((pathname ==='/m/indiancasino')){
+      setActive(6)
     }
     else if((pathname?.slice(0,7) === '/casino')){
       setActive(3)
@@ -52,18 +65,41 @@ function Mobilenav() {
             Sports
           </Link>
         </li>
-        <li
+        {/* <li
           className={`nav-item ${Active === 3 ? "active2" : ""}`}
           onClick={(e) => handleClick(3, e)}>
-          <Link  to="/m/slot" className="nav-link navlink1">
-            Casino + Slot
+          <Link  to="/m/slots" className="nav-link navlink1">
+            Slot
           </Link>
-        </li>
-        <li
+        </li> */}
+        {/* <li
           className={`nav-item ${Active === 4 ? "active2" : ""}`}
           onClick={(e) => handleClick(4, e)}>
-          <Link to="/m/Others" className="nav-link">
-            Others
+          <Link  to="/m/livecasino" className="nav-link navlink1">
+            Live Casino
+          </Link>
+        </li> */}
+        {/* <li
+          className={`nav-item ${Active === 5 ? "active2" : ""}`}
+          onClick={(e) => handleClick(5, e)}>
+          <Link  to="/m/fantsy" className="nav-link navlink1">
+            Fantsy 
+          </Link>
+        </li> */}
+
+        <li
+          className={`nav-item ${Active === 6 ? "active2" : ""}`}
+          onClick={(e) => handleClick(6, e)}>
+          <Link  to="/m/indiancasino" className="nav-link navlink1">
+            Indian Casino
+          </Link>
+        </li>
+
+        <li
+          className={`nav-item ${Active === 7 ? "active2" : ""}`}
+          onClick={(e) => handleClick(7, e)}>
+          <Link to="/m/sportbook" className="nav-link">
+            Sport Book
           </Link>
         </li>
       </ul>

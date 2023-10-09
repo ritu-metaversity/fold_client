@@ -1,16 +1,50 @@
-import React from "react";
-import NewLunch from "../Newlunch/NewLunch";
-import SideBar from "../sidebar/SideBar";
+import React, { useEffect, useState } from "react";
+import CasinoTabs from "./casinoTabs/CasinoTabs";
+import { CasinoApi } from "../../apis/CasinoApi";
 
-const LiveCasino = () => {
+const LiveCasino = ({liveCasino}) => {
+
+  const [category, setCategory] = useState([]);
+  const [gameLists, setGameLists] = useState();
+  const [providerTag, setProviderTags] = useState("");
+
+
+
+  // console.log(liveCasino, "xsdasds")
+  
+  
+  useEffect(()=>{
+    const token = localStorage.getItem("gameToken");
+    CasinoApi.Casino_Gamelist({
+      gameCategory: liveCasino ? "LIVECASINO":"SLOT",
+      provider : providerTag,
+      token
+    }).then((response)=>{
+      console.log(response.data.data,"hui");
+      if (response?.data?.data?.items?.length) 
+      {
+        const { items } = response.data.data;
+        let categories = items.map((el) => {
+          const itemAr = el?.category.split("/");
+          const lastelm = itemAr[itemAr.length - 1];
+          return lastelm;
+        });
+        const uniqueArrayValues = Array.from(new Set(categories));
+        if ( uniqueArrayValues.length) {
+          uniqueArrayValues.unshift("ALL");
+          const newAr = uniqueArrayValues.filter((el) => el !== "OTHER");
+          newAr.push("OTHER");
+          setCategory(newAr);
+        }
+        setGameLists(items);
+    }
+  })
+  }, [providerTag, liveCasino])
+
   return (
     <>
       <div className="main">
-        <div className="container-fluid container-fluid-5">
-          <div className=" itemHome">
-              <NewLunch/>
-          </div>
-        </div>
+      <CasinoTabs liveCasino={liveCasino} gameLists={gameLists} setProviderTags={setProviderTags} providerTag={providerTag} category={category}/>
       </div>
 
     </>

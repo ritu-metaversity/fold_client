@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../../apis/gameAPI";
 
-const CasinoModals = () => {
-    const [singleUserValue, setSingleUserValue] = useState()
+const CasinoModals = ({type}) => {
+    const [singleUserValue, setSingleUserValue] = useState();
+    const [nowaValue, setNowaValue] = useState()
 
     useEffect(()=>{
         GameAPI.SINGLE_USER_VALUE().then((res)=>{
-          // console.log(res?.data?.aura, "dssasasada")
-            setSingleUserValue(res?.data?.aura)
+          setSingleUserValue(res?.data?.aura)
+          setNowaValue(res?.data?.supernowa);
         })
     }, [])
 
@@ -19,16 +20,16 @@ const CasinoModals = () => {
         </div>
         <div className="casino_message">
           <p className="please_note">Please Note</p>
-          <p className="points">(1 Points = ₹{singleUserValue})</p>
+          <p className="points">(1 Points = ₹{type === 1? singleUserValue : nowaValue})</p>
 
           <div className="casino_dis">
             <p>
               <span>For Example:</span> If you place ₹100 your bet will be ₹
-              {100 * singleUserValue} Win or Loss according to the above
+              {type ===1? 100 * singleUserValue:100 * nowaValue} Win or Loss according to the above
               calculation.
             </p>
             <p>
-            यदि आप ₹100 लगाते हैं तो उपरोक्त गणना के अनुसार आपकी शर्त जीत या हार ₹ {100 * singleUserValue} होगी।
+            यदि आप ₹100 लगाते हैं तो उपरोक्त गणना के अनुसार आपकी शर्त जीत या हार ₹ {100 * (type === 1 ? singleUserValue : nowaValue)} होगी।
             </p>
           </div>
         </div>
