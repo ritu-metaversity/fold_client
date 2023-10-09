@@ -415,9 +415,9 @@ const NavBar = () => {
                 </div>
                 
               </div>
-              {/* {
+              {
                 (pathname === "/" || pathname === "/m/In-play" || pathname ==="/m/sports" || pathname === "/m/home" ) && <LatestEvent/>
-              } */}
+              }
               
             </div>
           </header>

@@ -27,6 +27,9 @@ import NewGameDetailPageDest from "./desktopLayout/NewGameDetailPageDest/NewGame
 import NewWithdraw from "./desktopLayout/NewWithdraw/NewWithdraw";
 import { UserAPI } from "./apis/UserAPI";
 import UnsetteledBetDeskHome from "./desktopLayout/UnsettelBetForDesk/UnsetteledBetDeskHome";
+import FantsyTabs from "./desktopLayout/fantasyGame/FantsyTabs";
+import IndianCasinoTabs from "./desktopLayout/IndianCasino/IndianCasinoTabs";
+import ComingSoon from "./common/comingSoon/ComingSoon";
 
 const RouteDesktop = () => {
   const [SportId, setSportId] = useState("");
@@ -164,7 +167,13 @@ const RouteDesktop = () => {
               <Route path="/Kabaddi" element={<HomePage />} />
               <Route path="/horseracing" element={<HomePage />} />
               {/* <Route path="/casino/:id" element={<CasinoForDesk />} /> */}
-              <Route path="/livecasino" element={<LiveCasino />} />
+              <Route path="/livecasino" element={<LiveCasino liveCasino={true} />} />
+              <Route path="/slot" element={<LiveCasino liveCasino={false} />} />
+              <Route path="/fantsy" element={<FantsyTabs  />} />
+              <Route path="/indiancasino" element={<IndianCasinoTabs/>} />
+              <Route path="/sportbook" element={<ComingSoon/>} />
+
+
               <Route path="/profitloss" element={<ProfitLossHome />} />
 
               <Route path="/unsetteledbet" element={<UnsetteledBetDeskHome/>} />

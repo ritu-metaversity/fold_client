@@ -159,12 +159,12 @@ ul.mtree.transit li.mtree-node>a::after {
 }
 
 .new-launch-text {
-    /* text-decoration: blink;
+    text-decoration: blink;
 	animation-name: blinker;
 	animation-duration: 0.6s;
 	animation-iteration-count:infinite;
 	animation-timing-function:ease-in-out;
-	animation-direction: alternate; */
+	animation-direction: alternate;
 }
 .move{
     transform: rotate(272deg); 

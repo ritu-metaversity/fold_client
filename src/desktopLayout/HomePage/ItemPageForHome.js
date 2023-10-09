@@ -15,7 +15,7 @@ function ItemPageForHome() {
     <div className="main">
       <div className="container-fluid container-fluid-5">
         <div className="row itemHome">
-          {/* <LatestEvent /> */}
+          <LatestEvent />
           <DeskMainPage />
           <NewLunch />
         </div>

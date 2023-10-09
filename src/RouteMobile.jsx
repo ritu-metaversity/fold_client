@@ -31,6 +31,10 @@ import FooterForMob from "./component/FooterForMob/FooterForMob";
 import NewMobWithdraw from "./component/Items/NewMobWithdraw/NewMobWithdraw";
 import { UserAPI } from "./apis/UserAPI";
 import UnSetteledBetHome from "./component/Items/UnSetteledBet/UnSetteledBetHome";
+import LiveCasino from "./desktopLayout/LiveCasino/LiveCasino";
+import FantsyTabs from "./desktopLayout/fantasyGame/FantsyTabs";
+import IndianCasinoTabs from "./desktopLayout/IndianCasino/IndianCasinoTabs";
+import ComingSoon from "./common/comingSoon/ComingSoon";
 
 const RouteMobile = () => {
   const { pathname } = useLocation();
@@ -168,6 +172,13 @@ const RouteMobile = () => {
               <Route path="/m/others" element={<Home />} />
               <Route path="/m/In-play" element={<Home />} />
               <Route path="/m/slot" element={<Slot />} />
+
+              <Route path="/m/livecasino" element={<LiveCasino liveCasino={true} />} />
+              <Route path="/m/slots" element={<LiveCasino liveCasino={false} />} />
+              <Route path="/m/fantsy" element={<FantsyTabs  />} />
+              <Route path="/m/indiancasino" element={<IndianCasinoTabs/>} />
+              <Route path="/m/sportbook" element={<ComingSoon/>} />
+
             </Route>
           </Route>
           <Route path="*" element={<Login />} />
