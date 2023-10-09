@@ -25,6 +25,7 @@ interface Props {
   name?: string;
   desktopUrl?: string;
   mobileUrl?: string;
+  type: "supernowa" | "aura" | "qtech" | "sportBook" | "fantasyGames";
 }
 const CasinoGame: FC<Props> = ({
   handleClose,
@@ -32,6 +33,7 @@ const CasinoGame: FC<Props> = ({
   name,
   desktopUrl,
   mobileUrl,
+  type,
 }) => {
   const matches = useMediaQuery("(max-width: 580px)");
   const [wait, setWait] = useState(false);
@@ -166,7 +168,7 @@ const CasinoGame: FC<Props> = ({
       >
         <DialogContent>
           <CasinoConfirmationModal
-            type="aura"
+            type={type}
             handleAgree={handleAgree}
             handleNotAgree={handleNotAgree}
           />

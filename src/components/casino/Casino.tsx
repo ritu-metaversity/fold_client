@@ -255,6 +255,7 @@ const Casino = () => {
       </Box>
       {!!open && (
         <CasinoGame
+          type="aura"
           name={casinoList.find((i) => i.gameId === open)?.gameName}
           id={open}
           handleClose={() => setOpen(0)}

@@ -4,7 +4,16 @@ import { createPortal } from "react-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { qTechServices } from "../../../utils/api/qTechGames/services";
 import { isMobile, isBrowser } from "react-device-detect";
-
+import {
+  Box,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Modal,
+  useMediaQuery,
+} from "@mui/material";
+import CasinoConfirmationModal from "../../casino/game/CasinoConfirmationModal";
 interface Props {
   gameName: string;
   close: () => void;
@@ -12,7 +21,7 @@ interface Props {
 
 function GamePortal({ gameName, close }: Props) {
   const [GameUrl, setGameUrl] = useState<string | null>(null);
-
+  const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const getSingleGame = async () => {
     const access_token = window.localStorage.getItem("qtech_access_token");
     const sessionToken = window.localStorage.getItem("token");
@@ -43,6 +52,33 @@ function GamePortal({ gameName, close }: Props) {
   useEffect(() => {
     getSingleGame();
   }, []);
+
+  const handleAgree = () => {
+    setOpenConfirmationModal(true);
+    // setOpenCasino(true);
+  };
+  const handleNotAgree = () => {
+    close();
+    setOpenConfirmationModal(false);
+  };
+
+  if (!openConfirmationModal) {
+    return (
+      <Dialog
+        PaperProps={{ sx: { overflow: "visible" } }}
+        open={true}
+        fullWidth
+      >
+        <DialogContent>
+          <CasinoConfirmationModal
+            type={"qtech"}
+            handleAgree={handleAgree}
+            handleNotAgree={handleNotAgree}
+          />
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return createPortal(
     <div className={classes["container"]}>

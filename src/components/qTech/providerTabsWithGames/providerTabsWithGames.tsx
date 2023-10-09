@@ -372,6 +372,13 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                         ?.gameName
                     }
                     id={open}
+                    type={
+                      SelectedProvider === "AURA"
+                        ? "aura"
+                        : SelectedProvider === "NOWA"
+                        ? "supernowa"
+                        : "qtech"
+                    }
                     handleClose={() => setOpen(0)}
                     desktopUrl={
                       gameLaunchURL ||

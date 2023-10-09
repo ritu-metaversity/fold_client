@@ -215,6 +215,7 @@ const SideBarCasino = ({
 
       {id && (
         <CasinoGame
+          type="aura"
           name={casinoList.find((i) => i.gameId === id)?.gameName}
           id={id}
           handleClose={() => setId(0)}
