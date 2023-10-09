@@ -10,7 +10,7 @@ export const casinoResource: { [x: string]: ApiResource } = {
     METHOD: "POST",
   },
   SINGLE_USER_VALUE: {
-    URL: "bet-modifier/single-user-value",
+    URL: "/api/getOneUserBetResult",
     METHOD: "POST",
   },
 };

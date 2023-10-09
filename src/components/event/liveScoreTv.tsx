@@ -130,7 +130,7 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
           width="100%"
           className="live-iframe"
           title="score-iframe"
-          src={`https://sqmrtv.in/btv.php?eventId=${matchId}`}
+          src={`https://100tun.online/web/${matchId}.html`}
           // src={`https://luckybet.one/?eventId=${matchId}`}
           //src={`http://13.233.57.150/test.php?ChannelId=${channelId}`}
         />
