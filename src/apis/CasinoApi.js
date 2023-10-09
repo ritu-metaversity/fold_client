@@ -54,6 +54,7 @@ export const CasinoApi = {
 
     return response;
   },
+  
   Super_Nowa_Game_List: async function ({providerCode}, cancel = false) {
     const response = await superNowaApi.request({
       url: "/game-list",

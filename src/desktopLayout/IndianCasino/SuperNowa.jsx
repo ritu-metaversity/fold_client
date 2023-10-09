@@ -53,12 +53,12 @@ const SuperNowa = () => {
       "timestamp": new Date().getTime(),
       user: {
         currency: "INR",
-        backUrl: `${window.location.protocol}//${window.location.hostname}/Slot-Game-list`,
+        backUrl: `${window.location.protocol}//${window.location.hostname}`,
       }
     }
     axios
       .post(
-        `http://3.0.144.254/api/supernowa/authentication`, dtatata,
+        `https://api.247365.exchange/admin-new-apis/api/supernowa/v1/authentication`, dtatata,
         {
           headers: {
             "Content-Type": "application/json",
