@@ -26,51 +26,51 @@ export const casinoProviderList: ProviderInterface[] = [
     type: "custom",
     providerId: 323335,
   },
-  {
-    name: "EVOLUTION",
-    logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/5.png",
-    filterType: "EVO",
-  },
-  {
-    name: "VIVO GAMING",
-    logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/21.png",
-    filterType: "VGL",
-  },
-  {
-    name: "EZUGI",
-    logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/1.png",
-    filterType: "EZU",
-  },
+  // {
+  //   name: "EVOLUTION",
+  //   logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/5.png",
+  //   filterType: "EVO",
+  // },
+  // {
+  //   name: "VIVO GAMING",
+  //   logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/21.png",
+  //   filterType: "VGL",
+  // },
+  // {
+  //   name: "EZUGI",
+  //   logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/1.png",
+  //   filterType: "EZU",
+  // },
   // {
   //   name: "BGAMING",
   //   logo: "https://global-uploads.webflow.com/63b2c230b49fa188ad86ffec/63f4c9689497e0d7c32f4a31_BGaming_logo.svg",
   //   filterType: "BGM",
   // },
-  {
-    name: "SKY WIND",
-    logo: "https://skywindgroup.com/assets/site/images/skywind_white.svg",
-    filterType: "SWL",
-  },
-  {
-    name: "SA GAMING",
-    logo: "https://www.sagaming.com/img/logo.png",
-    filterType: "SAG",
-  },
-  {
-    name: "PRAGMATIC",
-    logo: "https://www.pragmaticplay.com/wp-content/themes/gp-theme-basic/libs/dist/images/PP-white-logo.svg",
-    filterType: "PPL",
-  },
-  {
-    name: "BETTER LIVE",
-    logo: "https://live.beter.co/wp-content/themes/artit/assets/images/logo.svg",
-    filterType: "BTL",
-  },
-  {
-    name: "BET GAMES",
-    logo: "https://www.betgames.tv/api/uploads/BG_Logo_White_Horizontal_Lock_Up_dcca475d41.png",
-    filterType: "BTV",
-  },
+  // {
+  //   name: "SKY WIND",
+  //   logo: "https://skywindgroup.com/assets/site/images/skywind_white.svg",
+  //   filterType: "SWL",
+  // },
+  // {
+  //   name: "SA GAMING",
+  //   logo: "https://www.sagaming.com/img/logo.png",
+  //   filterType: "SAG",
+  // },
+  // {
+  //   name: "PRAGMATIC",
+  //   logo: "https://www.pragmaticplay.com/wp-content/themes/gp-theme-basic/libs/dist/images/PP-white-logo.svg",
+  //   filterType: "PPL",
+  // },
+  // {
+  //   name: "BETTER LIVE",
+  //   logo: "https://live.beter.co/wp-content/themes/artit/assets/images/logo.svg",
+  //   filterType: "BTL",
+  // },
+  // {
+  //   name: "BET GAMES",
+  //   logo: "https://www.betgames.tv/api/uploads/BG_Logo_White_Horizontal_Lock_Up_dcca475d41.png",
+  //   filterType: "BTV",
+  // },
   // {
   //   name: " EBET",
   //   logo: "https://ebet.gg/wp-content/uploads/2022/05/EBET-logo.png",

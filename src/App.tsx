@@ -218,7 +218,7 @@ function App() {
   useEffect(() => {
     const time = setInterval(() => {
       getBalance();
-      authenticationHandler();
+      // authenticationHandler();
     }, 5000);
     return () => clearInterval(time);
   }, [isSignedIn, getBalance]);
@@ -227,7 +227,7 @@ function App() {
     if (isSignedIn) {
       getButtonValue();
       getBalance();
-      authenticationHandler();
+      // authenticationHandler();
     }
 
     return () => {

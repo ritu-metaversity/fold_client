@@ -235,6 +235,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     }
   }, [SelectedProvider, filter]);
 
+
   return (
     <>
       <div className={classes["container"]}>
@@ -331,7 +332,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
               <Fragment>
                 <Box bgcolor={colorHex.bg1}>
                   <Box m={"10px"} display={"flex"} flexWrap="wrap" gap={"10px"}>
-                    {!(customProviderGames?.length > 0) && (
+                    {!isLoading && !(customProviderGames?.length > 0) && (
                       <Typography
                         textAlign={"center"}
                         sx={{ verticalAlign: "center" }}
