@@ -14,7 +14,7 @@ export const casinoApi = axios.create({
 })
 
 export const superNowaApi = axios.create({
-  baseURL: "http://3.0.144.254/api/supernowa",
+  baseURL: "https://api.247365.exchange/admin-new-apis/api/supernowa",
 })
 
 api.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`
