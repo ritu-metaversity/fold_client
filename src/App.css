@@ -52,3 +52,7 @@ td{
 th{
     white-space: nowrap ;
 }
+
+.game-page {
+    min-height: calc(100vh - 200px);
+}

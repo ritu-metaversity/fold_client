@@ -151,6 +151,10 @@
     margin: auto !important;
 }
 
+.if_modals .modal-content{
+    background: transparent;
+}
+
 .casino_iframe{
     max-height: 100vh !important;
    height: 100vh;

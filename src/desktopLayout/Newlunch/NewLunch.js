@@ -91,7 +91,7 @@ const handleAgree=()=>{
 
       <Modal centered show={show}   onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals/>
+          <CasinoModals type={1}/>
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={()=>setShow(false)}>No, I Don't Agree</button>

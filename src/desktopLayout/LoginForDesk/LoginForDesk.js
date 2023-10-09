@@ -65,16 +65,16 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
           localStorage.setItem("userTypeInfo", res?.userTypeInfo);
           if (res.token !== "" && res.status !== false) {
             localStorage.setItem("token", token);
-            setInterval(
-              () =>
-                CasinoApi.Casino_Authentication({}).then((item) => {
-                  localStorage.setItem(
-                    "gameToken",
-                    item?.data?.data?.access_token
-                  );
-                }),
-              1000
-            );
+            // setInterval(
+            //   () =>
+            //     CasinoApi.Casino_Authentication({}).then((item) => {
+            //       localStorage.setItem(
+            //         "gameToken",
+            //         item?.data?.data?.access_token
+            //       );
+            //     }),
+            //   1000
+            // );
             nav("/home");
 
           }
@@ -146,16 +146,16 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
         localStorage.setItem("UserId", uId);
         if (res.data?.token !== "" && res?.data?.token !== undefined  && res?.data.status !== false) {
           localStorage.setItem("token", token);
-          setInterval(
-            () =>
-              CasinoApi.Casino_Authentication({}).then((item) => {
-                localStorage.setItem(
-                  "gameToken",
-                  item?.data?.data?.access_token
-                );
-              }),
-            1000
-          );
+          // setInterval(
+          //   () =>
+          //     CasinoApi.Casino_Authentication({}).then((item) => {
+          //       localStorage.setItem(
+          //         "gameToken",
+          //         item?.data?.data?.access_token
+          //       );
+          //     }),
+          //   1000
+          // );
           nav("/home");
         }
         const pType = res?.data?.passwordtype;
