@@ -7,7 +7,7 @@ export const supernowaResourcs: {
     METHOD: "POST",
   },
   AUTH: {
-    URL: `${process.env.REACT_APP_SUPER_NOWA_URL}/api/supernowa/authentication`,
+    URL: `${process.env.REACT_APP_SUPER_NOWA_URL}/api/supernowa/v1/authentication`,
     METHOD: "POST",
   },
 };
