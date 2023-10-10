@@ -91,6 +91,15 @@ const RouteMobile = () => {
       else if (pathname === "/" && window.innerWidth < 800) {
         nav("/login");
       }
+      else if (pathname === "/m/aura" || pathname === "/aura") {
+        nav("/m/aura");
+      }
+      // else if (pathname === "/m/sueprnowa" || pathname === "/sueprnowa") {
+      //   nav("/m/login");
+      // }
+      else if (pathname === "/m/sportbook" || pathname === "/sportbook") {
+        nav("/m/sportbook");
+      }
     }
     else{
       if(pathname === "/m/reports/deposit"){
