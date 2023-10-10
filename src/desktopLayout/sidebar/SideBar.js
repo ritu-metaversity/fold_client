@@ -158,28 +158,33 @@ function SideBar() {
       <Accordion defaultActiveKey="0"  className="main_sport_header">
       <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
         <ul className="live_casino">
-          
-          <li className="nav-item">
-            <Link to="/sportbook" className="nav-link">
-              <span className="new-launch-text">Our Virtual</span>
-            </Link>
-          </li>
-          
-          <li className="nav-item">
-            <Link to="/sportbook" className="nav-link">
-              <span className="new-launch-text">Live Casino</span>
-            </Link>
-          </li>
-          <li className="nav-item">
+        <li className="nav-item">
             <Link to="/aura" className="nav-link">
-              <span className="">Aura</span>
+              <span 
+              // className="new-launch-text"
+              >Aura</span>
             </Link>
           </li>
           <li className="nav-item">
             <Link to="/supernowa" className="nav-link">
-              <span className="">Super Nowa</span>
+              <span 
+              // className="new-launch-text"
+              >Super Nowa</span>
             </Link>
           </li>
+          
+          <li className="nav-item">
+            <Link to="/sportbook" className="nav-link">
+              <span className="">Our Virtual</span>
+            </Link>
+          </li>
+          
+          <li className="nav-item">
+            <Link to="/sportbook" className="nav-link">
+              <span className="">Live Casino</span>
+            </Link>
+          </li>
+          
           <li className="nav-item">
             <Link to="/sportbook" className="nav-link">
               <span className="">Slot</span>
