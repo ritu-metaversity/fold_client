@@ -137,7 +137,7 @@
 }
 
 .desktop_iframe{
-    height: 100vh;
+    height: 100%;
     overflow: scroll;
 }
 .casino_iframe.modal-body {

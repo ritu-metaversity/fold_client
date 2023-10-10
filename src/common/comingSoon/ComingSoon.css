@@ -1,14 +1,17 @@
 .comm_soon img{
-    width: 100%;
+    width: 50%;
 }
 
 .comm_soon {
     min-height: calc(100vh - 270px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-@media screen and (min-width: 800px) {
-    .comm_soon img {
-        width: 44%;
+@media screen and (max-width: 800px) {
+    .comm_soon img{
+        width: 100%;
     }
     .comm_soon {
         min-height: calc(100vh - 215px);

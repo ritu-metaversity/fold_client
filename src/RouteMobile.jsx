@@ -35,6 +35,8 @@ import LiveCasino from "./desktopLayout/LiveCasino/LiveCasino";
 import FantsyTabs from "./desktopLayout/fantasyGame/FantsyTabs";
 import IndianCasinoTabs from "./desktopLayout/IndianCasino/IndianCasinoTabs";
 import ComingSoon from "./common/comingSoon/ComingSoon";
+import NewLunch from "./desktopLayout/Newlunch/NewLunch";
+import SuperNowa from "./desktopLayout/IndianCasino/SuperNowa";
 
 const RouteMobile = () => {
   const { pathname } = useLocation();
@@ -176,7 +178,8 @@ const RouteMobile = () => {
               <Route path="/m/livecasino" element={<LiveCasino liveCasino={true} />} />
               <Route path="/m/slots" element={<LiveCasino liveCasino={false} />} />
               <Route path="/m/fantsy" element={<FantsyTabs  />} />
-              <Route path="/m/indiancasino" element={<IndianCasinoTabs/>} />
+              <Route path="/m/sueprnowa" element={<SuperNowa/>} />
+              <Route path="/m/aura" element={<NewLunch/>} />
               <Route path="/m/sportbook" element={<ComingSoon/>} />
 
             </Route>

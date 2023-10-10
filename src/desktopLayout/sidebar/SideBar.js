@@ -171,8 +171,13 @@ function SideBar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/indiancasino" className="nav-link">
-              <span className="">Indian Casino</span>
+            <Link to="/aura" className="nav-link">
+              <span className="">Aura</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/supernowa" className="nav-link">
+              <span className="">Super Nowa</span>
             </Link>
           </li>
           <li className="nav-item">

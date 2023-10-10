@@ -77,10 +77,13 @@ const SuperNowa = () => {
 
   return (
     <>
+    <div style={{height:"calc(100vh - 240px)"}}>
     {
         isLoading ?<p className="lodder lodder_footer">
         <i className="fa fa-spinner fa-spin"></i>
-      </p> : <div className="provider_images">
+      </p> :
+      
+       <div className="provider_images">
         {gameData?.map((item) => {
           console.log(item, "Dasdasd");
           return (
@@ -90,6 +93,7 @@ const SuperNowa = () => {
           );
         })}
       </div>
+      
     }
       
 
@@ -111,7 +115,7 @@ const SuperNowa = () => {
       </Modal>
 
 
-
+      </div>
     </>
   );
 };
