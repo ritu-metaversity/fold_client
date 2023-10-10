@@ -30,6 +30,8 @@ import UnsetteledBetDeskHome from "./desktopLayout/UnsettelBetForDesk/Unsetteled
 import FantsyTabs from "./desktopLayout/fantasyGame/FantsyTabs";
 import IndianCasinoTabs from "./desktopLayout/IndianCasino/IndianCasinoTabs";
 import ComingSoon from "./common/comingSoon/ComingSoon";
+import NewLunch from "./desktopLayout/Newlunch/NewLunch";
+import SuperNowa from "./desktopLayout/IndianCasino/SuperNowa";
 
 const RouteDesktop = () => {
   const [SportId, setSportId] = useState("");
@@ -170,7 +172,8 @@ const RouteDesktop = () => {
               <Route path="/livecasino" element={<LiveCasino liveCasino={true} />} />
               <Route path="/slot" element={<LiveCasino liveCasino={false} />} />
               <Route path="/fantsy" element={<FantsyTabs  />} />
-              <Route path="/indiancasino" element={<IndianCasinoTabs/>} />
+              <Route path="/aura" element={<NewLunch/>} />
+              <Route path="/supernowa" element={<SuperNowa/>} />
               <Route path="/sportbook" element={<ComingSoon/>} />
 
 

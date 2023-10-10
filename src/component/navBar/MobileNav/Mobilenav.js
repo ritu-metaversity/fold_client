@@ -25,7 +25,7 @@ function Mobilenav() {
       setActive(1)
     }
     else if((pathname ==='/m/sportbook')){
-      setActive(7)
+      setActive(8)
     }
     else if((pathname ==='/m/livecasino')){
       setActive(4)
@@ -36,8 +36,11 @@ function Mobilenav() {
     else if((pathname ==='/m/fantsy')){
       setActive(5)
     }
-    else if((pathname ==='/m/indiancasino')){
+    else if((pathname ==='/m/aura')){
       setActive(6)
+    }
+    else if((pathname ==='/m/sueprnowa')){
+      setActive(7)
     }
     else if((pathname?.slice(0,7) === '/casino')){
       setActive(3)
@@ -90,14 +93,21 @@ function Mobilenav() {
         <li
           className={`nav-item ${Active === 6 ? "active2" : ""}`}
           onClick={(e) => handleClick(6, e)}>
-          <Link  to="/m/indiancasino" className="nav-link navlink1">
-            Indian Casino
+          <Link  to="/m/aura" className="nav-link navlink1">
+            Aura
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${Active === 7 ? "active2" : ""}`}
+          onClick={(e) => handleClick(7, e)}>
+          <Link  to="/m/sueprnowa" className="nav-link navlink1">
+            Super Nowa
           </Link>
         </li>
 
         <li
-          className={`nav-item ${Active === 7 ? "active2" : ""}`}
-          onClick={(e) => handleClick(7, e)}>
+          className={`nav-item ${Active === 8 ? "active2" : ""}`}
+          onClick={(e) => handleClick(8, e)}>
           <Link to="/m/sportbook" className="nav-link">
             Sport Book
           </Link>
