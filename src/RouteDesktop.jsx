@@ -208,7 +208,7 @@ const RouteDesktop = () => {
                 path="/SignOut"
                 element={<SignoutForDesk statusMassege={statusMassege} />}
               />
-              {ItselfAllowed === true && localStorage.getItem("UsertypeInfo") == 1 ? (
+              {ItselfAllowed === true && localStorage.getItem("UsertypeInfo") != 2 ? (
                 <>
                   <Route path="/deposit" element={<DepositForDesk />} />
                   <Route path="/withdraw" element={<NewWithdraw />} />
