@@ -65,7 +65,7 @@ export const columnCasino: ColumnsInterface<any>[] = [
     minWidth: 70,
   },
   {
-    id: "date",
+    id: "time",
     label: "Place Date",
     minWidth: 70,
   },
