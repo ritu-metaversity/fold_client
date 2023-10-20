@@ -139,3 +139,14 @@ export const GameHeader = styled(Box)`
     align-items: flex-start;
   }
 `;
+export const BallByBallKiBall = styled("div")`
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: white;
+  border-radius: 50%;
+  background-color: #355e3b;
+`;
