@@ -5,16 +5,27 @@ import { CasinoApi } from "../../../../apis/CasinoApi";
 import {isBrowser} from 'react-device-detect';
 import {MdOutlineClose} from 'react-icons/md'
 import LiveCasinoModals from "../LiveCasinoModals";
+import CasinoModals from "../../../../component/Items/Slot/CasinoModals/CasinoModals";
 
 const GameList = ({ gameLists, providerFilter }) => {
   const [show, setShow] = useState(false);
+  const [ruleShow, setRuleShow] = useState(false);
   const [gameId, setGameId] = useState("");
-  const [iframeData, setIframeData] = useState("")
+  const [iframeData, setIframeData] = useState("");
+  const [Casinoshow, setCasinoShow] = useState(false);
+
 
   const handleClose = () => setShow(false);
   const handleShow = (val) => {
-    setGameId(val)
+    setGameId(val);
+    setRuleShow(true)
+
+  }
+
+  const handleAgree=()=>{
+    setCasinoShow(true)
     setShow(true);
+    setRuleShow(false)
   }
 
   useEffect(() => {
@@ -55,6 +66,16 @@ const GameList = ({ gameLists, providerFilter }) => {
           );
         })}
       </div>
+
+      <Modal centered show={ruleShow}   onHide={handleClose}>
+        <Modal.Body className="casino_modals_body">
+          <CasinoModals type={2}/>
+          <div className="agree_btn">
+            <button onClick={handleAgree}>Ok I Agree</button>
+            <button onClick={()=>setRuleShow(false)}>No, I Don't Agree</button>
+          </div>
+        </Modal.Body>
+      </Modal>
 
       <Modal className="if_modals" size="xl" show={show} onHide={handleClose}>
         <Modal.Body className="casino_iframe">

@@ -178,29 +178,28 @@
 .close_iframe {
     border: unset;
     outline: unset;
-    font-size: 27px;
-    color: #fff;
+    font-size: 20px;
+    color: #000;
     position: absolute;
     right: 3px;
     top: 7px;
-    background-color: unset;
+    background-color: #fff;
+    border-radius: 50%;
 }
 
 @media screen and (max-width: 800px) {
     .close_iframe {
         border: unset;
         outline: unset;
-        font-size: 27px;
-        right: unset;
-        top: unset;
-        background-color: unset;
-        position: relative;
-        background: #000;
-        display: block;
+        font-size: 20px;
         color: #000;
-        width: 99.5%;
-        margin: auto;
-        color: #fff;
+        position: absolute;
+        right: 48%;
+        top: 2px;
+        float: right;
+        margin-top: 2px;
+        background-color: #fff;
+        border-radius: 50%;
     }
 }
 
