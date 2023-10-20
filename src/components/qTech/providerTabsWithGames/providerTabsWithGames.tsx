@@ -282,9 +282,9 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
                         src={
                           filter == "slot" || filter == "lottery"
                             ? el == "All" || el === "OTHER"
-                              ? `/assets/icon/slot/${el}.png`
-                              : "/assets/icon/slot/slot.png"
-                            : `/assets/icon/casino/${el}.png`
+                              ? `/assets/Icon/slot/${el}.png`
+                              : "/assets/Icon/slot/slot.png"
+                            : `/assets/Icon/casino/${el}.png`
                         }
                         alt={el}
                       />
