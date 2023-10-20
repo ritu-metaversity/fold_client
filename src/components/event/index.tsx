@@ -91,35 +91,42 @@ const Event = () => {
   });
   const nav = useNavigate();
 
-  const oddFromSocket = (response: any) => {
-    console.log(response, "socket");
-    Object.keys(response).forEach((element) => {
-      if (
-        !["Fancy2", "Fancy3", "Odds", "Bookmaker", "OddEven"].includes(element)
-      )
-        response[element] = [];
-      else {
-        response[element] = response[element].map(
-          (single: any, index: number) => ({
-            ...(fancyOddsSlower[element]
-              ? fancyOddsSlower[element][index] || {}
-              : {}),
-            ...single,
-          })
-        );
-      }
-    });
-    setFancyOdds((fancyOdds: any) => {
-      const Odds = transformMatchOdds(response.Odds);
-      if (fancyOdds) {
-        const newFancy = { ...fancyOdds };
-        setPrevFancyOdds(newFancy);
-      } else {
-        setPrevFancyOdds({ ...response, Odds });
-      }
-      return { ...response, Odds };
-    });
-  };
+  // const oddFromSocket = (response: any) => {
+  //   console.log(response, "socket");
+  //   Object.keys(response).forEach((element) => {
+  //     if (
+  //       ![
+  //         "Fancy2",
+  //         "Fancy3",
+  //         "Odds",
+  //         "Bookmaker",
+  //         "OddEven",
+  //         "BallByBall",
+  //       ].includes(element)
+  //     )
+  //       response[element] = [];
+  //     else {
+  //       response[element] = response[element].map(
+  //         (single: any, index: number) => ({
+  //           ...(fancyOddsSlower[element]
+  //             ? fancyOddsSlower[element][index] || {}
+  //             : {}),
+  //           ...single,
+  //         })
+  //       );
+  //     }
+  //   });
+  //   setFancyOdds((fancyOdds: any) => {
+  //     const Odds = transformMatchOdds(response.Odds);
+  //     if (fancyOdds) {
+  //       const newFancy = { ...fancyOdds };
+  //       setPrevFancyOdds(newFancy);
+  //     } else {
+  //       setPrevFancyOdds({ ...response, Odds });
+  //     }
+  //     return { ...response, Odds };
+  //   });
+  // };
 
   //socket
   useEffect(() => {
@@ -593,11 +600,11 @@ const Event = () => {
             undefined
           )}
 
-        {/* {fancyOdds.Odds?.filter(
+        {fancyOdds.Odds?.filter(
           (i: any) => !["Match Odds"].includes(i.Name)
-        ).map(matchOddMapCallback)} */}
+        ).map(matchOddMapCallback)}
 
-        {/* {fancyOdds["Bookmaker"] &&
+        {fancyOdds["Bookmaker"] &&
           fancyOdds.Bookmaker.find(
             (odd: FancyOddsInterface) => odd.t === "TOSS"
           ) &&
@@ -606,7 +613,7 @@ const Event = () => {
               (odd: FancyOddsInterface) => odd.t === "TOSS"
             ),
             "toss"
-          )} */}
+          )}
         {/* accordians for fancy with values */}
         {Object.keys(fancyOdds).map((fancyMarket: any) => {
           if (["Odds", "Bookmaker"].includes(fancyMarket)) return <></>;
