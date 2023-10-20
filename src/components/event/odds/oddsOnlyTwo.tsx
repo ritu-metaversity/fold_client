@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import {
   BetDetailsInterface,
@@ -8,6 +8,7 @@ import {
 import { UserContext } from "../../../App";
 import { colorHex } from "../../../utils/constants";
 import { dharmParivartan } from "..";
+import { BallByBallKiBall } from "../styledComponents";
 
 interface Props {
   title: any | string;
@@ -159,7 +160,11 @@ const OddsOnlyTwo = ({
         textTransform={"capitalize"}
         fontSize={"0.8rem"}
       >
-        <>{odds?.nation}</>
+        <Box display={"flex"} alignItems={"center"} gap="1rem">
+          {odds.ball && <BallByBallKiBall>{odds.ball}</BallByBallKiBall>}{" "}
+          <>{odds?.nation}</>
+        </Box>
+
         {profit && (
           <Typography
             color={profit?.value >= 0 ? "green" : "red"}

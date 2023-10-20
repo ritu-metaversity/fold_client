@@ -64,6 +64,7 @@ export interface FancyOddsInterface {
   maxBet: number;
   minBet: number;
   display_message: string | null;
+  ball?: string;
 }
 
 export interface ProfitInterface {
