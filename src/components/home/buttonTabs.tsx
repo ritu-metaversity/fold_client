@@ -32,7 +32,7 @@ const selectedSx = {
 export const LinkandLabel = [
   {
     label: "Lottery",
-    link: "/cumming",
+    link: "/lottery",
     require: true,
   },
   {
@@ -48,14 +48,18 @@ export const LinkandLabel = [
     link: "/casino",
     require: true,
   },
+  // {
+  //   label: "Virtual Casino",
+  //   link: "/virtual-casino",
+  // },
   {
     label: "Slots",
-    link: "/cumming",
+    link: "/slot",
     require: true,
   },
   {
     label: "Fantasy Game",
-    link: "/cumming",
+    link: "/fantasy",
     require: true,
   },
 ];
