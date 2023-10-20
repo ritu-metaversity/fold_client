@@ -1,4 +1,3 @@
-import { memo, useEffect } from "react";
 import { GameInterface } from "../providerTabsWithGames/providerTabsWithGames";
 import { ProviderInterface } from "../providerTabsWithGames/providers.data";
 import classes from "./providers.module.css";
@@ -18,18 +17,6 @@ interface Props {
 }
 
 function ProvidersTabs({ getName, value, providerList, cls }: Props) {
-  useEffect(() => {
-    const el = providerList[0];
-    getName(
-      el?.filterType,
-      el?.customFilter,
-      el?.games,
-      el?.type,
-      el?.apiUrl,
-      el?.providerId
-    );
-  }, [providerList]);
-
   return (
     <div className={!cls ? classes["contianer"] : classes[cls!]}>
       {providerList.map((el) => (
@@ -61,4 +48,4 @@ function ProvidersTabs({ getName, value, providerList, cls }: Props) {
   );
 }
 
-export default memo(ProvidersTabs);
+export default ProvidersTabs;

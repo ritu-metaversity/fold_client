@@ -48,6 +48,10 @@ export const LinkandLabel = [
     link: "/casino",
     require: true,
   },
+  // {
+  //   label: "Virtual Casino",
+  //   link: "/virtual-casino",
+  // },
   {
     label: "Slots",
     link: "/cumming",
