@@ -10,7 +10,7 @@ export const api = axios.create({
     // },
 })
 export const casinoApi = axios.create({
-    baseURL: "https://api.playindia.app/api/qtech",
+    baseURL: "https://api.247idhub.com/api/qtech",
 })
 
 export const superNowaApi = axios.create({

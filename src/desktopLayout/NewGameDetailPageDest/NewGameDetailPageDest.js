@@ -30,9 +30,6 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
   const [status, setStatus] = useState();
   const [messege, setMessege] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [maxBet, setMaxBet] = useState();
-  const [minBet, setMinBet] = useState();
-  const [mFancyOdds, setMFancyOdds] = useState({});
   const [show, setShow] = useState(false);
   const [FancyID, setFancyID] = useState();
   const [errorMsg, setErrorMsg] = useState(false);
@@ -41,10 +38,6 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
   const [matchDetail, setMatchDelatil] = useState("");
   const [fancyOddsPnl, setFancyOddsPnl] = useState([]);
   const [pValue, setPvalue] = useState();
-  const [oddsPnl, setOddsPnl] = useState([]);
-  const [StackVal, setStackVal] = useState([]);
-  const [userbalance, setUserbalance] = useState("0.00");
-  const [error, setError] = useState(false);
   const [userIP, setUserIP] = useState("");
   const [betModals, setBetmodals] = useState(false);
   const [profits, setProfits] = useState({
@@ -53,31 +46,6 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
     Fancy: [],
   });
 
-//   useEffect(() => {
-//     const time = setInterval(() => {
-//       const token = localStorage.getItem("token");
-      
-//       if (token !== null || localStorage.getItem("Password-type")!== "old") {
-//         UserAPI.User_Balance()
-//           .then((res) => {
-//             setUserbalance(res?.data?.balance);
-//           })
-//           .catch((error) => {
-//             setError(true);
-//           });
-//       }
-//     }, 1000);
-
-//     return () => clearInterval(time);
-//   }, []);
-
-  // Stack Value Api
-
-//   useEffect(() => {
-//     GameAPI.Place_Bet().then((res) => {
-//       setStackVal(res);
-//     });
-//   }, []);
 
   const { id } = useParams();
   const matId = id;
@@ -139,67 +107,6 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
         setUserIP(res?.ip);
       });
   }, []);
-
-//   useEffect(() => {
-//     UserAPI.USER_ODDS_PNL({
-//       matchId: id,
-//     }).then((res) => {
-//       setOddsPnl(res?.data || []);
-//     });
-//     const time = setInterval(() => {
-//       UserAPI.USER_ODDS_PNL({
-//         matchId: id,
-//       }).then((res) => {
-//         setOddsPnl(res?.data || []);
-//       });
-//     }, 5000);
-
-//     return () => clearInterval(time);
-//   }, [id]);
-
-//   useEffect(() => {
-//     createProfits({
-//       fancyOdds,
-//       fancyPnl: fancyOddsPnl,
-//       betDetails: {
-//         isFancy: fancy,
-//         isBack: cName === "back" ? true : false,
-//         odds: spanValueRate,
-//         marketName: "",
-//         selectionId: parseInt(selectionId),
-//         priceValue: fancy === false ? spanValueRate : pValue,
-//         marketId: marketId === "" ? selectionId : marketId,
-//         matchId: matchId,
-//       },
-//       rechange: true,
-//       pnl: oddsPnl,
-//       setProfits,
-//     });
-//   }, [
-//     spanValueRate,
-//     oddsPnl,
-//     fancyOddsPnl,
-//     isLoading,
-//     marketId,
-//     selectionId,
-//   ]);
-
-//   useEffect(() => {
-//     UserAPI.USER_FANCY_PNL({
-//       matchId: id,
-//     }).then((res) => {
-//       setFancyOddsPnl(res?.data || []);
-//     });
-//     const time = setInterval(() => {
-//       UserAPI.USER_FANCY_PNL({
-//         matchId: id,
-//       }).then((res) => {
-//         setFancyOddsPnl(res?.data || []);
-//       });
-//     }, 5000);
-
-//     return () => clearInterval(time);
-//   }, [id]);
 
   const handleGameName = (item, id) => {
     setCurrentFancy(item);
@@ -283,7 +190,7 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
 
 
   const [stackySideBar, setStackySideBar] = useState("");
-  const [lastScrollY, setLastScrollY] = useState(0);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -370,16 +277,6 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
                                   item.runners.length === 0 ? "d-none" : ""
                                 }`}>
                                 {item.Name}
-                                {/* <span className="float-right">
-                                  Min Bet{" "}
-                                  <span>{minBet?.Odds[index]?.minBet}</span> Max
-                                  Bet <span>{minBet?.Odds[index]?.maxBet}</span>{" "}
-                                  <a href="/" className="game-rules-icon">
-                                    <span>
-                                      <i className="fa fa-info-circle float-right  ml-2"></i>
-                                    </span>
-                                  </a>
-                                </span> */}
                               </div>
                               <div
                                 className={`table-header ${
@@ -606,7 +503,270 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
                               {fancyOdds?.Bookmaker?.length &&
                                 fancyOdds?.Bookmaker?.map((bookmaker, id) => {
                                   const BookmakerProfitVal = profits?.Bookmaker?.find(
-                                    (profit) =>profit?.sid === bookmaker?.sid)?.value
+                                    (profit) =>profit?.sid === bookmaker?.sid)?.value;
+                                    if(bookmaker?.t == "TOSS") return <></>
+                                  return (
+                                    <div
+                                      key={id}
+                                      data-title="SUSPENDED"
+                                      className={`table-row ${
+                                        bookmaker?.gstatus === "SUSPENDED"
+                                          ? "suspended"
+                                          : bookmaker?.gstatus ===
+                                            "BALL RUNNING"
+                                          ? "ballrunning"
+                                          : ""
+                                      } `}>
+                                      <div className="float-left country-name box-4">
+                                        <span className="team-name">
+                                          <b>{bookmaker?.nation}</b>
+                                        </span>
+                                        {}
+                                        <p>
+                                          <span
+                                            className={`float-left ${
+                                              BookmakerProfitVal > 0
+                                                ? "text-success"
+                                                : BookmakerProfitVal < 0
+                                                ? "text-danger"
+                                                : ""
+                                            }`}
+                                            style={{
+                                              color: "black",
+                                              fontSize: "12px",
+                                            }}>
+                                            
+                                            {parseFloat(BookmakerProfitVal)?.toFixed(2) || 0}
+                                          </span>
+                                        </p>
+                                        <p>{}</p>
+                                      </div>
+                                      <div className="box-d-1 back-1 float-left text-center betting-disabled"></div>
+                                      <div className="box-d-1 back-2 float-left back-2 text-center betting-disabled"></div>
+                                      <div className="box-d-1 back float-left back lock text-center betting-disabled">
+                                        <button
+                                          className="odbtn"
+                                          onClick={() =>
+                                            handleSpanValueBack(
+                                              bookmaker?.b1,
+                                              bookmaker?.nation,
+                                              "back",
+                                              matId,
+                                              bookmaker?.mid,
+                                              bookmaker?.sid,
+                                              bookmaker?.nation,
+                                              pTime,
+                                              false,
+                                              bookmaker?.t
+                                            )
+                                          }>
+                                          <span>{bookmaker?.b1}</span>
+                                          <br />
+                                          <span style={{ fontSize: "12px" }}>
+                                            {bookmaker?.bs1}
+                                          </span>
+                                        </button>
+                                      </div>
+                                      <div className="box-d-1 lay float-left text-center betting-disabled">
+                                        <button
+                                          className="odbtn"
+                                          onClick={() =>
+                                            handleSpanValueLay(
+                                              bookmaker?.l1,
+                                              bookmaker?.nation,
+                                              "lay",
+                                              matId,
+                                              bookmaker?.mid,
+                                              bookmaker?.sid,
+                                              bookmaker?.nation,
+                                              pTime,
+                                              false,
+                                              bookmaker?.t
+                                            )
+                                          }>
+                                          <span>{bookmaker?.l1}</span>
+                                          <br />
+                                          <span style={{ fontSize: "12px" }}>
+                                            {bookmaker?.ls1}
+                                          </span>
+                                        </button>
+                                      </div>
+                                      <div className="box-d-1 lay-2 float-left text-center betting-disabled"></div>
+                                      <div className="box-d-1 lay-1 float-left text-center betting-disabled"></div>
+                                    </div>
+                                  );
+                                })}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+{
+  fancyOdds?.Bookmaker?.length > 2 &&<div className="row row5 bookmaker-market mt-1">
+  <div className="bm1 col-xl-12">
+    <div>
+      <div className="market-title mt-1">
+        Toss
+        <a href="/" className=" game-rules-icon">
+          {/* <b className="m-r-5">
+            Min:{maxBet?.minBet} Max:{maxBet?.maxBet}{" "}
+          </b> */}
+          <span>
+            <i className="fa fa-info-circle float-right"></i>
+          </span>
+        </a>
+      </div>
+      <div className="table-header">
+        <div className="float-left country-name box-4 text-info"></div>
+        <div className="box-1 float-left"></div>
+        <div className="box-1 float-left"></div>
+        <div className="back box-1 float-left text-center">
+          <b>BACK</b>
+        </div>
+        <div className="lay box-1 float-left text-center">
+          <b>LAY</b>
+        </div>
+        <div className="box-1 float-left"></div>
+        <div className="box-1 float-left"></div>
+      </div>
+      <div className="table-body">
+        {fancyOdds?.Bookmaker?.length &&
+          fancyOdds?.Bookmaker?.map((bookmaker, id) => {
+            const BookmakerProfitVal = profits?.Bookmaker?.find(
+              (profit) =>profit?.sid === bookmaker?.sid)?.value;
+              if(bookmaker?.t != "TOSS") return <></>
+            return (
+              <div
+                key={id}
+                data-title="SUSPENDED"
+                className={`table-row ${
+                  bookmaker?.gstatus === "SUSPENDED"
+                    ? "suspended"
+                    : bookmaker?.gstatus ===
+                      "BALL RUNNING"
+                    ? "ballrunning"
+                    : ""
+                } `}>
+                <div className="float-left country-name box-4">
+                  <span className="team-name">
+                    <b>{bookmaker?.nation}</b>
+                  </span>
+                  {}
+                  <p>
+                    <span
+                      className={`float-left ${
+                        BookmakerProfitVal > 0
+                          ? "text-success"
+                          : BookmakerProfitVal < 0
+                          ? "text-danger"
+                          : ""
+                      }`}
+                      style={{
+                        color: "black",
+                        fontSize: "12px",
+                      }}>
+                      
+                      {parseFloat(BookmakerProfitVal)?.toFixed(2) || 0}
+                    </span>
+                  </p>
+                  <p>{}</p>
+                </div>
+                <div className="box-d-1 back-1 float-left text-center betting-disabled"></div>
+                <div className="box-d-1 back-2 float-left back-2 text-center betting-disabled"></div>
+                <div className="box-d-1 back float-left back lock text-center betting-disabled">
+                  <button
+                    className="odbtn"
+                    onClick={() =>
+                      handleSpanValueBack(
+                        bookmaker?.b1,
+                        bookmaker?.nation,
+                        "back",
+                        matId,
+                        bookmaker?.mid,
+                        bookmaker?.sid,
+                        bookmaker?.nation,
+                        pTime,
+                        false,
+                        bookmaker?.t
+                      )
+                    }>
+                    <span>{bookmaker?.b1}</span>
+                    <br />
+                    <span style={{ fontSize: "12px" }}>
+                      {bookmaker?.bs1}
+                    </span>
+                  </button>
+                </div>
+                <div className="box-d-1 lay float-left text-center betting-disabled">
+                  <button
+                    className="odbtn"
+                    onClick={() =>
+                      handleSpanValueLay(
+                        bookmaker?.l1,
+                        bookmaker?.nation,
+                        "lay",
+                        matId,
+                        bookmaker?.mid,
+                        bookmaker?.sid,
+                        bookmaker?.nation,
+                        pTime,
+                        false,
+                        bookmaker?.t
+                      )
+                    }>
+                    <span>{bookmaker?.l1}</span>
+                    <br />
+                    <span style={{ fontSize: "12px" }}>
+                      {bookmaker?.ls1}
+                    </span>
+                  </button>
+                </div>
+                <div className="box-d-1 lay-2 float-left text-center betting-disabled"></div>
+                <div className="box-d-1 lay-1 float-left text-center betting-disabled"></div>
+              </div>
+            );
+          })}
+      </div>
+    </div>
+  </div>
+</div>
+}
+                      
+
+
+                      <div className="row row5 bookmaker-market mt-1">
+                        <div className="bm1 col-xl-12">
+                          <div>
+                            <div className="market-title mt-1">
+                             Toss
+                              <a href="/" className=" game-rules-icon">
+                                {/* <b className="m-r-5">
+                                  Min:{maxBet?.minBet} Max:{maxBet?.maxBet}{" "}
+                                </b> */}
+                                <span>
+                                  <i className="fa fa-info-circle float-right"></i>
+                                </span>
+                              </a>
+                            </div>
+                            <div className="table-header">
+                              <div className="float-left country-name box-4 text-info"></div>
+                              <div className="box-1 float-left"></div>
+                              <div className="box-1 float-left"></div>
+                              <div className="back box-1 float-left text-center">
+                                <b>BACK</b>
+                              </div>
+                              <div className="lay box-1 float-left text-center">
+                                <b>LAY</b>
+                              </div>
+                              <div className="box-1 float-left"></div>
+                              <div className="box-1 float-left"></div>
+                            </div>
+                            <div className="table-body">
+                              {fancyOdds?.Bookmaker?.length &&
+                                fancyOdds?.Bookmaker?.map((bookmaker, id) => {
+                                  const BookmakerProfitVal = profits?.Bookmaker?.find(
+                                    (profit) =>profit?.sid === bookmaker?.sid)?.value;
+                                    if(bookmaker?.t !== "TOSS") return <></>
                                   return (
                                     <div
                                       key={id}
@@ -639,35 +799,7 @@ function NewGameDetailPageDest({ getStackValue, SportId }) {
                                               color: "black",
                                               fontSize: "12px",
                                             }}>
-                                            {/* {
-                                              bookmaker.mid.includes("BM") || bookmaker.mid.includes("Bm") || bookmaker.mid.includes("bm")?
-                                            (() => {
-                                              const profit =
-                                                profits?.Bookmaker?.find(
-                                                  (profit) =>
-                                                    profit?.sid === bookmaker?.sid
-                                                );
-                                              if (profit)
-                                                return selectionId ==
-                                                  bookmaker?.sid
-                                                  ? (
-                                                      (profit?.value || 0) +
-                                                      ((cName === "back"
-                                                        ? 1
-                                                        : -1) *
-                                                        spanValueRate *
-                                                        updated) /
-                                                        100
-                                                    ).toFixed(2)
-                                                  : (
-                                                      (profit?.value || 0) +
-                                                      (cName === "back"
-                                                        ? -1
-                                                        : 1) *
-                                                        updated
-                                                    ).toFixed(2);
-                                              else return null;
-                                            })():""} */}
+                                            
                                             {parseFloat(BookmakerProfitVal)?.toFixed(2) || 0}
                                           </span>
                                         </p>
