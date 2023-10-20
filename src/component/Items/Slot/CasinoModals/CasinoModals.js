@@ -3,14 +3,18 @@ import { GameAPI } from "../../../../apis/gameAPI";
 
 const CasinoModals = ({type}) => {
     const [singleUserValue, setSingleUserValue] = useState();
-    const [nowaValue, setNowaValue] = useState()
+    const [nowaValue, setNowaValue] = useState();
+    const [liveCasino, setLiveCasino] = useState();
 
     useEffect(()=>{
         GameAPI.SINGLE_USER_VALUE().then((res)=>{
           setSingleUserValue(res?.data?.aura)
           setNowaValue(res?.data?.supernowa);
+          setLiveCasino(res?.data?.qtech);
         })
     }, [])
+
+    console.log(type, "sdassd")
 
   return (
     <>
@@ -20,7 +24,7 @@ const CasinoModals = ({type}) => {
         </div>
         <div className="casino_message">
           <p className="please_note">Please Note</p>
-          <p className="points">(1 Points = ₹{type === 1? singleUserValue : nowaValue})</p>
+          <p className="points">(1 Points = ₹{type === 1? singleUserValue : type === 2?liveCasino: nowaValue})</p>
 
           <div className="casino_dis">
             <p>
@@ -29,7 +33,7 @@ const CasinoModals = ({type}) => {
               calculation.
             </p>
             <p>
-            यदि आप ₹100 लगाते हैं तो उपरोक्त गणना के अनुसार आपकी शर्त जीत या हार ₹ {100 * (type === 1 ? singleUserValue : nowaValue)} होगी।
+            यदि आप ₹100 लगाते हैं तो उपरोक्त गणना के अनुसार आपकी शर्त जीत या हार ₹ {100 * (type === 1? singleUserValue : type === 2?liveCasino: nowaValue)} होगी।
             </p>
           </div>
         </div>

@@ -75,13 +75,13 @@ function Mobilenav() {
             Slot
           </Link>
         </li> */}
-        {/* <li
+        <li
           className={`nav-item ${Active === 4 ? "active2" : ""}`}
           onClick={(e) => handleClick(4, e)}>
           <Link  to="/m/livecasino" className="nav-link navlink1">
             Live Casino
           </Link>
-        </li> */}
+        </li>
         {/* <li
           className={`nav-item ${Active === 5 ? "active2" : ""}`}
           onClick={(e) => handleClick(5, e)}>

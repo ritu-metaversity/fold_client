@@ -180,7 +180,7 @@ function SideBar() {
           </li>
           
           <li className="nav-item">
-            <Link to="/sportbook" className="nav-link">
+            <Link to="/livecasino" className="nav-link">
               <span className="">Live Casino</span>
             </Link>
           </li>
