@@ -136,7 +136,10 @@
         align-items: center;
         margin-top: 12px;
     }
+.fantsy_img{
+    min-height: calc(100vh - 271px);
 
+}
     .provider_images img {
         padding: 4px 0px;
     }

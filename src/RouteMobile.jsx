@@ -94,9 +94,9 @@ const RouteMobile = () => {
       else if (pathname === "/m/aura" || pathname === "/aura") {
         nav("/m/aura");
       }
-      // else if (pathname === "/m/sueprnowa" || pathname === "/sueprnowa") {
-      //   nav("/m/login");
-      // }
+      else if (pathname === "/m/sueprnowa" || pathname === "/sueprnowa" || pathname == "/m/fantsy" || pathname == "/m/slots" || pathname == "/m/livecasino") {
+        nav("/m/login");
+      }
       else if (pathname === "/m/sportbook" || pathname === "/sportbook") {
         nav("/m/sportbook");
       }

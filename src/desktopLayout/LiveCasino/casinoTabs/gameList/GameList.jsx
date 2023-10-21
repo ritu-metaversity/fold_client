@@ -51,6 +51,7 @@ const GameList = ({ gameLists, providerFilter }) => {
 
   return (
     <>
+    <div className="fantsy_img">
       <div className="provider_images">
         {gameLists?.map((item) => {
           console.log(item, "Dasdasd");
@@ -65,6 +66,7 @@ const GameList = ({ gameLists, providerFilter }) => {
             </div>
           );
         })}
+      </div>
       </div>
 
       <Modal centered show={ruleShow}   onHide={handleClose}>
