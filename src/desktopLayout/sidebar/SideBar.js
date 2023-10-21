@@ -186,12 +186,12 @@ function SideBar() {
           </li>
           
           <li className="nav-item">
-            <Link to="/sportbook" className="nav-link">
+            <Link to="/slot" className="nav-link">
               <span className="">Slot</span>
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/sportbook" className="nav-link">
+            <Link to="/fantsy" className="nav-link">
               <span className="">Fantasy Game</span>
             </Link>
           </li>

@@ -170,11 +170,11 @@ function Login({ Errmessage, Statusmessage }) {
       setNavLogo(res?.data?.logo);
     });
   }, []);
-
+    
   return (
     <>
       <div className="wrapper login_main_section">
-        {Statusmessage === true ? (
+        {Statusmessage === true && (
           <div className="alertBtn">
             <AlertBtn
               color="success"
@@ -182,10 +182,10 @@ function Login({ Errmessage, Statusmessage }) {
               val={Errmessage}
             />
           </div>
-        ) : (
-          ""
-        )}
-        {(StatusVal === false && Statusmessage === undefined) ||
+        )
+      }
+
+        {(StatusVal === false || Statusmessage === undefined) &&
         Statusmessage === false ? (
           <div className="alertBtn">
             <AlertBtn color="danger" popupClose={popupClose} val={message} />
