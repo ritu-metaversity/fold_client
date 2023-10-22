@@ -241,9 +241,14 @@ const Event = () => {
       //showing only part of the data currently
       Object.keys(response).forEach((element) => {
         if (
-          !["Fancy2", "Fancy3", "Odds", "Bookmaker", "OddEven"].includes(
-            element
-          )
+          ![
+            "Fancy2",
+            "Fancy3",
+            "Odds",
+            "Bookmaker",
+            "OddEven",
+            "BallByBall",
+          ].includes(element)
         )
           response[element] = [];
         else {
