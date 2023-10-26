@@ -932,3 +932,18 @@ label.onoffbtn {
 th.text-left.nation-name, th.text-left.rate {
     color: #fff;
 }
+
+.ballbyball{
+    background-color: #08c;
+    padding: 3px;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    color: #fff;
+    margin-bottom: 2px;
+    margin-right:3px ;
+    margin-top: 2px;
+}
+.ballby{
+    margin-top: 2px;
+}
