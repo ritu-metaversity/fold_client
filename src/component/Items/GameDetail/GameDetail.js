@@ -874,7 +874,7 @@ function GameDetail({ getStackValue }) {
                           const BookmakerProfitVal = profits?.Bookmaker?.find(
                             (profit) => profit?.sid === bookmaker?.sid
                           )?.value;
-                          console.log(fancyOdds?.Bookmaker?.length, "dasdsd")
+                          console.log(fancyOdds?.Bookmaker?.length, "dasdsd");
                           if (bookmaker?.t !== "TOSS") return <></>;
                           return (
                             <>
@@ -1064,6 +1064,7 @@ function GameDetail({ getStackValue }) {
                               "Fancy",
                               "Fancy2",
                               "Fancy3",
+                              "BallByBall",
                             ].includes(item)
                           ) {
                             return null;
@@ -1110,10 +1111,14 @@ function GameDetail({ getStackValue }) {
                                   <div className="table-body" key={item + id}>
                                     <div className="fancy-tripple">
                                       <div data-title="" className="table-row">
+                                      
                                         <div className="float-left country-name box-4">
+                                        {item?.ball != undefined && (
+                                            <span className="ballbyball">{item?.ball}</span>
+                                          )}
                                           <span>
                                             <b className="fanct-title">
-                                              {item?.nation}
+                                              {item?.nation}{" "}
                                             </b>
                                           </span>
                                           <div className="float-right">

@@ -20,7 +20,6 @@ const LiveCasino = ({liveCasino}) => {
       provider : providerTag,
       token
     }).then((response)=>{
-      console.log(response.data.data,"hui");
       if (response?.data?.data?.items?.length) 
       {
         const { items } = response.data.data;

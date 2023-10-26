@@ -1282,7 +1282,6 @@ function GamedetailPage({ getStackValue, SportId }) {
                           ) {
                             return null;
                           }
-
                           return (
                             <li
                               key={item + id}
@@ -1312,6 +1311,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                               "Fancy",
                               "Fancy2",
                               "Fancy3",
+                              "BallByBall",
                             ].includes(item)
                           ) {
                             return null;
@@ -1379,7 +1379,13 @@ function GamedetailPage({ getStackValue, SportId }) {
                                             <div
                                               className="float-left country-name box-6"
                                               style={{ borderBottom: "0px" }}>
-                                              <p className="m-b-0">
+                                                
+                                              <p className="m-b-0 ballby">
+                                              {item?.ball != undefined && (
+                                                <span className="ballbyball">
+                                                  {item?.ball}
+                                                </span>
+                                              )}
                                                 <span
                                                   style={{ fontSize: "13px" }}>
                                                   {item?.nation}
@@ -1387,6 +1393,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                               </p>
                                               <p
                                                 className="m-b-0"
+                                                style={{marginLeft:"10px", marginTop:"5px"}}
                                                 onClick={() =>
                                                   handleFancyData(
                                                     item?.sid,
@@ -1540,7 +1547,13 @@ function GamedetailPage({ getStackValue, SportId }) {
                                             <div
                                               className="float-left country-name box-6"
                                               style={{ borderBottom: "0px" }}>
-                                              <p className="m-b-0">
+                                              
+                                              <p className="m-b-0 ballby">
+                                              {item?.ball != undefined && (
+                                                <span className="ballbyball">
+                                                  {item?.ball}
+                                                </span>
+                                              )}
                                                 <span
                                                   style={{ fontSize: "13px" }}>
                                                   {item?.nation}
@@ -1548,6 +1561,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                               </p>
                                               <p
                                                 className="m-b-0"
+                                                style={{marginLeft:"10px", marginTop:"5px"}}
                                                 onClick={() =>
                                                   handleFancyData(
                                                     item?.sid,
