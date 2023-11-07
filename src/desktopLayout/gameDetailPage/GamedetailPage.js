@@ -1051,7 +1051,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                                   }}>
                                                   <div style={{display:"flex", alignItems:"center"}}>
                                                     {
-                                                      item?.ball != undefined && 
+                                                      e?.ball != undefined && 
                                                       <p style={{paddingRight:"8px"}}>
                                                       <span
                                                         style={{
@@ -1240,7 +1240,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                                   }}>
                                                   <div style={{display:"flex", alignItems:"center"}}>
                                                     {
-                                                      item?.ball != undefined && <p style={{paddingRight:"8px"}}>
+                                                      e?.ball != undefined && <p style={{paddingRight:"8px"}}>
                                                       <span
                                                         style={{
                                                           background: "#08c",
