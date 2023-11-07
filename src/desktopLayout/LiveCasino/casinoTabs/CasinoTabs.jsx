@@ -11,11 +11,26 @@ const CasinoTabs = ({ gameLists, category, setProviderTags, liveCasino }) => {
   const [providerFilter, setProviderFilter] = useState("ALL");
   const [scrollX, setscrollX] = useState(0);
   const [hideButton, setSetHideBtton] = useState();
+  const [avQtech, setAvQtech] = useState("");
+  const [gameId, setGameId] = useState("");
+  const [show, setShow] = useState(false);
+  const [ruleShow, setRuleShow] = useState(false);
 
-  const handleCasino = (id, val) => {
+
+
+  const handleCasino = (id, val, name, gameCode) => {
+    setAvQtech(name)
     setActiveClass(id);
     setProviderTags(val);
+    if(name === "AVIATOR" || name === "Q Tech"){
+      setGameId(gameCode);
+      setRuleShow(true)
+    }
+    
   };
+  
+
+  console.log(gameId, "sdsssdsadas")
 
   const ref = useRef(null);
 
@@ -25,12 +40,12 @@ const CasinoTabs = ({ gameLists, category, setProviderTags, liveCasino }) => {
     setscrollX(scrollX + scrollOffset);
   };
 
-//   console.log((window.location.pathname?.includes('/m')), "dsadad")
 
 useEffect(()=>{
     const hideButton = window.location.pathname?.includes('/m');
     setSetHideBtton(hideButton)
 }, [hideButton])
+
 
   return (
     <>
@@ -44,16 +59,18 @@ useEffect(()=>{
         <ul ref={ref}>
           {liveCasino &&
             casinoProviderList?.map((item, id) => {
+              // console.log(item, "dsfsffw")
               return (
                 <>
                   <li
                     className={activeClass == id ? "casino_active" : ""}
-                    onClick={() => handleCasino(id, item?.filterType)}>
+                    onClick={() => handleCasino(id, item?.filterType, item?.name, item?.gameCode)}>
                     {item?.name}
                   </li>
                 </>
               );
             })}
+            
           {!liveCasino &&
             slotProviderList?.map((item, id) => {
               return (
@@ -73,7 +90,7 @@ useEffect(()=>{
       
       </div>
       <ProviderTabs setProviderFilter={setProviderFilter} category={category} />
-      <GameList providerFilter={providerFilter} gameLists={gameLists} />
+      <GameList ruleShow={ruleShow} setRuleShow={setRuleShow} show={show} setShow={setShow} gameId={gameId} setGameId={setGameId} avQtech={avQtech} providerFilter={providerFilter} gameLists={gameLists} />
     </>
   );
 };

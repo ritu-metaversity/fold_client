@@ -197,7 +197,7 @@ const NavBar = () => {
               <div className="row row5 pt-1 pb-1 mb-4">
                 <div className="logo col-6">
                   <Link
-                    to="/"
+                    to="/m/home"
                     className="router-link-exact-active router-link-active">
                     <i className="fa fa-home mr-1"></i>
                     <img

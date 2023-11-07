@@ -5,16 +5,17 @@ const CasinoModals = ({type}) => {
     const [singleUserValue, setSingleUserValue] = useState();
     const [nowaValue, setNowaValue] = useState();
     const [liveCasino, setLiveCasino] = useState();
-
+// console.log(type,"jkhghfv");
     useEffect(()=>{
         GameAPI.SINGLE_USER_VALUE().then((res)=>{
-          setSingleUserValue(res?.data?.aura)
-          setNowaValue(res?.data?.supernowa);
-          setLiveCasino(res?.data?.qtech);
+          console.log(res?.data[type],type, "dsfsfdsf")
+          setSingleUserValue(res?.data[type])
+          // setNowaValue(res?.data?.supernowa);
+          // setLiveCasino(res?.data?.qtech);
         })
     }, [])
 
-    console.log(type, "sdassd")
+    console.log(nowaValue, "sdassd")
 
   return (
     <>
@@ -24,7 +25,8 @@ const CasinoModals = ({type}) => {
         </div>
         <div className="casino_message">
           <p className="please_note">Please Note</p>
-          <p className="points">(1 Points = ₹{type === 1? singleUserValue : type === 2?liveCasino: nowaValue})</p>
+          {/* <p className="points">(1 Points = ₹{type === 1? singleUserValue : type === 2? liveCasino : nowaValue})</p> */}
+          <p className="points">(1 Points = ₹{singleUserValue})</p>
 
           <div className="casino_dis">
             <p>

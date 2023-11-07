@@ -6,12 +6,7 @@ const LiveCasino = ({liveCasino}) => {
 
   const [category, setCategory] = useState([]);
   const [gameLists, setGameLists] = useState();
-  const [providerTag, setProviderTags] = useState("");
-
-
-
-  // console.log(liveCasino, "xsdasds")
-  
+  const [providerTag, setProviderTags] = useState("");  
   
   useEffect(()=>{
     const token = localStorage.getItem("gameToken");
@@ -40,12 +35,13 @@ const LiveCasino = ({liveCasino}) => {
   })
   }, [providerTag, liveCasino])
 
+  
+
   return (
     <>
       <div className="main">
       <CasinoTabs liveCasino={liveCasino} gameLists={gameLists} setProviderTags={setProviderTags} providerTag={providerTag} category={category}/>
       </div>
-
     </>
   );
 };

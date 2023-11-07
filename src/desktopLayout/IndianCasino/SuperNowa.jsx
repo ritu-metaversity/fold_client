@@ -99,7 +99,7 @@ const SuperNowa = () => {
 
       <Modal centered show={casinoShow}   onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals type={2}/>
+          <CasinoModals type={"supernowa"}/>
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={()=>setCasinoShow(false)}>No, I Don't Agree</button>
