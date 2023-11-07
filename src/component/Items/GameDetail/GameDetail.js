@@ -50,6 +50,8 @@ function GameDetail({ getStackValue }) {
   const [oddsPnl, setOddsPnl] = useState([]);
   const [StackVal, setStackVal] = useState([]);
   const [userIP, setUserIP] = useState("");
+  const [activeIndex, setActiveIndex] = useState(0);
+
 
   const [profits, setProfits] = useState({
     Odds: {},
@@ -310,6 +312,10 @@ function GameDetail({ getStackValue }) {
     } else {
       setTvHideShow(false);
     }
+  };
+
+  const handleAccClick = (val) => {
+    setActiveIndex(val === activeIndex ? 0 : val);
   };
 
   return (
@@ -1021,7 +1027,219 @@ function GameDetail({ getStackValue }) {
 
                 {sId == 4 ? (
                   <div className="fancy-markets">
-                    <ul className="nav nav-tabs mt-2 fancy-nav">
+                    {gameName?.map((item, id2) => {
+                      if (
+                        [
+                          "Odds",
+                          "Bookmaker",
+                          "Fancy",
+                          "Khado",
+                          "Ball",
+                          "Meter",
+                        ].includes(item)
+                      ) {
+                        return null;
+                      }
+                      return (
+                        <div
+                          className={`tab-content mt-2 ${
+                            fancyOdds[item]?.length == 0 ? "d-none" : ""
+                          }`}>
+                          <div className="fancy-market">
+                            <div>
+                              <div className="table-header">
+                                <div  onClick={() => handleAccClick(id2)} className="market-title country-name mob_country">
+                                  <span>{item}</span>
+                                  <p className="float-right mb-0">
+                                    <i className="fa fa-info-circle"></i>
+                                  </p>
+                                </div>
+                              </div>
+                              {
+                                id2 !== activeIndex && <>
+                                 <div className="d-flex yes_no">
+                                <div className=" country-name box-4"></div>
+                                <div className="box-1  lay text-center">
+                                  <b>No</b>
+                                </div>
+                                <div className="back box-1  back text-center">
+                                  <b>Yes</b>
+                                </div>
+                              </div>
+                              {fancyOdds[item]?.map((item, id) => {
+                                const FancyProfitValue = fancyOddsPnl?.find(
+                                  (pnl) => pnl?.marketId === item?.sid
+                                )?.pnl;
+                                return (
+                                  <div className="table-body" key={item + id}>
+                                    <div className="fancy-tripple">
+                                      <div data-title="" className="table-row">
+                                        <div className="float-left country-name box-4">
+                                          {item?.ball != undefined && (
+                                            <span className="ballbyball">
+                                              {item?.ball}
+                                            </span>
+                                          )}
+                                          <span>
+                                            <b className="fanct-title">
+                                              {item?.nation}{" "}
+                                            </b>
+                                          </span>
+                                          <div className="float-right">
+                                            <div className="info-block">
+                                              <Accordion>
+                                                <Accordion.Item eventKey={id}>
+                                                  <Accordion.Header>
+                                                    <p
+                                                      data-toggle="collapse"
+                                                      data-target="/min-max-info355"
+                                                      aria-expanded="false"
+                                                      className="info-icon collapsed">
+                                                      <i className="fa fa-info-circle m-l-10"></i>
+                                                    </p>
+                                                  </Accordion.Header>
+                                                  <Accordion.Body>
+                                                    <div
+                                                      id="min-max-info355"
+                                                      className="min-max-info">
+                                                      <span>
+                                                        <b>Min:</b>
+                                                        <br />
+                                                        {
+                                                          mFancyOdds[
+                                                            currentFancy
+                                                          ][id]?.minBet
+                                                        }
+                                                      </span>
+                                                      <br />
+                                                      <span>
+                                                        <b>Max:</b>
+                                                        <br />
+                                                        {
+                                                          mFancyOdds[
+                                                            currentFancy
+                                                          ][id]?.maxBet
+                                                        }
+                                                      </span>
+                                                      <br />
+                                                    </div>
+                                                  </Accordion.Body>
+                                                </Accordion.Item>
+                                              </Accordion>
+                                            </div>
+                                          </div>
+                                          <p
+                                            className="cpointer"
+                                            onClick={(e) =>
+                                              handleFancyBook(e, mid, item.sid)
+                                            }>
+                                            <span
+                                              className={`float-left ${
+                                                FancyProfitValue > 0
+                                                  ? "sucess"
+                                                  : FancyProfitValue < 0
+                                                  ? "danger"
+                                                  : ""
+                                              }`}
+                                              style={{ color: "black" }}>
+                                              {FancyProfitValue || 0}
+                                            </span>
+                                          </p>
+                                        </div>
+
+                                        <div
+                                          className="box-1 lay float-left text-center"
+                                          onClick={(e) => handleShow(e)}>
+                                          <button
+                                            className="odbtn"
+                                            onClick={() =>
+                                              handleSpanValueLay(
+                                                item?.l1,
+                                                item?.nation,
+                                                "lay",
+                                                mid,
+                                                item?.sid,
+                                                0,
+                                                currentFancy,
+                                                pTime,
+                                                true,
+                                                item?.ls1
+                                              )
+                                            }>
+                                            <span className="odd d-block">
+                                              {item?.l1 === "" ? "0" : item?.l1}
+                                            </span>{" "}
+                                            <span className="d-block">
+                                              {item?.ls1}
+                                            </span>
+                                          </button>
+                                        </div>
+                                        <div
+                                          data-title={item?.gstatus}
+                                          className={`box-1 back float-left text-center ${
+                                            item?.gstatus === "SUSPENDED"
+                                              ? "suspended"
+                                              : item?.gstatus === "BALL RUNNING"
+                                              ? "ballrunning"
+                                              : ""
+                                          }`}
+                                          onClick={(e) => handleShow(e)}>
+                                          <button
+                                            className="odbtn"
+                                            onClick={() =>
+                                              handleSpanValueBack(
+                                                item?.b1,
+                                                item?.nation,
+                                                "back",
+                                                mid,
+                                                item?.sid,
+                                                0,
+                                                currentFancy,
+                                                pTime,
+                                                true,
+                                                item?.bs1
+                                              )
+                                            }>
+                                            <span className="odd d-block">
+                                              {item?.b1}
+                                            </span>{" "}
+                                            <span className="d-block">
+                                              {item?.bs1 === ""
+                                                ? "0"
+                                                : item?.bs1}
+                                            </span>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                                </>
+                              }
+                             
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                    <Modal
+                      show={showFancyModals}
+                      className={``}
+                      onHide={handleCloseFancyModal}
+                      style={{
+                        marginTop: "12px",
+                        marginInline: "2%",
+                        width: "95%",
+                      }}>
+                      <Modal.Header closeButton closeVariant="white">
+                        <Modal.Title>Run Amount</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <FancyModals matchId={mid} FancyID={FancyID} />
+                      </Modal.Body>
+                    </Modal>
+                    {/* <ul className="nav nav-tabs mt-2 fancy-nav">
                       {gameName?.length &&
                         gameName?.map((item, id) => {
                           if (
@@ -1065,6 +1283,9 @@ function GameDetail({ getStackValue }) {
                               "Fancy2",
                               "Fancy3",
                               "BallByBall",
+                              "Khado",
+                              "Ball",
+                              "Meter",
                             ].includes(item)
                           ) {
                             return null;
@@ -1276,7 +1497,7 @@ function GameDetail({ getStackValue }) {
                       </>
                     ) : (
                       <p className="no-found">No Real Data Found</p>
-                    )}
+                    )} */}
                   </div>
                 ) : (
                   ""

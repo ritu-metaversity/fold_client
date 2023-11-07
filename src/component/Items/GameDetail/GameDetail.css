@@ -947,3 +947,14 @@ th.text-left.nation-name, th.text-left.rate {
 .ballby{
     margin-top: 2px;
 }
+
+.mob_country{
+    width: 100%;
+    padding: 8px !important;
+}
+
+.yes_no{
+    border-bottom: 1px solid #fff;
+    height: 20px;
+    /* margin-left: 2px; */
+}

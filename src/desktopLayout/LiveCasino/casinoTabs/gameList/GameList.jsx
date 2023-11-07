@@ -7,10 +7,7 @@ import {MdOutlineClose} from 'react-icons/md'
 import LiveCasinoModals from "../LiveCasinoModals";
 import CasinoModals from "../../../../component/Items/Slot/CasinoModals/CasinoModals";
 
-const GameList = ({ gameLists, providerFilter }) => {
-  const [show, setShow] = useState(false);
-  const [ruleShow, setRuleShow] = useState(false);
-  const [gameId, setGameId] = useState("");
+const GameList = ({ gameLists, providerFilter,gameId, setGameId, show, setShow, ruleShow, setRuleShow }) => {
   const [iframeData, setIframeData] = useState("");
   const [Casinoshow, setCasinoShow] = useState(false);
 
@@ -71,7 +68,7 @@ const GameList = ({ gameLists, providerFilter }) => {
 
       <Modal centered show={ruleShow}   onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals type={2}/>
+          <CasinoModals type={"qtech"}/>
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={()=>setRuleShow(false)}>No, I Don't Agree</button>

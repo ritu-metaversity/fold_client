@@ -305,3 +305,25 @@ ul.nav.nav-tabs.mt-1.dis-none {
 span.team-name {
     font-size: 14px;
 }
+
+.collapsible {
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: left;
+    font-size: 15px;
+  }
+
+  .active, .collapsible:hover {
+    background-color: #555;
+  }
+  
+  .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+  }
+  .ballbyball{
+    justify-content: flex-start;
+  }
