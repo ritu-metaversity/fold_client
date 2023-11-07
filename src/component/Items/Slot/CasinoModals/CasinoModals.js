@@ -31,11 +31,11 @@ const CasinoModals = ({type}) => {
           <div className="casino_dis">
             <p>
               <span>For Example:</span> If you place ₹100 your bet will be ₹
-              {type ===1? 100 * singleUserValue:100 * nowaValue} Win or Loss according to the above
+              {100 * singleUserValue} Win or Loss according to the above
               calculation.
             </p>
             <p>
-            यदि आप ₹100 लगाते हैं तो उपरोक्त गणना के अनुसार आपकी शर्त जीत या हार ₹ {100 * (type === 1? singleUserValue : type === 2?liveCasino: nowaValue)} होगी।
+            यदि आप ₹100 लगाते हैं तो उपरोक्त गणना के अनुसार आपकी शर्त जीत या हार ₹ {100 * singleUserValue} होगी।
             </p>
           </div>
         </div>
