@@ -409,7 +409,8 @@ function GameDetail({ getStackValue }) {
                     <div className="scorecard scorecard-mobile">
                       <div className="score-inner">
                         <iframe
-                          src={`http://15.207.182.173:3050/event/${id}?theme=crazy-diamond`}
+                          // src={`http://15.207.182.173:3050/event/${id}?theme=crazy-diamond`}
+                          src={`https://score.247idhub.com/index.html/event/${id}?theme=crazy-diamond`}
                           width="100%"
                           className="score-card"
                           title="scorecord"
@@ -422,7 +423,8 @@ function GameDetail({ getStackValue }) {
                     <div className="scorecard scorecard-mobile">
                       <div className="score-inner">
                         <iframe
-                          src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sId}/${id}`}
+                          // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sId}/${id}`}
+                          src={`https://score.247idhub.com/go-score/template/${sId}/${id}`}
                           width="100%"
                           className="score-card"
                           title="scorecord"
