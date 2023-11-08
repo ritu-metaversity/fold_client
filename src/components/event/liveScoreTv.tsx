@@ -113,7 +113,8 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
           height="200px"
           title="score-iframe"
           // src={`http://15.207.182.173:3050/event/${matchId}`}
-          src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
+          src={`https://score.247idhub.com/go-score/template/${sportId}/${matchId}`}
+          // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
         />
       )}
       {showScore2 && (
@@ -121,8 +122,7 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
           width="100%"
           height="300px"
           title="score-iframe score-iframe2"
-          src={`http://15.207.182.173:3050/event/${matchId}?theme=dark-wolf`}
-          // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sportId}/${matchId}`}
+          src={`https://score.247idhub.com/index.html/event/${matchId}?theme=dark-wolf`}
         />
       )}
       {showLive && (
