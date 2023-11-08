@@ -449,7 +449,8 @@ function GamedetailPage({ getStackValue, SportId }) {
                         <div className="scorecard scorecard-mobile">
                           <div className="score-inner">
                             <iframe
-                              src={`http://15.207.182.173:3050/event/${matId}?theme=crazy-diamond`}
+                              // src={`http://15.207.182.173:3050/event/${matId}?theme=crazy-diamond`}
+                              src={`https://score.247idhub.com/index.html/event/${matId}?theme=crazy-diamond`}
                               width="100%"
                               className="score-card desk_score_card"
                               title="scorecord"
@@ -462,7 +463,8 @@ function GamedetailPage({ getStackValue, SportId }) {
                         <div className="scorecard scorecard-mobile">
                           <div className="score-inner ">
                             <iframe
-                              src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sId}/${matId}`}
+                              // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${sId}/${matId}`}
+                              src={`https://score.247idhub.com/go-score/template/${sId}/${matId}`}
                               width="100%"
                               className="score-card desk_score_card"
                               title="scorecord"
