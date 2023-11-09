@@ -112,7 +112,7 @@ export const slotProviderList: ProviderInterface[] = [
   },
   {
     name: "1X2 GAMING",
-    logo: "https://www.1x2gaming.com/img/logo@2x.png",
+    logo: "/assets/Icon/slot/1X2.png",
     filterType: "1x2",
   },
   {
