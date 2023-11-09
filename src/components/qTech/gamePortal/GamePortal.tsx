@@ -27,25 +27,50 @@ function GamePortal({ gameName, close }: Props) {
     const sessionToken = window.localStorage.getItem("token");
 
     if (access_token) {
-      const { response } = await qTechServices.singleGame({
-        playerId: "121212",
-        currency: "INR",
-        country: "IN",
-        gender: "M",
-        birthDate: "1986-01-01",
-        lang: "en_IN",
-        mode: "real",
-        device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
-        returnUrl: "http://playindia.app",
-        walletSessionId: sessionToken,
-        token: access_token,
-        gameName,
-      });
-
-      if (!!response && response.data && response?.data?.url) {
-        const { url } = response.data;
-        setGameUrl(url);
+      if (gameName) {
+        const { response } = await qTechServices.singleGame({
+          playerId: "121212",
+          currency: "INR",
+          country: "IN",
+          gender: "M",
+          birthDate: "1986-01-01",
+          lang: "en_IN",
+          mode: "real",
+          device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
+          returnUrl: "http://playindia.app",
+          walletSessionId: sessionToken,
+          token: access_token,
+          gameName,
+        });
+        if (!!response && response.data && response?.data?.url) {
+          const { url } = response.data;
+          setGameUrl(url);
+        }
+      } else {
+        const { response } = await qTechServices.gameLobby({
+          playerId: "121212",
+          currency: "INR",
+          country: "IN",
+          gender: "M",
+          birthDate: "1986-01-01",
+          lang: "en_IN",
+          mode: "real",
+          device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
+          returnUrl: "http://playindia.app",
+          walletSessionId: sessionToken,
+          token: access_token,
+          //  gameName,
+        });
+        if (!!response && response.data && response?.data?.url) {
+          const { url } = response.data;
+          setGameUrl(url);
+        }
       }
+
+      // if (!!response && response.data && response?.data?.url) {
+      //   const { url } = response.data;
+      //   setGameUrl(url);
+      // }
     }
   };
 

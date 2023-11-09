@@ -209,8 +209,11 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
       }
     }, 800);
 
-    if (!!type && type == "custom") {
+    if (type == "custom") {
       setCustomGameProvider(true);
+      if (value === "QTech-Lobby") {
+        showAndHideHandler();
+      }
       if (providerId) {
         getCustomGameProviderLists(apiUrl, providerId);
       }
