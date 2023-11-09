@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CasinoTabs from "./casinoTabs/CasinoTabs";
 import { CasinoApi } from "../../apis/CasinoApi";
 
-const LiveCasino = ({liveCasino}) => {
+const LiveCasino = ({liveCasino, showid}) => {
 
   const [category, setCategory] = useState([]);
   const [gameLists, setGameLists] = useState();
@@ -36,11 +36,13 @@ const LiveCasino = ({liveCasino}) => {
   }, [providerTag, liveCasino])
 
   
+  console.log(gameLists, "SDFfdsfdsfsfsdf")
+
 
   return (
     <>
       <div className="main">
-      <CasinoTabs liveCasino={liveCasino} gameLists={gameLists} setProviderTags={setProviderTags} providerTag={providerTag} category={category}/>
+      <CasinoTabs showid={showid} liveCasino={liveCasino} gameLists={gameLists} setProviderTags={setProviderTags} providerTag={providerTag} category={category}/>
       </div>
     </>
   );

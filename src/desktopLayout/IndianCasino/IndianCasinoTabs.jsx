@@ -60,12 +60,9 @@ useEffect(()=>{
             <MdKeyboardArrowRight />
           </button>
         }
-      
       </div>
-      {
-        activeClass === 0 ?<NewLunch/>:<SuperNowa/>
-      }
-     
+    <SuperNowa/>
+
     </>
   );
 };

@@ -158,13 +158,13 @@ function SideBar() {
       <Accordion defaultActiveKey="0"  className="main_sport_header">
       <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
         <ul className="live_casino">
-        <li className="nav-item">
+        {/* <li className="nav-item">
             <Link to="/aura" className="nav-link">
               <span 
               // className="new-launch-text"
               >Aura</span>
             </Link>
-          </li>
+          </li> */}
           <li className="nav-item">
             <Link to="/supernowa" className="nav-link">
               <span 
@@ -173,11 +173,11 @@ function SideBar() {
             </Link>
           </li>
           
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="/sportbook" className="nav-link">
               <span className="">Our Virtual</span>
             </Link>
-          </li>
+          </li> */}
           
           <li className="nav-item">
             <Link to="/livecasino" className="nav-link">
@@ -195,11 +195,11 @@ function SideBar() {
               <span className="">Fantasy Game</span>
             </Link>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="/sportbook" className="nav-link">
               <span className="">Sport Book</span>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
         </Accordion>

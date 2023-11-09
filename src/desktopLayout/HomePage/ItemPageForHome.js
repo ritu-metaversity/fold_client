@@ -9,6 +9,7 @@ import BannerList from "../../component/BannerSection/BannerList";
 import Itemdesk from "../itemPageforDesktop/Itemdesk";
 import DeskMainPage from "../itemPageforDesktop/DeskMainPage";
 import LatestEvent from "../../common/LatestEvent";
+import LiveCasino from "../LiveCasino/LiveCasino";
 
 function ItemPageForHome() {
   return (
@@ -17,7 +18,8 @@ function ItemPageForHome() {
         <div className="row itemHome">
           {/* <LatestEvent /> */}
           <DeskMainPage />
-          <NewLunch />
+          {/* <NewLunch /> */}
+          <LiveCasino liveCasino={true} showid={1}/>
         </div>
       </div>
     </div>

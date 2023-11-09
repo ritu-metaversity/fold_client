@@ -3,6 +3,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Slot from "../Items/Slot/Slot";
+import LiveCasino from "../../desktopLayout/LiveCasino/LiveCasino";
 
 function Item({ gameIdForItemPage, spName }) {
   const [gameName, setGameName] = useState("");
@@ -180,7 +181,9 @@ function Item({ gameIdForItemPage, spName }) {
               </div>
             </div>
           </div>
-          <Slot />
+          {/* <Slot /> */}
+
+          <LiveCasino liveCasino={true} showid={1}/>
         </>
       )}
     </div>
