@@ -10,14 +10,20 @@ export interface ProviderInterface {
 }
 
 export const casinoProviderList: ProviderInterface[] = [
+  // {
+  //   name: "AURA GAME",
+  //   logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
+  //   filterType: "AURA",
+  //   type: "custom",
+  //   apiUrl:
+  //     "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/wolf.json",
+  //   providerId: 323334,
+  // },
   {
-    name: "AURA GAME",
-    logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
-    filterType: "AURA",
+    name: "Q Tech",
+    logo: "https://11bet24.com/static/media/qtechlogo.97b6c0859adf911c43bb.png",
+    filterType: "QTech-Lobby",
     type: "custom",
-    apiUrl:
-      "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/wolf.json",
-    providerId: 323334,
   },
   {
     name: "SUPER NOWA",
