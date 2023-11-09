@@ -6,7 +6,7 @@ import ProviderTabs from "./providerTabs/ProviderTabs";
 import GameList from "./gameList/GameList";
 import { slotProviderList } from "../SlotProvider";
 
-const CasinoTabs = ({ gameLists, category, setProviderTags, liveCasino }) => {
+const CasinoTabs = ({ gameLists, category, setProviderTags, liveCasino, showid }) => {
   const [activeClass, setActiveClass] = useState(0);
   const [providerFilter, setProviderFilter] = useState("ALL");
   const [scrollX, setscrollX] = useState(0);
@@ -49,47 +49,50 @@ useEffect(()=>{
 
   return (
     <>
-      <div className="casino_tabs">
-        {
-            hideButton ? "":<button  onClick={() => scroll(-20)} className="casino_left_tab">
-            <MdKeyboardArrowLeft />
-          </button>
-        }
-        
-        <ul ref={ref}>
-          {liveCasino &&
-            casinoProviderList?.map((item, id) => {
-              // console.log(item, "dsfsffw")
-              return (
-                <>
-                  <li
-                    className={activeClass == id ? "casino_active" : ""}
-                    onClick={() => handleCasino(id, item?.filterType, item?.name, item?.gameCode)}>
-                    {item?.name}
-                  </li>
-                </>
-              );
-            })}
-            
-          {!liveCasino &&
-            slotProviderList?.map((item, id) => {
-              return (
+    {
+      showid == 2 && <div className="casino_tabs">
+      {
+          hideButton ? "":<button  onClick={() => scroll(-20)} className="casino_left_tab">
+          <MdKeyboardArrowLeft />
+        </button>
+      }
+      
+      <ul ref={ref}>
+        {liveCasino &&
+          casinoProviderList?.map((item, id) => {
+            // console.log(item, "dsfsffw")
+            return (
+              <>
                 <li
                   className={activeClass == id ? "casino_active" : ""}
-                  onClick={() => handleCasino(id, item?.filterType)}>
+                  onClick={() => handleCasino(id, item?.filterType, item?.name, item?.gameCode)}>
                   {item?.name}
                 </li>
-              );
-            })}
-        </ul>
-        {
-            hideButton ?"":  <button onClick={() => scroll(20)} className="casino_left_tab">
-            <MdKeyboardArrowRight />
-          </button>
-        }
+              </>
+            );
+          })}
+          
+        {!liveCasino &&
+          slotProviderList?.map((item, id) => {
+            return (
+              <li
+                className={activeClass == id ? "casino_active" : ""}
+                onClick={() => handleCasino(id, item?.filterType)}>
+                {item?.name}
+              </li>
+            );
+          })}
+      </ul>
+      {
+          hideButton ?"":  <button onClick={() => scroll(20)} className="casino_left_tab">
+          <MdKeyboardArrowRight />
+        </button>
+      }
+    
+    </div>
+    }
       
-      </div>
-      <ProviderTabs setProviderFilter={setProviderFilter} category={category} />
+     {showid == 2 && <ProviderTabs setProviderFilter={setProviderFilter} category={category} />}
       <GameList ruleShow={ruleShow} setRuleShow={setRuleShow} show={show} setShow={setShow} gameId={gameId} setGameId={setGameId} avQtech={avQtech} providerFilter={providerFilter} gameLists={gameLists} />
     </>
   );

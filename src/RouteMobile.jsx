@@ -97,9 +97,9 @@ const RouteMobile = () => {
       else if (pathname === "/m/sueprnowa" || pathname === "/sueprnowa" || pathname == "/m/fantsy" || pathname == "/m/slots" || pathname == "/m/livecasino") {
         nav("/m/login");
       }
-      else if (pathname === "/m/sportbook" || pathname === "/sportbook") {
-        nav("/m/sportbook");
-      }
+      // else if (pathname === "/m/sportbook" || pathname === "/sportbook") {
+      //   nav("/m/sportbook");
+      // }
     }
     else{
       if(pathname === "/m/reports/deposit"){
@@ -184,12 +184,12 @@ const RouteMobile = () => {
               <Route path="/m/In-play" element={<Home />} />
               <Route path="/m/slot" element={<Slot />} />
 
-              <Route path="/m/livecasino" element={<LiveCasino liveCasino={true} />} />
-              <Route path="/m/slots" element={<LiveCasino liveCasino={false} />} />
+              <Route path="/m/livecasino" element={<LiveCasino liveCasino={true} showid={2}/>} />
+              <Route path="/m/slots" element={<LiveCasino liveCasino={false} showid={2}/>} />
               <Route path="/m/fantsy" element={<FantsyTabs  />} />
               <Route path="/m/sueprnowa" element={<SuperNowa/>} />
               <Route path="/m/aura" element={<NewLunch/>} />
-              <Route path="/m/sportbook" element={<ComingSoon/>} />
+              {/* <Route path="/m/sportbook" element={<ComingSoon/>} /> */}
 
             </Route>
           </Route>
