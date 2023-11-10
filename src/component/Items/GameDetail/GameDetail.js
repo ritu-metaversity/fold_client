@@ -1027,9 +1027,10 @@ function GameDetail({ getStackValue }) {
                   <div></div>
                 </div>
 
+
                 {sId == 4 ? (
                   <div className="fancy-markets">
-                    {gameName?.map((item, id2) => {
+                    {gameName?.map((item1, id2) => {
                       if (
                         [
                           "Odds",
@@ -1038,20 +1039,20 @@ function GameDetail({ getStackValue }) {
                           "Khado",
                           "Ball",
                           "Meter",
-                        ].includes(item)
+                        ].includes(item1)
                       ) {
                         return null;
                       }
                       return (
                         <div
                           className={`tab-content mt-2 ${
-                            fancyOdds[item]?.length == 0 ? "d-none" : ""
+                            fancyOdds[item1]?.length == 0 ? "d-none" : ""
                           }`}>
                           <div className="fancy-market">
                             <div>
                               <div className="table-header">
                                 <div  onClick={() => handleAccClick(id2)} className="market-title country-name mob_country">
-                                  <span>{item}</span>
+                                  <span>{item1}</span>
                                   <p className="float-right mb-0">
                                     <i className="fa fa-info-circle"></i>
                                   </p>
@@ -1068,10 +1069,11 @@ function GameDetail({ getStackValue }) {
                                   <b>Yes</b>
                                 </div>
                               </div>
-                              {fancyOdds[item]?.map((item, id) => {
+                              {fancyOdds[item1]?.map((item, id) => {
                                 const FancyProfitValue = fancyOddsPnl?.find(
                                   (pnl) => pnl?.marketId === item?.sid
                                 )?.pnl;
+                                
                                 return (
                                   <div className="table-body" key={item + id}>
                                     <div className="fancy-tripple">
@@ -1107,21 +1109,13 @@ function GameDetail({ getStackValue }) {
                                                       <span>
                                                         <b>Min:</b>
                                                         <br />
-                                                        {
-                                                          mFancyOdds[
-                                                            currentFancy
-                                                          ][id]?.minBet
-                                                        }
+                                                        {item?.minBet}
                                                       </span>
                                                       <br />
                                                       <span>
                                                         <b>Max:</b>
                                                         <br />
-                                                        {
-                                                          mFancyOdds[
-                                                            currentFancy
-                                                          ][id]?.maxBet
-                                                        }
+                                                        {item?.maxBet}
                                                       </span>
                                                       <br />
                                                     </div>

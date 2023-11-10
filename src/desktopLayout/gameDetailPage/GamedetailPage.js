@@ -1174,7 +1174,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                                     Min:{" "}
                                                     <span>
                                                       {
-                                                        mFancyOdds["Fancy2"][id]
+                                                        mFancyOdds[item][id]
                                                           ?.minBet
                                                       }
                                                     </span>
@@ -1183,7 +1183,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                                     Max:{" "}
                                                     <span>
                                                       {
-                                                        mFancyOdds["Fancy2"][id]
+                                                        mFancyOdds[item][id]
                                                           ?.maxBet
                                                       }
                                                     </span>
@@ -1363,7 +1363,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                                     Min:{" "}
                                                     <span>
                                                       {
-                                                        mFancyOdds["Fancy2"][id]
+                                                        mFancyOdds[item][id]
                                                           ?.minBet
                                                       }
                                                     </span>
@@ -1372,7 +1372,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                                     Max:{" "}
                                                     <span>
                                                       {
-                                                        mFancyOdds["Fancy2"][id]
+                                                        mFancyOdds[item][id]
                                                           ?.maxBet
                                                       }
                                                     </span>
