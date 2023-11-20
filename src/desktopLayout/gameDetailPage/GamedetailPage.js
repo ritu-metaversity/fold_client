@@ -478,6 +478,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                     <div className="markets">
                       {matchodd?.length &&
                         matchodd?.map((item, index) => {
+                          if(item?.Name === "Tied Match") return <></>
                           return (
                             <div className="main-market" key={index + index}>
                               <div
@@ -970,6 +971,222 @@ function GamedetailPage({ getStackValue, SportId }) {
                           </div>
                         </div>
                       )}
+
+{matchodd?.length &&
+                        matchodd?.map((item, index) => {
+                          if(item?.Name !== "Tied Match") return <></>
+                          return (
+                            <div className="main-market" key={index + index}>
+                              <div
+                                className={`market-title mt-1 ${
+                                  item.runners.length === 0 ? "d-none" : ""
+                                }`}>
+                                {item.Name}
+                                <span className="float-right">
+                                  Min Bet:{" "}
+                                  <span>{minBet?.Odds[index]?.minBet}</span> Max
+                                  Bet:{" "}
+                                  <span>{minBet?.Odds[index]?.maxBet}</span>{" "}
+                                  <span className="game-rules-icon">
+                                    <span>
+                                      <i className="fa fa-info-circle float-right  ml-2"></i>
+                                    </span>
+                                  </span>
+                                </span>
+                              </div>
+                              <div
+                                className={`table-header ${
+                                  item.runners.length === 0 ? "d-none" : ""
+                                }`}>
+                                <div className="float-left country-name box min-max">
+                                  <b></b>
+                                </div>
+                                <div className="box-d-1 float-left"></div>
+                                <div className="box-d-1 float-left"></div>
+                                <div className="back box-d-1 float-left text-center">
+                                  <b>BACK</b>
+                                </div>
+                                <div className="lay box-d-1 float-left text-center">
+                                  <b>LAY</b>
+                                </div>
+                                <div className="box-d-1 float-left"></div>
+                                <div className="box-d-1 float-left"></div>
+                              </div>
+
+                              <div
+                                data-title="OPEN"
+                                className={`table-body ${
+                                  item.runners.length === 0 ? "d-none" : ""
+                                }`}>
+                                {item.runners?.length &&
+                                  item.runners.map((event, id1) => {
+                                    return (
+                                      <div
+                                        data-title="ACTIVE"
+                                        className={"table-row"}
+                                        key={id1}>
+                                        <div className="float-left country-name box">
+                                          <span className="team-name">
+                                            <b>{event.name}</b>
+                                          </span>
+                                          <p>
+                                            <span
+                                              style={{
+                                                color: "black",
+                                                fontSize: "12px",
+                                              }}
+                                              className={`float-left ${
+                                                profits?.Odds[
+                                                  Number(item?.marketId)
+                                                ]?.find(
+                                                  (profit) =>
+                                                    profit?.sid ==
+                                                    event?.selectionId
+                                                )?.value > 0
+                                                  ? "text-success"
+                                                  : profits?.Odds[
+                                                      Number(item?.marketId)
+                                                    ]?.find(
+                                                      (profit) =>
+                                                        profit?.sid ==
+                                                        event?.selectionId
+                                                    )?.value < 0
+                                                  ? "text-danger"
+                                                  : ""
+                                              }`}>
+                                              {profits.Odds[
+                                                Number(item?.marketId)
+                                              ]
+                                                ?.find(
+                                                  (profit) =>
+                                                    profit?.sid ==
+                                                    event?.selectionId
+                                                )
+                                                ?.value?.toFixed(2) || 0}
+                                            </span>
+                                          </p>
+                                        </div>
+                                        {event?.ex?.availableToBack?.length &&
+                                          event?.ex?.availableToBack
+                                            .map((e, id) => {
+                                              return (
+                                                <div
+                                                  key={id}
+                                                  className={`box-d-1 back2  float-left back-2 text-center ${
+                                                    id === 1
+                                                      ? "back-2 ds-none"
+                                                      : id === 2
+                                                      ? "back-1 ds-none"
+                                                      : "back"
+                                                  } 
+                                                    ${
+                                                      e?.price !==
+                                                      previousState?.Odds[index]
+                                                        ?.runners[id1]?.ex
+                                                        ?.availableToBack[id]
+                                                        ?.price
+                                                        ? "blink"
+                                                        : ""
+                                                    }`}>
+                                                  <button
+                                                    className="odbtn"
+                                                    disabled={
+                                                      id === 1 || id === 2
+                                                        ? true
+                                                        : false
+                                                    }
+                                                    onClick={() =>
+                                                      handleSpanValueBack(
+                                                        e?.price,
+                                                        event?.name,
+                                                        "back",
+                                                        matId,
+                                                        item?.marketId,
+                                                        event?.selectionId,
+                                                        item?.Name,
+                                                        pTime,
+                                                        false
+                                                      )
+                                                    }>
+                                                    <span className="odd d-block">
+                                                      {e?.price}
+                                                    </span>
+                                                    <span className="d-block">
+                                                      {e?.size}
+                                                    </span>
+                                                  </button>
+                                                </div>
+                                              );
+                                            })
+                                            .reverse()}
+
+                                        {event?.ex?.availableToLay?.length &&
+                                          event.ex.availableToLay.map(
+                                            (e, id) => {
+                                              return (
+                                                <div
+                                                  key={id}
+                                                  className={`box-d-1 lay float-left text-center ${
+                                                    id === 1
+                                                      ? "lay-1 ds-none"
+                                                      : id === 2
+                                                      ? "lay-2 ds-none"
+                                                      : "lay"
+                                                  }
+                                                    ${
+                                                      e?.price !==
+                                                      previousState?.Odds[index]
+                                                        ?.runners[id1]?.ex
+                                                        ?.availableToLay[id]
+                                                        ?.price
+                                                        ? "blink"
+                                                        : ""
+                                                    }`}>
+                                                  <button
+                                                    className="odbtn"
+                                                    disabled={
+                                                      id === 1 || id === 2
+                                                        ? true
+                                                        : false
+                                                    }
+                                                    onClick={() =>
+                                                      handleSpanValueLay(
+                                                        e?.price,
+                                                        event?.name,
+                                                        "lay",
+                                                        matId,
+                                                        item?.marketId,
+                                                        event?.selectionId,
+                                                        item?.Name,
+                                                        pTime,
+                                                        false
+                                                      )
+                                                    }>
+                                                    <span className="odd d-block">
+                                                      {e.price === 0
+                                                        ? "0"
+                                                        : e.price}
+                                                    </span>{" "}
+                                                    <span className="d-block">
+                                                      {e.size === 0
+                                                        ? "0"
+                                                        : "0.00"}
+                                                    </span>
+                                                  </button>
+                                                </div>
+                                              );
+                                            }
+                                          )}
+                                      </div>
+                                    );
+                                  })}
+                              </div>
+                              <div className="table-remark text-right remark">
+                                {item?.display_message}
+                              </div>
+                            </div>
+                          );
+                        })}
                     </div>
 
                     <div
