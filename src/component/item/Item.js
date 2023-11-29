@@ -183,7 +183,7 @@ function Item({ gameIdForItemPage, spName }) {
           </div>
           {/* <Slot /> */}
 
-          <LiveCasino liveCasino={true} showid={1}/>
+          <LiveCasino liveCasino={"LIVECASINO"} showid={1}/>
         </>
       )}
     </div>

@@ -194,3 +194,75 @@ export const slotProviderList  = [
       filter: "SLOT",
     },
   ]
+
+
+
+  export const Lottry  = [
+    {
+      name: "BET GAMES",
+      logo: "https://www.betgames.tv/api/uploads/BG_Logo_White_Horizontal_Lock_Up_dcca475d41.png",
+      filterType: "BTV",
+      filter: "LOTTERY",
+    },
+    {
+      name: "EVOLUTION",
+      logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/5.png",
+      filterType: "EVO",
+      filter: "LOTTERY",
+    },
+    {
+      name: "EVOPLAY",
+      logo: "https://evoplay.games/wp-content/themes/evoplay/assets/img/logo.svg",
+      filterType: "EVP",
+      filter: "LOTTERY",
+    },
+    {
+      name: "GALAXSYS",
+      logo: "https://galaxsys.co/wp-content/uploads/2022/02/Galaxsys.svghttps://galaxsys.co/wp-content/uploads/2022/02/Galaxsys.svg",
+      filterType: "GLX",
+      filter: "LOTTERY",
+    },
+    {
+      name: "PLAY GO",
+      logo: "https://static.wixstatic.com/media/dad1c6_ef8a09e283c54aa9863a02228afb9852~mv2.png/v1/fill/w_272,h_74,al_c,q_95,enc_auto/playngo_logo_on_black.png",
+      filterType: "PNG",
+      filter: "LOTTERY",
+    },
+    {
+      name: "S4",
+      logo: "https://s4game.eu/wp-content/uploads/2019/09/cropped-s4game-log%C3%B3-7.jpg",
+      filterType: "S4G",
+      filter: "LOTTERY",
+    },
+    
+    {
+      name: "SPEARHEAD",
+      logo: "https://spearheadstudios.com/wp-content/themes/spearheadstudios/assets/img/logo.svg?v=1",
+      filterType: "SHS",
+      filter: "LOTTERY",
+    },
+    {
+      name: "SPRIBE",
+      logo: "https://spribe.co/spribe-logo.b13289b5f5fab437.svg",
+      filterType: "SPB",
+      filter: "LOTTERY",
+    },
+    {
+      logo: "https://www.triple-pg.com/wp-content/uploads/2023/05/logo-wh.svg",
+      name: "TRIPLE",
+      filterType: "TPG",
+      filter: "LOTTERY",
+    },
+    {
+      logo: "https://kironinteractive.com/wp-content/uploads/2022/03/Kiron-Logo-Flat-white.png",
+      name: "KIRON",
+      filterType: "TPG",
+      filter: "LOTTERY",
+    },
+    {
+      logo: "https://turbogames.io/images/home/home-logo.png",
+      name: "TURBO",
+      filterType: "TRB",
+      filter: "LOTTERY",
+    },
+  ]

@@ -169,10 +169,11 @@ const RouteDesktop = () => {
               <Route path="/Kabaddi" element={<HomePage />} />
               <Route path="/horseracing" element={<HomePage />} />
               {/* <Route path="/casino/:id" element={<CasinoForDesk />} /> */}
-              <Route path="/livecasino" element={<LiveCasino liveCasino={true} showid={2}/>} />
-              <Route path="/slot" element={<LiveCasino liveCasino={false} showid={2} />} />
+              <Route path="/livecasino" element={<LiveCasino liveCasino={"LIVECASINO"} showid={2}/>} />
+              <Route path="/slot" element={<LiveCasino liveCasino={"SLOT"} showid={2} />} />
+              <Route path="/lottery" element={<LiveCasino liveCasino={"LOTTERY"} showid={2} />} />
               <Route path="/fantsy" element={<FantsyTabs  />} />
-              {/* <Route path="/aura" element={<NewLunch/>} /> */}
+              <Route path="/aura" element={<NewLunch/>} />
               <Route path="/supernowa" element={<SuperNowa/>} />
               {/* <Route path="/sportbook" element={<ComingSoon/>} /> */}
 
