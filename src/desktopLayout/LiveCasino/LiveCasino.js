@@ -11,7 +11,7 @@ const LiveCasino = ({liveCasino, showid}) => {
   useEffect(()=>{
     const token = localStorage.getItem("gameToken");
     CasinoApi.Casino_Gamelist({
-      gameCategory: liveCasino ? "LIVECASINO":"SLOT",
+      gameCategory: liveCasino,
       provider : providerTag,
       token
     }).then((response)=>{
@@ -36,7 +36,6 @@ const LiveCasino = ({liveCasino, showid}) => {
   }, [providerTag, liveCasino])
 
   
-  console.log(gameLists, "SDFfdsfdsfsfsdf")
 
 
   return (

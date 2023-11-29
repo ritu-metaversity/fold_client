@@ -79,7 +79,7 @@ function MatchBet(props) {
           <div
             data-v-4a9e4d9c=""
             className="table-responsive1"
-            style={{ backgroundColor: "#fff" }}>
+            style={{ backgroundColor: "#fff", overflowX:"scroll" }}>
             <table
               className={`table table-bordered 
               ${props.matchLength === 0 ? "d-none" : ""}

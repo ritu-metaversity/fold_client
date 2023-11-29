@@ -19,7 +19,7 @@ function ItemPageForHome() {
           {/* <LatestEvent /> */}
           <DeskMainPage />
           {/* <NewLunch /> */}
-          <LiveCasino liveCasino={true} showid={1}/>
+          <LiveCasino liveCasino={"LIVECASINO"} showid={1}/>
         </div>
       </div>
     </div>
