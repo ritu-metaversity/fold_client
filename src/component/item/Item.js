@@ -181,9 +181,9 @@ function Item({ gameIdForItemPage, spName }) {
               </div>
             </div>
           </div>
-          {/* <Slot /> */}
+          <Slot />
 
-          <LiveCasino liveCasino={"LIVECASINO"} showid={1}/>
+          {/* <LiveCasino liveCasino={"LIVECASINO"} showid={1}/> */}
         </>
       )}
     </div>

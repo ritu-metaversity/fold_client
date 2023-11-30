@@ -18,8 +18,8 @@ function ItemPageForHome() {
         <div className="row itemHome">
           {/* <LatestEvent /> */}
           <DeskMainPage />
-          {/* <NewLunch /> */}
-          <LiveCasino liveCasino={"LIVECASINO"} showid={1}/>
+          <NewLunch />
+          {/* <LiveCasino liveCasino={"LIVECASINO"} showid={1}/> */}
         </div>
       </div>
     </div>
