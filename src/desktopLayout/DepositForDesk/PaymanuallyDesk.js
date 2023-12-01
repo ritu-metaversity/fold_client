@@ -6,6 +6,10 @@ import { Input } from "antd";
 import Modal from "react-bootstrap/Modal";
 import AlertBtn from "../../component/Alert/AlertBtn";
 import { UserAPI } from "../../apis/UserAPI";
+import toast, { Toaster } from 'react-hot-toast';
+import {
+  CopyOutlined , CloseCircleFilled
+} from '@ant-design/icons';
 
 const PaymanuallyDesk = (props) => {
   const [payMethods, setPayMethods] = useState();
@@ -26,7 +30,7 @@ const PaymanuallyDesk = (props) => {
   const increment = () => {
     setBitValue(Number(Bitvalue) + 10);
   };
-  
+
   const decrement = () => {
     if (Bitvalue != 0 && Bitvalue > 9) setBitValue(Number(Bitvalue) - 10);
   };
@@ -46,6 +50,11 @@ const PaymanuallyDesk = (props) => {
   //     setAllDatataa(res.data);
   //   });
   // }, []);
+
+  const handleCopy = (text)=>{
+    navigator.clipboard.writeText(text);
+    toast.success("Copied Successfully")
+  }
 
   useEffect(() => {
     UserAPI.NEW_DEPOSITE_API().then((res) => {
@@ -67,7 +76,12 @@ const PaymanuallyDesk = (props) => {
     setIsLoading(true);
     setAlertBtnshow(false);
 
-    if (Bitvalue == 0 || Bitvalue === "0" || Bitvalue === NaN || Bitvalue === undefined) {
+    if (
+      Bitvalue == 0 ||
+      Bitvalue === "0" ||
+      Bitvalue === NaN ||
+      Bitvalue === undefined
+    ) {
       setColor("danger");
       setMessege("Amount is Greate then 99");
       setAlertBtnshow(true);
@@ -112,7 +126,6 @@ const PaymanuallyDesk = (props) => {
     }
   };
 
-
   const handleCloseModal = () => setShowModals(false);
   const handleShow = (e) => {
     e.preventDefault();
@@ -130,6 +143,7 @@ const PaymanuallyDesk = (props) => {
   }, []);
   return (
     <div>
+      <Toaster position="top-right"/>
       {alertBtnshow ? (
         <AlertBtn color={color} val={messege} popupClose={popupClose} />
       ) : (
@@ -201,9 +215,13 @@ const PaymanuallyDesk = (props) => {
                     <Col
                       className={item.methodName === "Bank" ? "d-none" : ""}
                       key={item.methodName + id}
-                      onClick={() => handlePaymentDetails(item.methodName,
-                        id,
-                        item?.depositType)}>
+                      onClick={() =>
+                        handlePaymentDetails(
+                          item.methodName,
+                          id,
+                          item?.depositType
+                        )
+                      }>
                       <div
                         className={`css-1502y4u ${
                           active === id ? "active3" : ""
@@ -251,7 +269,8 @@ const PaymanuallyDesk = (props) => {
                       marginInline: "2%",
                       width: "95%",
                     }}>
-                    <Modal.Body className="image-body">
+                    <Modal.Body className="image-body" style={{position:"relative"}}>
+                    <button onClick={handleCloseModal} className="close_btn_modal"><CloseCircleFilled /></button>
                       {" "}
                       <img
                         src={res?.accountNumber && res?.accountNumber}
@@ -272,6 +291,11 @@ const PaymanuallyDesk = (props) => {
                             readOnly
                             type="text"
                           />
+                          <p className="deposit_image">
+                            <a href={res?.accountNumber} download>
+                            Download <i class="fa fa-download"></i>
+                            </a>
+                          </p>
                         </div>
                       </Col>
                     </Row>
@@ -314,8 +338,9 @@ const PaymanuallyDesk = (props) => {
                       </div>
                     </Col>
                     <Col className="name-d">
-                      <div className="">
+                      <div className="upi_copy">
                         <p className="Typography-root">{res?.accountNumber}</p>
+                        <p onClick={() => handleCopy(res?.accountNumber)}><CopyOutlined /></p>
                       </div>
                     </Col>
                   </Row>
@@ -345,10 +370,11 @@ const PaymanuallyDesk = (props) => {
                     </div>
                   </Col>
                   <Col>
-                    <div className="">
+                    <div className="upi_copy">
                       <p className="Typography-root text-right">
                         {res?.accountNumber}
                       </p>
+                      <p onClick={() => handleCopy(res?.accountNumber)}><CopyOutlined /></p>
                     </div>
                   </Col>
                 </Row>
@@ -359,8 +385,9 @@ const PaymanuallyDesk = (props) => {
                     </div>
                   </Col>
                   <Col>
-                    <div className="">
+                    <div className="upi_copy">
                       <p className="Typography-root text-right">{res?.ifsc}</p>
+                      <p onClick={() => handleCopy(res?.ifsc)}><CopyOutlined /></p>
                     </div>
                   </Col>
                 </Row>
@@ -583,7 +610,7 @@ const PaymanuallyDesk = (props) => {
                   )}
                   <input
                     value={""}
-                    onChange={(e) =>{
+                    onChange={(e) => {
                       if (e.target.files?.length) {
                         if (e.target.files[0]?.type.includes("image")) {
                           setFiles(e.target.files[0]);

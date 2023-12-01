@@ -7,8 +7,10 @@ import "./PayManually.css";
 import { Input } from "antd";
 import Modal from "react-bootstrap/Modal";
 import AlertBtn from "../../Alert/AlertBtn";
-import { setLocale } from "yup";
-import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+import {
+  CopyOutlined , CloseCircleFilled
+} from '@ant-design/icons';
 
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
@@ -128,8 +130,15 @@ const PayManually = (props) => {
     setAlertBtnshow(false);
   };
 
+  const handleCopy = (text)=>{
+    navigator.clipboard.writeText(text);
+    toast.success("Copied Successfully")
+  }
+
   return (
     <div>
+      <Toaster position="top-right"/>
+
       {alertBtnshow ? (
         <AlertBtn color={color} val={messege} popupClose={popupClose} />
       ) : (
@@ -255,7 +264,8 @@ const PayManually = (props) => {
                       marginInline: "2%",
                       width: "95%",
                     }}>
-                    <Modal.Body className="image-body">
+                    <Modal.Body className="image-body" style={{position:"relative"}}>
+                    <button onClick={handleCloseModal} className="close_btn_modal"><CloseCircleFilled /></button>
                       {" "}
                       <img
                         src={res?.accountNumber && res?.accountNumber}
@@ -276,6 +286,11 @@ const PayManually = (props) => {
                             readOnly
                             type="text"
                           />
+                          <p className="deposit_image">
+                            <a href={res?.accountNumber} download>
+                            Download <i class="fa fa-download"></i>
+                            </a>
+                          </p>
                         </div>
                       </Col>
                     </Row>
@@ -318,8 +333,10 @@ const PayManually = (props) => {
                       </div>
                     </Col>
                     <Col className="name-d">
-                      <div className="">
+                      <div className="upi_copy">
                         <p className="Typography-root">{res?.accountNumber}</p>
+                        <p onClick={() => handleCopy(res?.accountNumber)}><CopyOutlined /></p>
+
                       </div>
                     </Col>
                   </Row>
@@ -349,10 +366,11 @@ const PayManually = (props) => {
                     </div>
                   </Col>
                   <Col>
-                    <div className="">
+                    <div className="upi_copy">
                       <p className="Typography-root text-right">
                         {res?.accountNumber}
                       </p>
+                      <p onClick={() => handleCopy(res?.accountNumber)}><CopyOutlined /></p>
                     </div>
                   </Col>
                 </Row>
@@ -363,8 +381,9 @@ const PayManually = (props) => {
                     </div>
                   </Col>
                   <Col>
-                    <div className="">
+                    <div className="upi_copy">
                       <p className="Typography-root text-right">{res?.ifsc}</p>
+                      <p onClick={() => handleCopy(res?.ifsc)}><CopyOutlined /></p>
                     </div>
                   </Col>
                 </Row>

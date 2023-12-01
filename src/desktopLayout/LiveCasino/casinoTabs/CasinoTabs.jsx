@@ -32,8 +32,6 @@ const CasinoTabs = ({
     }
   };
 
-  console.log(gameId, "sdsssdsadas");
-
   const ref = useRef(null);
 
   const scroll = (scrollOffset) => {

@@ -4,6 +4,9 @@ import "./DepositForDesk.css";
 import PaymanuallyDesk from "./PaymanuallyDesk";
 import Modal from "react-bootstrap/Modal";
 import { UserAPI } from "../../apis/UserAPI";
+import {
+  CloseCircleFilled
+} from '@ant-design/icons';
 
 const DepositForDesk = () => {
   const [paymentListDetails, setPaymentListDetails] = useState({});
@@ -39,7 +42,6 @@ const DepositForDesk = () => {
         </div>
         <div className="wrapper main-conatiner desk_deposit deposit">
           <PaymanuallyDesk UpdateDetails={UpdateDetails} />
-
           <div className="row row5 mt-2">
             <div className="col-12">
               <div className="table-responsive">
@@ -133,8 +135,8 @@ const DepositForDesk = () => {
                         marginInline: "2%",
                         width: "95%",
                       }}>
-                      <Modal.Body>
-                        {" "}
+                      <Modal.Body style={{position:"relative"}}>
+                        <button onClick={handleCloseModal} className="close_btn_modal"><CloseCircleFilled /></button>
                         <img src={modalImg} width="100%" alt="screen-short" />
                       </Modal.Body>
                     </Modal>
