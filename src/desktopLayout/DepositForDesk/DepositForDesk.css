@@ -1,14 +1,17 @@
-.depositTable{
+.depositTable {
     margin-inline: 1%;
     width: 98%;
 }
-.status_btn{
+
+.status_btn {
     width: 50%;
     margin: auto;
 }
-.desk_deposit{
+
+.desk_deposit {
     overflow: hidden !important;
 }
+
 .desk_Loading {
     background: #f1f5f880 !important;
     height: calc(100% - 150px) !important;
@@ -16,9 +19,52 @@
     left: 15%;
     width: 85% !important;
 }
+
 p.lodder.depositLoading.desk_Loading i {
     margin-top: -2% !important;
 }
+
 tr.deposit-list {
     background: #2c3d50;
+}
+
+.deposit_image {
+    text-decoration: none;
+    background-color: #2c3d50;
+    padding: 6px 12px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.deposit_image a {
+    text-decoration: none;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.upi_copy{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
+span.anticon.anticon-copy {
+    margin-left: 4px;
+    cursor: pointer;
+}
+
+.close_btn_modal{
+    text-decoration: none;
+    border: unset;
+    outline: unset;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 50%;
+}
+.close_btn_modal .anticon svg{
+    color: #000;
+    font-size: 24px;
 }

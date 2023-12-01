@@ -4,6 +4,9 @@ import { UserAPI } from "../../../apis/UserAPI";
 import "./Deposit.css";
 import PayManually from "./PayManually";
 import Modal from "react-bootstrap/Modal";
+import {
+  CloseCircleFilled
+} from '@ant-design/icons';
 
 const Deposit = () => {
   const [paymentListDetails, setPaymentListDetails] = useState({});
@@ -119,7 +122,8 @@ const Deposit = () => {
                             marginInline: "2%",
                             width: "95%",
                           }}>
-                          <Modal.Body>
+                          <Modal.Body style={{position:"relative"}}>
+                          <button onClick={handleCloseModal} className="close_btn_modal"><CloseCircleFilled /></button>
                             {" "}
                             <img src={modalImg} width="100%" alt="screen-short"/>
                           </Modal.Body>
