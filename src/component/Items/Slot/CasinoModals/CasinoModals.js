@@ -14,9 +14,6 @@ const CasinoModals = ({type}) => {
           // setLiveCasino(res?.data?.qtech);
         })
     }, [])
-
-    console.log(nowaValue, "sdassd")
-
   return (
     <>
       <div className="main_casino_modals">
