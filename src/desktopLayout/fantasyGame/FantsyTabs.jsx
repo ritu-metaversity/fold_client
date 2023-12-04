@@ -2,20 +2,32 @@ import React, { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { FgameData } from "./FantsyGameProvider";
 import FantsyList from "./FantsyList";
+import { useLocation } from "react-router-dom";
 
-const FantsyTabs = ({ gameLists, category, setProviderTags, liveCasino }) => {
+const FantsyTabs = ({  }) => {
   const [activeClass, setActiveClass] = useState(0);
   const [providerFilter, setProviderFilter] = useState("SPB");
   const [scrollX, setscrollX] = useState(0);
   const [hideButton, setSetHideBtton] = useState();
 
+  const {state} = useLocation();
+
+
+  useEffect(()=>{
+    if(state != null){
+    setActiveClass(state?.id);
+    setProviderFilter(state?.gameId);}
+    else{
+      setActiveClass(0);
+      setProviderFilter("SPB")
+    }
+  }, [state])
   const handleCasino = (id, val) => {
     setActiveClass(id);
     setProviderFilter(val);
   };
 
   const ref = useRef(null);
-
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;
     ref.current.scroll({left:ref.current.scrollLeft + scrollOffset })

@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Slot from "../Items/Slot/Slot";
 import LiveCasino from "../../desktopLayout/LiveCasino/LiveCasino";
+import LiveCasinoHome from "../../CasinoHome/LiveCasinoHome";
+import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
+import SlotHome from "../../CasinoHome/SlotHome";
+import LotteryHome from "../../CasinoHome/LotteryHome";
+import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 
 function Item({ gameIdForItemPage, spName }) {
   const [gameName, setGameName] = useState("");
@@ -182,8 +187,17 @@ function Item({ gameIdForItemPage, spName }) {
             </div>
           </div>
           <Slot />
+          <div className="casino-main">
+            <SuperNowaHome path={"/m/sueprnowa"}/>
+          <LiveCasinoHome/>
+          <FantasyGamesHome 
+          path={"/m/fantsy"}
+          />
+          <SlotHome path={"/m/slots"}/>
+          <LotteryHome  path={"/m/lottery"}/>
+          </div>
+          
 
-          {/* <LiveCasino liveCasino={"LIVECASINO"} showid={1}/> */}
         </>
       )}
     </div>

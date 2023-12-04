@@ -62,7 +62,7 @@ export const CasinoProviderList = [
     },
     {
       name: "Q Tech",
-      logo: "Qtech",
+      logo: "https://247lords.com/static/media/qtechlogo.97b6c0859adf911c43bb.png",
       gameCode: "Qtech",
       filterType: "SPB",
     }

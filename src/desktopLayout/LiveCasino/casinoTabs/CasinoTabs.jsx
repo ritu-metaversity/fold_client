@@ -12,6 +12,7 @@ const CasinoTabs = ({
   setProviderTags,
   liveCasino,
   showid,
+  state,
 }) => {
   const [activeClass, setActiveClass] = useState(0);
   const [providerFilter, setProviderFilter] = useState("ALL");
@@ -33,6 +34,18 @@ const CasinoTabs = ({
   };
 
   const ref = useRef(null);
+
+  useEffect(() => {
+    if (state != null) {
+      setActiveClass(state?.id);
+      setProviderTags(state?.gameId);
+    } else {
+      setActiveClass(0);
+      setProviderTags("YUILD");
+    }
+  }, [state]);
+
+  console.log(state, "state")
 
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;
@@ -60,7 +73,6 @@ const CasinoTabs = ({
           <ul ref={ref}>
             {liveCasino == "LIVECASINO" &&
               casinoProviderList?.map((item, id) => {
-                // console.log(item, "dsfsffw")
                 return (
                   <>
                     <li

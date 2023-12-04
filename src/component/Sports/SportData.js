@@ -3,6 +3,12 @@ import TopNav from "../navBar/TopNav";
 import Sport from "./Sport";
 import BannerList from "../BannerSection/BannerList";
 import FooterForMob from "../FooterForMob/FooterForMob";
+import Slot from "../Items/Slot/Slot";
+import LiveCasinoHome from "../../CasinoHome/LiveCasinoHome";
+import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
+import SlotHome from "../../CasinoHome/SlotHome";
+import LotteryHome from "../../CasinoHome/LotteryHome";
+import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 
 const SportData = () => {
   const [gameIdForItemPage, setGameIdForItemPage] = useState("");
@@ -22,6 +28,18 @@ const SportData = () => {
       }
       
       <Sport gameIdForItemPage={gameIdForItemPage} />
+
+      <Slot />
+          <div className="casino-main">
+          <SuperNowaHome path={"/m/sueprnowa"}/>
+
+          <LiveCasinoHome/>
+          <FantasyGamesHome 
+          path={"/m/fantsy"}
+          />
+          <SlotHome path={"/m/slots"}/>
+          <LotteryHome  path={"/m/lottery"}/>
+          </div>
     </>
   );
 };

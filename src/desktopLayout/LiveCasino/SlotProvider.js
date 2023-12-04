@@ -218,7 +218,7 @@ export const slotProviderList  = [
     },
     {
       name: "GALAXSYS",
-      logo: "https://galaxsys.co/wp-content/uploads/2022/02/Galaxsys.svghttps://galaxsys.co/wp-content/uploads/2022/02/Galaxsys.svg",
+      logo: "https://galaxsys.co/wp-content/uploads/2022/02/Galaxsys.svg",
       filterType: "GLX",
       filter: "LOTTERY",
     },
