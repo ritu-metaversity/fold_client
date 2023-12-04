@@ -5,6 +5,12 @@ import { GameAPI } from "../../apis/gameAPI";
 import BannerList from "../../component/BannerSection/BannerList";
 import moment from "moment";
 import "./InPlay.css";
+import NewLunch from "../Newlunch/NewLunch";
+import LiveCasinoHome from "../../CasinoHome/LiveCasinoHome";
+import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
+import SlotHome from "../../CasinoHome/SlotHome";
+import LotteryHome from "../../CasinoHome/LotteryHome";
+import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 
 const InPlay = () => {
   const [gameName, setGameName] = useState("");
@@ -86,14 +92,14 @@ const InPlay = () => {
                     <div className="card-content">
                       <table className="table item-table coupon-table change_background">
                         <thead>
-                          <tr className='bet-table-header'>
+                          <tr className="bet-table-header">
                             <th
                               style={{
                                 width: "63%",
                                 fontSize: "14px",
                                 fontWeight: "900",
                               }}>
-                             <b>Game</b>
+                              <b>Game</b>
                             </th>
                             <th colSpan="2">1</th>
                             <th colSpan="2">X</th>
@@ -147,7 +153,6 @@ const InPlay = () => {
                                               </span>
                                               <span className="game-icon">
                                                 <i className="fa fa-tv v-m icon-tv"></i>
-                                                
                                               </span>
                                               <span className="game-icon">
                                                 <img
@@ -262,6 +267,13 @@ const InPlay = () => {
           </div>
         </div>
       </div>
+      <NewLunch />
+      <SuperNowaHome path={"/supernowa"}/>
+
+      <LiveCasinoHome />
+      <FantasyGamesHome path={"/fantsy"} />
+      <SlotHome path={"/slot"} />
+      <LotteryHome path={"/lottery"} />
     </div>
   );
 };

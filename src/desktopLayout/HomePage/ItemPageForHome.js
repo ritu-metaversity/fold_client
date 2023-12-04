@@ -10,6 +10,11 @@ import Itemdesk from "../itemPageforDesktop/Itemdesk";
 import DeskMainPage from "../itemPageforDesktop/DeskMainPage";
 import LatestEvent from "../../common/LatestEvent";
 import LiveCasino from "../LiveCasino/LiveCasino";
+import LiveCasinoHome from "../../CasinoHome/LiveCasinoHome";
+import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
+import SlotHome from "../../CasinoHome/SlotHome";
+import LotteryHome from "../../CasinoHome/LotteryHome";
+import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 
 function ItemPageForHome() {
   return (
@@ -19,6 +24,12 @@ function ItemPageForHome() {
           {/* <LatestEvent /> */}
           <DeskMainPage />
           <NewLunch />
+          <SuperNowaHome path={"/supernowa"}/>
+
+      <LiveCasinoHome />
+      <FantasyGamesHome path={"/fantsy"} />
+      <SlotHome path={"/slot"} />
+      <LotteryHome path={"/lottery"} />
           {/* <LiveCasino liveCasino={"LIVECASINO"} showid={1}/> */}
         </div>
       </div>

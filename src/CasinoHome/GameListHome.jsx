@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import LiveCasino from "../LiveCasinoModals";
-import { CasinoApi } from "../../../../apis/CasinoApi";
+
 import { isBrowser } from "react-device-detect";
 import { MdOutlineClose } from "react-icons/md";
-import LiveCasinoModals from "../LiveCasinoModals";
-import CasinoModals from "../../../../component/Items/Slot/CasinoModals/CasinoModals";
+import { CasinoApi } from "../apis/CasinoApi";
+import CasinoModals from "../component/Items/Slot/CasinoModals/CasinoModals";
+import LiveCasinoModals from "../desktopLayout/LiveCasino/casinoTabs/LiveCasinoModals";
 
-const GameList = ({
+const GameListHome = ({
   gameLists,
   providerFilter,
   gameId,
@@ -99,4 +99,4 @@ const GameList = ({
   );
 };
 
-export default GameList;
+export default GameListHome;
