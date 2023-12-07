@@ -17,6 +17,7 @@ import { Typography } from "@mui/material";
 import { colorHex } from "../../../utils/constants";
 import CasinoGame from "../../casino/game/CasinoGame";
 import { supernowaServices } from "../../../utils/api/supernowa/services";
+import { useLocation } from "react-router-dom";
 
 export interface GameInterface {
   id: string;
@@ -65,7 +66,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   const [gameLaunchURL, setGameLaunchURL] = useState<string | null>(null);
   const token = localStorage.getItem("token");
   const screenRef = useRef<HTMLDivElement | null>(null);
-
+  const { state } = useLocation();
   const showAndHideHandler = function () {
     setShowPortal(!ShowPortal);
   };
@@ -82,12 +83,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     });
     setIsLoading(false);
 
-    if (
-      !!response &&
-      !!response?.data &&
-      !!response?.data?.items &&
-      response?.data?.items.length
-    ) {
+    if (response?.data?.items?.length) {
       const { items } = response?.data;
       let categories = items.map((el: any) => {
         const itemAr = el?.category.split("/");
@@ -244,6 +240,13 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     }
   }, [SelectedProvider, filter]);
 
+  useEffect(() => {
+    if (state?.gameCode) {
+      setSelectedGame(state.gameCode);
+      showAndHideHandler();
+    }
+  }, [state]);
+
   return (
     <>
       <div className={classes["container"]}>
@@ -268,7 +271,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
             />
           </div>
           <div className={classes["games_div"]}>
-            {!CustomGameList && !!Category && Category?.length ? (
+            {!CustomGameList && !customGameProvider && Category?.length ? (
               <div className={classes["category_filter_div"]}>
                 {Category.map((el) => (
                   <div
@@ -310,7 +313,8 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
               </Box>
             )}
             <div className={classes["games_container"]}>
-              {filterGamesList?.length || GameLists?.length
+              {!customGameProvider &&
+              (filterGamesList?.length || GameLists?.length)
                 ? (CustomGameList?.length
                     ? CustomGameList
                     : filterGamesList?.length

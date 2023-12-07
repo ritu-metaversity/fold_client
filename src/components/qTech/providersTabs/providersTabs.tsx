@@ -1,6 +1,8 @@
+import { useLocation } from "react-router-dom";
 import { GameInterface } from "../providerTabsWithGames/providerTabsWithGames";
 import { ProviderInterface } from "../providerTabsWithGames/providers.data";
 import classes from "./providers.module.css";
+import { useEffect } from "react";
 
 interface Props {
   getName: (
@@ -17,6 +19,21 @@ interface Props {
 }
 
 function ProvidersTabs({ getName, value, providerList, cls }: Props) {
+  const { state } = useLocation();
+  useEffect(() => {
+    if (state?.filterType) {
+      const el = providerList.find((i) => i.filterType === state.filterType);
+      el &&
+        getName(
+          el?.filterType,
+          el?.customFilter,
+          el?.games,
+          el?.type,
+          el?.apiUrl,
+          el?.providerId
+        );
+    }
+  }, [state]);
   return (
     <div className={!cls ? classes["contianer"] : classes[cls!]}>
       {providerList.map((el) => (
