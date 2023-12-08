@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-inline:5px;
 }
 .Inner_header_for_game_provide_Incasin {
     width: 100%;
