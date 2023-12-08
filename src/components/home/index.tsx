@@ -87,7 +87,7 @@ const Home = () => {
       {/* } */}
       <ButtonTabs />
       <Sports />
-      <TopCasinoHero sideBanner={sideBanner} />
+      {/* <TopCasinoHero sideBanner={sideBanner} /> */}
       <AllProviderName />
     </HomeLayout>
   );
