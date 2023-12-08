@@ -1,7 +1,7 @@
 import { ButtonTabs } from "./buttonTabs";
 import BoxWithTitle from "../common/BoxWithTitle";
 import HomeLayout from "../layout/homeLayout";
-import { BlinkImage, UserContainer } from "../layout/styledComponents";
+import { BlinkImage } from "../layout/styledComponents";
 import Hero, { BannerInterface } from "./Hero";
 import Sports from "./Sports";
 import { userServices } from "../../utils/api/user/services";
@@ -13,6 +13,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
+import AllProviderName from "./AllProviderName";
 
 const Home = () => {
   const nav = useNavigate();
@@ -87,6 +88,7 @@ const Home = () => {
       <ButtonTabs />
       <Sports />
       <TopCasinoHero sideBanner={sideBanner} />
+      <AllProviderName />
     </HomeLayout>
   );
 };

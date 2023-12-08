@@ -16,11 +16,9 @@ import { casinoService } from "../../utils/api/casino/service";
 import { UserContext } from "../../App";
 import axios from "axios";
 import CasinoGame from "./game/CasinoGame";
-// import { supernowaServices } from "../../utils/api/supernowa/services";
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: "20px",
-  // marginTop: "5px",
   marginRight: "10px",
   paddingTop: "2px",
   paddingBottom: "2px",
@@ -56,14 +54,9 @@ const Casino = () => {
       name: string;
     }[]
   >([]);
-  const [supernowaGamesList, setSupernowaGamesList] = useState<
-    SuperNowaGameInterface[]
-  >([]);
   const [open, setOpen] = useState(0);
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
-  const urlPathName = window.location.pathname.split("/")[1];
   const token = localStorage.getItem("token");
-  const [gameLaunchURL, setGameLaunchURL] = useState<string | null>(null);
 
   const nav = useNavigate();
   const { isSignedIn, setCasinoId } = useContext(UserContext);
@@ -259,14 +252,8 @@ const Casino = () => {
           name={casinoList.find((i) => i.gameId === open)?.gameName}
           id={open}
           handleClose={() => setOpen(0)}
-          desktopUrl={
-            gameLaunchURL ||
-            `https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`
-          }
-          mobileUrl={
-            gameLaunchURL ||
-            `https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`
-          }
+          desktopUrl={`https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`}
+          mobileUrl={`https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${open}`}
         />
       )}
     </HomeLayout>
