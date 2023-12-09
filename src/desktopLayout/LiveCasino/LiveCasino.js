@@ -8,9 +8,8 @@ const LiveCasino = ({liveCasino, showid}) => {
   const [category, setCategory] = useState([]);
   const [gameLists, setGameLists] = useState();
   const [providerTag, setProviderTags] = useState("");  
-
+  
   const {state} = useLocation();
-
   
   useEffect(()=>{
     const token = localStorage.getItem("gameToken");
@@ -37,9 +36,10 @@ const LiveCasino = ({liveCasino, showid}) => {
         setGameLists(items);
     }
   })
-  }, [providerTag, liveCasino])
+  }, [providerTag, liveCasino]);
 
-  // console.log(providerTag, "fsdfdsfs")
+  console.log(gameLists, "Dafafasd")
+
 
   return (
     <>
