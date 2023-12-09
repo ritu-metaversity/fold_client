@@ -8,6 +8,8 @@ import { UserAPI } from "../../apis/UserAPI";
 import Modal from "react-bootstrap/Modal";
 import RegisterModals from "../Register/RegisterModals";
 import { CasinoApi } from "../../apis/CasinoApi";
+import toast, { Toaster } from "react-hot-toast";
+import { AiOutlineClose } from "react-icons/ai";
 
 function Login({ Errmessage, Statusmessage }) {
   const nav = useNavigate();
@@ -17,7 +19,6 @@ function Login({ Errmessage, Statusmessage }) {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoading1, setIsLoading1] = useState(false);
-  const [statusbtn, setStatusBtn] = useState(false);
   const [showModals, setShowModals] = useState(false);
   const [isDemoIdLoginAllowed, setIsDemoIdLoginAllowed] = useState();
   const [navLogo, setNavLogo] = useState();
@@ -48,22 +49,25 @@ function Login({ Errmessage, Statusmessage }) {
         .then((res) => {
           const token = res.token;
           if (res?.status === false) {
-            setStatusVal(false);
-            setMessage(res.message);
+            toast(res.message, {
+              icon: <AiOutlineClose />,
+              style: {
+                borderRadius: "10px",
+                background: "#f8d7da",
+                color: "#58151c",
+              },
+            });
             setIsLoading(false);
           }
           localStorage.removeItem("UserName");
           localStorage.removeItem("UserPassword");
           axios.defaults.headers.common["Authorization"] = token;
           api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-          setStatusVal(res.status);
-          setMessage("Invalid Username or password");
           localStorage.setItem("UsertypeInfo", res?.userTypeInfo);
           const uId = res.userId;
           localStorage.setItem("UserId", uId);
           if (res.token !== "" && res.status !== false) {
             localStorage.setItem("token", token);
-
             setInterval(
               () =>
                 CasinoApi.Casino_Authentication({}).then((item) => {
@@ -83,8 +87,14 @@ function Login({ Errmessage, Statusmessage }) {
           }
         })
         .catch((error) => {
-          setStatusVal(false);
-          setMessage(error?.response?.data?.message);
+          toast(error?.response?.data?.message, {
+            icon: <AiOutlineClose />,
+            style: {
+              borderRadius: "10px",
+              background: "#f8d7da",
+              color: "#58151c",
+            },
+          });
           setIsLoading(false);
         });
     }
@@ -122,8 +132,8 @@ function Login({ Errmessage, Statusmessage }) {
         api.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${res?.data?.token}`;
-        setStatusVal(res?.data.status);
-        setMessage("Invalid Username or password");
+        // setStatusVal(res?.data.status);
+        // setMessage("Invalid Username or password");
         localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
         const uId = res.data?.username;
         localStorage.setItem("UserId", uId);
@@ -151,15 +161,27 @@ function Login({ Errmessage, Statusmessage }) {
           nav("/m/setting/changepassword");
         }
         if (res?.data.status === false) {
-          setStatusVal(false);
-          setMessage(res?.data?.message);
+          toast(res?.data?.message, {
+            icon: <AiOutlineClose />,
+            style: {
+              borderRadius: "10px",
+              background: "#f8d7da",
+              color: "#58151c",
+            },
+          });
           setIsLoading(false);
         }
       })
       .catch((error) => {
+        toast(error?.response?.data?.message, {
+          icon: <AiOutlineClose />,
+          style: {
+            borderRadius: "10px",
+            background: "#f8d7da",
+            color: "#58151c",
+          },
+        });
         setIsLoading1(false);
-        setStatusVal(false);
-        setMessage(error?.response?.data?.message);
         setIsLoading(false);
       });
   };
@@ -170,9 +192,10 @@ function Login({ Errmessage, Statusmessage }) {
       setNavLogo(res?.data?.logo);
     });
   }, []);
-    
+
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="wrapper login_main_section">
         {Statusmessage === true && (
           <div className="alertBtn">
@@ -182,9 +205,7 @@ function Login({ Errmessage, Statusmessage }) {
               val={Errmessage}
             />
           </div>
-        )
-      }
-
+        )}
         {(StatusVal === false || Statusmessage === undefined) &&
         Statusmessage === false ? (
           <div className="alertBtn">
@@ -197,7 +218,6 @@ function Login({ Errmessage, Statusmessage }) {
         <div className="login-wrapper1">
           <div className="text-center logo-login mb-3">
             <img
-              // src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/themes/diamondexch9.com/mobile/logo.png"
               src={navLogo}
               alt=""
             />
@@ -212,12 +232,6 @@ function Login({ Errmessage, Statusmessage }) {
                   className="form-control"
                   onChange={(e) => setUser(e.target.value)}
                 />
-
-                <span
-                  className="text-danger error-msg"
-                  style={{ display: "none" }}>
-                  {" "}
-                </span>
               </div>
               <div className="form-group mb-4">
                 <input
@@ -227,9 +241,6 @@ function Login({ Errmessage, Statusmessage }) {
                   className="form-control"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <span
-                  className="text-danger error-msg"
-                  style={{ display: "none" }}></span>
               </div>
               <div className="form-group mb-0">
                 <button
