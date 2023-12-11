@@ -39,6 +39,9 @@ export function RegisterForm() {
       password: "",
       confirmPassword: "",
       mobile: "",
+      casinoComm: appData?.casinoComm || 0,
+      fancyComm: appData?.fancyComm || 0,
+      oddsComm: appData?.oddsComm || 0,
       checked: true,
       appUrl: window.location.hostname.replace("www.", "") || "atozscore.com",
     },
@@ -278,6 +281,66 @@ export function RegisterForm() {
                 helperText={errors.confirmPassword}
               />
             </Grid>
+            {values.oddsComm > 0 && (
+              <Grid
+                item
+                // xs={12}
+                xs={5.76}
+                sm={3.68}
+              >
+                Odds Commission
+                <TextField
+                  size={matches ? "small" : "medium"}
+                  fullWidth
+                  margin="dense"
+                  InputProps={{
+                    readOnly: true,
+                    sx: { bgcolor: colorHex.bg4 },
+                  }}
+                  value={values.oddsComm}
+                />
+              </Grid>
+            )}
+            {values.fancyComm > 0 && (
+              <Grid
+                item
+                // xs={12}
+                xs={5.76}
+                sm={3.68}
+              >
+                Fancy Commission
+                <TextField
+                  size={matches ? "small" : "medium"}
+                  fullWidth
+                  margin="dense"
+                  InputProps={{
+                    readOnly: true,
+                    sx: { bgcolor: colorHex.bg4 },
+                  }}
+                  value={values.fancyComm}
+                />
+              </Grid>
+            )}
+            {values.casinoComm > 0 && (
+              <Grid
+                item
+                // xs={12}
+                xs={5.76}
+                sm={3.68}
+              >
+                Casino Commission
+                <TextField
+                  size={matches ? "small" : "medium"}
+                  fullWidth
+                  margin="dense"
+                  InputProps={{
+                    readOnly: true,
+                    sx: { bgcolor: colorHex.bg4 },
+                  }}
+                  value={values.casinoComm}
+                />
+              </Grid>
+            )}
             <Grid item xs={12}>
               <Form.Check
                 name="checked"
@@ -293,7 +356,6 @@ export function RegisterForm() {
                 }
               />
             </Grid>
-
             <Button
               sx={{ p: 2.5 }}
               variant="contained"
@@ -303,7 +365,6 @@ export function RegisterForm() {
             >
               Submit
             </Button>
-
             {appData?.isDemoIdLoginAllowed && (
               <Button
                 sx={{ p: 2.5 }}
