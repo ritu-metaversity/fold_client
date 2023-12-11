@@ -25,20 +25,40 @@ function Login({ Errmessage, Statusmessage }) {
 
   const { host } = window.location;
 
+  console.log(password, user, "user");
+
   const handleLogin = () => {
     setStatusVal(true);
     setIsLoading(true);
     if (password === "" && user === "") {
-      setStatusVal(false);
-      setMessage("Username and Password are required");
+      toast("Username and Password are required", {
+        icon: <AiOutlineClose />,
+        style: {
+          borderRadius: "10px",
+          background: "#f8d7da",
+          color: "#58151c",
+        },
+      });
       setIsLoading(false);
     } else if (user === "") {
-      setStatusVal(false);
-      setMessage("Username is required");
+      toast("Username is required", {
+        icon: <AiOutlineClose />,
+        style: {
+          borderRadius: "10px",
+          background: "#f8d7da",
+          color: "#58151c",
+        },
+      });
       setIsLoading(false);
     } else if (password === "") {
-      setStatusVal(false);
-      setMessage("Password is required");
+      toast("Password is required", {
+        icon: <AiOutlineClose />,
+        style: {
+          borderRadius: "10px",
+          background: "#f8d7da",
+          color: "#58151c",
+        },
+      });
       setIsLoading(false);
     }
     if (password !== "" && user !== "") {
@@ -217,10 +237,7 @@ function Login({ Errmessage, Statusmessage }) {
 
         <div className="login-wrapper1">
           <div className="text-center logo-login mb-3">
-            <img
-              src={navLogo}
-              alt=""
-            />
+            <img src={navLogo} alt="" />
           </div>
           <div className="login-form">
             <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>

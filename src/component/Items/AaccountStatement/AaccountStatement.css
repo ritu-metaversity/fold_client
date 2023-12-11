@@ -66,7 +66,7 @@
 .mx-datepicker {
     position: relative;
     display: inline-block;
-    width: 210px;
+    /* width: 210px; */
     color: #73879c;
     font: 14px/1.5 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', sans-serif;
 }
@@ -218,7 +218,7 @@ input[type=checkbox], input[type=radio] {
 .mx-datepicker {
     position: relative;
     display: inline-block;
-    width: 210px;
+    /* width: 210px; */
     color: #73879c;
     font: 14px/1.5 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', sans-serif;
 }
@@ -641,7 +641,7 @@ div#match_unmatched {
     button.btn.btn-primary.btn-block.btn-sm {
         font-size: 14px;
         padding: 4px;
-        width: 100%;
+        width: 100% !important;
         margin-right: 2px;
         border-radius: unset;
     }    
