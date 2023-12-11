@@ -11,7 +11,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.whatsapp-fixed{
+  position: absolute;
+  top:50%;
+  display: flex;
+  right:0;
+  background-color:#25d366;
+  text-decoration: none;
+  height: 50px;
+  transition: top 1.2s ease-in;
+}
+.whatsapp-fixed img{
+   width: 50px;
+  height: 50px;
 
+} 
+.whatsapp-text{
+  font-weight: 700;
+
+      display: none;
+    flex-direction: column;
+    color: #fff;
+    padding: 5px;
+    font-size: 14px;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.whatsapp-fixed:hover .whatsapp-text{
+  display: flex;
+}
 :root {
   --main-cl: #fff;
   --gray-cl: #cacaca;

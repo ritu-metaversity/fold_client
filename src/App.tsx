@@ -5,6 +5,7 @@ import React, {
   SetStateAction,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from "react";
 
@@ -25,6 +26,8 @@ import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 import { useLocation } from "react-router-dom";
 import { FaHeadphones } from "react-icons/fa";
 import { qTechServices } from "./utils/api/qTechGames/services";
+import { Approval } from "@mui/icons-material";
+import { FooterImageInterface } from "./components/layout/Footer";
 
 const Pages = React.lazy(() => import("./components/pages"));
 const CustomizedDialogPassword = React.lazy(
@@ -56,6 +59,7 @@ interface UserContextType {
   setCasinoId?: Dispatch<SetStateAction<number>>;
   getBalanceData: () => Promise<void>;
   userIp: string;
+  footerData?: FooterImageInterface;
 }
 
 const defaultStake = {
@@ -114,6 +118,7 @@ function App() {
   const [balanceData, setBalanceData] = useState<BalanceDataInterface | null>(
     null
   );
+
   const [userIp, setUserIp] = useState("");
   const [dheerajOpen, setDheerajOpen] = useState(false);
 
@@ -172,7 +177,16 @@ function App() {
       }
     }
   };
-
+  const [footerData, setFooterData] = useState<FooterImageInterface>();
+  useEffect(() => {
+    const getFooterData = async () => {
+      const { response } = await utilServices.footerImages();
+      if (response) {
+        setFooterData(response.data);
+      }
+    };
+    getFooterData();
+  }, []);
   useEffect(() => {
     const getNewEventOpen = async () => {
       const { response } = await sportServices.leftMenu();
@@ -194,7 +208,7 @@ function App() {
     getSelfAllowed();
     getNewEventOpen();
   }, []);
-
+  const appRef = useRef<HTMLAnchorElement | null>(null);
   const getButtonValue = async () => {
     const { response } = await userServices.getButtonValue();
     if (response?.data) {
@@ -238,6 +252,19 @@ function App() {
     };
   }, [isSignedIn, getBalance]);
 
+  useEffect(() => {
+    const handleScroll = (event: Event) => {
+      if (appRef?.current) {
+        appRef.current.style.top = `calc( ${window.scrollY}px + 50vh)`;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   if (isSignedIn === null) {
     return <LoadingBallSvg />;
   }
@@ -265,6 +292,7 @@ function App() {
         <div className="App">
           <UserContext.Provider
             value={{
+              footerData,
               balance: balanceData,
               getBalanceData: getBalance,
               activeEventList,
@@ -293,8 +321,23 @@ function App() {
           <iframe
             style={{ display: dheerajOpen ? "flex" : "none" }}
             className={"_iframe"}
+            title="dhee_iframe"
             src="http://15.207.226.246:10004?clientId=1a07c68d-1c26-43d1-880b-3a9e5deb2e93"
           />
+          {!isSignedIn && (
+            <a
+              ref={appRef}
+              href={footerData?.s_whatsapp.link}
+              className="whatsapp-fixed"
+            >
+              <div className="whatsapp-text">
+                <span>Get an ID Instantly on Whatsapp</span>{" "}
+                <span>Click Here Now</span>
+              </div>
+              <img alt="whatsapp" src="/assets/images/images.png"></img>
+            </a>
+          )}
+
           <Box
             className={`chat_icon_div shadow`}
             sx={{ bgcolor: "secondary.main" }}

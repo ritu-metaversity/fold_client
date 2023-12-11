@@ -43,7 +43,8 @@ function LoginForm({
 }: Props) {
   const theme = useTheme();
   const nav = useNavigate();
-  const { setUser, setModal, setIsSignedIn, appData } = useContext(UserContext);
+  const { setUser, setModal, footerData, setIsSignedIn, appData } =
+    useContext(UserContext);
   const handleDemoUserLogin = async () => {
     const { response } = await authServices.demoUserLogin(
       window.location.hostname.replace("www.", "")
@@ -133,7 +134,7 @@ function LoginForm({
               helperText={errors.password}
             />
             <a
-              href="https://wa.me/17168156061"
+              href={footerData?.s_whatsapp.link}
               target={"_blank"}
               rel="noreferrer"
               style={{
