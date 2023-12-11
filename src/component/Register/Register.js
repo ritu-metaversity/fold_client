@@ -19,6 +19,9 @@ const Register = () => {
   const [message, setMessage] = useState("");
   const [isLoading1, setIsLoading1] = useState(false);
   const [alertBtnColor, setAlertBtnColor] = useState();
+  const [casinoComm, setCasinoComm] = useState("");
+  const [fancyComm, setFancyComm] = useState("");
+  const [oddsComm, setOddsComm] = useState("");
 
   const nav = useNavigate();
 
@@ -212,7 +215,10 @@ const Register = () => {
     UserAPI.Self_By_App_Url().then((res) => {
       setLogo(res?.data?.logo);
       setStatusBtn(res?.data?.selfAllowed);
-      setIsDemoIdLoginAllowed(res?.data?.isDemoIdLoginAllowed)
+      setIsDemoIdLoginAllowed(res?.data?.isDemoIdLoginAllowed);
+      setCasinoComm(res?.data?.casinoComm);
+      setFancyComm(res?.data?.fancyComm);
+      setOddsComm(res?.data?.oddsComm);
     });
   }, []);
 
@@ -314,6 +320,31 @@ const Register = () => {
                 <span
                   className="text-danger error-msg"
                   style={{ display: "none" }}></span>
+              </div>
+              <div className="form-group mb-4">
+              <div className="form-group mb-4">
+              <div className="comm_sec">
+                {
+                  oddsComm != "0" && <div className="sub_comm_sec">
+                  <p>Odds Comm</p>
+                  <input disabled defaultValue={oddsComm} value={oddsComm} />
+                </div>
+                }
+                {
+                  casinoComm != "0" && <div className="sub_comm_sec">
+                  <p>Casino Comm</p>
+                  <input disabled defaultValue={casinoComm} value={casinoComm} />
+                </div>
+                }
+                {
+                  fancyComm != "0" && <div className="sub_comm_sec">
+                  <p>Fancy Comm</p>
+                  <input disabled defaultValue={fancyComm} value={fancyComm} />
+                </div>
+                }
+                
+              </div>
+            </div>
               </div>
               <div className="form-group mb-0">
                 <button

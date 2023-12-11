@@ -1,0 +1,35 @@
+.comm_sec{
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+align-items: center;
+}
+.sub_comm_sec{
+margin: 1px;
+width: 48%;
+}
+
+.sub_comm_sec input{
+    height: 33px;
+    border: 1px solid #ced4da !important;
+    padding-left: 3px;
+    margin-top: 4px;
+    background: #ddd;
+    width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+   
+    .sub_comm_sec input{
+    width: 100%;
+    }
+    .sub_comm_sec{
+        width: 48%;
+        }
+}
+
+.reg_form{
+    width: 500px;
+    min-width: 500px;
+    max-width: 500px;
+}

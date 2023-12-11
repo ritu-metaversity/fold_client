@@ -4,6 +4,7 @@ import { AuthorAPI } from "../../apis/AuthorAPI";
 import { FaHandPointDown } from "react-icons/fa";
 import { api } from "../../apis/configs/axiosConfigs";
 import { UserAPI } from "../../apis/UserAPI";
+import './RegisterPage.css'
 
 const RegisterPage = () => {
   const [password, setPassword] = useState(0);
@@ -17,11 +18,10 @@ const RegisterPage = () => {
   const [isLoading1, setIsLoading1] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [casinoComm, setCasinoComm] = useState("");
+  const [fancyComm, setFancyComm] = useState("");
+  const [oddsComm, setOddsComm] = useState("");
   const [isDemoIdLoginAllowed, setIsDemoIdLoginAllowed] = useState();
-
-
-
-
 
   const nav = useNavigate();
 
@@ -69,8 +69,6 @@ const RegisterPage = () => {
   const [mobileNumberError, setmobileNumberError] = useState("");
   const [userNameError, setUserNameError] = useState("");
 
-   
-
   const handleConfirmPasswordsValidation = (e) => {
     setConfirmPassword(e.target.value);
     const confirmPass = e.target.value;
@@ -80,7 +78,6 @@ const RegisterPage = () => {
       setConfirmPasswordError("");
     }
   };
-
 
   const handlePassWordsValidation = (e) => {
     setPassword(e.target.value);
@@ -92,8 +89,9 @@ const RegisterPage = () => {
     } else if (passData?.length > 13) {
       setPasswordError("Maximum 12 letters required");
     } else if (
-      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$#!%*?&_]{8,12}$/) ===
-      null
+      passData?.match(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$#!%*?&_]{8,12}$/
+      ) === null
     ) {
       setPasswordError(
         "Password should contain atleast one number and one lower case and one upper case."
@@ -109,8 +107,9 @@ const RegisterPage = () => {
   };
 
   const handleMobileNumber = (e) => {
-    if(e.target.value.match(/^[0-9]*$/) !== null){
-      setMobileNumber(e.target.value);}
+    if (e.target.value.match(/^[0-9]*$/) !== null) {
+      setMobileNumber(e.target.value);
+    }
     if (e.target.value === "") {
       setmobileNumberError("Mobile number must not be empty.");
     } else if (e.target.value?.length !== 10) {
@@ -134,8 +133,6 @@ const RegisterPage = () => {
     } else {
       setUserNameError("");
     }
-
-    
   };
 
   const handleLogin = (e) => {
@@ -164,7 +161,7 @@ const RegisterPage = () => {
         });
     }
   };
-  const handleLoginWithDemoAccount = ()=>{
+  const handleLoginWithDemoAccount = () => {
     setIsLoading1(true);
     AuthorAPI.LOGIN_WITH_DEMO_USER()
       .then((res) => {
@@ -181,8 +178,12 @@ const RegisterPage = () => {
         localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
         const uId = res.data?.username;
         localStorage.setItem("UserId", uId);
-        if (res.data?.token !== "" && res?.data?.token !== undefined  && res?.data.status !== false) {
-        localStorage.setItem("token", token);
+        if (
+          res.data?.token !== "" &&
+          res?.data?.token !== undefined &&
+          res?.data.status !== false
+        ) {
+          localStorage.setItem("token", token);
 
           nav("/m/home");
         }
@@ -198,20 +199,25 @@ const RegisterPage = () => {
         }
       })
       .catch((error) => {
-          setStatusCode(error.response.status);
-          setErrorMsg(error.response.data.message);
-          setStatusVal(false);
+        setStatusCode(error.response.status);
+        setErrorMsg(error.response.data.message);
+        setStatusVal(false);
         setIsLoading1(false);
       });
-}
+  };
 
-
-useEffect(()=>{
-  UserAPI.Self_By_App_Url().then((res)=>{
-    setIsDemoIdLoginAllowed(res?.data?.isDemoIdLoginAllowed);
+  useEffect(() => {
+    UserAPI.Self_By_App_Url().then((res) => {
+      setIsDemoIdLoginAllowed(res?.data?.isDemoIdLoginAllowed);
       setLogo(res?.data?.logo);
-  })
-},[])
+      setCasinoComm(res?.data?.casinoComm);
+      setFancyComm(res?.data?.fancyComm);
+      setOddsComm(res?.data?.oddsComm);
+    });
+  }, []);
+
+  console.log(oddsComm == "0", "DSfsfsfsdfs")
+
 
   return (
     <>
@@ -219,9 +225,10 @@ useEffect(()=>{
         <div className="text-center logo-login mb-3">
           <img src={logo} alt="" />
         </div>
-        <div className="login-form">
+        <div className="login-form reg_form">
           <h4 className="text-center register_head">
-            REGISTER <FaHandPointDown /> <i className="fas fa-hand-point-down"></i>
+            REGISTER <FaHandPointDown />{" "}
+            <i className="fas fa-hand-point-down"></i>
           </h4>
           {StatusVal === true ? <p className="error">{errorMsg}</p> : ""}
           <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
@@ -231,14 +238,16 @@ useEffect(()=>{
                 type="text"
                 placeholder="Username"
                 className="form-control form-cont"
-                aria-required="true"
-                aria-invalid="false"
                 onChange={handleUserName}
                 onFocus={handleUserName}
                 autoComplete="off"
               />
-             <p
-                style={{ marginTop: "12px", fontSize: "12px", marginLeft:"3px" }}
+              <p
+                style={{
+                  marginTop: "12px",
+                  fontSize: "12px",
+                  marginLeft: "3px",
+                }}
                 className="text-danger error-msg">
                 {userNameError}
               </p>
@@ -247,17 +256,19 @@ useEffect(()=>{
               <input
                 name="Mobile Number"
                 type="text"
-                  value={mobileNumber}
+                value={mobileNumber}
                 placeholder="Mobile Number"
                 className="form-control form-cont"
-                aria-required="true"
-                aria-invalid="false"
-               onChange={handleMobileNumber}
+                onChange={handleMobileNumber}
                 onFocus={handleMobileNumber}
                 autoComplete="off"
               />
-             <p
-                style={{ marginTop: "12px", fontSize: "12px" , marginLeft:"3px"}}
+              <p
+                style={{
+                  marginTop: "12px",
+                  fontSize: "12px",
+                  marginLeft: "3px",
+                }}
                 className="text-danger error-msg">
                 {mobileNumberError}
               </p>
@@ -268,14 +279,16 @@ useEffect(()=>{
                 type="password"
                 placeholder="Password"
                 className="form-control form-cont"
-                aria-required="true"
-                aria-invalid="false"
                 onChange={handlePassWordsValidation}
                 onFocus={handlePassWordsValidation}
                 autoComplete="off"
               />
-                <p
-                style={{ marginTop: "12px", fontSize: "12px" , marginLeft:"3px"}}
+              <p
+                style={{
+                  marginTop: "12px",
+                  fontSize: "12px",
+                  marginLeft: "3px",
+                }}
                 className="text-danger error-msg">
                 {passwordError}
               </p>
@@ -286,17 +299,42 @@ useEffect(()=>{
                 type="password"
                 placeholder="Confirm Password"
                 className="form-control form-cont"
-                aria-required="true"
-                aria-invalid="false"
                 onChange={handleConfirmPasswordsValidation}
                 onFocus={handleConfirmPasswordsValidation}
                 autoComplete="off"
               />
               <p
-                style={{ marginTop: "12px", marginLeft:"3px",fontSize: "12px" }}
+                style={{
+                  marginTop: "12px",
+                  marginLeft: "3px",
+                  fontSize: "12px",
+                }}
                 className="text-danger error-msg">
                 {confirmPasswordError}
               </p>
+            </div>
+            <div className="form-group mb-4">
+              <div className="comm_sec">
+                {
+                  oddsComm != "0" && <div className="sub_comm_sec">
+                  <p>Odds Comm</p>
+                  <input disabled defaultValue={oddsComm} value={oddsComm} />
+                </div>
+                }
+                {
+                  casinoComm != "0" && <div className="sub_comm_sec">
+                  <p>Casino Comm</p>
+                  <input disabled defaultValue={casinoComm} value={casinoComm} />
+                </div>
+                }
+                {
+                  fancyComm != "0" && <div className="sub_comm_sec">
+                  <p>Fancy Comm</p>
+                  <input disabled defaultValue={fancyComm} value={fancyComm} />
+                </div>
+                }
+                
+              </div>
             </div>
             <div className="form-group mb-0">
               <button
@@ -311,22 +349,24 @@ useEffect(()=>{
                 )}
               </button>
             </div>
-            {
-              isDemoIdLoginAllowed? <div className="form-group mb-0 mt-2">
-              <button
-                type="submit"
-                className="btn btn-primary btn-block"
-                onClick={handleLoginWithDemoAccount}>
-                Login with Demo User
-                {isLoading1 ? (
-                  <i className="ml-2 fa fa-spinner fa-spin"></i>
-                ) : (
-                  <i className="ml-2 fa fa-sign-in"></i>
-                )}
-              </button>
-            </div>:""
-            }
-           
+            {isDemoIdLoginAllowed ? (
+              <div className="form-group mb-0 mt-2">
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block"
+                  onClick={handleLoginWithDemoAccount}>
+                  Login with Demo User
+                  {isLoading1 ? (
+                    <i className="ml-2 fa fa-spinner fa-spin"></i>
+                  ) : (
+                    <i className="ml-2 fa fa-sign-in"></i>
+                  )}
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+
             <div className="form-group mb-0" style={{ marginTop: "12px" }}>
               <Link type="submit" to="/" className="btn btn-primary btn-block">
                 <i className="ml-2 fa fa-sign-in rotateBtn"></i>
