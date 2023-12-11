@@ -76,6 +76,9 @@ interface AppDataInterface {
   mobileLogo: string;
   isDemoIdLoginAllowed: boolean;
   selfAllowed: boolean;
+  casinoComm: number;
+  fancyComm: number;
+  oddsComm: number;
 }
 
 export let setErrorRef: any;
