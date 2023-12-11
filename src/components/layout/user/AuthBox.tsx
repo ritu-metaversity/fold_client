@@ -28,8 +28,15 @@ export function AuthBox() {
   const theme = useTheme();
   const [loading, setLoading] = useState(false);
   const [demoLoading, setDemoLoading] = useState(false);
-  const { setIsSignedIn, appData, isSignedIn, setUser, modal, setModal } =
-    useContext(UserContext);
+  const {
+    setIsSignedIn,
+    appData,
+    isSignedIn,
+    footerData,
+    setUser,
+    modal,
+    setModal,
+  } = useContext(UserContext);
   const nav = useNavigate();
 
   const { values, handleChange, errors, handleSubmit, resetForm } = useFormik({
@@ -158,7 +165,7 @@ export function AuthBox() {
                 helperText={errors.userId}
               />
               <a
-                href="https://wa.me/17168156061"
+                href={footerData?.s_whatsapp.link}
                 target={"_blank"}
                 rel="noreferrer"
                 style={{

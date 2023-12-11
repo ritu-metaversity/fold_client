@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { utilServices } from "../../utils/api/util/services";
+import React, { useContext, useState } from "react";
 import CustomizedDialog2 from "../common/Dailog2";
 import Faq from "./rules/Faq";
 import "./footer.css";
 import { Box, Button, DialogActions } from "@mui/material";
+import { UserContext } from "../../App";
 
-interface FooterImageInterface {
+export interface FooterImageInterface {
   id: string;
   appUrl: string;
   support: string;
@@ -41,20 +41,8 @@ interface FooterImageInterface {
 }
 
 const Footer = () => {
-  const [footerData, setFooterData] = useState<FooterImageInterface | null>(
-    null
-  );
+  const { footerData } = useContext(UserContext);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const getFooterData = async () => {
-      const { response } = await utilServices.footerImages();
-      if (response) {
-        setFooterData(response.data);
-      }
-    };
-    getFooterData();
-  }, []);
 
   return (
     <div>
