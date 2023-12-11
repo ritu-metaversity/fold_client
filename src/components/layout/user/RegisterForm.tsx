@@ -288,7 +288,7 @@ export function RegisterForm() {
                 xs={5.76}
                 sm={3.68}
               >
-                Odds Commission
+                Odds Comm.
                 <TextField
                   size={matches ? "small" : "medium"}
                   fullWidth
@@ -308,7 +308,7 @@ export function RegisterForm() {
                 xs={5.76}
                 sm={3.68}
               >
-                Fancy Commission
+                Fancy Comm.
                 <TextField
                   size={matches ? "small" : "medium"}
                   fullWidth
@@ -328,7 +328,7 @@ export function RegisterForm() {
                 xs={5.76}
                 sm={3.68}
               >
-                Casino Commission
+                Casino Comm.
                 <TextField
                   size={matches ? "small" : "medium"}
                   fullWidth
