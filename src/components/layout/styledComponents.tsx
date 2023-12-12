@@ -49,6 +49,7 @@ export const AnnouncementBox = styled(Box)<{ isSignedIn: boolean }>`
   background-color: #444;
   padding: 10px;
   height: 2.2rem;
+  min-width: 0;
   @media (max-width: 1279px) {
     padding-block: 2px;
     border-radius: 5px;

@@ -5,7 +5,6 @@ import { socket } from "../../utils/socket/socket";
 const Socket = () => {
   const [searchParams] = useSearchParams();
   useEffect(() => {
-    console.log("asdfasdf");
     // no-op if the socket is already connected
     socket.connect();
 

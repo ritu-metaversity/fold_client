@@ -61,7 +61,6 @@ const Casino = () => {
   const nav = useNavigate();
   const { isSignedIn, setCasinoId } = useContext(UserContext);
   const getCasinoList = async () => {
-    console.log("in min");
     if (!isSignedIn) {
       nav("/");
       return;

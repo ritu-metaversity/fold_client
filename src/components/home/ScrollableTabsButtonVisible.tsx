@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react";
 import Box from "@mui/material/Box";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
-import Tab, { tabClasses } from "@mui/material/Tab";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { tabClasses } from "@mui/material/Tab";
+import { useMediaQuery } from "@mui/material";
 import { colorHex } from "../../utils/constants";
 import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
 import { TabStyled } from "./styledComponents";
@@ -20,13 +20,10 @@ export function ScrollableTabsButtonVisible({
   sports,
 }: TabsProps) {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    console.log(newValue);
     setValue(newValue);
   };
 
   const matches = useMediaQuery("(min-width:1280px)");
-  console.log(sports[0], "index");
-  const theme = useTheme();
   return (
     <Box
       sx={{

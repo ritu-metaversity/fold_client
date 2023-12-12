@@ -36,9 +36,6 @@ const LiveCasino = React.lazy(() => import("../qTech/liveCasino/LiveCasino"));
 const Lottery = React.lazy(() => import("../qTech/lottery/lottery"));
 
 const Pages = () => {
-  useEffect(() => {
-    console.log("Ran page");
-  }, []);
   return (
     <div>
       <Suspense

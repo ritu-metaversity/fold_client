@@ -164,7 +164,6 @@ const apiWithSnackbar: (
   arg: ApiServiceInterface
 ) => Promise<ApiResponse> = async (args) => {
   const result = await apiHandler(args);
-  console.log(result, "res");
   return apiSnackbarNotifications(result);
 };
 export { apiService, apiHandler, apiWithErrorSnackbar, apiWithSnackbar };
