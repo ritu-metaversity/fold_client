@@ -65,7 +65,6 @@ const InPlay = () => {
                 <ul className="list-unstyled nav_desk ">
                   {activeSportList?.length &&
                     activeSportList?.map((res) => {
-                      console.log(res, "dsadasdas");
                       return (
                         <li
                           className="nav-item"

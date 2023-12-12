@@ -38,7 +38,6 @@ const LiveCasino = ({liveCasino, showid}) => {
   })
   }, [providerTag, liveCasino]);
 
-  console.log(gameLists, "Dafafasd")
 
 
   return (

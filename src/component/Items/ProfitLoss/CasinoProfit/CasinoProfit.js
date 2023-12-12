@@ -171,12 +171,9 @@ function CasinoProfit() {
       <div className="report-container Mobile-view-topNav">
         <div className="card">
           <div className="card-body container-fluid container-fluid-5 max1_height">
-            <div className="row row5 acc-stat">
+            <div className="row row5 acc-stat mb-12">
               <div className="col-6">
-                <div className="form-group mb-0">
-                  <div
-                    className="mx-datepicker">
-                    <div className="mx-input-wrapper">
+                
                       <DatePicker
                         defaultValue={dayjs(startDate)}
                         format={dateFormat}
@@ -187,15 +184,9 @@ function CasinoProfit() {
                           d.isAfter(dayjs())
                         }
                       />
-                    </div>
-                  </div>
-                </div>
               </div>
               <div className="col-6">
-                <div className="form-group mb-0">
-                  <div
-                    className="mx-datepicker">
-                    <div className="mx-input-wrapper">
+               
                       <DatePicker
                         defaultValue={dayjs}
                         format={dateFormat}
@@ -206,9 +197,6 @@ function CasinoProfit() {
                           d.isAfter(dayjs())
                         }
                       />
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div className="row row5 mt-2 acc-stat" style={{ marginInline: "-7px" }}>

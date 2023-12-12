@@ -152,11 +152,9 @@ function BetHistory() {
                 </div>
               </div>
             </div>
-            <div className="row row5 mt-2 acc-stat">
+            <div className="row row5 mt-2 acc-stat mb-12">
               <div className="col-6">
-                <div className="form-group mb-0">
-                  <div className="mx-datepicker" >
-                    <div className="mx-input-wrapper">
+                
                       <DatePicker
                         defaultValue={dayjs(startDate)}
                         // value={startDate}
@@ -169,14 +167,8 @@ function BetHistory() {
                           d.isAfter(dayjs())
                         }
                       />
-                    </div>
-                  </div>
-                </div>
               </div>
               <div className="col-6">
-                <div className="form-group mb-0">
-                  <div className="mx-datepicker" >
-                    <div className="mx-input-wrapper">
                       <DatePicker
                         defaultValue={dayjs}
                         selected={startDate}
@@ -188,9 +180,6 @@ function BetHistory() {
                           d.isAfter(dayjs())
                         }
                       />
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div className="row row5 mt-2 acc-stat">

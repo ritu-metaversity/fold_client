@@ -58,7 +58,6 @@ const GameListHome = ({
       <div className="fantsy_img">
         <div className="provider_images">
           {gameLists?.map((item) => {
-            console.log(item, "Dasdasd");
             if (
               providerFilter != "ALL" &&
               !item?.category?.includes(providerFilter)

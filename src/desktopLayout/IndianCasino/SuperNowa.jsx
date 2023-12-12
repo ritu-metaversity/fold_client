@@ -69,7 +69,6 @@ const SuperNowa = () => {
       .then((response) => {
         if (response) {
             setIframeData(response?.data?.data?.launchURL)
-          console.log(response?.data?.launchURL, "sdfsdfsdfsdfsdfsdfsd")
         } else {
         }
       })
@@ -85,7 +84,6 @@ const SuperNowa = () => {
       
        <div className="provider_images">
         {gameData?.map((item) => {
-          console.log(item, "Dasdasd");
           return (
             <div style={{cursor:"pointer"}} onClick={()=>handleShow(item?.code, item?.providerCode)}>
               <img height="96px;" src={item?.thumb} alt="" />

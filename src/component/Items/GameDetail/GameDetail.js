@@ -1081,7 +1081,6 @@ function GameDetail({ getStackValue }) {
                           const BookmakerProfitVal = profits?.Bookmaker?.find(
                             (profit) => profit?.sid === bookmaker?.sid
                           )?.value;
-                          console.log(fancyOdds?.Bookmaker?.length, "dasdsd");
                           if (bookmaker?.t !== "TOSS") return <></>;
                           return (
                             <>

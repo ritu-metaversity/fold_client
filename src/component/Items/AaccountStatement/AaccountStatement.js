@@ -8,7 +8,6 @@ import { UserAPI } from "../../../apis/UserAPI";
 import SearchBet from "./SearchBet";
 import AlertBtn from "../../Alert/AlertBtn";
 
-
 const dateFormat = "YYYY-MM-DD";
 
 function AaccountStatement() {
@@ -89,7 +88,7 @@ function AaccountStatement() {
   };
 
   const submit = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     if (startDate === "") {
       setStartDate(moment().format().slice(0, 10));
     } else {
@@ -133,28 +132,26 @@ function AaccountStatement() {
   }
 
   const handlePagenation = (val) => {
-    if(pagination !==0)
-    setPagination(val);
+    if (pagination !== 0) setPagination(val);
     setActive(val);
   };
 
-  const increment = () => { 
-    if(pageLength - 1 !== pagination){
-      setPagination(pagination + 1)
-     setActive(pagination+1 );
-  }
+  const increment = () => {
+    if (pageLength - 1 !== pagination) {
+      setPagination(pagination + 1);
+      setActive(pagination + 1);
+    }
   };
 
-
   const decerement = () => {
-    if(pagination !== 0){
-      setPagination(pagination - 1)
-      setActive(pagination-1 );
+    if (pagination !== 0) {
+      setPagination(pagination - 1);
+      setActive(pagination - 1);
     }
   };
 
   const incrementByLast = () => {
-    setPagination(pageLength-1);
+    setPagination(pageLength - 1);
   };
 
   const decrementByFirst = () => {
@@ -193,45 +190,33 @@ function AaccountStatement() {
             <h4 className="mb-0 heading-ch">Account Statement</h4>
           </div>
           <div className="card-body statement container-fluid container-fluid-5 max_height">
-            <div className="row row5 ">
+            <div className="row row5 mb-12">
               <div className="col-6">
-                <div className="form-group mb-0">
-                  <div className="mx-datepicker">
-                    <div className="mx-input-wrapper">
-                      <DatePicker
-                        defaultValue={dayjs(startDate)}
-                        // value={startDate}
-                        format={dateFormat}
-                        selected={startDate}
-                        onChange={StartDateValue}
-                        disabledDate={(d) =>
-                          !d ||
-                          d.isBefore(dayjs().subtract(2, "month")) ||
-                          d.isAfter(dayjs())
-                        }
-                      />
-                    </div>
-                  </div>
-                </div>
+                  <DatePicker
+                    defaultValue={dayjs(startDate)}
+                    // value={startDate}
+                    format={dateFormat}
+                    selected={startDate}
+                    onChange={StartDateValue}
+                    disabledDate={(d) =>
+                      !d ||
+                      d.isBefore(dayjs().subtract(2, "month")) ||
+                      d.isAfter(dayjs())
+                    }
+                  />
               </div>
               <div className="col-6 ">
-                <div className="form-group mb-0">
-                  <div className="mx-datepicker" >
-                    <div className="mx-input-wrapper">
-                      <DatePicker
-                        defaultValue={dayjs}
-                        selected={startDate}
-                        format={dateFormat}
-                        onChange={EndDateValue}
-                        disabledDate={(d) =>
-                          !d ||
-                          d.isBefore(dayjs().subtract(2, "month")) ||
-                          d.isAfter(dayjs())
-                        }
-                      />
-                    </div>
-                  </div>
-                </div>
+                  <DatePicker
+                    defaultValue={dayjs}
+                    selected={startDate}
+                    format={dateFormat}
+                    onChange={EndDateValue}
+                    disabledDate={(d) =>
+                      !d ||
+                      d.isBefore(dayjs().subtract(2, "month")) ||
+                      d.isAfter(dayjs())
+                    }
+                  />
               </div>
             </div>
             <div className="row row5  ">
@@ -266,8 +251,10 @@ function AaccountStatement() {
                 <div
                   id="account-statement_length"
                   className="dataTables_length cpoint d-flex align-items-center">
-                  <label style={{ fontSize: "14px" }} className="showEntries">Show</label>
-                  <select 
+                  <label style={{ fontSize: "14px" }} className="showEntries">
+                    Show
+                  </label>
+                  <select
                     name="account-statement_length"
                     aria-controls="account-statement"
                     className="form-control form-control-sm theme1font optionValue"
@@ -439,48 +426,47 @@ function AaccountStatement() {
               ""
             ) : (
               <div className="row row5 mt-2 ">
-                  <div
-                    className={`col-12 ${pageLength === 0 ? "dis-none" : ""}`}>
-                    <nav aria-label="Page navigation example">
-                      <ul className="pagination">
-                        <li className="page-item" onClick={decrementByFirst}>
-                          <button className="page-link" aria-label="Previous">
-                            <span aria-hidden="true">First</span>
-                          </button>
-                        </li>
-                        <li className="page-item" onClick={decerement}>
-                          <button className="page-link" aria-label="Previous">
-                            <span aria-hidden="true">Prev</span>
-                          </button>
-                        </li>
-                          <li
-                            className="page-item "
-                            onClick={() => handlePagenation(1)}>
-                            <button className="plink act">
-                              <span aria-hidden="true" className="num">
-                                {pagination+1}
-                              </span>
-                            </button>
-                          </li>
-                        <li className="page-item" onClick={increment}>
-                          <button
-                            className="page-link"
-                            // disabled={!(pageLength - 1 === pagination)}
-                            aria-label="Next">
-                            <span aria-hidden="true" className="num">
-                              Next
-                            </span>
-                          </button>
-                        </li>
-                        <li className="page-item" onClick={incrementByLast}>
-                          <button className="page-link" aria-label="Next">
-                            <span aria-hidden="true">Last</span>
-                          </button>
-                        </li>
-                      </ul>
-                    </nav>
-                  </div>
+                <div className={`col-12 ${pageLength === 0 ? "dis-none" : ""}`}>
+                  <nav aria-label="Page navigation example">
+                    <ul className="pagination">
+                      <li className="page-item" onClick={decrementByFirst}>
+                        <button className="page-link" aria-label="Previous">
+                          <span aria-hidden="true">First</span>
+                        </button>
+                      </li>
+                      <li className="page-item" onClick={decerement}>
+                        <button className="page-link" aria-label="Previous">
+                          <span aria-hidden="true">Prev</span>
+                        </button>
+                      </li>
+                      <li
+                        className="page-item "
+                        onClick={() => handlePagenation(1)}>
+                        <button className="plink act">
+                          <span aria-hidden="true" className="num">
+                            {pagination + 1}
+                          </span>
+                        </button>
+                      </li>
+                      <li className="page-item" onClick={increment}>
+                        <button
+                          className="page-link"
+                          // disabled={!(pageLength - 1 === pagination)}
+                          aria-label="Next">
+                          <span aria-hidden="true" className="num">
+                            Next
+                          </span>
+                        </button>
+                      </li>
+                      <li className="page-item" onClick={incrementByLast}>
+                        <button className="page-link" aria-label="Next">
+                          <span aria-hidden="true">Last</span>
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
                 </div>
+              </div>
             )}
           </div>
         </div>

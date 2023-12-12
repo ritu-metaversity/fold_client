@@ -16,7 +16,7 @@
     
     width: 100% !important;
     margin-left: -5px !important;
-    padding: 6px 20px !important;
+    padding: 3px 20px !important;
     padding-left: 10px !important;
 }
 .mt-7 {
@@ -51,4 +51,8 @@
 .totalVal{
     justify-content: end;
     margin-right: 8px;
+}
+
+.mt4{
+    margin-top: 4px;
 }

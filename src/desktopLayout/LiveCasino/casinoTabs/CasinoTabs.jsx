@@ -45,7 +45,6 @@ const CasinoTabs = ({
     }
   }, [state]);
 
-  console.log(state, "state")
 
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;

@@ -7,13 +7,7 @@
 .ant-tabs-nav-wrap {
     margin-left: 12px;
 }
-/* .statement1{
-    height: 70vh;
-    overflow: scroll;
-} */
-/* .statement1::-webkit-scrollbar{
-    display: none;
-} */
+
 
 
 
@@ -22,28 +16,19 @@
     min-width: 100%;
     max-width: 100%;
     height: 36px;
-    border-radius: 3px;
-    margin-left: -7px;
+    border-radius: 3px !important;
+ 
 }
-
+.mb-12{
+    margin-bottom: 12px;
+}
 @media screen and (max-width: 350px) {
     .ant-picker {
-        width: 89%;
-        min-width: 74%;
-        max-width: 74%;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
         height: 36px;
         border-radius: 3px;
-        margin-left: -8px;
     }
 }
 
-@media screen and (min-width: 351px) and (max-width: 420px) {
-    .ant-picker {
-        width: 89%;
-        min-width: 87%;
-        max-width: 87%;
-        height: 36px;
-        border-radius: 3px;
-        margin-left: -8px;
-    }
-}
