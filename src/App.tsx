@@ -324,7 +324,7 @@ function App() {
             title="dhee_iframe"
             src="http://15.207.226.246:10004?clientId=1a07c68d-1c26-43d1-880b-3a9e5deb2e93"
           />
-          {!isSignedIn && (
+          {!isSignedIn && appData?.selfAllowed && (
             <a
               ref={appRef}
               href={footerData?.s_whatsapp.link}
