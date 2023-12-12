@@ -4,7 +4,7 @@ import { FgameData } from "./FantsyGameProvider";
 import FantsyList from "./FantsyList";
 import { useLocation } from "react-router-dom";
 
-const FantsyTabs = ({  }) => {
+const FantsyTabs = () => {
   const [activeClass, setActiveClass] = useState(0);
   const [providerFilter, setProviderFilter] = useState("SPB");
   const [scrollX, setscrollX] = useState(0);
