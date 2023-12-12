@@ -1194,7 +1194,6 @@ function GamedetailPage({ getStackValue, SportId }) {
                         sId == 4 ? "" : "d-none"
                       }`}>
                       {gameName?.map((item, id2) => {
-                        console.log(item, "fdsfdsfsd");
                         if (
                           [
                             "Odds",
@@ -1245,11 +1244,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                                       {fancyOdds[item]
                                         .slice(0, fancyOdds[item]?.length / 2)
                                         ?.map((e, id) => {
-                                          console.log(
-                                            fancyOdds[item]?.length,
-                                            fancyOdds[item]?.length / 2,
-                                            "dsfsdfasfdasd"
-                                          );
+                                          
                                           return (
                                             <div
                                               key={id + id}
@@ -1438,7 +1433,6 @@ function GamedetailPage({ getStackValue, SportId }) {
                                       {fancyOdds[item]
                                         .slice(fancyOdds[item]?.length / 2)
                                         ?.map((e, id) => {
-                                          console.log(e?.ball, "Dfdsfdsfsdf");
                                           return (
                                             <div
                                               key={id + id}

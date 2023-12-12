@@ -34,7 +34,6 @@ const FantsyTabs = ({  }) => {
     setscrollX(scrollX + scrollOffset);
   };
 
-//   console.log((window.location.pathname?.includes('/m')), "dsadad")
 
 useEffect(()=>{
     const hideButton = window.location.pathname?.includes('/m');
@@ -53,7 +52,6 @@ useEffect(()=>{
         <ul ref={ref}>
           {
             FgameData?.map((item, id) => {
-                // console.log(item, "dssasdasda")
               return (
                 <>
                   <li

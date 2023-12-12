@@ -43,7 +43,6 @@ function CasinoUnsetteledBet() {
   //   });
   // };
 
-  // console.log(Deleted, "sdsfsd")
 
   const result = [];
   for (var i = 1; i < pageLength; i++) {

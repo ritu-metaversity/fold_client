@@ -43,7 +43,6 @@ const FantsyList = ({ providerFilter }) => {
       <div className="fantsy_img">
         <div className="provider_images">
           {fantsyGameList?.map((item) => {
-            console.log(item, "Dasdasd");
             if (providerFilter !== item?.providerId) return <></>;
             return (
               <div

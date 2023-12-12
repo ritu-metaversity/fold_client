@@ -13,7 +13,6 @@ const SlotHome = ({path}) => {
 
       <div className="live_casino_home">
         {slotProviderList.map((item, id) => {
-            console.log(item, "DSfsdfadsf")
           return (
             <div
               key={id}

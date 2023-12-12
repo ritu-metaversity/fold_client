@@ -160,9 +160,7 @@ const SportPnl = () => {
      <div className="card-body container-fluid container-fluid-5 ">
           <div className="row row5">
             <div className="col-2">
-              <div className="form-group mb-0">
-                <div className="mx-datepicker" >
-                  <div className="mx-input-wrapper">
+              
                     <DatePicker
                       defaultValue={dayjs(startDate)}
                       className="mx-input"
@@ -174,14 +172,10 @@ const SportPnl = () => {
                         d.isAfter(dayjs())
                       }
                     />
-                  </div>
-                </div>
-              </div>
+                 
             </div>
             <div className="col-2">
-              <div className="form-group mb-0">
-                <div className="mx-datepicker" >
-                  <div className="mx-input-wrapper">
+              
                     <DatePicker
                       defaultValue={dayjs}
                       format={dateFormat}
@@ -193,12 +187,10 @@ const SportPnl = () => {
                         d.isAfter(dayjs())
                       }
                     />
-                  </div>
-                </div>
-              </div>
+                 
             </div>
             <div className="col-2">
-              <div className="form-group mb-0 mt-7">
+              <div className="form-group mb-0 ">
                 <select
                   name="reportType"
                   className="custom-select"
@@ -220,7 +212,7 @@ const SportPnl = () => {
               </div>
             </div>
             <div className="col-2">
-              <div className="form-group mb-0 mt-7">
+              <div className="form-group mb-0">
                 <select
                   name="reportType"
                   className="custom-select"
@@ -243,7 +235,7 @@ const SportPnl = () => {
               </div>
             </div>
 
-            <div className="col-2 mt-11">
+            <div className="col-2 mt4">
               <div
                 id="account-statement_length"
                 className="dataTables_length cpoint d-flex align-items-center">
@@ -277,7 +269,7 @@ const SportPnl = () => {
 
             <div className="col-1">
               <button
-                className="btn btn-primary btn-block mt-7"
+                className="btn btn-primary btn-block"
                 onClick={submit}>
                 Submit
               </button>

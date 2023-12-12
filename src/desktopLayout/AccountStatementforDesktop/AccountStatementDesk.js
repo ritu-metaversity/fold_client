@@ -133,8 +133,7 @@ const AccountStatementDesk = () => {
   }
 
   const handlePagenation = (val) => {
-    if(pagination !== 0)
-    setPagination(val);
+    if (pagination !== 0) setPagination(val);
     setActive(val);
   };
 
@@ -179,336 +178,309 @@ const AccountStatementDesk = () => {
     setError(vl);
   };
 
-
   return (
     <>
       <div className="main">
         <div className="container-fluid container-fluid-5">
           <div className="itemHome">
-            
-              <div className="card">
-                <div className="card-header header-card ">
-                  <h4 className="mb-0">Account Statement</h4>
-                </div>
-                <div className="card-body container-fluid container-fluid-5 ">
-                  <div className="row row5">
-                    <div className="col-2">
-                      <div className="form-group mb-0">
-                        <div
-                          className="mx-datepicker">
-                          <div className="mx-input-wrapper">
-                            <DatePicker
-                              defaultValue={dayjs(startDate)}
-                              className="mx-input"
-                              format={dateFormat}
-                              selected={startDate}
-                              onChange={StartDateValue}
-                              disabledDate={(d) =>
-                                !d ||
-                                d.isBefore(dayjs().subtract(2, "month")) ||
-                                d.isAfter(dayjs())
-                              }
-                            />
-                          </div>
-                        </div>
+            <div className="card">
+              <div className="card-header header-card ">
+                <h4 className="mb-0">Account Statement</h4>
+              </div>
+              <div className="card-body container-fluid container-fluid-5 ">
+                <div className="row row5">
+                  <div className="col-2">
+                    <DatePicker
+                      defaultValue={dayjs(startDate)}
+                      className="mx-input"
+                      format={dateFormat}
+                      selected={startDate}
+                      onChange={StartDateValue}
+                      disabledDate={(d) =>
+                        !d ||
+                        d.isBefore(dayjs().subtract(2, "month")) ||
+                        d.isAfter(dayjs())
+                      }
+                    />
+                  </div>
+                  <div className="col-2">
+                    <DatePicker
+                      defaultValue={dayjs}
+                      className="mx-input"
+                      selected={endDate}
+                      format={dateFormat}
+                      onChange={EndDateValue}
+                      disabledDate={(d) =>
+                        !d ||
+                        d.isBefore(dayjs().subtract(2, "month")) ||
+                        d.isAfter(dayjs())
+                      }
+                    />
+                  </div>
+                  <div className="col-2">
+                    <div className="form-group mb-0 ">
+                      <select
+                        name="reportType"
+                        className="custom-select"
+                        onChange={getOptionValue}>
+                        <option value="1">All</option>
+                        <option value="2">Game Report</option>
+                        <option value="3">Deposit/Withdraw Report</option>
+                      </select>
+                      <div className="upDownbtn">
+                        <i className="fa fa-caret-up"></i>
+                        <i className="fa fa-caret-down"></i>
                       </div>
-                    </div>
-                    <div className="col-2">
-                      <div className="form-group mb-0">
-                        <div
-                          className="mx-datepicker"
-                          not-before="Tue Jan 10 2023 05:30:00 GMT+0530 (India Standard Time)"
-                          not-after="Fri Feb 10 2023 05:30:00 GMT+0530 (India Standard Time)"
-                          style={{ width: "auto" }}>
-                          <div className="mx-input-wrapper">
-                            <DatePicker
-                              defaultValue={dayjs}
-                              className="mx-input"
-                              selected={endDate}
-                              format={dateFormat}
-                              onChange={EndDateValue}
-                              disabledDate={(d) =>
-                                !d ||
-                                d.isBefore(dayjs().subtract(2, "month")) ||
-                                d.isAfter(dayjs())
-                              }
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-2">
-                      <div className="form-group mb-0 mt-7">
-                        <select
-                          name="reportType"
-                          className="custom-select"
-                          onChange={getOptionValue}>
-                          <option value="1">All</option>
-                          <option value="2">Game Report</option>
-                          <option value="3">Deposit/Withdraw Report</option>
-                        </select>
-                        <div className="upDownbtn">
-                          <i className="fa fa-caret-up"></i>
-                          <i className="fa fa-caret-down"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className={`col-2 mt-11 ${
-                        dataListLength === 0 ? "dis-none" : ""
-                      }`}>
-                      <div className="">
-                        <div
-                          id="account-statement_length"
-                          className="dataTables_length cpoint d-flex align-items-center">
-                          <label
-                            style={{ fontSize: "14px" }}
-                            className="showEntries">
-                            Show
-                          </label>
-                          <select
-                            name="account-statement_length"
-                            aria-controls="account-statement"
-                            className="form-control form-control-sm theme1font optionValue"
-                            style={{ fontSize: "14px", height: "38px" }}
-                            onChange={getIndexValues}>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25">25</option>
-                            <option value="30">30</option>
-                            <option value="35">35</option>
-                            <option value="40">40</option>
-                            <option value="45">45</option>
-                            <option value="50">50</option>
-                            <option value="100" selected>
-                              100
-                            </option>
-                          </select>
-                          <i className="fa fa-angle-down arrowBtn"></i>
-                          <label className="entries">entries</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-1">
-                      <button
-                        className="btn btn-primary btn-block mt-7"
-                        onClick={submit}>
-                        Submit
-                      </button>
                     </div>
                   </div>
+                  <div
+                    className={`col-3 mt4 ${
+                      dataListLength === 0 ? "dis-none" : ""
+                    }`}>
+                    <div className="">
+                      <div
+                        id="account-statement_length"
+                        className="dataTables_length cpoint d-flex align-items-center">
+                        <label
+                          style={{ fontSize: "14px" }}
+                          className="showEntries">
+                          Show
+                        </label>
+                        <select
+                          name="account-statement_length"
+                          aria-controls="account-statement"
+                          className="form-control form-control-sm theme1font optionValue"
+                          style={{ fontSize: "14px", height: "38px" }}
+                          onChange={getIndexValues}>
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                          <option value="20">20</option>
+                          <option value="25">25</option>
+                          <option value="30">30</option>
+                          <option value="35">35</option>
+                          <option value="40">40</option>
+                          <option value="45">45</option>
+                          <option value="50">50</option>
+                          <option value="100" selected>
+                            100
+                          </option>
+                        </select>
+                        <i className="fa fa-angle-down arrowBtn"></i>
+                        <label className="entries">entries</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-1">
+                    <button
+                      className="btn btn-primary btn-block "
+                      onClick={submit}>
+                      Submit
+                    </button>
+                  </div>
+                </div>
 
-                  <div className="row row5 mt-2">
-                    <div className="col-12 account-statement-tbl">
-                      <div className="table-responsive desk-table-responsive">
-                        {isLoading ? (
-                          <p className="lodder">
-                            <i className="fa fa-spinner fa-spin"></i>
-                          </p>
-                        ) : (
-                          <table
-                            role="table"
-                            aria-busy="false"
-                            aria-colcount="6"
-                            className="table b-table table-striped table-bordered"
-                            id="__BVID__104">
-                            <thead className="pnlVal">
-                              <tr role="row">
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="1"
-                                  className="text-center text-white">
-                                  Date
-                                </th>
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="2"
-                                  className="text-right text-white">
-                                  Sr no
-                                </th>
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="3"
-                                  className="text-right text-white">
-                                  Credit
-                                </th>
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="4"
-                                  className="text-right text-white">
-                                  Debit
-                                </th>
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="5"
-                                  className="text-right text-white">
-                                  Balance
-                                </th>
-                                <th
-                                  role="columnheader"
-                                  scope="col"
-                                  aria-colindex="6"
-                                  className="text-left text-white">
-                                  Remark
-                                </th>
-                              </tr>
-                            </thead>
-                            {/* {show ? ( */}
-                            <tbody>
-                              {dataList &&
-                                dataList?.map((res) => {
-                                  return (
-                                    <tr
-                                      role="row"
-                                      className="cPointer"
-                                      key={res?.sno}
-                                      onClick={(e) =>
-                                        handleShow(
-                                          e,
-                                          res?.remark,
-                                          res?.marketid
-                                        )
-                                      }>
-                                      <td
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="1"
-                                        className="text-center">
-                                        {res?.date}
-                                      </td>
-                                      <td
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="2"
-                                        className="text-right">
-                                        {res?.sno}
-                                      </td>
-                                      <td
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="3"
-                                        className="text-right text-success">
-                                        {res?.credit}
-                                      </td>
-                                      <td
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="4"
-                                        className="text-right text-danger">
-                                        {res?.debit}
-                                      </td>
-                                      <td
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="5"
-                                        className="text-right text-success">
-                                        {res?.pts}
-                                      </td>
-                                      <td
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="6"
-                                        className="text-left">
-                                        {res?.remark}
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
+                <div className="row row5 mt-2">
+                  <div className="col-12 account-statement-tbl">
+                    <div className="table-responsive desk-table-responsive">
+                      {isLoading ? (
+                        <p className="lodder">
+                          <i className="fa fa-spinner fa-spin"></i>
+                        </p>
+                      ) : (
+                        <table
+                          role="table"
+                          aria-busy="false"
+                          aria-colcount="6"
+                          className="table b-table table-striped table-bordered"
+                          id="__BVID__104">
+                          <thead className="pnlVal">
+                            <tr role="row">
+                              <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="1"
+                                className="text-center text-white">
+                                Date
+                              </th>
+                              <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="2"
+                                className="text-right text-white">
+                                Sr no
+                              </th>
+                              <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="3"
+                                className="text-right text-white">
+                                Credit
+                              </th>
+                              <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="4"
+                                className="text-right text-white">
+                                Debit
+                              </th>
+                              <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="5"
+                                className="text-right text-white">
+                                Balance
+                              </th>
+                              <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="6"
+                                className="text-left text-white">
+                                Remark
+                              </th>
+                            </tr>
+                          </thead>
+                          {/* {show ? ( */}
+                          <tbody>
+                            {dataList &&
+                              dataList?.map((res) => {
+                                return (
+                                  <tr
+                                    role="row"
+                                    className="cPointer"
+                                    key={res?.sno}
+                                    onClick={(e) =>
+                                      handleShow(e, res?.remark, res?.marketid)
+                                    }>
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="1"
+                                      className="text-center">
+                                      {res?.date}
+                                    </td>
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="2"
+                                      className="text-right">
+                                      {res?.sno}
+                                    </td>
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="3"
+                                      className="text-right text-success">
+                                      {res?.credit}
+                                    </td>
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="4"
+                                      className="text-right text-danger">
+                                      {res?.debit}
+                                    </td>
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="5"
+                                      className="text-right text-success">
+                                      {res?.pts}
+                                    </td>
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="6"
+                                      className="text-left">
+                                      {res?.remark}
+                                    </td>
+                                  </tr>
+                                );
+                              })}
 
-                              {/* ) : (
+                            {/* ) : (
                                 ""
                               )} */}
-                            </tbody>
-                          </table>
-                        )}
+                          </tbody>
+                        </table>
+                      )}
 
-                        <Modal
-                          show={showModals}
-                          size="xl"
-                          className=""
-                          onHide={handleCloseModal}
-                          style={{
-                            marginTop: "12px",
-                            marginInline: "2%",
-                            width: "95%",
-                          }}>
-                          <Modal.Header closeButton closeVariant="white" className="head-result">
-                            <Modal.Title className="acc-result">Result</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body className="account-popup">
-                            <SearchBetDesk
-                              MarketId={MarketId}
-                              remark={remark}
-                            />
-                          </Modal.Body>
-                        </Modal>
-                      </div>
+                      <Modal
+                        show={showModals}
+                        size="xl"
+                        className=""
+                        onHide={handleCloseModal}
+                        style={{
+                          marginTop: "12px",
+                          marginInline: "2%",
+                          width: "95%",
+                        }}>
+                        <Modal.Header
+                          closeButton
+                          closeVariant="white"
+                          className="head-result">
+                          <Modal.Title className="acc-result">
+                            Result
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className="account-popup">
+                          <SearchBetDesk MarketId={MarketId} remark={remark} />
+                        </Modal.Body>
+                      </Modal>
                     </div>
                   </div>
-                  {pageLength === 0 || isLoading ? (
-                    ""
-                  ) : (
-                    <div className="row row5 mt-2 ">
-                      <div
-                        className={`col-12 ${
-                          pageLength === 0 ? "dis-none" : ""
-                        }`}>
-                        <nav aria-label="Page navigation example">
-                          <ul className="pagination">
-                            <li
-                              className="page-item"
-                              onClick={decrementByFirst}>
-                              <button
-                                className="page-link"
-                                aria-label="Previous">
-                                <span aria-hidden="true">First</span>
-                              </button>
-                            </li>
-                            <li className="page-item" onClick={decerement}>
-                              <button
-                                className="page-link"
-                                aria-label="Previous">
-                                <span aria-hidden="true">Prev</span>
-                              </button>
-                            </li>
-                            <li
-                              className="page-item "
-                              onClick={() => handlePagenation(1)}>
-                              <button className="plink act">
-                                <span aria-hidden="true" className="num">
-                                  {pagination + 1}
-                                </span>
-                              </button>
-                            </li>
-                            <li className="page-item" onClick={increment}>
-                              <button
-                                className="page-link"
-                                // disabled={!(pageLength - 1 === pagination)}
-                                aria-label="Next">
-                                <span aria-hidden="true" className="num">
-                                  Next
-                                </span>
-                              </button>
-                            </li>
-                            <li className="page-item" onClick={incrementByLast}>
-                              <button className="page-link" aria-label="Next">
-                                <span aria-hidden="true">Last</span>
-                              </button>
-                            </li>
-                          </ul>
-                        </nav>
-                      </div>
-                    </div>
-                  )}
                 </div>
+                {pageLength === 0 || isLoading ? (
+                  ""
+                ) : (
+                  <div className="row row5 mt-2 ">
+                    <div
+                      className={`col-12 ${
+                        pageLength === 0 ? "dis-none" : ""
+                      }`}>
+                      <nav aria-label="Page navigation example">
+                        <ul className="pagination">
+                          <li className="page-item" onClick={decrementByFirst}>
+                            <button className="page-link" aria-label="Previous">
+                              <span aria-hidden="true">First</span>
+                            </button>
+                          </li>
+                          <li className="page-item" onClick={decerement}>
+                            <button className="page-link" aria-label="Previous">
+                              <span aria-hidden="true">Prev</span>
+                            </button>
+                          </li>
+                          <li
+                            className="page-item "
+                            onClick={() => handlePagenation(1)}>
+                            <button className="plink act">
+                              <span aria-hidden="true" className="num">
+                                {pagination + 1}
+                              </span>
+                            </button>
+                          </li>
+                          <li className="page-item" onClick={increment}>
+                            <button
+                              className="page-link"
+                              // disabled={!(pageLength - 1 === pagination)}
+                              aria-label="Next">
+                              <span aria-hidden="true" className="num">
+                                Next
+                              </span>
+                            </button>
+                          </li>
+                          <li className="page-item" onClick={incrementByLast}>
+                            <button className="page-link" aria-label="Next">
+                              <span aria-hidden="true">Last</span>
+                            </button>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                )}
               </div>
+            </div>
           </div>
         </div>
       </div>

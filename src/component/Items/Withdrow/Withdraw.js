@@ -23,13 +23,11 @@ const Withdraw = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userBalance, setUserBalance] = useState();
 
-
-
   const handleClick = () => {
     setIsLoading(true);
     setErrorAlert(false);
 
-    if(amount === "" || amount === undefined){
+    if (amount === "" || amount === undefined) {
       setMessage("The Amount field is required");
       setErrorAlert(true);
       setColorName("danger");
@@ -40,75 +38,76 @@ const Withdraw = () => {
       setErrorAlert(true);
       setColorName("danger");
       setIsLoading(false);
-    }
-    else if(accountNumber === ""){
+    } else if (accountNumber === "") {
       setMessage("The Account Number is required");
       setErrorAlert(true);
       setColorName("danger");
       setIsLoading(false);
-    }
-    else if(accountHolderName === ""){
+    } else if (accountHolderName === "") {
       setMessage("The Account Name field is required");
       setErrorAlert(true);
       setColorName("danger");
       setIsLoading(false);
-    }
-    else if(bankName === ""){
+    } else if (bankName === "") {
       setMessage("The Bank Name field is required");
       setErrorAlert(true);
       setColorName("danger");
       setIsLoading(false);
-    }else if(ifsc === ""){
+    } else if (ifsc === "") {
       setMessage("The IFSC field is required");
       setErrorAlert(true);
       setColorName("danger");
       setIsLoading(false);
-    }
-    
-     else if (userBalance < amount) {
+    } else if (userBalance < amount) {
       setMessage("Insufficient balance ");
       setErrorAlert(true);
       setColorName("danger");
       setIsLoading(false);
     }
 
-    if (userBalance >= amount && amount !=="" && bankName !== "" && ifsc !== "" && accountHolderName !== "" && accountNumber !== "") {
-        UserAPI.Self_Withdraw_App({
-          accountHolderName: accountHolderName,
-          bankName: bankName,
-          accountType: accountType,
-          amount: amount,
-          ifsc: ifsc,
-          accountNumber: accountNumber,
-        })
-          .then((res) => {
-            UserAPI.Withdraw_Request().then((res) => {
-              setIsLoading(false);
-              setWithdrawReq(res.data);
-              setDataLength(res?.data?.length);
-            });
-            setMessage(res.message);
-            setErrorAlert(true);
-            setColorName("success");
-            if (res.status === true) {
-              setAmount("");
-              setBankName("");
-              setAccountNumber("");
-              setIFSC("");
-              setAccountHolderName("");
-            }
-          })
-          .catch((error) => {
+    if (
+      userBalance >= amount &&
+      amount !== "" &&
+      bankName !== "" &&
+      ifsc !== "" &&
+      accountHolderName !== "" &&
+      accountNumber !== ""
+    ) {
+      UserAPI.Self_Withdraw_App({
+        accountHolderName: accountHolderName,
+        bankName: bankName,
+        accountType: accountType,
+        amount: amount,
+        ifsc: ifsc,
+        accountNumber: accountNumber,
+      })
+        .then((res) => {
+          UserAPI.Withdraw_Request().then((res) => {
             setIsLoading(false);
-            setErrorAlert(true);
-            setColorName("danger")
-            setMessage(error.response.data.message);
+            setWithdrawReq(res.data);
+            setDataLength(res?.data?.length);
           });
-      
+          setMessage(res.message);
+          setErrorAlert(true);
+          setColorName("success");
+          if (res.status === true) {
+            setAmount("");
+            setBankName("");
+            setAccountNumber("");
+            setIFSC("");
+            setAccountHolderName("");
+          }
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          setErrorAlert(true);
+          setColorName("danger");
+          setMessage(error.response.data.message);
+        });
     }
   };
 
-  const nav = useNavigate()
+  const nav = useNavigate();
 
   useEffect(() => {
     UserAPI.Withdraw_Request().then((res) => {
@@ -116,17 +115,17 @@ const Withdraw = () => {
       setDataLength(res?.data?.length);
     });
 
-    UserAPI.User_Balance().then((res) => {
-      setUserBalance(res?.data?.balance - res?.data?.libality);
-    }).catch((error)=>{
-      if(error?.response?.status === 401){
-       
-        nav("/login");
-        localStorage.clear();
-      }
-    });
+    UserAPI.User_Balance()
+      .then((res) => {
+        setUserBalance(res?.data?.balance - res?.data?.libality);
+      })
+      .catch((error) => {
+        if (error?.response?.status === 401) {
+          nav("/login");
+          localStorage.clear();
+        }
+      });
   }, []);
-
 
   const popupClose = (vl) => {
     setErrorAlert(vl);

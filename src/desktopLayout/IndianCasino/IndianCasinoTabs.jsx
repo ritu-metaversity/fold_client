@@ -42,7 +42,6 @@ useEffect(()=>{
         <ul ref={ref}>
           {
             indianCasino?.map((item, id) => {
-                // console.log(item, "dssasdasda")
               return (
                 <>
                   <li

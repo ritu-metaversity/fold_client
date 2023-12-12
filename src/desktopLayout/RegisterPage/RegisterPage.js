@@ -4,7 +4,8 @@ import { AuthorAPI } from "../../apis/AuthorAPI";
 import { FaHandPointDown } from "react-icons/fa";
 import { api } from "../../apis/configs/axiosConfigs";
 import { UserAPI } from "../../apis/UserAPI";
-import './RegisterPage.css'
+import "./RegisterPage.css";
+import { CasinoApi } from "../../apis/CasinoApi";
 
 const RegisterPage = () => {
   const [password, setPassword] = useState(0);
@@ -135,6 +136,16 @@ const RegisterPage = () => {
     }
   };
 
+  useEffect(() => {
+    UserAPI.Self_By_App_Url().then((res) => {
+      setIsDemoIdLoginAllowed(res?.data?.isDemoIdLoginAllowed);
+      setLogo(res?.data?.logo);
+      setCasinoComm(res?.data?.casinoComm);
+      setFancyComm(res?.data?.fancyComm);
+      setOddsComm(res?.data?.oddsComm);
+    });
+  }, []);
+
   const handleLogin = (e) => {
     e.preventDefault();
     setStatusVal(false);
@@ -146,12 +157,47 @@ const RegisterPage = () => {
         confirmPassword: confirmPassword,
         mobile: mobileNumber,
         userId: UserName,
+        casinoComm: casinoComm,
+        fancyComm:fancyComm,
+        oddsComm:oddsComm
       })
         .then((res) => {
-          localStorage.setItem("UserName", res.username);
-          localStorage.setItem("UserPassword", res.password);
-          nav("/login");
-          setIsLoading(false);
+          const token = res?.token;
+          setMessage(res.message);
+          api.defaults.headers.common["Authorization"] = `Bearer ${res?.token}`;
+          setStatusVal(res?.status);
+          setMessage("Invalid Username or password");
+          localStorage.setItem("UsertypeInfo", res?.userTypeInfo);
+          const uId = res?.username;
+          localStorage.setItem("UserId", uId);
+          if (
+            res?.token !== "" &&
+            res?.token !== undefined &&
+            res?.status !== false
+          ) {
+            localStorage.setItem("token", token);
+            nav("/home");
+            setInterval(
+              () =>
+                CasinoApi.Casino_Authentication({}).then((item) => {
+                  localStorage.setItem(
+                    "gameToken",
+                    item?.data?.data?.access_token
+                  );
+                }),
+              1000
+            );
+          }
+          const pType = res?.passwordtype;
+          localStorage.setItem("Password-type", pType);
+          if (pType === "old") {
+            nav("/m/setting/changepassword");
+          }
+          if (res?.status === false) {
+            setStatusVal(false);
+            setErrorMsg(res?.message);
+            setIsLoading(false);
+          }
         })
         .catch((error) => {
           setIsLoading(false);
@@ -184,7 +230,16 @@ const RegisterPage = () => {
           res?.data.status !== false
         ) {
           localStorage.setItem("token", token);
-
+          setInterval(
+            () =>
+              CasinoApi.Casino_Authentication({}).then((item) => {
+                localStorage.setItem(
+                  "gameToken",
+                  item?.data?.data?.access_token
+                );
+              }),
+            1000
+          );
           nav("/m/home");
         }
         const pType = res?.data?.passwordtype;
@@ -206,18 +261,7 @@ const RegisterPage = () => {
       });
   };
 
-  useEffect(() => {
-    UserAPI.Self_By_App_Url().then((res) => {
-      setIsDemoIdLoginAllowed(res?.data?.isDemoIdLoginAllowed);
-      setLogo(res?.data?.logo);
-      setCasinoComm(res?.data?.casinoComm);
-      setFancyComm(res?.data?.fancyComm);
-      setOddsComm(res?.data?.oddsComm);
-    });
-  }, []);
-
-  console.log(oddsComm == "0", "DSfsfsfsdfs")
-
+ 
 
   return (
     <>
@@ -315,25 +359,32 @@ const RegisterPage = () => {
             </div>
             <div className="form-group mb-4">
               <div className="comm_sec">
-                {
-                  oddsComm != "0" && <div className="sub_comm_sec">
-                  <p>Odds Comm</p>
-                  <input disabled defaultValue={oddsComm} value={oddsComm} />
-                </div>
-                }
-                {
-                  casinoComm != "0" && <div className="sub_comm_sec">
-                  <p>Casino Comm</p>
-                  <input disabled defaultValue={casinoComm} value={casinoComm} />
-                </div>
-                }
-                {
-                  fancyComm != "0" && <div className="sub_comm_sec">
-                  <p>Fancy Comm</p>
-                  <input disabled defaultValue={fancyComm} value={fancyComm} />
-                </div>
-                }
-                
+                {oddsComm != "0" && (
+                  <div className="sub_comm_sec">
+                    <p>Odds Comm</p>
+                    <input disabled defaultValue={oddsComm} value={oddsComm} />
+                  </div>
+                )}
+                {casinoComm != "0" && (
+                  <div className="sub_comm_sec">
+                    <p>Casino Comm</p>
+                    <input
+                      disabled
+                      defaultValue={casinoComm}
+                      value={casinoComm}
+                    />
+                  </div>
+                )}
+                {fancyComm != "0" && (
+                  <div className="sub_comm_sec">
+                    <p>Fancy Comm</p>
+                    <input
+                      disabled
+                      defaultValue={fancyComm}
+                      value={fancyComm}
+                    />
+                  </div>
+                )}
               </div>
             </div>
             <div className="form-group mb-0">

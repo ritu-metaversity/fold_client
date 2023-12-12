@@ -5,10 +5,8 @@ const CasinoModals = ({type}) => {
     const [singleUserValue, setSingleUserValue] = useState();
     const [nowaValue, setNowaValue] = useState();
     const [liveCasino, setLiveCasino] = useState();
-// console.log(type,"jkhghfv");
     useEffect(()=>{
         GameAPI.SINGLE_USER_VALUE().then((res)=>{
-          console.log(res?.data[type],type, "dsfsfdsf")
           setSingleUserValue(res?.data[type])
           // setNowaValue(res?.data?.supernowa);
           // setLiveCasino(res?.data?.qtech);

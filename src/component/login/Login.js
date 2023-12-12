@@ -25,7 +25,6 @@ function Login({ Errmessage, Statusmessage }) {
 
   const { host } = window.location;
 
-  console.log(password, user, "user");
 
   const handleLogin = () => {
     setStatusVal(true);
@@ -131,9 +130,9 @@ function Login({ Errmessage, Statusmessage }) {
   const handleCloseModal = () => setShowModals(false);
 
   useEffect(() => {
-    if (localStorage.getItem("UserName") !== null) {
-      setShowModals(true);
-    }
+    // if (localStorage.getItem("UserName") !== null) {
+    //   setShowModals(true);
+    // }
     if (localStorage.getItem("token") !== null) {
       nav("/m/home");
     }
@@ -147,13 +146,11 @@ function Login({ Errmessage, Statusmessage }) {
         const token = res.data.token;
         setMessage(res.message);
         setIsLoading1(false);
-        localStorage.removeItem("UserName");
-        localStorage.removeItem("UserPassword");
+        // localStorage.removeItem("UserName");
+        // localStorage.removeItem("UserPassword");
         api.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${res?.data?.token}`;
-        // setStatusVal(res?.data.status);
-        // setMessage("Invalid Username or password");
         localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
         const uId = res.data?.username;
         localStorage.setItem("UserId", uId);
