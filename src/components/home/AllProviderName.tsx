@@ -1,17 +1,23 @@
 import "./AllProviderName.css";
 import { useNavigate } from "react-router";
 import { AllCasinoProviderName, ProviderObject, key } from "./AllProviderConst";
+import { useContext } from "react";
+import { UserContext } from "../../App";
 
 const AllProviderName = () => {
   let navigate = useNavigate();
+
+  const { isSignedIn, setModal } = useContext(UserContext);
   const handleGamePageroute = (providerItem: ProviderObject, key: key) => {
-    navigate(providerItem.PageUrl, {
-      state: {
-        filterType: providerItem?.gameCode,
-        filter: providerItem.filter,
-        gameCode: providerItem.gameCodeName,
-      },
-    });
+    if (isSignedIn)
+      navigate(providerItem.PageUrl, {
+        state: {
+          filterType: providerItem?.gameCode,
+          filter: providerItem.filter,
+          gameCode: providerItem.gameCodeName,
+        },
+      });
+    else setModal && setModal({ login: true });
   };
   return (
     <div className="Main_header_for_game_provide_Incasino">
