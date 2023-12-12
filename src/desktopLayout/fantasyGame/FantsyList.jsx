@@ -5,16 +5,23 @@ import { MdOutlineClose } from "react-icons/md";
 import { fantsyGameList } from "./FantsyGameList";
 import LiveCasinoModals from "../LiveCasino/casinoTabs/LiveCasinoModals";
 import { CasinoApi } from "../../apis/CasinoApi";
+import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
 
 const FantsyList = ({ providerFilter }) => {
   const [show, setShow] = useState(false);
   const [gameId, setGameId] = useState("");
   const [iframeData, setIframeData] = useState("");
+  const [casinoShow, setCasinoShow] = useState(false);
+
+  const handleAgree = () => {
+    setShow(true);
+    setCasinoShow(false);
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = (val) => {
     setGameId(val);
-    setShow(true);
+    setCasinoShow(true);
   };
 
   useEffect(() => {
@@ -54,6 +61,18 @@ const FantsyList = ({ providerFilter }) => {
           })}
         </div>
       </div>
+
+      <Modal centered show={casinoShow} onHide={handleClose}>
+        <Modal.Body className="casino_modals_body">
+          <CasinoModals type={"fantasyGames"} />
+          <div className="agree_btn">
+            <button onClick={handleAgree}>Ok I Agree</button>
+            <button onClick={() => setCasinoShow(false)}>
+              No, I Don't Agree
+            </button>
+          </div>
+        </Modal.Body>
+      </Modal>
 
       <Modal className="if_modals" size="xl" show={show} onHide={handleClose}>
         <Modal.Body className="casino_iframe">
