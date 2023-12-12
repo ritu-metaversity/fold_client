@@ -147,7 +147,6 @@ export function WithdrawForm({
 
     onSubmit: async (values) => {
       const newValues: SelfWithdrawPayload = { ...values };
-      console.log(newValues, "iuytfvbnmkiuytgfv");
       setLoading(true);
       newValues.ifsc = newValues.ifsc?.toUpperCase();
       if (newValues.withdrawType.toLowerCase() !== "bank") {
@@ -160,7 +159,6 @@ export function WithdrawForm({
           ?.id || "";
       setSaveWithdrawData(newValues);
       const { response } = await userServices.selfWithdraw(newValues);
-      console.log(response, "bank");
       if (response) {
         if (response.data.bankExist === false) {
           setOpen(true);
@@ -193,21 +191,18 @@ export function WithdrawForm({
   const getStack = async () => {
     const { response } = await userServices.getWithdrawStack();
     if (response?.data) {
-      console.log(response);
       setStack(response.data);
     }
   };
   const getTypes = async () => {
     const { response } = await userServices.getWithdrawTypes();
     if (response?.data) {
-      console.log(response);
       setWithdrawTypes(response.data);
     }
   };
   const getSavedInfo = async () => {
     const { response } = await userServices.getWithdrawSaved();
     if (response?.data) {
-      console.log(response);
       setSavedInfo(response.data);
     }
   };
@@ -216,8 +211,6 @@ export function WithdrawForm({
     getStack();
     getSavedInfo();
   }, []);
-
-  console.log(values, "asdfkjajds");
 
   return (
     <>

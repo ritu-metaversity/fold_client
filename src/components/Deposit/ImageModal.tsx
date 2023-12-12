@@ -10,7 +10,6 @@ interface Props {
 }
 const ImageModal: FC<Props> = ({ open, handleClose, src }) => {
   const containerRef = useRef(null);
-  // console.log(origin)
   return (
     <Dialog open={open} maxWidth="lg" onClose={handleClose}>
       <DialogContent sx={{ width: "100%", p: 0.7 }}>

@@ -27,7 +27,6 @@ const InplaySport = () => {
       setLoading(true);
       const { response } = await sportServices.allActiveEvent();
       if (response) {
-        console.log(response);
         setActiveMatches(
           response?.data
             ?.filter((sports: SportInterface) => sports.matchList?.length)

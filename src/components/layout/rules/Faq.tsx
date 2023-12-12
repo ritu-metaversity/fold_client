@@ -15,7 +15,6 @@ const Faq = () => {
     setOpen(data.map((i) => false));
   }, [data]);
 
-  console.log(open, "open");
   return (
     <>
       <div className="britishdiv">
@@ -30,7 +29,6 @@ const Faq = () => {
           <p
             className="iconForCollapse"
             onClick={() => {
-              console.log("clicked");
               setOpen((o) => {
                 let newO = [...o];
                 return newO.map((item, index2) =>

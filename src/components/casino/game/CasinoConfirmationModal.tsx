@@ -32,7 +32,6 @@ const CasinoConfirmationModal: FC<Props> = ({
       const { response } = await casinoService.singleUserValue();
       if (response?.data) {
         setSingleUserValue(response.data);
-        console.log(response, "dakfj;lakdf;");
       }
     })();
   }, []);

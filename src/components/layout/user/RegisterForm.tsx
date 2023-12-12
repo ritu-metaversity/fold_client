@@ -22,13 +22,13 @@ import { UserContext } from "../../../App";
 import * as yup from "yup";
 import { passwordRegex } from "../../../utils/regex";
 
-interface RegisterInterface {
-  username?: string;
-  password?: string;
-}
+// interface RegisterInterface {
+//   username?: string;
+//   password?: string;
+// }
 export function RegisterForm() {
-  const [newCredAfterRegister, setNewCredAfterRegister] =
-    useState<RegisterInterface | null>(null);
+  // const [newCredAfterRegister, setNewCredAfterRegister] =
+  //   useState<RegisterInterface | null>(null);
   const matches = useMediaQuery("(max-width: 580px)");
   const [loading, setLoading] = useState(false);
   const nav = useNavigate();
@@ -89,7 +89,25 @@ export function RegisterForm() {
       setLoading(true);
       const { response } = await userServices.register(values);
       if (response) {
-        setNewCredAfterRegister(response);
+        // setNewCredAfterRegister(response);
+        if (response) {
+          if (response.passwordtype === "old" && setModal) {
+            setModal({ changePassword: true });
+            setLoading(false);
+            nav({
+              pathname: "/",
+              search: "first-login=true",
+            });
+            localStorage.setItem("token", response.token);
+          } else {
+            localStorage.setItem("token", response.token);
+            snackBarUtil.success("Login Successful !!");
+            if (setIsSignedIn) setIsSignedIn(true);
+          }
+          localStorage.setItem("userType", response.userTypeInfo);
+          if (setUser) setUser(response);
+          localStorage.setItem("user", JSON.stringify(response));
+        }
       }
       setLoading(false);
     },
@@ -117,37 +135,37 @@ export function RegisterForm() {
       }
     }
   };
-  if (newCredAfterRegister) {
-    return (
-      <>
-        <Grid
-          container
-          bgcolor={colorHex.bg3}
-          my={2}
-          py={2}
-          px={2}
-          borderRadius={1}
-          rowGap={6}
-        >
-          <Grid item xs={6}>
-            Username:
-          </Grid>
-          <Grid item xs={6}>
-            {newCredAfterRegister?.username}
-          </Grid>
-          <Grid item xs={6}>
-            Password:
-          </Grid>
-          <Grid item xs={6}>
-            {newCredAfterRegister?.password}
-          </Grid>
-        </Grid>
-        <Typography color="error.main">
-          Please save these details and login with this username and password.
-        </Typography>
-      </>
-    );
-  }
+  // if (newCredAfterRegister) {
+  //   return (
+  //     <>
+  //       <Grid
+  //         container
+  //         bgcolor={colorHex.bg3}
+  //         my={2}
+  //         py={2}
+  //         px={2}
+  //         borderRadius={1}
+  //         rowGap={6}
+  //       >
+  //         <Grid item xs={6}>
+  //           Username:
+  //         </Grid>
+  //         <Grid item xs={6}>
+  //           {newCredAfterRegister?.username}
+  //         </Grid>
+  //         <Grid item xs={6}>
+  //           Password:
+  //         </Grid>
+  //         <Grid item xs={6}>
+  //           {newCredAfterRegister?.password}
+  //         </Grid>
+  //       </Grid>
+  //       <Typography color="error.main">
+  //         Please save these details and login with this username and password.
+  //       </Typography>
+  //     </>
+  //   );
+  // }
   return (
     <Box position="relative">
       {loading && (
