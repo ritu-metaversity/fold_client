@@ -195,6 +195,7 @@ function AaccountStatement() {
                   <DatePicker
                     defaultValue={dayjs(startDate)}
                     // value={startDate}
+                    inputReadOnly={true}
                     format={dateFormat}
                     selected={startDate}
                     onChange={StartDateValue}
@@ -210,6 +211,7 @@ function AaccountStatement() {
                     defaultValue={dayjs}
                     selected={startDate}
                     format={dateFormat}
+                    inputReadOnly={true}
                     onChange={EndDateValue}
                     disabledDate={(d) =>
                       !d ||

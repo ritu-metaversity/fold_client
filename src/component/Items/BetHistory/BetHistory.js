@@ -158,6 +158,7 @@ function BetHistory() {
                       <DatePicker
                         defaultValue={dayjs(startDate)}
                         // value={startDate}
+                        inputReadOnly={true}
                         format={dateFormat}
                         selected={startDate}
                         onChange={StartDateValue}
@@ -174,6 +175,7 @@ function BetHistory() {
                         selected={startDate}
                         format={dateFormat}
                         onChange={EndDateValue}
+                        inputReadOnly={true}
                         disabledDate={(d) =>
                           !d ||
                           d.isBefore(dayjs().subtract(2, "month")) ||

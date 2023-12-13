@@ -168,6 +168,7 @@ function SportProfit() {
                 <DatePicker
                   defaultValue={dayjs(startDate)}
                   format={dateFormat}
+                  inputReadOnly={true}
                   onChange={StartDateValue}
                   disabledDate={(d) =>
                     !d ||
@@ -179,6 +180,7 @@ function SportProfit() {
               <div className="col-6 ">
                 <DatePicker
                   defaultValue={dayjs}
+                  inputReadOnly={true}
                   format={dateFormat}
                   onChange={EndDateValue}
                   disabledDate={(d) =>
