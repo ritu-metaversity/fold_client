@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./GameDetail.css";
 import Modal from "react-bootstrap/Modal";
 import Placebet from "../../MobPlacebet/Placebet";
@@ -51,6 +51,9 @@ function GameDetail({ getStackValue }) {
   const [StackVal, setStackVal] = useState([]);
   const [userIP, setUserIP] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const ref = useRef(null);
+  const scale = (ref.current?.clientWidth || 300) / 280
 
 
   const [profits, setProfits] = useState({
@@ -388,14 +391,19 @@ function GameDetail({ getStackValue }) {
                 {TvHideShow ? (
                   <div id="scoreboard-box">
                     <div className="scorecard scorecard-mobile">
-                      <div className="score-inner">
+                      <div className="score-inner tv-score-container">
                         <iframe
+                        ref={ref}
                           // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
                           // src={`http://43.205.116.130/tv.php?eventId=${id}`}
                           // src={`https://sqmrtv.in/btv.php?eventId=${id}`}
                           src={`https://100tun.online/web/${id}.html`}
                           width="100%"
-                          className="score-card"
+                          style={{
+                            aspectRatio: "16/9",
+                            transform: `scale(${scale})`,
+                          }}
+                          className="score-card tv-iframe"
                           title="scorecord"
                           allowFullScreen={true}></iframe>
                       </div>

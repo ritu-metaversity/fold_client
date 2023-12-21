@@ -3,13 +3,9 @@ import { GameAPI } from "../../../../apis/gameAPI";
 
 const CasinoModals = ({type}) => {
     const [singleUserValue, setSingleUserValue] = useState();
-    const [nowaValue, setNowaValue] = useState();
-    const [liveCasino, setLiveCasino] = useState();
     useEffect(()=>{
         GameAPI.SINGLE_USER_VALUE().then((res)=>{
           setSingleUserValue(res?.data[type])
-          // setNowaValue(res?.data?.supernowa);
-          // setLiveCasino(res?.data?.qtech);
         })
     }, [])
   return (

@@ -24,12 +24,12 @@ function ItemPageForHome() {
           {/* <LatestEvent /> */}
           <DeskMainPage />
           <NewLunch />
-          <SuperNowaHome path={"/supernowa"}/>
+          <SuperNowaHome path={"/supernowa"} />
 
-      <LiveCasinoHome />
-      <FantasyGamesHome path={"/fantsy"} />
-      <SlotHome path={"/slot"} />
-      <LotteryHome path={"/lottery"} />
+          <LiveCasinoHome />
+          <FantasyGamesHome path={"/fantsy"} />
+          <SlotHome path={"/slot"} />
+          <LotteryHome path={"/lottery"} />
           {/* <LiveCasino liveCasino={"LIVECASINO"} showid={1}/> */}
         </div>
       </div>

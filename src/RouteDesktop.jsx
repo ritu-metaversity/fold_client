@@ -46,38 +46,23 @@ const RouteDesktop = () => {
   const id = pathname?.slice(13);
 
   useEffect(() => {
-    // if(!pathname.includes('m')){
     if (localStorage.getItem("token") === null) {
       nav("/login");
-      if (pathname === "/") {
-        nav("/home");
-      } else if (pathname === "/register") {
-        nav("/register");
-      } else if (pathname === "/Cricket") {
-        nav("/Cricket");
-      } else if (pathname === "/Tennis") {
-        nav("/Tennis");
-      } else if (pathname === "/Football") {
-        nav("/Football");
-      } else if (pathname === "/Kabaddi") {
-        nav("/Kabaddi");
-      } else if (pathname === "/home") {
-        nav("/home");
-      } else if (pathname === "/about-us") {
-        nav("/about-us");
-      } else if (pathname === "/terms-and-conditions") {
-        nav("/terms-and-conditions");
-      } else if (pathname === "/responsible-gaming") {
-        nav("/responsible-gaming");
-      } else if (pathname === "/inplay") {
-        nav("/inplay");
-      } else if (pathname.includes("gamedetails")) {
-        nav(`/gamedetails/${id}`);
-      }
+      if (pathname === "/") nav("/home");
+      else if (pathname === "/register") nav("/register");
+      else if (pathname === "/Cricket") nav("/Cricket");
+      else if (pathname === "/Tennis") nav("/Tennis");
+      else if (pathname === "/Football") nav("/Football");
+      else if (pathname === "/Kabaddi") nav("/Kabaddi");
+      else if (pathname === "/home") nav("/home");
+      else if (pathname === "/about-us") nav("/about-us");
+      else if (pathname === "/terms-and-conditions") nav("/terms-and-conditions");
+      else if (pathname === "/responsible-gaming") nav("/responsible-gaming");
+      else if (pathname === "/inplay") nav("/inplay");
+      else if (pathname.includes("gamedetails")) nav(`/gamedetails/${id}`);
     } else if (pathname === "/") {
       nav("/");
     }
-    // }
   }, [pathname]);
 
   const idddd = (id) => {
