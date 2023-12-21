@@ -579,7 +579,7 @@ button.nav-link.nav2.nav-btn:first-child {
 }
 
 .score-card {
-    height: 290px;
+    height: 100%;
     margin-bottom: -3px;
     background-color: #567e2f;
     margin-top: 3px;
@@ -958,3 +958,10 @@ th.text-left.nation-name, th.text-left.rate {
     height: 20px;
     /* margin-left: 2px; */
 }
+
+.tv-iframe {
+    transform-origin: center 15px;
+  }
+  .tv-score-container {
+    overflow: hidden;
+  }
