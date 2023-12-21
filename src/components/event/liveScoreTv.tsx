@@ -1,11 +1,11 @@
 import { Switch, Typography, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { sportServices } from "../../utils/api/sport/services";
 import ScoreboardIcon from "@mui/icons-material/Scoreboard";
 import { MatchInterface } from "../home/match";
-
+import "./liveScoreTv.css";
 const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
   const [searchParams] = useSearchParams();
 
@@ -65,6 +65,9 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
   //   () => (channelId && channelId.toString() !== "0" ? true : false),
   //   [channelId]
   // );
+  const ref = useRef<HTMLIFrameElement | null>(null);
+
+  const scale = (ref.current?.clientWidth || 300) / 280;
   const isMobile = useMediaQuery("(max-width: 480px)");
   return (
     <>
@@ -126,14 +129,21 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
         />
       )}
       {showLive && (
-        <iframe
-          width="100%"
-          className="live-iframe"
-          title="score-iframe"
-          src={`https://100tun.online/web/${matchId}.html`}
-          // src={`https://luckybet.one/?eventId=${matchId}`}
-          //src={`http://13.233.57.150/test.php?ChannelId=${channelId}`}
-        />
+        <div className="tv-score-container">
+          <iframe
+            width="100%"
+            ref={ref}
+            className="tv-iframe live-iframe"
+            style={{
+              aspectRatio: "16/9",
+              transform: `scale(${scale})`,
+            }}
+            title="score-iframe"
+            src={`https://100tun.online/web/${matchId}.html`}
+            // src={`https://luckybet.one/?eventId=${matchId}`}
+            //src={`http://13.233.57.150/test.php?ChannelId=${channelId}`}
+          />
+        </div>
       )}
     </>
   );

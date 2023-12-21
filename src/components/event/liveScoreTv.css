@@ -1,0 +1,6 @@
+.tv-iframe {
+  transform-origin: center 10px;
+}
+.tv-score-container {
+  overflow: hidden;
+}
