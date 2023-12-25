@@ -77,14 +77,17 @@ const Slot = () => {
     setSportName(gameName);
     if (localStorage.getItem("token") !== null && singleUserValue !== 1) {
       setShow(true);
-    } else {
-      nav("/login");
-    }
-    if(localStorage.getItem("token") !== null && singleUserValue === 1){
+    } 
+    else if(localStorage.getItem("token") !== null && singleUserValue === 1){
       setCasinoShow(true)
+    }else {
+      nav("/login");
     }
     e.preventDefault();
   };
+
+
+  // console.log(Casinoshow, "Casinoshow")
 
   return (
     <>

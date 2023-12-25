@@ -92,7 +92,7 @@ const SuperNowa = () => {
 
   return (
     <>
-    <div style={{height:"calc(100vh - 240px)"}}>
+    <div style={{height:"calc(100vh - 240px)", overflowY:"scroll"}}>
     {
         isLoading ?<p className="lodder lodder_footer">
         <i className="fa fa-spinner fa-spin"></i>

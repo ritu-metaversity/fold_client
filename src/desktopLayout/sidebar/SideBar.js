@@ -124,7 +124,6 @@ function SideBar({ ItselfAllowedData }) {
     setShow(false);
   };
 
-  console.log(ItselfAllowedData, "ItselfAllowedData");
 
   return (
     <div className="">
