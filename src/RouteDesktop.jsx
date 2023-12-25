@@ -32,6 +32,8 @@ import IndianCasinoTabs from "./desktopLayout/IndianCasino/IndianCasinoTabs";
 import ComingSoon from "./common/comingSoon/ComingSoon";
 import NewLunch from "./desktopLayout/Newlunch/NewLunch";
 import SuperNowa from "./desktopLayout/IndianCasino/SuperNowa";
+import FooterForMob from "./component/FooterForMob/FooterForMob";
+import WhatsAppIcon from "./common/whatsAppIcon/WhatsAppIcon";
 
 const RouteDesktop = () => {
   const [SportId, setSportId] = useState("");
@@ -56,7 +58,8 @@ const RouteDesktop = () => {
       else if (pathname === "/Kabaddi") nav("/Kabaddi");
       else if (pathname === "/home") nav("/home");
       else if (pathname === "/about-us") nav("/about-us");
-      else if (pathname === "/terms-and-conditions") nav("/terms-and-conditions");
+      else if (pathname === "/terms-and-conditions")
+        nav("/terms-and-conditions");
       else if (pathname === "/responsible-gaming") nav("/responsible-gaming");
       else if (pathname === "/inplay") nav("/inplay");
       else if (pathname.includes("gamedetails")) nav(`/gamedetails/${id}`);
@@ -89,6 +92,25 @@ const RouteDesktop = () => {
     });
   }, []);
 
+
+  const [whatsAppIconPosition, setWhatsAppIconPosition] = useState({ top: '10px', right: '10px' });
+
+  useEffect(() => {
+    const handleScroll = () => {
+    
+     
+      const newTop = window.scrollY;
+
+
+      setWhatsAppIconPosition({ top: newTop});
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div>
@@ -154,18 +176,29 @@ const RouteDesktop = () => {
               <Route path="/Kabaddi" element={<HomePage />} />
               <Route path="/horseracing" element={<HomePage />} />
               {/* <Route path="/casino/:id" element={<CasinoForDesk />} /> */}
-              <Route path="/livecasino" element={<LiveCasino liveCasino={"LIVECASINO"} showid={2}/>} />
-              <Route path="/slot" element={<LiveCasino liveCasino={"SLOT"} showid={2} />} />
-              <Route path="/lottery" element={<LiveCasino liveCasino={"LOTTERY"} showid={2} />} />
-              <Route path="/fantsy" element={<FantsyTabs  />} />
-              <Route path="/aura" element={<NewLunch/>} />
-              <Route path="/supernowa" element={<SuperNowa/>} />
+              <Route
+                path="/livecasino"
+                element={<LiveCasino liveCasino={"LIVECASINO"} showid={2} />}
+              />
+              <Route
+                path="/slot"
+                element={<LiveCasino liveCasino={"SLOT"} showid={2} />}
+              />
+              <Route
+                path="/lottery"
+                element={<LiveCasino liveCasino={"LOTTERY"} showid={2} />}
+              />
+              <Route path="/fantsy" element={<FantsyTabs />} />
+              <Route path="/aura" element={<NewLunch />} />
+              <Route path="/supernowa" element={<SuperNowa />} />
               {/* <Route path="/sportbook" element={<ComingSoon/>} /> */}
-
 
               <Route path="/profitloss" element={<ProfitLossHome />} />
 
-              <Route path="/unsetteledbet" element={<UnsetteledBetDeskHome/>} />
+              <Route
+                path="/unsetteledbet"
+                element={<UnsetteledBetDeskHome />}
+              />
               <Route path="/about-us" element={<AboutPageForDesk />} />
               <Route
                 path="/terms-and-conditions"
@@ -194,7 +227,8 @@ const RouteDesktop = () => {
                 path="/SignOut"
                 element={<SignoutForDesk statusMassege={statusMassege} />}
               />
-              {ItselfAllowed === true && localStorage.getItem("UsertypeInfo") != 2 ? (
+              {ItselfAllowed === true &&
+              localStorage.getItem("UsertypeInfo") != 2 ? (
                 <>
                   <Route path="/deposit" element={<DepositForDesk />} />
                   <Route path="/withdraw" element={<NewWithdraw />} />
@@ -205,12 +239,13 @@ const RouteDesktop = () => {
             </Routes>
           </div>
         </div>
+        {localStorage.getItem("token") == null &&  <WhatsAppIcon top={whatsAppIconPosition.top}/>}
         {pathname === "/login" ||
         pathname === "/register" ||
         pathname.includes("gamedetails") ? (
           ""
         ) : (
-          <Footer />
+          <FooterForMob />
         )}
       </>
     </div>

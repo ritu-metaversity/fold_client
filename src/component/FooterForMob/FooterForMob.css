@@ -2,20 +2,26 @@ footer {
     height: auto;
     line-height: 24px;
 }
+
 footer {
     position: relative;
     background-color: #0088cc;
     color: #fff;
 }
+
 .text-center {
-    text-align: center!important;
+    text-align: center !important;
 }
-.mail-link.white, .mail-link.white:hover {
-    color: #fff !important; 
+
+.mail-link.white,
+.mail-link.white:hover {
+    color: #fff !important;
 }
-.footer-menu{
+
+.footer-menu {
     border-bottom: 2px dashed #fff;
 }
+
 .footer-menu ul {
     display: flex;
     flex-wrap: wrap;
@@ -25,16 +31,19 @@ footer {
     align-items: center;
     padding: 9px 12px;
 }
-.footer-menu ul li a{
+
+.footer-menu ul li a {
     color: #fff;
     border-bottom: 1px solid #fff;
     font-size: 14px;
- }
-.footer-menu ul li{
-   color: #fff;
-   padding: 0px 12px;
 }
-.fotterP{
+
+.footer-menu ul li {
+    color: #fff;
+    padding: 0px 12px;
+}
+
+.fotterP {
     text-align: center;
     padding: 5px 0px;
     font-size: 12px;
@@ -50,15 +59,86 @@ ul.footer_icon li svg {
     font-size: 18px;
 }
 
-ul.footer_icon li:hover{
+ul.footer_icon li:hover {
     background-color: #2c3d50;
     transition: 0.3s;
 }
 
-ul.footer_icon li:hover>svg{
+ul.footer_icon li:hover>svg {
     color: #fff;
     transition: 0.3s;
 }
+
+.footer_main {
+    background-color: #2c3d50;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 /* .footer_icon{
     display: none !important;
 } */
+
+.support-detail {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+}
+.social-icons-box {
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    right: 10px;
+}
+.social-icon:not(:last-child) {
+    margin-right: 5px;
+}
+.social-icon {
+    background-color: #ffffff;
+    height: 40px;
+    width: 40px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.social-icon img {
+    height: 30px;
+}
+.support-detail h2{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+@media only screen and (max-width: 767px) {
+    .support-detail {
+        width: 100%;
+        margin-top: 15px;
+    }
+    .social-icons-box {
+        width: 100%;
+        justify-content: center;
+        position: unset;
+        margin-top: 15px;
+    }
+    .social-icon {
+        height: 30px;
+        width: 30px;
+    }
+    .social-icon img {
+        height: 20px;
+    }
+    .support-detail h2{
+        font-size: 20px;
+    }
+}
+

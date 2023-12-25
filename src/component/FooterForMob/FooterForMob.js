@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./FooterForMob.css";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { GameAPI } from "../../apis/gameAPI";
-import {
-  FaFacebookF,
-  FaTelegramPlane,
-  FaWhatsapp,
-  FaYoutube,
-  FaTwitter,
-  FaInstagram,
-} from "react-icons/fa";
 
 function FooterForMob() {
   const [footerImage, setFooterImage] = useState([]);
@@ -24,15 +16,74 @@ function FooterForMob() {
 
   return (
     <div>
+      <section class="footer_main">
+        <div class="footer-top">
+          <div class="support-detail">
+            <h2>24X7 Support</h2>
+            <p></p>
+          </div>
+          <div class="social-icons-box">
+          <div class="social-icon">
+              <a href={footerImage?.s_whatsapp?.link} target="_blank" rel="noreferrer">
+                <img
+                  src={footerImage?.s_whatsapp?.icon}
+                  alt="Twitter"
+                />
+              </a>
+            </div>
+            <div class="social-icon">
+              <a href={footerImage?.s_facebook?.link} target="_blank" rel="noreferrer">
+                <img
+                  src={footerImage?.s_facebook?.icon}
+                  alt="facebook"
+                />
+              </a>
+            </div>
+            <div class="social-icon">
+              <a href={footerImage?.s_instagram?.link} target="_blank" rel="noreferrer">
+                <img
+                  src={footerImage?.s_instagram?.icon}
+                  alt="Telegram"
+                />
+              </a>
+            </div>
+            <div class="social-icon">
+              <a href={footerImage?.s_telegram?.link} target="_blank" rel="noreferrer">
+                <img
+                  src={footerImage?.s_telegram?.icon}
+                  alt="Twitter"
+                />
+              </a>
+            </div>
+            
+            <div class="social-icon">
+              <a href={footerImage?.s_youtube?.link} target="_blank" rel="noreferrer">
+                <img
+                  src={footerImage?.s_youtube?.icon}
+                  alt="Twitter"
+                />
+              </a>
+            </div>
+            {
+              footerImage?.s_twitter !== null && <div class="social-icon">
+              <a href={footerImage?.s_twitter?.link} target="_blank" rel="noreferrer">
+                <img
+                  src={footerImage?.s_twitter?.icon}
+                  alt="Twitter"
+                />
+              </a>
+            </div>
+            }
+            
+          </div>
+        </div>
+      </section>
       <footer>
         <div className="footer-menu">
           <ul>
             <li>
               <Link to="/about-us">About</Link>
             </li>
-            {/* <li>
-              <Link to="/">Rules</Link>
-            </li> */}
             <li>
               <Link to="terms-and-conditions">Terms and Conditions</Link>
             </li>

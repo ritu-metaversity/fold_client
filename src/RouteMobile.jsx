@@ -37,6 +37,7 @@ import IndianCasinoTabs from "./desktopLayout/IndianCasino/IndianCasinoTabs";
 import ComingSoon from "./common/comingSoon/ComingSoon";
 import NewLunch from "./desktopLayout/Newlunch/NewLunch";
 import SuperNowa from "./desktopLayout/IndianCasino/SuperNowa";
+import WhatsAppIcon from "./common/whatsAppIcon/WhatsAppIcon";
 
 const RouteMobile = () => {
   const { pathname } = useLocation();
@@ -144,6 +145,26 @@ const RouteMobile = () => {
 
   };
 
+
+  const [whatsAppIconPosition, setWhatsAppIconPosition] = useState({ top: '10px', right: '10px' });
+
+  useEffect(() => {
+    const handleScroll = () => {
+    
+     
+      const newTop = window.scrollY;
+
+
+      setWhatsAppIconPosition({ top: newTop});
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div>
       {" "}
@@ -196,6 +217,9 @@ const RouteMobile = () => {
           </Route>
           <Route path="*" element={<Login />} />
         </Routes>
+        {
+        localStorage.getItem("token") == null &&  <WhatsAppIcon top={whatsAppIconPosition.top}/>
+        }
         {pathname === "/login" || pathname === "/m/register" ? "" : <FooterForMob />}
       </>
     </div>

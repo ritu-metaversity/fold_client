@@ -76,7 +76,7 @@ const GameListHome = ({
 
       <Modal centered show={ruleShow} onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals type={"qtech"} />
+          <CasinoModals type={"qtech"} show={setShow} setShow={setRuleShow} />
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={() => setRuleShow(false)}>

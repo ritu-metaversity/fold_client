@@ -357,7 +357,7 @@ const RegisterPage = () => {
                 {confirmPasswordError}
               </p>
             </div>
-            <div className="form-group mb-4">
+            {/* <div className="form-group mb-4">
               <div className="comm_sec">
                 {oddsComm != "0" && (
                   <div className="sub_comm_sec">
@@ -386,7 +386,7 @@ const RegisterPage = () => {
                   </div>
                 )}
               </div>
-            </div>
+            </div> */}
             <div className="form-group mb-0">
               <button
                 type="submit"

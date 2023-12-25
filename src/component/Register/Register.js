@@ -372,7 +372,7 @@ const Register = () => {
                   className="text-danger error-msg"
                   style={{ display: "none" }}></span>
               </div>
-              <div className="form-group mb-4">
+              {/* <div className="form-group mb-4">
                 <div className="form-group mb-4">
                   <div className="comm_sec">
                     {oddsComm != "0" && (
@@ -407,7 +407,7 @@ const Register = () => {
                     )}
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="form-group mb-0">
                 <button
                   type="submit"
