@@ -339,7 +339,7 @@ export function RegisterForm() {
                 />
               </Grid>
             )}
-            {values.casinoComm > 0 && (
+            {/* {values.casinoComm > 0 && (
               <Grid
                 item
                 // xs={12}
@@ -358,7 +358,7 @@ export function RegisterForm() {
                   value={values.casinoComm}
                 />
               </Grid>
-            )}
+            )} */}
             <Grid item xs={12}>
               <Form.Check
                 name="checked"
