@@ -330,7 +330,7 @@ function App() {
               casinoId,
               setCasinoId,
               user,
-              appData: appData ? { ...appData, qtech: true } : null,
+              appData: appData,
               modal,
               setModal,
               setIsSignedIn,
