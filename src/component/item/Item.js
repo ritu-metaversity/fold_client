@@ -193,21 +193,13 @@ function Item({ gameIdForItemPage, spName, ItselfAllowedData }) {
               </div>
             </div>
           </div>
-          {ItselfAllowedData?.aura &&  <Slot />}
-         
+          <Slot />
           <div className="casino-main">
-            
-            {ItselfAllowedData?.superNova && (
-              <SuperNowaHome path={"/m/sueprnowa"} />
-            )}
-            {ItselfAllowedData?.qtech && (
-              <>
-                <LiveCasinoHome />
-                <FantasyGamesHome path={"/m/fantsy"} />
-                <SlotHome path={"/m/slots"} />
-                <LotteryHome path={"/m/lottery"} />
-              </>
-            )}
+            <SuperNowaHome path={"/m/sueprnowa"} />
+            <LiveCasinoHome />
+            <FantasyGamesHome path={"/m/fantsy"} />
+            <SlotHome path={"/m/slots"} />
+            <LotteryHome path={"/m/lottery"} />
           </div>
         </>
       )}

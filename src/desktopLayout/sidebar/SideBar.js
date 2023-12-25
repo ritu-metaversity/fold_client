@@ -171,7 +171,7 @@ function SideBar({ ItselfAllowedData }) {
       <Accordion defaultActiveKey="0" className="main_sport_header">
         <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
           <ul className="live_casino">
-            {ItselfAllowedData?.aura && (
+           
               <li className="nav-item">
                 <Link to="/aura" className="nav-link">
                   <span
@@ -181,8 +181,7 @@ function SideBar({ ItselfAllowedData }) {
                   </span>
                 </Link>
               </li>
-            )}
-            {ItselfAllowedData?.superNova && (
+           
               <li className="nav-item">
                 <Link to="/supernowa" className="nav-link">
                   <span
@@ -192,8 +191,7 @@ function SideBar({ ItselfAllowedData }) {
                   </span>
                 </Link>
               </li>
-            )}
-            {ItselfAllowedData?.qtech && (
+          
               <>
                 <li className="nav-item">
                   <Link to="/livecasino" className="nav-link">
@@ -217,8 +215,7 @@ function SideBar({ ItselfAllowedData }) {
                   </Link>
                 </li>
               </>
-            )}
-
+            
             {/* <li className="nav-item">
             <Link to="/sportbook" className="nav-link">
               <span className="">Our Virtual</span>
