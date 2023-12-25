@@ -403,4 +403,7 @@ table {
     .game-listing-container.main-container {
         background: #f7f7f7 !important;
     }
+    .tab-pane.container.pl-0.pr-0.max_heirht {
+        min-height: calc(100vh - 387px);
+    }
 }

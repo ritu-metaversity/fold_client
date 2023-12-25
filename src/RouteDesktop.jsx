@@ -40,6 +40,7 @@ const RouteDesktop = () => {
   const [Errmessage, setErrMessege] = useState("");
   const [Statusmessage, setStatusmessage] = useState(false);
   const [ItselfAllowed, setItselfAllowed] = useState();
+  const [ItselfAllowedData, setItselfAllowedData] = useState();
 
   const nav = useNavigate();
 
@@ -89,6 +90,7 @@ const RouteDesktop = () => {
   useEffect(() => {
     UserAPI.Self_By_App_Url().then((res) => {
       setItselfAllowed(res?.data?.selfAllowed);
+      setItselfAllowedData(res?.data);
     });
   }, []);
 
@@ -132,7 +134,7 @@ const RouteDesktop = () => {
             ""
           ) : (
             <div className="sidebar col-md-2">
-              <SideBar />
+              <SideBar ItselfAllowedData={ItselfAllowedData}/>
             </div>
           )}
 
@@ -163,7 +165,7 @@ const RouteDesktop = () => {
               />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/inplay" element={<InPlay />} />
-              <Route path="/home" element={<ItemPageForHome />} />
+              <Route path="/home" element={<ItemPageForHome ItselfAllowedData={ItselfAllowedData}/>} />
               <Route path="/gamedetail/:id" element={<GamedetailPage />} />
               <Route
                 path="/accountstatement"
