@@ -26,8 +26,8 @@ import { LoadingBallSvg } from "./components/loadingBall/loadingBall";
 import { useLocation } from "react-router-dom";
 import { FaHeadphones } from "react-icons/fa";
 import { qTechServices } from "./utils/api/qTechGames/services";
-import { Approval } from "@mui/icons-material";
 import { FooterImageInterface } from "./components/layout/Footer";
+import { casinoService } from "./utils/api/casino/service";
 
 const Pages = React.lazy(() => import("./components/pages"));
 const CustomizedDialogPassword = React.lazy(
@@ -60,6 +60,7 @@ interface UserContextType {
   getBalanceData: () => Promise<void>;
   userIp: string;
   footerData?: FooterImageInterface;
+  singleUserValue?: SingleUserValue;
 }
 
 const defaultStake = {
@@ -74,7 +75,17 @@ const defaultStake = {
   stack9: 0,
   stack10: 0,
 };
-
+interface SingleUserValue {
+  id: string;
+  subAdminId: number;
+  supernowa: number;
+  aura: number;
+  qtech: number;
+  sportBook: number;
+  currency: string;
+  fantasyGames: number;
+  userId: string;
+}
 interface AppDataInterface {
   logo: string;
   mobileLogo: string;
@@ -121,7 +132,9 @@ function App() {
 
   const [userIp, setUserIp] = useState("");
   const [dheerajOpen, setDheerajOpen] = useState(false);
-
+  const [singleUserValue, setSingleUserValue] = useState<
+    SingleUserValue | undefined
+  >();
   useEffect(() => {
     const getIpy = async () => {
       const { response: ipRes } = await utilServices.getIpfy();
@@ -244,6 +257,12 @@ function App() {
     if (isSignedIn) {
       getButtonValue();
       getBalance();
+      (async () => {
+        const { response } = await casinoService.singleUserValue();
+        if (response?.data) {
+          setSingleUserValue(response.data);
+        }
+      })();
       authenticationHandler();
     }
 
@@ -292,6 +311,7 @@ function App() {
         <div className="App">
           <UserContext.Provider
             value={{
+              singleUserValue,
               footerData,
               balance: balanceData,
               getBalanceData: getBalance,

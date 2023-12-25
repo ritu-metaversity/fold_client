@@ -1,19 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
-import { casinoService } from "../../../utils/api/casino/service";
-import { Box, Button, DialogActions, Typography } from "@mui/material";
+import React, { FC, useContext, useEffect } from "react";
+import { Box, DialogActions, Typography } from "@mui/material";
 import { CasinoAction, CasinoActionContainer } from "../styledComponent";
-
-interface SingleUserValue {
-  id: string;
-  subAdminId: number;
-  supernowa: number;
-  aura: number;
-  qtech: number;
-  sportBook: number;
-  currency: string;
-  fantasyGames: number;
-  userId: string;
-}
+import { UserContext } from "../../../App";
 
 interface Props {
   type: "supernowa" | "aura" | "qtech" | "sportBook" | "fantasyGames";
@@ -25,16 +13,17 @@ const CasinoConfirmationModal: FC<Props> = ({
   handleNotAgree,
   type,
 }) => {
-  const [singleUserValue, setSingleUserValue] =
-    useState<SingleUserValue | null>(null);
+  const { singleUserValue } = useContext(UserContext);
   useEffect(() => {
-    (async () => {
-      const { response } = await casinoService.singleUserValue();
-      if (response?.data) {
-        setSingleUserValue(response.data);
-      }
-    })();
-  }, []);
+    if (singleUserValue?.[type] === 1) {
+      handleAgree();
+    }
+  }, [singleUserValue, type]);
+
+  if (singleUserValue?.[type] === 1) {
+    return <></>;
+  }
+
   return (
     <Box textAlign={"center"} overflow={"visible"} paddingTop={20}>
       {/* {singleUserValue.message} */}
