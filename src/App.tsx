@@ -86,7 +86,8 @@ interface SingleUserValue {
   fantasyGames: number;
   userId: string;
 }
-interface AppDataInterface {
+
+export interface AppDataInterface {
   logo: string;
   mobileLogo: string;
   isDemoIdLoginAllowed: boolean;
@@ -94,6 +95,11 @@ interface AppDataInterface {
   casinoComm: number;
   fancyComm: number;
   oddsComm: number;
+  aura: boolean;
+  superNova: boolean;
+  virtual: boolean;
+  sportBook: boolean;
+  qtech: boolean;
 }
 
 export let setErrorRef: any;
@@ -182,7 +188,7 @@ function App() {
   }, [isSignedIn]);
 
   const authenticationHandler = async () => {
-    if (isSignedIn) {
+    if (isSignedIn && appData?.qtech) {
       const { response } = await qTechServices.authentication();
       if (!!response && response?.data && response?.data?.access_token) {
         const { access_token } = response?.data;
@@ -324,7 +330,7 @@ function App() {
               casinoId,
               setCasinoId,
               user,
-              appData,
+              appData: appData ? { ...appData, qtech: true } : null,
               modal,
               setModal,
               setIsSignedIn,

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useRef } from "react";
+import { Fragment, useEffect, useState, useRef, useContext } from "react";
 import { qTechServices } from "../../../utils/api/qTechGames/services";
 import ProvidersTabs from "../providersTabs/providersTabs";
 import classes from "./providerTabsWithGames.module.css";
@@ -18,6 +18,7 @@ import { colorHex } from "../../../utils/constants";
 import CasinoGame from "../../casino/game/CasinoGame";
 import { supernowaServices } from "../../../utils/api/supernowa/services";
 import { useLocation } from "react-router-dom";
+import { UserContext } from "../../../App";
 
 export interface GameInterface {
   id: string;
@@ -72,6 +73,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   };
 
   const getGameLists = async (token: string, provider?: string) => {
+    if (!appData?.qtech) return;
     setIsLoading(true);
     const { response } = await qTechServices.gameLists({
       token,
@@ -112,6 +114,8 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   // };
 
   const authHandler = async (code: string, providerCode: string) => {
+    if (!appData?.superNova) return;
+
     setOpen(code);
 
     const { response } = await supernowaServices.authentication({
@@ -155,6 +159,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   };
 
   const getSuperNowaGameList = async () => {
+    if (!appData?.superNova) return;
     const { response } = await supernowaServices.gameLists({
       providerCode: "SN",
     });
@@ -247,6 +252,8 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     }
   }, [state]);
 
+  const { appData } = useContext(UserContext);
+
   return (
     <>
       <div className={classes["container"]}>
@@ -261,10 +268,19 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
             <ProvidersTabs
               providerList={
                 filter === "slot"
-                  ? slotProviderList
+                  ? appData?.qtech
+                    ? slotProviderList
+                    : []
                   : filter === "lottery"
-                  ? lotteryprovidersList
-                  : casinoProviderList
+                  ? appData?.qtech
+                    ? lotteryprovidersList
+                    : []
+                  : casinoProviderList.filter(
+                      (i) =>
+                        (i.filterType === "AURA" && appData?.aura) ||
+                        (i.filterType === "NOWA" && appData?.superNova) ||
+                        (!i.providerId && appData?.qtech)
+                    )
               }
               getName={getProviderValue}
               value={SelectedProvider || ""}

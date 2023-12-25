@@ -1,11 +1,12 @@
 import { Box } from "@mui/system";
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "../layout";
 import Loading from "../layout/loading";
 import { NewLayout, ThrowToLogin } from "../terms";
 import Games from "../qTech/games/Games";
 import ComingSoon from "../comingSoon/ComingSoon";
+import { UserContext } from "../../App";
 
 // import Aboutus from "./aboutus";
 // import ResponsibleGaming from "./responsibleGaming";
@@ -36,6 +37,7 @@ const LiveCasino = React.lazy(() => import("../qTech/liveCasino/LiveCasino"));
 const Lottery = React.lazy(() => import("../qTech/lottery/lottery"));
 
 const Pages = () => {
+  const { appData } = useContext(UserContext);
   return (
     <div>
       <Suspense

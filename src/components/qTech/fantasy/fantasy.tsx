@@ -3,7 +3,6 @@ import classes from "./fantasy.module.css";
 import { data, gameData, GameDataInterface } from "./data";
 import ProvidersTabs from "../providersTabs/providersTabs";
 import GamePortal from "../gamePortal/GamePortal";
-import { qTechServices } from "../../../utils/api/qTechGames/services";
 import { Toolbar, useMediaQuery } from "@mui/material";
 
 function Fantasy() {

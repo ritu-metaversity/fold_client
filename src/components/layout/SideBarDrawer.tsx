@@ -125,29 +125,31 @@ export const Drawers = ({
               />
             </ListItemButton>
           </SidebarHeader>
-          <SidebarHeader
-            sx={{
-              borderBottom: "1px solid " + colorHex.borderLine,
-            }}
-          >
-            <ListItemButton
-              onClick={(e) => {
-                if (!isSignedIn) {
-                  e.preventDefault();
-                  setModal && setModal({ login: true });
-                } else {
-                  nav("/casino");
-                }
+          {(appData?.qtech || appData?.aura || appData?.superNova) && (
+            <SidebarHeader
+              sx={{
+                borderBottom: "1px solid " + colorHex.borderLine,
               }}
             >
-              <ListItemText
-                primaryTypographyProps={{
-                  fontSize: "0.9rem",
+              <ListItemButton
+                onClick={(e) => {
+                  if (!isSignedIn) {
+                    e.preventDefault();
+                    setModal && setModal({ login: true });
+                  } else {
+                    nav("/casino");
+                  }
                 }}
-                primary={"LIVE CASINO"}
-              />
-            </ListItemButton>
-          </SidebarHeader>
+              >
+                <ListItemText
+                  primaryTypographyProps={{
+                    fontSize: "0.9rem",
+                  }}
+                  primary={"LIVE CASINO"}
+                />
+              </ListItemButton>
+            </SidebarHeader>
+          )}
           <SidebarSport />
         </List>
       </Box>

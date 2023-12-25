@@ -1,40 +1,20 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, ButtonGroup } from "@mui/material";
+import { ButtonGroup } from "@mui/material";
 import { Box } from "@mui/system";
-import { colorHex } from "../../utils/constants";
-import { UserContext } from "../../App";
+import { AppDataInterface, UserContext } from "../../App";
 import { ButtonTabStyledButton } from "./styledComponents";
 
-const unSelectedSx = {
-  bgcolor: colorHex.bg2,
-  borderColor: "unset !important",
-  color: "text.primary",
-  width: "max-content",
-  display: "block",
-  flex: 1,
-  lineHeight: 1,
-  padding: "16px 16px",
-};
-
-const selectedSx = {
-  // bgcolor: "secondary.main",
-  color: "white",
-  padding: "16px 16px",
-  flex: 1,
-
-  lineHeight: 1,
-  display: "block",
-  width: "max-content",
-  borderColor: "unset !important",
-};
-
-export const LinkandLabel = [
-  {
-    label: "Lottery",
-    link: "/lottery",
-    require: true,
-  },
+export const getLinksAndLabels = (appData: AppDataInterface) => [
+  ...(appData.qtech
+    ? [
+        {
+          label: "Lottery",
+          link: "/lottery",
+          require: true,
+        },
+      ]
+    : []),
   {
     label: "SportsBook1",
     link: "/cumming",
@@ -43,31 +23,40 @@ export const LinkandLabel = [
     label: "Exchange",
     link: "/",
   },
-  {
-    label: "Live Casino",
-    link: "/casino",
-    require: true,
-  },
+  ...(appData.qtech || appData.aura || appData.superNova
+    ? [
+        {
+          label: "Live Casino",
+          link: "/casino",
+          require: true,
+        },
+      ]
+    : []),
   // {
   //   label: "Virtual Casino",
   //   link: "/virtual-casino",
   // },
-  {
-    label: "Slots",
-    link: "/slot",
-    require: true,
-  },
-  {
-    label: "Fantasy Game",
-    link: "/fantasy",
-    require: true,
-  },
+  ...(appData.qtech
+    ? [
+        {
+          label: "Slots",
+          link: "/slot",
+          require: true,
+        },
+        {
+          label: "Fantasy Game",
+          link: "/fantasy",
+          require: true,
+        },
+      ]
+    : []),
 ];
 
 export function ButtonTabs() {
   const [current, setCurrent] = useState("/");
-  const { isSignedIn, setModal } = useContext(UserContext);
+  const { isSignedIn, setModal, appData } = useContext(UserContext);
   const nav = useNavigate();
+  const linksAndLabel = appData ? getLinksAndLabels(appData) : [];
   return (
     <Box
       width={"calc(100% - 8px)"}
@@ -86,7 +75,7 @@ export function ButtonTabs() {
         color="secondary"
         variant="contained"
       >
-        {LinkandLabel.map((item) => (
+        {linksAndLabel.map((item) => (
           <ButtonTabStyledButton
             onClick={() => {
               if (isSignedIn) {

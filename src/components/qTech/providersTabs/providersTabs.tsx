@@ -32,6 +32,18 @@ function ProvidersTabs({ getName, value, providerList, cls }: Props) {
           el?.apiUrl,
           el?.providerId
         );
+    } else {
+      const el = providerList[0];
+      if (el) {
+        getName(
+          el?.filterType,
+          el?.customFilter,
+          el?.games,
+          el?.type,
+          el?.apiUrl,
+          el?.providerId
+        );
+      }
     }
   }, [state]);
   return (

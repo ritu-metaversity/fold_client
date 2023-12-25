@@ -7,7 +7,7 @@ import { UserContext } from "../../App";
 const AllProviderName = () => {
   let navigate = useNavigate();
 
-  const { isSignedIn, setModal } = useContext(UserContext);
+  const { isSignedIn, setModal, appData } = useContext(UserContext);
   const handleGamePageroute = (providerItem: ProviderObject, key: key) => {
     if (isSignedIn)
       navigate(providerItem.PageUrl, {
@@ -21,26 +21,42 @@ const AllProviderName = () => {
   };
   return (
     <div className="Main_header_for_game_provide_Incasino">
-      {Object.keys(AllCasinoProviderName).map((key, item) => (
-        <div className="Inner_header_for_game_provide_Incasin">
-          <h3 className="provider_name_details">{key}</h3>
-          <div className="main_wrap_live-casion">
-            {AllCasinoProviderName &&
-              AllCasinoProviderName[
-                key as keyof typeof AllCasinoProviderName
-              ].map((item, index) => (
-                <div
-                  className="MainBtn_warp"
-                  style={{ border: "0.5px solid" }}
-                  onClick={() => handleGamePageroute(item, key as key)}
-                >
-                  <img className="complany-logo-warp" src={item?.logo} alt="" />
-                  <span className="complany-name-wrap">{item?.name}</span>
-                </div>
-              ))}
+      {Object.keys(AllCasinoProviderName).map((key, item) =>
+        !appData?.qtech && key !== "Indian Casino" ? (
+          <></>
+        ) : !(appData?.aura || appData?.superNova) && key == "Indian Casino" ? (
+          <></>
+        ) : (
+          <div className="Inner_header_for_game_provide_Incasin">
+            <h3 className="provider_name_details">{key}</h3>
+            <div className="main_wrap_live-casion">
+              {AllCasinoProviderName &&
+                AllCasinoProviderName[
+                  key as keyof typeof AllCasinoProviderName
+                ].map(
+                  (item, index) =>
+                    ((item.gameCode === "AURA" && appData?.aura) ||
+                      (item.gameCode === "NOWA" && appData?.superNova) ||
+                      (!["AURA", "NOWA"].includes(item.gameCode) &&
+                        appData?.qtech)) && (
+                      <div
+                        className="MainBtn_warp"
+                        style={{ border: "0.5px solid" }}
+                        onClick={() => handleGamePageroute(item, key as key)}
+                      >
+                        <img
+                          className="complany-logo-warp"
+                          src={item?.logo}
+                          alt=""
+                        />
+                        <span className="complany-name-wrap">{item?.name}</span>
+                      </div>
+                    )
+                )}
+            </div>
           </div>
-        </div>
-      ))}
+        )
+      )}
     </div>
   );
 };

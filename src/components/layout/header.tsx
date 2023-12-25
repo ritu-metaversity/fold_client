@@ -21,7 +21,7 @@ import { colorHex } from "../../utils/constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import styled from "@emotion/styled";
-import { LinkandLabel } from "../home/buttonTabs";
+import { getLinksAndLabels } from "../home/buttonTabs";
 export const drawerWidth = 220;
 export const drawerWidthXl = 270;
 
@@ -70,7 +70,7 @@ export default function Header(props: Props) {
   const matches = useMediaQuery("(min-width:1280px)");
   const drawerWidthLocal = notShowSidebar ? 0 : drawerWidth;
   const drawerWidthXlLocal = notShowSidebar ? 0 : drawerWidthXl;
-
+  const linkAndLabel = appData ? getLinksAndLabels(appData) : [];
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -86,7 +86,7 @@ export default function Header(props: Props) {
           zIndex: 100,
         }}
       >
-        {LinkandLabel.map((item, index) => (
+        {linkAndLabel.map((item, index) => (
           <>
             <TopNavLinks
               onClick={(e) => {
@@ -107,7 +107,7 @@ export default function Header(props: Props) {
             >
               {item.label}
             </TopNavLinks>
-            {isSignedIn && index + 1 !== LinkandLabel.length && <Circle />}
+            {isSignedIn && index + 1 !== linkAndLabel.length && <Circle />}
           </>
         ))}
 
