@@ -10,7 +10,7 @@ import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
 import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 
-function Item({ gameIdForItemPage, spName }) {
+function Item({ gameIdForItemPage, spName, ItselfAllowedData }) {
   const [gameName, setGameName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [MatchListLength, setMatchListLength] = useState();
@@ -22,7 +22,7 @@ function Item({ gameIdForItemPage, spName }) {
   localStorage.setItem("SportId", gameIdForItemPage);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     axios
       .get("https://oddsapi.247idhub.com/betfair_api/active_match", {
@@ -35,10 +35,16 @@ function Item({ gameIdForItemPage, spName }) {
   }, []);
 
   useEffect(() => {
-    var matchData = gameName && gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList?.length
+    var matchData =
+      gameName &&
+      gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList
+        ?.length;
     setMatchListLength(matchData);
-
-  },[gameName && gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList?.length]);
+  }, [
+    gameName &&
+      gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList
+        ?.length,
+  ]);
 
   return (
     <div>
@@ -56,7 +62,8 @@ function Item({ gameIdForItemPage, spName }) {
               <div>
                 <div className="pt-2">
                   {gameName?.find((item) => item?.sportid === gameIdForItemPage)
-                    ?.matchList?.length === 0 ||gameName?.find((item) => item?.sportid === gameIdForItemPage)
+                    ?.matchList?.length === 0 ||
+                  gameName?.find((item) => item?.sportid === gameIdForItemPage)
                     ?.matchList?.length === undefined ? (
                     <p className="no-found" style={{ marginBottom: "12px" }}>
                       No Real Data Found
@@ -66,10 +73,10 @@ function Item({ gameIdForItemPage, spName }) {
                       ?.find((item) => item?.sportid === gameIdForItemPage)
                       ?.matchList.map((item) => {
                         return (
-                          <Link key={item.matchId} to={`/m/gamedetail/${item.matchId}`}>
-                            <div
-                              className="game-list pt-1 pb-1 container-fluid"
-                              >
+                          <Link
+                            key={item.matchId}
+                            to={`/m/gamedetail/${item.matchId}`}>
+                            <div className="game-list pt-1 pb-1 container-fluid">
                               <div className="row row5">
                                 <div className="col-8 game-head">
                                   <p className="mb-0 game-name">
@@ -186,18 +193,22 @@ function Item({ gameIdForItemPage, spName }) {
               </div>
             </div>
           </div>
-          <Slot />
+          {ItselfAllowedData?.aura &&  <Slot />}
+         
           <div className="casino-main">
-            <SuperNowaHome path={"/m/sueprnowa"}/>
-          <LiveCasinoHome/>
-          <FantasyGamesHome 
-          path={"/m/fantsy"}
-          />
-          <SlotHome path={"/m/slots"}/>
-          <LotteryHome  path={"/m/lottery"}/>
+            
+            {ItselfAllowedData?.superNova && (
+              <SuperNowaHome path={"/m/sueprnowa"} />
+            )}
+            {ItselfAllowedData?.qtech && (
+              <>
+                <LiveCasinoHome />
+                <FantasyGamesHome path={"/m/fantsy"} />
+                <SlotHome path={"/m/slots"} />
+                <LotteryHome path={"/m/lottery"} />
+              </>
+            )}
           </div>
-          
-
         </>
       )}
     </div>

@@ -45,6 +45,7 @@ const RouteMobile = () => {
   const [Errmessage, setErrMessege] = useState("");
   const [Statusmessage, setStatusmessage] = useState(false);
   const [ItselfAllowed, setItselfAllowed] = useState()
+  const [ItselfAllowedData, setItselfAllowedData] = useState()
 
   const nav = useNavigate();
 
@@ -115,6 +116,7 @@ const RouteMobile = () => {
   useEffect(()=>{
     UserAPI.Self_By_App_Url().then((res)=>{
       setItselfAllowed(res?.data?.selfAllowed)
+      setItselfAllowedData(res?.data)
     })
   }, [ItselfAllowed])
 
@@ -198,9 +200,9 @@ const RouteMobile = () => {
             <Route path="/m/setting/changebtnvalue" element={<ChangeBtnValue />}/>
             <Route path="/m/setting/changepassword" element={ <ChangePassword message={message} statusMsg={statusMsg} />}/>
             <Route path="/SignOut" element={<SignOut statusMsgForLogout={statusMsgForLogout} />}/>
-            <Route path="" element={<Mobilenav />}>
-              <Route path="/m/Home" element={<Home idddd={idddd} />} />
-              <Route path="/m/sports" element={<SportData />} />
+            <Route path="" element={<Mobilenav ItselfAllowedData={ItselfAllowedData}/>}>
+              <Route path="/m/Home" element={<Home idddd={idddd} ItselfAllowedData={ItselfAllowedData}/>} />
+              <Route path="/m/sports" element={<SportData ItselfAllowedData={ItselfAllowedData} />} />
               <Route path="/m/others" element={<Home />} />
               <Route path="/m/In-play" element={<Home />} />
               <Route path="/m/slot" element={<Slot />} />

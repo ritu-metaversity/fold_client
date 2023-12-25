@@ -9,8 +9,9 @@ import axios from "axios";
 import { Modal } from "react-bootstrap";
 import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
 import { GameAPI } from "../../apis/gameAPI";
+import { UserAPI } from "../../apis/UserAPI";
 
-function SideBar() {
+function SideBar({ ItselfAllowedData }) {
   const [visible, setVisible] = useState(true);
   const [visible2, setVisible2] = useState(true);
   const [visible3, setVisible3] = useState(true);
@@ -107,11 +108,13 @@ function SideBar() {
     setSportName(gameName);
     if (localStorage.getItem("token") !== null && singleUserValue !== 1) {
       setShow(true);
+    } else if (
+      singleUserValue === 1 &&
+      localStorage.getItem("token") !== null
+    ) {
+      setCasinoShow(true);
     } else {
       nav("/login");
-    }
-    if (singleUserValue === 1 && localStorage.getItem("token") !== null) {
-      setCasinoShow(true);
     }
     e.preventDefault();
   };
@@ -120,6 +123,8 @@ function SideBar() {
     setCasinoShow(true);
     setShow(false);
   };
+
+  console.log(ItselfAllowedData, "ItselfAllowedData");
 
   return (
     <div className="">
@@ -166,24 +171,53 @@ function SideBar() {
       <Accordion defaultActiveKey="0" className="main_sport_header">
         <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
           <ul className="live_casino">
-            <li className="nav-item">
-              <Link to="/aura" className="nav-link">
-                <span
-                // className="new-launch-text"
-                >
-                  Aura
-                </span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/supernowa" className="nav-link">
-                <span
-                // className="new-launch-text"
-                >
-                  Super Nowa
-                </span>
-              </Link>
-            </li>
+            {ItselfAllowedData?.aura && (
+              <li className="nav-item">
+                <Link to="/aura" className="nav-link">
+                  <span
+                  // className="new-launch-text"
+                  >
+                    Aura
+                  </span>
+                </Link>
+              </li>
+            )}
+            {ItselfAllowedData?.superNova && (
+              <li className="nav-item">
+                <Link to="/supernowa" className="nav-link">
+                  <span
+                  // className="new-launch-text"
+                  >
+                    Super Nowa
+                  </span>
+                </Link>
+              </li>
+            )}
+            {ItselfAllowedData?.qtech && (
+              <>
+                <li className="nav-item">
+                  <Link to="/livecasino" className="nav-link">
+                    <span className="">Live Casino</span>
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link to="/slot" className="nav-link">
+                    <span className="">Slot</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/fantsy" className="nav-link">
+                    <span className="">Fantasy Game</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/lottery" className="nav-link">
+                    <span className="">Lottery</span>
+                  </Link>
+                </li>
+              </>
+            )}
 
             {/* <li className="nav-item">
             <Link to="/sportbook" className="nav-link">
@@ -191,27 +225,6 @@ function SideBar() {
             </Link>
           </li> */}
 
-            <li className="nav-item">
-              <Link to="/livecasino" className="nav-link">
-                <span className="">Live Casino</span>
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link to="/slot" className="nav-link">
-                <span className="">Slot</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/fantsy" className="nav-link">
-                <span className="">Fantasy Game</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/lottery" className="nav-link">
-                <span className="">Lottery</span>
-              </Link>
-            </li>
             {/* <li className="nav-item">
             <Link to="/sportbook" className="nav-link">
               <span className="">Sport Book</span>

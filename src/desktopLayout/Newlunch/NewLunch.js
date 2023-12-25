@@ -46,11 +46,11 @@ function NewLunch() {
     setSportName(gameName);
     if (localStorage.getItem("token") !== null && singleUserValue !== 1) {
       setShow(true);
-    } else {
-      nav("/login");
-    }
-    if (singleUserValue === 1 && localStorage.getItem("token") !== null) {
+    } 
+   else if (singleUserValue === 1 && localStorage.getItem("token") !== null) {
       setCasinoShow(true);
+    }else {
+      nav("/login");
     }
   };
 
