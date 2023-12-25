@@ -15,24 +15,21 @@ import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
 import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
 import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
+import Slot from "../../component/Items/Slot/Slot";
 
-function ItemPageForHome({ItselfAllowedData}) {
+function ItemPageForHome({ ItselfAllowedData }) {
   return (
     <div className="main">
       <div className="container-fluid container-fluid-5">
         <div className="row itemHome">
           <DeskMainPage />
-
-           <SuperNowaHome path={"/supernowa"} />
-          
-             <LiveCasinoHome />
+          <NewLunch />
+          <SuperNowaHome path={"/supernowa"} />
+          <LiveCasinoHome />
           <FantasyGamesHome path={"/fantsy"} />
           <SlotHome path={"/slot"} />
           <LotteryHome path={"/lottery"} />
-           
-          
 
-         
           {/* <LiveCasino liveCasino={"LIVECASINO"} showid={1}/> */}
         </div>
       </div>
