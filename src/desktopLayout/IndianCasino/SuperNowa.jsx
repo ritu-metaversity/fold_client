@@ -6,6 +6,7 @@ import { CasinoApi } from "../../apis/CasinoApi";
 import axios from "axios";
 import LiveCasinoModals from "../LiveCasino/casinoTabs/LiveCasinoModals";
 import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
+import { GameAPI } from "../../apis/gameAPI";
 
 const SuperNowa = () => {
   const [show, setShow] = useState(false);
@@ -19,11 +20,7 @@ const SuperNowa = () => {
 
   const handleClose = () => setShow(false);
 
-  const handleShow = (val, providerCode) => {
-    setGameId(val);
-    setPcode(providerCode)
-    setCasinoShow(true)
-  }
+ 
 
   const handleAgree=()=>{
     setCasinoShow(true)
@@ -41,6 +38,25 @@ const SuperNowa = () => {
 
     })
   }, [])
+
+  const [singleUserValue, setSingleUserValue] = useState();
+  useEffect(() => {
+    GameAPI.SINGLE_USER_VALUE().then((res) => {
+      console.log(res?.data?.supernowa, "res?.data?.supernowa")
+      setSingleUserValue(res?.data?.supernowa);
+      
+    });
+  }, []);
+
+  const handleShow = (val, providerCode) => {
+    setGameId(val);
+    setPcode(providerCode)
+    if (singleUserValue !== 1) {
+      setCasinoShow(true);  
+    }else{
+      setShow(true)
+    }
+  }
 
 
   useEffect(() => {
@@ -97,7 +113,7 @@ const SuperNowa = () => {
 
       <Modal centered show={casinoShow}   onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals type={"supernowa"} show={setShow} setShow={setCasinoShow}/>
+          <CasinoModals type={"supernowa"} singleUserValue={singleUserValue} show={setShow} setShow={setCasinoShow}/>
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={()=>setCasinoShow(false)}>No, I Don't Agree</button>

@@ -6,6 +6,7 @@ import { isBrowser } from "react-device-detect";
 import { MdOutlineClose } from "react-icons/md";
 import LiveCasinoModals from "../LiveCasinoModals";
 import CasinoModals from "../../../../component/Items/Slot/CasinoModals/CasinoModals";
+import { GameAPI } from "../../../../apis/gameAPI";
 
 const GameList = ({
   gameLists,
@@ -20,10 +21,22 @@ const GameList = ({
   const [iframeData, setIframeData] = useState("");
   const [Casinoshow, setCasinoShow] = useState(false);
 
+  const [singleUserValue, setSingleUserValue] = useState();
+  useEffect(() => {
+    GameAPI.SINGLE_USER_VALUE().then((res) => {
+      console.log(res?.data?.qtech, "res?.data?.supernowa");
+      setSingleUserValue(res?.data?.qtech);
+    });
+  }, []);
+
   const handleClose = () => setShow(false);
   const handleShow = (val) => {
     setGameId(val);
-    setRuleShow(true);
+    if (singleUserValue !== 1) {
+      setRuleShow(true);
+    } else {
+      setShow(true);
+    }
   };
 
   const handleAgree = () => {
@@ -76,7 +89,7 @@ const GameList = ({
 
       <Modal centered show={ruleShow} onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals type={"qtech"} show={setShow} setShow={setRuleShow}/>
+          <CasinoModals type={"qtech"} singleUserValue={singleUserValue} show={setShow} setShow={setRuleShow} />
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={() => setRuleShow(false)}>

@@ -6,12 +6,21 @@ import { fantsyGameList } from "./FantsyGameList";
 import LiveCasinoModals from "../LiveCasino/casinoTabs/LiveCasinoModals";
 import { CasinoApi } from "../../apis/CasinoApi";
 import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
+import { GameAPI } from "../../apis/gameAPI";
 
 const FantsyList = ({ providerFilter }) => {
   const [show, setShow] = useState(false);
   const [gameId, setGameId] = useState("");
   const [iframeData, setIframeData] = useState("");
   const [casinoShow, setCasinoShow] = useState(false);
+
+  const [singleUserValue, setSingleUserValue] = useState();
+  useEffect(() => {
+    GameAPI.SINGLE_USER_VALUE().then((res) => {
+      console.log(res?.data?.fantasyGames, "res?.data?.supernowa");
+      setSingleUserValue(res?.data?.fantasyGames);
+    });
+  }, []);
 
   const handleAgree = () => {
     setShow(true);
@@ -21,7 +30,11 @@ const FantsyList = ({ providerFilter }) => {
   const handleClose = () => setShow(false);
   const handleShow = (val) => {
     setGameId(val);
-    setCasinoShow(true);
+    if (setCasinoShow !== 1) {
+      setCasinoShow(true);
+    } else {
+      setShow(true);
+    }
   };
 
   useEffect(() => {
@@ -64,7 +77,12 @@ const FantsyList = ({ providerFilter }) => {
 
       <Modal centered show={casinoShow} onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals type={"fantasyGames"} show={setShow} setShow={setCasinoShow}/>
+          <CasinoModals
+            type={"fantasyGames"}
+            singleUserValue={singleUserValue}
+            show={setShow}
+            setShow={setCasinoShow}
+          />
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={() => setCasinoShow(false)}>
