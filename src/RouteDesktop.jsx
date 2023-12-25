@@ -113,6 +113,7 @@ const RouteDesktop = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  
 
   return (
     <div>
@@ -241,17 +242,17 @@ const RouteDesktop = () => {
             </Routes>
           </div>
         </div>
-        {localStorage.getItem("token") == null &&  <WhatsAppIcon top={whatsAppIconPosition.top}/>}
+        {(localStorage.getItem("token") == null && ItselfAllowed) &&  <WhatsAppIcon top={whatsAppIconPosition.top}/>}
         {pathname === "/login" ||
         pathname === "/register" ||
         pathname.includes("gamedetails") ? (
           ""
         ) : (
-          <FooterForMob />
+          <FooterForMob ItselfAllowed={ItselfAllowed}/>
         )}
       </>
     </div>
   );
-};
+};  
 
 export default RouteDesktop;

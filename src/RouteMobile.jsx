@@ -220,9 +220,9 @@ const RouteMobile = () => {
           <Route path="*" element={<Login />} />
         </Routes>
         {
-        localStorage.getItem("token") == null &&  <WhatsAppIcon top={whatsAppIconPosition.top}/>
+        (localStorage.getItem("token") == null && ItselfAllowed) &&  <WhatsAppIcon top={whatsAppIconPosition.top}/>
         }
-        {pathname === "/login" || pathname === "/m/register" ? "" : <FooterForMob />}
+        {pathname === "/login" || pathname === "/m/register" ? "" : <FooterForMob  ItselfAllowed={ItselfAllowed}/>}
       </>
     </div>
   );

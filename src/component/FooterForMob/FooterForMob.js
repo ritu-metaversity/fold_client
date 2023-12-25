@@ -3,7 +3,7 @@ import "./FooterForMob.css";
 import { Link } from "react-router-dom";
 import { GameAPI } from "../../apis/gameAPI";
 
-function FooterForMob() {
+function FooterForMob({ItselfAllowed}) {
   const [footerImage, setFooterImage] = useState([]);
   const hostName = window.location.host.split(".");
 
@@ -12,11 +12,11 @@ function FooterForMob() {
       setFooterImage(res?.data);
     });
   }, []);
-
-
+  
   return (
     <div>
-      <section class="footer_main">
+      {
+        ItselfAllowed &&   <section class="footer_main">
         <div class="footer-top">
           <div class="support-detail">
             <h2>24X7 Support</h2>
@@ -78,6 +78,8 @@ function FooterForMob() {
           </div>
         </div>
       </section>
+      }
+    
       <footer>
         <div className="footer-menu">
           <ul>
