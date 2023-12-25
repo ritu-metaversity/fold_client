@@ -64,7 +64,7 @@ const FantsyList = ({ providerFilter }) => {
 
       <Modal centered show={casinoShow} onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals type={"fantasyGames"} />
+          <CasinoModals type={"fantasyGames"} show={setShow} setShow={setCasinoShow}/>
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={() => setCasinoShow(false)}>
