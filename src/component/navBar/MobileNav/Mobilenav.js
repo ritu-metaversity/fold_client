@@ -56,7 +56,7 @@ function Mobilenav({ ItselfAllowedData }) {
           </Link>
         </li>
 
-        {ItselfAllowedData?.aura && (
+       
           <li
             className={`nav-item ${Active === 6 ? "active2" : ""}`}
             onClick={(e) => handleClick(6, e)}>
@@ -64,8 +64,8 @@ function Mobilenav({ ItselfAllowedData }) {
               Aura
             </Link>
           </li>
-        )}
-        {ItselfAllowedData?.superNova && (
+       
+       
           <li
             className={`nav-item ${Active === 7 ? "active2" : ""}`}
             onClick={(e) => handleClick(7, e)}>
@@ -73,8 +73,8 @@ function Mobilenav({ ItselfAllowedData }) {
               Super Nowa
             </Link>
           </li>
-        )}
-        {ItselfAllowedData?.qtech && (
+       
+       
           <>
             <li
               className={`nav-item ${Active === 3 ? "active2" : ""}`}
@@ -105,7 +105,6 @@ function Mobilenav({ ItselfAllowedData }) {
               </Link>
             </li>
           </>
-        )}
       </ul>
       <Outlet />
     </>

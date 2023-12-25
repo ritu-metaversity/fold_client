@@ -22,20 +22,14 @@ function ItemPageForHome({ItselfAllowedData}) {
       <div className="container-fluid container-fluid-5">
         <div className="row itemHome">
           <DeskMainPage />
-          {
-            ItselfAllowedData?.aura && <NewLunch />
-          }
-          {
-            ItselfAllowedData?.superNova && <SuperNowaHome path={"/supernowa"} />
-          }
-          {
-            ItselfAllowedData?.qtech && <>
+
+           <SuperNowaHome path={"/supernowa"} />
+          
              <LiveCasinoHome />
           <FantasyGamesHome path={"/fantsy"} />
           <SlotHome path={"/slot"} />
           <LotteryHome path={"/lottery"} />
-            </>
-          }
+           
           
 
          
