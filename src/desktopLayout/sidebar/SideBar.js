@@ -8,6 +8,7 @@ import Accordion from "react-bootstrap/Accordion";
 import axios from "axios";
 import { Modal } from "react-bootstrap";
 import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
+import { GameAPI } from "../../apis/gameAPI";
 
 function SideBar() {
   const [visible, setVisible] = useState(true);
@@ -22,7 +23,7 @@ function SideBar() {
   const [casinoId, setCasinoId] = useState();
   const [show, setShow] = useState(false);
   const [Casinoshow, setCasinoShow] = useState(false);
-  
+
   const [SportName, setSportName] = useState("");
 
   function collapse() {
@@ -32,7 +33,6 @@ function SideBar() {
       setVisible(true);
       setVisible2(false);
       setVisible3(false);
-
     }
   }
   function collapse2() {
@@ -86,7 +86,6 @@ function SideBar() {
       });
   }, []);
 
-
   const token = localStorage.getItem("token");
   const handleClose = () => setCasinoShow(false);
 
@@ -94,24 +93,33 @@ function SideBar() {
     setIsLoading(false);
   };
 
-  const nav = useNavigate()
+  const [singleUserValue, setSingleUserValue] = useState();
+  useEffect(() => {
+    GameAPI.SINGLE_USER_VALUE().then((res) => {
+      console.log(res?.data?.supernowa, "res?.data?.supernowa");
+      setSingleUserValue(res?.data?.supernowa);
+    });
+  }, []);
+
+  const nav = useNavigate();
   const handleData = (id, gameName, e) => {
-    setCasinoId(id)
-    setSportName(gameName)
-    if(localStorage.getItem("token") !== null){
-      setShow(true)
-    }else{
-      nav('/login')
+    setCasinoId(id);
+    setSportName(gameName);
+    if (localStorage.getItem("token") !== null && singleUserValue !== 1) {
+      setShow(true);
+    } else {
+      nav("/login");
+    }
+    if (singleUserValue === 1 && localStorage.getItem("token") !== null) {
+      setCasinoShow(true);
     }
     e.preventDefault();
   };
 
-  const handleAgree=()=>{
-    setCasinoShow(true)
-    setShow(false)
-  }
-
-
+  const handleAgree = () => {
+    setCasinoShow(true);
+    setShow(false);
+  };
 
   return (
     <div className="">
@@ -155,62 +163,65 @@ function SideBar() {
           {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
         </p>
       </div>
-      <Accordion defaultActiveKey="0"  className="main_sport_header">
-      <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
-        <ul className="live_casino">
-        <li className="nav-item">
-            <Link to="/aura" className="nav-link">
-              <span 
-              // className="new-launch-text"
-              >Aura</span>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/supernowa" className="nav-link">
-              <span 
-              // className="new-launch-text"
-              >Super Nowa</span>
-            </Link>
-          </li>
-          
-          {/* <li className="nav-item">
+      <Accordion defaultActiveKey="0" className="main_sport_header">
+        <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
+          <ul className="live_casino">
+            <li className="nav-item">
+              <Link to="/aura" className="nav-link">
+                <span
+                // className="new-launch-text"
+                >
+                  Aura
+                </span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/supernowa" className="nav-link">
+                <span
+                // className="new-launch-text"
+                >
+                  Super Nowa
+                </span>
+              </Link>
+            </li>
+
+            {/* <li className="nav-item">
             <Link to="/sportbook" className="nav-link">
               <span className="">Our Virtual</span>
             </Link>
           </li> */}
-          
-          <li className="nav-item">
-            <Link to="/livecasino" className="nav-link">
-              <span className="">Live Casino</span>
-            </Link>
-          </li>
-          
-          <li className="nav-item">
-            <Link to="/slot" className="nav-link">
-              <span className="">Slot</span>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/fantsy" className="nav-link">
-              <span className="">Fantasy Game</span>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/lottery" className="nav-link">
-              <span className="">Lottery</span>
-            </Link>
-          </li>
-          {/* <li className="nav-item">
+
+            <li className="nav-item">
+              <Link to="/livecasino" className="nav-link">
+                <span className="">Live Casino</span>
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to="/slot" className="nav-link">
+                <span className="">Slot</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/fantsy" className="nav-link">
+                <span className="">Fantasy Game</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/lottery" className="nav-link">
+                <span className="">Lottery</span>
+              </Link>
+            </li>
+            {/* <li className="nav-item">
             <Link to="/sportbook" className="nav-link">
               <span className="">Sport Book</span>
             </Link>
           </li> */}
-        </ul>
-      </nav>
-        </Accordion>
+          </ul>
+        </nav>
+      </Accordion>
 
-
-        <div
+      <div
         className="sidebar-title m-t-5 theme2bg"
         onClick={collapse3}
         aria-controls="events"
@@ -221,14 +232,21 @@ function SideBar() {
           {visible3 ? <IoIosArrowDown /> : <IoIosArrowUp />}
         </p>
       </div>
-      <Accordion defaultActiveKey="0"  className="main_sport_header">
-      {matchList?.length && visible3 &&
-        matchList?.map((e, id) => {
-          return (
-            <Accordion.Item eventKey={id}>
-                <Accordion.Header onClick={() => handleSportId(id, e?.sportId)} className="sport_header">
-                { toggle === id ?<AiOutlineMinusSquare />: <AiOutlinePlusSquare />}
-                   {e?.sportName}
+      <Accordion defaultActiveKey="0" className="main_sport_header">
+        {matchList?.length &&
+          visible3 &&
+          matchList?.map((e, id) => {
+            return (
+              <Accordion.Item eventKey={id}>
+                <Accordion.Header
+                  onClick={() => handleSportId(id, e?.sportId)}
+                  className="sport_header">
+                  {toggle === id ? (
+                    <AiOutlineMinusSquare />
+                  ) : (
+                    <AiOutlinePlusSquare />
+                  )}
+                  {e?.sportName}
                 </Accordion.Header>
                 {e?.matchList?.map((item, index) => {
                   return (
@@ -237,60 +255,68 @@ function SideBar() {
                         <Link
                           to={`/gamedetail/${item?.matchId}`}
                           className="sub-nav-link">
-                          <span className="">
-                            {item?.matchName}
-                          </span>
+                          <span className="">{item?.matchName}</span>
                         </Link>
                       </p>
                     </Accordion.Body>
                   );
                 })}
               </Accordion.Item>
-          );
-        })}
-        </Accordion>
+            );
+          })}
+      </Accordion>
 
-
-      <Modal centered show={show}   onHide={handleClose}>
+      <Modal centered show={show} onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals type={1} show={setCasinoShow} setShow={setShow}/>
+          <CasinoModals
+            type={1}
+            singleUserValue={singleUserValue}
+            show={setCasinoShow}
+            setShow={setShow}
+          />
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
-            <button onClick={()=>setShow(false)}>No, I Don't Agree</button>
+            <button onClick={() => setShow(false)}>No, I Don't Agree</button>
           </div>
         </Modal.Body>
       </Modal>
 
-
-        <Modal show={Casinoshow} size="xl" className="slot-modal" onHide={handleClose}>
-      <Modal.Header className="mob_none" closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {SportName}
-        </Modal.Title>
-      </Modal.Header>
-        <button  onClick={()=>setShow(false)} className="close_btn desk_none">X</button>
+      <Modal
+        show={Casinoshow}
+        size="xl"
+        className="slot-modal"
+        onHide={handleClose}>
+        <Modal.Header className="mob_none" closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            {SportName}
+          </Modal.Title>
+        </Modal.Header>
+        <button onClick={() => setShow(false)} className="close_btn desk_none">
+          X
+        </button>
         <Modal.Body>
-        {isLoading ? (
-        <p className="lodder">
-        <i className="fa fa-spinner fa-spin"></i>
-      </p>
-      ) : (
-        <iframe
-          src={`https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
-          className="mobile_if"
-          width="100%"
-          title="mobile"
-          allowFullScreen={true}
-          onLoad={finishLoading} />
-      )}
+          {isLoading ? (
+            <p className="lodder">
+              <i className="fa fa-spinner fa-spin"></i>
+            </p>
+          ) : (
+            <iframe
+              src={`https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
+              className="mobile_if"
+              width="100%"
+              title="mobile"
+              allowFullScreen={true}
+              onLoad={finishLoading}
+            />
+          )}
 
-      <iframe
-        src={`https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
-        className="desktop_if"
-        width="100%"
-        title="desktop"
-        onLoad={finishLoading}
-      />
+          <iframe
+            src={`https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
+            className="desktop_if"
+            width="100%"
+            title="desktop"
+            onLoad={finishLoading}
+          />
         </Modal.Body>
       </Modal>
     </div>

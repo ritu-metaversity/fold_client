@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../../apis/gameAPI";
 
-const CasinoModals = ({ type, setShow, show }) => {
-  const [singleUserValue, setSingleUserValue] = useState();
-  useEffect(() => {
-    GameAPI.SINGLE_USER_VALUE().then((res) => {
-      setSingleUserValue(res?.data[type]);
-      if (res?.data[type] === 1 || res?.data[type] === undefined) {
-        setShow(false);
-        show(true);
-      }
-    });
-  }, []);
+const CasinoModals = ({ type, setShow, show, singleUserValue }) => {
+  
 
-  console.log(singleUserValue, "singleUserValue")
 
   return (
     <>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GameAPI } from "../../apis/gameAPI";
-import "./NewLunch.css"
+import "./NewLunch.css";
 import { Modal } from "react-bootstrap";
 import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
 
@@ -14,14 +14,14 @@ function NewLunch() {
   const [SportName, setSportName] = useState("");
   const [Casinoshow, setCasinoShow] = useState(false);
 
-
   useEffect(() => {
-    fetch("https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/diamond.json")
+    fetch(
+      "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/diamond.json"
+    )
       .then((res) => res.json())
       .then((res) => {
-        setCasinoData(res?.data)
-      setIsLoading(false)
-
+        setCasinoData(res?.data);
+        setIsLoading(false);
       });
   }, []);
 
@@ -29,23 +29,35 @@ function NewLunch() {
     setIsLoading(false);
   };
 
-const nav = useNavigate();
-const token = localStorage.getItem("token");
-const handleClose = () => setCasinoShow(false);
-const handleCasino = (id, gameName)=>{
-    setCasinoId(id)
-    setSportName(gameName)
-    if(localStorage.getItem("token") !== null){
-      setShow(true)
-    }else{
-      nav("/login")
-    }
-}
+  const nav = useNavigate();
+  const token = localStorage.getItem("token");
 
-const handleAgree=()=>{
-  setCasinoShow(true)
-  setShow(false)
-}
+  const [singleUserValue, setSingleUserValue] = useState();
+  useEffect(() => {
+    GameAPI.SINGLE_USER_VALUE().then((res) => {
+      console.log(res?.data?.aura, "res?.data?.supernowa");
+      setSingleUserValue(res?.data?.aura);
+    });
+  }, []);
+
+  const handleClose = () => setCasinoShow(false);
+  const handleCasino = (id, gameName) => {
+    setCasinoId(id);
+    setSportName(gameName);
+    if (localStorage.getItem("token") !== null && singleUserValue !== 1) {
+      setShow(true);
+    } else {
+      nav("/login");
+    }
+    if (singleUserValue === 1 && localStorage.getItem("token") !== null) {
+      setCasinoShow(true);
+    }
+  };
+
+  const handleAgree = () => {
+    setCasinoShow(true);
+    setShow(false);
+  };
 
   return (
     <div>
@@ -54,16 +66,17 @@ const handleAgree=()=>{
           <div className="col-md-12 newLunch-icon">
             {casinoData?.map((res, id) => {
               return (
-                  <div key={id} className="casinoicon" onClick={()=>handleCasino(res?.gameId, res.gameName)}>
-                    <div className="d-inline-block casinoicons">
-                      <img
-                        src={res?.imageUrl}
-                        alt="card"
-                        className="img-fluid"
-                      />
-                      <div className="casino-name newLunchName">{res?.gameName}</div>
+                <div
+                  key={id}
+                  className="casinoicon"
+                  onClick={() => handleCasino(res?.gameId, res.gameName)}>
+                  <div className="d-inline-block casinoicons">
+                    <img src={res?.imageUrl} alt="card" className="img-fluid" />
+                    <div className="casino-name newLunchName">
+                      {res?.gameName}
                     </div>
                   </div>
+                </div>
               );
             })}
 
@@ -87,51 +100,54 @@ const handleAgree=()=>{
         </div>
       </div>
 
-
-
-      <Modal centered show={show}   onHide={handleClose}>
+      <Modal centered show={show} onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals type={"aura"} show={setCasinoShow} setShow={setShow}/>
+          <CasinoModals type={"aura"} singleUserValue={singleUserValue} show={setCasinoShow} setShow={setShow} />
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
-            <button onClick={()=>setShow(false)}>No, I Don't Agree</button>
+            <button onClick={() => setShow(false)}>No, I Don't Agree</button>
           </div>
         </Modal.Body>
       </Modal>
 
-
-      <Modal show={Casinoshow} size="xl" className="slot-modal" onHide={handleClose}>
-      <Modal.Header className="mob_none" closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {SportName}
-        </Modal.Title>
-      </Modal.Header>
-        <button  onClick={()=>setShow(false)} className="close_btn desk_none">X</button>
+      <Modal
+        show={Casinoshow}
+        size="xl"
+        className="slot-modal"
+        onHide={handleClose}>
+        <Modal.Header className="mob_none" closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            {SportName}
+          </Modal.Title>
+        </Modal.Header>
+        <button onClick={() => setShow(false)} className="close_btn desk_none">
+          X
+        </button>
         <Modal.Body>
-        {isLoading ? (
-        <p className="lodder">
-        <i className="fa fa-spinner fa-spin"></i>
-      </p>
-      ) : (
-        <>
-        <iframe
-          src={`https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
-          className="mobile_if"
-          width="100%"
-          title="mobile"
-          allowFullScreen={true}
-          onLoad={finishLoading} />
-    
+          {isLoading ? (
+            <p className="lodder">
+              <i className="fa fa-spinner fa-spin"></i>
+            </p>
+          ) : (
+            <>
+              <iframe
+                src={`https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
+                className="mobile_if"
+                width="100%"
+                title="mobile"
+                allowFullScreen={true}
+                onLoad={finishLoading}
+              />
 
-      <iframe
-        src={`https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
-        className="desktop_if"
-        width="100%"
-        title="desktop"
-        onLoad={finishLoading}
-      />
-      </>
-      )}
+              <iframe
+                src={`https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${casinoId}`}
+                className="desktop_if"
+                width="100%"
+                title="desktop"
+                onLoad={finishLoading}
+              />
+            </>
+          )}
         </Modal.Body>
       </Modal>
     </div>

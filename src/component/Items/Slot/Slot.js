@@ -33,25 +33,26 @@ const Slot = () => {
   //   });
   // }, []);
 
+  const [singleUserValue, setSingleUserValue] = useState();
+  useEffect(() => {
+    GameAPI.SINGLE_USER_VALUE().then((res) => {
+      console.log(res?.data?.aura, "res?.data?.supernowa");
+      setSingleUserValue(res?.data?.aura);
+    });
+  }, []);
+
   const handleClick = (id, name, e) => {
     setCasinoListId(id);
     setActiveClass(id);
     setCasinoName(name);
-
     if (localStorage.getItem("token") !== null) {
       setShow(true);
     }
     e.preventDefault();
   };
 
-  // useEffect(() => {
-  //   GameAPI.CASINO_LIST_BY_TYPE({
-  //     id: casinoListId,
-  //   }).then((res) => {
-  //     setCasinoData(res);
-  //     setIsLoading(false)
-  //   });
-  // }, [casinoListId]);
+
+
 
   const handleAgree=()=>{
     setCasinoShow(true)
@@ -74,10 +75,13 @@ const Slot = () => {
   const handleData = (id, gameName, e) => {
     setCasinoId(id);
     setSportName(gameName);
-    if (localStorage.getItem("token") !== null) {
+    if (localStorage.getItem("token") !== null && singleUserValue !== 1) {
       setShow(true);
     } else {
       nav("/login");
+    }
+    if(localStorage.getItem("token") !== null && singleUserValue === 1){
+      setCasinoShow(true)
     }
     e.preventDefault();
   };
@@ -204,7 +208,7 @@ const Slot = () => {
 
       <Modal centered show={show}   onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals type={"aura"} show={setCasinoShow} setShow={setShow}/>
+          <CasinoModals type={"aura"} singleUserValue={singleUserValue} show={setCasinoShow} setShow={setShow}/>
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={()=>setShow(false)}>No, I Don't Agree</button>
