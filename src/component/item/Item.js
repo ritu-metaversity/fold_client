@@ -9,6 +9,7 @@ import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
 import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
 import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
+import { get } from "mongoose";
 
 function Item({ gameIdForItemPage, casinoAllow }) {
   const [gameName, setGameName] = useState("");
@@ -204,6 +205,20 @@ function Item({ gameIdForItemPage, casinoAllow }) {
               </>
             )}
           </div>
+
+          {localStorage.getItem("token") === null && (
+            <>
+              <Slot />
+              <div className="casino-main">
+                <SuperNowaHome path={"/m/sueprnowa"} />
+
+                <LiveCasinoHome />
+                <FantasyGamesHome path={"/m/fantsy"} />
+                <SlotHome path={"/m/slots"} />
+                <LotteryHome path={"/m/lottery"} />
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

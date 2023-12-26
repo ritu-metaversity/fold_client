@@ -39,6 +39,19 @@ const SportData = ({ casinoAllow }) => {
           </>
         )}
       </div>
+      {localStorage.getItem("token") === null && (
+            <>
+              <Slot />
+              <div className="casino-main">
+                <SuperNowaHome path={"/m/sueprnowa"} />
+
+                <LiveCasinoHome />
+                <FantasyGamesHome path={"/m/fantsy"} />
+                <SlotHome path={"/m/slots"} />
+                <LotteryHome path={"/m/lottery"} />
+              </div>
+            </>
+          )}
     </>
   );
 };
