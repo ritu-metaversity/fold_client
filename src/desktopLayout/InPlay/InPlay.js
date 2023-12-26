@@ -12,7 +12,7 @@ import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
 import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 
-const InPlay = () => {
+const InPlay = ({ casinoAllow }) => {
   const [gameName, setGameName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [MatchListLength, setMatchListLength] = useState();
@@ -266,13 +266,16 @@ const InPlay = () => {
           </div>
         </div>
       </div>
-      <NewLunch />
-      <SuperNowaHome path={"/supernowa"}/>
-
-      <LiveCasinoHome />
-      <FantasyGamesHome path={"/fantsy"} />
-      <SlotHome path={"/slot"} />
-      <LotteryHome path={"/lottery"} />
+      {casinoAllow?.Aura && <NewLunch />}
+      {casinoAllow?.Nowa && <SuperNowaHome path={"/supernowa"} />}
+      {casinoAllow?.Qtech && (
+        <>
+          <LiveCasinoHome />
+          <FantasyGamesHome path={"/fantsy"} />
+          <SlotHome path={"/slot"} />
+          <LotteryHome path={"/lottery"} />
+        </>
+      )}
     </div>
   );
 };

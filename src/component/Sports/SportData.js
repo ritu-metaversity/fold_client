@@ -10,7 +10,7 @@ import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
 import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 
-const SportData = ({ ItselfAllowedData }) => {
+const SportData = ({ casinoAllow }) => {
   const [gameIdForItemPage, setGameIdForItemPage] = useState("");
 
   const gameId = (id) => {
@@ -26,14 +26,18 @@ const SportData = ({ ItselfAllowedData }) => {
 
       <Sport gameIdForItemPage={gameIdForItemPage} />
 
-      <Slot />
+      {casinoAllow?.Aura && <Slot />}
 
       <div className="casino-main">
-        <SuperNowaHome path={"/m/sueprnowa"} />
-        <LiveCasinoHome />
-        <FantasyGamesHome path={"/m/fantsy"} />
-        <SlotHome path={"/m/slots"} />
-        <LotteryHome path={"/m/lottery"} />
+        {casinoAllow?.Nowa && <SuperNowaHome path={"/m/sueprnowa"} />}
+        {casinoAllow?.Qtech && (
+          <>
+            <LiveCasinoHome />
+            <FantasyGamesHome path={"/m/fantsy"} />
+            <SlotHome path={"/m/slots"} />
+            <LotteryHome path={"/m/lottery"} />
+          </>
+        )}
       </div>
     </>
   );

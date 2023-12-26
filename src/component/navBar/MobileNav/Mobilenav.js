@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import "../Nav.css";
 
-function Mobilenav({ ItselfAllowedData }) {
+function Mobilenav({ casinoAllow }) {
   const [Active, setActive] = useState(1);
 
   const handleClick = (val, e) => {
     // e.preventDefault()
     setActive(val);
   };
-
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -55,8 +54,7 @@ function Mobilenav({ ItselfAllowedData }) {
             Sports
           </Link>
         </li>
-
-       
+        {casinoAllow?.Aura && (
           <li
             className={`nav-item ${Active === 6 ? "active2" : ""}`}
             onClick={(e) => handleClick(6, e)}>
@@ -64,8 +62,8 @@ function Mobilenav({ ItselfAllowedData }) {
               Aura
             </Link>
           </li>
-       
-       
+        )}
+        {casinoAllow?.Nowa && (
           <li
             className={`nav-item ${Active === 7 ? "active2" : ""}`}
             onClick={(e) => handleClick(7, e)}>
@@ -73,8 +71,8 @@ function Mobilenav({ ItselfAllowedData }) {
               Super Nowa
             </Link>
           </li>
-       
-       
+        )}
+        {casinoAllow?.Qtech && (
           <>
             <li
               className={`nav-item ${Active === 3 ? "active2" : ""}`}
@@ -105,6 +103,7 @@ function Mobilenav({ ItselfAllowedData }) {
               </Link>
             </li>
           </>
+        )}
       </ul>
       <Outlet />
     </>

@@ -34,13 +34,14 @@ import NewLunch from "./desktopLayout/Newlunch/NewLunch";
 import SuperNowa from "./desktopLayout/IndianCasino/SuperNowa";
 import FooterForMob from "./component/FooterForMob/FooterForMob";
 import WhatsAppIcon from "./common/whatsAppIcon/WhatsAppIcon";
+import { GameAPI } from "./apis/gameAPI";
 
 const RouteDesktop = () => {
   const [SportId, setSportId] = useState("");
   const [Errmessage, setErrMessege] = useState("");
   const [Statusmessage, setStatusmessage] = useState(false);
   const [ItselfAllowed, setItselfAllowed] = useState();
-  const [ItselfAllowedData, setItselfAllowedData] = useState();
+  const [ItselfAllowedData, setItselfAllowedData] = useState([]);
 
   const nav = useNavigate();
 
@@ -90,29 +91,67 @@ const RouteDesktop = () => {
   useEffect(() => {
     UserAPI.Self_By_App_Url().then((res) => {
       setItselfAllowed(res?.data?.selfAllowed);
-      setItselfAllowedData(res?.data);
     });
+   
   }, []);
 
+  useEffect(()=>{
+    GameAPI.ALLOTED_CASINO_LIST().then((res)=>{
+      setItselfAllowedData(res?.data);
+    })
+  }, [pathname])
 
   const [whatsAppIconPosition, setWhatsAppIconPosition] = useState({ top: '10px', right: '10px' });
 
   useEffect(() => {
     const handleScroll = () => {
-    
-     
       const newTop = window.scrollY;
-
-
       setWhatsAppIconPosition({ top: newTop});
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const casinoStateNames = ['Aura', 'Super Nova', 'QTech', 'Virtual', 'SportBook'];
+
+
+  const [AuraData, setAuraData] = useState();
+  const [NowaData, setNowaData] = useState();
+  const [QtechData, setQtechData] = useState();
+  const [VirtualData, setVirtualData] = useState();
+  const [SportBookData, setSportBookData] = useState();
+
+
+  useEffect(() => {
+    if (ItselfAllowedData) {
+      casinoStateNames.forEach(name => {
+        const casinoData = ItselfAllowedData.find(item => item.name === name);
+        const setCasinoData = getSetterFunction(name);
+        setCasinoData(casinoData?.active);
+      });
+    }
+  }, [ItselfAllowedData, casinoStateNames]);
+
+  function getSetterFunction(name) {
+    switch (name) {
+      case 'Aura':
+        return setAuraData;
+      case 'Super Nova':
+        return setNowaData;
+      case 'QTech':
+        return setQtechData;
+      case 'Virtual':
+        return setVirtualData;
+      case 'SportBook':
+        return setSportBookData;
+      default:
+        return () => {};
+    }
+  }
+
+  const casinoAllow = {Aura: AuraData, Nowa: NowaData, Qtech: QtechData, Virtual: VirtualData, Sportbook: SportBookData}
   
 
   return (
@@ -135,7 +174,7 @@ const RouteDesktop = () => {
             ""
           ) : (
             <div className="sidebar col-md-2">
-              <SideBar ItselfAllowedData={ItselfAllowedData}/>
+              <SideBar casinoAllow={casinoAllow}/>
             </div>
           )}
 
@@ -165,8 +204,8 @@ const RouteDesktop = () => {
                 }
               />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/inplay" element={<InPlay />} />
-              <Route path="/home" element={<ItemPageForHome ItselfAllowedData={ItselfAllowedData}/>} />
+              <Route path="/inplay" element={<InPlay casinoAllow={casinoAllow}/>} />
+              <Route path="/home" element={<ItemPageForHome casinoAllow={casinoAllow}/>} />
               <Route path="/gamedetail/:id" element={<GamedetailPage />} />
               <Route
                 path="/accountstatement"

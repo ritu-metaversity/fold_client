@@ -11,7 +11,7 @@ import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
 import { GameAPI } from "../../apis/gameAPI";
 import { UserAPI } from "../../apis/UserAPI";
 
-function SideBar({ ItselfAllowedData }) {
+function SideBar({ casinoAllow }) {
   const [visible, setVisible] = useState(true);
   const [visible2, setVisible2] = useState(true);
   const [visible3, setVisible3] = useState(true);
@@ -124,7 +124,6 @@ function SideBar({ ItselfAllowedData }) {
     setShow(false);
   };
 
-
   return (
     <div className="">
       {/* <div
@@ -156,21 +155,29 @@ function SideBar({ ItselfAllowedData }) {
         </ul>
       </nav> */}
 
-      <div
-        className="sidebar-title m-t-5 theme2bg"
-        onClick={collapse2}
-        aria-controls="events"
-        aria-expanded="true"
-        role="button">
-        <h5 className="text-white d-inline-block m-b-0">Others Game</h5>
-        <p className="arrow-line">
-          {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
-        </p>
-      </div>
+      {/* Aura: AuraData, Nowa: NowaData, Qtech: QtechData, Virtual: VirtualData, Sportbook: SportBookData */}
+      {(casinoAllow?.Aura ||
+        casinoAllow?.Nowa ||
+        casinoAllow?.Qtech ||
+        casinoAllow?.Virtual ||
+        casinoAllow?.Sportbook) && (
+        <div
+          className="sidebar-title m-t-5 theme2bg"
+          onClick={collapse2}
+          aria-controls="events"
+          aria-expanded="true"
+          role="button">
+          <h5 className="text-white d-inline-block m-b-0">Others Game</h5>
+          <p className="arrow-line">
+            {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
+          </p>
+        </div>
+      )}
+
       <Accordion defaultActiveKey="0" className="main_sport_header">
         <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
           <ul className="live_casino">
-           
+            {casinoAllow?.Aura && (
               <li className="nav-item">
                 <Link to="/aura" className="nav-link">
                   <span
@@ -180,7 +187,8 @@ function SideBar({ ItselfAllowedData }) {
                   </span>
                 </Link>
               </li>
-           
+            )}
+            {casinoAllow?.Nowa && (
               <li className="nav-item">
                 <Link to="/supernowa" className="nav-link">
                   <span
@@ -190,7 +198,9 @@ function SideBar({ ItselfAllowedData }) {
                   </span>
                 </Link>
               </li>
-          
+            )}
+
+            {casinoAllow?.Qtech && (
               <>
                 <li className="nav-item">
                   <Link to="/livecasino" className="nav-link">
@@ -214,7 +224,8 @@ function SideBar({ ItselfAllowedData }) {
                   </Link>
                 </li>
               </>
-            
+            )}
+
             {/* <li className="nav-item">
             <Link to="/sportbook" className="nav-link">
               <span className="">Our Virtual</span>

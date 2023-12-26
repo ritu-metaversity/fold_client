@@ -313,6 +313,18 @@ export const GameAPI = {
 
     return response.data;
   },
+  ALLOTED_CASINO_LIST: async function (cancel = false) {
+    const response = await api.request({
+      url: "/user/alloted-casino-list",
+      method: "POST",
+
+      signal: cancel
+        ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
 
 
 };
