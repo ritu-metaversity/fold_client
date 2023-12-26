@@ -244,4 +244,7 @@ export const userServices = {
     };
     return await apiWithSnackbar(params);
   },
+  allocatedCasino: async () => {
+    return await apiWithSnackbar({ resource: userResources.ALLOCATED_CASINO });
+  },
 };

@@ -21,7 +21,7 @@ import { colorHex } from "../../utils/constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import styled from "@emotion/styled";
-import { getLinksAndLabels } from "../home/buttonTabs";
+import { LinksAndLabels, getLinksAndLabels } from "../home/buttonTabs";
 export const drawerWidth = 220;
 export const drawerWidthXl = 270;
 
@@ -66,11 +66,14 @@ export default function Header(props: Props) {
   };
 
   const { pathname } = useLocation();
-  const { isSignedIn, appData, user, setModal } = React.useContext(UserContext);
+  const { isSignedIn, allocatedCasino, appData, user, setModal } =
+    React.useContext(UserContext);
   const matches = useMediaQuery("(min-width:1280px)");
   const drawerWidthLocal = notShowSidebar ? 0 : drawerWidth;
   const drawerWidthXlLocal = notShowSidebar ? 0 : drawerWidthXl;
-  const linkAndLabel = appData ? getLinksAndLabels(appData) : [];
+  const linkAndLabel = isSignedIn
+    ? getLinksAndLabels(allocatedCasino)
+    : LinksAndLabels;
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />

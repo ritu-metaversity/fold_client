@@ -123,4 +123,8 @@ export const userResources: {
     URL: "save/client-bank",
     METHOD: "POST",
   },
+  ALLOCATED_CASINO: {
+    URL: "/user/alloted-casino-list",
+    METHOD: "POST",
+  },
 };

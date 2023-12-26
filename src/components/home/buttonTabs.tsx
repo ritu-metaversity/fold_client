@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonGroup } from "@mui/material";
 import { Box } from "@mui/system";
-import { AppDataInterface, UserContext } from "../../App";
+import { UserContext } from "../../App";
 import { ButtonTabStyledButton } from "./styledComponents";
 
-export const getLinksAndLabels = (appData: AppDataInterface) => [
-  ...(appData.qtech
+export const getLinksAndLabels = (alloc: AllocatedCasino) => [
+  ...(alloc.QTech?.active
     ? [
         {
           label: "Lottery",
@@ -15,15 +15,19 @@ export const getLinksAndLabels = (appData: AppDataInterface) => [
         },
       ]
     : []),
-  {
-    label: "SportsBook1",
-    link: "/cumming",
-  },
+  ...(alloc.SportBook?.active
+    ? [
+        {
+          label: "SportsBook1",
+          link: "/cumming",
+        },
+      ]
+    : []),
   {
     label: "Exchange",
     link: "/",
   },
-  ...(appData.qtech || appData.aura || appData.superNova
+  ...(alloc.Aura?.active || alloc.QTech?.active || alloc["Super Nova"]?.active
     ? [
         {
           label: "Live Casino",
@@ -36,7 +40,7 @@ export const getLinksAndLabels = (appData: AppDataInterface) => [
   //   label: "Virtual Casino",
   //   link: "/virtual-casino",
   // },
-  ...(appData.qtech
+  ...(alloc.QTech?.active
     ? [
         {
           label: "Slots",
@@ -52,11 +56,48 @@ export const getLinksAndLabels = (appData: AppDataInterface) => [
     : []),
 ];
 
+export const LinksAndLabels = [
+  {
+    label: "Lottery",
+    link: "/lottery",
+    require: true,
+  },
+  {
+    label: "SportsBook1",
+    link: "/cumming",
+  },
+  {
+    label: "Exchange",
+    link: "/",
+  },
+  {
+    label: "Live Casino",
+    link: "/casino",
+    require: true,
+  },
+  // {
+  //   label: "Virtual Casino",
+  //   link: "/virtual-casino",
+  // },
+  {
+    label: "Slots",
+    link: "/slot",
+    require: true,
+  },
+  {
+    label: "Fantasy Game",
+    link: "/fantasy",
+    require: true,
+  },
+];
+
 export function ButtonTabs() {
   const [current, setCurrent] = useState("/");
-  const { isSignedIn, setModal, appData } = useContext(UserContext);
+  const { isSignedIn, setModal, allocatedCasino } = useContext(UserContext);
   const nav = useNavigate();
-  const linksAndLabel = appData ? getLinksAndLabels(appData) : [];
+  const linksAndLabel = isSignedIn
+    ? getLinksAndLabels(allocatedCasino)
+    : LinksAndLabels;
   return (
     <Box
       width={"calc(100% - 8px)"}

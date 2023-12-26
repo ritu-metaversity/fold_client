@@ -61,6 +61,7 @@ interface UserContextType {
   userIp: string;
   footerData?: FooterImageInterface;
   singleUserValue?: SingleUserValue;
+  allocatedCasino: AllocatedCasino;
 }
 
 const defaultStake = {
@@ -95,11 +96,6 @@ export interface AppDataInterface {
   casinoComm: number;
   fancyComm: number;
   oddsComm: number;
-  aura: boolean;
-  superNova: boolean;
-  virtual: boolean;
-  sportBook: boolean;
-  qtech: boolean;
 }
 
 export let setErrorRef: any;
@@ -121,10 +117,12 @@ export const UserContext = createContext<UserContextType>({
   casinoId: 1,
   getBalanceData: async () => {},
   userIp: "",
+  allocatedCasino: {},
 });
 
 function App() {
   const [isSignedIn, setIsSignedIn] = useState<null | boolean>(null);
+  const [allocatedCasino, setAllocatedCasino] = useState<AllocatedCasino>({});
   const [user, setUser] = useState(null);
   const [announcement, setAnnouncement] = useState("");
   const [modal, setModal] = useState<ModalState>({ login: false });
@@ -187,15 +185,15 @@ function App() {
     }
   }, [isSignedIn]);
 
-  const authenticationHandler = async () => {
-    if (isSignedIn && appData?.qtech) {
+  const authenticationHandler = useCallback(async () => {
+    if (isSignedIn && allocatedCasino["QTech"]?.active) {
       const { response } = await qTechServices.authentication();
       if (!!response && response?.data && response?.data?.access_token) {
         const { access_token } = response?.data;
         window.localStorage.setItem("qtech_access_token", access_token);
       }
     }
-  };
+  }, [allocatedCasino, isSignedIn]);
   const [footerData, setFooterData] = useState<FooterImageInterface>();
   useEffect(() => {
     const getFooterData = async () => {
@@ -257,7 +255,7 @@ function App() {
       authenticationHandler();
     }, 5000);
     return () => clearInterval(time);
-  }, [isSignedIn, getBalance]);
+  }, [isSignedIn, getBalance, authenticationHandler]);
 
   useEffect(() => {
     if (isSignedIn) {
@@ -269,7 +267,26 @@ function App() {
           setSingleUserValue(response.data);
         }
       })();
-      authenticationHandler();
+      (async () => {
+        const { response } = await userServices.allocatedCasino();
+        if (response?.data) {
+          setAllocatedCasino(
+            response.data.reduce(
+              (acc: AllocatedCasino, cur: CasinoAllocItem) => ({
+                ...acc,
+                [cur.name]: cur,
+              }),
+              {}
+            ) || {}
+          );
+          if (
+            response.data.find((item: CasinoAllocItem) => item.name === "QTech")
+              .active
+          ) {
+            authenticationHandler();
+          }
+        }
+      })();
     }
 
     return () => {
@@ -278,7 +295,7 @@ function App() {
   }, [isSignedIn, getBalance]);
 
   useEffect(() => {
-    const handleScroll = (event: Event) => {
+    const handleScroll = () => {
       if (appRef?.current) {
         appRef.current.style.top = `calc( ${window.scrollY}px + 50vh)`;
       }
@@ -317,6 +334,7 @@ function App() {
         <div className="App">
           <UserContext.Provider
             value={{
+              allocatedCasino,
               singleUserValue,
               footerData,
               balance: balanceData,

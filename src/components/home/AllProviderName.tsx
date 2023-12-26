@@ -6,8 +6,7 @@ import { UserContext } from "../../App";
 
 const AllProviderName = () => {
   let navigate = useNavigate();
-
-  const { isSignedIn, setModal, appData } = useContext(UserContext);
+  const { isSignedIn, setModal, allocatedCasino } = useContext(UserContext);
   const handleGamePageroute = (providerItem: ProviderObject, key: key) => {
     if (isSignedIn)
       navigate(providerItem.PageUrl, {
@@ -22,9 +21,16 @@ const AllProviderName = () => {
   return (
     <div className="Main_header_for_game_provide_Incasino">
       {Object.keys(AllCasinoProviderName).map((key, item) =>
-        !appData?.qtech && key !== "Indian Casino" ? (
+        isSignedIn &&
+        !allocatedCasino["QTech"]?.active &&
+        key !== "Indian Casino" ? (
           <></>
-        ) : !(appData?.aura || appData?.superNova) && key == "Indian Casino" ? (
+        ) : !(
+            allocatedCasino.Aura?.active ||
+            allocatedCasino["Super Nova"]?.active
+          ) &&
+          key === "Indian Casino" &&
+          isSignedIn ? (
           <></>
         ) : (
           <div className="Inner_header_for_game_provide_Incasin">
@@ -35,10 +41,13 @@ const AllProviderName = () => {
                   key as keyof typeof AllCasinoProviderName
                 ].map(
                   (item, index) =>
-                    ((item.gameCode === "AURA" && appData?.aura) ||
-                      (item.gameCode === "NOWA" && appData?.superNova) ||
+                    (!isSignedIn ||
+                      (item.gameCode === "AURA" &&
+                        allocatedCasino.Aura?.active) ||
+                      (item.gameCode === "NOWA" &&
+                        allocatedCasino["Super Nova"]?.active) ||
                       (!["AURA", "NOWA"].includes(item.gameCode) &&
-                        appData?.qtech)) && (
+                        allocatedCasino["QTech"]?.active)) && (
                       <div
                         className="MainBtn_warp"
                         style={{ border: "0.5px solid" }}

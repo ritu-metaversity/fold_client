@@ -1,17 +1,13 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useMemo } from "react";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Icon, IconSmall, SidebarHeader } from "./styledComponents";
 import { useNavigate } from "react-router-dom";
-import { ExpandLess, ExpandMore, Menu } from "@mui/icons-material";
-import { sportsTabList } from "../home/sportsTabList";
-import { Box, Collapse, IconButton } from "@mui/material";
+import { Menu } from "@mui/icons-material";
+import { Box, IconButton } from "@mui/material";
 import { UserContext } from "../../App";
 import { colorHex } from "../../utils/constants";
-import InPlaySidebar from "./InPlaySidebar";
 import SidebarSport from "./SidebarSport";
 
 export const Drawers = ({
@@ -21,7 +17,7 @@ export const Drawers = ({
 }) => {
   //   const [open, setOpen] = useState([true, false, false, false, false]);
   //   const [matchCollapse, setMatchCollapse] = useState<boolean[]>([]);
-  const { isSignedIn, setModal, appData, activeEventList } =
+  const { isSignedIn, setModal, appData, allocatedCasino } =
     useContext(UserContext);
 
   // const handleClick = (index: number) => {
@@ -45,6 +41,14 @@ export const Drawers = ({
   // }, [activeEventList]);
 
   const nav = useNavigate();
+  const showSideCasino = useMemo(
+    () =>
+      !isSignedIn ||
+      allocatedCasino.Aura?.active ||
+      allocatedCasino.QTech?.active ||
+      allocatedCasino["Super Nova"]?.active,
+    [allocatedCasino, isSignedIn]
+  );
   return (
     <Box // p={{ lg: 1 }}
       sx={{
@@ -125,7 +129,7 @@ export const Drawers = ({
               />
             </ListItemButton>
           </SidebarHeader>
-          {(appData?.qtech || appData?.aura || appData?.superNova) && (
+          {showSideCasino && (
             <SidebarHeader
               sx={{
                 borderBottom: "1px solid " + colorHex.borderLine,

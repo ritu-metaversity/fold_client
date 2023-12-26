@@ -73,7 +73,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   };
 
   const getGameLists = async (token: string, provider?: string) => {
-    if (!appData?.qtech) return;
+    if (!allocatedCasino["QTech"]?.active) return;
     setIsLoading(true);
     const { response } = await qTechServices.gameLists({
       token,
@@ -114,7 +114,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   // };
 
   const authHandler = async (code: string, providerCode: string) => {
-    if (!appData?.superNova) return;
+    if (!allocatedCasino["Super Nova"]?.active) return;
 
     setOpen(code);
 
@@ -159,7 +159,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
   };
 
   const getSuperNowaGameList = async () => {
-    if (!appData?.superNova) return;
+    if (!allocatedCasino["Super Nova"]?.active) return;
     const { response } = await supernowaServices.gameLists({
       providerCode: "SN",
     });
@@ -252,7 +252,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     }
   }, [state]);
 
-  const { appData } = useContext(UserContext);
+  const { allocatedCasino } = useContext(UserContext);
 
   return (
     <>
@@ -268,18 +268,20 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
             <ProvidersTabs
               providerList={
                 filter === "slot"
-                  ? appData?.qtech
+                  ? allocatedCasino["QTech"]?.active
                     ? slotProviderList
                     : []
                   : filter === "lottery"
-                  ? appData?.qtech
+                  ? allocatedCasino["QTech"]?.active
                     ? lotteryprovidersList
                     : []
                   : casinoProviderList.filter(
                       (i) =>
-                        (i.filterType === "AURA" && appData?.aura) ||
-                        (i.filterType === "NOWA" && appData?.superNova) ||
-                        (!i.providerId && appData?.qtech)
+                        (i.filterType === "AURA" &&
+                          allocatedCasino["Aura"]?.active) ||
+                        (i.filterType === "NOWA" &&
+                          allocatedCasino["Super Nova"]?.active) ||
+                        (!i.providerId && allocatedCasino["QTech"]?.active)
                     )
               }
               getName={getProviderValue}
