@@ -45,7 +45,7 @@ function Item({ gameIdForItemPage, casinoAllow }) {
   ]);
 
   return (
-    <div>
+    <div className="min_height">
       {isLoading ? (
         <p className="lodder">
           <i className="fa fa-spinner fa-spin"></i>
