@@ -9,7 +9,6 @@ import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
 import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
 import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
-import { get } from "mongoose";
 
 function Item({ gameIdForItemPage, casinoAllow }) {
   const [gameName, setGameName] = useState("");
