@@ -23,9 +23,9 @@ function ItemPageForHome({ casinoAllow }) {
       <div className="container-fluid container-fluid-5">
         <div className="row itemHome">
           <DeskMainPage />
-          {casinoAllow?.Aura && <NewLunch />}
-          {casinoAllow?.Nowa && <SuperNowaHome path={"/supernowa"} />}
-          {casinoAllow?.Qtech && (
+          {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <NewLunch />}
+          {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/supernowa"} />}
+          {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
             <>
               <LiveCasinoHome />
               <FantasyGamesHome path={"/fantsy"} />

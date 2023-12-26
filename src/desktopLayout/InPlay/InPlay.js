@@ -266,9 +266,9 @@ const InPlay = ({ casinoAllow }) => {
           </div>
         </div>
       </div>
-      {casinoAllow?.Aura && <NewLunch />}
-      {casinoAllow?.Nowa && <SuperNowaHome path={"/supernowa"} />}
-      {casinoAllow?.Qtech && (
+      {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <NewLunch />}
+      {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/supernowa"} />}
+      {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
         <>
           <LiveCasinoHome />
           <FantasyGamesHome path={"/fantsy"} />

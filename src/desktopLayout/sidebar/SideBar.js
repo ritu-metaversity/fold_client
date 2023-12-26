@@ -160,7 +160,7 @@ function SideBar({ casinoAllow }) {
         casinoAllow?.Nowa ||
         casinoAllow?.Qtech ||
         casinoAllow?.Virtual ||
-        casinoAllow?.Sportbook) && (
+        casinoAllow?.Sportbook) || localStorage.getItem("token") === null && (
         <div
           className="sidebar-title m-t-5 theme2bg"
           onClick={collapse2}
@@ -177,7 +177,7 @@ function SideBar({ casinoAllow }) {
       <Accordion defaultActiveKey="0" className="main_sport_header">
         <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
           <ul className="live_casino">
-            {casinoAllow?.Aura && (
+            {(casinoAllow?.Aura || localStorage.getItem("token") === null) && (
               <li className="nav-item">
                 <Link to="/aura" className="nav-link">
                   <span
@@ -188,7 +188,7 @@ function SideBar({ casinoAllow }) {
                 </Link>
               </li>
             )}
-            {casinoAllow?.Nowa && (
+            {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && (
               <li className="nav-item">
                 <Link to="/supernowa" className="nav-link">
                   <span
@@ -200,7 +200,7 @@ function SideBar({ casinoAllow }) {
               </li>
             )}
 
-            {casinoAllow?.Qtech && (
+            {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
               <>
                 <li className="nav-item">
                   <Link to="/livecasino" className="nav-link">
@@ -225,6 +225,8 @@ function SideBar({ casinoAllow }) {
                 </li>
               </>
             )}
+
+
 
             {/* <li className="nav-item">
             <Link to="/sportbook" className="nav-link">
