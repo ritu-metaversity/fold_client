@@ -74,8 +74,6 @@ function FooterForMob({ ItselfAllowed }) {
                 </a>
               </div>
               }
-
-             
               {footerImage?.s_twitter !== null && (
                 <div class="social-icon">
                   <a
@@ -90,7 +88,6 @@ function FooterForMob({ ItselfAllowed }) {
           </div>
         </section>
       )}
-
       <footer>
         <div className="footer-menu">
           <ul>

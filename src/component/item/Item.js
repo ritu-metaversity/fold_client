@@ -10,7 +10,7 @@ import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
 import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 
-function Item({ gameIdForItemPage, spName, ItselfAllowedData }) {
+function Item({ gameIdForItemPage, casinoAllow }) {
   const [gameName, setGameName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [MatchListLength, setMatchListLength] = useState();
@@ -18,8 +18,6 @@ function Item({ gameIdForItemPage, spName, ItselfAllowedData }) {
   if (!gameIdForItemPage) {
     gameIdForItemPage = 4;
   }
-
-  localStorage.setItem("SportId", gameIdForItemPage);
 
   useEffect(() => {
     setIsLoading(true);
@@ -193,13 +191,18 @@ function Item({ gameIdForItemPage, spName, ItselfAllowedData }) {
               </div>
             </div>
           </div>
-          <Slot />
+          {casinoAllow?.Aura && <Slot />}
+
           <div className="casino-main">
-            <SuperNowaHome path={"/m/sueprnowa"} />
-            <LiveCasinoHome />
-            <FantasyGamesHome path={"/m/fantsy"} />
-            <SlotHome path={"/m/slots"} />
-            <LotteryHome path={"/m/lottery"} />
+            {casinoAllow?.Nowa && <SuperNowaHome path={"/m/sueprnowa"} />}
+            {casinoAllow?.Qtech && (
+              <>
+                <LiveCasinoHome />
+                <FantasyGamesHome path={"/m/fantsy"} />
+                <SlotHome path={"/m/slots"} />
+                <LotteryHome path={"/m/lottery"} />
+              </>
+            )}
           </div>
         </>
       )}

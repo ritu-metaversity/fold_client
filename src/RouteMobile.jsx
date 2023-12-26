@@ -38,6 +38,7 @@ import ComingSoon from "./common/comingSoon/ComingSoon";
 import NewLunch from "./desktopLayout/Newlunch/NewLunch";
 import SuperNowa from "./desktopLayout/IndianCasino/SuperNowa";
 import WhatsAppIcon from "./common/whatsAppIcon/WhatsAppIcon";
+import { GameAPI } from "./apis/gameAPI";
 
 const RouteMobile = () => {
   const { pathname } = useLocation();
@@ -116,9 +117,14 @@ const RouteMobile = () => {
   useEffect(()=>{
     UserAPI.Self_By_App_Url().then((res)=>{
       setItselfAllowed(res?.data?.selfAllowed)
-      setItselfAllowedData(res?.data)
     })
   }, [ItselfAllowed])
+
+  useEffect(()=>{
+    GameAPI.ALLOTED_CASINO_LIST().then((res)=>{
+      setItselfAllowedData(res?.data);
+    })
+  }, [pathname])
 
   useEffect(() => {
     if (
@@ -152,20 +158,52 @@ const RouteMobile = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-    
-     
       const newTop = window.scrollY;
-
-
       setWhatsAppIconPosition({ top: newTop});
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const casinoStateNames = ['Aura', 'Super Nova', 'QTech', 'Virtual', 'SportBook'];
+
+
+  const [AuraData, setAuraData] = useState();
+  const [NowaData, setNowaData] = useState();
+  const [QtechData, setQtechData] = useState();
+  const [VirtualData, setVirtualData] = useState();
+  const [SportBookData, setSportBookData] = useState();
+
+  useEffect(() => {
+    if (ItselfAllowedData) {
+      casinoStateNames.forEach(name => {
+        const casinoData = ItselfAllowedData.find(item => item.name === name);
+        const setCasinoData = getSetterFunction(name);
+        setCasinoData(casinoData?.active);
+      });
+    }
+  }, [ItselfAllowedData, casinoStateNames]);
+
+  function getSetterFunction(name) {
+    switch (name) {
+      case 'Aura':
+        return setAuraData;
+      case 'Super Nova':
+        return setNowaData;
+      case 'QTech':
+        return setQtechData;
+      case 'Virtual':
+        return setVirtualData;
+      case 'SportBook':
+        return setSportBookData;
+      default:
+        return () => {};
+    }
+  }
+
+  const casinoAllow = {Aura: AuraData, Nowa: NowaData, Qtech: QtechData, Virtual: VirtualData, Sportbook: SportBookData}
 
   return (
     <div>
@@ -200,11 +238,11 @@ const RouteMobile = () => {
             <Route path="/m/setting/changebtnvalue" element={<ChangeBtnValue />}/>
             <Route path="/m/setting/changepassword" element={ <ChangePassword message={message} statusMsg={statusMsg} />}/>
             <Route path="/SignOut" element={<SignOut statusMsgForLogout={statusMsgForLogout} />}/>
-            <Route path="" element={<Mobilenav ItselfAllowedData={ItselfAllowedData}/>}>
-              <Route path="/m/Home" element={<Home idddd={idddd} ItselfAllowedData={ItselfAllowedData}/>} />
-              <Route path="/m/sports" element={<SportData ItselfAllowedData={ItselfAllowedData} />} />
-              <Route path="/m/others" element={<Home />} />
-              <Route path="/m/In-play" element={<Home />} />
+            <Route path="" element={<Mobilenav casinoAllow={casinoAllow}/>}>
+              <Route path="/m/Home" element={<Home idddd={idddd} casinoAllow={casinoAllow}/>} />
+              <Route path="/m/sports" element={<SportData  casinoAllow={casinoAllow} />} />
+              <Route path="/m/others" element={<Home />} casinoAllow={casinoAllow}/>
+              <Route path="/m/In-play" element={<Home />} casinoAllow={casinoAllow}/>
               <Route path="/m/slot" element={<Slot />} />
 
               <Route path="/m/livecasino" element={<LiveCasino liveCasino={"LIVECASINO"} showid={2}/>} />

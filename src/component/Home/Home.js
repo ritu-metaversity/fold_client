@@ -25,7 +25,7 @@ const gameId =(id)=>{
         localStorage.getItem("token") !== null?"":<BannerList/>
       }
 
-        <Item ItselfAllowedData={props.ItselfAllowedData} gameIdForItemPage={gameIdForItemPage}/>
+        <Item casinoAllow={props.casinoAllow} gameIdForItemPage={gameIdForItemPage}/>
     </div>
   );
 }
