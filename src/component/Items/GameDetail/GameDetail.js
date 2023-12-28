@@ -53,8 +53,7 @@ function GameDetail({ getStackValue }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const ref = useRef(null);
-  const scale = (ref.current?.clientWidth || 300) / 280
-
+  const scale = (ref.current?.clientWidth || 300) / 280;
 
   const [profits, setProfits] = useState({
     Odds: {},
@@ -62,6 +61,8 @@ function GameDetail({ getStackValue }) {
     Fancy: [],
   });
   // Stack Value Api
+
+  // console.log(sId, "sIdsId")
 
   useEffect(() => {
     GameAPI.Place_Bet().then((res) => {
@@ -393,7 +394,7 @@ function GameDetail({ getStackValue }) {
                     <div className="scorecard scorecard-mobile">
                       <div className="score-inner tv-score-container">
                         <iframe
-                        ref={ref}
+                          ref={ref}
                           // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
                           // src={`http://43.205.116.130/tv.php?eventId=${id}`}
                           // src={`https://sqmrtv.in/btv.php?eventId=${id}`}
@@ -446,7 +447,7 @@ function GameDetail({ getStackValue }) {
 
                 <div>
                   {matchodd?.map((item, id1) => {
-                    if(item?.Name === "Tied Match") return <></>
+                    if (item?.Name === "Tied Match") return <></>;
                     return (
                       <div key={item}>
                         <div
@@ -862,109 +863,108 @@ function GameDetail({ getStackValue }) {
                   <div></div>
                 </div>
                 {matchodd?.map((item, id1) => {
-                    if(item?.Name !== "Tied Match") return <></>
-                    return (
-                      <div key={item}>
-                        <div
-                          className={`market-title mt-1
+                  if (item?.Name !== "Tied Match") return <></>;
+                  return (
+                    <div key={item}>
+                      <div
+                        className={`market-title mt-1
                             ${item?.runners.length === 0 ? "d-none" : ""}
                             `}>
-                          {item?.Name}
-                          <p className="float-right mb-0">
-                            <i className="fa fa-info-circle"></i>
-                          </p>
-                        </div>
-                        <div
-                          className={`main-market ${
-                            item?.runners.length === 0 ? "d-none" : ""
-                          }`}>
-                          <div className="table-header">
-                            <div className="float-left country-name box-6 min-max">
-                              <b>
-                                Min:
-                                <span>{minBet?.Odds[id1]?.minBet}</span>
-                              </b>
-                              <b style={{ marginLeft: "6px" }}>
-                                Max:
-                                <span>{minBet?.Odds[id1]?.maxBet}</span>
-                              </b>
-                              <b style={{ marginLeft: "6px" }}>
-                                BetDelay:{" "}
-                                <span>{minBet?.Odds[id1]?.betDelay}</span>
-                              </b>
-                            </div>
-                            <div className="back box-1 box-7 float-left text-center">
-                              <b>BACK</b>
-                            </div>
-                            <div className="lay box-1 box-7 float-left text-center">
-                              <b>LAY</b>
-                            </div>
+                        {item?.Name}
+                        <p className="float-right mb-0">
+                          <i className="fa fa-info-circle"></i>
+                        </p>
+                      </div>
+                      <div
+                        className={`main-market ${
+                          item?.runners.length === 0 ? "d-none" : ""
+                        }`}>
+                        <div className="table-header">
+                          <div className="float-left country-name box-6 min-max">
+                            <b>
+                              Min:
+                              <span>{minBet?.Odds[id1]?.minBet}</span>
+                            </b>
+                            <b style={{ marginLeft: "6px" }}>
+                              Max:
+                              <span>{minBet?.Odds[id1]?.maxBet}</span>
+                            </b>
+                            <b style={{ marginLeft: "6px" }}>
+                              BetDelay:{" "}
+                              <span>{minBet?.Odds[id1]?.betDelay}</span>
+                            </b>
                           </div>
-                          <div data-title="OPEN" className="table-body">
-                            {item?.runners?.length &&
-                              item?.runners?.map((event, index) => {
-                                const availableToBack = [
-                                  ...event?.ex?.availableToBack,
-                                ];
-                                const availableToLay = [
-                                  ...event?.ex?.availableToLay,
-                                ];
+                          <div className="back box-1 box-7 float-left text-center">
+                            <b>BACK</b>
+                          </div>
+                          <div className="lay box-1 box-7 float-left text-center">
+                            <b>LAY</b>
+                          </div>
+                        </div>
+                        <div data-title="OPEN" className="table-body">
+                          {item?.runners?.length &&
+                            item?.runners?.map((event, index) => {
+                              const availableToBack = [
+                                ...event?.ex?.availableToBack,
+                              ];
+                              const availableToLay = [
+                                ...event?.ex?.availableToLay,
+                              ];
 
-                                const ProfitValue = profits?.Odds[
-                                  item?.marketId
-                                ]?.find(
-                                  (profit) => profit?.sid == event?.selectionId
-                                )?.value;
-                                return (
-                                  <div
-                                    data-title="ACTIVE"
-                                    className={`table-row ${
-                                      item.status === "SUSPENDED"
-                                        ? "suspended"
-                                        : ""
-                                    }  `}
-                                    key={event + index}>
-                                    <div className="float-left country-name box-4 box-8">
+                              const ProfitValue = profits?.Odds[
+                                item?.marketId
+                              ]?.find(
+                                (profit) => profit?.sid == event?.selectionId
+                              )?.value;
+                              return (
+                                <div
+                                  data-title="ACTIVE"
+                                  className={`table-row ${
+                                    item.status === "SUSPENDED"
+                                      ? "suspended"
+                                      : ""
+                                  }  `}
+                                  key={event + index}>
+                                  <div className="float-left country-name box-4 box-8">
+                                    <span
+                                      className="team-name"
+                                      style={{
+                                        fontSize: "14px",
+                                        fontWeight: "300",
+                                      }}>
+                                      <b className="fanct-title">
+                                        {event?.name}
+                                      </b>
+                                    </span>
+
+                                    <p>
                                       <span
-                                        className="team-name"
-                                        style={{
-                                          fontSize: "14px",
-                                          fontWeight: "300",
-                                        }}>
-                                        <b className="fanct-title">
-                                          {event?.name}
-                                        </b>
+                                        style={{ color: "black" }}
+                                        className={`float-left ${
+                                          ProfitValue > 0
+                                            ? "text-success"
+                                            : ProfitValue < 0
+                                            ? "text-danger"
+                                            : ""
+                                        }`}>
+                                        {parseFloat(ProfitValue)?.toFixed(2) ||
+                                          0}
                                       </span>
-
-                                      <p>
-                                        <span
-                                          style={{ color: "black" }}
-                                          className={`float-left ${
-                                            ProfitValue > 0
-                                              ? "text-success"
-                                              : ProfitValue < 0
-                                              ? "text-danger"
-                                              : ""
-                                          }`}>
-                                          {parseFloat(ProfitValue)?.toFixed(
-                                            2
-                                          ) || 0}
-                                        </span>
-                                      </p>
-                                    </div>
-                                    {availableToBack?.length &&
-                                      availableToBack
-                                        ?.map((e, id) => {
-                                          const BlinkClassBack =
-                                            e?.price !==
-                                            previousState?.Odds[id1]?.runners[
-                                              index
-                                            ]?.ex?.availableToBack[id]?.price;
-                                          return (
-                                            <div
-                                              key={id + "back"}
-                                              onClick={(e) => handleShow(e, id)}
-                                              className={`box-1 box-7 float-left text-center 
+                                    </p>
+                                  </div>
+                                  {availableToBack?.length &&
+                                    availableToBack
+                                      ?.map((e, id) => {
+                                        const BlinkClassBack =
+                                          e?.price !==
+                                          previousState?.Odds[id1]?.runners[
+                                            index
+                                          ]?.ex?.availableToBack[id]?.price;
+                                        return (
+                                          <div
+                                            key={id + "back"}
+                                            onClick={(e) => handleShow(e, id)}
+                                            className={`box-1 box-7 float-left text-center 
                                                 ${
                                                   id === 1
                                                     ? "back-2 ds-none"
@@ -975,63 +975,13 @@ function GameDetail({ getStackValue }) {
                                                  ${
                                                    BlinkClassBack ? "blink" : ""
                                                  }`}>
-                                              <button
-                                                className="odbtn"
-                                                onClick={() =>
-                                                  handleSpanValueBack(
-                                                    e?.price,
-                                                    event?.name,
-                                                    "back",
-                                                    mid,
-                                                    item?.marketId,
-                                                    event?.selectionId,
-                                                    item?.Name,
-                                                    pTime,
-                                                    false
-                                                  )
-                                                }>
-                                                <span className="odd d-block">
-                                                  {e?.price}
-                                                </span>{" "}
-                                                <span className="d-block">
-                                                  {e.size === ""
-                                                    ? "0.0"
-                                                    : e?.size}
-                                                </span>
-                                              </button>
-                                            </div>
-                                          );
-                                        })
-                                        .reverse()}
-                                    {availableToLay?.length &&
-                                      availableToLay?.map((e, id) => {
-                                        const BlinkClassLay =
-                                          e?.price !==
-                                          previousState?.Odds[id1]?.runners[
-                                            index
-                                          ]?.ex?.availableToLay[id]?.price;
-                                        return (
-                                          <div
-                                            key={id + "lay"}
-                                            onClick={(e) => handleShow(e, id)}
-                                            className={`box-1 box-7 float-left text-center 
-                                                ${
-                                                  id === 1
-                                                    ? "lay-1 ds-none"
-                                                    : id === 2
-                                                    ? "lay-2 ds-none"
-                                                    : "lay"
-                                                }
-                                                ${
-                                                  BlinkClassLay ? "blink" : ""
-                                                } `}>
                                             <button
                                               className="odbtn"
                                               onClick={() =>
-                                                handleSpanValueLay(
+                                                handleSpanValueBack(
                                                   e?.price,
                                                   event?.name,
-                                                  "lay",
+                                                  "back",
                                                   mid,
                                                   item?.marketId,
                                                   event?.selectionId,
@@ -1042,23 +992,72 @@ function GameDetail({ getStackValue }) {
                                               }>
                                               <span className="odd d-block">
                                                 {e?.price}
-                                              </span>
+                                              </span>{" "}
                                               <span className="d-block">
-                                                {e?.size}
+                                                {e.size === ""
+                                                  ? "0.0"
+                                                  : e?.size}
                                               </span>
                                             </button>
                                           </div>
                                         );
-                                      })}
-                                  </div>
-                                );
-                              })}
-                          </div>
+                                      })
+                                      .reverse()}
+                                  {availableToLay?.length &&
+                                    availableToLay?.map((e, id) => {
+                                      const BlinkClassLay =
+                                        e?.price !==
+                                        previousState?.Odds[id1]?.runners[index]
+                                          ?.ex?.availableToLay[id]?.price;
+                                      return (
+                                        <div
+                                          key={id + "lay"}
+                                          onClick={(e) => handleShow(e, id)}
+                                          className={`box-1 box-7 float-left text-center 
+                                                ${
+                                                  id === 1
+                                                    ? "lay-1 ds-none"
+                                                    : id === 2
+                                                    ? "lay-2 ds-none"
+                                                    : "lay"
+                                                }
+                                                ${
+                                                  BlinkClassLay ? "blink" : ""
+                                                } `}>
+                                          <button
+                                            className="odbtn"
+                                            onClick={() =>
+                                              handleSpanValueLay(
+                                                e?.price,
+                                                event?.name,
+                                                "lay",
+                                                mid,
+                                                item?.marketId,
+                                                event?.selectionId,
+                                                item?.Name,
+                                                pTime,
+                                                false
+                                              )
+                                            }>
+                                            <span className="odd d-block">
+                                              {e?.price}
+                                            </span>
+                                            <span className="d-block">
+                                              {e?.size}
+                                            </span>
+                                          </button>
+                                        </div>
+                                      );
+                                    })}
+                                </div>
+                              );
+                            })}
                         </div>
                       </div>
-                    );
-                  })}
-                
+                    </div>
+                  );
+                })}
+
                 <div
                   className={`${
                     fancyOdds?.Bookmaker?.length <= 2 ? "d-none" : ""
@@ -1233,216 +1232,222 @@ function GameDetail({ getStackValue }) {
                   <div></div>
                 </div>
 
-                
-
-
-                {sId == 4 ? (
-                  <div className="fancy-markets">
-                    {gameName?.map((item1, id2) => {
-                      if (
-                        [
-                          "Odds",
-                          "Bookmaker",
-                          "Fancy",
-                          "Khado",
-                          "Ball",
-                          "Meter",
-                        ].includes(item1)
-                      ) {
-                        return null;
-                      }
-                      return (
-                        <div
-                          className={`tab-content mt-2 ${
-                            fancyOdds[item1]?.length == 0 ? "d-none" : ""
-                          }`}>
-                          <div className="fancy-market">
-                            <div>
-                              <div className="table-header">
-                                <div  onClick={() => handleAccClick(id2)} className="market-title country-name mob_country">
-                                  <span>{item1}</span>
-                                  <p className="float-right mb-0">
-                                    <i className="fa fa-info-circle"></i>
-                                  </p>
-                                </div>
+                <div className="fancy-markets">
+                  {gameName?.map((item1, id2) => {
+                    if (
+                      [
+                        "Odds",
+                        "Bookmaker",
+                        "Fancy",
+                        "Khado",
+                        "Ball",
+                        "Meter",
+                      ].includes(item1)
+                    ) {
+                      return null;
+                    }
+                    return (
+                      <div
+                        className={`tab-content mt-2 ${
+                          fancyOdds[item1]?.length == 0 ? "d-none" : ""
+                        }`}>
+                        <div className="fancy-market">
+                          <div>
+                            <div className="table-header">
+                              <div
+                                onClick={() => handleAccClick(id2)}
+                                className="market-title country-name mob_country">
+                                <span>{item1}</span>
+                                <p className="float-right mb-0">
+                                  <i className="fa fa-info-circle"></i>
+                                </p>
                               </div>
-                              {
-                                id2 !== activeIndex && <>
-                                 <div className="d-flex yes_no">
-                                <div className=" country-name box-4"></div>
-                                <div className="box-1  lay text-center">
-                                  <b>No</b>
+                            </div>
+                            {id2 !== activeIndex && (
+                              <>
+                                <div className="d-flex yes_no">
+                                  <div className=" country-name box-4"></div>
+                                  <div className="box-1  lay text-center">
+                                    <b>No</b>
+                                  </div>
+                                  <div className="back box-1  back text-center">
+                                    <b>Yes</b>
+                                  </div>
                                 </div>
-                                <div className="back box-1  back text-center">
-                                  <b>Yes</b>
-                                </div>
-                              </div>
-                              {fancyOdds[item1]?.map((item, id) => {
-                                const FancyProfitValue = fancyOddsPnl?.find(
-                                  (pnl) => pnl?.marketId === item?.sid
-                                )?.pnl;
-                                return (
-                                  <div className="table-body" key={item + id}>
-                                    <div className="fancy-tripple">
-                                      <div data-title="" className="table-row">
-                                        <div className="float-left country-name box-4">
-                                          {item?.ball != undefined && (
-                                            <span className="ballbyball">
-                                              {item?.ball}
+                                {fancyOdds[item1]?.map((item, id) => {
+                                  const FancyProfitValue = fancyOddsPnl?.find(
+                                    (pnl) => pnl?.marketId === item?.sid
+                                  )?.pnl;
+                                  return (
+                                    <div className="table-body" key={item + id}>
+                                      <div className="fancy-tripple">
+                                        <div
+                                          data-title=""
+                                          className="table-row">
+                                          <div className="float-left country-name box-4">
+                                            {item?.ball != undefined && (
+                                              <span className="ballbyball">
+                                                {item?.ball}
+                                              </span>
+                                            )}
+                                            <span>
+                                              <b className="fanct-title">
+                                                {item?.nation}{" "}
+                                              </b>
                                             </span>
-                                          )}
-                                          <span>
-                                            <b className="fanct-title">
-                                              {item?.nation}{" "}
-                                            </b>
-                                          </span>
-                                          <div className="float-right">
-                                            <div className="info-block">
-                                              <Accordion>
-                                                <Accordion.Item eventKey={id}>
-                                                  <Accordion.Header>
-                                                    <p
-                                                      data-toggle="collapse"
-                                                      data-target="/min-max-info355"
-                                                      aria-expanded="false"
-                                                      className="info-icon collapsed">
-                                                      <i className="fa fa-info-circle m-l-10"></i>
-                                                    </p>
-                                                  </Accordion.Header>
-                                                  <Accordion.Body>
-                                                    <div
-                                                      id="min-max-info355"
-                                                      className="min-max-info">
-                                                      <span>
-                                                        <b>Min:</b>
+                                            <div className="float-right">
+                                              <div className="info-block">
+                                                <Accordion>
+                                                  <Accordion.Item eventKey={id}>
+                                                    <Accordion.Header>
+                                                      <p
+                                                        data-toggle="collapse"
+                                                        data-target="/min-max-info355"
+                                                        aria-expanded="false"
+                                                        className="info-icon collapsed">
+                                                        <i className="fa fa-info-circle m-l-10"></i>
+                                                      </p>
+                                                    </Accordion.Header>
+                                                    <Accordion.Body>
+                                                      <div
+                                                        id="min-max-info355"
+                                                        className="min-max-info">
+                                                        <span>
+                                                          <b>Min:</b>
+                                                          <br />
+                                                          {item?.minBet}
+                                                        </span>
                                                         <br />
-                                                        {item?.minBet}
-                                                      </span>
-                                                      <br />
-                                                      <span>
-                                                        <b>Max:</b>
+                                                        <span>
+                                                          <b>Max:</b>
+                                                          <br />
+                                                          {item?.maxBet}
+                                                        </span>
                                                         <br />
-                                                        {item?.maxBet}
-                                                      </span>
-                                                      <br />
-                                                    </div>
-                                                  </Accordion.Body>
-                                                </Accordion.Item>
-                                              </Accordion>
+                                                      </div>
+                                                    </Accordion.Body>
+                                                  </Accordion.Item>
+                                                </Accordion>
+                                              </div>
                                             </div>
+                                            <p
+                                              className="cpointer"
+                                              onClick={(e) =>
+                                                handleFancyBook(
+                                                  e,
+                                                  mid,
+                                                  item.sid
+                                                )
+                                              }>
+                                              <span
+                                                className={`float-left ${
+                                                  FancyProfitValue > 0
+                                                    ? "sucess"
+                                                    : FancyProfitValue < 0
+                                                    ? "danger"
+                                                    : ""
+                                                }`}
+                                                style={{ color: "black" }}>
+                                                {FancyProfitValue || 0}
+                                              </span>
+                                            </p>
                                           </div>
-                                          <p
-                                            className="cpointer"
-                                            onClick={(e) =>
-                                              handleFancyBook(e, mid, item.sid)
-                                            }>
-                                            <span
-                                              className={`float-left ${
-                                                FancyProfitValue > 0
-                                                  ? "sucess"
-                                                  : FancyProfitValue < 0
-                                                  ? "danger"
-                                                  : ""
-                                              }`}
-                                              style={{ color: "black" }}>
-                                              {FancyProfitValue || 0}
-                                            </span>
-                                          </p>
-                                        </div>
 
-                                        <div
-                                          className="box-1 lay float-left text-center"
-                                          onClick={(e) => handleShow(e)}>
-                                          <button
-                                            className="odbtn"
-                                            onClick={() =>
-                                              handleSpanValueLay(
-                                                item?.l1,
-                                                item?.nation,
-                                                "lay",
-                                                mid,
-                                                item?.sid,
-                                                0,
-                                                currentFancy,
-                                                pTime,
-                                                true,
-                                                item?.ls1
-                                              )
-                                            }>
-                                            <span className="odd d-block">
-                                              {item?.l1 === "" ? "0" : item?.l1}
-                                            </span>{" "}
-                                            <span className="d-block">
-                                              {item?.ls1}
-                                            </span>
-                                          </button>
-                                        </div>
-                                        <div
-                                          data-title={item?.gstatus}
-                                          className={`box-1 back float-left text-center ${
-                                            item?.gstatus === "SUSPENDED"
-                                              ? "suspended"
-                                              : item?.gstatus === "BALL RUNNING"
-                                              ? "ballrunning"
-                                              : ""
-                                          }`}
-                                          onClick={(e) => handleShow(e)}>
-                                          <button
-                                            className="odbtn"
-                                            onClick={() =>
-                                              handleSpanValueBack(
-                                                item?.b1,
-                                                item?.nation,
-                                                "back",
-                                                mid,
-                                                item?.sid,
-                                                0,
-                                                currentFancy,
-                                                pTime,
-                                                true,
-                                                item?.bs1
-                                              )
-                                            }>
-                                            <span className="odd d-block">
-                                              {item?.b1}
-                                            </span>{" "}
-                                            <span className="d-block">
-                                              {item?.bs1 === ""
-                                                ? "0"
-                                                : item?.bs1}
-                                            </span>
-                                          </button>
+                                          <div
+                                            className="box-1 lay float-left text-center"
+                                            onClick={(e) => handleShow(e)}>
+                                            <button
+                                              className="odbtn"
+                                              onClick={() =>
+                                                handleSpanValueLay(
+                                                  item?.l1,
+                                                  item?.nation,
+                                                  "lay",
+                                                  mid,
+                                                  item?.sid,
+                                                  0,
+                                                  currentFancy,
+                                                  pTime,
+                                                  true,
+                                                  item?.ls1
+                                                )
+                                              }>
+                                              <span className="odd d-block">
+                                                {item?.l1 === ""
+                                                  ? "0"
+                                                  : item?.l1}
+                                              </span>{" "}
+                                              <span className="d-block">
+                                                {item?.ls1}
+                                              </span>
+                                            </button>
+                                          </div>
+                                          <div
+                                            data-title={item?.gstatus}
+                                            className={`box-1 back float-left text-center ${
+                                              item?.gstatus === "SUSPENDED"
+                                                ? "suspended"
+                                                : item?.gstatus ===
+                                                  "BALL RUNNING"
+                                                ? "ballrunning"
+                                                : ""
+                                            }`}
+                                            onClick={(e) => handleShow(e)}>
+                                            <button
+                                              className="odbtn"
+                                              onClick={() =>
+                                                handleSpanValueBack(
+                                                  item?.b1,
+                                                  item?.nation,
+                                                  "back",
+                                                  mid,
+                                                  item?.sid,
+                                                  0,
+                                                  currentFancy,
+                                                  pTime,
+                                                  true,
+                                                  item?.bs1
+                                                )
+                                              }>
+                                              <span className="odd d-block">
+                                                {item?.b1}
+                                              </span>{" "}
+                                              <span className="d-block">
+                                                {item?.bs1 === ""
+                                                  ? "0"
+                                                  : item?.bs1}
+                                              </span>
+                                            </button>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
-                                );
-                              })}
-                                </>
-                              }
-                             
-                            </div>
+                                  );
+                                })}
+                              </>
+                            )}
                           </div>
                         </div>
-                      );
-                    })}
-                    <Modal
-                      show={showFancyModals}
-                      className={``}
-                      onHide={handleCloseFancyModal}
-                      style={{
-                        marginTop: "12px",
-                        marginInline: "2%",
-                        width: "95%",
-                      }}>
-                      <Modal.Header closeButton closeVariant="white">
-                        <Modal.Title>Run Amount</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <FancyModals matchId={mid} FancyID={FancyID} />
-                      </Modal.Body>
-                    </Modal>
-                    {/* <ul className="nav nav-tabs mt-2 fancy-nav">
+                      </div>
+                    );
+                  })}
+                  <Modal
+                    show={showFancyModals}
+                    className={``}
+                    onHide={handleCloseFancyModal}
+                    style={{
+                      marginTop: "12px",
+                      marginInline: "2%",
+                      width: "95%",
+                    }}>
+                    <Modal.Header closeButton closeVariant="white">
+                      <Modal.Title>Run Amount</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <FancyModals matchId={mid} FancyID={FancyID} />
+                    </Modal.Body>
+                  </Modal>
+                  {/* <ul className="nav nav-tabs mt-2 fancy-nav">
                       {gameName?.length &&
                         gameName?.map((item, id) => {
                           if (
@@ -1701,10 +1706,7 @@ function GameDetail({ getStackValue }) {
                     ) : (
                       <p className="no-found">No Real Data Found</p>
                     )} */}
-                  </div>
-                ) : (
-                  ""
-                )}
+                </div>
               </div>
             </div>
           </div>

@@ -74,7 +74,7 @@ function FooterForMob({ ItselfAllowed }) {
                 </a>
               </div>
               }
-              {footerImage?.s_twitter !== null && (
+              {footerImage?.s_twitter && (
                 <div class="social-icon">
                   <a
                     href={footerImage?.s_twitter?.link}
