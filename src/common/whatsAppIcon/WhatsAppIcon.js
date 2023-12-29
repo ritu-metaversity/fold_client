@@ -1,17 +1,23 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import './WhatsAppIcon.css'
+import { GameAPI } from "../../apis/gameAPI";
 
 const WhatsAppIcon = ({top}) => {
+  const [footerImage, setFooterImage] = useState({});
 
-  console.log(top, "isVisibale")
+  useEffect(() => {
+    GameAPI.FOOTER_IMAGESS().then((res) => {
+      setFooterImage(res?.data);
+    });
+  }, []);
   
   return (
     <div>
       <a
-        href="https://web.whatsapp.com/"
+        href={footerImage?.s_whatsapp?.link != null ? footerImage?.s_whatsapp?.link:"#"}
         className="whatsapp-fixed"
-        target="_blank"
-        style={{top: `calc(${top}px + 80vh)`}} rel="noreferrer">
+        style={{top: `calc(${top}px + 80vh)`}}>
         <div className="whatsapp-text">
           <span>Get an ID Instantly on Whatsapp</span>{" "}
           <span>Click Here Now</span>
