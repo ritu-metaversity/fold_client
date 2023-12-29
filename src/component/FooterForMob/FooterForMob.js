@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { GameAPI } from "../../apis/gameAPI";
 
 function FooterForMob({ ItselfAllowed }) {
-  const [footerImage, setFooterImage] = useState([]);
+  const [footerImage, setFooterImage] = useState({});
   const hostName = window.location.host.split(".");
 
   useEffect(() => {
@@ -12,15 +12,16 @@ function FooterForMob({ ItselfAllowed }) {
       setFooterImage(res?.data);
     });
   }, []);
+  
 
   return (
     <div>
-      {ItselfAllowed && (
+      {(ItselfAllowed || footerImage != null) && (
         <section class="footer_main">
           <div class="footer-top">
             <div class="support-detail">
-              <h2>24X7 Support</h2>
-              <p></p>
+              <h2>{footerImage?.support}</h2>
+              <p>{footerImage?.mobileNo}</p>
             </div>
             <div class="social-icons-box">
               {
