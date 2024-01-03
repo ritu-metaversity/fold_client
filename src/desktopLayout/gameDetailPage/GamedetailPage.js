@@ -17,7 +17,7 @@ function GamedetailPage({ getStackValue, SportId }) {
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [currentFancy, setCurrentFancy] = useState("Fancy3");
-  const [matchodd, setMatchodd] = useState({});
+  const [matchodd, setMatchodd] = useState([]);
   const [gameName, setGameName] = useState("");
   const [fancyOdds, setFancyOdds] = useState("");
   const [eTime, setETime] = useState("");
@@ -329,6 +329,7 @@ function GamedetailPage({ getStackValue, SportId }) {
   };
 
   const [stackySideBar, setStackySideBar] = useState("");
+  const [marketIdForPnl, setMarketIdForPnl] = useState();
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
@@ -375,6 +376,45 @@ function GamedetailPage({ getStackValue, SportId }) {
   const handleAccClick = (val) => {
     setActiveIndex(val === activeIndex ? 0 : val);
   };
+
+  const [oddsObject, setOddsObject] = useState({});
+  const [winnerData, setWinnerData] = useState();
+
+  useEffect(()=>{
+    matchodd?.map((res)=>{
+      setMarketIdForPnl(res?.marketId)
+    })
+  }, [matchodd])
+
+
+  useEffect(() => {
+    UserAPI.WINNER_PNL({
+      marketId: marketIdForPnl,
+    }).then((res) => {
+      console.log(res, "Dasdasdasdasdsada")
+      setWinnerData(res?.data || []);
+    });
+    const time = setInterval(() => {
+      UserAPI.WINNER_PNL({
+        marketId: marketIdForPnl,
+      }).then((res) => {
+        setWinnerData(res?.data || []);
+      });
+    }, 5000);
+
+    return () => clearInterval(time);
+  }, [marketIdForPnl]);
+
+  
+  
+  useEffect(() => {
+    let resultObject = {};
+    winnerData?.forEach((item) => {
+      resultObject[item.selctionId] = item.liability;
+    });
+    setOddsObject(resultObject);
+  }, [winnerData]);
+  
 
   return (
     <>
@@ -534,7 +574,24 @@ function GamedetailPage({ getStackValue, SportId }) {
                                             <b>{event.name}</b>
                                           </span>
                                           <p>
-                                            <span
+                                            {
+                                              (item?.Name)?.includes("Winner")?<span
+                                              style={{
+                                                color: "black",
+                                                fontSize: "12px",
+                                              }}
+                                              className={`float-left ${
+                                                oddsObject[event?.selectionId] > 0
+                                                  ? "text-success"
+                                                  : oddsObject[event?.selectionId] < 0
+                                                  ? "text-danger"
+                                                  : ""
+                                              }`}>
+                                              
+                                                {
+                                                  oddsObject[event?.selectionId]
+                                                }
+                                            </span>: <span
                                               style={{
                                                 color: "black",
                                                 fontSize: "12px",
@@ -568,6 +625,8 @@ function GamedetailPage({ getStackValue, SportId }) {
                                                 )
                                                 ?.value?.toFixed(2) || 0}
                                             </span>
+                                            }
+                                            
                                           </p>
                                         </div>
                                         {event?.ex?.availableToBack?.length &&

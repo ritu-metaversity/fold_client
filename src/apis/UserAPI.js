@@ -369,6 +369,21 @@ export const UserAPI = {
 
     return response.data;
   },
+  WINNER_PNL: async function ({marketId},cancel = false) {
+    const response = await api.request({
+      url: `/enduser/user-winner-pnl`,
+      method: "POST",
+      
+      data:{
+       marketId
+      },
+      signal: cancel
+        ? cancelApiObject[this.get.name].handleRequestCancellation().signal
+        : undefined,
+    });
+
+    return response.data;
+  },
   
 };
 

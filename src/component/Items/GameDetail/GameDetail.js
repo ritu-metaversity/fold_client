@@ -18,7 +18,7 @@ function GameDetail({ getStackValue }) {
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [showModals, setShowModals] = useState(false);
   const [currentFancy, setCurrentFancy] = useState("Fancy2");
-  const [matchodd, setMatchodd] = useState({});
+  const [matchodd, setMatchodd] = useState([]);
   const [gameName, setGameName] = useState("");
   const [fancyOdds, setFancyOdds] = useState("");
   const [eTime, setETime] = useState("");
@@ -322,6 +322,44 @@ function GameDetail({ getStackValue }) {
     setActiveIndex(val === activeIndex ? 0 : val);
   };
 
+  const [oddsObject, setOddsObject] = useState({});
+  const [marketIdForPnl, setMarketIdForPnl] = useState();
+  const [winnerData, setWinnerData] = useState();
+
+  useEffect(()=>{
+    matchodd?.map((res)=>{
+      setMarketIdForPnl(res?.marketId)
+    })
+  }, [matchodd])
+
+
+  useEffect(() => {
+    UserAPI.WINNER_PNL({
+      marketId: marketIdForPnl,
+    }).then((res) => {
+      console.log(res, "Dasdasdasdasdsada")
+      setWinnerData(res?.data || []);
+    });
+    const time = setInterval(() => {
+      UserAPI.WINNER_PNL({
+        marketId: marketIdForPnl,
+      }).then((res) => {
+        setWinnerData(res?.data || []);
+      });
+    }, 5000);
+    return () => clearInterval(time);
+  }, [marketIdForPnl]);
+
+  
+  
+  useEffect(() => {
+    let resultObject = {};
+    winnerData?.forEach((item) => {
+      resultObject[item.selctionId] = item.liability;
+    });
+    setOddsObject(resultObject);
+  }, [winnerData]);
+
   return (
     <>
       <div className="main-div">
@@ -522,7 +560,18 @@ function GameDetail({ getStackValue }) {
                                       </span>
 
                                       <p>
-                                        <span
+                                        {
+                                          item?.Name?.includes("Winner") ? <span
+                                          style={{ color: "black" }}
+                                          className={`float-left ${
+                                            oddsObject[event?.selectionId] > 0
+                                              ? "text-success"
+                                              : oddsObject[event?.selectionId] < 0
+                                              ? "text-danger"
+                                              : ""
+                                          }`}>
+                                          {oddsObject[event?.selectionId] || 0}
+                                        </span>:<span
                                           style={{ color: "black" }}
                                           className={`float-left ${
                                             ProfitValue > 0
@@ -535,6 +584,8 @@ function GameDetail({ getStackValue }) {
                                             2
                                           ) || 0}
                                         </span>
+                                        }
+                                        
                                       </p>
                                     </div>
                                     {availableToBack?.length &&
