@@ -34,7 +34,9 @@ import {
   FancyOddsInterface,
   FancyPnl,
   Pnl,
+  PnlObj,
   ProfitObjectInterface,
+  WinnerPnl,
 } from "./types";
 import { createProfits, transformMatchOdds } from "./eventUtils";
 import moment from "moment";
@@ -42,7 +44,6 @@ import Marquee from "react-fast-marquee";
 import { socket } from "../../utils/socket/socket";
 import LiveScoreTv from "./liveScoreTv";
 import MyBetWrapper from "./bet/MyBetWrapper";
-import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 
 const anish_socket_actve = false;
 const ankit_socket_actve = false;
@@ -78,6 +79,7 @@ const Event = () => {
   const [fancyOdds, setFancyOdds] = useState<any>();
   const [fancyOddsSlower, setFancyOddsSlower] = useState<any>({});
   const [pnl, setPnl] = useState<Pnl[] | null>(null);
+  const [winnerPnl, setWinnerPnl] = useState<PnlObj[] | null>(null);
   const [fancyPnl, setFancyPnl] = useState<FancyPnl[] | null>(null);
   const [prevFancyOdds, setPrevFancyOdds] = useState<any>();
   const [selectedPnlMarketId, setSelectedPnlMarketId] = useState("");
@@ -286,9 +288,23 @@ const Event = () => {
 
   const getPnl = async () => {
     if (!matchId || ankit_socket_actve) return;
-    const { response } = await userServices.pnlByMatch(matchId);
-    if (response?.data?.length) {
-      setPnl(response.data);
+    if (fancyOdds?.Odds?.[0]?.Name.toLowerCase().includes("winner")) {
+      const { response } = await userServices.winnerPnlByMatch(
+        fancyOdds?.Odds?.[0]?.marketId
+      );
+      if (response?.data?.length) {
+        setWinnerPnl(
+          response.data.map((pnlsOdds: WinnerPnl) => ({
+            pnl: pnlsOdds.liability,
+            selectionId: pnlsOdds.selctionId,
+          }))
+        );
+      }
+    } else {
+      const { response } = await userServices.pnlByMatch(matchId);
+      if (response?.data?.length) {
+        setPnl(response.data);
+      }
     }
   };
 
@@ -325,7 +341,7 @@ const Event = () => {
       getBets();
     }, 5000);
     return () => clearInterval(timer);
-  }, [matchId]);
+  }, [matchId, fancyOdds?.Odds?.[0]?.Name]);
 
   useEffect(() => {
     getOdds();
@@ -340,10 +356,10 @@ const Event = () => {
       rechange: true,
       pnl,
       setProfits,
+      winnerPnl,
     });
   }, [betDetails?.marketId]);
 
-  console.log(fancyOdds, "odds==================");
   useEffect(() => {
     createProfits({
       fancyOdds,
@@ -351,6 +367,7 @@ const Event = () => {
       betDetails,
       pnl,
       setProfits,
+      winnerPnl,
     });
   }, [betDetails?.stake, pnl, fancyPnl, fancyOdds?.Odds[0]?.marketId]);
 

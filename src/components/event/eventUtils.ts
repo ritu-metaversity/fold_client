@@ -38,12 +38,15 @@ export const createProfits = ({
   rechange,
   fancyPnl,
   setProfits,
+  winnerPnl,
 }: CreateProfitProps) => {
   if (!fancyOdds) return;
   const pnlsOdds = pnl?.find(
     (element) => element?.marketId == betDetails?.marketId
   );
-  const plnOddsArray = pnlsOdds
+  const plnOddsArray = winnerPnl
+    ? winnerPnl
+    : pnlsOdds
     ? [
         { pnl: pnlsOdds.pnl1, selectionId: pnlsOdds.selection1 },
         { pnl: pnlsOdds.pnl2, selectionId: pnlsOdds.selection2 },
@@ -133,7 +136,9 @@ export const createProfits = ({
           );
           if (!pnlsOddCurrent) return accu;
 
-          const plnArrayCurrent = pnlsOddCurrent
+          const plnArrayCurrent = winnerPnl
+            ? winnerPnl
+            : pnlsOddCurrent
             ? [
                 {
                   pnl: pnlsOddCurrent.pnl1,

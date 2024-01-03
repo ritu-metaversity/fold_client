@@ -2,6 +2,10 @@ import { ApiResource } from "../apiService";
 export const userResources: {
   [x: string]: ApiResource;
 } = {
+  GET_WINNER_PNL: {
+    URL: "/enduser/user-winner-pnl",
+    METHOD: "POST",
+  },
   USER_INFO: {
     URL: "enduser/profile",
     METHOD: "POST",

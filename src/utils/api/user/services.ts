@@ -103,6 +103,13 @@ export const userServices = {
     };
     return await apiHandler(params);
   },
+  winnerPnlByMatch: async (marketId: string) => {
+    const params = {
+      resource: userResources.GET_WINNER_PNL,
+      data: { marketId },
+    };
+    return await apiHandler(params);
+  },
   fancyPnlByMatch: async (matchId: string) => {
     const params = {
       resource: userResources.GET_FANCY_PNL,

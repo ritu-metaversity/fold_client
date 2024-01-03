@@ -17,6 +17,7 @@ export interface CreateProfitProps {
       Fancy: ProfitInterface[];
     }>
   >;
+  winnerPnl: PnlObj[] | null;
 }
 
 interface BetsInterface {
@@ -85,5 +86,14 @@ export interface Pnl {
 }
 export interface FancyPnl {
   marketId: string;
+  pnl: number;
+}
+
+export interface WinnerPnl {
+  selctionId: string;
+  liability: number;
+}
+export interface PnlObj {
+  selectionId: string;
   pnl: number;
 }
