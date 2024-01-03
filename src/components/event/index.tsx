@@ -326,6 +326,9 @@ const Event = () => {
       setFancyOdds(null);
     };
   }, [isSignedIn, matchId]);
+  useEffect(() => {
+    fancyOdds && getPnl();
+  }, [fancyOdds?.Odds?.[0]?.marketId]);
 
   // odds polling 0.5 sec
   useEffect(() => {
@@ -335,13 +338,15 @@ const Event = () => {
 
   //pnl polling 5 sec
   useEffect(() => {
-    const timer = setInterval(() => {
-      getPnl();
-      getFancyPnl();
-      getBets();
-    }, 5000);
+    const timer =
+      fancyOdds &&
+      setInterval(() => {
+        getPnl();
+        getFancyPnl();
+        getBets();
+      }, 5000);
     return () => clearInterval(timer);
-  }, [matchId, fancyOdds?.Odds?.[0]?.Name]);
+  }, [matchId, fancyOdds?.Odds?.[0]?.marketId]);
 
   useEffect(() => {
     getOdds();
@@ -369,7 +374,13 @@ const Event = () => {
       setProfits,
       winnerPnl,
     });
-  }, [betDetails?.stake, pnl, fancyPnl, fancyOdds?.Odds[0]?.marketId]);
+  }, [
+    betDetails?.stake,
+    pnl,
+    fancyPnl,
+    winnerPnl,
+    fancyOdds?.Odds[0]?.marketId,
+  ]);
 
   const currentMatch: { date: string; matchName: string; matchId: string } =
     useMemo(
