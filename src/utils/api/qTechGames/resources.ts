@@ -18,4 +18,8 @@ export const qTechGamesResourcs: {
     URL: `${process.env.REACT_APP_Q_TECH_DEMO_URL}/api/qtech/gamelink`,
     METHOD: "POST",
   },
+  Q_TECH_PROVIDER_LIST: {
+    URL: `${process.env.REACT_APP_Q_TECH_DEMO_URL}/api/qtech/provider`,
+    METHOD: "POST",
+  },
 };

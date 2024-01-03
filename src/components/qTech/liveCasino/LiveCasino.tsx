@@ -7,7 +7,7 @@ function LiveCasino() {
   return (
     <div>
       {!!isMobile ? null : <Toolbar />}
-      <ProviderTabsWithGames filter={"casino"} />
+      <ProviderTabsWithGames filter={"LIVECASINO"} />
     </div>
   );
 }

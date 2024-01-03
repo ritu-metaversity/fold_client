@@ -286,6 +286,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
               }
               getName={getProviderValue}
               value={SelectedProvider || ""}
+              filter={filter.toUpperCase()}
             />
           </div>
           <div className={classes["games_div"]}>

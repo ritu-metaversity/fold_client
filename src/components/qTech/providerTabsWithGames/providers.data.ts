@@ -14,6 +14,7 @@ export const casinoProviderList: ProviderInterface[] = [
     name: "AURA GAME",
     logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
     filterType: "AURA",
+    customFilter: true,
     type: "custom",
     apiUrl:
       "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/wolf.json",
@@ -21,12 +22,14 @@ export const casinoProviderList: ProviderInterface[] = [
   },
   {
     name: "Q Tech",
+    customFilter: true,
     logo: "https://11bet24.com/static/media/qtechlogo.97b6c0859adf911c43bb.png",
     filterType: "QTech-Lobby",
     type: "custom",
   },
   {
     name: "SUPER NOWA",
+    customFilter: true,
     logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
     filterType: "NOWA",
     type: "custom",
