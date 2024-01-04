@@ -16,7 +16,7 @@ const SlotHome = ({ providerList }) => {
         if (key === "liveCasino") return <></>;
         return (
           <>
-            <h4 className="casino_name">{key}</h4>
+            <h4 className="casino_name">{key?.toUpperCase()}</h4>
             <div className="live_casino_home">
               {providerList?.[key]?.map((item, id) => {
                 return (

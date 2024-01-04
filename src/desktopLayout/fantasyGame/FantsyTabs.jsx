@@ -77,21 +77,6 @@ const FantsyTabs = () => {
           })}
         </ul>
 
-        {/* <ul ref={ref}>
-          {
-            FgameData?.map((item, id) => {
-              return (
-                <>
-                  <li
-                    className={activeClass == id ? "casino_active" : ""}
-                    onClick={() => handleCasino(id, item?.filterType)}>
-                    {item?.name}
-                  </li>
-                </>
-              );
-            })}
-          
-        </ul> */}
         {hideButton ? (
           ""
         ) : (

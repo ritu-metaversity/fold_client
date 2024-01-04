@@ -61,7 +61,7 @@ const LiveCasinoHome = ({ providerList }) => {
   }, [gameId]);
   return (
     <div>
-      <h4 className="casino_name">Live Casino</h4>
+      <h4 className="casino_name">{("Live Casino")?.toUpperCase()}</h4>
 
       <div className="live_casino_home">
         {providerList?.map((item) => {

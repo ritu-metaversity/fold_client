@@ -20,7 +20,7 @@ const FantasyGamesHome = ({path}) => {
     }, [])
   return (
     <div>
-      <h4 className="casino_name">Fantasy Games</h4>
+      <h4 className="casino_name">{("Fantasy Games").toUpperCase()}</h4>
 
       <div className="live_casino_home">
         {FgameData?.map((ele) =>
