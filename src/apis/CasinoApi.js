@@ -26,6 +26,18 @@ export const CasinoApi = {
 
     return response;
   },
+  ProvideList: async function ({gameType}, cancel = false) {
+    const response = await casinoApi.request({
+      url: "/provider",
+      method: "POST",
+      data: {gameType },
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+    },
+    });
+
+    return response;
+  },
 
  
 

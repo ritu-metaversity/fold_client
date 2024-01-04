@@ -18,11 +18,11 @@ function Mobilenav({ casinoAllow }) {
       setActive(2);
     } else if (pathname === "/m/In-play") {
       setActive(1);
-    } else if (pathname === "/m/lottery") {
+    } else if (pathname === "/lottery") {
       setActive(8);
     } else if (pathname === "/m/livecasino") {
       setActive(4);
-    } else if (pathname === "/m/slots") {
+    } else if (pathname === "/slot") {
       setActive(3);
     } else if (pathname === "/m/fantsy") {
       setActive(5);
@@ -33,6 +33,8 @@ function Mobilenav({ casinoAllow }) {
     } else if (pathname?.slice(0, 7) === "/casino") {
       setActive(3);
     } else if (pathname === "/") {
+      setActive(2);
+    }else if (pathname === "/instantWin") {
       setActive(2);
     }
   }, [pathname]);
@@ -77,7 +79,7 @@ function Mobilenav({ casinoAllow }) {
             <li
               className={`nav-item ${Active === 3 ? "active2" : ""}`}
               onClick={(e) => handleClick(3, e)}>
-              <Link to="/m/slots" className="nav-link navlink1">
+              <Link to="/slot" className="nav-link navlink1">
                 Slot
               </Link>
             </li>
@@ -98,8 +100,15 @@ function Mobilenav({ casinoAllow }) {
             <li
               className={`nav-item ${Active === 8 ? "active2" : ""}`}
               onClick={(e) => handleClick(8, e)}>
-              <Link to="/m/lottery" className="nav-link">
+              <Link to="/lottery" className="nav-link navlink1">
                 Lottery
+              </Link>
+            </li>
+            <li
+              className={`nav-item ${Active === 9 ? "active2" : ""}`}
+              onClick={(e) => handleClick(9, e)}>
+              <Link to="/instantWin" className="nav-link">
+              Instant Win
               </Link>
             </li>
           </>

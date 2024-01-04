@@ -204,6 +204,10 @@
         background-color: #fff;
         border-radius: 50%;
     }
+    .casino_left_tab {
+       display: none;
+    
+    }
 }
 
 .close_iframe svg path:first-child {

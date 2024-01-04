@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopNav from "../navBar/TopNav";
 import Sport from "./Sport";
 import BannerList from "../BannerSection/BannerList";
@@ -9,6 +9,7 @@ import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
 import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
 import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
+import { CasinoApi } from "../../apis/CasinoApi";
 
 const SportData = ({ casinoAllow }) => {
   const [gameIdForItemPage, setGameIdForItemPage] = useState("");
@@ -17,6 +18,16 @@ const SportData = ({ casinoAllow }) => {
     setGameIdForItemPage(id);
     // props.idddd(id);
   };
+
+  const [providerList, setProviderList] = useState({})
+  useEffect(()=>{
+    CasinoApi.ProvideList({
+      gameType:"ALL"
+    }).then((res)=>{
+      setProviderList(res?.data?.data)
+    })
+
+  }, []);
   return (
     <>
       <div className="main-gameHead">
@@ -26,32 +37,19 @@ const SportData = ({ casinoAllow }) => {
 
       <Sport gameIdForItemPage={gameIdForItemPage} />
 
-      {casinoAllow?.Aura && <Slot />}
+      {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <Slot />}
 
-      <div className="casino-main">
-        {casinoAllow?.Nowa && <SuperNowaHome path={"/m/sueprnowa"} />}
-        {casinoAllow?.Qtech && (
-          <>
-            <LiveCasinoHome />
-            <FantasyGamesHome path={"/m/fantsy"} />
-            <SlotHome path={"/m/slots"} />
-            <LotteryHome path={"/m/lottery"} />
-          </>
-        )}
-      </div>
-      {localStorage.getItem("token") === null && (
-            <>
-              <Slot />
-              <div className="casino-main">
-                <SuperNowaHome path={"/m/sueprnowa"} />
-
-                <LiveCasinoHome />
+          <div className="casino-main">
+            {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/m/sueprnowa"} />}
+            {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
+              <>
+                <LiveCasinoHome providerList={providerList?.liveCasino}/>
                 <FantasyGamesHome path={"/m/fantsy"} />
-                <SlotHome path={"/m/slots"} />
-                <LotteryHome path={"/m/lottery"} />
-              </div>
-            </>
-          )}
+                <SlotHome providerList={providerList} />
+              </>
+            )}
+          </div>
+          {localStorage.getItem("token") === null && <LotteryHome path={"/lottery"} />}
     </>
   );
 };

@@ -230,6 +230,10 @@ const RouteDesktop = () => {
                 path="/lottery"
                 element={<LiveCasino liveCasino={"LOTTERY"} showid={2} />}
               />
+              <Route
+                path="/instantWin"
+                element={<LiveCasino liveCasino={"INSTANTWIN"} showid={2} />}
+              />
               <Route path="/fantsy" element={<FantsyTabs />} />
               <Route path="/aura" element={<NewLunch />} />
               <Route path="/supernowa" element={<SuperNowa />} />

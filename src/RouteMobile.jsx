@@ -97,12 +97,9 @@ const RouteMobile = () => {
       else if (pathname === "/m/aura" || pathname === "/aura") {
         nav("/m/aura");
       }
-      else if (pathname === "/m/sueprnowa" || pathname === "/sueprnowa" || pathname == "/m/fantsy" || pathname == "/m/slots" || pathname == "/m/livecasino" || pathname == "/m/lottery") {
+      else if (pathname === "/m/sueprnowa" || pathname === "/sueprnowa" || pathname == "/m/fantsy" || pathname == "/slot" || pathname == "/m/livecasino" || pathname == "/lottery") {
         nav("/m/login");
       }
-      // else if (pathname === "/m/sportbook" || pathname === "/sportbook") {
-      //   nav("/m/sportbook");
-      // }
     }
     else{
       if(pathname === "/m/reports/deposit"){
@@ -246,8 +243,9 @@ const RouteMobile = () => {
               <Route path="/m/slot" element={<Slot />} />
 
               <Route path="/m/livecasino" element={<LiveCasino liveCasino={"LIVECASINO"} showid={2}/>} />
-              <Route path="/m/slots" element={<LiveCasino liveCasino={"SLOT"} showid={2}/>} />
-              <Route path="/m/lottery" element={<LiveCasino liveCasino={"LOTTERY"} showid={2}/>} />
+              <Route path="/slot" element={<LiveCasino liveCasino={"SLOT"} showid={2}/>} />
+              <Route path="/lottery" element={<LiveCasino liveCasino={"LOTTERY"} showid={2}/>} />
+              <Route path="/instantWin" element={<LiveCasino liveCasino={"INSTANTWIN"} showid={2}/>} />
               <Route path="/m/fantsy" element={<FantsyTabs  />} />
               <Route path="/m/sueprnowa" element={<SuperNowa/>} />
               <Route path="/m/aura" element={<NewLunch/>} />

@@ -223,6 +223,11 @@ function SideBar({ casinoAllow }) {
                     <span className="">Lottery</span>
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="/instantWin" className="nav-link">
+                    <span className="">Instant Win</span>
+                  </Link>
+                </li>
               </>
             )}
 

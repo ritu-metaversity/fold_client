@@ -10,7 +10,7 @@ import CasinoModals from "../component/Items/Slot/CasinoModals/CasinoModals";
 import LiveCasinoModals from "../desktopLayout/LiveCasino/casinoTabs/LiveCasinoModals";
 import { GameAPI } from "../apis/gameAPI";
 
-const LiveCasinoHome = () => {
+const LiveCasinoHome = ({ providerList }) => {
   const [iframeData, setIframeData] = useState("");
   const [gameId, setGameId] = useState("");
   const [ruleShow, setRuleShow] = useState(false);
@@ -59,12 +59,30 @@ const LiveCasinoHome = () => {
       setIframeData(res?.data?.data?.url);
     });
   }, [gameId]);
-
   return (
     <div>
       <h4 className="casino_name">Live Casino</h4>
 
       <div className="live_casino_home">
+        {providerList?.map((item) => {
+          return (
+            <div
+              onClick={() => handleShow(item?.gameCode)}
+              className="sub_live_casino">
+              <img
+                className="live_casino_logo"
+                src={item?.image}
+                alt="fsfsdfsd"
+              />
+              <p style={{ fontWeight: "900", paddingTop: "2px" }}>
+                {item?.providerName}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+      {
+        localStorage.getItem("token") == null &&  <div className="live_casino_home">
         {CasinoProviderList.map((item) => {
           return (
             <div
@@ -82,9 +100,16 @@ const LiveCasinoHome = () => {
           );
         })}
       </div>
+      }
+     
       <Modal centered show={ruleShow} onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
-          <CasinoModals type={"qtech"} singleUserValue={singleUserValue}  show={setShow} setShow={setRuleShow} />
+          <CasinoModals
+            type={"qtech"}
+            singleUserValue={singleUserValue}
+            show={setShow}
+            setShow={setRuleShow}
+          />
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={() => setRuleShow(false)}>
