@@ -49,10 +49,23 @@ function ProvidersTabs({ getName, value, providerList, cls, filter }: Props) {
   }, [filter]);
 
   useEffect(() => {
-    if (providerList) {
-      const el =
-        providerList?.find((i) => i.filterType === state?.filterType) ||
-        providerList?.[0];
+    if (state?.filterType) {
+      const el = providerList?.find((i) => i.filterType === state?.filterType);
+      const el2 = providerListFromApiRaw?.find(
+        (i) => i.providerId === state?.filterType
+      )?.providerId;
+      if (el)
+        getName(
+          el?.filterType,
+          el?.customFilter,
+          el?.games,
+          el?.type,
+          el?.apiUrl,
+          el?.providerId
+        );
+      else if (el2) getName(el2);
+    } else if (providerList) {
+      const el = providerList?.[0];
       el &&
         getName(
           el?.filterType,
@@ -63,9 +76,7 @@ function ProvidersTabs({ getName, value, providerList, cls, filter }: Props) {
           el?.providerId
         );
     } else if (providerListFromApiRaw) {
-      const el =
-        providerListFromApiRaw?.find((i) => i.providerId === state?.filterType)
-          ?.providerId || providerListFromApi[0];
+      const el = providerListFromApi[0];
       el && getName(el);
     }
   }, [state, providerListFromApiRaw]);
@@ -74,7 +85,7 @@ function ProvidersTabs({ getName, value, providerList, cls, filter }: Props) {
       {providerList?.map(
         (el) =>
           (!filter ||
-            // providerListFromApi.includes(el.filterType) ||
+            providerListFromApi.includes(el.filterType) ||
             el.customFilter) && (
             <div
               onClick={() =>

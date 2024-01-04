@@ -4,6 +4,8 @@ import { data, gameData, GameDataInterface } from "./data";
 import ProvidersTabs from "../providersTabs/providersTabs";
 import GamePortal from "../gamePortal/GamePortal";
 import { Toolbar, useMediaQuery } from "@mui/material";
+import { ProviderListFromApi } from "../../home/AllProviderName";
+import { qTechServices } from "../../../utils/api/qTechGames/services";
 
 function Fantasy() {
   const [SelectedProvider, setSelectedProvider] = useState<string | null>(
@@ -13,7 +15,22 @@ function Fantasy() {
   const [SelectedGame, setSelectedGame] = useState<string | null>(null);
   const [ShowPortal, setShowPortal] = useState<boolean>(false);
   const isMobile = useMediaQuery("(max-width: 1210px)");
-
+  const [providerListFromApi, setProviderListFromApi] = useState<string[]>([]);
+  const getProviderListFromApi = async () => {
+    const { response } = await qTechServices.providerLists("all");
+    if (response?.data) {
+      const newRes: ProviderListFromApi = { ...response.data };
+      setProviderListFromApi(
+        Object.values(newRes).reduce((a, b) => {
+          const b2 = b.map((i) => i.providerId);
+          return [...a, ...b2];
+        }, [] as string[])
+      );
+    }
+  };
+  useEffect(() => {
+    getProviderListFromApi();
+  }, []);
   const showAndHideHandler = function () {
     setShowPortal(!ShowPortal);
   };
@@ -55,7 +72,9 @@ function Fantasy() {
       <div className={classes["gam_ls"]}>
         <div className={classes["tl"]}>
           <ProvidersTabs
-            providerList={data}
+            providerList={data.filter((i) =>
+              providerListFromApi.includes(i.filterType)
+            )}
             getName={getProviderValue}
             value={SelectedProvider || ""}
           />

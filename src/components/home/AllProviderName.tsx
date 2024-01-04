@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import { qTechServices } from "../../utils/api/qTechGames/services";
 
-interface ProviderListFromApiInterface {
+export interface ProviderListFromApiInterface {
   id: number;
   gameType: string;
   providerName: string;
@@ -13,14 +13,14 @@ interface ProviderListFromApiInterface {
   providerId: string;
   image: string;
 }
-interface ProviderListFromApi {
+export interface ProviderListFromApi {
   [x: string]: ProviderListFromApiInterface[];
 }
 const Heading = {
   slot: "Slot Games",
   lottery: "Lottery",
   instantWin: "Instant Win",
-  liveCasino: "Live Casino",
+  liveCasino: "International Casino",
 };
 const AllProviderName = () => {
   let navigate = useNavigate();
@@ -75,7 +75,8 @@ const AllProviderName = () => {
           ) &&
             key === "Indian Casino" &&
             isSignedIn) ||
-          (isSignedIn && ["Slot Games", "Lottery"].includes(key)) ? (
+          (isSignedIn &&
+            ["Slot Games", "Lottery", "Internation Casino"].includes(key)) ? (
           <></>
         ) : (
           <div className="Inner_header_for_game_provide_Incasin">
@@ -92,7 +93,11 @@ const AllProviderName = () => {
                       (item.gameCode === "NOWA" &&
                         allocatedCasino["Super Nova"]?.active) ||
                       (!["AURA", "NOWA"].includes(item.gameCode) &&
-                        allocatedCasino["QTech"]?.active)) && (
+                        allocatedCasino["QTech"]?.active &&
+                        providerListFromApiRaw &&
+                        !!Object.values(providerListFromApiRaw)
+                          .reduce((A, C) => [...A, ...C], [])
+                          .find((j) => j.providerId === item.gameCode))) && (
                       <div
                         className="MainBtn_warp"
                         style={{ border: "0.5px solid" }}
