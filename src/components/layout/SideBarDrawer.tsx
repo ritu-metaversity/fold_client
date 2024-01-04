@@ -141,7 +141,7 @@ export const Drawers = ({
                     e.preventDefault();
                     setModal && setModal({ login: true });
                   } else {
-                    nav("/casino");
+                    nav("/livecasino");
                   }
                 }}
               >

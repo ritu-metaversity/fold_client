@@ -5,6 +5,15 @@ import classes from "./providers.module.css";
 import { useEffect, useState } from "react";
 import { qTechServices } from "../../../utils/api/qTechGames/services";
 
+interface ProviderListFromApiInterface {
+  id: number;
+  gameType: string;
+  providerName: string;
+  currency: string;
+  image: string;
+  providerId: string;
+}
+
 interface Props {
   getName: (
     value: string,
@@ -15,7 +24,7 @@ interface Props {
     providerId?: number
   ) => void;
   value: string;
-  providerList: ProviderInterface[];
+  providerList?: ProviderInterface[];
   cls?: string;
   filter?: string;
 }
@@ -23,9 +32,10 @@ interface Props {
 function ProvidersTabs({ getName, value, providerList, cls, filter }: Props) {
   const { state } = useLocation();
   const [providerListFromApi, setProviderListFromApi] = useState<string[]>([]);
-  const [providerListFromApiRaw, setProviderListFromApiRaw] = useState<any[]>(
-    []
-  );
+  const [providerListFromApiRaw, setProviderListFromApiRaw] = useState<
+    ProviderListFromApiInterface[]
+  >([]);
+
   const getProviderListFromApi = async () => {
     const { response } = await qTechServices.providerLists(filter || "");
     if (response?.data) {
@@ -33,12 +43,16 @@ function ProvidersTabs({ getName, value, providerList, cls, filter }: Props) {
       setProviderListFromApi(response.data.map((o: any) => o.providerId));
     }
   };
+
   useEffect(() => {
     filter && getProviderListFromApi();
   }, [filter]);
+
   useEffect(() => {
-    if (state?.filterType) {
-      const el = providerList.find((i) => i.filterType === state.filterType);
+    if (providerList) {
+      const el =
+        providerList?.find((i) => i.filterType === state?.filterType) ||
+        providerList?.[0];
       el &&
         getName(
           el?.filterType,
@@ -48,26 +62,19 @@ function ProvidersTabs({ getName, value, providerList, cls, filter }: Props) {
           el?.apiUrl,
           el?.providerId
         );
-    } else {
-      const el = providerList[0];
-      if (el) {
-        getName(
-          el?.filterType,
-          el?.customFilter,
-          el?.games,
-          el?.type,
-          el?.apiUrl,
-          el?.providerId
-        );
-      }
+    } else if (providerListFromApiRaw) {
+      const el =
+        providerListFromApiRaw?.find((i) => i.providerId === state?.filterType)
+          ?.providerId || providerListFromApi[0];
+      el && getName(el);
     }
-  }, [state]);
+  }, [state, providerListFromApiRaw]);
   return (
     <div className={!cls ? classes["contianer"] : classes[cls!]}>
-      {providerList.map(
+      {providerList?.map(
         (el) =>
           (!filter ||
-            providerListFromApi.includes(el.filterType) ||
+            // providerListFromApi.includes(el.filterType) ||
             el.customFilter) && (
             <div
               onClick={() =>
@@ -94,6 +101,24 @@ function ProvidersTabs({ getName, value, providerList, cls, filter }: Props) {
             </div>
           )
       )}
+      {providerListFromApiRaw.map((item) => {
+        return (
+          <div
+            onClick={() => getName(item.providerId)}
+            key={item.providerName}
+            className={classes["tab_container"]}
+          >
+            <div
+              className={`${classes["tab"]} ${
+                classes[value === item.providerId ? "active" : ""]
+              }`}
+            >
+              <img src={item.image} alt="logo" />
+              <p>{item.providerName}</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

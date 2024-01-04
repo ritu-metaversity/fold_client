@@ -38,7 +38,8 @@ const linksWithoutSideBar = [
   "/report/activity",
   "/report/currentbets",
   "/slot",
-  "/casino",
+  "/livecasino",
+  "/instantWin",
   "/fantasy",
   "/lottery",
 ];
@@ -122,14 +123,14 @@ export default function Header(props: Props) {
             }
           }}
           style={
-            pathname === "/casino"
+            pathname === "/livecasino"
               ? {
                   color: "#fdcf13",
                   borderBottom: "2px solid #fdcf13",
                 }
               : {}
           }
-          to="/casino"
+          to="/livecasino"
         >
           Live Casino
         </TopNavLinks> */}
