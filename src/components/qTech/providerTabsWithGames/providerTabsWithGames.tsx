@@ -78,10 +78,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     const { response } = await qTechServices.gameLists({
       token,
       provider: SelectedProvider || "",
-      gameCategory:
-        filter === "slot" || filter === "lottery"
-          ? filter.toUpperCase()
-          : "LIVECASINO",
+      gameCategory: filter.toUpperCase(),
     });
     setIsLoading(false);
 
@@ -267,14 +264,8 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
           <div className={classes["side_provider_list"]}>
             <ProvidersTabs
               providerList={
-                filter === "slot"
-                  ? allocatedCasino["QTech"]?.active
-                    ? slotProviderList
-                    : []
-                  : filter === "lottery"
-                  ? allocatedCasino["QTech"]?.active
-                    ? lotteryprovidersList
-                    : []
+                ["instantWin", "lottery", "slot"].includes(filter)
+                  ? undefined
                   : casinoProviderList.filter(
                       (i) =>
                         (i.filterType === "AURA" &&
@@ -286,6 +277,7 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
               }
               getName={getProviderValue}
               value={SelectedProvider || ""}
+              filter={filter.toUpperCase()}
             />
           </div>
           <div className={classes["games_div"]}>

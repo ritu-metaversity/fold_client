@@ -91,7 +91,7 @@ const SideBarCasino = ({
             onClick={() =>
               isSignedIn
                 ? setId(casino.gameId)
-                : // nav(`/casino/${casino.gameId}`)
+                : // nav(`/livecasino/${casino.gameId}`)
                   openLoginModal()
             }
             sx={{

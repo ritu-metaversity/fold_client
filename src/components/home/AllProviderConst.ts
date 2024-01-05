@@ -23,14 +23,14 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
       name: "Super nowa",
       logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
       gameCode: "NOWA",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
     {
       name: "Aura",
       logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
       gameCode: "AURA",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
   ],
@@ -40,7 +40,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
       logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/5.png",
       gameCodeName: "EVO-dhp",
       gameCode: "EVO",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
     {
@@ -48,7 +48,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
       logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/21.png",
       gameCodeName: "VGL-bulgariaroulette",
       gameCode: "VGL",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
     {
@@ -56,7 +56,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
       logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/1.png",
       gameCodeName: "EZU-32cards",
       gameCode: "EZU",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
     // {
@@ -70,7 +70,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
       logo: "https://skywindgroup.com/assets/site/images/skywind_white.svg",
       gameCodeName: "SWL-atomroulette",
       gameCode: "SWL",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
     {
@@ -78,7 +78,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
       logo: "https://www.sagaming.com/img/logo.png",
       gameCodeName: "SAG-lobby",
       gameCode: "SAG",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
     {
@@ -86,7 +86,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
       logo: "https://www.pragmaticplay.com/wp-content/themes/gp-theme-basic/libs/dist/images/PP-white-logo.svg",
       gameCodeName: "PPL-livecasinolobby",
       gameCode: "PPL",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
     {
@@ -94,7 +94,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
       logo: "https://live.beter.co/wp-content/themes/artit/assets/images/logo.svg",
       gameCodeName: "BTL-lobby",
       gameCode: "BTL",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
     {
@@ -102,7 +102,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
       logo: "https://www.betgames.tv/api/uploads/BG_Logo_White_Horizontal_Lock_Up_dcca475d41.png",
       gameCodeName: "BTV-lobby",
       gameCode: "BTV",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
     {
@@ -110,14 +110,14 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
       logo: "https://sitethemedata.com/casino_icons/fantasy/aviator.png",
       gameCodeName: "SPB-aviator",
       gameCode: "SPB",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
     {
       name: "Q Tech",
-      logo: "/assets/img/qtech.png",
+      logo: "https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/QTECH.png",
       gameCode: "QTech-Lobby",
-      PageUrl: "/casino",
+      PageUrl: "/livecasino",
       filter: "LIVECASINO",
     },
   ],
@@ -161,7 +161,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
     },
     {
       name: "1X2 GAMING",
-      logo: "https://www.1x2gaming.com/img/logo@2x.png",
+      logo: "https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/1x2.png",
       gameCode: "1x2",
       PageUrl: "/slot",
       filter: "SLOT",
@@ -231,7 +231,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
     },
     {
       name: "FUGASO",
-      logo: "https://fugaso.com/images/logo.svg",
+      logo: "https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/FUG.svg",
       gameCode: "FUG",
       PageUrl: "/slot",
       filter: "SLOT",
@@ -408,7 +408,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
     },
     {
       name: "GALAXSYS",
-      logo: "https://galaxsys.co/wp-content/uploads/2022/02/Galaxsys.svg",
+      logo: "https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/GLX.svg",
       gameCode: "GLX",
       PageUrl: "/lottery",
       filter: "LOTTERY",
@@ -420,13 +420,13 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
       PageUrl: "/lottery",
       filter: "LOTTERY",
     },
-    {
-      name: "S4",
-      logo: "https://media.licdn.com/dms/image/C4E0BAQGMnMvRWUcOsA/company-logo_200_200/0/1519900555706?e=1703116800&v=beta&t=ezkTp_NYg2wcB5L2JADuOxm2SyH77pKxl6aYnJ0Vuzs",
-      gameCode: "S4G",
-      PageUrl: "/lottery",
-      filter: "LOTTERY",
-    },
+    // {
+    //   name: "S4",
+    //   logo: "https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/S4.png",
+    //   gameCode: "S4G",
+    //   PageUrl: "/lottery",
+    //   filter: "LOTTERY",
+    // },
     {
       name: "SPEARHEAD",
       logo: "https://spearheadstudios.com/wp-content/themes/spearheadstudios/assets/img/logo.svg?v=1",
@@ -457,7 +457,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
     },
     {
       name: "TURBO",
-      logo: "https://turbogames.io/images/home/home-logo.png",
+      logo: "https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/TRB.png",
       gameCode: "TRB",
       PageUrl: "/lottery",
       filter: "LOTTERY",

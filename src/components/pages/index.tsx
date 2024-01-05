@@ -7,6 +7,7 @@ import { NewLayout, ThrowToLogin } from "../terms";
 import Games from "../qTech/games/Games";
 import ComingSoon from "../comingSoon/ComingSoon";
 import { UserContext } from "../../App";
+import InstantWin from "../qTech/instantWin/InstantWin";
 
 // import Aboutus from "./aboutus";
 // import ResponsibleGaming from "./responsibleGaming";
@@ -59,10 +60,11 @@ const Pages = () => {
               <Route path="activity" element={<Activity />} />
               <Route path="currentbets" element={<CurrentBets />} />
             </Route>
-            <Route path="/casino" element={<LiveCasino />} />
+            <Route path="/livecasino" element={<LiveCasino />} />
+            <Route path="/instantWin" element={<InstantWin />} />
             <Route path="/fantasy" element={<Fantasy />} />
             <Route path="/slot" element={<Slot />} />
-            {/* <Route path="/casino/:id" element={<CasinoGame />} /> */}
+            {/* <Route path="/livecasino/:id" element={<CasinoGame />} /> */}
             <Route path="/virtual-casino" element={<Casino />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/deposit" element={<Deposit />} />

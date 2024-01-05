@@ -65,7 +65,7 @@ const Home = () => {
               <BlinkImage
                 onClick={() => {
                   isSignedIn
-                    ? nav("/casino/" + banner.clickUrl)
+                    ? nav("/livecasino/" + banner.clickUrl)
                     : setModal && setModal({ login: true });
                 }}
                 key={index}

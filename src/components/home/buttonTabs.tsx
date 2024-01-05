@@ -31,7 +31,7 @@ export const getLinksAndLabels = (alloc: AllocatedCasino) => [
     ? [
         {
           label: "Live Casino",
-          link: "/casino",
+          link: "/livecasino",
           require: true,
         },
       ]
@@ -72,7 +72,7 @@ export const LinksAndLabels = [
   },
   {
     label: "Live Casino",
-    link: "/casino",
+    link: "/livecasino",
     require: true,
   },
   // {
@@ -134,7 +134,7 @@ export function ButtonTabs() {
         {/* <Button
           onClick={() => {
             if (isSignedIn) {
-              nav("/casino");
+              nav("/livecasino");
               setCurrent("live-casino");
             } else if (setModal) {
               setModal({ login: true });

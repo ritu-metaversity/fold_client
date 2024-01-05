@@ -15,6 +15,13 @@ export const qTechServices = {
     };
     return await apiWithErrorSnackbar(params);
   },
+  providerLists: async (gameType: string) => {
+    const params = {
+      resource: qTechGamesResourcs.Q_TECH_PROVIDER_LIST,
+      data: { gameType },
+    };
+    return await apiWithErrorSnackbar(params);
+  },
   gameLobby: async <T extends object>(data: T) => {
     const params = {
       resource: qTechGamesResourcs.Q_TECH_GAME_LOBBY,
