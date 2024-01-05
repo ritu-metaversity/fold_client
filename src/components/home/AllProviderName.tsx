@@ -12,6 +12,7 @@ export interface ProviderListFromApiInterface {
   currency: string;
   providerId: string;
   image: string;
+  gameCode?: string;
 }
 export interface ProviderListFromApi {
   [x: string]: ProviderListFromApiInterface[];
@@ -62,6 +63,27 @@ const AllProviderName = () => {
   //     });
   //   else setModal && setModal({ login: true });
   // };
+  const hardCodedProviders = [
+    ...(providerListFromApiRaw?.instantWin?.find((i) => i.providerId === "SPB")
+      ? [
+          {
+            name: "AVIATOR",
+            logo: "https://sitethemedata.com/casino_icons/fantasy/aviator.png",
+            gameCodeName: "SPB-aviator",
+            gameCode: "SPB",
+            PageUrl: "/livecasino",
+            filter: "LIVECASINO",
+          },
+        ]
+      : []),
+    {
+      name: "Q Tech",
+      logo: "https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/QTECH.png",
+      gameCode: "QTech-Lobby",
+      PageUrl: "/livecasino",
+      filter: "LIVECASINO",
+    },
+  ];
   return (
     <div className="Main_header_for_game_provide_Incasino">
       {Object.keys(AllCasinoProviderName).map((key, item) =>
@@ -139,6 +161,7 @@ const AllProviderName = () => {
                             logo: "https://turbogames.io/images/home/home-logo.png",
                             gameCode: item.providerId,
                             PageUrl: "/" + key,
+                            gameCodeName: item.gameCode,
                             filter: key.toUpperCase(),
                           },
                           key as key
@@ -153,6 +176,21 @@ const AllProviderName = () => {
                       <span className="complany-name-wrap">
                         {item?.providerName}
                       </span>
+                    </div>
+                  ))}
+                {key === "liveCasino" &&
+                  hardCodedProviders.map((item) => (
+                    <div
+                      className="MainBtn_warp"
+                      style={{ border: "0.5px solid" }}
+                      onClick={() => handleGamePageroute(item, key as key)}
+                    >
+                      <img
+                        className="complany-logo-warp"
+                        src={item?.logo}
+                        alt=""
+                      />
+                      <span className="complany-name-wrap">{item?.name}</span>
                     </div>
                   ))}
               </div>

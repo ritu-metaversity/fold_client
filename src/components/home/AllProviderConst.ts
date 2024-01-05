@@ -469,3 +469,22 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
     // },
   ],
 };
+
+
+export const hardCodedProviders = [
+  {
+    name: "AVIATOR",
+    logo: "https://sitethemedata.com/casino_icons/fantasy/aviator.png",
+    gameCodeName: "SPB-aviator",
+    gameCode: "SPB",
+    PageUrl: "/livecasino",
+    filter: "LIVECASINO",
+  },
+  {
+    name: "Q Tech",
+    logo: "/assets/img/qtech.png",
+    gameCode: "QTech-Lobby",
+    PageUrl: "/livecasino",
+    filter: "LIVECASINO",
+  },
+];

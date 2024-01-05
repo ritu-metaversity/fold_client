@@ -4,15 +4,7 @@ import { createPortal } from "react-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { qTechServices } from "../../../utils/api/qTechGames/services";
 import { isMobile, isBrowser } from "react-device-detect";
-import {
-  Box,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Modal,
-  useMediaQuery,
-} from "@mui/material";
+import { Dialog, DialogContent } from "@mui/material";
 import CasinoConfirmationModal from "../../casino/game/CasinoConfirmationModal";
 interface Props {
   gameName: string;
@@ -37,7 +29,7 @@ function GamePortal({ gameName, close }: Props) {
           lang: "en_IN",
           mode: "real",
           device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
-          returnUrl: "http://playindia.app",
+          returnUrl: window.location.origin,
           walletSessionId: sessionToken,
           token: access_token,
           gameName,
@@ -56,7 +48,7 @@ function GamePortal({ gameName, close }: Props) {
           lang: "en_IN",
           mode: "real",
           device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
-          returnUrl: "http://playindia.app",
+          returnUrl: window.location.origin,
           walletSessionId: sessionToken,
           token: access_token,
           //  gameName,
