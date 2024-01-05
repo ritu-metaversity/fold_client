@@ -107,8 +107,8 @@ const LiveCasinoHome = ({ providerList }) => {
             </div>
           );
         })}
-
-        <div onClick={() => handleShowQtech()} className="sub_live_casino">
+        {
+          localStorage.getItem("token") !== null && <div onClick={() => handleShowQtech()} className="sub_live_casino">
           <img
             className="live_casino_logo"
             src="https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/QTECH.png"
@@ -116,6 +116,9 @@ const LiveCasinoHome = ({ providerList }) => {
           />
           <p style={{ fontWeight: "900", paddingTop: "2px" }}>Qtech</p>
         </div>
+        }
+
+        
       </div>
       {localStorage.getItem("token") == null && (
         <div className="live_casino_home">
