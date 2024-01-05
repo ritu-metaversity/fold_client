@@ -66,6 +66,31 @@ export const CasinoApi = {
 
     return response;
   },
+  Qtech_Link: async function ({playerId, currency, country,gender, gameName, birthDate, lang, mode, device, returnUrl, token, walletSessionId}, cancel = false) {
+    const response = await casinoApi.request({
+      url: "/gamelobby",
+      method: "POST",
+      data: {
+        playerId,
+        currency,
+        country,
+        gender,
+        gameName,
+        birthDate,
+        lang,
+        mode,
+        device,
+        returnUrl,
+        token,
+        walletSessionId
+      },
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+    },
+    });
+
+    return response;
+  },
   
   Super_Nowa_Game_List: async function ({providerCode}, cancel = false) {
     const response = await superNowaApi.request({

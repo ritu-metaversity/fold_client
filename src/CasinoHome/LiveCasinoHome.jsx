@@ -33,15 +33,38 @@ const LiveCasinoHome = ({ providerList }) => {
       setShow(true);
     }
   };
+  const handleShowQtech = () => {
+    if (singleUserValue !== 1) {
+      setRuleShow(true);
+    } else {
+      setShow(true);
+    }
+    CasinoApi.Qtech_Link({
+      playerId: "121212",
+      currency: "INR",
+      country: "IN",
+      gender: "M",
+      birthDate: "1986-01-01",
+      lang: "en_IN",
+      mode: "real",
+      device: isBrowser ? "desktop" : "mobile",
+      returnUrl: window.location.host,
+      token: gameToken,
+      walletSessionId: token,
+    }).then((res) => {
+      console.log(res, "resresresresresres");
+      setIframeData(res?.data?.data?.url);
+    });
+  };
 
   const handleAgree = () => {
     setShow(true);
     setRuleShow(false);
   };
 
+  const gameToken = localStorage.getItem("gameToken");
+  const token = localStorage.getItem("token");
   useEffect(() => {
-    const gameToken = localStorage.getItem("gameToken");
-    const token = localStorage.getItem("token");
     CasinoApi.Casino_GameLink({
       playerId: "121212",
       currency: "INR",
@@ -59,12 +82,16 @@ const LiveCasinoHome = ({ providerList }) => {
       setIframeData(res?.data?.data?.url);
     });
   }, [gameId]);
+
+  useEffect(() => {}, []);
+
   return (
     <div>
-      <h4 className="casino_name">{("Live Casino")?.toUpperCase()}</h4>
+      <h4 className="casino_name">{"Live Casino"?.toUpperCase()}</h4>
 
       <div className="live_casino_home">
         {providerList?.map((item) => {
+          // console.log(item, "itemitem")
           return (
             <div
               onClick={() => handleShow(item?.gameCode)}
@@ -80,28 +107,37 @@ const LiveCasinoHome = ({ providerList }) => {
             </div>
           );
         })}
+
+        <div onClick={() => handleShowQtech()} className="sub_live_casino">
+          <img
+            className="live_casino_logo"
+            src="https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/QTECH.png"
+            alt="fsfsdfsd"
+          />
+          <p style={{ fontWeight: "900", paddingTop: "2px" }}>Qtech</p>
+        </div>
       </div>
-      {
-        localStorage.getItem("token") == null &&  <div className="live_casino_home">
-        {CasinoProviderList.map((item) => {
-          return (
-            <div
-              onClick={() => handleShow(item?.gameCode)}
-              className="sub_live_casino">
-              <img
-                className="live_casino_logo"
-                src={item?.logo}
-                alt="fsfsdfsd"
-              />
-              <p style={{ fontWeight: "900", paddingTop: "2px" }}>
-                {item?.name}
-              </p>
-            </div>
-          );
-        })}
-      </div>
-      }
-     
+      {localStorage.getItem("token") == null && (
+        <div className="live_casino_home">
+          {CasinoProviderList.map((item) => {
+            return (
+              <div
+                onClick={() => handleShow(item?.gameCode)}
+                className="sub_live_casino">
+                <img
+                  className="live_casino_logo"
+                  src={item?.logo}
+                  alt="fsfsdfsd"
+                />
+                <p style={{ fontWeight: "900", paddingTop: "2px" }}>
+                  {item?.name}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
       <Modal centered show={ruleShow} onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
           <CasinoModals
