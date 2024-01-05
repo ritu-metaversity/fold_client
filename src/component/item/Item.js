@@ -9,6 +9,7 @@ import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
 import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
 import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
+import { CasinoApi } from "../../apis/CasinoApi";
 
 function Item({ gameIdForItemPage, casinoAllow }) {
   const [gameName, setGameName] = useState("");
@@ -43,6 +44,18 @@ function Item({ gameIdForItemPage, casinoAllow }) {
       gameName?.find((item) => item?.sportid === gameIdForItemPage)?.matchList
         ?.length,
   ]);
+
+  const [providerList, setProviderList] = useState({})
+  useEffect(()=>{
+    CasinoApi.ProvideList({
+      gameType:"ALL"
+    }).then((res)=>{
+      setProviderList(res?.data?.data)
+    })
+
+  }, []);
+
+  console.log(providerList, "providerListproviderList")
 
   return (
     <div className="min_height">
@@ -191,33 +204,32 @@ function Item({ gameIdForItemPage, casinoAllow }) {
               </div>
             </div>
           </div>
-          {casinoAllow?.Aura && <Slot />}
+          {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <Slot />}
 
           <div className="casino-main">
-            {casinoAllow?.Nowa && <SuperNowaHome path={"/m/sueprnowa"} />}
-            {casinoAllow?.Qtech && (
+            {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/m/sueprnowa"} />}
+            {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
               <>
-                <LiveCasinoHome />
+                <LiveCasinoHome providerList={providerList?.liveCasino}/>
                 <FantasyGamesHome path={"/m/fantsy"} />
-                <SlotHome path={"/m/slots"} />
-                <LotteryHome path={"/m/lottery"} />
+                <SlotHome providerList={providerList} />
               </>
             )}
           </div>
 
-          {localStorage.getItem("token") === null && (
+          {/* {localStorage.getItem("token") === null && (
             <>
               <Slot />
               <div className="casino-main">
                 <SuperNowaHome path={"/m/sueprnowa"} />
 
-                <LiveCasinoHome />
+                <LiveCasinoHome  providerList={providerList?.liveCasino} />
                 <FantasyGamesHome path={"/m/fantsy"} />
-                <SlotHome path={"/m/slots"} />
-                <LotteryHome path={"/m/lottery"} />
+                <SlotHome providerList={providerList} />
               </div>
             </>
-          )}
+          )} */}
+           {localStorage.getItem("token") === null && <LotteryHome path={"/lottery"} />}
         </>
       )}
     </div>

@@ -26,12 +26,49 @@ export const CasinoApi = {
 
     return response;
   },
+  ProvideList: async function ({gameType}, cancel = false) {
+    const response = await casinoApi.request({
+      url: "/provider",
+      method: "POST",
+      data: {gameType },
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+    },
+    });
+
+    return response;
+  },
 
  
 
   Casino_GameLink: async function ({playerId, currency, country,gender, gameName, birthDate, lang, mode, device, returnUrl, token, walletSessionId}, cancel = false) {
     const response = await casinoApi.request({
       url: "/gamelink",
+      method: "POST",
+      data: {
+        playerId,
+        currency,
+        country,
+        gender,
+        gameName,
+        birthDate,
+        lang,
+        mode,
+        device,
+        returnUrl,
+        token,
+        walletSessionId
+      },
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+    },
+    });
+
+    return response;
+  },
+  Qtech_Link: async function ({playerId, currency, country,gender, gameName, birthDate, lang, mode, device, returnUrl, token, walletSessionId}, cancel = false) {
+    const response = await casinoApi.request({
+      url: "/gamelobby",
       method: "POST",
       data: {
         playerId,

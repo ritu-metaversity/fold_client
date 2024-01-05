@@ -9,7 +9,7 @@ const SuperNowaHome = ({path}) => {
     }
   return (
     <div>
-      <h4 className="casino_name">Super Nowa</h4>
+      <h4 className="casino_name">{("Super Nowa").toUpperCase()}</h4>
 
       <div className="live_casino_home">
         <div onClick={handelFantsy}  className="sub_live_casino">
