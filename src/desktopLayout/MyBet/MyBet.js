@@ -57,7 +57,10 @@ function MyBet(props) {
                     key={id}
                     className={`myBet ${item?.back === true ? "back" : "lay"}`}>
                     <td>{item?.nation}</td>
-                    <td className="text-right">{item?.rate}</td>
+                    <td className="text-right">
+                      {item?.rate} {" "}
+                      {["fancy", "oddeven", "ballbyball"]?.find((i) =>item?.marketName?.toLowerCase().includes(i)) ? `(${item.priveValue})`: ""}
+                      </td>
 
                     <td className="text-right">{item?.amount}</td>
                   </tr>

@@ -22,13 +22,16 @@ const GameListHome = ({
   const [Casinoshow, setCasinoShow] = useState(false);
 
   const [singleUserValue, setSingleUserValue] = useState();
+  const token = localStorage.getItem("token")
   useEffect(() => {
-    GameAPI.SINGLE_USER_VALUE().then((res) => {
-      console.log(res?.data?.qtech, "res?.data?.supernowa")
-      setSingleUserValue(res?.data?.qtech);
-      
-    });
-  }, []);
+    if(token !== null){
+      GameAPI.SINGLE_USER_VALUE().then((res) => {
+        console.log(res?.data?.qtech, "res?.data?.supernowa")
+        setSingleUserValue(res?.data?.qtech);
+        
+      });
+    }
+  }, [token]);
 
   const handleClose = () => setShow(false);
   const handleShow = (val) => {

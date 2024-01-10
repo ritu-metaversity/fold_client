@@ -284,6 +284,13 @@ function BetHistory() {
                               scope="col"
                               aria-colindex="5"
                               className="text-right bg-color">
+                              Price Value
+                            </th>
+                            <th
+                              role="columnheader"
+                              scope="col"
+                              aria-colindex="5"
+                              className="text-right bg-color">
                               Pnl
                             </th>
                             <th
@@ -325,6 +332,9 @@ function BetHistory() {
                                   </td>
                                   <td aria-colindex="5" className="text-right ">
                                     {res?.rate}
+                                  </td>
+                                  <td aria-colindex="5" className="text-right ">
+                                    {res?.price}
                                   </td>
                                   <td
                                     aria-colindex="6"

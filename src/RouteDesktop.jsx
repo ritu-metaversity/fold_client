@@ -95,11 +95,14 @@ const RouteDesktop = () => {
    
   }, []);
 
+  const token = localStorage.getItem("token")
   useEffect(()=>{
-    GameAPI.ALLOTED_CASINO_LIST().then((res)=>{
-      setItselfAllowedData(res?.data);
-    })
-  }, [pathname])
+    if(token !== null){
+      GameAPI.ALLOTED_CASINO_LIST().then((res)=>{
+        setItselfAllowedData(res?.data);
+      })
+    }
+  }, [pathname, token])
 
   const [whatsAppIconPosition, setWhatsAppIconPosition] = useState({ top: '10px', right: '10px' });
 

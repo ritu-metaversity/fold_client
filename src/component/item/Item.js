@@ -19,10 +19,11 @@ function Item({ gameIdForItemPage, casinoAllow }) {
   if (!gameIdForItemPage) {
     gameIdForItemPage = 4;
   }
+  const token = localStorage.getItem("token");
+
 
   useEffect(() => {
     setIsLoading(true);
-    const token = localStorage.getItem("token");
     axios
       .get("https://oddsapi.247idhub.com/betfair_api/active_match", {
         token: token,
@@ -31,7 +32,7 @@ function Item({ gameIdForItemPage, casinoAllow }) {
         setGameName(res?.data?.data);
         setIsLoading(false);
       });
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     var matchData =
@@ -45,15 +46,18 @@ function Item({ gameIdForItemPage, casinoAllow }) {
         ?.length,
   ]);
 
+  
+
   const [providerList, setProviderList] = useState({})
   useEffect(()=>{
-    CasinoApi.ProvideList({
-      gameType:"ALL"
-    }).then((res)=>{
-      setProviderList(res?.data?.data)
-    })
-
-  }, []);
+    if(token !== null){
+      CasinoApi.ProvideList({
+        gameType:"ALL"
+      }).then((res)=>{
+        setProviderList(res?.data?.data)
+      })
+    }
+  }, [token]);
 
   console.log(providerList, "providerListproviderList")
 

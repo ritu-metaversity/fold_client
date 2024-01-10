@@ -56,14 +56,19 @@ const CasinoTabs = ({
     setSetHideBtton(hideButton);
   }, [hideButton]);
 
+  const token = localStorage.getItem("token")
+
   useEffect(() => {
-    CasinoApi.ProvideList({
-      gameType: liveCasino,
-    }).then((res) => {
-      setProviderList(res?.data?.data);
-      console.log(res?.data?.data, "resresres");
-    });
-  }, [liveCasino]);
+    if(token !== null){
+      CasinoApi.ProvideList({
+        gameType: liveCasino,
+      }).then((res) => {
+        setProviderList(res?.data?.data);
+        console.log(res?.data?.data, "resresres");
+      });
+    }
+    
+  }, [liveCasino, token]);
 
   return (
     <>

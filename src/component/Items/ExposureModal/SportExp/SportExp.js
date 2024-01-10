@@ -193,6 +193,13 @@ const SportExp = ({spType}) => {
                             className="text-left bg-color">
                             User Rate
                           </th>
+                          <th
+                            role="columnheader"
+                            scope="col"
+                            aria-colindex="6"
+                            className="text-left bg-color">
+                            Price Value
+                          </th>
 
                           <th
                             role="columnheader"
@@ -285,6 +292,12 @@ const SportExp = ({spType}) => {
                                       : ""
                                   }`}>
                                   {item?.rate}
+                                </td>
+                                <td
+                                  role="columnheader"
+                                  aria-colindex="6"
+                                  className={`text-left`}>
+                                  {item?.price}
                                 </td>
 
                                 <td

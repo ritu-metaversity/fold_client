@@ -96,11 +96,13 @@ function SideBar({ casinoAllow }) {
 
   const [singleUserValue, setSingleUserValue] = useState();
   useEffect(() => {
-    GameAPI.SINGLE_USER_VALUE().then((res) => {
-      console.log(res?.data?.supernowa, "res?.data?.supernowa");
-      setSingleUserValue(res?.data?.supernowa);
-    });
-  }, []);
+    if(token !== null){
+      GameAPI.SINGLE_USER_VALUE().then((res) => {
+        setSingleUserValue(res?.data?.supernowa);
+      });
+    }
+    
+  }, [token]);
 
   const nav = useNavigate();
   const handleData = (id, gameName, e) => {

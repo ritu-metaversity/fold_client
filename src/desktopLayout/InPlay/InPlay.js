@@ -57,15 +57,18 @@ const InPlay = ({ casinoAllow }) => {
     nav(`/gamedetail/${id}`);
   };
 
-  const [providerList, setProviderList] = useState({})
+  const [providerList, setProviderList] = useState({});
+  const token = localStorage.getItem("token")
   useEffect(()=>{
-    CasinoApi.ProvideList({
-      gameType:"ALL"
-    }).then((res)=>{
-      setProviderList(res?.data?.data)
-    })
-
-  }, [])
+    if(token !== null){
+      CasinoApi.ProvideList({
+        gameType:"ALL"
+      }).then((res)=>{
+        setProviderList(res?.data?.data)
+      })
+    }
+   
+  }, [token])
 
   return (
     <div className="main">

@@ -34,11 +34,14 @@ function NewLunch() {
 
   const [singleUserValue, setSingleUserValue] = useState();
   useEffect(() => {
-    GameAPI.SINGLE_USER_VALUE().then((res) => {
-      console.log(res?.data?.aura, "res?.data?.supernowa");
-      setSingleUserValue(res?.data?.aura);
-    });
-  }, []);
+    if(token !== null){
+      GameAPI.SINGLE_USER_VALUE().then((res) => {
+        console.log(res?.data?.aura, "res?.data?.supernowa");
+        setSingleUserValue(res?.data?.aura);
+      });
+    }
+    
+  }, [token]);
 
   const handleClose = () => setCasinoShow(false);
   const handleCasino = (id, gameName) => {

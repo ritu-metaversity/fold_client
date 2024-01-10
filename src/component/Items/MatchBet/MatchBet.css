@@ -1,6 +1,7 @@
 .matchbet-detail th{
     font-size: 14px !important;
     padding: 4px;
+    color: #fff;
 }
 .matchbet-detail th:first-child{
     padding-left: 0px;
@@ -26,4 +27,7 @@ p.text-center.no-real {
     padding: 10px;
     color: #000;
     font-size: 13px;
+}
+.matchbet-detail{
+    background: #2c3d50;
 }
