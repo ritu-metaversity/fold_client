@@ -11,23 +11,25 @@ import { CasinoApi } from "../../apis/CasinoApi";
 
 function ItemPageForHome({ casinoAllow }) {
   const [providerList, setProviderList] = useState({})
+  const token = localStorage.getItem("token");
   useEffect(()=>{
-    CasinoApi.ProvideList({
-      gameType:"ALL"
-    }).then((res)=>{
-      setProviderList(res?.data?.data)
-      console.log(res?.data?.data, "asdasdasdasd")
-    })
-
-  }, [])
+    if(token !== null){
+      CasinoApi.ProvideList({
+        gameType:"ALL"
+      }).then((res)=>{
+        setProviderList(res?.data?.data)
+        console.log(res?.data?.data, "asdasdasdasd")
+      })
+    }
+  }, [token])
   return (
     <div className="main">
       <div className="container-fluid container-fluid-5">
         <div className="row itemHome">
           <DeskMainPage />
-          {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <NewLunch />}
-          {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/supernowa"} />}
-          {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
+          {(casinoAllow?.Aura || token === null) && <NewLunch />}
+          {(casinoAllow?.Nowa || token === null) && <SuperNowaHome path={"/supernowa"} />}
+          {(casinoAllow?.Qtech || token === null) && (
             <>
               <LiveCasinoHome providerList={providerList?.liveCasino}/>
               <FantasyGamesHome path={"/fantsy"} />
@@ -35,7 +37,7 @@ function ItemPageForHome({ casinoAllow }) {
             </>
           )}
           {
-           localStorage.getItem("token") === null && <LotteryHome path={"/lottery"} />
+           token === null && <LotteryHome path={"/lottery"} />
           }
 
           {/* <LiveCasino liveCasino={"LIVECASINO"} showid={1}/> */}

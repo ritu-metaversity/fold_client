@@ -117,11 +117,15 @@ const RouteMobile = () => {
     })
   }, [ItselfAllowed])
 
+  
+const token = localStorage.getItem("token")
   useEffect(()=>{
-    GameAPI.ALLOTED_CASINO_LIST().then((res)=>{
-      setItselfAllowedData(res?.data);
-    })
-  }, [pathname])
+    if(token !== null){
+      GameAPI.ALLOTED_CASINO_LIST().then((res)=>{
+        setItselfAllowedData(res?.data);
+      })
+    }
+  }, [pathname, token])
 
   useEffect(() => {
     if (

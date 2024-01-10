@@ -254,6 +254,14 @@ function BetHistorydesk() {
                               <th
                                 role="columnheader"
                                 scope="col"
+                                aria-colindex="4"
+                                className="text-right text-white"
+                                style={{ width: "100px" }}>
+                                Price Value
+                              </th>
+                              <th
+                                role="columnheader"
+                                scope="col"
                                 aria-colindex="5"
                                 className="text-right text-white">
                                 Pnl
@@ -319,6 +327,13 @@ function BetHistorydesk() {
                                       aria-colindex="4"
                                       className="text-right">
                                       {res?.rate}
+                                    </td>
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="4"
+                                      className="text-right">
+                                      {res?.price}
                                     </td>
                                     <td
                                       role="columnheader"

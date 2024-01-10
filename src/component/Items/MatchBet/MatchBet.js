@@ -96,10 +96,14 @@ function MatchBet(props) {
                   Object.keys(matchBet?.data).map((key) => (
                     <>
                       {matchBet?.data[key].map((item, id) => {
+                        console.log(item, "fefwerwerwerw")
                         return (
                           <tr key={id} className={`${item?.back === true ? "back" :"lay"}`}>
                             <td className={`${item?.back === true ? "back" :"lay"}`}>{item?.nation}</td>
-                            <td className={`text-right ${item?.back === true ? "back" :"lay"}`}>{item?.rate}</td>
+                            <td className={`text-right ${item?.back === true ? "back" :"lay"}`}>
+                              {item?.rate} {" "}
+                              {["fancy", "oddeven", "ballbyball"]?.find((i) =>item?.marketName?.toLowerCase().includes(i)) ? `(${item.priveValue})`: ""}
+                            </td>
 
                             <td className={`text-right ${item?.back === true ? "back" :"lay"}`}>{item?.amount}</td>
                           </tr>

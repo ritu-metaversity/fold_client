@@ -290,6 +290,13 @@ const UnsetteledBetSportForDesk = () => {
                                 className="text-left bg-color text-right">
                                 User Rate
                               </th>
+                              <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="6"
+                                className="text-left bg-color text-right">
+                                Price Value
+                              </th>
 
                               <th
                                 role="columnheader"
@@ -363,6 +370,12 @@ const UnsetteledBetSportForDesk = () => {
                                       aria-colindex="6"
                                       className="text-right">
                                       {item.rate}
+                                    </td>
+                                    <td
+                                      role="columnheader"
+                                      aria-colindex="6"
+                                      className="text-right">
+                                      {item.price}
                                     </td>
 
                                     <td

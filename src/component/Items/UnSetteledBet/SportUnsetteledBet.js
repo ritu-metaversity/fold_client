@@ -286,6 +286,13 @@ function SportUnsetteledBet() {
                             className="text-left bg-color text-right">
                             User Rate
                           </th>
+                          <th
+                            role="columnheader"
+                            scope="col"
+                            aria-colindex="6"
+                            className="text-left bg-color text-right">
+                            Price Value
+                          </th>
 
                           <th
                             role="columnheader"
@@ -384,6 +391,12 @@ function SportUnsetteledBet() {
                                       : ""
                                   }`}>
                                   {item.rate}
+                                </td>
+                                <td
+                                  role="columnheader"
+                                  aria-colindex="6"
+                                  className={`text-left `}>
+                                  {item.price}
                                 </td>
 
                                 <td

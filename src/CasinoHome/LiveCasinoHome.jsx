@@ -17,12 +17,15 @@ const LiveCasinoHome = ({ providerList }) => {
   const [show, setShow] = useState(false);
 
   const [singleUserValue, setSingleUserValue] = useState();
+  const token = localStorage.getItem("token")
   useEffect(() => {
-    GameAPI.SINGLE_USER_VALUE().then((res) => {
-      console.log(res?.data?.qtech, "res?.data?.supernowa");
-      setSingleUserValue(res?.data?.qtech);
-    });
-  }, []);
+    if(token !== null){
+      GameAPI.SINGLE_USER_VALUE().then((res) => {
+        setSingleUserValue(res?.data?.qtech);
+        
+      });
+    }
+  }, [token]);
 
   const handleClose = () => setShow(false);
   const handleShow = (val) => {
@@ -63,27 +66,27 @@ const LiveCasinoHome = ({ providerList }) => {
   };
 
   const gameToken = localStorage.getItem("gameToken");
-  const token = localStorage.getItem("token");
   useEffect(() => {
-    CasinoApi.Casino_GameLink({
-      playerId: "121212",
-      currency: "INR",
-      country: "IN",
-      gender: "M",
-      gameName: gameId,
-      birthDate: "1986-01-01",
-      lang: "en_IN",
-      mode: "real",
-      device: isBrowser ? "desktop" : "mobile",
-      returnUrl: window.location.host,
-      token: gameToken,
-      walletSessionId: token,
-    }).then((res) => {
-      setIframeData(res?.data?.data?.url);
-    });
-  }, [gameId]);
-
-  useEffect(() => {}, []);
+    if(token !== null){
+      CasinoApi.Casino_GameLink({
+        playerId: "121212",
+        currency: "INR",
+        country: "IN",
+        gender: "M",
+        gameName: gameId,
+        birthDate: "1986-01-01",
+        lang: "en_IN",
+        mode: "real",
+        device: isBrowser ? "desktop" : "mobile",
+        returnUrl: window.location.host,
+        token: gameToken,
+        walletSessionId: token,
+      }).then((res) => {
+        setIframeData(res?.data?.data?.url);
+      });
+    }
+   
+  }, [gameId, token]);
 
   return (
     <div>

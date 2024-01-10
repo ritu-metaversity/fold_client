@@ -10,13 +10,19 @@ const FantasyGamesHome = ({ path }) => {
   };
 
   const [providerList, setProviderList] = useState({});
+  const token = localStorage.getItem("token")
   useEffect(() => {
-    CasinoApi.ProvideList({
-      gameType: "ALL",
-    }).then((res) => {
-      setProviderList(res?.data?.data);
-    });
-  }, []);
+    if(token !== null){
+      CasinoApi.ProvideList({
+        gameType: "ALL",
+      }).then((res) => {
+        setProviderList(res?.data?.data);
+      });
+    }
+    
+  }, [token]);
+
+
   return (
     <div>
       <h4 className="casino_name">{"Fantasy Games".toUpperCase()}</h4>
@@ -24,7 +30,7 @@ const FantasyGamesHome = ({ path }) => {
       <div className="live_casino_home">
         
 
-        {localStorage.getItem("token") === null? FgameData?.map((ele, id) => {
+        {token === null? FgameData?.map((ele, id) => {
           return (
             <div
               key={id}
@@ -40,7 +46,8 @@ const FantasyGamesHome = ({ path }) => {
               </p>
             </div>
           );
-        }):FgameData?.map((ele) =>
+        }):
+        FgameData?.map((ele) =>
           Object?.values(providerList)
             ?.reduce((a, c) => [...a, ...c], [])
             .find((item1) => ele.filterType == item1?.providerId)
