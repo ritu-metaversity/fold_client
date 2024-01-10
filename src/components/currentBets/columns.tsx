@@ -27,6 +27,11 @@ export const columnSports: ColumnsInterface<any>[] = [
     minWidth: 70,
   },
   {
+    id: "price",
+    label: "Price Value",
+    minWidth: 70,
+  },
+  {
     id: "amount",
     label: "Amount",
     minWidth: 70,

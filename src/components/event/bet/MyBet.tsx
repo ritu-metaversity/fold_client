@@ -82,7 +82,12 @@ export const getMyBets = (betList: any[]) =>
         {bet.nation}
       </Grid>
       <Grid item xs={3} textAlign="center">
-        {bet.rate}
+        {bet.rate}{" "}
+        {["fancy", "oddeven", "ballbyball"].find((i) =>
+          bet.marketName.toLowerCase().includes(i)
+        )
+          ? `(${bet.priveValue})`
+          : ""}
       </Grid>
       <Grid item xs={3} textAlign="right">
         {bet.amount}
