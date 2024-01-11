@@ -11,13 +11,15 @@ function TopNav({ gameId }) {
     GameAPI.ACTIVE_SPORT_LIST().then((res) => {
       setActiveSport(res);
     });
+     localStorage.setItem("SportId", 4);
   }, []);
 
   const handleClick = (val) => {
     setactive(val);
     gameId(val);
-    localStorage.setItem("SportId", val)
+    localStorage.setItem("SportId", val);
   };
+
 
 
   return (
