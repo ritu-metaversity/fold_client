@@ -1,0 +1,6 @@
+td{
+    white-space: nowrap;
+}
+td>span{
+    font-size: 0.6rem;
+}

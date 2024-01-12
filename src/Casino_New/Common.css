@@ -1,0 +1,53 @@
+.fancy_aaa_container{
+    display: flex;
+    align-items: stretch;
+    gap:10px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+.fancy_aaa_container>*{
+    flex: 1;
+}
+
+.lay,
+.lay-color {
+    background-color: #faa9ba !important;
+}
+
+.back,
+.back-color {
+    background-color: #72bbef !important;
+}
+
+.layx {
+    background-color: #faa9ba !important;
+}
+
+.backx {
+    background-color: #72bbef !important;
+}
+.content_container{
+    background-color: #eee;
+    padding: 15px;
+}
+.suspended::after{
+    font-family: "Font Awesome 5 Free";
+    content:"\f023";
+    font-weight: 900;
+    font-size: 1.25rem;
+    color: #fff;
+    position: absolute;
+    top:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.suspended{
+    position: relative;
+    cursor: not-allowed;
+
+}

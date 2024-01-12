@@ -1,0 +1,22 @@
+ 
+.dt-special-border {
+    border-right: 5px solid;
+}
+@media (max-width: 580px) {
+    .dt20_container{
+        flex-direction: column;
+}
+ 
+.dt-special-border {
+    border-right: 0px solid;
+}
+  .dt20_container   .content_container>div{
+    flex-direction: column;
+  }
+  .dt20_container   .content_container>.card_card_card{
+    flex-direction: row;
+  }
+}
+.b_color{
+  border-color: #0088cc;
+}
