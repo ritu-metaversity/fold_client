@@ -1,8 +1,5 @@
-import { FC, useContext } from "react";
-import moment from "moment";
 import clsx from "clsx";
 import "./PlayerPlus.css";
-import { globalContext } from "../../CasinoMainPage/CasinoMainPage";
 
 
 const PlayerPlusComponent= ({
@@ -10,20 +7,24 @@ const PlayerPlusComponent= ({
   showRateForSecondT2Also,
   title,
   showRateForFirstT2,
+  setShowBetSection,
+  setBetState,
+  setOpen
 }) => {
-  const { setBetDetails } = useContext(globalContext);
   const handleClick = (t2) => {
-    setBetDetails &&
-      (Number(t2.rate) || Number(t2.b1)) &&
-      setBetDetails({
+    setBetState &&
+      setBetState((prev) => ({
+        ...prev,
+        nation:t2?.nation,
         casinoName: 2,
         isBack: true,
-        marketId: t2.mid,
         odds: Number(t2.rate) || Number(t2.b1),
-        placeTime: moment().format("DD-MM-YYYY HH:mm:sss"),
+        marketId: t2.mid,
+        placeTime: new Date().toString(),
         selectionId: t2.sid,
-        nation: t2.nation,
-      });
+        colorName:"back"
+      }));
+      setOpen(true)
   };
   return (
     <tr

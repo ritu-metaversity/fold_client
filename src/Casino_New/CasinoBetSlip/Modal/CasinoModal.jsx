@@ -16,7 +16,7 @@ const CasinoModal = ({ open, handleClose, children, title, size }) => {
         <div className="modal_overall">
           <div className="modal_overlay"></div>
           <div className={"modal_container " + size}>
-            <div className="modal_header bg-primary">
+            <div className="modal_header " style={{background:"#08c"}}>
               {title}
               <i className="fa fa-times" onClick={handleClose} />
             </div>

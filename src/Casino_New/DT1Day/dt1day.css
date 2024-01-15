@@ -1,0 +1,28 @@
+.dt1day_container {
+    display: flex;
+    gap: 1rem;
+}
+
+.dt1day_container>table {
+    box-shadow: 0px 0px 1px #2a2a2a;
+    width: calc(50% - 0.5rem);
+}
+.dt1day_container th:first-child{ 
+    background-color: white;
+}
+
+@media (max-width: 768px) {
+    .dt1day_container{
+        flex-direction: column;
+    }
+    .dt1day_container>table{
+        width: 100%;
+    }
+}
+
+.small_icon_image_card{
+
+    margin-left: 2px;
+    width: 10px;
+    height: 11.7px;
+}

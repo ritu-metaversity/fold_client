@@ -61,3 +61,13 @@
    .flip-card-back {
      transform: rotateY(180deg);
    }
+
+   @media screen and (max-width: 800px) {
+    .flip-card-front{
+      background-color: unset;
+    }
+    .flip-card img {
+      width: 23px;
+      height: 35px;
+  }
+   }

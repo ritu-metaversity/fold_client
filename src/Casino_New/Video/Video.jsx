@@ -12,6 +12,8 @@ import FlipClockCountdown from "../clock/FlipClockCountDown";
 import { videoIdById } from "../Constant/Constant";
 import { useParams } from "react-router-dom";
 import CardOnVideo from "../CardOnVideo/CardOnVideo";
+import AndarBaharCardOnVideo from "../andarBahar/AndarBaharCardOnVideo";
+import SingleCardOnVideo from "../aaa/SingleCardOnVideo";
 
 const Video= ({ t1, t3 }) => {
   // const id = window.location.pathname.replace("/", "");
@@ -30,15 +32,15 @@ const Video= ({ t1, t3 }) => {
   const cardOnVideoById = {
     "51": <CardOnVideo t1={t1} />,
     "52": <Card2OnVideo t1={t1} />,
-    // "53": <SingleCardOnVideo t1={t1} />,
-    // "54": <SingleCardOnVideo t1={t1} />,
-    // "55": <SingleCardOnVideo t1={t1} />,
+    "54": <SingleCardOnVideo t1={t1} />,
+    "60": <AndarBaharCardOnVideo t3={t3} />,
+    "61": <Card2OnVideo t1={t1} />,
+    "55": <SingleCardOnVideo t1={t1} />,
+    "53": <SingleCardOnVideo t1={t1} />,
     // "56": <OtpCardOnVideo t1={t1} />,
     // "57": <CardOnVideo t1={t1} />,
     // "58": <PokerCardOnVideo t1={t1} />,
     // "59": <PokerCardOnVideo t1={t1} />,
-    // "60": <AndarBaharCardOnVideo t3={t3} />,
-    // "61": <Card2OnVideo t1={t1} />,
   };
   return (
     <div className="video_block_container">

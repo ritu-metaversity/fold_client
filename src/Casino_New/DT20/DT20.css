@@ -1,22 +1,58 @@
- 
-.dt-special-border {
-    border-right: 5px solid;
+ .dt-special-border {
+   border-right: 5px solid;
+ }
+.desk-view-casino{
+  display: block;
 }
-@media (max-width: 580px) {
-    .dt20_container{
-        flex-direction: column;
+.mob-view-casino{
+  display: none;
 }
- 
-.dt-special-border {
-    border-right: 0px solid;
-}
-  .dt20_container   .content_container>div{
-    flex-direction: column;
+
+ @media (max-width: 800px) {
+   .dt20_container {
+     flex-direction: column;
+   }
+
+   .dt-special-border {
+     border-right: 0px solid;
+   }
+   .dt20_container .content_container>.card_card_card {
+     flex-direction: row;
+   }
+   /* .row>*{
+    width: unset;
+    max-width: unset;
+    margin-right: -12px;
+
+   } */
+   .pair_dt{
+    width: 100% !important;
+   }
+  .desk-view-casino{
+    display: none;
   }
-  .dt20_container   .content_container>.card_card_card{
-    flex-direction: row;
+  .mob-view-casino{
+    display: block;
+  }
+ }
+
+ .b_color {
+   border-color: #0088cc;
+ }
+
+.activeClass {
+  border-top: 2px solid #fff;
+}
+
+@media screen and (max-width: 800px) {
+  .casino_row .row>*{
+    width: unset ;
+    max-width: unset ;
+    margin-left: -9px;
+  }
+  .pair_dt{
+    width: 100% !important;
   }
 }
-.b_color{
-  border-color: #0088cc;
-}
+
+

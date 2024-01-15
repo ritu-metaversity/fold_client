@@ -179,6 +179,36 @@ function SideBar({ casinoAllow }) {
       <Accordion defaultActiveKey="0" className="main_sport_header">
         <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
           <ul className="live_casino">
+          <li className="nav-item">
+                  <Link to="/60/casino" className="nav-link">
+                    <span className="">ANDAR BAHAR</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/54/casino" className="nav-link">
+                    <span className="">AMAR AKBAR ANTHONY</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/52/casino" className="nav-link">
+                    <span className="">20-20 DRAGON TIGER</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/61/casino" className="nav-link">
+                    <span className="">1 DAY DRAGON TIGER</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/53/casino" className="nav-link">
+                    <span className="">LUCKY 7 - B</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/51/casino" className="nav-link">
+                    <span className="">20-20 Teenpatti</span>
+                  </Link>
+                </li>
             {(casinoAllow?.Aura || localStorage.getItem("token") === null) && (
               <li className="nav-item">
                 <Link to="/aura" className="nav-link">
@@ -194,7 +224,6 @@ function SideBar({ casinoAllow }) {
               <li className="nav-item">
                 <Link to="/supernowa" className="nav-link">
                   <span
-                  // className="new-launch-text"
                   >
                     Super Nowa
                   </span>
@@ -209,6 +238,7 @@ function SideBar({ casinoAllow }) {
                     <span className="">Live Casino</span>
                   </Link>
                 </li>
+                
 
                 <li className="nav-item">
                   <Link to="/slot" className="nav-link">

@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 
 export const UseOdds = (value) => {
-
-
   const [odds, setOdds] = useState(null);
   const [pnl, setPnl] = useState({});
   const [betPlace, setBetPlace] = useState(false);
   const token = localStorage.getItem("token");
+
+  console.log(value, "sadfsfsdf")
+
   useEffect(() => {
     const timer = setInterval(() => {
       value &&
-        fetch("http://43.205.157.72:3434/" + "casino/" + value)
+        fetch("http://43.205.157.72:3434/casino/" + value)
           .then((res) => res.json())
           .then((res) => {
             if (Array.isArray(res?.data?.data?.bf)) {
@@ -21,7 +22,7 @@ export const UseOdds = (value) => {
                 res.data.data.t2 = [...res.data.data.t2, ...res.data.data.t3];
               }
               res.data.data.t2BySid = {};
-              res?.data?.data?.t2?.forEach((item: T2) => {
+              res?.data?.data?.t2?.forEach((item) => {
                 item.gstatus =
                   Number(item.gstatus) === 1
                     ? true
@@ -38,7 +39,7 @@ export const UseOdds = (value) => {
     return () => {
       clearInterval(timer);
     };
-  }, [pnl]);
+  }, [pnl, value]);
 
   useEffect(() => {
     Number(odds?.data?.t1?.[0]?.mid) &&
@@ -69,7 +70,7 @@ export const UseOdds = (value) => {
             setPnl({});
           }
         });
-  }, [betPlace, odds?.data.t1?.[0].mid]);
+  }, [betPlace, odds?.data.t1?.[0].mid, value]);
   return { odds, setBetPlace };
 };
 

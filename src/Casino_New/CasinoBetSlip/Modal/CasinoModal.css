@@ -35,6 +35,11 @@ height: 100vh;
 background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal_container.md {
-    max-width: 768px;
+.modal_container.sm {
+    max-width: 420px;
+}
+.rule_font{
+  font-weight: 400;
+  font-size: 13px;
+  cursor: pointer;
 }

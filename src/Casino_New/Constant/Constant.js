@@ -56,7 +56,7 @@ export const titleById = {
     "58": "poker",
     "59": "poker20",
     "60": "ab20",
-    "61": "dt6",
+    "61": "dt2",
   };
   export const idFromGtype = {
     "51": "teen20",
