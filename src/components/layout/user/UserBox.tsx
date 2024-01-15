@@ -56,6 +56,7 @@ const UserBox = () => {
           // maxWidth={{ xs: "10rem", md: "unset" }}
           // overflow="hidden"
           // textOverflow={"ellipsis"}
+          sx={{ cursor: "pointer" }}
           fontWeight={{ xs: 800, lg: 500 }}
           whiteSpace="nowrap"
         >
