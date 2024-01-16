@@ -10,15 +10,15 @@ const DT20SpecialButton = ({ t2, noToolTip, setBetState,  setOpen }) => {
         </div>
       )}
       <div className="gap-3 casino_row">
-        <div className="row ">
+        <div className={window?.innerWidth > 800?"row ":""}>
           <div className="col-md-9 row dt_20">
-            <div className="col-md-5 col-sm-3">
+            <div className="col-5 casino_name_dt">
               <SingleButton  setOpen={setOpen} setBetState={setBetState} odd={t2[0]} />
             </div>
-            <div className="col-md-2 col-sm-3">
+            <div className="col-2 casino_name_dt_md">
               <SingleButton  setOpen={setOpen} setBetState={setBetState} odd={t2[1]} />
             </div>
-            <div className="col-md-5 col-sm-3 dt-special-border b_color">
+            <div className="col-5 dt-special-border b_color casino_name_dt">
               <SingleButton   setOpen={setOpen} setBetState={setBetState} odd={t2[2]} />
             </div>
           </div>
@@ -28,7 +28,7 @@ const DT20SpecialButton = ({ t2, noToolTip, setBetState,  setOpen }) => {
         </div>
       </div>
       {noToolTip && (
-       <div className="w-100 text-end" style={{marginTop:"6px"}}>
+       <div className="w-100 text-end min-max-casino" style={{marginTop:"6px"}}>
        <span className="fw">Min:</span> <span>{t2[0].min}</span>{" "}
        <span className="fw">Max:</span> <span>{t2[0].max}</span>
      </div>

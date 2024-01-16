@@ -45,11 +45,6 @@
 }
 
 @media screen and (max-width: 800px) {
-  .casino_row .row>*{
-    width: unset ;
-    max-width: unset ;
-    margin-left: -9px;
-  }
   .pair_dt{
     width: 100% !important;
   }

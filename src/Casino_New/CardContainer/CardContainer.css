@@ -18,4 +18,8 @@
     .card_card_card img{
         width: 30px;
     }
+    .card_card_card{
+        padding: 12px;
+        gap: 0px 10px;
+    }
 }

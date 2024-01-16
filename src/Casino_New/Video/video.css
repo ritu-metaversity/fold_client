@@ -62,4 +62,15 @@
         background-color: rgba(0, 0, 0, 0.1);
         padding: 0 ;
     }
+    .video_iframe_container {
+        height: unset;  
+    }
+    .video_block_container{
+        height: 100%;
+        min-height: 100%;
+    }
+    .cards_container {
+     
+        gap:0px;
+    }
 }

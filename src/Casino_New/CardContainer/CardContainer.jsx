@@ -40,7 +40,7 @@ const CardContainer = ({ t2, noToolTip, setBetState,  setDraganRate, setTigerRat
             <ToolTip title={`Min:${t2[0]?.min} Max:${t2[0]?.max}`} />
           </div>
         )}
-        <div className="w-100 text-center">{t2[0]?.rate}</div>
+        <div className="w-100 text-center rate_heading card_rate_heading">{t2[0]?.rate}</div>
         <div className="card_card_card">
           {t2.map((item) => (
             <div className="text-center">
@@ -65,12 +65,14 @@ const CardContainer = ({ t2, noToolTip, setBetState,  setDraganRate, setTigerRat
                   }
                 />
               </div>
+              <div className="desk-view-casino">
               {item?.pnl}
+              </div>
             </div>
           ))}
         </div>
         {noToolTip && (
-          <div className="w-100 text-end" style={{marginTop:"6px"}}>
+          <div className="w-100 text-end min-max-casino" style={{marginTop:"6px"}}>
             <span className="fw">Min:</span> <span>{t2[0]?.min}</span>{" "}
             <span className="fw">Max:</span> <span>{t2[0]?.max}</span>
           </div>

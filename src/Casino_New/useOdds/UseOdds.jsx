@@ -70,7 +70,7 @@ export const UseOdds = (value) => {
             setPnl({});
           }
         });
-  }, [betPlace, odds?.data.t1?.[0].mid, value]);
+  }, [betPlace, odds?.data?.t1?.[0]?.mid, value]);
   return { odds, setBetPlace };
 };
 

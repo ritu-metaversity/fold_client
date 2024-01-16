@@ -88,17 +88,22 @@ const Aaa = ({ odds, setShowBetSection,setBetState, setOpen }) => {
       <div className="row mob-view-casino">
           <AaaMob t2={t2} abc={abc}/>
         </div>
-      <div className="fancy_aaa_container">
-        <TwoButtonContainer setOpen={setOpen} className={"d-block"} setShowBetSection={setShowBetSection}  setBetState={setBetState} t2={[t2BySid["4"], t2BySid["5"]]} />
-        <TwoButtonContainer setOpen={setOpen} className={"d-block"} setShowBetSection={setShowBetSection}  setBetState={setBetState} t2={[t2BySid["6"], t2BySid["7"]]} />
-        <TwoButtonContainer setOpen={setOpen} className={"d-block"} setShowBetSection={setShowBetSection}  setBetState={setBetState} t2={[t2BySid["21"], t2BySid["22"]]} />
+      <div className="fancy_aaa_container mt-3">
+        <TwoButtonContainer
+            toolTipshow={true} setOpen={setOpen} className={"d-block"} setShowBetSection={setShowBetSection}  setBetState={setBetState} t2={[t2BySid["4"], t2BySid["5"]]} />
+        <TwoButtonContainer
+            toolTipshow={true} setOpen={setOpen} className={"d-block"} setShowBetSection={setShowBetSection}  setBetState={setBetState} t2={[t2BySid["6"], t2BySid["7"]]} />
+        <TwoButtonContainer
+            toolTipshow={true} setOpen={setOpen} className={"d-block"} setShowBetSection={setShowBetSection}  setBetState={setBetState} t2={[t2BySid["21"], t2BySid["22"]]} />
       </div>
-      <br />
+      <div className="mt-3">
       <BCardContainer
       setOpen={setOpen}
       setBetState={setBetState} setShowBetSection={setShowBetSection}
         t2={t2?.filter((item) => item?.nation?.toLowerCase().includes("card"))}
       />
+      </div>
+     
     </>
   );
 };

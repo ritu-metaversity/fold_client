@@ -8,8 +8,8 @@ const AaaMob = ({ t2, abc }) => {
       <table className="table1 table-bordered mb-0">
         <thead>
           <tr>
-            <th colSpan={3} className="box-10" style={{fontSize:"14px"}}>
-            Min: ${t2[0]?.min} Max: ${t2[0]?.max}
+            <th colSpan={3} className="box-10" style={{fontSize:"14px", padding:"4px 2px"}}>
+            Min: {t2[0]?.min} Max: {t2[0]?.max}
             </th>
           </tr>
         </thead>{" "}
@@ -18,7 +18,7 @@ const AaaMob = ({ t2, abc }) => {
             if(item?.gtype !== "aaa") return <></>
             return (
               <tr   className={clsx({
-                // "aaa-button": true,
+                "aaa-table": true,
                 clearfix: true,
                 suspended: item?.gstatus !== "ACTIVE",
               })}>

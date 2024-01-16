@@ -136,15 +136,19 @@ const BTable = ({ odds,  setBetState,setShowBetSection, setOpen }) => {
           </div>
         </div>
         <div style={{ flex: 2 }}>
-          <TwoButtonContainer  className={"d-flex"} setBetState={setBetState}
+          <TwoButtonContainer
+            toolTipshow={false}  className={"d-flex"} setBetState={setBetState}
           setShowBetSection={setShowBetSection} t2={[t2BySid["14"], t2BySid["15"]]} />
         </div>
 
-        {/* <TwoButtonContainer t2={[t2BySid["4"], t2BySid["5"]]} />
-        <TwoButtonContainer t2={[t2BySid["21"], t2BySid["22"]]} /> */}
+        {/* <TwoButtonContainer
+            toolTipshow={false} t2={[t2BySid["4"], t2BySid["5"]]} />
+        <TwoButtonContainer
+            toolTipshow={false} t2={[t2BySid["21"], t2BySid["22"]]} /> */}
       </div>
       <div className="fancy_aaa_container">
-        <TwoButtonContainer  className={"d-flex"} setBetState={setBetState}
+        <TwoButtonContainer
+            toolTipshow={false}  className={"d-flex"} setBetState={setBetState}
           setShowBetSection={setShowBetSection} t2={[t2BySid["8"], t2BySid["9"]]} />
 
         <BCardContainer

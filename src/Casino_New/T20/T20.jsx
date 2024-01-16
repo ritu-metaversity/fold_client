@@ -17,7 +17,7 @@ const T20 = ({ odds, t1, setOpen }) => {
                   {t1?.max}
               </span>
             </th>
-            <th colSpan={mobile ? 2 : 1}>Back</th>
+            <th colSpan={mobile ? 2 : 1}>BACK</th>
             <th style={{ display: mobile ? "none" : "" }}></th>
           </tr>
         </thead>

@@ -18,6 +18,7 @@ import AndarBaharKarna from "../andarBahar/AndarBaharKarna.jsx";
 import Luck7B from "../Luck7B/Luck7B.jsx";
 import CasinoHead from "../CasinoHead/CasinoHead.jsx";
 import MatchBet from "../../component/Items/MatchBet/MatchBet.js";
+import T20Rule from "../T20/T20Rule.jsx";
 
 const defaultStake = {
   stack1: 0,
@@ -83,8 +84,6 @@ const CasinoMainPage = () => {
     return () => resizeObserver.disconnect();
   }, [divRef]);
 
-  console.log(open, "openopenopen")
-
   return (
     <>
       <CasinoModal
@@ -110,7 +109,7 @@ const CasinoMainPage = () => {
             ActiveNavbar == 1 ?  <div className="app_container">
             <div>
               <div
-                className="w-100  text-white p-2 d-flex"
+                className="w-100  text-white p-2 d-flex casino-title"
                 style={{ background: "#0088cc" }}>
                 {titleById[id]}
                 <span
@@ -176,6 +175,9 @@ const CasinoMainPage = () => {
 
             <div>
               <LastResult matchId={t1?.mid[1]} />
+              {
+                id === "51" && <T20Rule />
+              }
             </div>
           </div>:<MatchBet/>
           }

@@ -51,3 +51,78 @@
     cursor: not-allowed;
 
 }
+.styles_fcc__digit_block__GZabH {
+    
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7) !important;
+}  
+
+@media screen and (max-width: 800px) {
+    .styles_fcc__digit_block__GZabH {
+        font-size: 26px;
+        height: 38px !important;
+        font-weight: 900;
+        width: 26px !important;
+    }   
+    .content_container{
+        background-color: #eee;
+        padding: 1px 5px 9px!important;
+    } 
+    .last-font{
+        font-size: 12px;
+    }
+    .casino-title{
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: capitalize !important;
+    }
+    .dt_20{
+        margin: 0;
+        padding: 0;
+        justify-content: space-between;
+    }
+    .casino_name_dt{
+        padding: 0px 2px;
+    }
+    .casino_name_dt_md{
+        padding: 0px 2px;
+    }
+    .rate_heading{
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .min-max-casino{
+        font-size: 12px;
+    }
+    .fw {
+        font-weight: 500;
+    }
+    .card_rate_heading{
+        font-size: 12px;
+        font-weight: bold;
+        padding-top: 8px;
+    }
+    .fancy_aaa_container{
+      
+        margin-top: 0px;
+    }
+    .dt1_head{
+        font-size: 14px;
+    }
+    .lucky_card_image{
+        width: 49px !important;
+        height: 61px;
+
+    }
+}
+i.fas.fa-info-circle {
+    color: #2c3d50;
+}
+.rule_text{
+    font-size: 12px;
+}
+.rule_right{
+    font-size: 12px;
+}
+.pair_value tr td{
+    padding: 4px !important;
+}

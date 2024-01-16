@@ -43,14 +43,14 @@ const LastResult = ({ matchId }) => {
         setMid={(mid) => setFirst(mid)}
       />
       <div
-        className="w-100  text-white p-2 d-flex"
+        className="w-100  text-white p-2 d-flex last-font"
         style={{ background: "#0088cc" }}>
         Last Result
-        <Link to={`/result?token=${token}`} className="ms-auto text-white">
+        <Link to={`/result?token=${token}`} className="ms-auto text-white last-font">
           View All
         </Link>
       </div>
-      <div className="w-100 text-end">
+      <div className="w-100 text-end min-max-casino">
         {resultList?.map((item) => {
           return (
             <span

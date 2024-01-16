@@ -17,13 +17,13 @@ const AndarBaharCardOnVideo  = ({ t3 }) => {
     <>
       {(t3 && (t3[0]?.ball || t3[0]?.aall)) && (
         <div className="card_shown_on_top card_shown_on_top_andar_bahar ">
-          <div className="">Andar</div>
+          <div className="round_id">Andar</div>
           <Slider {...settings}>
             {aall.map((sid) => (
               <CardComp shown={true} card={sid} />
             ))}
           </Slider>
-          <div className="">Bahar</div>
+          <div className="round_id">Bahar</div>
           <Slider {...settings}>
             {ball.map((sid) => (
               <CardComp shown={true} card={sid} />

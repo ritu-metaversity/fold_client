@@ -37,7 +37,7 @@ const AndarBaharKarna = ({ odds, setOpen,setShowBetSection, setBetState }) => {
           ))}
         </div>
       </div>
-      <div className=" andar_bahar_row bahar_color">
+      <div className={`andar_bahar_row bahar_color ${window.innerWidth < 800 ?"mt-2 mb-2":""}`}>
         <div className="andar_bahar_label border-end border-black">Bahar</div>
         <div className="px-4 d-sm-none">
           <Slider {...settings}>
@@ -102,7 +102,8 @@ const CardCompAB  = ({
           ".png"
         }
       />
-      <div className="mb-n1">{t2BySid[sid]?.pnl}</div>
+
+      <div className="mb-n1 desk-view-casino">{t2BySid[sid]?.pnl}</div>
     </div>
   );
 };

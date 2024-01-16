@@ -41,15 +41,15 @@ const PlayerBackLayTR = ({
       )}
     >
       <td>
-        <p>{title || t2?.nationEle || t2?.nation}</p>
+        <p className="dt1_head">{title || t2?.nationEle || t2?.nation}</p>
         <span>{t2?.pnl}</span>
       </td>
       <td onClick={() => handleClick(t2, t2.b1, "back")}>
-        <p>{showRateForFirstT2 ? t2?.b1 : t2?.nation}</p>
+        <p className="dt1_head">{showRateForFirstT2 ? t2?.b1 : t2?.nation}</p>
         <span>{t2?.bs1}</span>
       </td>
       <td className="lay" onClick={() => handleClick(t2, t2.l1, "lay" )}>
-        <p>{showRateForSecondT2Also ? t2?.l1 : t2?.nation}</p>
+        <p className="dt1_head">{showRateForSecondT2Also ? t2?.l1 : t2?.nation}</p>
         <span>{t2?.ls1}</span>
       </td>
     </tr>

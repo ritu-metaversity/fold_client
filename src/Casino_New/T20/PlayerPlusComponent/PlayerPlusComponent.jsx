@@ -32,9 +32,10 @@ const PlayerPlusComponent= ({
         suspended: !t2[0]?.gstatus,
       })}
     >
-      <td>{title || t2[0]?.nationEle || t2[0]?.nation}</td>
+      <td className="dt1_head">{title || t2[0]?.nationEle || t2[0]?.nation}</td>
       <td
         className={clsx({
+          "dt1_head":true,
           suspended:
             // t2[0]?.gstatus &&
             !t2[0]?.gstatus || t2[0]?.gstatus !== "ACTIVE",
@@ -47,6 +48,7 @@ const PlayerPlusComponent= ({
       <td
         onClick={() => handleClick(t2[1])}
         className={clsx({
+          "dt1_head":true,
           suspended:
             // t2[0]?.gstatus &&
             !t2[1]?.gstatus || t2[1]?.gstatus !== "ACTIVE",

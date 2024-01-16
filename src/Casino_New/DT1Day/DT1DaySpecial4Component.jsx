@@ -29,11 +29,12 @@ const DT1DaySpecial4Component= ({ t2, title,setShowBetSection, setBetState, setO
       <td>{title}</td>
       <td
         className={clsx({
+          "dt1_head":true,
           suspended: t2[0]?.gstatus !== "ACTIVE",
         })}
         onClick={() => handleClick(t2[0])}
       >
-        <p>{t2[0]?.rate || t2[0].b1}</p>
+        <p className="dt1_head">{t2[0]?.rate || t2[0].b1}</p>
         <span>{t2[0]?.pnl}</span>
       </td>
       <td
@@ -42,7 +43,7 @@ const DT1DaySpecial4Component= ({ t2, title,setShowBetSection, setBetState, setO
           suspended: t2[1]?.gstatus !== "ACTIVE",
         })}
       >
-        <p>{t2[1]?.rate || t2[1].b1}</p>
+        <p className="dt1_head">{t2[1]?.rate || t2[1].b1}</p>
         <span>{t2[1]?.pnl}</span>
       </td>
       <td
@@ -51,7 +52,7 @@ const DT1DaySpecial4Component= ({ t2, title,setShowBetSection, setBetState, setO
           suspended: t2[2]?.gstatus !== "ACTIVE",
         })}
       >
-        <p>{t2[2]?.rate || t2[2].b1}</p>
+        <p className="dt1_head">{t2[2]?.rate || t2[2].b1}</p>
         <span>{t2[2]?.pnl}</span>
       </td>
       <td
@@ -60,7 +61,7 @@ const DT1DaySpecial4Component= ({ t2, title,setShowBetSection, setBetState, setO
           suspended: t2[3]?.gstatus !== "ACTIVE",
         })}
       >
-        <p>{t2[3]?.rate || t2[3].b1}</p>
+        <p className="dt1_head">{t2[3]?.rate || t2[3].b1}</p>
         <span>{t2[3]?.pnl}</span>
       </td>
     </tr>

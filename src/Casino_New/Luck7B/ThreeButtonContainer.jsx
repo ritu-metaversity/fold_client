@@ -1,9 +1,9 @@
-import { FC } from "react";
 import ToolTip from "../tooltip/Tooltip";
 import { SingleButton } from "../TwoButtonContainer/TwoButtonContainer";
 
 
 const ThreeButtonContainer = ({ t2, noToolTip, setBetState, setShowBetSection, setOpen }) => {
+  console.log(t2, "t2t2t2")
   return (
     <div className="content_container">
       {!noToolTip && (
@@ -14,12 +14,13 @@ const ThreeButtonContainer = ({ t2, noToolTip, setBetState, setShowBetSection, s
       <div className="d-flex gap-3">
         <SingleButton setOpen={setOpen} setBetState={setBetState} setShowBetSection={setShowBetSection} odd={t2[0]} />
         <div className="card_card_card">
-          <img src={"/img/CARD 7.png"} alt=""/>
+          <p>&nbsp;</p>
+          <img className="lucky_card_image" src={"/img/CARD 7.png"} alt=""/>
         </div>
         <SingleButton setOpen={setOpen} setBetState={setBetState} setShowBetSection={setShowBetSection} odd={t2[1]} />
       </div>
       {noToolTip && (
-        <div className="w-100 text-end">
+        <div className="w-100 text-end min-max-casino">
           {`Min:${t2[0]?.min} Max:${t2[0]?.max}`}
         </div>
       )}

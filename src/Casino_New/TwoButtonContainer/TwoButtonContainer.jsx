@@ -1,16 +1,23 @@
 import { useContext, useEffect } from "react";
 import clsx from "clsx";
 import { globalContext } from "../CasinoMainPage/CasinoMainPage";
+import ToolTip from "../tooltip/Tooltip";
 
-const TwoButtonContainer = ({ t2, noToolTip, setBetState, className, setOpen }) => {
+const TwoButtonContainer = ({ t2, noToolTip, setBetState, className, setOpen, toolTipshow }) => {
   return (
     <div className="content_container">
+      {
+        toolTipshow && <div className="w-100 mt-1 view-casino">
+        <ToolTip title={`Min: ${t2[0]?.min} Max: ${t2[0]?.max}`} />
+      </div>
+      }
+       
       <div className={`${className} gap-3`}>
         <SingleButton setOpen={setOpen} setBetState={setBetState} odd={t2[0]} />
         <SingleButton setOpen={setOpen} setBetState={setBetState} odd={t2[1]} />
       </div>
       {noToolTip && (
-        <div className="w-100 text-end" style={{ marginTop: "6px" }}>
+        <div className="w-100 text-end min-max-casino" style={{ marginTop: "6px" }}>
           <span className="fw">Min:</span> <span>{t2[0]?.min}</span>{" "}
           <span className="fw">Max:</span> <span>{t2[0]?.max}</span>
         </div>
@@ -41,8 +48,8 @@ export const SingleButton = ({ odd, setBetState, setOpen }) => {
   };
 
   return (
-    <div className="w-100 text-center">
-      {odd?.b1 || odd?.rate}
+    <div className="w-100 text-center" style={{overflow:"hidden"}}>
+      <p className="rate_heading" style={{padding:'8px 0px'}}><b>{odd?.b1 || odd?.rate}</b> </p>
       <button
         onClick={handleClick}
         className={clsx(
@@ -52,7 +59,6 @@ export const SingleButton = ({ odd, setBetState, setOpen }) => {
         style={{
           textTransform: "uppercase",
           fontWeight: 600,
-          marginTop: "6px",
         }}>
         {odd?.nation?.replace("Dragon ", "").replace("Tiger ", "") == "Red" ? (
           <>
@@ -85,7 +91,9 @@ export const SingleButton = ({ odd, setBetState, setOpen }) => {
           odd?.nation?.replace("Dragon ", "").replace("Tiger ", "")
         )}
       </button>
+      <p className="desk-view-casino">
       {odd?.pnl}
+      </p>
     </div>
   );
 };
