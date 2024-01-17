@@ -11,7 +11,7 @@ const settings: Settings = {
   slidesToShow: 5,
   slidesToScroll: 3,
 };
-const AndarBaharKarna = ({ odds, setOpen,setShowBetSection, setBetState }) => {
+const AndarBaharKarna = ({ odds, setOpen,setShowBetSection, setBetState, setUpdated }) => {
   const { t2BySid, t2 } = odds.data;
   console.log(t2BySid, "s");
 
@@ -25,14 +25,14 @@ const AndarBaharKarna = ({ odds, setOpen,setShowBetSection, setBetState }) => {
         <div className="px-4 d-sm-none">
           <Slider {...settings}>
             {[...Array(13).keys()].map((sid) => (
-              <CardCompAB setOpen={setOpen} setShowBetSection={setShowBetSection}
+              <CardCompAB setOpen={setOpen} setShowBetSection={setShowBetSection} setUpdated={setUpdated}
                 setBetState={setBetState} sid={sid + 1 + ""} br={ar} t2BySid={t2BySid} />
             ))}
           </Slider>
         </div>
         <div className="andar_bahar_t2_card_container">
           {[...Array(13).keys()].map((sid) => (
-            <CardCompAB setOpen={setOpen} setShowBetSection={setShowBetSection}
+            <CardCompAB setOpen={setOpen} setShowBetSection={setShowBetSection} setUpdated={setUpdated}
                 setBetState={setBetState} sid={sid + 1 + ""} br={ar} t2BySid={t2BySid} />
           ))}
         </div>
@@ -42,14 +42,14 @@ const AndarBaharKarna = ({ odds, setOpen,setShowBetSection, setBetState }) => {
         <div className="px-4 d-sm-none">
           <Slider {...settings}>
             {[...Array(13).keys()].map((sid) => (
-              <CardCompAB setOpen={setOpen} setShowBetSection={setShowBetSection}
+              <CardCompAB setOpen={setOpen} setShowBetSection={setShowBetSection} setUpdated={setUpdated}
                 setBetState={setBetState} sid={sid + 21 + ""} br={br} t2BySid={t2BySid} />
             ))}
           </Slider>
         </div>
         <div className="andar_bahar_t2_card_container">
           {[...Array(13).keys()].map((sid) => (
-            <CardCompAB setOpen={setOpen} setShowBetSection={setShowBetSection}
+            <CardCompAB setOpen={setOpen} setShowBetSection={setShowBetSection} setUpdated={setUpdated}
                 setBetState={setBetState} sid={sid + 21 + ""} br={br} t2BySid={t2BySid} />
           ))}
         </div>
@@ -64,7 +64,7 @@ const CardCompAB  = ({
   t2BySid,
   setOpen,
   setShowBetSection,
-                
+  setUpdated,
   setBetState
 }) => {
   const handleClick = (t2) => {
@@ -76,11 +76,12 @@ const CardCompAB  = ({
         isBack: true,
         odds: Number(t2.rate) || Number(t2.b1),
         marketId: t2.mid,
-        placeTime: new Date().toString(),
         selectionId: t2.sid,
         colorName:"back"
       }));
-      setOpen(true)
+      setOpen(true);
+      setShowBetSection(true);
+      setUpdated(0)
   };
   return (
     <div onClick={() => handleClick(t2BySid[sid])}>

@@ -9,7 +9,8 @@ const PlayerPlusComponent= ({
   showRateForFirstT2,
   setShowBetSection,
   setBetState,
-  setOpen
+  setOpen,
+  setUpdated
 }) => {
   const handleClick = (t2) => {
     setBetState &&
@@ -20,11 +21,12 @@ const PlayerPlusComponent= ({
         isBack: true,
         odds: Number(t2.rate) || Number(t2.b1),
         marketId: t2.mid,
-        placeTime: new Date().toString(),
         selectionId: t2.sid,
         colorName:"back"
       }));
-      setOpen(true)
+      setOpen(true);
+      setShowBetSection(true);
+      setUpdated(0)
   };
   return (
     <tr

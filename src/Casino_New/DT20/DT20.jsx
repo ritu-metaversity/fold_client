@@ -26,7 +26,7 @@ const dummyt2 = [
   },
 ];
 
-const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
+const DT20 = ({ odds, setBetState, setShowBetSection, setOpen, setUpdated }) => {
   const { t2BySid } = odds?.data;
 
   const [draganRate, setDraganRate] = useState(0);
@@ -43,7 +43,9 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
     <>
       <DT20SpecialButton
         setBetState={setBetState}
+        setShowBetSection={setShowBetSection}
         setOpen={setOpen}
+        setUpdated={setUpdated}
         noToolTip
         t2={[t2BySid["1"], t2BySid["3"], t2BySid["2"], t2BySid["4"]]}
       />
@@ -72,6 +74,7 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
               <div className="content_container text-center">
                 <TwoButtonContainer
             toolTipshow={false}
+            setUpdated={setUpdated}
                   className={"d-flex"}
                   setBetState={setBetState}
                   setOpen={setOpen}
@@ -79,6 +82,7 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
                   t2={[t2BySid["5"], t2BySid["6"]]}
                   noToolTip></TwoButtonContainer>
                 <TwoButtonContainer
+                setUpdated={setUpdated}
             toolTipshow={false}
                   className={"d-flex"}
                   setBetState={setBetState}
@@ -89,6 +93,7 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
               </div>
               <br />
               <CardContainer
+              setUpdated={setUpdated}
                 setBetState={setBetState}
                 setShowBetSection={setShowBetSection}
                 setOpen={setOpen}
@@ -116,6 +121,7 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
             <div>
               <div className="content_container text-center">
                 <TwoButtonContainer
+                setUpdated={setUpdated}
             toolTipshow={false}
                   setOpen={setOpen}
                   className={"d-flex"}
@@ -124,6 +130,7 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
                   t2={[t2BySid["22"], t2BySid["23"]]}
                   noToolTip></TwoButtonContainer>
                 <TwoButtonContainer
+                setUpdated={setUpdated}
             toolTipshow={false}
                   setOpen={setOpen}
                   className={"d-flex"}
@@ -134,6 +141,7 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
               </div>
               <br />
               <CardContainer
+              setUpdated={setUpdated}
                 setShowBetSection={setShowBetSection}
                 setTigerRate={setTigerRate}
                 setOpen={setOpen}
@@ -163,6 +171,7 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
         <div className="content_container text-center desk-view-casino">
           <h4 style={{ fontWeight: 600, marginBottom:"-20px" }}>DRAGON</h4>
           <TwoButtonContainer
+          setUpdated={setUpdated}
             toolTipshow={false}
             setOpen={setOpen}
             className={"d-flex"}
@@ -171,6 +180,7 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
             t2={[t2BySid["5"], t2BySid["6"]]}
             noToolTip/>
           <TwoButtonContainer
+          setUpdated={setUpdated}
             toolTipshow={false}
             setOpen={setOpen}
             className={"d-flex"}
@@ -182,6 +192,7 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
         <div className="content_container text-center desk-view-casino">
           <h4 style={{ fontWeight: 600, marginBottom:"-20px" }}>TIGER</h4>
           <TwoButtonContainer
+          setUpdated={setUpdated}
             toolTipshow={false}
             setOpen={setOpen}
             className={"d-flex"}
@@ -190,6 +201,7 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
             t2={[t2BySid["22"], t2BySid["23"]]}
             noToolTip></TwoButtonContainer>
           <TwoButtonContainer
+          setUpdated={setUpdated}
             toolTipshow={false}
             setOpen={setOpen}
             className={"d-flex"}
@@ -199,10 +211,11 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
             noToolTip></TwoButtonContainer>
         </div>
       </div>
-      <div className="fancy_aaa_container dt20_container desk-view-casino">
+      <div className="fancy_aaa_container dt20_container desk-view-casino-dt">
         <div className="content_container text-center">
           <h4 style={{ fontWeight: 600 }}>DRAGON {draganRate}</h4>
           <CardContainer
+          setUpdated={setUpdated}
             setOpen={setOpen}
             setBetState={setBetState}
             setShowBetSection={setShowBetSection}
@@ -229,6 +242,7 @@ const DT20 = ({ odds, setBetState, setShowBetSection, setOpen }) => {
         <div className="content_container text-center">
           <h4 style={{ fontWeight: 600 }}>TIGER {tigerRate}</h4>
           <CardContainer
+          setUpdated={setUpdated}
             setOpen={setOpen}
             setShowBetSection={setShowBetSection}
             setTigerRate={setTigerRate}

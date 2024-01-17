@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { globalContext } from "../CasinoMainPage/CasinoMainPage";
 import ToolTip from "../tooltip/Tooltip";
 
-const TwoButtonContainer = ({ t2, noToolTip, setBetState, className, setOpen, toolTipshow }) => {
+const TwoButtonContainer = ({ t2, noToolTip, setBetState, className, setOpen, toolTipshow, setShowBetSection,  setUpdated }) => {
   return (
     <div className="content_container">
       {
@@ -13,8 +13,8 @@ const TwoButtonContainer = ({ t2, noToolTip, setBetState, className, setOpen, to
       }
        
       <div className={`${className} gap-3`}>
-        <SingleButton setOpen={setOpen} setBetState={setBetState} odd={t2[0]} />
-        <SingleButton setOpen={setOpen} setBetState={setBetState} odd={t2[1]} />
+        <SingleButton setOpen={setOpen}  setUpdated={setUpdated} setShowBetSection={setShowBetSection} setBetState={setBetState} odd={t2[0]} />
+        <SingleButton setOpen={setOpen}  setUpdated={setUpdated} setShowBetSection={setShowBetSection} setBetState={setBetState} odd={t2[1]} />
       </div>
       {noToolTip && (
         <div className="w-100 text-end min-max-casino" style={{ marginTop: "6px" }}>
@@ -28,9 +28,7 @@ const TwoButtonContainer = ({ t2, noToolTip, setBetState, className, setOpen, to
 
 export default TwoButtonContainer;
 
-export const SingleButton = ({ odd, setBetState, setOpen }) => {
-  useEffect(() => {}, [setBetState]);
-
+export const SingleButton = ({ odd, setBetState, setOpen, setShowBetSection, setUpdated }) => {
   const handleClick = () => {
     setOpen(true);
     setBetState &&
@@ -41,10 +39,11 @@ export const SingleButton = ({ odd, setBetState, setOpen }) => {
         isBack: true,
         odds: Number(odd?.rate) || Number(odd?.b1),
         marketId: odd?.mid,
-        placeTime: new Date().toString(),
         selectionId: odd?.sid,
         colorName: "back",
       }));
+      setShowBetSection(true);
+      setUpdated(0)
   };
 
   return (

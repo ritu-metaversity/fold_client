@@ -1,4 +1,4 @@
-import {  useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
 import "./aaa.css";
 import clsx from "clsx";
 import { globalContext } from "../CasinoMainPage/CasinoMainPage";
@@ -7,9 +7,8 @@ import TwoButtonContainer from "../TwoButtonContainer/TwoButtonContainer";
 import BCardContainer from "../bollywoodTable/BCardContainer";
 import AaaMob from "./AaaMob";
 
-
 const abc = ["A", "B", "C", "D", "E"];
-const Aaa = ({ odds, setShowBetSection,setBetState, setOpen }) => {
+const Aaa = ({ odds, setShowBetSection, setBetState, setOpen, setUpdated }) => {
   const t2 = odds?.data?.t2 || [];
 
   const t2BySid = useMemo(() => {
@@ -19,19 +18,21 @@ const Aaa = ({ odds, setShowBetSection,setBetState, setOpen }) => {
     });
   }, [odds]);
 
-  const { setBetDetails } = useContext(globalContext);
   const handleClick = (odd, isBack) => {
-    setBetDetails &&
-      Number(odd.rate) &&
-      setBetDetails({
-        casinoName: 2,
-        isBack,
-        odds: Number(odd?.rate),
-        marketId: odd?.mid,
-        placeTime: new Date().toString(),
-        selectionId: odd?.sid,
+    setOpen(true);
+    setBetState &&
+      setBetState((prev) => ({
+        ...prev,
         nation: odd?.nation,
-      });
+        casinoName: 2,
+        isBack: isBack,
+        odds: Number(odd?.rate) || Number(odd?.b1),
+        marketId: odd?.mid,
+        selectionId: odd?.sid,
+        colorName: "back",
+      }));
+    setShowBetSection(true);
+    setUpdated(0)
   };
   return (
     <>
@@ -58,22 +59,19 @@ const Aaa = ({ odds, setShowBetSection,setBetState, setOpen }) => {
                     "aaa-button": true,
                     clearfix: true,
                     suspended: item?.gstatus !== "ACTIVE",
-                  })}
-                >
+                  })}>
                   <button
                     onClick={() =>
                       handleClick({ ...item, rate: item?.b1 || "" }, true)
                     }
-                    className="back"
-                  >
+                    className="back">
                     <span className="odd">{item?.b1}</span>
                   </button>{" "}
                   <button
                     onClick={() =>
                       handleClick({ ...item, rate: item?.l1 || "" }, false)
                     }
-                    className="lay"
-                  >
+                    className="lay">
                     <span className="odd">{item?.l1}</span>
                   </button>
                 </div>
@@ -83,27 +81,50 @@ const Aaa = ({ odds, setShowBetSection,setBetState, setOpen }) => {
             )
           )}
         </div>
-       
       </div>
       <div className="row mob-view-casino">
-          <AaaMob t2={t2} abc={abc}/>
-        </div>
+        <AaaMob t2={t2} abc={abc} />
+      </div>
       <div className="fancy_aaa_container mt-3">
         <TwoButtonContainer
-            toolTipshow={true} setOpen={setOpen} className={"d-block"} setShowBetSection={setShowBetSection}  setBetState={setBetState} t2={[t2BySid["4"], t2BySid["5"]]} />
+        setUpdated={setUpdated}
+          toolTipshow={true}
+          setOpen={setOpen}
+          className={"d-block"}
+          setShowBetSection={setShowBetSection}
+          setBetState={setBetState}
+          t2={[t2BySid["4"], t2BySid["5"]]}
+        />
         <TwoButtonContainer
-            toolTipshow={true} setOpen={setOpen} className={"d-block"} setShowBetSection={setShowBetSection}  setBetState={setBetState} t2={[t2BySid["6"], t2BySid["7"]]} />
+        setUpdated={setUpdated}
+          toolTipshow={true}
+          setOpen={setOpen}
+          className={"d-block"}
+          setShowBetSection={setShowBetSection}
+          setBetState={setBetState}
+          t2={[t2BySid["6"], t2BySid["7"]]}
+        />
         <TwoButtonContainer
-            toolTipshow={true} setOpen={setOpen} className={"d-block"} setShowBetSection={setShowBetSection}  setBetState={setBetState} t2={[t2BySid["21"], t2BySid["22"]]} />
+        setUpdated={setUpdated}
+          toolTipshow={true}
+          setOpen={setOpen}
+          className={"d-block"}
+          setShowBetSection={setShowBetSection}
+          setBetState={setBetState}
+          t2={[t2BySid["21"], t2BySid["22"]]}
+        />
       </div>
       <div className="mt-3">
-      <BCardContainer
-      setOpen={setOpen}
-      setBetState={setBetState} setShowBetSection={setShowBetSection}
-        t2={t2?.filter((item) => item?.nation?.toLowerCase().includes("card"))}
-      />
+        <BCardContainer
+        setUpdated={setUpdated}
+          setOpen={setOpen}
+          setBetState={setBetState}
+          setShowBetSection={setShowBetSection}
+          t2={t2?.filter((item) =>
+            item?.nation?.toLowerCase().includes("card")
+          )}
+        />
       </div>
-     
     </>
   );
 };

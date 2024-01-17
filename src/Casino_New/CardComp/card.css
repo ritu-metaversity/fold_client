@@ -57,8 +57,10 @@
 }
 
 .flip-card img {
-  width: 34px;
-  height: 45px;
+  
+  width: 30px;
+  height: 38px;
+  border-radius: 6px;
 }
 
 /* Style the back side */

@@ -126,3 +126,6 @@ i.fas.fa-info-circle {
 .pair_value tr td{
     padding: 4px !important;
 }
+.ander_slick .slick-slide{
+    width: unset !important;
+}

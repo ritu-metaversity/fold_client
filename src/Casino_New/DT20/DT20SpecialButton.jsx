@@ -1,7 +1,7 @@
 import { SingleButton } from "../TwoButtonContainer/TwoButtonContainer";
 
 
-const DT20SpecialButton = ({ t2, noToolTip, setBetState,  setOpen }) => {
+const DT20SpecialButton = ({ t2, noToolTip, setBetState,  setOpen, setShowBetSection, setUpdated }) => {
   return (
     <div className="content_container">
       {!noToolTip && (
@@ -13,17 +13,17 @@ const DT20SpecialButton = ({ t2, noToolTip, setBetState,  setOpen }) => {
         <div className={window?.innerWidth > 800?"row ":""}>
           <div className="col-md-9 row dt_20">
             <div className="col-5 casino_name_dt">
-              <SingleButton  setOpen={setOpen} setBetState={setBetState} odd={t2[0]} />
+              <SingleButton setUpdated={setUpdated} setShowBetSection={setShowBetSection}  setOpen={setOpen} setBetState={setBetState} odd={t2[0]} />
             </div>
             <div className="col-2 casino_name_dt_md">
-              <SingleButton  setOpen={setOpen} setBetState={setBetState} odd={t2[1]} />
+              <SingleButton setUpdated={setUpdated} setShowBetSection={setShowBetSection}  setOpen={setOpen} setBetState={setBetState} odd={t2[1]} />
             </div>
             <div className="col-5 dt-special-border b_color casino_name_dt">
-              <SingleButton   setOpen={setOpen} setBetState={setBetState} odd={t2[2]} />
+              <SingleButton setUpdated={setUpdated} setShowBetSection={setShowBetSection}   setOpen={setOpen} setBetState={setBetState} odd={t2[2]} />
             </div>
           </div>
           <div className="col-md-3 pair_dt">
-            <SingleButton  setOpen={setOpen} setBetState={setBetState} odd={t2[3]} />
+            <SingleButton setUpdated={setUpdated} setShowBetSection={setShowBetSection}  setOpen={setOpen} setBetState={setBetState} odd={t2[3]} />
           </div>
         </div>
       </div>

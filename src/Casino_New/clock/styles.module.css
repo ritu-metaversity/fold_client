@@ -5,7 +5,7 @@
     --fcc-digit-font-size: 50px;
     --fcc-label-font-size: 16px;
     --fcc-label-color: #ffffff;
-    --fcc-background: #0f181a;
+    --fcc-background: #242424;
     --fcc-digit-color: #ffffff;
     --fcc-divider-color: #ffffff66;
     --fcc-divider-height: 1px;
@@ -155,5 +155,14 @@
   
   .fcc__colon::before {
     margin-bottom: var(--fcc-separator-size);
+  }
+
+  @media screen and (min-width:800px) {
+    .fcc__digit_block{
+      font-size: 46px;
+      font-weight: 900;
+    }
+    
+    
   }
   

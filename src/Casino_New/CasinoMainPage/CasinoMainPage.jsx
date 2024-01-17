@@ -9,7 +9,7 @@ import CasinoBetSlip from "../CasinoBetSlip/CasinoBetSlip/CasinoBetSlip";
 import { UseOdds } from "../useOdds/UseOdds.jsx";
 import Video from "../Video/Video.jsx";
 import T20 from "../T20/T20.jsx";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import LastResult from "../LastResult/LastResult.jsx";
 import DT1Day from "../DT1Day/DT1Day.jsx";
 import BTable from "../bollywoodTable/Btable.jsx";
@@ -19,6 +19,9 @@ import Luck7B from "../Luck7B/Luck7B.jsx";
 import CasinoHead from "../CasinoHead/CasinoHead.jsx";
 import MatchBet from "../../component/Items/MatchBet/MatchBet.js";
 import T20Rule from "../T20/T20Rule.jsx";
+import MyBet from "../../desktopLayout/MyBet/MyBet.js";
+import CasinoMatchBet from "../CasinoMatchBet/CasinoMatchBet.jsx";
+import moment from "moment";
 
 const defaultStake = {
   stack1: 0,
@@ -45,29 +48,39 @@ const CasinoMainPage = () => {
   const divRef = useRef(null);
   const [stakes, setStakes] = useState(defaultStake);
   const [openRulesModal, setOpenRulesModal] = useState(false);
+  const [showBetSection, setShowBetSection] = useState(false);
+  const [updated, setUpdated] = useState(0);
   const [open, setOpen] = useState(false);
   const { id } = useParams();
   const [ActiveNavbar, setActiveNavBar] = useState(1);
   const { odds, setBetPlace } = UseOdds(nameById[id]);
   const t1 = odds?.data?.t1?.[0];
   const token = localStorage.getItem("token");
+  var curr = new Date();
+  curr.setDate(curr.getDate() + 3);
+  const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [betState, setBetState] = useState({
     nation: "",
     casinoName: 0,
     isBack: true,
     odds: null,
     marketId: "",
-    placeTime: null,
+    placeTime: pTime,
     selectionId: null,
     colorName: "back",
   });
-  const [showBetSection, setShowBetSection] = useState(true);
 
   useEffect(() => {
     GameAPI.Get_Stack_Value().then((res) => {
       setStakes(res);
     });
   }, []);
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setShowBetSection(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (!divRef.current) return;
@@ -83,6 +96,8 @@ const CasinoMainPage = () => {
     resizeObserver.observe(divRef.current);
     return () => resizeObserver.disconnect();
   }, [divRef]);
+
+  console.log(showBetSection, "showBetSectionshowBetSection");
 
   return (
     <>
@@ -100,88 +115,113 @@ const CasinoMainPage = () => {
       </CasinoModal>
 
       <div className="mob-view-casino">
-        <CasinoHead t1={t1} ActiveNavbar={ActiveNavbar} setOpenRulesModal={setOpenRulesModal} setActiveNavBar={setActiveNavBar}/>
+        <CasinoHead
+          t1={t1}
+          ActiveNavbar={ActiveNavbar}
+          setOpenRulesModal={setOpenRulesModal}
+          setActiveNavBar={setActiveNavBar}
+        />
       </div>
 
-      <div ref={divRef} className={`${window.innerWidth < 800?"":"row"} row5`}>
+      <div
+        ref={divRef}
+        className={`${window.innerWidth < 800 ? "" : "row"} row5`}>
         <div className={`col-md-9 featured-box-detail sports-wrapper m-b-10`}>
-          {
-            ActiveNavbar == 1 ?  <div className="app_container">
-            <div>
-              <div
-                className="w-100  text-white p-2 d-flex casino-title"
-                style={{ background: "#0088cc" }}>
-                {titleById[id]}
-                <span
-                  className="ms-1 rule_font desk-view-casino"
-                  onClick={() => setOpenRulesModal(true)}>
-                  <u>Rules</u>
-                </span>
-                <div className="ms-auto desk-view-casino">
-                  Round ID: {t1?.mid?.split(".")[1]} | Min: {t1?.min} | Max:{" "}
-                  {t1?.max}
+          {ActiveNavbar == 1 ? (
+            <div className="app_container">
+              <div>
+                <div
+                  className="w-100  text-white p-2 d-flex casino-title"
+                  style={{ background: "#0088cc" }}>
+                  {titleById[id]}
+                  <span
+                    className="ms-1 rule_font desk-view-casino"
+                    onClick={() => setOpenRulesModal(true)}>
+                    <u>Rules</u>
+                  </span>
+                  <div className="ms-auto desk-view-casino">
+                    Round ID: {t1?.mid?.split(".")[1]} | Min: {t1?.min} | Max:{" "}
+                    {t1?.max}
+                  </div>
                 </div>
+                {odds?.data?.t1 && (
+                  <Video t3={odds.data.t3} t1={odds?.data?.t1?.[0]} />
+                )}
+                {id == "51" && odds && (
+                  <T20
+                    setOpen={setOpen}
+                    setBetState={setBetState}
+                    setShowBetSection={setShowBetSection}
+                    t1={t1}
+                    odds={odds}
+                    setUpdated={setUpdated}
+                  />
+                )}
+                {id === "60" && odds && (
+                  <AndarBaharKarna
+                    setOpen={setOpen}
+                    setShowBetSection={setShowBetSection}
+                    setBetState={setBetState}
+                    odds={odds}
+                    setUpdated={setUpdated}
+                  />
+                )}
               </div>
-              {odds?.data?.t1 && (
-                <Video t3={odds.data.t3} t1={odds?.data?.t1?.[0]} />
-              )}
-              {id == "51" && odds && (
-                <T20 setOpen={setOpen}  setBetState={setBetState} setShowBetSection={setShowBetSection} t1={t1} odds={odds} />
-              )}
-              {id === "60" && odds && <AndarBaharKarna setOpen={setOpen} setShowBetSection={setShowBetSection}
-                setBetState={setBetState} odds={odds} />}
-            </div>
 
-            {id == "52" && odds && (
-              <DT20
-                setShowBetSection={setShowBetSection}
-                setBetState={setBetState}
-                odds={odds}
-                setOpen={setOpen}
-              />
-            )}
-            {id === "54" && odds && (
-              <Aaa
-                setShowBetSection={setShowBetSection}
-                setBetState={setBetState}
-                odds={odds}
-                setOpen={setOpen}
-              />
-            )}
-            {id === "55" && odds && (
-              <BTable
-                setShowBetSection={setShowBetSection}
-                setBetState={setBetState}
-                odds={odds}
-                setOpen={setOpen}
-              />
-            )}
-            {id === "61" && odds && (
-              <DT1Day
-                setShowBetSection={setShowBetSection}
-                setBetState={setBetState}
-                odds={odds}
-                setOpen={setOpen}
-              />
-            )}
-            {id === "53" && odds && (
-              <Luck7B
-                setShowBetSection={setShowBetSection}
-                setBetState={setBetState}
-                odds={odds}
-                setOpen={setOpen}
-              />
-            )}
+              {id == "52" && odds && (
+                <DT20
+                  setShowBetSection={setShowBetSection}
+                  setBetState={setBetState}
+                  odds={odds}
+                  setOpen={setOpen}
+                  setUpdated={setUpdated}
+                />
+              )}
+              {id === "54" && odds && (
+                <Aaa
+                  setShowBetSection={setShowBetSection}
+                  setBetState={setBetState}
+                  odds={odds}
+                  setOpen={setOpen}
+                  setUpdated={setUpdated}
+                />
+              )}
+              {id === "55" && odds && (
+                <BTable
+                  setShowBetSection={setShowBetSection}
+                  setBetState={setBetState}
+                  odds={odds}
+                  setOpen={setOpen}
+                  setUpdated={setUpdated}
+                />
+              )}
+              {id === "61" && odds && (
+                <DT1Day
+                  setShowBetSection={setShowBetSection}
+                  setBetState={setBetState}
+                  odds={odds}
+                  setOpen={setOpen}
+                  setUpdated={setUpdated}
+                />
+              )}
+              {id === "53" && odds && (
+                <Luck7B
+                  setShowBetSection={setShowBetSection}
+                  setBetState={setBetState}
+                  odds={odds}
+                  setOpen={setOpen}
+                  setUpdated={setUpdated}
+                />
+              )}
 
-            <div>
-              <LastResult matchId={t1?.mid[1]} />
-              {
-                id === "51" && <T20Rule />
-              }
+              <div className="mt-2">
+                <LastResult matchId={t1?.mid[1]} />
+                {id === "51" && <T20Rule />}
+              </div>
             </div>
-          </div>:<MatchBet/>
-          }
-          
+          ) : (
+            <MatchBet />
+          )}
         </div>
         <div
           id="sidebar-right"
@@ -193,20 +233,26 @@ const CasinoMainPage = () => {
             betState={betState}
             stakes={stakes}
             open={open}
+            setUpdated={setUpdated}
+            updated={updated}
             setOpen={setOpen}
           />
+          <div className="mt-2" style={{ marginRight: "5px" }}>
+            <CasinoMatchBet />
+          </div>
         </div>
         <div className="mob-view-casino">
-        <CasinoBetSlip
+          <CasinoBetSlip
             setShowBetSection={setShowBetSection}
             showBetSection={showBetSection}
             betState={betState}
             stakes={stakes}
             open={open}
+            setUpdated={setUpdated}
+            updated={updated}
             setOpen={setOpen}
           />
         </div>
-        
       </div>
 
       <Toaster />

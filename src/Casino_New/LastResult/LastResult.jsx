@@ -22,9 +22,6 @@ const LastResult = ({ matchId }) => {
         .get("http://43.205.157.72:3434/casino/meta-" + tableIdtoUrl[id])
         .then((res) => {
           setResultList(res?.data?.data?.result);
-
-          //   const bets: MatchedBetObj[][] = Object.values(res.data) || [[]];
-          //   setBetlist(bets?.[0] || []);
         })
         .catch((error) => {
           console.log(error);
@@ -34,7 +31,6 @@ const LastResult = ({ matchId }) => {
     return () => {};
   }, [matchId]);
 
-  console.log(resultList, "dsfdsfsdfsdfdsfsdfdsf");
 
   return (
     <>

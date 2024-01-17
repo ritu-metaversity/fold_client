@@ -7,7 +7,7 @@ import ToolTip from "../tooltip/Tooltip";
 
 
 
-const CardContainer = ({ t2, noToolTip, setBetState,  setDraganRate, setTigerRate, setShowBetSection}) => {
+const CardContainer = ({ t2, noToolTip, setBetState,  setDraganRate, setTigerRate, setShowBetSection, setUpdated}) => {
 
 
   const handleClick = (odd) => {
@@ -20,11 +20,11 @@ const CardContainer = ({ t2, noToolTip, setBetState,  setDraganRate, setTigerRat
         isBack: true,
         odds: Number(odd?.rate) || Number(odd?.b1),
         marketId: odd?.mid,
-        placeTime: new Date().toString(),
         selectionId: odd?.sid,
         colorName:"back"
       }));
       setShowBetSection(true);
+      setUpdated(0)
   };
 
   useEffect(()=>{

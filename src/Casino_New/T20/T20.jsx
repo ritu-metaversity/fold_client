@@ -2,10 +2,9 @@ import "./T20.css";
 import PlayerPlusComponent from "./PlayerPlusComponent/PlayerPlusComponent";
 import useMediaQuery from "../useMediaQuery/useMediaQuery";
 
-const T20 = ({ odds, t1, setOpen }) => {
+const T20 = ({ odds, t1, setOpen, setShowBetSection, setUpdated }) => {
   const mobile = useMediaQuery("(max-width: 768px)");
-  const t2 = odds?.data.t2 || [];
-  
+  const t2 = odds?.data.t2 || [];  
   return (
     <div className="t20_container">
       <table>
@@ -22,8 +21,8 @@ const T20 = ({ odds, t1, setOpen }) => {
           </tr>
         </thead>
         <tbody>
-          <PlayerPlusComponent setOpen={setOpen} showRateForFirstT2 t2={[t2[0], t2[1]]} />
-          <PlayerPlusComponent setOpen={setOpen} showRateForFirstT2 t2={[t2[2], t2[3]]} />
+          <PlayerPlusComponent setUpdated={setUpdated} setShowBetSection={setShowBetSection} setOpen={setOpen} showRateForFirstT2 t2={[t2[0], t2[1]]} />
+          <PlayerPlusComponent setUpdated={setUpdated} setShowBetSection={setShowBetSection} setOpen={setOpen} showRateForFirstT2 t2={[t2[2], t2[3]]} />
         </tbody>
       </table>
     </div>

@@ -4,6 +4,9 @@
 .desk-view-casino{
   display: block;
 }
+.desk-view-casino-dt{
+  display: flex;
+}
 .mob-view-casino{
   display: none;
 }
@@ -19,16 +22,13 @@
    .dt20_container .content_container>.card_card_card {
      flex-direction: row;
    }
-   /* .row>*{
-    width: unset;
-    max-width: unset;
-    margin-right: -12px;
-
-   } */
    .pair_dt{
     width: 100% !important;
    }
   .desk-view-casino{
+    display: none;
+  }
+  .desk-view-casino-dt{
     display: none;
   }
   .mob-view-casino{

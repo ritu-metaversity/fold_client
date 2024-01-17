@@ -190,6 +190,11 @@ function SideBar({ casinoAllow }) {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link to="/55/casino" className="nav-link">
+                    <span className="">BOLLYWOOD TABLE </span>
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link to="/52/casino" className="nav-link">
                     <span className="">20-20 DRAGON TIGER</span>
                   </Link>

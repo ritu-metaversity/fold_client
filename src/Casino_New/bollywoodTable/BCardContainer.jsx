@@ -7,7 +7,7 @@ import ToolTip from "../tooltip/Tooltip";
 
 
 
-const BCardContainer = ({ t2, noToolTip, setOpen, setBetState }) => {
+const BCardContainer = ({ t2, noToolTip, setOpen, setBetState,  setUpdated, setShowBetSection }) => {
   const handleClick = (odd) => {
     setOpen(true);
     setBetState &&
@@ -18,10 +18,11 @@ const BCardContainer = ({ t2, noToolTip, setOpen, setBetState }) => {
         isBack: true,
         odds: Number(odd?.rate) || Number(odd?.b1),
         marketId: odd?.mid,
-        placeTime: new Date().toString(),
         selectionId: odd?.sid,
         colorName: "back",
       }));
+      setUpdated(0);
+      setShowBetSection(true)
   };
   if (t2.length)
     return (

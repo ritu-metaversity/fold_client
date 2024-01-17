@@ -1019,6 +1019,7 @@ ul.list-unstyled.navbar-nav li a {
 
 .list1 {
     padding-left: 4px;
+    white-space: nowrap;
 }
 
 .modal.fade.show.custom-modal-class {

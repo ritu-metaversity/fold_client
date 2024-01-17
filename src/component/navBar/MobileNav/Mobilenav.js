@@ -47,8 +47,12 @@ function Mobilenav({ casinoAllow }) {
       setActive(13);
     }else if (pathname === "/m/53/casino") {
       setActive(18);
-    }else if (pathname === "/m/51/casino") {
+    }
+    else if (pathname === "/m/51/casino") {
       setActive(14);
+    }
+    else if (pathname === "/m/55/casino") {
+      setActive(15);
     }
   }, [pathname]);
 
@@ -87,7 +91,7 @@ function Mobilenav({ casinoAllow }) {
             </Link>
           </li>
         )}
-        {(casinoAllow?.Qtech || localStorage.getItem("token") == null)&& (
+        {/* {(casinoAllow?.Qtech || localStorage.getItem("token") == null)&& ( */}
           <>
             <li
               className={`nav-item ${Active === 3 ? "active2" : ""}`}
@@ -166,8 +170,15 @@ function Mobilenav({ casinoAllow }) {
               20-20 Teenpatti
               </Link>
             </li>
+            <li
+              className={`nav-item ${Active === 15 ? "active2" : ""}`}
+              onClick={(e) => handleClick(15, e)}>
+              <Link to="/m/55/casino" className="nav-link">
+              BOLLYWOOD TABLE 
+              </Link>
+            </li>
           </>
-        )}
+        {/* // )} */}
       </ul>
       <Outlet />
     </>

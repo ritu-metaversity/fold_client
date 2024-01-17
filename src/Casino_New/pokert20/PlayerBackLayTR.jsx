@@ -10,7 +10,8 @@ const PlayerBackLayTR = ({
   showRateForFirstT2,
   setShowBetSection,
   setBetState,
-  setOpen
+  setOpen,
+  setUpdated
 }) => {
   const { setBetDetails } = useContext(globalContext);
  
@@ -23,11 +24,12 @@ const PlayerBackLayTR = ({
         isBack: true,
         odds: Number(l1b1) ,
         marketId: t2.mid,
-        placeTime: new Date().toString(),
         selectionId: t2.sid,
         colorName:colorName
       }));
-      setOpen(true)
+      setOpen(true);
+      setUpdated(0);
+      setShowBetSection(true);
   };
 
 

@@ -5,7 +5,7 @@ import ToolTip from "../tooltip/Tooltip";
 import DT1DaySpecial4Component from "./DT1DaySpecial4Component";
 import "./dt1day.css";
 
-const DT1Day = ({ odds, setShowBetSection, setBetState, setOpen }) => {
+const DT1Day = ({ odds, setShowBetSection, setBetState, setOpen,  setUpdated }) => {
   const { t2BySid } = odds?.data;
   return (
     <>
@@ -37,6 +37,7 @@ const DT1Day = ({ odds, setShowBetSection, setBetState, setOpen }) => {
                 showRateForSecondT2Also
                 setOpen={setOpen}
                 t2={t2BySid["1"]}
+                setUpdated={setUpdated}
               />
               <PlayerBackLayTR
                 setShowBetSection={setShowBetSection}
@@ -45,6 +46,7 @@ const DT1Day = ({ odds, setShowBetSection, setBetState, setOpen }) => {
                 showRateForSecondT2Also
                 setOpen={setOpen}
                 t2={t2BySid["2"]}
+                setUpdated={setUpdated}
               />
               {/* {Array(9)} */}
               {/* {[...Array(9).keys()].map((index) => {
@@ -69,6 +71,7 @@ const DT1Day = ({ odds, setShowBetSection, setBetState, setOpen }) => {
               odd={t2BySid["3"]}
               setShowBetSection={setShowBetSection}
               setBetState={setBetState}
+              setUpdated={setUpdated}
             />
             <div className="mob-view-casino" style={{textAlign:"right", padding: "12px 3px 0px"}}>
               <span>
@@ -104,6 +107,7 @@ const DT1Day = ({ odds, setShowBetSection, setBetState, setOpen }) => {
                 setShowBetSection={setShowBetSection}
                 setBetState={setBetState}
                 t2={[t2BySid["4"], t2BySid["5"]]}
+                setUpdated={setUpdated}
               />{" "}
               <PlayerPlusComponent
                 setOpen={setOpen}
@@ -113,6 +117,7 @@ const DT1Day = ({ odds, setShowBetSection, setBetState, setOpen }) => {
                 setShowBetSection={setShowBetSection}
                 setBetState={setBetState}
                 t2={[t2BySid["12"], t2BySid["13"]]}
+                setUpdated={setUpdated}
               />
             </tbody>
           </table>
@@ -167,6 +172,7 @@ const DT1Day = ({ odds, setShowBetSection, setBetState, setOpen }) => {
                 showRateForSecondT2Also
                 title="Dragon"
                 t2={[t2BySid["6"], t2BySid["7"]]}
+                setUpdated={setUpdated}
               />{" "}
               <PlayerPlusComponent
                 setOpen={setOpen}
@@ -176,6 +182,7 @@ const DT1Day = ({ odds, setShowBetSection, setBetState, setOpen }) => {
                 showRateForFirstT2
                 showRateForSecondT2Also
                 t2={[t2BySid["14"], t2BySid["15"]]}
+                setUpdated={setUpdated}
               />
             </tbody>
           </table>
@@ -225,12 +232,14 @@ const DT1Day = ({ odds, setShowBetSection, setBetState, setOpen }) => {
                 setBetState={setBetState}
                 title="Dragon"
                 t2={[t2BySid["8"], t2BySid["9"], t2BySid["10"], t2BySid["11"]]}
+                setUpdated={setUpdated}
               />{" "}
               <DT1DaySpecial4Component
                 setOpen={setOpen}
                 setShowBetSection={setShowBetSection}
                 setBetState={setBetState}
                 title="Tiger"
+                setUpdated={setUpdated}
                 t2={[
                   t2BySid["16"],
                   t2BySid["17"],

@@ -43,9 +43,9 @@
     gap:5px;
 }
 .card_shown_on_top_andar_bahar{
-    width: 300px;
+    width: 220px;
     background-color: rgba(0, 0, 0, 0.1);
-    padding: 0 2rem;
+    padding: 0 10px;
     color: white;
 }
 .player_name{

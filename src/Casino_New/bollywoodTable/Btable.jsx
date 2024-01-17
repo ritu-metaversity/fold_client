@@ -6,9 +6,14 @@ import ToolTip from "../tooltip/Tooltip";
 import TwoButtonContainer from "../TwoButtonContainer/TwoButtonContainer";
 import BCardContainer from "./BCardContainer";
 
-
 const abc = ["a", "b", "c", "d", "e", "f"];
-const BTable = ({ odds,  setBetState,setShowBetSection, setOpen }) => {
+const BTable = ({
+  odds,
+  setBetState,
+  setShowBetSection,
+  setOpen,
+  setUpdated,
+}) => {
   const t2 = odds?.data?.t2 || [];
 
   const t2BySid = useMemo(() => {
@@ -20,18 +25,20 @@ const BTable = ({ odds,  setBetState,setShowBetSection, setOpen }) => {
 
   const { setBetDetails } = useContext(globalContext);
   const handleClick = (odd, isBack) => {
-    setBetDetails &&
-      Number(odd.rate) &&
-      setBetDetails({
+    setBetState &&
+      setBetState((prev) => ({
+        ...prev,
+        nation: odd?.nation,
         casinoName: 2,
-        isBack,
-        odds: Number(odd.rate),
+        isBack: isBack,
+        odds: Number(odd.rate) || Number(odd.b1),
         marketId: odd.mid,
-        placeTime: new Date().toString(),
         selectionId: odd.sid,
-        nation: odd.nation,
-      });
-      setOpen(true)
+        colorName: "back",
+      }));
+    setOpen(true);
+    setUpdated(0);
+    setShowBetSection(true);
   };
   return (
     <>
@@ -59,26 +66,23 @@ const BTable = ({ odds,  setBetState,setShowBetSection, setOpen }) => {
                     "aaa-button": true,
                     clearfix: true,
                     suspended: item.gstatus !== "ACTIVE",
-                  })}
-                >
+                  })}>
                   <button
                     onClick={() =>
                       handleClick({ ...item, rate: item.b1 || "" }, true)
                     }
-                    className="back"
-                  >
+                    className="back">
                     <span className="odd">{item.b1}</span>
                   </button>
                   <button
                     onClick={() =>
                       handleClick({ ...item, rate: item.l1 || "" }, false)
                     }
-                    className="lay"
-                  >
+                    className="lay">
                     <span className="odd">{item.l1}</span>
                   </button>
                 </div>
-                <div style={{color: "black"}}>0</div>
+                <div style={{ color: "black" }}>0</div>
               </div>
             ) : (
               <></>
@@ -106,8 +110,7 @@ const BTable = ({ odds,  setBetState,setShowBetSection, setOpen }) => {
                   "aaa-button": true,
                   clearfix: true,
                   suspended: t2BySid["7"].gstatus !== "ACTIVE",
-                })}
-              >
+                })}>
                 <button
                   onClick={() =>
                     handleClick(
@@ -115,8 +118,7 @@ const BTable = ({ odds,  setBetState,setShowBetSection, setOpen }) => {
                       true
                     )
                   }
-                  className="back"
-                >
+                  className="back">
                   <span className="odd">{t2BySid["7"].b1}</span>
                 </button>
                 <button
@@ -126,19 +128,24 @@ const BTable = ({ odds,  setBetState,setShowBetSection, setOpen }) => {
                       false
                     )
                   }
-                  className="lay"
-                >
+                  className="lay">
                   <span className="odd">{t2BySid["7"].l1}</span>
                 </button>
               </div>
-              <div style={{color: "black"}}>0</div>
+              <div style={{ color: "black" }}>0</div>
             </div>
           </div>
         </div>
         <div style={{ flex: 2 }}>
           <TwoButtonContainer
-            toolTipshow={false}  className={"d-flex"} setBetState={setBetState}
-          setShowBetSection={setShowBetSection} t2={[t2BySid["14"], t2BySid["15"]]} />
+            setUpdated={setUpdated}
+            setOpen={setOpen}
+            toolTipshow={false}
+            className={"d-flex"}
+            setBetState={setBetState}
+            setShowBetSection={setShowBetSection}
+            t2={[t2BySid["14"], t2BySid["15"]]}
+          />
         </div>
 
         {/* <TwoButtonContainer
@@ -148,14 +155,21 @@ const BTable = ({ odds,  setBetState,setShowBetSection, setOpen }) => {
       </div>
       <div className="fancy_aaa_container">
         <TwoButtonContainer
-            toolTipshow={false}  className={"d-flex"} setBetState={setBetState}
-          setShowBetSection={setShowBetSection} t2={[t2BySid["8"], t2BySid["9"]]} />
+          setUpdated={setUpdated}
+          setOpen={setOpen}
+          toolTipshow={false}
+          className={"d-flex"}
+          setBetState={setBetState}
+          setShowBetSection={setShowBetSection}
+          t2={[t2BySid["8"], t2BySid["9"]]}
+        />
 
         <BCardContainer
-        setBetState={setBetState}
-        setShowBetSection={setShowBetSection}
-        setOpen={setOpen}
-          t2={t2.filter((item) => item.nation.toLowerCase().includes("card"))}
+          setBetState={setBetState}
+          setShowBetSection={setShowBetSection}
+          setOpen={setOpen}
+          setUpdated={setUpdated}
+          t2={t2.filter((item) => item?.nation?.toLowerCase()?.includes("card"))}
         />
       </div>
     </>
