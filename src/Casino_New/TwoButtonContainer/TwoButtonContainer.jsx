@@ -90,7 +90,7 @@ export const SingleButton = ({ odd, setBetState, setOpen, setShowBetSection, set
           odd?.nation?.replace("Dragon ", "").replace("Tiger ", "")
         )}
       </button>
-      <p className="desk-view-casino">
+      <p className={`desk-view-casino ${odd?.pnl >= 0? "text-success":"text-danger"}`}>
       {odd?.pnl}
       </p>
     </div>

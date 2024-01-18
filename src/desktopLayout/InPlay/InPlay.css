@@ -20,6 +20,7 @@ tr.dest_notFound td p {
     cursor: pointer;
     padding: 0.4rem 1rem;
     text-transform: capitalize;
+    white-space: nowrap;
 }
 .top_navbar{
     margin-top: 10px;

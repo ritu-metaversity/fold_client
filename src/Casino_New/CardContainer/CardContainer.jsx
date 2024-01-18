@@ -65,7 +65,7 @@ const CardContainer = ({ t2, noToolTip, setBetState,  setDraganRate, setTigerRat
                   }
                 />
               </div>
-              <div className="desk-view-casino">
+              <div className={`desk-view-casino ${item?.pnl > 0? "text-success":"text-danger"}`}>
               {item?.pnl}
               </div>
             </div>

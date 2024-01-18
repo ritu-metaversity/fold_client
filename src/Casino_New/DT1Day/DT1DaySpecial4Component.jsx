@@ -36,7 +36,7 @@ const DT1DaySpecial4Component= ({ t2, title,setShowBetSection, setBetState, setO
         onClick={() => handleClick(t2[0])}
       >
         <p className="dt1_head">{t2[0]?.rate || t2[0].b1}</p>
-        <span>{t2[0]?.pnl}</span>
+        <span className={t2[0]?.pnl > 0? "text-success":"text-danger"}>{t2[0]?.pnl}</span>
       </td>
       <td
         onClick={() => handleClick(t2[1])}
@@ -45,7 +45,7 @@ const DT1DaySpecial4Component= ({ t2, title,setShowBetSection, setBetState, setO
         })}
       >
         <p className="dt1_head">{t2[1]?.rate || t2[1].b1}</p>
-        <span>{t2[1]?.pnl}</span>
+        <span className={t2[1]?.pnl > 0? "text-success":"text-danger"}>{t2[1]?.pnl}</span>
       </td>
       <td
         onClick={() => handleClick(t2[2])}
@@ -54,7 +54,7 @@ const DT1DaySpecial4Component= ({ t2, title,setShowBetSection, setBetState, setO
         })}
       >
         <p className="dt1_head">{t2[2]?.rate || t2[2].b1}</p>
-        <span>{t2[2]?.pnl}</span>
+        <span className={t2[2]?.pnl > 0? "text-success":"text-danger"}>{t2[2]?.pnl}</span>
       </td>
       <td
         onClick={() => handleClick(t2[3])}
@@ -63,7 +63,7 @@ const DT1DaySpecial4Component= ({ t2, title,setShowBetSection, setBetState, setO
         })}
       >
         <p className="dt1_head">{t2[3]?.rate || t2[3].b1}</p>
-        <span>{t2[3]?.pnl}</span>
+        <span className={t2[3]?.pnl > 0? "text-success":"text-danger"}>{t2[3]?.pnl}</span>
       </td>
     </tr>
   );

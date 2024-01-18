@@ -96,12 +96,11 @@ function SideBar({ casinoAllow }) {
 
   const [singleUserValue, setSingleUserValue] = useState();
   useEffect(() => {
-    if(token !== null){
+    if (token !== null) {
       GameAPI.SINGLE_USER_VALUE().then((res) => {
         setSingleUserValue(res?.data?.supernowa);
       });
     }
-    
   }, [token]);
 
   const nav = useNavigate();
@@ -158,62 +157,79 @@ function SideBar({ casinoAllow }) {
       </nav> */}
 
       {/* Aura: AuraData, Nowa: NowaData, Qtech: QtechData, Virtual: VirtualData, Sportbook: SportBookData */}
-      {(casinoAllow?.Aura ||
+      <div
+        className="sidebar-title m-t-5 theme2bg"
+        onClick={collapse2}
+        aria-controls="events"
+        aria-expanded="true"
+        role="button">
+        <h5 className="text-white d-inline-block m-b-0">Casino</h5>
+        <p className="arrow-line">
+          {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
+        </p>
+      </div>
+      {casinoAllow?.Aura ||
         casinoAllow?.Nowa ||
         casinoAllow?.Qtech ||
         casinoAllow?.Virtual ||
-        casinoAllow?.Sportbook) || localStorage.getItem("token") === null && (
-        <div
-          className="sidebar-title m-t-5 theme2bg"
-          onClick={collapse2}
-          aria-controls="events"
-          aria-expanded="true"
-          role="button">
-          <h5 className="text-white d-inline-block m-b-0">Others Game</h5>
-          <p className="arrow-line">
-            {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
-          </p>
-        </div>
-      )}
+        casinoAllow?.Sportbook ||
+        (localStorage.getItem("token") === null && (
+          <div
+            className="sidebar-title m-t-5 theme2bg"
+            onClick={collapse2}
+            aria-controls="events"
+            aria-expanded="true"
+            role="button">
+            <h5 className="text-white d-inline-block m-b-0">Others Game</h5>
+            <p className="arrow-line">
+              {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
+            </p>
+          </div>
+        ))}
 
       <Accordion defaultActiveKey="0" className="main_sport_header">
         <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
           <ul className="live_casino">
-          <li className="nav-item">
-                  <Link to="/60/casino" className="nav-link">
-                    <span className="">ANDAR BAHAR</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/54/casino" className="nav-link">
-                    <span className="">AMAR AKBAR ANTHONY</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/55/casino" className="nav-link">
-                    <span className="">BOLLYWOOD TABLE </span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/52/casino" className="nav-link">
-                    <span className="">20-20 DRAGON TIGER</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/61/casino" className="nav-link">
-                    <span className="">1 DAY DRAGON TIGER</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/53/casino" className="nav-link">
-                    <span className="">LUCKY 7 - B</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/51/casino" className="nav-link">
-                    <span className="">20-20 Teenpatti</span>
-                  </Link>
-                </li>
+            <li className="nav-item">
+              <Link to="/60/casino" className="nav-link">
+                <span className="">ANDAR BAHAR</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/54/casino" className="nav-link">
+                <span className="">AMAR AKBAR ANTHONY</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/55/casino" className="nav-link">
+                <span className="">BOLLYWOOD TABLE </span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/52/casino" className="nav-link">
+                <span className="">20-20 DRAGON TIGER</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/61/casino" className="nav-link">
+                <span className="">1 DAY DRAGON TIGER</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/53/casino" className="nav-link">
+                <span className="">LUCKY 7 - B</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/51/casino" className="nav-link">
+                <span className="">20-20 Teenpatti</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/57/casino" className="nav-link">
+                <span className="">1 DAY TEENPATTI</span>
+              </Link>
+            </li>
             {(casinoAllow?.Aura || localStorage.getItem("token") === null) && (
               <li className="nav-item">
                 <Link to="/aura" className="nav-link">
@@ -228,10 +244,7 @@ function SideBar({ casinoAllow }) {
             {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && (
               <li className="nav-item">
                 <Link to="/supernowa" className="nav-link">
-                  <span
-                  >
-                    Super Nowa
-                  </span>
+                  <span>Super Nowa</span>
                 </Link>
               </li>
             )}
@@ -243,7 +256,6 @@ function SideBar({ casinoAllow }) {
                     <span className="">Live Casino</span>
                   </Link>
                 </li>
-                
 
                 <li className="nav-item">
                   <Link to="/slot" className="nav-link">
@@ -267,8 +279,6 @@ function SideBar({ casinoAllow }) {
                 </li>
               </>
             )}
-
-
 
             {/* <li className="nav-item">
             <Link to="/sportbook" className="nav-link">

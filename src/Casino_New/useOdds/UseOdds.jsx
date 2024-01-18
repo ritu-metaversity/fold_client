@@ -6,8 +6,6 @@ export const UseOdds = (value) => {
   const [betPlace, setBetPlace] = useState(false);
   const token = localStorage.getItem("token");
 
-  console.log(value, "sadfsfsdf")
-
   useEffect(() => {
     const timer = setInterval(() => {
       value &&
@@ -42,11 +40,9 @@ export const UseOdds = (value) => {
   }, [pnl, value]);
 
   useEffect(() => {
-    Number(odds?.data?.t1?.[0]?.mid) &&
-      fetch(
-        "http://13.250.53.81/" +
-          "VirtualCasinoBetPlacer/vc/liability/",
-        {
+    const timer = setInterval(() => {
+      Number(odds?.data?.t1?.[0]?.mid) &&
+        fetch("http://13.250.53.81/" + "VirtualCasinoBetPlacer/vc/liability/", {
           body: JSON.stringify({
             roundId: odds?.data.t1?.[0].mid,
           }),
@@ -55,21 +51,25 @@ export const UseOdds = (value) => {
             "Content-Type": "application/json",
           },
           method: "POST",
-        }
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.data) {
-            const pnl = {};
-            let i;
-            for (i of res.data) {
-              pnl[i.sid] = i.liability;
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.data) {
+              const pnl = {};
+              let i;
+              for (i of res.data) {
+                pnl[i.sid] = i.liability;
+              }
+              setPnl(pnl);
+            } else {
+              setPnl({});
             }
-            setPnl(pnl);
-          } else {
-            setPnl({});
-          }
-        });
+          });
+    }, 2000);
+  
+    return () => {
+      clearInterval(timer);
+    };
   }, [betPlace, odds?.data?.t1?.[0]?.mid, value]);
   return { odds, setBetPlace };
 };

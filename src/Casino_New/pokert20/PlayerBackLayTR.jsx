@@ -44,7 +44,7 @@ const PlayerBackLayTR = ({
     >
       <td>
         <p className="dt1_head">{title || t2?.nationEle || t2?.nation}</p>
-        <span>{t2?.pnl}</span>
+        <span className={t2?.pnl >= 0? "text-success":"text-danger"}>{t2?.pnl}</span>
       </td>
       <td onClick={() => handleClick(t2, t2.b1, "back")}>
         <p className="dt1_head">{showRateForFirstT2 ? t2?.b1 : t2?.nation}</p>

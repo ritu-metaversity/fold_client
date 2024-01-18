@@ -113,6 +113,9 @@
         height: 61px;
 
     }
+    .d-flex-mob{
+        display: block !important;
+    }
 }
 i.fas.fa-info-circle {
     color: #2c3d50;

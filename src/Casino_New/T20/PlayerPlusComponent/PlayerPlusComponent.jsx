@@ -19,9 +19,9 @@ const PlayerPlusComponent= ({
         nation:t2?.nation,
         casinoName: 2,
         isBack: true,
-        odds: Number(t2.rate) || Number(t2.b1),
-        marketId: t2.mid,
-        selectionId: t2.sid,
+        odds: Number(t2?.rate) || Number(t2?.b1),
+        marketId: t2?.mid,
+        selectionId: t2?.sid,
         colorName:"back"
       }));
       setOpen(true);
@@ -44,8 +44,8 @@ const PlayerPlusComponent= ({
         })}
         onClick={() => handleClick(t2[0])}
       >
-        <p>{showRateForFirstT2 ? t2[0]?.rate || t2[0].b1 : t2[0]?.nation}</p>
-        <span>{t2[0]?.pnl}</span>
+        <p>{showRateForFirstT2 ? t2[0]?.rate || t2[0]?.b1 : t2[0]?.nation}</p>
+        <span className={t2[0]?.pnl >= 0? "text-success":"text-danger"}>{t2[0]?.pnl}</span>
       </td>
       <td
         onClick={() => handleClick(t2[1])}
@@ -57,9 +57,9 @@ const PlayerPlusComponent= ({
         })}
       >
         <p>
-          {showRateForSecondT2Also ? t2[1]?.rate || t2[1].b1 : t2[1]?.nation}
+          {showRateForSecondT2Also ? t2[1]?.rate || t2[1]?.b1 : t2[1]?.nation}
         </p>
-        <span>{t2[1]?.pnl}</span>
+        <span className={t2[1]?.pnl >= 0? "text-success":"text-danger"}>{t2[1]?.pnl}</span>
       </td>
     </tr>
   );

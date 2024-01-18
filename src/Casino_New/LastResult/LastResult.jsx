@@ -47,9 +47,10 @@ const LastResult = ({ matchId }) => {
         </Link>
       </div>
       <div className="w-100 text-end min-max-casino">
-        {resultList?.map((item) => {
+        {resultList?.map((item, index) => {
           return (
             <span
+            key={item + index}
               style={{
                 color: LetterAndColorById[id]?.[item.result]?.color,
               }}

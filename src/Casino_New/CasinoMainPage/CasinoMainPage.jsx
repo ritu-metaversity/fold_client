@@ -22,6 +22,7 @@ import T20Rule from "../T20/T20Rule.jsx";
 import MyBet from "../../desktopLayout/MyBet/MyBet.js";
 import CasinoMatchBet from "../CasinoMatchBet/CasinoMatchBet.jsx";
 import moment from "moment";
+import TeenPatti1Day from "../TeenPatti1Day/TeenPatti1Day.jsx";
 
 const defaultStake = {
   stack1: 0,
@@ -97,7 +98,6 @@ const CasinoMainPage = () => {
     return () => resizeObserver.disconnect();
   }, [divRef]);
 
-  console.log(showBetSection, "showBetSectionshowBetSection");
 
   return (
     <>
@@ -209,6 +209,15 @@ const CasinoMainPage = () => {
                   setShowBetSection={setShowBetSection}
                   setBetState={setBetState}
                   odds={odds}
+                  setOpen={setOpen}
+                  setUpdated={setUpdated}
+                />
+              )}
+              {id === "57" && odds && (
+                <TeenPatti1Day
+                  odds={odds}
+                  setShowBetSection={setShowBetSection}
+                  setBetState={setBetState}
                   setOpen={setOpen}
                   setUpdated={setUpdated}
                 />

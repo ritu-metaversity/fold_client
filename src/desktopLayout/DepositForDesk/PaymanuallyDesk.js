@@ -293,7 +293,7 @@ const PaymanuallyDesk = (props) => {
                           />
                           <p className="deposit_image">
                             <a href={res?.accountNumber} download>
-                            Download <i class="fa fa-download"></i>
+                            Download <i className="fa fa-download"></i>
                             </a>
                           </p>
                         </div>

@@ -166,7 +166,7 @@ const NavBar = () => {
 
   const controlNavbar = () => {
     if (pathname.includes("casino") == true) {
-      if (window.scrollY > 15) {
+      if (window.scrollY > 10) {
         setStackySideBar("Nav-fixed");
       } else {
         setStackySideBar("");

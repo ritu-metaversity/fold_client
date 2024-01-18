@@ -38,7 +38,7 @@ const Video= ({ t1, t3 }) => {
     "55": <SingleCardOnVideo t1={t1} />,
     "53": <SingleCardOnVideo t1={t1} />,
     // "56": <OtpCardOnVideo t1={t1} />,
-    // "57": <CardOnVideo t1={t1} />,
+    "57": <CardOnVideo t1={t1} />,
     // "58": <PokerCardOnVideo t1={t1} />,
     // "59": <PokerCardOnVideo t1={t1} />,
   };

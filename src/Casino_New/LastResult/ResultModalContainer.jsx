@@ -14,8 +14,7 @@ const ResultModalContainer= ({ mid, setMid, tableId }) => {
 
   const [loading, setLoading] = useState(false);
 
-  const [searchParams] = useSearchParams();
-  const token = searchParams.get("token");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (mid) {

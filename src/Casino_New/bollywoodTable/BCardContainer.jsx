@@ -66,7 +66,7 @@ const BCardContainer = ({ t2, noToolTip, setOpen, setBetState,  setUpdated, setS
                 alt=""
                 />
               </div>
-              <div className="desk-view-casino">
+              <div className={`desk-view-casino ${item?.pnl >= 0? "text-success":"text-danger"}`}>
               {item.pnl}
               </div>
             </div>

@@ -15,14 +15,13 @@ const CasinoBetSlip = ({
   open,
   setOpen,
   updated,
-  setUpdated
+  setUpdated,
 }) => {
-  
   const [userIp, setUserIP] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [betPlace, setBetPlace] = useState([]);
 
-  const {id} = useParams();
+  const { id } = useParams();
   useEffect(() => {
     fetch("https://oddsapi.247idhub.com/betfair_api/my-ip")
       .then((res) => res.json())
@@ -30,7 +29,6 @@ const CasinoBetSlip = ({
         setUserIP(res?.ip);
       });
   }, []);
-
 
   const handleSubmit = () => {
     const token = localStorage.getItem("token");
@@ -42,7 +40,7 @@ const CasinoBetSlip = ({
           ...betState,
           stake: updated,
           userIp: userIp,
-          matchId:id,
+          matchId: id,
           deviceInfo: {
             userAgent:
               "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
@@ -98,42 +96,76 @@ const CasinoBetSlip = ({
             </div>
           </p>
         )}
-        <div className="ps card d-none d-sm-block desk-view-casino" style={{marginRight:"4px"}}>
+        <div
+          className="ps card d-none d-sm-block desk-view-casino"
+          style={{ marginRight: "4px" }}>
           <div>
-            <div className="card-header bg-primary text-white" style={{padding: "0.5rem 1rem"}}>Place Bet</div>
+            <div
+              className="card-header bg-primary text-white"
+              style={{ padding: "0.5rem 1rem" }}>
+              Place Bet
+            </div>
             {showBetSection && (
               <div className="">
                 <div
                   className={`table-responsive bet-table ${betState?.colorName}`}>
                   <form>
-                    <table
-                      className={`coupon-table table table-borderedless `}>
+                    <table className={`coupon-table table table-borderedless `}>
                       <thead>
-                        <tr style={{backgroundColor: "#ccc", fontSize:"12px"}}>
-                          <th style={{ width: "2%"}}></th>
-                          <th style={{ width: "28%", fontSize:"12px",textAlign: "left", marginLeft:"12px" }}>
+                        <tr
+                          style={{ backgroundColor: "#ccc", fontSize: "12px" }}>
+                          <th style={{ width: "2%" }}></th>
+                          <th
+                            style={{
+                              width: "28%",
+                              fontSize: "12px",
+                              textAlign: "left",
+                              marginLeft: "12px",
+                            }}>
                             (Bet for)
                           </th>
-                          <th style={{ width: "25%", fontSize:"12px",textAlign: "left" }}>
+                          <th
+                            style={{
+                              width: "25%",
+                              fontSize: "12px",
+                              textAlign: "left",
+                            }}>
                             Odds
                           </th>
-                          <th style={{ width: "15%", fontSize:"12px",textAlign: "left" }}>
+                          <th
+                            style={{
+                              width: "15%",
+                              fontSize: "12px",
+                              textAlign: "left",
+                            }}>
                             Stake
                           </th>
-                          <th style={{ width: "15%",fontSize:"12px", textAlign: "right", paddingRight:"5px" }}>
+                          <th
+                            style={{
+                              width: "15%",
+                              fontSize: "12px",
+                              textAlign: "right",
+                              paddingRight: "5px",
+                            }}>
                             Profit
                           </th>
                         </tr>
                       </thead>
                       <tbody className={betState?.colorName}>
                         <tr style={{ height: "40px" }}>
-                          <td><div
+                          <td>
+                            <div
                               onClick={handleBetClose}
                               className="text-danger closeIcon">
                               <i className="fa fa-times"></i>
-                            </div></td>
-                          <td style={{ whiteSpace: "initial", fontWeight:"bold" }}>
-                            {betState?.nation}                            
+                            </div>
+                          </td>
+                          <td
+                            style={{
+                              whiteSpace: "initial",
+                              fontWeight: "bold",
+                            }}>
+                            {betState?.nation}
                           </td>
                           <td className="bet-odds">
                             <div className="">
@@ -175,7 +207,11 @@ const CasinoBetSlip = ({
                               />
                             </div>
                           </td>
-                          <td className="text-right bet-profit" style={{paddingRight:"5px"}}>0.00</td>
+                          <td
+                            className="text-right bet-profit"
+                            style={{ paddingRight: "5px" }}>
+                            0.00
+                          </td>
                         </tr>
                         <tr>
                           <td
@@ -183,9 +219,10 @@ const CasinoBetSlip = ({
                             className="value-buttons"
                             style={{ padding: "5px" }}>
                             {stakes &&
-                              Object?.values(stakes)?.map((item) => {
+                              Object?.values(stakes)?.map((item, id) => {
                                 return (
                                   <button
+                                    key={id + item}
                                     className="btn m-l-5 m-b-5"
                                     onClick={() => handleClick(item)}
                                     // value={e}
@@ -203,13 +240,15 @@ const CasinoBetSlip = ({
                       <button
                         type="button"
                         onClick={handleBetClose}
-                        className="btn btn-sm btn-danger float-left" style={{fontSize:"14px", padding: "0.25rem 0.5rem"}}>
+                        className="btn btn-sm btn-danger float-left"
+                        style={{ fontSize: "14px", padding: "0.25rem 0.5rem" }}>
                         Reset
                       </button>
                       <button
                         type="button"
                         onClick={handleSubmit}
-                        className="btn btn-sm btn-success float-right m-b-5" style={{fontSize:"14px", padding: "0.25rem 0.5rem"}}>
+                        className="btn btn-sm btn-success float-right m-b-5"
+                        style={{ fontSize: "14px", padding: "0.25rem 0.5rem" }}>
                         Submit
                       </button>
                     </div>
@@ -224,7 +263,14 @@ const CasinoBetSlip = ({
             open={open}
             handleClose={handleBetClose}
             title="Place Bet">
-            <div className={`place-bet pt-2 pb-2`}>
+            {isLoading && (
+              <p className="place-lodder">
+                <div>
+                  <i className="fa fa-spinner fa-spin"></i>
+                </div>
+              </p>
+            )}
+            <div className={`place-bet pt-2 pb-2 ${betState?.colorName}`}>
               <div className={`container-fluid container-fluid-5`}>
                 <div className="stake_container mt-2">
                   <div className="">
@@ -281,11 +327,13 @@ const CasinoBetSlip = ({
                     );
                   })} */}
                   {stakes &&
-                    Object?.values(stakes)?.map((item) => {
+                    Object?.values(stakes)?.map((item, id) => {
                       return (
                         <button
+                          key={item + id}
                           className="btn btn-primary btn-block w-100"
                           onClick={() => handleClick(item)}
+                          style={{background:"#2c3d50"}}
                           // value={e}
                           type="button">
                           {item}
