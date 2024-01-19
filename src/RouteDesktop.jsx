@@ -36,6 +36,7 @@ import FooterForMob from "./component/FooterForMob/FooterForMob";
 import WhatsAppIcon from "./common/whatsAppIcon/WhatsAppIcon";
 import { GameAPI } from "./apis/gameAPI";
 import CasinoMainPage from "./Casino_New/CasinoMainPage/CasinoMainPage";
+import CasinoResult from "./Casino_New/CasinoResult/CasinoResult";
 
 const RouteDesktop = () => {
   const [SportId, setSportId] = useState("");
@@ -261,6 +262,7 @@ const RouteDesktop = () => {
 
 
               <Route path="/:id/casino" element={<CasinoMainPage />} />
+              <Route path="/casinoresult/:id" element={<CasinoResult />} />
               
 
               <Route path="/profitloss" element={<ProfitLossHome />} />

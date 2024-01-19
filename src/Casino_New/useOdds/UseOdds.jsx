@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CasinoLiveApi } from "../../apis/CasinoLiveApi";
 
 export const UseOdds = (value) => {
   const [odds, setOdds] = useState(null);
@@ -9,30 +10,35 @@ export const UseOdds = (value) => {
   useEffect(() => {
     const timer = setInterval(() => {
       value &&
-        fetch("http://43.205.157.72:3434/casino/" + value)
-          .then((res) => res.json())
-          .then((res) => {
-            if (Array.isArray(res?.data?.data?.bf)) {
-              convertBfToT2(res.data);
-            }
-            if (Array.isArray(res?.data?.data?.t2)) {
-              if (Array.isArray(res?.data?.data?.t3)) {
-                res.data.data.t2 = [...res.data.data.t2, ...res.data.data.t3];
-              }
-              res.data.data.t2BySid = {};
-              res?.data?.data?.t2?.forEach((item) => {
-                item.gstatus =
-                  Number(item.gstatus) === 1
-                    ? true
-                    : Number(item.gstatus) === 0
-                    ? false
-                    : item.gstatus;
-                item.pnl = pnl[item.sid] || 0;
-                res.data.data.t2BySid[item.sid] = item;
-              });
-            }
-            setOdds(res?.data);
+      // CasinoLiveApi.Casino_Data_Main({
+      //   value
+      // })
+      CasinoLiveApi.Casino_Data({
+        value
+      }).then((res) => {
+        if (Array.isArray(res?.data?.data?.bf)) {
+          convertBfToT2(res.data);
+        }
+        if (Array.isArray(res?.data?.data?.t2)) {
+          if (Array.isArray(res?.data?.data?.t3)) {
+            res.data.data.t2 = [...res.data.data.t2, ...res.data.data.t3];
+          }
+          res.data.data.t2BySid = {};
+          res?.data?.data?.t2?.forEach((item) => {
+            item.gstatus =
+              Number(item.gstatus) === 1
+                ? true
+                : Number(item.gstatus) === 0
+                ? false
+                : item.gstatus;
+            item.pnl = pnl[item.sid] || 0;
+            res.data.data.t2BySid[item.sid] = item;
           });
+        }
+        setOdds(res?.data);
+      })
+        // fetch("http://43.205.157.72:3434/casino/" + value)
+          
     }, 2000);
     return () => {
       clearInterval(timer);
@@ -42,31 +48,21 @@ export const UseOdds = (value) => {
   useEffect(() => {
     const timer = setInterval(() => {
       Number(odds?.data?.t1?.[0]?.mid) &&
-        fetch("http://13.250.53.81/" + "VirtualCasinoBetPlacer/vc/liability/", {
-          body: JSON.stringify({
-            roundId: odds?.data.t1?.[0].mid,
-          }),
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            if (res.data) {
-              const pnl = {};
-              let i;
-              for (i of res.data) {
-                pnl[i.sid] = i.liability;
-              }
-              setPnl(pnl);
-            } else {
-              setPnl({});
-            }
-          });
+      CasinoLiveApi.Casino_Libility({
+        roundId: odds?.data?.t1?.[0]?.mid
+      }).then((res) => {
+        if (res.data) {
+          const pnl = {};
+          let i;
+          for (i of res.data) {
+            pnl[i.sid] = i.liability;
+          }
+          setPnl(pnl);
+        } else {
+          setPnl({});
+        }
+      });
     }, 2000);
-  
     return () => {
       clearInterval(timer);
     };

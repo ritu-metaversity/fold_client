@@ -4,33 +4,25 @@ import axios from "axios";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { LetterAndColorById, tableIdtoUrl } from "../Constant/Constant";
 import ResultModalContainer from "./ResultModalContainer";
+import { CasinoLiveApi } from "../../apis/CasinoLiveApi";
 
 const LastResult = ({ matchId }) => {
   // const id =  window.location.pathname.replace("/", "");
   const { id } = useParams();
   const [first, setFirst] = useState("");
   const [resultList, setResultList] = useState([]);
-  // const { matchId } = useContext(globalContext);
+  const token = localStorage.getItem("token");
 
-  // console.log(matchId, "matchId")
-
-  const [searchParams] = useSearchParams();
-  const token = searchParams.get("token");
   useEffect(() => {
-    if (matchId)
-      axios
-        .get("http://43.205.157.72:3434/casino/meta-" + tableIdtoUrl[id])
-        .then((res) => {
-          setResultList(res?.data?.data?.result);
-        })
-        .catch((error) => {
-          console.log(error);
-          setResultList([]);
-        });
-
-    return () => {};
-  }, [matchId]);
-
+    CasinoLiveApi.Casino_Data({
+      value: tableIdtoUrl[id]
+    }).then((res) => {
+      setResultList(res?.data?.result);
+    })
+    .catch((error) => {
+      setResultList([]);
+    });
+  }, []);
 
   return (
     <>
@@ -42,7 +34,7 @@ const LastResult = ({ matchId }) => {
         className="w-100  text-white p-2 d-flex last-font"
         style={{ background: "#0088cc" }}>
         Last Result
-        <Link to={`/result?token=${token}`} className="ms-auto text-white last-font">
+        <Link to={`/casinoresult/${id}`} className="ms-auto text-white last-font">
           View All
         </Link>
       </div>

@@ -6,6 +6,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import moment from "moment";
+import { CasinoLiveApi } from "../../../apis/CasinoLiveApi";
 
 const CasinoBetSlip = ({
   stakes,
@@ -33,33 +34,19 @@ const CasinoBetSlip = ({
   const handleSubmit = () => {
     const token = localStorage.getItem("token");
     setIsLoading(true);
-    axios
-      .post(
-        "http://13.250.53.81/VirtualCasinoBetPlacer/vc/place-bet",
-        {
-          ...betState,
-          stake: updated,
-          userIp: userIp,
-          matchId: id,
-          deviceInfo: {
-            userAgent:
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
-            browser: "Chrome",
-            device: "Macintosh",
-            deviceType: "desktop",
-            os: "Windows",
-            os_version: "windows-10",
-            browser_version: "108.0.0.0",
-            orientation: "landscape",
-          },
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+    CasinoLiveApi.Casino_Place_Bet({
+      casinoName: betState?.casinoName,
+      colorName: betState?.colorName,
+      isBack: betState?.isBack,
+      marketId: betState?.marketId,
+      nation: betState?.nation,
+      odds: betState?.odds,
+      placeTime: betState?.placeTime,
+      selectionId: betState?.selectionId,
+      stake: updated,
+      userIp: userIp,
+      matchId: id,
+    })
       .then((res) => {
         setIsLoading(false);
         if (res.data.status === true) {
@@ -75,6 +62,48 @@ const CasinoBetSlip = ({
         setIsLoading(false);
         toast.error(error?.response?.data?.message || "Failed !!");
       });
+    // axios
+    //   .post(
+    //     "http://13.250.53.81/VirtualCasinoBetPlacer/vc/place-bet",
+    //     {
+    //       ...betState,
+    //       stake: updated,
+    //       userIp: userIp,
+    //       matchId: id,
+    //       deviceInfo: {
+    //         userAgent:
+    //           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+    //         browser: "Chrome",
+    //         device: "Macintosh",
+    //         deviceType: "desktop",
+    //         os: "Windows",
+    //         os_version: "windows-10",
+    //         browser_version: "108.0.0.0",
+    //         orientation: "landscape",
+    //       },
+    //     },
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     setIsLoading(false);
+    //     if (res.data.status === true) {
+    //       setBetPlace && setBetPlace((o) => !o);
+    //       handleBetClose();
+    //       toast.success("Success !!");
+    //     } else {
+    //       toast.error(res.data.message || "Failed !!");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setIsLoading(false);
+    //     toast.error(error?.response?.data?.message || "Failed !!");
+    //   });
   };
 
   const handleClick = (event) => {
@@ -333,7 +362,7 @@ const CasinoBetSlip = ({
                           key={item + id}
                           className="btn btn-primary btn-block w-100"
                           onClick={() => handleClick(item)}
-                          style={{background:"#2c3d50"}}
+                          style={{ background: "#2c3d50" }}
                           // value={e}
                           type="button">
                           {item}

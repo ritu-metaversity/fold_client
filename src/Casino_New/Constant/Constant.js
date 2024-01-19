@@ -4,10 +4,10 @@ export const titleById = {
     "53": "LUCKY 7 - B",
     "54": "AMAR AKBAR ANTHONY",
     "55": "BOLLYWOOD TABLE",
-    "56": "OPEN TEENPATTI",
+    // "56": "OPEN TEENPATTI",
     "57": "1 DAY TEENPATTI",
-    "58": "1-DAY POKER",
-    "59": "20-20 POKER",
+    // "58": "1-DAY POKER",
+    // "59": "20-20 POKER",
     "60": "ANDAR BAHAR",
     "61": "1 DAY DRAGON TIGER",
   };

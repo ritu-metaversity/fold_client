@@ -1,48 +1,38 @@
 import {  useEffect, useState } from "react";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { titleById } from "../Constant/Constant";
 import ResultModal2CardContent from "./ResulTModalContent2Card";
 import ResulTModalContent3Card from "./ResulTModalContent3Card";
 import ResultModalContent from "./ResultModalContent";
 import CasinoModal from "../CasinoBetSlip/Modal/CasinoModal";
+import { CasinoLiveApi } from "../../apis/CasinoLiveApi";
 
 
 const ResultModalContainer= ({ mid, setMid, tableId }) => {
   const [resultByMid, setREsultByMid] = useState(null);
-  const id = tableId || window.location.pathname.replace("/", "");
+  const {id} = useParams()
+ 
 
   const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("token");
 
   useEffect(() => {
+    
     if (mid) {
       setLoading(true);
-      axios
-        .post(
-          "http://18.139.200.104/admin-new-apis/diamond/api/mid",
-          {
-            mid: mid,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((res) => {
-          setLoading(false);
-
-          console.log(res);
-          setREsultByMid(res.data?.data || null);
-        })
-        .catch((err) => {
-          setLoading(false);
-          console.log(err);
-        });
+      CasinoLiveApi.Casino_Result_Mod({
+        mid: mid
+      }).then((res) => {
+        setLoading(false);
+        setREsultByMid(res.data || null);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
     }
-
     return () => {
       setREsultByMid(null);
     };
@@ -58,7 +48,7 @@ const ResultModalContainer= ({ mid, setMid, tableId }) => {
         </p>
       )}
       <CasinoModal
-        title={`${titleById[id]} Result`}
+        title={`${titleById[tableId || id]} Result`}
         open={!!mid}
         size="md"
         handleClose={() => setMid("")}
@@ -69,7 +59,7 @@ const ResultModalContainer= ({ mid, setMid, tableId }) => {
         {id === "52" && resultByMid && (
           <ResultModal2CardContent result={resultByMid} />
         )}
-        {(id === "54" || id === "53" || id === "55") && resultByMid && (
+        {(id == "54" || id == "53" || id == "55") && resultByMid && (
           <ResultModalContent result={resultByMid} />
         )}
       </CasinoModal>
