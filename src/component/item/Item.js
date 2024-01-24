@@ -59,7 +59,6 @@ function Item({ gameIdForItemPage, casinoAllow }) {
     }
   }, [token]);
 
-  console.log(providerList, "providerListproviderList")
 
   return (
     <div className="min_height">

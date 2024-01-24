@@ -6,7 +6,6 @@ import styles from "./styles.module.css";
 
 
 export default function FlipClockDigit(props) {
-    // console.log(props, "sdffrwerwerwefdwc")
   const { current, next, className, style } = props;
   const [digit, setDigit] = useState({
     current,

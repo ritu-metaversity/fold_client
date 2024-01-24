@@ -1,17 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 
-import axios from "axios";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams  } from "react-router-dom";
 import { LetterAndColorById, tableIdtoUrl } from "../Constant/Constant";
 import ResultModalContainer from "./ResultModalContainer";
 import { CasinoLiveApi } from "../../apis/CasinoLiveApi";
 
 const LastResult = ({ matchId }) => {
-  // const id =  window.location.pathname.replace("/", "");
   const { id } = useParams();
   const [first, setFirst] = useState("");
   const [resultList, setResultList] = useState([]);
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     CasinoLiveApi.Casino_Data({

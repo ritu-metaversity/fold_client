@@ -9,7 +9,6 @@ const ThreeButtonContainer = ({
   setOpen,
   setUpdated
 }) => {
-  console.log(t2, "t2t2t2");
   return (
     <div className="content_container">
       {!noToolTip && (

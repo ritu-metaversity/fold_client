@@ -391,7 +391,6 @@ function GamedetailPage({ getStackValue, SportId }) {
     UserAPI.WINNER_PNL({
       marketId: marketIdForPnl,
     }).then((res) => {
-      console.log(res, "Dasdasdasdasdsada")
       setWinnerData(res?.data || []);
     });
     const time = setInterval(() => {
@@ -1263,9 +1262,6 @@ function GamedetailPage({ getStackValue, SportId }) {
                         ) {
                           return null;
                         }
-
-                        console.log( fancyOdds[item]?.length,fancyOdds[item]
-                          .slice(0,fancyOdds[item]?.length ==1?1 :fancyOdds[item]?.length / 2), "fadfaedfada")
                         return (
                           <>
                             <div

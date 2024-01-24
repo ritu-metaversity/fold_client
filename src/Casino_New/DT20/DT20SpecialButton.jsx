@@ -29,8 +29,8 @@ const DT20SpecialButton = ({ t2, noToolTip, setBetState,  setOpen, setShowBetSec
       </div>
       {noToolTip && (
        <div className="w-100 text-end min-max-casino" style={{marginTop:"6px"}}>
-       <span className="fw">Min:</span> <span>{t2[0].min}</span>{" "}
-       <span className="fw">Max:</span> <span>{t2[0].max}</span>
+       <span className="fw">Min:</span> <span>{t2[0]?.min}</span>{" "}
+       <span className="fw">Max:</span> <span>{t2[0]?.max}</span>
      </div>
       )}
     </div>

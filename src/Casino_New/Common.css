@@ -1,11 +1,12 @@
-.fancy_aaa_container{
+.fancy_aaa_container {
     display: flex;
     align-items: stretch;
-    gap:10px;
+    gap: 10px;
     flex-wrap: wrap;
     margin-top: 12px;
 }
-.fancy_aaa_container>*{
+
+.fancy_aaa_container>* {
     flex: 1;
 }
 
@@ -26,35 +27,39 @@
 .backx {
     background-color: #72bbef !important;
 }
-.content_container{
+
+.content_container {
     background-color: #eee;
     padding: 15px;
 }
-.suspended::after{
+
+.suspended::after {
     font-family: "Font Awesome 5 Free";
-    content:"\f023";
+    content: "\f023";
     font-weight: 900;
     font-size: 1.25rem;
     color: #fff;
     position: absolute;
-    top:0;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     right: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
-.suspended{
+
+.suspended {
     position: relative;
     cursor: not-allowed;
 
 }
+
 .styles_fcc__digit_block__GZabH {
-    
+
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7) !important;
-}  
+}
 
 @media screen and (max-width: 800px) {
     .styles_fcc__digit_block__GZabH {
@@ -62,73 +67,130 @@
         height: 38px !important;
         font-weight: 900;
         width: 26px !important;
-    }   
-    .content_container{
+    }
+
+    .content_container {
         background-color: #eee;
-        padding: 1px 5px 9px!important;
-    } 
-    .last-font{
+        padding: 1px 5px 9px !important;
+    }
+
+    .last-font {
         font-size: 12px;
     }
-    .casino-title{
+
+    .casino-title {
         font-size: 14px;
         font-weight: bold;
         text-transform: capitalize !important;
     }
-    .dt_20{
+
+    .dt_20 {
         margin: 0;
         padding: 0;
         justify-content: space-between;
     }
-    .casino_name_dt{
+
+    .casino_name_dt {
         padding: 0px 2px;
     }
-    .casino_name_dt_md{
+
+    .casino_name_dt_md {
         padding: 0px 2px;
     }
-    .rate_heading{
+
+    .rate_heading {
         font-size: 12px;
         font-weight: bold;
     }
-    .min-max-casino{
+
+    .min-max-casino {
         font-size: 12px;
     }
+
     .fw {
         font-weight: 500;
     }
-    .card_rate_heading{
+
+    .card_rate_heading {
         font-size: 12px;
         font-weight: bold;
         padding-top: 8px;
     }
-    .fancy_aaa_container{
-      
+
+    .fancy_aaa_container {
+
         margin-top: 0px;
     }
-    .dt1_head{
+
+    .dt1_head {
         font-size: 14px;
     }
-    .lucky_card_image{
+
+    .lucky_card_image {
         width: 49px !important;
         height: 61px;
 
     }
-    .d-flex-mob{
+
+    .d-flex-mob {
         display: block !important;
     }
 }
+
 i.fas.fa-info-circle {
     color: #2c3d50;
 }
-.rule_text{
+
+.rule_text {
     font-size: 12px;
 }
-.rule_right{
+
+.rule_right {
     font-size: 12px;
 }
-.pair_value tr td{
+
+.pair_value tr td {
     padding: 4px !important;
 }
-.ander_slick .slick-slide{
+
+.ander_slick .slick-slide {
     width: unset !important;
 }
+
+
+.col-6 .ant-picker {
+
+    width: 100%;
+    height: 35px;
+    border-radius: unset;
+
+
+}
+
+.col-6 .ant-picker select {
+    font-size: 18px;
+    font-weight: 600;
+
+
+}
+
+.col-6 .ant-picker input {
+    font-size: 18px;
+
+
+}
+
+
+@media screen and (max-width: 800px) {
+    .mob_btn button{
+      width: 100% !important;
+      margin-top: 12px !important;
+      border-radius: unset;
+      color: #fff;
+      font-size: 14px !important;
+      padding: 5px 0px !important;
+      margin-inline: unset;
+    }
+  }
+
+  

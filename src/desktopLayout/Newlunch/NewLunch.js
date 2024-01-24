@@ -36,7 +36,6 @@ function NewLunch() {
   useEffect(() => {
     if(token !== null){
       GameAPI.SINGLE_USER_VALUE().then((res) => {
-        console.log(res?.data?.aura, "res?.data?.supernowa");
         setSingleUserValue(res?.data?.aura);
       });
     }

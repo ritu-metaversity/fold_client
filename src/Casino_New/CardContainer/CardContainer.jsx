@@ -11,7 +11,6 @@ const CardContainer = ({ t2, noToolTip, setBetState,  setDraganRate, setTigerRat
 
 
   const handleClick = (odd) => {
-    // console.log(odd, "oddoddoddoddwde")
     setBetState &&
       setBetState((prev) => ({
         ...prev,
@@ -57,8 +56,7 @@ const CardContainer = ({ t2, noToolTip, setBetState,  setDraganRate, setTigerRat
                 alt=""
                   src={
                     "/img/" +
-                    item?.nation
-                      .replace("Dragon ", "")
+                    item?.nation?.replace("Dragon ", "")
                       .replace("Tiger ", "")
                       .toUpperCase() +
                     ".png"

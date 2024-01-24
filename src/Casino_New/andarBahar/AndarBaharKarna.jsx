@@ -4,7 +4,7 @@ import Slider, { Settings } from "react-slick";
 import moment from "moment";
 import { globalContext } from "../CasinoMainPage/CasinoMainPage";
 
-const settings: Settings = {
+const settings = {
   infinite: true,
   arrows: true,
   speed: 500,
@@ -13,7 +13,6 @@ const settings: Settings = {
 };
 const AndarBaharKarna = ({ odds, setOpen,setShowBetSection, setBetState, setUpdated }) => {
   const { t2BySid, t2 } = odds.data;
-  console.log(t2BySid, "s");
 
   const bShownCards = t2BySid["undefined"];
   const br = bShownCards?.br ? bShownCards?.br?.split(",") : [];

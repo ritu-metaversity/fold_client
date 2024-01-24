@@ -42,7 +42,6 @@ const SuperNowa = () => {
   const [singleUserValue, setSingleUserValue] = useState();
   useEffect(() => {
     GameAPI.SINGLE_USER_VALUE().then((res) => {
-      console.log(res?.data?.supernowa, "res?.data?.supernowa")
       setSingleUserValue(res?.data?.supernowa);
       
     });

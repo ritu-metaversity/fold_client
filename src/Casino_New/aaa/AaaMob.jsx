@@ -2,7 +2,6 @@ import clsx from "clsx";
 import React from "react";
 
 const AaaMob = ({ t2, abc }) => {
-  console.log(t2, "Dsfsdfdfdsfs");
   return (
     <div className="table-responsive aaa-odds">
       <table className="table1 table-bordered mb-0">

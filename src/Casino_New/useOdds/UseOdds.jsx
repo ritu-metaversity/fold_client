@@ -5,14 +5,10 @@ export const UseOdds = (value) => {
   const [odds, setOdds] = useState(null);
   const [pnl, setPnl] = useState({});
   const [betPlace, setBetPlace] = useState(false);
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const timer = setInterval(() => {
       value &&
-      // CasinoLiveApi.Casino_Data_Main({
-      //   value
-      // })
       CasinoLiveApi.Casino_Data({
         value
       }).then((res) => {
@@ -25,6 +21,9 @@ export const UseOdds = (value) => {
           }
           res.data.data.t2BySid = {};
           res?.data?.data?.t2?.forEach((item) => {
+            if (!item.nation && item.nat) {
+              item.nation = item.nat;
+            }
             item.gstatus =
               Number(item.gstatus) === 1
                 ? true
@@ -37,13 +36,16 @@ export const UseOdds = (value) => {
         }
         setOdds(res?.data);
       })
-        // fetch("http://43.205.157.72:3434/casino/" + value)
           
     }, 2000);
     return () => {
       clearInterval(timer);
     };
   }, [pnl, value]);
+
+  useEffect(()=>{
+    return ()=>setOdds(null)
+  }, [value])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -55,7 +57,7 @@ export const UseOdds = (value) => {
           const pnl = {};
           let i;
           for (i of res.data) {
-            pnl[i.sid] = i.liability;
+            pnl[i?.sid] = i?.liability;
           }
           setPnl(pnl);
         } else {
@@ -72,7 +74,7 @@ export const UseOdds = (value) => {
 
 const convertBfToT2 = (oddData) => {
   if (oddData?.data?.bf && oddData?.data?.bf?.length > 0) {
-    oddData.data.bf.forEach((bfElement, index) => {
+    oddData?.data.bf.forEach((bfElement, index) => {
       const t2Obj = {
         mid: bfElement.marketId,
         sid: bfElement.sectionId,
@@ -106,14 +108,14 @@ const convertBfToT2 = (oddData) => {
         t1Obj.C4 = bfElement.C2;
         t1Obj.C6 = bfElement.C3;
       }
-      if (Array.isArray(oddData.data.t1)) {
-        const newt1Obj = [{ ...oddData.data.t1?.[0], ...t1Obj }];
+      if (Array.isArray(oddData?.data.t1)) {
+        const newt1Obj = [{ ...oddData?.data.t1?.[0], ...t1Obj }];
         oddData.data.t1 = newt1Obj;
       } else {
         oddData.data.t1 = [t1Obj];
       }
 
-      if (Array.isArray(oddData.data.t2)) {
+      if (Array.isArray(oddData?.data.t2)) {
         oddData.data.t2.push(t2Obj);
       } else {
         oddData.data.t2 = [t2Obj];

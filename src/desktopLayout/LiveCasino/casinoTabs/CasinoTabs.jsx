@@ -64,7 +64,6 @@ const CasinoTabs = ({
         gameType: liveCasino,
       }).then((res) => {
         setProviderList(res?.data?.data);
-        console.log(res?.data?.data, "resresres");
       });
     }
     

@@ -16,7 +16,6 @@ const ResultModalContainer= ({ mid, setMid, tableId }) => {
 
   const [loading, setLoading] = useState(false);
 
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     
@@ -30,7 +29,6 @@ const ResultModalContainer= ({ mid, setMid, tableId }) => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
       });
     }
     return () => {

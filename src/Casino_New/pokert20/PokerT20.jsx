@@ -1,10 +1,6 @@
-import { FC } from "react";
 import PlayerPlusComponent from "../teenPattiOpen/PlayerPlusComponent";
 
-interface Props {
-  odds: OddsData;
-}
-const PokerT20: FC<Props> = ({ odds }) => {
+const PokerT20 = ({ odds }) => {
   const { t2BySid } = odds.data;
   return (
     <div className="t20_container">
@@ -18,7 +14,7 @@ const PokerT20: FC<Props> = ({ odds }) => {
             </tr>
           </thead>
           <tbody>
-            {[...Array(9).keys()].map((index) => {
+            {[...Array(9).keys()]?.map((index) => {
               if (index <= 4)
                 return (
                   <PlayerPlusComponent

@@ -32,7 +32,6 @@ const CasinoBetSlip = ({
   }, []);
 
   const handleSubmit = () => {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     CasinoLiveApi.Casino_Place_Bet({
       casinoName: betState?.casinoName,
@@ -58,7 +57,6 @@ const CasinoBetSlip = ({
         }
       })
       .catch((error) => {
-        console.log(error);
         setIsLoading(false);
         toast.error(error?.response?.data?.message || "Failed !!");
       });
@@ -100,7 +98,6 @@ const CasinoBetSlip = ({
     //     }
     //   })
     //   .catch((error) => {
-    //     console.log(error);
     //     setIsLoading(false);
     //     toast.error(error?.response?.data?.message || "Failed !!");
     //   });

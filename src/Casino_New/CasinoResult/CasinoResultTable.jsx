@@ -4,16 +4,16 @@ import React from 'react'
 const CasinoResultTable = ({resultList, setMid, handlePrev, index, handleNext, setIndex}) => {
   return (
     <>
-     <table className="table table-striped table-bordered">
-            <thead>
+     <table className={` ${window.innerWidth > 800 ?"table-bordered table table-striped ":""}`}>
+            <thead className='desk-view-casino-table'> 
               <tr>
                 <th>Round Id</th>
                 <th>Winner</th>
               </tr>
             </thead>
             <tbody>
-              {resultList.map((item) => (
-                <tr>
+              {resultList?.map((item) => (
+                <tr className='mob_table'>
                   <td
                     style={{
                       cursor: "pointer",
@@ -23,9 +23,9 @@ const CasinoResultTable = ({resultList, setMid, handlePrev, index, handleNext, s
                       height: "40px",
                     }}
                     onClick={() => setMid(item.mid)}>
-                    {item.mid.split(".")[1]}
+                    {item?.mid?.split(".")[1]}
                   </td>
-                  <td>{item.nat}</td>
+                  <td><b className="mob-view-casino">Winner: - </b> {item?.nat}</td>
                 </tr>
               ))}
               {!(resultList?.length > 0) && (

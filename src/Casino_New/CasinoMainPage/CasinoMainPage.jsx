@@ -56,7 +56,6 @@ const CasinoMainPage = () => {
   // const { odds, setBetPlace } = UseOdds(nameById[id]);
   const { odds, setBetPlace } = UseOdds(tableIdtoUrl[id]);
   const t1 = odds?.data?.t1?.[0];
-  const token = localStorage.getItem("token");
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
@@ -145,7 +144,7 @@ const CasinoMainPage = () => {
                   </div>
                 </div>
                 {odds?.data?.t1 && (
-                  <Video t3={odds.data.t3} t1={odds?.data?.t1?.[0]} />
+                  <Video t3={odds && odds.data.t3} t1={odds && odds?.data?.t1?.[0]} />
                 )}
                 {id == "51" && odds && (
                   <T20

@@ -1,12 +1,5 @@
 import "./video.css";
 import { useEffect, useState } from "react";
-// import CardOnVideo from "../odds/t20TeenPatti/cardOnVideo";
-// import SingleCardOnVideo from "../odds/lucky7B/SingleCardOnVideo";
-// import { videoIdById } from "../../utils/constants";
-// import OtpCardOnVideo from "./components/OtpCardOnVideo";
-
-// import PokerCardOnVideo from "./components/PokerCardOnVideo";
-// import AndarBaharCardOnVideo from "./components/AndarBaharCardOnVideo";
 import Card2OnVideo from "../DT20/Card2OnVideo/Card2OnVideo";
 import FlipClockCountdown from "../clock/FlipClockCountDown";
 import { videoIdById } from "../Constant/Constant";
@@ -16,7 +9,6 @@ import AndarBaharCardOnVideo from "../andarBahar/AndarBaharCardOnVideo";
 import SingleCardOnVideo from "../aaa/SingleCardOnVideo";
 
 const Video= ({ t1, t3 }) => {
-  // const id = window.location.pathname.replace("/", "");
   const {id} = useParams();
   const [first, setFirst] = useState(0);
 
@@ -37,10 +29,7 @@ const Video= ({ t1, t3 }) => {
     "61": <Card2OnVideo t1={t1} />,
     "55": <SingleCardOnVideo t1={t1} />,
     "53": <SingleCardOnVideo t1={t1} />,
-    // "56": <OtpCardOnVideo t1={t1} />,
     "57": <CardOnVideo t1={t1} />,
-    // "58": <PokerCardOnVideo t1={t1} />,
-    // "59": <PokerCardOnVideo t1={t1} />,
   };
   return (
     <div className="video_block_container">

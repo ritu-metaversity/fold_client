@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import "./CasinoResult.css";
-import axios from "axios";
 import { useParams, useSearchParams } from "react-router-dom";
-import clsx from "clsx";
 import { tableIdtoUrl, titleById } from "../Constant/Constant";
 import ResultModalContainer from "../LastResult/ResultModalContainer";
 import { DatePicker } from "antd";
@@ -12,12 +10,9 @@ import CasinoResultTable from "./CasinoResultTable";
 import { CasinoLiveApi } from "../../apis/CasinoLiveApi";
 
 const CasinoResult = () => {
-  const [fromDate, setFromDate] = useState(new Date());
   const [casinoId, setCasinoId] = useState("");
   const [resultList, setResultList] = useState([]);
   const [mid, setMid] = useState("");
-  const [searchParams] = useSearchParams();
-  const token = localStorage.getItem("token");
   const [noOfRecords, setNoOfRecords] = useState(10);
   const [index, setIndex] = useState(0);
   var curr = new Date();
@@ -37,7 +32,6 @@ const CasinoResult = () => {
         setResultList(res.data || []);
       }
     }).catch((err) => {
-      console.log(err);
       setResultList([]);
     });
   }, [noOfRecords, index, id]);
@@ -52,7 +46,6 @@ const CasinoResult = () => {
         setResultList(res.data || []);
       }
     }).catch((err) => {
-      console.log(err);
       setResultList([]);
     });
   }
@@ -64,7 +57,6 @@ const CasinoResult = () => {
     setIndex((o) => (o <= 0 ? 0 : o - 1));
   };
   const handleNext = () => {
-    console.log("next");
     setIndex((o) => (o >= 100 ? 100 : o + 1));
   };
 
@@ -84,8 +76,8 @@ const CasinoResult = () => {
           <div className="text-white">Casino Result</div>
         </div>
         <div className="card-body gap-container ">
-          <div className="row">
-            <div className="col-2">
+        <div className="row">
+            <div className={`${window.innerWidth < 800?"col-6":"col-2"} `}>
               <DatePicker
                 defaultValue={dayjs(startDate)}
                 className="mx-input"
@@ -100,7 +92,7 @@ const CasinoResult = () => {
               />
               {/* <CustomizedDatePicker value={fromDate} onChange={setFromDate} /> */}
             </div>
-            <div className="col-2">
+            <div className={`${window.innerWidth < 800?"col-6":"col-2"} `}>
               <div className="form-group mb-0">
                 <select
                   name="reportType"
@@ -113,8 +105,8 @@ const CasinoResult = () => {
                 </select>
               </div>
             </div>
-            <div className="col-2" onClick={handleSubmit}>
-              <button className="btn btn-primary ">Submit</button>
+            <div className={`${window.innerWidth < 800?"col-12":"col-2"}  mob_btn`} onClick={handleSubmit}>
+              <button className="btn " style={{ background:"#08c" }}>Submit</button>
             </div>
           </div>
           <div className="w-100">

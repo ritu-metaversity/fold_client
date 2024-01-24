@@ -6,8 +6,8 @@ import BCardContainer from "../bollywoodTable/BCardContainer";
 const Luck7B = ({ odds, setBetState,setShowBetSection, setOpen,  setUpdated}) => {
   const t2 = odds?.data?.t2 || [];
   const t2BySid = useMemo(() => {
-    return t2.reduce((accu, curr) => {
-      accu[curr.sid] = curr;
+    return t2?.reduce((accu, curr) => {
+      accu[curr?.sid] = curr;
       return accu;
     });
   }, [odds]);
@@ -26,7 +26,7 @@ const Luck7B = ({ odds, setBetState,setShowBetSection, setOpen,  setUpdated}) =>
       setOpen={setOpen}
       setBetState={setBetState} setShowBetSection={setShowBetSection}
         noToolTip
-        t2={t2.filter((item) => item.nation.toLowerCase().includes("card "))}
+        t2={t2?.filter((item) => item?.nation?.toLowerCase()?.includes("card "))}
       />
       </div>
       
