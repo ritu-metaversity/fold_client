@@ -10,7 +10,7 @@ import axios from "axios";
 
 function NewGameDetailPageDest({ getStackValue, SportId }) {
   var curr = new Date();
-  curr.setDate(curr.getDate() + 3);
+  curr.setDate(curr.getDate());
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [currentFancy, setCurrentFancy] = useState("Fancy3");
   const [matchodd, setMatchodd] = useState({});

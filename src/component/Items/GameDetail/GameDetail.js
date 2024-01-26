@@ -14,7 +14,7 @@ import { useParams } from "react-router-dom";
 
 function GameDetail({ getStackValue }) {
   var curr = new Date();
-  curr.setDate(curr.getDate() + 3);
+  curr.setDate(curr.getDate());
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [showModals, setShowModals] = useState(false);
   const [currentFancy, setCurrentFancy] = useState("Fancy2");
