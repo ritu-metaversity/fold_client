@@ -15,8 +15,8 @@
 }
 .three-card-result{
     display: flex;
-    gap: 1.75rem;
-    padding: 15px;
+    gap: 1.3rem;
+    padding: 23px 0px 0px 15px;
     justify-content: center;
 }
 .three-card-result>*{
@@ -30,6 +30,10 @@
     color: green;
     animation: trophyAni 2s infinite;
     background-color: transparent;
+}
+.lg {
+    width: 55%;
+    min-width: 55%;
 }
 @keyframes trophyAni {
     0% {

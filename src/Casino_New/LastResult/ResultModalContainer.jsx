@@ -48,7 +48,7 @@ const ResultModalContainer= ({ mid, setMid, tableId }) => {
       <CasinoModal
         title={`${titleById[tableId || id]} Result`}
         open={!!mid}
-        size="md"
+        size="lg"
         handleClose={() => setMid("")}
       >
         {(id === "51" || id === "57") && resultByMid && (
