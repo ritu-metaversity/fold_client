@@ -16,8 +16,7 @@ export const casinoProviderList: ProviderInterface[] = [
     filterType: "AURA",
     customFilter: true,
     type: "custom",
-    apiUrl:
-      "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/wolf.json",
+    apiUrl: "https://admin-api-banners-2.s3.ap-south-1.amazonaws.com/wolf.json",
     providerId: 323334,
   },
   {

@@ -68,7 +68,7 @@ const Casino = () => {
     if (Number(value) === 323334) {
       axios
         .get(
-          "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/wolf.json"
+          "https://admin-api-banners-2.s3.ap-south-1.amazonaws.com/wolf.json"
         )
         .then((res) => setCasinoList(res.data.data));
     } else {
