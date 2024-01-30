@@ -3,7 +3,7 @@ import axios from "axios";
 const token =  localStorage.getItem("token");
 
 export const api = axios.create({
-    baseURL: "https://api.247365.exchange/admin-new-apis",  
+    baseURL: "https://adminapi.247idhub.com/admin-new-apis",  
     // baseURL: "http://18.139.200.104/admin-new-apis",
     // headers: {
     //     'Authorization': 'Bearer ' + localStorage.getItem("token"),
@@ -14,7 +14,7 @@ export const casinoApi = axios.create({
 })
 
 export const superNowaApi = axios.create({
-  baseURL: "https://api.247365.exchange/admin-new-apis/api/supernowa",
+  baseURL: "https://adminapi.247idhub.com/admin-new-apis/api/supernowa",
 })
 
 api.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`

@@ -74,7 +74,7 @@ const SuperNowa = () => {
     }
     axios
       .post(
-        `https://api.247365.exchange/admin-new-apis/api/supernowa/v1/authentication`, dtatata,
+        `https://adminapi.247idhub.com/admin-new-apis/api/supernowa/v1/authentication`, dtatata,
         {
           headers: {
             "Content-Type": "application/json",

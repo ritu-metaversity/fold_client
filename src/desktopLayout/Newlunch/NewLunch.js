@@ -16,7 +16,7 @@ function NewLunch() {
 
   useEffect(() => {
     fetch(
-      "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/diamond.json"
+      "https://admin-api-banners-2.s3.ap-south-1.amazonaws.com/diamond.json"
     )
       .then((res) => res.json())
       .then((res) => {
