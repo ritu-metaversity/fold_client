@@ -100,15 +100,6 @@ function ProviderTabsWithGames({ filter }: { filter: string }) {
     }
   };
 
-  // const authenticationHandler = async () => {
-  //   setIsLoading(true);
-  //   const { response } = await qTechServices.authentication();
-  //   if (!!response && response?.data && response?.data?.access_token) {
-  //     const { access_token } = response?.data;
-  //     window.localStorage.setItem("qtech_access_token", access_token);
-  //     await getGameLists(access_token);
-  //   }
-  // };
 
   const authHandler = async (code: string, providerCode: string) => {
     if (!allocatedCasino["Super Nova"]?.active) return;

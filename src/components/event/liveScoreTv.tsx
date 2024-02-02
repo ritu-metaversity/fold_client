@@ -12,8 +12,8 @@ const LiveScoreTv = ({ lastMatchedTime }: { lastMatchedTime: string }) => {
   const matchId = searchParams.get("match-id");
   const sportId = searchParams.get("sport-id");
   const [showLive, setShowLive] = useState(false);
-  const [showScore, setShowScore] = useState(true);
-  const [showScore2, setShowScore2] = useState(false);
+  const [showScore, setShowScore] = useState(false);
+  const [showScore2, setShowScore2] = useState(true);
   const [activeEventList, setActiveEventList] = useState<MatchInterface[]>([]);
 
   const handleShowScoreChange = (

@@ -42,17 +42,6 @@ function Fantasy() {
     setSelectedProvider(value);
   };
 
-  // const authenticationHandler = async () => {
-  //   const { response } = await qTechServices.authentication();
-  //   if (!!response && response?.data && response?.data?.access_token) {
-  //     const { access_token } = response?.data;
-  //     window.localStorage.setItem("qtech_access_token", access_token);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   authenticationHandler();
-  // }, []);
 
   useEffect(() => {
     if (SelectedProvider) {

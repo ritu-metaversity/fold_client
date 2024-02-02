@@ -98,27 +98,6 @@ const Casino = () => {
   //   }
   // };
 
-  // const authHandler = async (item: SuperNowaGameInterface) => {
-  //   setOpen(1);
-
-  //   const { response } = await supernowaServices.authentication({
-  //     game: {
-  //       gameCode: item?.code,
-  //       providerCode: item?.providerCode,
-  //     },
-  //     timestamp: new Date().getTime(),
-  //     user: {
-  //       currency: "INR",
-  //       backUrl: "http://maggibook.com",
-  //     },
-  //   });
-
-  //   if (response && response?.data && response?.data?.launchURL) {
-  //     const { launchURL } = response?.data;
-  //     setGameLaunchURL(launchURL);
-  //   }
-  // };
-
   useEffect(() => {
     getCasinoList();
   }, [value, isSignedIn]);
