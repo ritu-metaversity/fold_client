@@ -305,7 +305,7 @@ function GamedetailPage({ getStackValue, SportId }) {
     setErrorMsg(vl);
   };
 
-  const [toggleBtn1, settoggleBtn1] = useState(true);
+  const [toggleBtn1, settoggleBtn1] = useState(false);
   const [toggleBtn, settoggleBtn] = useState(false);
 
   const handleSwitchInput = (e) => {
