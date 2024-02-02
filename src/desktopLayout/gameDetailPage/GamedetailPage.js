@@ -484,7 +484,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                         </div>
                       </div>
                     </div>
-                    {toggleBtn ? (
+                    {toggleBtn1 ? (
                       <div id="scoreboard-box">
                         <div className="scorecard scorecard-mobile">
                           <div className="score-inner">
@@ -498,7 +498,7 @@ function GamedetailPage({ getStackValue, SportId }) {
                           </div>
                         </div>
                       </div>
-                    ) : toggleBtn1 ? (
+                    ) : toggleBtn ? (
                       <div id="scoreboard-box">
                         <div className="scorecard scorecard-mobile">
                           <div className="score-inner ">

@@ -451,7 +451,7 @@ function GameDetail({ getStackValue }) {
                 ) : (
                   ""
                 )}
-                {toggleBtn ? (
+                {toggleBtn1 ? (
                   <div id="scoreboard-box">
                     <div className="scorecard scorecard-mobile">
                       <div className="score-inner">
@@ -465,7 +465,7 @@ function GameDetail({ getStackValue }) {
                       </div>
                     </div>
                   </div>
-                ) : toggleBtn1 ? (
+                ) : toggleBtn ? (
                   <div id="scoreboard-box">
                     <div className="scorecard scorecard-mobile">
                       <div className="score-inner">
