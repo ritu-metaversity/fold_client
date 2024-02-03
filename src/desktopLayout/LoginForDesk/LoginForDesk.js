@@ -65,16 +65,13 @@ const LoginForDesk = ({Errmessage, Statusmessage}) => {
           localStorage.setItem("userTypeInfo", res?.userTypeInfo);
           if (res.token !== "" && res.status !== false) {
             localStorage.setItem("token", token);
-            setInterval(
-              () =>
-                CasinoApi.Casino_Authentication({}).then((item) => {
-                  localStorage.setItem(
-                    "gameToken",
-                    item?.data?.data?.access_token
-                  );
-                }),
-              1000
-            );
+            
+            CasinoApi.Casino_Authentication({}).then((item) => {
+              localStorage.setItem(
+                "gameToken",
+                item?.data?.data?.access_token
+              );
+            })
             nav("/home");
 
           }

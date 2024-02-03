@@ -6,6 +6,7 @@ import { AuthorAPI } from "../../apis/AuthorAPI";
 import Modal from "react-bootstrap/Modal";
 import ExposureModal from "../Items/ExposureModal/ExposureModal";
 import LatestEvent from "../../common/LatestEvent";
+import { CasinoApi } from "../../apis/CasinoApi";
 
 const NavBar = () => {
   const [close, setClose] = useState(false);
@@ -185,7 +186,32 @@ const NavBar = () => {
     return () => {
       window.removeEventListener("scroll", controlNavbar);
     };
+    
   }, []);
+
+  const token = localStorage.getItem("token")
+
+
+  useEffect(()=>{
+    if(token !== null){
+      CasinoApi.Casino_Authentication({}).then((item) => {
+        localStorage.setItem(
+          "gameToken",
+          item?.data?.data?.access_token
+        );
+      });
+      setInterval(
+        () =>
+          CasinoApi.Casino_Authentication({}).then((item) => {
+            localStorage.setItem(
+              "gameToken",
+              item?.data?.data?.access_token
+            );
+          }),
+          3600000
+      );
+    }
+  }, [token])
 
 
   return (

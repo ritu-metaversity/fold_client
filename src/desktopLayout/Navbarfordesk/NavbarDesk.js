@@ -6,6 +6,7 @@ import { GameAPI } from "../../apis/gameAPI";
 import { UserAPI } from "../../apis/UserAPI";
 import ExpForDesk from "./ExpForDesk/ExpForDesk";
 import NavLoginForm from "./NavLoginForm/NavLoginForm";
+import { CasinoApi } from "../../apis/CasinoApi";
 
 const NavbarDesk = (props) => {
   const [close, setClose] = useState(false);
@@ -23,7 +24,7 @@ const NavbarDesk = (props) => {
 
   function toggle(e) {
     e.preventDefault();
-    setSeachDetail("")
+    setSeachDetail("");
     if (close === false) {
       setClose(true);
     } else {
@@ -65,15 +66,14 @@ const NavbarDesk = (props) => {
       nav("/login");
     }
 
-
-    if (token !== null && localStorage.getItem("Password-type" ) !== "old") {
+    if (token !== null && localStorage.getItem("Password-type") !== "old") {
       UserAPI.User_Balance()
         .then((res) => {
           setUserbalance(res?.data?.balance);
           setExp(res?.data?.libality);
         })
         .catch((error) => {
-          if(error?.response?.status === 401){
+          if (error?.response?.status === 401) {
             setError(true);
             nav("/login");
             localStorage.clear();
@@ -82,28 +82,25 @@ const NavbarDesk = (props) => {
         });
     }
 
-
-  const time = setInterval(() => {
-    if (token !== null && localStorage.getItem("Password-type" ) !== "old") {
-      UserAPI.User_Balance()
-        .then((res) => {
-          setUserbalance(res?.data?.balance);
-          setExp(res?.data?.libality);
-        })
-        .catch((error) => {
-          if(error?.response?.status === 401){
+    const time = setInterval(() => {
+      if (token !== null && localStorage.getItem("Password-type") !== "old") {
+        UserAPI.User_Balance()
+          .then((res) => {
+            setUserbalance(res?.data?.balance);
+            setExp(res?.data?.libality);
+          })
+          .catch((error) => {
+            if (error?.response?.status === 401) {
+              setError(true);
+              nav("/login");
+              localStorage.clear();
+            }
             setError(true);
-            nav("/login");
-            localStorage.clear();
-          }
-          setError(true);
-        });
-    }
-  }, 1500);
+          });
+      }
+    }, 1500);
 
-  return () => clearInterval(time);
-
-   
+    return () => clearInterval(time);
   }, [nav]);
 
   const handleSportId = (sportid) => {
@@ -111,12 +108,31 @@ const NavbarDesk = (props) => {
   };
 
   const handleExpModal = () => setShowExpModals(false);
-  const [isDeleted, setIsDeleted] = useState(false)
+  const [isDeleted, setIsDeleted] = useState(false);
   const handleExpShow = (e, val) => {
     setShowExpModals(true);
-    setIsDeleted(val)
+    setIsDeleted(val);
     e.preventDefault();
   };
+
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (token !== null) {
+      CasinoApi.Casino_Authentication({}).then((item) => {
+        localStorage.setItem("gameToken", item?.data?.data?.access_token);
+      });
+      setInterval(
+        () =>
+          CasinoApi.Casino_Authentication({}).then((item) => {
+            localStorage.setItem("gameToken", item?.data?.data?.access_token);
+          }),
+        3600000
+      );
+    }
+  }, [token]);
+
+
 
   return (
     <>
@@ -145,7 +161,7 @@ const NavbarDesk = (props) => {
                         autoComplete="off"
                         type="text"
                         value={SeachDetail}
-                        onChange={(e)=>setSeachDetail(e.target.value)}
+                        onChange={(e) => setSeachDetail(e.target.value)}
                         className={!close ? "" : "search-input-show"}
                       />
                       <Link onClick={toggle}>
@@ -170,16 +186,16 @@ const NavbarDesk = (props) => {
                           </span>
                         </b>
                       </div>
-                      <div className="mt-1" onClick={(e) => handleExpShow(e, false)}>
+                      <div
+                        className="mt-1"
+                        onClick={(e) => handleExpShow(e, false)}>
                         <p className="cPointer" onClick={() => setLgShow(true)}>
-                         
-                            <span className="t-underline">Exp:</span>{" "}
-                            <b>
-                              <span className="t-underline">
-                                {parseFloat(Exp)?.toFixed(2)}
-                              </span>
-                            </b>
-                         
+                          <span className="t-underline">Exp:</span>{" "}
+                          <b>
+                            <span className="t-underline">
+                              {parseFloat(Exp)?.toFixed(2)}
+                            </span>
+                          </b>
                         </p>
                       </div>
 
@@ -208,13 +224,14 @@ const NavbarDesk = (props) => {
                     </li>
 
                     <li className="account float-left">
-                      <span style={{fontWeight:"600"}} onClick={droupMenu}>
+                      <span style={{ fontWeight: "600" }} onClick={droupMenu}>
                         {localStorage.getItem("UserId")}
                         <i className="fa fa-chevron-down"></i>
                       </span>
                       {droup && (
-                        <ul className="d-block" style={{top: "65px"}}>
-                          {status === true && localStorage.getItem("UsertypeInfo") != 2 ? (
+                        <ul className="d-block" style={{ top: "65px" }}>
+                          {status === true &&
+                          localStorage.getItem("UsertypeInfo") != 2 ? (
                             <>
                               <Link
                                 to="/deposit"
@@ -229,7 +246,9 @@ const NavbarDesk = (props) => {
                                 Withdraw
                               </Link>
                             </>
-                          ):""}
+                          ) : (
+                            ""
+                          )}
 
                           <li>
                             <Link
@@ -336,8 +355,7 @@ const NavbarDesk = (props) => {
                       onClick={() => handleSportId(res?.sportId)}>
                       <Link
                         to={`/${res?.sportName.replace(" ", "")}`}
-                        className=""
-                      >
+                        className="">
                         {res?.sportName}
                       </Link>
                     </li>

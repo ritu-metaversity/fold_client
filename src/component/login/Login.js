@@ -25,7 +25,6 @@ function Login({ Errmessage, Statusmessage }) {
 
   const { host } = window.location;
 
-
   const handleLogin = () => {
     setStatusVal(true);
     setIsLoading(true);
@@ -87,16 +86,11 @@ function Login({ Errmessage, Statusmessage }) {
           localStorage.setItem("UserId", uId);
           if (res.token !== "" && res.status !== false) {
             localStorage.setItem("token", token);
-            setInterval(
-              () =>
-                CasinoApi.Casino_Authentication({}).then((item) => {
-                  localStorage.setItem(
-                    "gameToken",
-                    item?.data?.data?.access_token
-                  );
-                }),
-              1000
-            );
+
+            CasinoApi.Casino_Authentication({}).then((item) => {
+              localStorage.setItem("gameToken", item?.data?.data?.access_token);
+            });
+
             nav("/m/home");
           }
           const pType = res.passwordtype;
@@ -160,16 +154,12 @@ function Login({ Errmessage, Statusmessage }) {
           res?.data.status !== false
         ) {
           localStorage.setItem("token", token);
-          setInterval(
-            () =>
               CasinoApi.Casino_Authentication({}).then((item) => {
                 localStorage.setItem(
                   "gameToken",
                   item?.data?.data?.access_token
                 );
-              }),
-            1000
-          );
+              });
           nav("/m/home");
         }
         const pType = res?.data?.passwordtype;
