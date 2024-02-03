@@ -252,10 +252,16 @@ function App() {
   useEffect(() => {
     const time = setInterval(() => {
       getBalance();
-      authenticationHandler();
     }, 5000);
     return () => clearInterval(time);
-  }, [isSignedIn, getBalance, authenticationHandler]);
+  }, [isSignedIn, getBalance]);
+
+    useEffect(() => {
+      const time = setInterval(() => {
+        authenticationHandler();
+      }, 3600000);
+      return () => clearInterval(time);
+    }, [isSignedIn, authenticationHandler]);
 
   useEffect(() => {
     if (isSignedIn) {
