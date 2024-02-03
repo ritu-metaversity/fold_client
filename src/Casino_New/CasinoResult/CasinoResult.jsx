@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./CasinoResult.css";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { tableIdtoUrl, titleById } from "../Constant/Constant";
 import ResultModalContainer from "../LastResult/ResultModalContainer";
 import { DatePicker } from "antd";
@@ -19,8 +19,15 @@ const CasinoResult = () => {
   const time = moment(curr).format("YYYY-MM-DD");
   const [startDate, setStartDate] = useState(time);
   const dateFormat = "YYYY-MM-DD";
+  const nav = useNavigate()
 
   const {id} = useParams()
+
+
+  const handleCasinoId = (e)=>{
+    setCasinoId(e.target.value);
+    nav(`/casinoresult/${e.target.value}`)
+  }
 
   useEffect(() => {
     CasinoLiveApi.Casino_Result({
@@ -96,7 +103,7 @@ const CasinoResult = () => {
               <div className="form-group mb-0">
                 <select
                   name="reportType"
-                  onChange={(e) => setCasinoId(e.target.value)}
+                  onChange={(e) => handleCasinoId(e)}
                   className="custom-select">
                   <option value="">Casino Type</option>
                   {Object.keys(titleById).map((key) => (

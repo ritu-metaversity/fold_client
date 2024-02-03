@@ -67,7 +67,7 @@ function SideBar({ casinoAllow }) {
   useEffect(() => {
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open"
+        "https://adminapi.247idhub.com/admin-new-apis/enduser/left-menu-data-open"
       )
       .then((res) => {
         setMatchList(res?.data?.data);
@@ -78,7 +78,7 @@ function SideBar({ casinoAllow }) {
 
   useEffect(() => {
     fetch(
-      "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/diamond.json"
+      "https://admin-api-banners-2.s3.ap-south-1.amazonaws.com/diamond.json"
     )
       .then((res) => res.json())
       .then((res) => {
