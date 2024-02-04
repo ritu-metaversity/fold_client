@@ -178,13 +178,6 @@ const Register = () => {
             res?.status !== false
           ) {
             localStorage.setItem("token", token);
-           
-                CasinoApi.Casino_Authentication({}).then((item) => {
-                  localStorage.setItem(
-                    "gameToken",
-                    item?.data?.data?.access_token
-                  );
-                });
             nav("/m/home");
           }
           const pType = res?.passwordtype;
@@ -232,13 +225,6 @@ const Register = () => {
           res?.data.status !== false
         ) {
           localStorage.setItem("token", token);
-         
-              CasinoApi.Casino_Authentication({}).then((item) => {
-                localStorage.setItem(
-                  "gameToken",
-                  item?.data?.data?.access_token
-                );
-              });
           nav("/m/home");
         }
         const pType = res?.data?.passwordtype;
