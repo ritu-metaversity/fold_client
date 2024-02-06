@@ -255,8 +255,8 @@ const token = localStorage.getItem("token")
               <Route path="/m/fantsy" element={<FantsyTabs  />} />
               <Route path="/m/sueprnowa" element={<SuperNowa/>} />
               <Route path="/m/aura" element={<NewLunch/>} />
-              <Route path="/m/:id/casino" element={<CasinoMainPage />} />
-              <Route path="/casinoresult/:id" element={<CasinoResult />} />
+              {/* <Route path="/m/:id/casino" element={<CasinoMainPage />} />
+              <Route path="/casinoresult/:id" element={<CasinoResult />} /> */}
 
               {/* <Route path="/m/sportbook" element={<ComingSoon/>} /> */}
 

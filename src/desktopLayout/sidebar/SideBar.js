@@ -157,7 +157,7 @@ function SideBar({ casinoAllow }) {
       </nav> */}
 
       {/* Aura: AuraData, Nowa: NowaData, Qtech: QtechData, Virtual: VirtualData, Sportbook: SportBookData */}
-      <div
+      {/* <div
         className="sidebar-title m-t-5 theme2bg"
         onClick={collapse2}
         aria-controls="events"
@@ -167,7 +167,7 @@ function SideBar({ casinoAllow }) {
         <p className="arrow-line">
           {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
         </p>
-      </div>
+      </div> */}
       {casinoAllow?.Aura ||
         casinoAllow?.Nowa ||
         casinoAllow?.Qtech ||
@@ -190,7 +190,7 @@ function SideBar({ casinoAllow }) {
       <Accordion defaultActiveKey="0" className="main_sport_header">
         <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
           <ul className="live_casino">
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to="/60/casino" className="nav-link">
                 <span className="">ANDAR BAHAR</span>
               </Link>
@@ -229,7 +229,7 @@ function SideBar({ casinoAllow }) {
               <Link to="/57/casino" className="nav-link">
                 <span className="">1 DAY TEENPATTI</span>
               </Link>
-            </li>
+            </li> */}
             {(casinoAllow?.Aura || localStorage.getItem("token") === null) && (
               <li className="nav-item">
                 <Link to="/aura" className="nav-link">

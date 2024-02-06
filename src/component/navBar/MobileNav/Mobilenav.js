@@ -134,7 +134,7 @@ function Mobilenav({ casinoAllow }) {
             </li>
           </>
         )}
-        <li
+        {/* <li
           className={`nav-item ${Active === 10 ? "active2" : ""}`}
           onClick={(e) => handleClick(10, e)}>
           <Link to="/m/60/casino" className="nav-link navlink1">
@@ -189,7 +189,7 @@ function Mobilenav({ casinoAllow }) {
           <Link to="/m/57/casino" className="nav-link">
             1 DAY TEENPATTI
           </Link>
-        </li>
+        </li> */}
       </ul>
       <Outlet />
     </>

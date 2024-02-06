@@ -261,8 +261,8 @@ const RouteDesktop = () => {
               <Route path="/supernowa" element={<SuperNowa />} />
 
 
-              <Route path="/:id/casino" element={<CasinoMainPage />} />
-              <Route path="/casinoresult/:id" element={<CasinoResult />} />
+              {/* <Route path="/:id/casino" element={<CasinoMainPage />} />
+              <Route path="/casinoresult/:id" element={<CasinoResult />} /> */}
               
 
               <Route path="/profitloss" element={<ProfitLossHome />} />
