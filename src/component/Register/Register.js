@@ -352,7 +352,7 @@ const Register = () => {
                   className="text-danger error-msg"
                   style={{ display: "none" }}></span>
               </div>
-              {/* <div className="form-group mb-4">
+              <div className="form-group mb-4">
                 <div className="form-group mb-4">
                   <div className="comm_sec">
                     {oddsComm != "0" && (
@@ -365,7 +365,7 @@ const Register = () => {
                         />
                       </div>
                     )}
-                    {casinoComm != "0" && (
+                    {/* {casinoComm != "0" && (
                       <div className="sub_comm_sec">
                         <p>Casino Comm</p>
                         <input
@@ -374,7 +374,7 @@ const Register = () => {
                           value={casinoComm}
                         />
                       </div>
-                    )}
+                    )} */}
                     {fancyComm != "0" && (
                       <div className="sub_comm_sec">
                         <p>Fancy Comm</p>
@@ -387,7 +387,7 @@ const Register = () => {
                     )}
                   </div>
                 </div>
-              </div> */}
+              </div>
               <div className="form-group mb-0">
                 <button
                   type="submit"

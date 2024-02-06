@@ -181,7 +181,7 @@ const RegisterPage = () => {
           const pType = res?.passwordtype;
           localStorage.setItem("Password-type", pType);
           if (pType === "old") {
-            nav("/m/setting/changepassword");
+            nav("/changepassword");
           }
           if (res?.status === false) {
             setStatusVal(false);
@@ -220,12 +220,12 @@ const RegisterPage = () => {
           res?.data.status !== false
         ) {
           localStorage.setItem("token", token);
-          nav("/m/home");
+          nav("/home");
         }
         const pType = res?.data?.passwordtype;
         localStorage.setItem("Password-type", pType);
         if (pType === "old") {
-          nav("/m/setting/changepassword");
+          nav("/changepassword");
         }
         if (res?.data.status === false) {
           setStatusVal(false);
@@ -337,7 +337,7 @@ const RegisterPage = () => {
                 {confirmPasswordError}
               </p>
             </div>
-            {/* <div className="form-group mb-4">
+            <div className="form-group mb-4">
               <div className="comm_sec">
                 {oddsComm != "0" && (
                   <div className="sub_comm_sec">
@@ -345,7 +345,7 @@ const RegisterPage = () => {
                     <input disabled defaultValue={oddsComm} value={oddsComm} />
                   </div>
                 )}
-                {casinoComm != "0" && (
+                {/* {casinoComm != "0" && (
                   <div className="sub_comm_sec">
                     <p>Casino Comm</p>
                     <input
@@ -354,7 +354,7 @@ const RegisterPage = () => {
                       value={casinoComm}
                     />
                   </div>
-                )}
+                )} */}
                 {fancyComm != "0" && (
                   <div className="sub_comm_sec">
                     <p>Fancy Comm</p>
@@ -366,7 +366,7 @@ const RegisterPage = () => {
                   </div>
                 )}
               </div>
-            </div> */}
+            </div>
             <div className="form-group mb-0">
               <button
                 type="submit"

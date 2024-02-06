@@ -44,6 +44,8 @@ function App() {
     });
   }, []);
 
+  console.log("dsfsfsdfsd12")
+
   return (
     <div className="App">
       {mobileRoutes === true ? <RouteDesktop /> : <RouteMobile />}

@@ -52,7 +52,8 @@ const FantsyList = ({ providerFilter }) => {
         lang: "en_IN",
         mode: "real",
         device: isBrowser ? "desktop" : "mobile",
-        returnUrl: window.location.host,
+        // returnUrl: window.location.host,
+        returnUrl:window.location.origin,
         token: gameToken,
         walletSessionId: token,
       }).then((res) => {
