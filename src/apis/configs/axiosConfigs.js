@@ -16,7 +16,7 @@ export const superNowaApi = axios.create({
 })
 
 export const LiveCasinoBaseUrl = axios.create({
-  baseURL:"http://43.205.157.72:3434/"
+  baseURL:"http://174.138.122.248:3434/"
 })
 export const LiveCasinoLibility = axios.create({
   baseURL:"http://13.250.53.81/VirtualCasinoBetPlacer/vc/"
