@@ -9,7 +9,7 @@ export const AuthorAPI = {
         data: {
             userId: userId,
             password: password,
-            appUrl: window.location.hostname
+            appUrl: window.location.hostname.replace('www.','')
         },
         signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
       })
@@ -44,7 +44,7 @@ export const AuthorAPI = {
         data: {
             currentPassword: currentPassword,
             newPassword: newPassword,
-            appUrl: window.location.hostname
+            appUrl: window.location.hostname.replace('www.','')
         },
         signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
       })
@@ -65,7 +65,7 @@ export const AuthorAPI = {
             casinoComm: casinoComm,
             fancyComm:fancyComm,
             oddsComm:oddsComm,
-            appUrl: window.location.hostname
+            appUrl: window.location.hostname.replace('www.','')
         },
         signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
       })
@@ -101,7 +101,7 @@ export const AuthorAPI = {
         url: `/login/demo-user-creation-login`,
         method: "POST",
         data:{
-         appUrl: window.location.hostname
+         appUrl: window.location.hostname.replace('www.','')
         },
 
         signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,

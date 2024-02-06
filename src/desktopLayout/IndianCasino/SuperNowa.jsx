@@ -69,7 +69,7 @@ const SuperNowa = () => {
       "timestamp": new Date().getTime(),
       user: {
         currency: "INR",
-        backUrl: `${window.location.protocol}//${window.location.hostname}`,
+        backUrl: `${window.location.protocol}//${window.location.hostname.replace('www.','')}`,
       }
     }
     axios

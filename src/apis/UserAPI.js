@@ -135,7 +135,7 @@ export const UserAPI = {
       url: `/login/is-self-by-app-url`,
       method: "POST",
       data: {
-        appUrl: window.location.hostname,
+        appUrl: window.location.hostname.replace('www.',''),
       },
 
       signal: cancel

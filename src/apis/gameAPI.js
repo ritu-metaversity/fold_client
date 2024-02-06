@@ -105,7 +105,7 @@ export const GameAPI = {
       method: "POST",
       data: {
         id: id,
-        appUrl: window.location.hostname
+        appUrl: window.location.hostname.replace('www.','')
       },
 
       signal: cancel
@@ -243,7 +243,7 @@ export const GameAPI = {
       url: "app/getAboutUs",
       method: "POST",
       data:{
-        appUrl: window.location.hostname
+        appUrl: window.location.hostname.replace('www.','')
       },
       signal: cancel
         ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
@@ -258,7 +258,7 @@ export const GameAPI = {
       url: "app/getTermAndCondition",
       method: "POST",
       data:{
-        appUrl: window.location.hostname
+        appUrl: window.location.hostname.replace('www.','')
       },
       signal: cancel
         ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
@@ -273,7 +273,7 @@ export const GameAPI = {
       url: "app/getResponsibleGaming",
       method: "POST",
       data:{
-        appUrl: window.location.hostname
+        appUrl: window.location.hostname.replace('www.','')
       },
       signal: cancel
         ? cancelApiObject[this.getAll.name].handleRequestCancellation().signal
@@ -288,7 +288,7 @@ export const GameAPI = {
       url: "api/admin/getData",
       method: "POST",
       data:{
-        appUrl: window.location.hostname
+        appUrl: window.location.hostname.replace('www.','')
       },
 
       signal: cancel
@@ -303,7 +303,7 @@ export const GameAPI = {
       url: "/api/getOneUserBetResult",
       method: "POST",
       data:{
-        appUrl: window.location.hostname
+        appUrl: window.location.hostname.replace('www.','')
       },
 
       signal: cancel

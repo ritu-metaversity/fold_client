@@ -40,7 +40,7 @@ function App() {
 
 
   useEffect(() => {
-    document.title = window.location.hostname;
+    document.title = window.location.hostname.replace('www.','');
     UserAPI.Self_By_App_Url().then((res)=>{
       if (res?.data.favicon) {
         let favicon = document.createElement("link")
