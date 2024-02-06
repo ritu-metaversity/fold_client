@@ -1,0 +1,120 @@
+.placeBetTable {
+  width: 100%;
+}
+.bet-odds .form-group {
+  display: flex;
+  align-items: center;
+}
+.spinner-buttons {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  /* margin-top: -0.75rem; */
+}
+.spinner-buttons > button {
+  height: 10px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.value-buttons button {
+  width: auto;
+  border: 0;
+  min-width: 19%;
+  margin-top: 2px;
+  margin: 2px;
+  float: left;
+  font-weight: normal;
+  background-color: #ddd;
+  color: #000;
+}
+.bet-table{
+    /* font-size: 0.7rem !important; */
+}
+.bet_heading {
+  border-bottom: 1px solid #ddd;
+}
+.pt td {
+  padding: 5px;
+}
+.arrow_btn {
+  height: 30px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 0px;
+}
+
+.upDown{
+  background-color: #ddd;
+  padding: 2px;
+  height: 14px !important;
+  line-height: 12px;
+  min-width: 20px;
+  width: 20px;
+  vertical-align: top;
+  border-radius: 0;
+}
+.upDown  i{
+    padding: 0px;
+    margin: 0px;
+    font-size: 12px;
+}
+
+.palce_btn {
+    display: flex;
+    justify-content: space-between;
+    /* padding: 10px; */
+    align-items: center;
+}
+
+tr.bet_heading.bg_change {
+    background: #ddd;
+    font-size: 0.8rem;
+}
+
+.text_color{
+    color: red;
+}
+.stake_container{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 0.5rem;
+}
+.stake_container input{ 
+  height: 100%;
+}
+.stakeactionminus{
+  border-radius: 0;
+}
+
+.place-lodder{
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999999;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+/* .place-lodder>*{
+  background-color: white;
+  width: 40px;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10%;
+  height: 40px;
+} */
+.value-buttons button{
+  min-width: 18.5%;
+  background: #2c3d50;
+  color: #fff;
+}

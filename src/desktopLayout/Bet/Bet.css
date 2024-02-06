@@ -1,7 +1,6 @@
 
 .sidebar-right {
     max-width: 30% !important;
-    -ms-flex: 0 0 30% !important;
     flex: 0 0 30% !important;
     padding-left: 0 !important;
 }
@@ -9,7 +8,7 @@
     overflow: hidden !important;
     overflow-anchor: none;
     touch-action: auto;
-    position: sticky;
+    position: sticky !important;
     top: 5px;
 }
 .place-bet {

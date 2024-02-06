@@ -1,0 +1,73 @@
+.t20_container {
+    width: 100%;
+}
+.t20_container span {
+    font-size: 0.65rem;
+    line-height: 0.8;
+}
+.t20_container th {
+    font-weight: 500;
+    font-size: 14px;
+}
+.t20_container table {
+    width: 100%;
+    font-size: 0.8rem;
+
+}
+.t20_container tr>*{
+    min-width: 60px;
+    padding: 6px;
+    text-align: center;
+    cursor: pointer;
+    background-color:#72bbef ;
+    border: 1px solid #fff;
+    
+}
+.t20_container tr>*:last-child{
+    border-right: 0px ;
+    
+}
+.t20_container tr>*:first-child {
+    width: 50%;
+    text-align: left;
+    cursor: auto;
+    
+    background-color: rgba(0,0,0,0.05);
+}
+
+.t20_container tr.suspended::after{
+
+    font-family: "Font Awesome 5 Free";
+    content:"\f023";
+    font-weight: 900;
+    font-size: 1.25rem;
+    color: #fff;
+    position: absolute;
+    top:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.t20_container td.suspended::after{
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    tr>*{
+    padding: 2px;
+    }
+    .t20_container span {
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .t20_container tr>*:first-child {
+        background-color: #fff;
+    }
+    .t20_container tr>*{
+       border: 1px solid #aaa;
+    }
+}

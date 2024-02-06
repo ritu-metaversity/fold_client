@@ -157,12 +157,12 @@ function Sport({ gameIdForItemPage }) {
                     ""
                   )}
                   {gameName?.length === undefined && (
-                    <div class="tab-pane container pl-0 pr-0 max_heirht">
-                      <div class="game-listing-container main-container ">
+                    <div className="tab-pane container pl-0 pr-0 max_heirht">
+                      <div className="game-listing-container main-container ">
                         <div>
                           <div>
                             <p
-                              class="no-found"
+                              className="no-found"
                               style={{ marginBottom: "12px" }}>
                               No Real Data Found
                             </p>

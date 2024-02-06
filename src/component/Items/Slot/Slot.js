@@ -88,7 +88,6 @@ const Slot = () => {
   };
 
 
-  // console.log(Casinoshow, "Casinoshow")
 
   return (
     <>

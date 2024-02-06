@@ -1,0 +1,25 @@
+.card_card_card{
+    display: flex;
+    flex-wrap: wrap;
+    margin:auto;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+
+}
+.card_card_card img{
+    width: 40px;
+    position: relative;
+    outline: 1px solid #faee2d;
+    margin-bottom: 7px;
+}
+
+@media (max-width:768px) {
+    .card_card_card img{
+        width: 30px;
+    }
+    .card_card_card{
+        padding: 12px;
+        gap: 0px 10px;
+    }
+}

@@ -35,6 +35,8 @@ import SuperNowa from "./desktopLayout/IndianCasino/SuperNowa";
 import FooterForMob from "./component/FooterForMob/FooterForMob";
 import WhatsAppIcon from "./common/whatsAppIcon/WhatsAppIcon";
 import { GameAPI } from "./apis/gameAPI";
+import CasinoMainPage from "./Casino_New/CasinoMainPage/CasinoMainPage";
+import CasinoResult from "./Casino_New/CasinoResult/CasinoResult";
 
 const RouteDesktop = () => {
   const [SportId, setSportId] = useState("");
@@ -92,24 +94,26 @@ const RouteDesktop = () => {
     UserAPI.Self_By_App_Url().then((res) => {
       setItselfAllowed(res?.data?.selfAllowed);
     });
-   
   }, []);
 
-  const token = localStorage.getItem("token")
-  useEffect(()=>{
-    if(token !== null){
-      GameAPI.ALLOTED_CASINO_LIST().then((res)=>{
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (token !== null) {
+      GameAPI.ALLOTED_CASINO_LIST().then((res) => {
         setItselfAllowedData(res?.data);
-      })
+      });
     }
-  }, [pathname, token])
+  }, [pathname, token]);
 
-  const [whatsAppIconPosition, setWhatsAppIconPosition] = useState({ top: '10px', right: '10px' });
+  const [whatsAppIconPosition, setWhatsAppIconPosition] = useState({
+    top: "10px",
+    right: "10px",
+  });
 
   useEffect(() => {
     const handleScroll = () => {
       const newTop = window.scrollY;
-      setWhatsAppIconPosition({ top: newTop});
+      setWhatsAppIconPosition({ top: newTop });
     };
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -117,8 +121,13 @@ const RouteDesktop = () => {
     };
   }, []);
 
-  const casinoStateNames = ['Aura', 'Super Nova', 'QTech', 'Virtual', 'SportBook'];
-
+  const casinoStateNames = [
+    "Aura",
+    "Super Nova",
+    "QTech",
+    "Virtual",
+    "SportBook",
+  ];
 
   const [AuraData, setAuraData] = useState();
   const [NowaData, setNowaData] = useState();
@@ -126,11 +135,10 @@ const RouteDesktop = () => {
   const [VirtualData, setVirtualData] = useState();
   const [SportBookData, setSportBookData] = useState();
 
-
   useEffect(() => {
     if (ItselfAllowedData) {
-      casinoStateNames.forEach(name => {
-        const casinoData = ItselfAllowedData.find(item => item.name === name);
+      casinoStateNames.forEach((name) => {
+        const casinoData = ItselfAllowedData.find((item) => item.name === name);
         const setCasinoData = getSetterFunction(name);
         setCasinoData(casinoData?.active);
       });
@@ -139,23 +147,28 @@ const RouteDesktop = () => {
 
   function getSetterFunction(name) {
     switch (name) {
-      case 'Aura':
+      case "Aura":
         return setAuraData;
-      case 'Super Nova':
+      case "Super Nova":
         return setNowaData;
-      case 'QTech':
+      case "QTech":
         return setQtechData;
-      case 'Virtual':
+      case "Virtual":
         return setVirtualData;
-      case 'SportBook':
+      case "SportBook":
         return setSportBookData;
       default:
         return () => {};
     }
   }
 
-  const casinoAllow = {Aura: AuraData, Nowa: NowaData, Qtech: QtechData, Virtual: VirtualData, Sportbook: SportBookData}
-  
+  const casinoAllow = {
+    Aura: AuraData,
+    Nowa: NowaData,
+    Qtech: QtechData,
+    Virtual: VirtualData,
+    Sportbook: SportBookData,
+  };
 
   return (
     <div>
@@ -177,7 +190,7 @@ const RouteDesktop = () => {
             ""
           ) : (
             <div className="sidebar col-md-2">
-              <SideBar casinoAllow={casinoAllow}/>
+              <SideBar casinoAllow={casinoAllow} />
             </div>
           )}
 
@@ -207,8 +220,14 @@ const RouteDesktop = () => {
                 }
               />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/inplay" element={<InPlay casinoAllow={casinoAllow}/>} />
-              <Route path="/home" element={<ItemPageForHome casinoAllow={casinoAllow}/>} />
+              <Route
+                path="/inplay"
+                element={<InPlay casinoAllow={casinoAllow} />}
+              />
+              <Route
+                path="/home"
+                element={<ItemPageForHome casinoAllow={casinoAllow} />}
+              />
               <Route path="/gamedetail/:id" element={<GamedetailPage />} />
               <Route
                 path="/accountstatement"
@@ -240,7 +259,11 @@ const RouteDesktop = () => {
               <Route path="/fantsy" element={<FantsyTabs />} />
               <Route path="/aura" element={<NewLunch />} />
               <Route path="/supernowa" element={<SuperNowa />} />
-              {/* <Route path="/sportbook" element={<ComingSoon/>} /> */}
+
+
+              <Route path="/:id/casino" element={<CasinoMainPage />} />
+              <Route path="/casinoresult/:id" element={<CasinoResult />} />
+              
 
               <Route path="/profitloss" element={<ProfitLossHome />} />
 
@@ -288,17 +311,19 @@ const RouteDesktop = () => {
             </Routes>
           </div>
         </div>
-        {(localStorage.getItem("token") == null && ItselfAllowed) &&  <WhatsAppIcon top={whatsAppIconPosition.top}/>}
+        {localStorage.getItem("token") == null && ItselfAllowed && (
+          <WhatsAppIcon top={whatsAppIconPosition.top} />
+        )}
         {pathname === "/login" ||
         pathname === "/register" ||
         pathname.includes("gamedetails") ? (
           ""
         ) : (
-          <FooterForMob ItselfAllowed={ItselfAllowed}/>
+          <FooterForMob ItselfAllowed={ItselfAllowed} />
         )}
       </>
     </div>
   );
-};  
+};
 
 export default RouteDesktop;

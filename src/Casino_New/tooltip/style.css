@@ -1,0 +1,44 @@
+.open{
+
+}
+.tooltip_container{
+    position: relative;
+    text-align: end;
+}
+.tooltip_container.start{
+    text-align: start;
+}
+.tooltipBox{
+    position: absolute;
+    z-index: 230139;
+    right: 0;
+    color: white;
+    top: 100%;
+    opacity: 0;
+    border-radius: 3px;
+    padding: 5px 15px;
+    background-color: rgb(102, 102, 102);
+    width: max-content;
+    max-width: 100%;
+    box-shadow:  0px 0px 15px rgba(0, 0, 0, 1);
+}
+.tooltip_container.start .tooltipBox{
+    text-align: start;
+    right: unset;
+    left: 0;
+}
+.open{
+    animation: showAnim 0.5s ease forwards;
+}
+.fa-info-circle:hover.fa-info-circle:before {
+    color:blue;
+}
+
+@keyframes showAnim {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

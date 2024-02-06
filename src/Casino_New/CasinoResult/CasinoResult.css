@@ -1,0 +1,40 @@
+.custom-select,
+.custom-select-sm {
+    display: inline-block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    background-size: 8px 10px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+   
+}
+
+.custom-select-sm {
+    width: auto;
+
+}
+
+.gap-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    .mob_table {
+        display: flex;
+        justify-content: space-between;
+        background-color: #fff;
+        padding: 0px 5px;
+        box-shadow: 0 3px 5px -3px;
+        margin: 6px 0px;
+    }
+
+    .mob_table td {
+        background-color: unset !important;
+    }
+}

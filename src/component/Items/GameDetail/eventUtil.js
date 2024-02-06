@@ -8,7 +8,6 @@ export const createProfits = ({
   }) => {
     if (!fancyOdds) return;
     if(!Array.isArray(pnl)){
-        console.log("pnl is not array")
         return;
     }
     const pnlsOdds = pnl?.find(

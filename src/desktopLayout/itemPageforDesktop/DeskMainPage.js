@@ -208,8 +208,8 @@ function DeskMainPage({ SportId }) {
                   )}
                   {(gameName?.length === undefined ||
                     gameName?.length === 0) && (
-                    <tbody class="">
-                      <tr class="dest_notFound">
+                    <tbody className="">
+                      <tr className="dest_notFound">
                         <td colspan="6">
                           <p>No Real Data Found</p>
                         </td>

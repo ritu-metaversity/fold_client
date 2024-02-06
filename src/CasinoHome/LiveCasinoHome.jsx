@@ -55,7 +55,6 @@ const LiveCasinoHome = ({ providerList }) => {
       token: gameToken,
       walletSessionId: token,
     }).then((res) => {
-      console.log(res, "resresresresresres");
       setIframeData(res?.data?.data?.url);
     });
   };
@@ -94,7 +93,6 @@ const LiveCasinoHome = ({ providerList }) => {
 
       <div className="live_casino_home">
         {providerList?.map((item) => {
-          // console.log(item, "itemitem")
           return (
             <div
               onClick={() => handleShow(item?.gameCode)}

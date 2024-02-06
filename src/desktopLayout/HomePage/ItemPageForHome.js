@@ -18,7 +18,6 @@ function ItemPageForHome({ casinoAllow }) {
         gameType:"ALL"
       }).then((res)=>{
         setProviderList(res?.data?.data)
-        console.log(res?.data?.data, "asdasdasdasd")
       })
     }
   }, [token])

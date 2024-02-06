@@ -17,15 +17,15 @@ function FooterForMob({ ItselfAllowed }) {
   return (
     <div>
       {(ItselfAllowed || footerImage != null) && (
-        <section class="footer_main">
-          <div class="footer-top">
-            <div class="support-detail">
+        <section className="footer_main">
+          <div className="footer-top">
+            <div className="support-detail">
               <h2>{footerImage?.support}</h2>
               <p>{footerImage?.mobileNo}</p>
             </div>
-            <div class="social-icons-box">
+            <div className="social-icons-box">
               {
-                footerImage?.s_whatsapp &&  <div class="social-icon">
+                footerImage?.s_whatsapp &&  <div className="social-icon">
                 <a
                   href={footerImage?.s_whatsapp?.link}
                   target="_blank"
@@ -35,7 +35,7 @@ function FooterForMob({ ItselfAllowed }) {
               </div>
               }
               {
-                footerImage?.s_facebook && <div class="social-icon">
+                footerImage?.s_facebook && <div className="social-icon">
                 <a
                   href={footerImage?.s_facebook?.link}
                   target="_blank"
@@ -45,7 +45,7 @@ function FooterForMob({ ItselfAllowed }) {
               </div>
               }
               {
-                footerImage?.s_instagram && <div class="social-icon">
+                footerImage?.s_instagram && <div className="social-icon">
                 <a
                   href={footerImage?.s_instagram?.link}
                   target="_blank"
@@ -55,7 +55,7 @@ function FooterForMob({ ItselfAllowed }) {
               </div>
               }
               {
-                footerImage?.s_telegram && <div class="social-icon">
+                footerImage?.s_telegram && <div className="social-icon">
                 <a
                   href={footerImage?.s_telegram?.link}
                   target="_blank"
@@ -66,7 +66,7 @@ function FooterForMob({ ItselfAllowed }) {
               }
               
               {
-                footerImage?.s_youtube &&  <div class="social-icon">
+                footerImage?.s_youtube &&  <div className="social-icon">
                 <a
                   href={footerImage?.s_youtube?.link}
                   target="_blank"
@@ -76,7 +76,7 @@ function FooterForMob({ ItselfAllowed }) {
               </div>
               }
               {footerImage?.s_twitter && (
-                <div class="social-icon">
+                <div className="social-icon">
                   <a
                     href={footerImage?.s_twitter?.link}
                     target="_blank"

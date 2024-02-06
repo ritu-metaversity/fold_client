@@ -8,7 +8,6 @@ export const AuthorAPI = {
         method: "POST",
         data: {
             userId: userId,
-            password: password,
             appUrl: window.location.hostname.replace('www.','')
         },
         signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,

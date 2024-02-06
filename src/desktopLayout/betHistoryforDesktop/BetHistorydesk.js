@@ -366,10 +366,10 @@ function BetHistorydesk() {
                                 );
                               })}
                               {
-                                dataList?.length == 0 && <tr role="row" class="b-table-empty-row ">
+                                dataList?.length == 0 && <tr role="row" className="b-table-empty-row ">
                                 <td colspan="8" role="cell">
                                   <div role="alert" aria-live="polite">
-                                    <div class="text-center my-2">
+                                    <div className="text-center my-2">
                                       There are no records to show
                                     </div>
                                   </div>

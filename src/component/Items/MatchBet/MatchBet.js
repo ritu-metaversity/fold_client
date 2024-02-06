@@ -96,7 +96,6 @@ function MatchBet(props) {
                   Object.keys(matchBet?.data).map((key) => (
                     <>
                       {matchBet?.data[key].map((item, id) => {
-                        console.log(item, "fefwerwerwerw")
                         return (
                           <tr key={id} className={`${item?.back === true ? "back" :"lay"}`}>
                             <td className={`${item?.back === true ? "back" :"lay"}`}>{item?.nation}</td>

@@ -34,8 +34,29 @@ function Mobilenav({ casinoAllow }) {
       setActive(3);
     } else if (pathname === "/") {
       setActive(2);
-    }else if (pathname === "/instantWin") {
+    } else if (pathname === "/instantWin") {
       setActive(2);
+    } else if (pathname === "/m/60/casino") {
+      setActive(10);
+    } else if (pathname === "/m/54/casino") {
+      setActive(11);
+    } else if (pathname === "/m/52/casino") {
+      setActive(12);
+    } else if (pathname === "/m/61/casino") {
+      setActive(13);
+    } else if (pathname === "/m/53/casino") {
+      setActive(18);
+    } else if (pathname === "/m/51/casino") {
+      setActive(14);
+    } 
+    else if (pathname === "/m/55/casino") {
+      setActive(15);
+    }
+    else if (pathname === "/m/57/casino") {
+      setActive(16);
+    }
+    else if (pathname === "/instantWin") {
+      setActive(9);
     }
   }, [pathname]);
 
@@ -74,7 +95,7 @@ function Mobilenav({ casinoAllow }) {
             </Link>
           </li>
         )}
-        {(casinoAllow?.Qtech || localStorage.getItem("token") == null)&& (
+        {(casinoAllow?.Qtech || localStorage.getItem("token") == null) && (
           <>
             <li
               className={`nav-item ${Active === 3 ? "active2" : ""}`}
@@ -107,12 +128,68 @@ function Mobilenav({ casinoAllow }) {
             <li
               className={`nav-item ${Active === 9 ? "active2" : ""}`}
               onClick={(e) => handleClick(9, e)}>
-              <Link to="/instantWin" className="nav-link">
-              Instant Win
+              <Link to="/instantWin" className="nav-link navlink1">
+                Instant Win
               </Link>
             </li>
           </>
         )}
+        <li
+          className={`nav-item ${Active === 10 ? "active2" : ""}`}
+          onClick={(e) => handleClick(10, e)}>
+          <Link to="/m/60/casino" className="nav-link navlink1">
+            ANDAR BAHAR
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${Active === 11 ? "active2" : ""}`}
+          onClick={(e) => handleClick(11, e)}>
+          <Link to="/m/54/casino" className="nav-link navlink1">
+            AMAR AKBAR ANTHONY
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${Active === 12 ? "active2" : ""}`}
+          onClick={(e) => handleClick(12, e)}>
+          <Link to="/m/52/casino" className="nav-link navlink1">
+            20-20 DRAGON TIGER
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${Active === 13 ? "active2" : ""}`}
+          onClick={(e) => handleClick(13, e)}>
+          <Link to="/m/61/casino" className="nav-link navlink1">
+            1 DAY DRAGON TIGER
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${Active === 18 ? "active2" : ""}`}
+          onClick={(e) => handleClick(18, e)}>
+          <Link to="/m/53/casino" className="nav-link navlink1">
+            LUCKY 7 - B
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${Active === 14 ? "active2" : ""}`}
+          onClick={(e) => handleClick(14, e)}>
+          <Link to="/m/51/casino" className="nav-link navlink1">
+            20-20 Teenpatti
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${Active === 15 ? "active2" : ""}`}
+          onClick={(e) => handleClick(15, e)}>
+          <Link to="/m/55/casino" className="nav-link navlink1">
+            BOLLYWOOD TABLE
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${Active === 16 ? "active2" : ""}`}
+          onClick={(e) => handleClick(16, e)}>
+          <Link to="/m/57/casino" className="nav-link">
+            1 DAY TEENPATTI
+          </Link>
+        </li>
       </ul>
       <Outlet />
     </>

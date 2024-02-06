@@ -7,7 +7,6 @@ const SlotHome = ({ providerList }) => {
   const handelFantsy = (id, val, path) => {
     nav(`/${path}`, { state: { id: id, gameId: val } });
 
-    console.log(path, "path")
   };
 
   return (

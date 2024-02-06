@@ -27,7 +27,6 @@ const GameList = ({
   useEffect(() => {
     if(token !== null){
       GameAPI.SINGLE_USER_VALUE().then((res) => {
-        console.log(res?.data?.qtech, "res?.data?.supernowa");
         setSingleUserValue(res?.data?.qtech);
       });
     }

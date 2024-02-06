@@ -12,11 +12,6 @@ function GameHead({ SportId, matchLength }) {
     setActiveNavBar(val);
   };
 
- 
-
-  const stackValDesk = (val)=>{
-    stackValue(val)
-  }
   return (
     <>
       <div className="">

@@ -1,0 +1,14 @@
+.casino_tab{
+    justify-content: space-between;
+    background-color: #08c;
+}
+
+@media screen and (max-width: 800px) {
+    .rule_font{
+        font-size: 12px;
+        text-align: right;
+    }
+    .round_id{
+        font-size: 12px;
+    }
+}

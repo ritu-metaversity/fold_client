@@ -62,7 +62,6 @@ function GameDetail({ getStackValue }) {
   });
   // Stack Value Api
 
-  // console.log(sId, "sIdsId")
 
   useEffect(() => {
     GameAPI.Place_Bet().then((res) => {
@@ -337,7 +336,6 @@ function GameDetail({ getStackValue }) {
     UserAPI.WINNER_PNL({
       marketId: marketIdForPnl,
     }).then((res) => {
-      console.log(res, "Dasdasdasdasdsada")
       setWinnerData(res?.data || []);
     });
     const time = setInterval(() => {
