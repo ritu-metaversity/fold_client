@@ -130,13 +130,13 @@ export function WithdrawForm({
               ? undefined
               : "Bank name should contain atleast one alphabet."
             : err.noBank,
-        ifsc:
-          values.ifsc || values.withdrawType.toLowerCase() !== "bank"
-            ? values.ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) ||
-              values.withdrawType.toLowerCase() !== "bank"
-              ? undefined
-              : err.invalidIfsc
-            : err.noIfsc,
+        // ifsc:
+          // values.ifsc || values.withdrawType.toLowerCase() !== "bank"
+          //   ? values.ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) ||
+          //     values.withdrawType.toLowerCase() !== "bank"
+          //     ? undefined
+          //     : err.invalidIfsc
+          //   : err.noIfsc,
       };
 
       return Object.fromEntries(

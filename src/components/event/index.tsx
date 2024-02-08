@@ -205,7 +205,7 @@ const Event = () => {
 
   // const { lastMessage: oddsPnlLastMessage } = useWebSocket(
   //   `${
-  //     process.env.REACT_APP_ANKIT_SOCKET_BET
+  //     import.meta.env.VITE_ANKIT_SOCKET_BET
   //   }/enduserodd/${matchId}/${localStorage.getItem("token")}`,
   //   { shouldReconnect: (event: CloseEvent) => true }
   // );
@@ -221,7 +221,7 @@ const Event = () => {
 
   // const { lastMessage: fancyPnlLastMessage } = useWebSocket(
   //   `${
-  //     process.env.REACT_APP_ANKIT_SOCKET_BET
+  //     import.meta.env.VITE_ANKIT_SOCKET_BET
   //   }/enduserfancy/${matchId}/${localStorage.getItem("token")}`,
   //   { shouldReconnect: (event: CloseEvent) => true }
   // );

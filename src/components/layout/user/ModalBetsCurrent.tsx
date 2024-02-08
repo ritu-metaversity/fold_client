@@ -3,12 +3,12 @@ import CurrentBetTable from "../../currentBets/table";
 import { userServices } from "../../../utils/api/user/services";
 import { useEffect, useState } from "react";
 import { FilterCurrentBets } from "../../currentBets/types";
-import { betTypes } from "../../currentBets";
 import { Form } from "react-bootstrap";
 import Filter from "./Filter";
 import { columnCasino, columnSports } from "../../currentBets/columns";
 import { qTechServices } from "../../../utils/api/qTechGames/services";
 import GamePortal from "../../qTech/gamePortal/GamePortal";
+import { betTypes } from "../../../utils/constants";
 
 const CurrentBetsForModal = () => {
   const matches = useMediaQuery("(min-width:1280px)");

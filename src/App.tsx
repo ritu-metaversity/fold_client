@@ -185,8 +185,8 @@ function App() {
     }
   }, [isSignedIn]);
 
-  const authenticationHandler = useCallback(async () => {
-    if (isSignedIn && allocatedCasino["QTech"]?.active) {
+  const authenticationHandler = useCallback(async (force?:boolean) => {
+    if (isSignedIn && (allocatedCasino["QTech"]?.active||force)) {
       const { response } = await qTechServices.authentication();
       if (!!response && response?.data && response?.data?.access_token) {
         const { access_token } = response?.data;
@@ -194,6 +194,7 @@ function App() {
       }
     }
   }, [allocatedCasino, isSignedIn]);
+  
   const [footerData, setFooterData] = useState<FooterImageInterface>();
   useEffect(() => {
     const getFooterData = async () => {
@@ -289,7 +290,7 @@ function App() {
             response.data.find((item: CasinoAllocItem) => item.name === "QTech")
               .active
           ) {
-            authenticationHandler();
+            authenticationHandler(true);
           }
         }
       })();

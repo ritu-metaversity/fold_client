@@ -12,9 +12,9 @@ import CurrentBetTable from "./table";
 import { columnCasino, columnSports } from "./columns";
 import { Form } from "react-bootstrap";
 import { userServices } from "../../utils/api/user/services";
+import { betTypes } from "../../utils/constants";
 
 
-export const betTypes = ["none", "all", "back", "lay"];
 
 const CurrentBets = () => {
   const matches = useMediaQuery("(min-width:1280px)");

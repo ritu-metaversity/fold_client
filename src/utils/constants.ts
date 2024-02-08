@@ -25,3 +25,5 @@ export const colorHex = {
   gr2: "#03B37F52",
   gr1: "#03B37F",
 };
+
+export const betTypes = ["none", "all", "back", "lay"];

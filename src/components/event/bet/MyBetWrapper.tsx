@@ -14,7 +14,7 @@ const MyBetWrapper = ({ bets }: { bets: BetsInterface | null }) => {
 
   // const { lastMessage } = useWebSocket(
   //   `${
-  //     process.env.REACT_APP_ANKIT_SOCKET_BET
+  //     import.meta.env.VITE_ANKIT_SOCKET_BET
   //   }/chat/${matchId}/${localStorage.getItem("token")}`,
   //   { shouldReconnect: (event: CloseEvent) => true }
   // );

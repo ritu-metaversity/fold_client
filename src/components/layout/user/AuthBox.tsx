@@ -21,8 +21,6 @@ import { Form } from "react-bootstrap";
 import snackBarUtil from "../snackBarUtil";
 import { RegisterForm } from "./RegisterForm";
 import CustomizedDialogPassword from "./ResetPasswordDailog";
-import * as yup from "yup";
-import { error } from "console";
 
 export function AuthBox() {
   const theme = useTheme();

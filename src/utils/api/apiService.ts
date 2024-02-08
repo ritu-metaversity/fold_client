@@ -64,8 +64,8 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
   const baseURL = url.includes("http")
     ? ""
     : betfair
-    ? process.env.REACT_APP_BETFAIR_URL
-    : process.env.REACT_APP_API_URL;
+    ? import.meta.env.VITE_BETFAIR_URL
+    : import.meta.env.VITE_API_URL;
 
   try {
     config = {
