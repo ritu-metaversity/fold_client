@@ -224,13 +224,14 @@ const NewWithdraw = () => {
         setColorName("danger");
         setIsLoading(false);
         return false;
-      } else if (ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
-        setMessage("Enter Valid IFSC Code");
-        setErrorAlert(true);
-        setColorName("danger");
-        setIsLoading(false);
-        return false;
-      }
+      } 
+      // else if (ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
+      //   setMessage("Enter Valid IFSC Code");
+      //   setErrorAlert(true);
+      //   setColorName("danger");
+      //   setIsLoading(false);
+      //   return false;
+      // }
     } else if (withType === "PAYTM") {
       if (
         withCoinValue === "" ||

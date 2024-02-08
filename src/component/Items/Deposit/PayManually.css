@@ -76,7 +76,7 @@ p.lodder.depositLoading {
     opacity: 0.6;
     height: calc(100% - 86px);
     z-index: 1;
-    top: 144px;
+    /* top: 144px; */
 }
 
 

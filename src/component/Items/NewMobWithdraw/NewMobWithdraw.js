@@ -234,13 +234,14 @@ const NewMobWithdraw = () => {
         setColorName("danger");
         setIsLoading(false);
         return false;
-      } else if (ifsc?.match(/^[A-Z]{4}0[A-Z0-9]{6}$/) === null) {
-        setMessage("Enter Valid IFSC Code");
-        setErrorAlert(true);
-        setColorName("danger");
-        setIsLoading(false);
-        return false;
       }
+      //  else if (ifsc?.match(/^[A-Z]{4}0[A-Z0-9]{6}$/) === null) {
+      //   setMessage("Enter Valid IFSC Code");
+      //   setErrorAlert(true);
+      //   setColorName("danger");
+      //   setIsLoading(false);
+      //   return false;
+      // }
     } else if (withType === "PAYTM") {
       if (
         withCoinValue === "" ||
@@ -378,9 +379,12 @@ const NewMobWithdraw = () => {
       ) : (
         ""
       )}
-      <br/>
+      
        {saveDetailMessage ? (
+        <>
+        <br/>
         <AlertBtn className="savemessage" color={colorName} popupClose={popupClose} val={bankSaveMessage} />
+        </>
       ) : (
         ""
       )}
