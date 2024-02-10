@@ -820,13 +820,13 @@ const NewWithdraw = () => {
                               className="text-center bg_color_ch">
                               Status
                             </th>
-                            <th
+                            {/* <th
                               role="columnheader"
                               scope="col"
                               aria-colindex="6"
                               className="text-left bg_color_ch">
                               Action
-                            </th>
+                            </th> */}
                           </tr>
                         </thead>
 
@@ -891,7 +891,7 @@ const NewWithdraw = () => {
                                         {item.status}
                                       </p>
                                     </td>
-                                    <td
+                                    {/* <td
                                       aria-colindex="6"
                                       className={`text-left ${
                                         item.status === "Pending"
@@ -900,7 +900,7 @@ const NewWithdraw = () => {
                                       }`}
                                       onClick={() => handlePending(item?.id)}>
                                       <button className="canBtn">Cancel</button>
-                                    </td>
+                                    </td> */}
                                   </tr>
                                 </>
                               );

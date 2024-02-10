@@ -370,13 +370,13 @@ useEffect(()=>{
                               className="text-center">
                               Status
                             </th>
-                            <th
+                            {/* <th
                               role="columnheader"
                               scope="col"
                               aria-colindex="6"
                               className="text-left ">
                               Action
-                            </th>
+                            </th> */}
                           </tr>
                         </thead>
 
@@ -434,7 +434,7 @@ useEffect(()=>{
                                       >
                                       <p className={`${item.status === "Pending"? "pending": item.status === "APPROVED"? "approved": "rejected"}`}>{item.status}</p>
                                     </td>
-                                    <td
+                                    {/* <td
                                       aria-colindex="6"
                                       className={`text-left ${
                                         item.status === "Pending"
@@ -443,7 +443,7 @@ useEffect(()=>{
                                       }`}
                                       onClick={() => handlePending(item?.id)}>
                                       <button className="canBtn">Cancel</button>
-                                    </td>
+                                    </td> */}
                                   </tr>
                                 </>
                               );

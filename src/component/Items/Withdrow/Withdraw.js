@@ -334,13 +334,13 @@ const Withdraw = () => {
                           className="text-left ">
                           Status
                         </th>
-                        <th
+                        {/* <th
                           role="columnheader"
                           scope="col"
                           aria-colindex="6"
                           className="text-left ">
                           Action
-                        </th>
+                        </th> */}
                       </tr>
                     </thead>
 
@@ -402,7 +402,7 @@ const Withdraw = () => {
                                     {item.status}
                                   </p>
                                 </td>
-                                <td
+                                {/* <td
                                   aria-colindex="6"
                                   className={`text-left ${
                                     item.status === "Pending" ? "" : "d-none"
@@ -411,7 +411,7 @@ const Withdraw = () => {
                                   <button className="cancelBtnTd">
                                     Cancel
                                   </button>
-                                </td>
+                                </td> */}
                               </tr>
                             </>
                           );

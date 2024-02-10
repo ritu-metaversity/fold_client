@@ -835,13 +835,13 @@ const NewMobWithdraw = () => {
                               className="text-left bg_color_ch">
                               Status
                             </th>
-                            <th
+                            {/* <th
                               role="columnheader"
                               scope="col"
                               aria-colindex="6"
                               className="text-left bg_color_ch">
                               Action
-                            </th>
+                            </th> */}
                           </tr>
                         </thead>
 
@@ -904,7 +904,7 @@ const NewMobWithdraw = () => {
                                         {item.status}
                                       </p>
                                     </td>
-                                    <td
+                                    {/* <td
                                       aria-colindex="6"
                                       className={`text-left ${
                                         item.status === "Pending"
@@ -915,7 +915,7 @@ const NewMobWithdraw = () => {
                                       <button className="cancelBtnTd">
                                         Cancel
                                       </button>
-                                    </td>
+                                    </td> */}
                                   </tr>
                                 </>
                               );
