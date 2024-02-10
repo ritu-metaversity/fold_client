@@ -317,7 +317,8 @@ function App() {
   if (isSignedIn === null) {
     return <LoadingBallSvg />;
   }
-
+  console.log("version2");
+  
   return (
     <ThemeProvider theme={theme}>
       <Snackbar
