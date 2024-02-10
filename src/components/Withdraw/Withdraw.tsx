@@ -15,7 +15,7 @@ import { UserContext } from "../../App";
 const Withdraw = () => {
   const [withdrawList, setWithdrawList] = useState([]);
 
-  const [cancelWithdrawl, setCancelWithdrawl] = useState(0);
+  // const [cancelWithdrawl, setCancelWithdrawl] = useState(0);
 
   const nav = useNavigate();
   const getWithdrawList = async () => {
@@ -32,19 +32,19 @@ const Withdraw = () => {
     };
   }, []);
   const { user } = useContext(UserContext);
-  const handleSubmit = async () => {
-    if (cancelWithdrawl) {
-      const { response } = await userServices.cancelWithdrawlRequest(
-        cancelWithdrawl
-      );
-      if (response) {
-        setCancelWithdrawl(0);
-        getWithdrawList();
-      }
-    } else {
-      snackBarUtil.error("Please select the withdrawl request again.");
-    }
-  };
+  // const handleSubmit = async () => {
+  //   if (cancelWithdrawl) {
+  //     const { response } = await userServices.cancelWithdrawlRequest(
+  //       cancelWithdrawl
+  //     );
+  //     if (response) {
+  //       setCancelWithdrawl(0);
+  //       getWithdrawList();
+  //     }
+  //   } else {
+  //     snackBarUtil.error("Please select the withdrawl request again.");
+  //   }
+  // };
 
   useEffect(() => {
     if (user.userTypeInfo === 2) {
@@ -55,42 +55,9 @@ const Withdraw = () => {
   if (!user || user.userTypeInfo === 2) {
     return <></>;
   }
-  const handleClose = () => setCancelWithdrawl(0);
+  // const handleClose = () => setCancelWithdrawl(0);
   return (
     <HomeLayout>
-      <CustomizedDialog2
-        title="Cancel Request"
-        open={Boolean(cancelWithdrawl)}
-        handleClose={() => setCancelWithdrawl(0)}
-      >
-        <Typography my={2}>
-          Are you sure you want to cancel this request ??
-        </Typography>
-        <Grid container mt={5}>
-          <Grid item xs={6}></Grid>
-          <Grid item xs={3} p={1}>
-            <Button
-              fullWidth
-              variant="outlined"
-              color="error"
-              onClick={handleClose}
-            >
-              Close
-            </Button>
-          </Grid>
-          <Grid item xs={3} p={1}>
-            <Button
-              fullWidth
-              style={{ color: "white" }}
-              onClick={handleSubmit}
-              variant="contained"
-              color="secondary"
-            >
-              Submit
-            </Button>
-          </Grid>
-        </Grid>
-      </CustomizedDialog2>
       <Box
         sx={{
           textAlign: "left",
@@ -108,14 +75,14 @@ const Withdraw = () => {
             withdrawList.map((item: any) => {
               const newItem: any = { ...item };
               newItem.status = <StatusTypography status={item.status} />;
-              newItem.action = item.status === "Pending" && (
-                <Button
-                  variant="outlined"
-                  onClick={() => setCancelWithdrawl(item.id)}
-                >
-                  Cancel
-                </Button>
-              );
+              // newItem.action = item.status === "Pending" && (
+              //   <Button
+              //     variant="outlined"
+              //     onClick={() => setCancelWithdrawl(item.id)}
+              //   >
+              //     Cancel
+              //   </Button>
+              // );
               return newItem;
             }) || []
           }
