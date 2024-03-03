@@ -17,8 +17,8 @@ const WhatsAppBox = () => {
         </div>
         {footerData?.s_whatsapp?.link != null &&
         footerData?.s_whatsapp?.link != "" ? (
-          <Link
-            to={footerData?.s_whatsapp?.link}
+          <a
+            href={footerData?.s_whatsapp?.link}
             target="_blank"
             className="create-whatsapp-link"
           >
@@ -27,7 +27,7 @@ const WhatsAppBox = () => {
               {/* <i className="fab fa-whatsapp" /> */}
             </div>
             <div className="click-here">click here</div>
-          </Link>
+          </a>
         ) : (
           <div className="create-whatsapp-link">
             <div className="whatsapp-icon">
