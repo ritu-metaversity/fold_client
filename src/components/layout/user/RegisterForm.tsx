@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
 import * as yup from "yup";
 import { passwordRegex } from "../../../utils/regex";
+import WhatsAppBox from "./WhatsAppBox";
 
 // interface RegisterInterface {
 //   username?: string;
@@ -181,6 +182,7 @@ export function RegisterForm() {
         </Box>
       )}
       <Box bgcolor="black" borderRadius={2} p={2} mt={2}>
+        <WhatsAppBox />
         <form onSubmit={handleSubmit}>
           <Grid
             fontWeight={400}

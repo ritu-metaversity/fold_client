@@ -1,0 +1,100 @@
+.whatsapp-box {
+    /* background: #d5d5d5; */
+    padding: 8px;
+    border-radius: 8px;
+    /* max-width: 350px; */
+    width: 100%;
+    margin: 0 auto 5px;
+}
+.whatsapp-box a {
+    text-decoration: none;
+}
+.whatsapp-box>div:first-child {
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+.whatsapp-box>div:first-child span {
+    font-size: 14px;
+}
+.whatsapp-box>div:first-child h4 {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 8px;
+}
+.whatsapp-icon {
+    background-color: #25d366;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 24px;
+    width: 50px;
+    box-shadow: 0 0 3px #fff;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.whatsapp-icon img {
+    width: 100%;
+}
+.create-whatsapp-link .click-here {
+    background-color: #25d366;
+    color: #fff;
+    padding: 8px;
+    width: calc(100% - 45px);
+    margin-left: -5px;
+    height: auto;
+    line-height: normal;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+.create-whatsapp-link {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    cursor: pointer;
+}
+
+.create-account-seperator {
+    margin-top: 0;
+    position: relative;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.create-account-seperator::before {
+    position: absolute;
+    content: "";
+    background-color: #ddd;
+    width: 30px;
+    left: calc(50% - 41px);
+    height: 2px;
+    top: 50%;
+    transform: translateX(-50%);
+}
+.create-account-seperator::after {
+    position: absolute;
+    content: "";
+    background-color: #ddd;
+    width: 30px;
+    right: calc(50% - 64px);
+    height: 2px;
+    top: 50%;
+    transform: translateX(-50%);
+}
+.or_text{
+    margin: 15px auto;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.or_text div{
+    border:0.5px solid #ccc;
+    width: 80px;
+    margin: 5px 20px;
+}
