@@ -38,7 +38,7 @@ import { GameAPI } from "./apis/gameAPI";
 import CasinoMainPage from "./Casino_New/CasinoMainPage/CasinoMainPage";
 import CasinoResult from "./Casino_New/CasinoResult/CasinoResult";
 
-const RouteDesktop = () => {
+const RouteDesktop = ({ footerImage }) => {
   const [SportId, setSportId] = useState("");
   const [Errmessage, setErrMessege] = useState("");
   const [Statusmessage, setStatusmessage] = useState(false);
@@ -50,6 +50,8 @@ const RouteDesktop = () => {
   const { pathname } = useLocation();
 
   const id = pathname?.slice(13);
+
+  console.log(footerImage, "footerImagefooterImage");
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
@@ -219,7 +221,10 @@ const RouteDesktop = () => {
                   />
                 }
               />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route
+                path="/register"
+                element={<RegisterPage footerImage={footerImage} />}
+              />
               <Route
                 path="/inplay"
                 element={<InPlay casinoAllow={casinoAllow} />}
@@ -260,10 +265,8 @@ const RouteDesktop = () => {
               <Route path="/aura" element={<NewLunch />} />
               <Route path="/supernowa" element={<SuperNowa />} />
 
-
               {/* <Route path="/:id/casino" element={<CasinoMainPage />} />
               <Route path="/casinoresult/:id" element={<CasinoResult />} /> */}
-              
 
               <Route path="/profitloss" element={<ProfitLossHome />} />
 
@@ -311,15 +314,18 @@ const RouteDesktop = () => {
             </Routes>
           </div>
         </div>
-        {localStorage.getItem("token") == null && ItselfAllowed && (
-          <WhatsAppIcon top={whatsAppIconPosition.top} />
-        )}
+
         {pathname === "/login" ||
         pathname === "/register" ||
         pathname.includes("gamedetails") ? (
           ""
         ) : (
-          <FooterForMob ItselfAllowed={ItselfAllowed} />
+          <>
+            {localStorage.getItem("token") == null && ItselfAllowed && (
+              <WhatsAppIcon top={whatsAppIconPosition.top} />
+            )}
+            <FooterForMob ItselfAllowed={ItselfAllowed} />
+          </>
         )}
       </>
     </div>

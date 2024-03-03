@@ -208,7 +208,7 @@ a {
     background-color: #fff;
     border-radius: 8px;
     margin: 0 auto;
-    max-width: 300px;
+    /* min-width: 350px; */
     width: 100%;
     padding: 26px 16px 16px 16px;
 }

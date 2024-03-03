@@ -6,8 +6,9 @@ import { UserAPI } from "../../apis/UserAPI";
 import { api } from "../../apis/configs/axiosConfigs";
 import "./Register.css";
 import { CasinoApi } from "../../apis/CasinoApi";
+import WhatsAppBox from "../../desktopLayout/RegisterPage/WhatsAppBox";
 
-const Register = () => {
+const Register = ({footerImage}) => {
   const [password, setPassword] = useState(0);
   const [mobileNumber, setMobileNumber] = useState();
   const [UserName, setUserName] = useState("");
@@ -256,6 +257,7 @@ const Register = () => {
   const popupClose = (vl) => {
     setStatusVal(!vl);
   };
+
   return (
     <>
       <div className="wrapper login_main_section">
@@ -275,6 +277,8 @@ const Register = () => {
             <img src={logo} alt="" />
           </div>
           <div className="login-form">
+            <WhatsAppBox whatsapp={footerImage?.s_whatsapp}/>
+            <div class="create-account-seperator">OR</div>
             <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
               <div className="form-group mb-4">
                 <input
@@ -419,7 +423,7 @@ const Register = () => {
                 ""
               )}
 
-              <div className="form-group mb-0" style={{ marginTop: "12px" }}>
+              {/* <div className="form-group mb-0" style={{ marginTop: "12px" }}>
                 <Link
                   type="submit"
                   to="/"
@@ -427,7 +431,7 @@ const Register = () => {
                   <i className="ml-2 fa fa-sign-in rotateBtn"></i>
                   Back
                 </Link>
-              </div>
+              </div> */}
             </form>
           </div>
         </div>

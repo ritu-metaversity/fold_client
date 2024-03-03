@@ -6,8 +6,9 @@ import { api } from "../../apis/configs/axiosConfigs";
 import { UserAPI } from "../../apis/UserAPI";
 import "./RegisterPage.css";
 import { CasinoApi } from "../../apis/CasinoApi";
+import WhatsAppBox from "./WhatsAppBox";
 
-const RegisterPage = () => {
+const RegisterPage = ({footerImage}) => {
   const [password, setPassword] = useState(0);
   const [mobileNumber, setMobileNumber] = useState();
   const [UserName, setUserName] = useState("");
@@ -254,7 +255,10 @@ const RegisterPage = () => {
             REGISTER <FaHandPointDown />{" "}
             <i className="fas fa-hand-point-down"></i>
           </h4>
+
           {StatusVal === true ? <p className="error">{errorMsg}</p> : ""}
+          <WhatsAppBox  whatsapp={footerImage?.s_whatsapp}/>
+          <div class="create-account-seperator">OR</div>
           <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
             <div className="form-group mb-4">
               <input
@@ -398,12 +402,12 @@ const RegisterPage = () => {
               ""
             )}
 
-            <div className="form-group mb-0" style={{ marginTop: "12px" }}>
+            {/* <div className="form-group mb-0" style={{ marginTop: "12px" }}>
               <Link type="submit" to="/" className="btn btn-primary btn-block">
                 <i className="ml-2 fa fa-sign-in rotateBtn"></i>
                 Back
               </Link>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>

@@ -12,12 +12,16 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import RouteMobile from "./RouteMobile";
 import RouteDesktop from "./RouteDesktop";
 import { UserAPI } from "./apis/UserAPI";
+import { GameAPI } from "./apis/gameAPI";
+
 
 function App() {
   const nav = useNavigate();
   const { pathname } = useLocation();
 
   const [mobileRoutes, setMoileRoutes] = useState(true);
+  const [footerImage, setFooterImage] = useState({});
+
 
   useEffect(() => {
     if (window.innerWidth > 1000) {
@@ -44,11 +48,16 @@ function App() {
     });
   }, []);
 
-  console.log("dsfsfsdfsd12")
+
+  useEffect(() => {
+    GameAPI.FOOTER_IMAGESS().then((res) => {
+      setFooterImage(res?.data);
+    });
+  }, []);
 
   return (
     <div className="App">
-      {mobileRoutes === true ? <RouteDesktop /> : <RouteMobile />}
+      {mobileRoutes === true ? <RouteDesktop footerImage={footerImage}/> : <RouteMobile footerImage={footerImage}/>}
     </div>
   );
 }

@@ -42,7 +42,7 @@ import { GameAPI } from "./apis/gameAPI";
 import CasinoMainPage from "./Casino_New/CasinoMainPage/CasinoMainPage";
 import CasinoResult from "./Casino_New/CasinoResult/CasinoResult";
 
-const RouteMobile = () => {
+const RouteMobile = ({footerImage}) => {
   const { pathname } = useLocation();
   const [SportId, setSportId] = useState("");
   const [Errmessage, setErrMessege] = useState("");
@@ -208,13 +208,15 @@ const token = localStorage.getItem("token")
 
   const casinoAllow = {Aura: AuraData, Nowa: NowaData, Qtech: QtechData, Virtual: VirtualData, Sportbook: SportBookData}
 
+  
+
   return (
     <div>
       {" "}
       <>
         <Routes>
           <Route path="/m/login" element={ <Login Errmessage={Errmessage} Statusmessage={Statusmessage} />}/>
-          <Route path="/m/register" element={<Register />} />
+          <Route path="/m/register" element={<Register footerImage={footerImage}/>} />
           <Route exact path="/signup3" element={<Signup3 />} />
           <Route exact path="/signup1" element={<Signup1 />} />
           <Route exact path="/signup2" element={<Signup2 />} />
@@ -264,10 +266,15 @@ const token = localStorage.getItem("token")
           </Route>
           <Route path="*" element={<Login />} />
         </Routes>
+        
+        {pathname === "/login" || pathname === "/m/register" ? "" :
+        <>
         {
         (localStorage.getItem("token") == null && ItselfAllowed) &&  <WhatsAppIcon top={whatsAppIconPosition.top}/>
         }
-        {pathname === "/login" || pathname === "/m/register" ? "" : <FooterForMob  ItselfAllowed={ItselfAllowed}/>}
+         <FooterForMob  ItselfAllowed={ItselfAllowed}/>
+        </>
+         }
       </>
     </div>
   );
