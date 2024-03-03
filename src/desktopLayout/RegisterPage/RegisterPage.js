@@ -8,7 +8,7 @@ import "./RegisterPage.css";
 import { CasinoApi } from "../../apis/CasinoApi";
 import WhatsAppBox from "./WhatsAppBox";
 
-const RegisterPage = ({footerImage}) => {
+const RegisterPage = ({ footerImage }) => {
   const [password, setPassword] = useState(0);
   const [mobileNumber, setMobileNumber] = useState();
   const [UserName, setUserName] = useState("");
@@ -159,8 +159,8 @@ const RegisterPage = ({footerImage}) => {
         mobile: mobileNumber,
         userId: UserName,
         casinoComm: casinoComm,
-        fancyComm:fancyComm,
-        oddsComm:oddsComm
+        fancyComm: fancyComm,
+        oddsComm: oddsComm,
       })
         .then((res) => {
           const token = res?.token;
@@ -242,8 +242,6 @@ const RegisterPage = ({footerImage}) => {
       });
   };
 
- 
-
   return (
     <>
       <div className="login-wrapper">
@@ -257,8 +255,13 @@ const RegisterPage = ({footerImage}) => {
           </h4>
 
           {StatusVal === true ? <p className="error">{errorMsg}</p> : ""}
-          <WhatsAppBox  whatsapp={footerImage?.s_whatsapp}/>
-          <div class="create-account-seperator">OR</div>
+          {footerImage?.s_whatsapp?.link != null &&
+            footerImage?.s_whatsapp?.link != "" && (
+              <>
+                <WhatsAppBox whatsapp={footerImage?.s_whatsapp} />
+                <div class="create-account-seperator">OR</div>
+              </>
+            )}
           <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
             <div className="form-group mb-4">
               <input

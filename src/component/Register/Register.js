@@ -277,8 +277,13 @@ const Register = ({footerImage}) => {
             <img src={logo} alt="" />
           </div>
           <div className="login-form">
-            <WhatsAppBox whatsapp={footerImage?.s_whatsapp}/>
+            {
+              footerImage?.s_whatsapp?.link != null && footerImage?.s_whatsapp?.link != "" && <>
+              <WhatsAppBox whatsapp={footerImage?.s_whatsapp}/>
             <div class="create-account-seperator">OR</div>
+              </>
+            }
+            
             <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
               <div className="form-group mb-4">
                 <input
