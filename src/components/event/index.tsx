@@ -261,13 +261,13 @@ const Event = () => {
             ) => ({
               ...(fancyOddsSlower[element]
                 ? fancyOddsSlower[element].find(
-                    (odd: FancyOddsInterface & { marketId: string }) =>
-                      odd.sid
-                        ? odd.sid === single.sid
-                        : odd.marketId
+                  (odd: FancyOddsInterface & { marketId: string }) =>
+                    odd.sid
+                      ? odd.sid === single.sid
+                      : odd.marketId
                         ? odd.marketId === single.marketId
                         : false
-                  ) || {}
+                ) || {}
                 : {}),
               ...single,
             })
@@ -611,42 +611,55 @@ const Event = () => {
           {betSlip}
           {betDetails?.marketName === "Bookmaker"
             ? profits.Bookmaker?.filter(
-                (item) => item?.mid === betDetails?.marketId
-              ).map((profit) => <BetResult {...profit} />)
+              (item) => item?.mid === betDetails?.marketId
+            ).map((profit) => <BetResult {...profit} />)
             : betDetails?.marketName &&
-              profits.Odds[betDetails?.marketId]?.map((profit) => (
-                <BetResult {...profit} />
-              ))}
+            profits.Odds[betDetails?.marketId]?.map((profit) => (
+              <BetResult {...profit} />
+            ))}
         </CustomizedDialog2>
 
-        {fancyOdds.Odds?.filter((i: any) => i.Name === "Match Odds").map(
-          matchOddMapCallback
-        )}
+        {
+          window.location.hostname.includes("onlysession.in") ? null : <>
+            {/* Match Odds Section */}
+            {fancyOdds.Odds?.filter((i: any) => i.Name === "Match Odds").map(
+              matchOddMapCallback
+            )}
 
-        {fancyOdds["Bookmaker"].find(
-          (i: FancyOddsInterface) => i.t !== "TOSS"
-        ) &&
-          bookmakerMapCallback(
-            fancyOdds.Bookmaker.filter(
-              (odd: FancyOddsInterface) => odd.t !== "TOSS"
-            ),
-            undefined
-          )}
+            {/* Bookmaker Section */}
 
-        {fancyOdds.Odds?.filter(
-          (i: any) => !["Match Odds"].includes(i.Name)
-        ).map(matchOddMapCallback)}
+            {fancyOdds["Bookmaker"].find(
+              (i: FancyOddsInterface) => i.t !== "TOSS"
+            ) &&
+              bookmakerMapCallback(
+                fancyOdds.Bookmaker.filter(
+                  (odd: FancyOddsInterface) => odd.t !== "TOSS"
+                ),
+                undefined
+              )}
 
-        {fancyOdds["Bookmaker"] &&
-          fancyOdds.Bookmaker.find(
-            (odd: FancyOddsInterface) => odd.t === "TOSS"
-          ) &&
-          bookmakerMapCallback(
-            fancyOdds.Bookmaker.filter(
-              (odd: FancyOddsInterface) => odd.t === "TOSS"
-            ),
-            "toss"
-          )}
+            {/* Toss and Tied Section */}
+
+            {fancyOdds.Odds?.filter(
+              (i: any) => !["Match Odds"].includes(i.Name)
+            ).map(matchOddMapCallback)}
+
+            {fancyOdds["Bookmaker"] &&
+              fancyOdds.Bookmaker.find(
+                (odd: FancyOddsInterface) => odd.t === "TOSS"
+              ) &&
+              bookmakerMapCallback(
+                fancyOdds.Bookmaker.filter(
+                  (odd: FancyOddsInterface) => odd.t === "TOSS"
+                ),
+                "toss"
+              )}
+          </>
+        }
+
+
+
+        {/* Fancy Section */}
         {/* accordians for fancy with values */}
         {Object.keys(fancyOdds).map((fancyMarket: any) => {
           if (["Odds", "Bookmaker"].includes(fancyMarket)) return <></>;
