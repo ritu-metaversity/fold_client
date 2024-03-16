@@ -49,6 +49,7 @@ const Filter = ({
     setPageSize(Number(e.target.value));
     setSearchFilters({ ...searchFilters, pageSize: Number(e.target.value) });
   };
+  const host = window.location.hostname;
   return (
     <Box py={{ xs: 1, md: 2, lg: 1 }}>
       <form onSubmit={handleSubmit}>
@@ -109,18 +110,21 @@ const Filter = ({
             >
               Sports
             </CategoryTabs>
-            <CategoryTabs
-              onClick={() =>
-                setSearchFilters({ ...searchFilters, category: 2 })
-              }
-              sx={
-                searchFilters.category === 2
-                  ? { borderBottom: "2px solid #AAAFB5", fontWeight: "600" }
-                  : {}
-              }
-            >
-              Casino
-            </CategoryTabs>
+            {
+              host.includes("onlysession.in") ? null : <CategoryTabs
+                onClick={() =>
+                  setSearchFilters({ ...searchFilters, category: 2 })
+                }
+                sx={
+                  searchFilters.category === 2
+                    ? { borderBottom: "2px solid #AAAFB5", fontWeight: "600" }
+                    : {}
+                }
+              >
+                Casino
+              </CategoryTabs>
+            }
+
           </CurrentBetCategoryTabsContainer>
         </Grid>
         <Box

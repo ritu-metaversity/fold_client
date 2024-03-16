@@ -638,24 +638,26 @@ const Event = () => {
                 undefined
               )}
 
-            {/* Toss and Tied Section */}
-
-            {fancyOdds.Odds?.filter(
-              (i: any) => !["Match Odds"].includes(i.Name)
-            ).map(matchOddMapCallback)}
-
-            {fancyOdds["Bookmaker"] &&
-              fancyOdds.Bookmaker.find(
-                (odd: FancyOddsInterface) => odd.t === "TOSS"
-              ) &&
-              bookmakerMapCallback(
-                fancyOdds.Bookmaker.filter(
-                  (odd: FancyOddsInterface) => odd.t === "TOSS"
-                ),
-                "toss"
-              )}
           </>
         }
+
+        {/* Toss and Tied Section */}
+
+        {window.location.hostname.includes("onlysession.in") ? null : fancyOdds.Odds?.filter(
+          (i: any) => !["Match Odds"].includes(i.Name)
+        ).map(matchOddMapCallback)}
+
+        {fancyOdds["Bookmaker"] &&
+          fancyOdds.Bookmaker.find(
+            (odd: FancyOddsInterface) => odd.t === "TOSS"
+          ) &&
+          bookmakerMapCallback(
+            fancyOdds.Bookmaker.filter(
+              (odd: FancyOddsInterface) => odd.t === "TOSS"
+            ),
+            "toss"
+          )}
+
 
 
 

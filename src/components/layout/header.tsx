@@ -66,6 +66,7 @@ export default function Header(props: Props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const host = window.location.hostname;
   const { pathname } = useLocation();
   const { isSignedIn, allocatedCasino, appData, user, setModal } =
     React.useContext(UserContext);
@@ -90,7 +91,11 @@ export default function Header(props: Props) {
           zIndex: 100,
         }}
       >
-        {linkAndLabel.map((item, index) => (
+        {linkAndLabel.map((item, index) => {
+          if(host.includes("onlysession.in")){
+            if(item?.label !== "Exchange") return null
+          }
+          return(
           <>
             <TopNavLinks
               onClick={(e) => {
@@ -111,9 +116,9 @@ export default function Header(props: Props) {
             >
               {item.label}
             </TopNavLinks>
-            {isSignedIn && index + 1 !== linkAndLabel.length && <Circle />}
+            {host.includes("onlysession.in")?null: isSignedIn && index + 1 !== linkAndLabel.length && <Circle />}
           </>
-        ))}
+        )})}
 
         {/* <TopNavLinks
           onClick={(e) => {

@@ -24,6 +24,8 @@ export function ScrollableTabsButtonVisible({
   };
 
   const matches = useMediaQuery("(min-width:1280px)");
+  const host =  window.location.hostname;
+        
   return (
     <Box
       sx={{
@@ -64,7 +66,11 @@ export function ScrollableTabsButtonVisible({
           iconPosition={matches ? "start" : "top"}
           sx={{ bgcolor: 0 === value ? "gray" : "" }}
         />
-        {sports.map((s) => (
+        {sports.map((s) => {
+          if(host?.includes("onlysession.in")){
+            if(s.name !== "Cricket") return null
+          }
+          return(
           <TabStyled
             value={s.sportId}
             label={s.name}
@@ -73,7 +79,7 @@ export function ScrollableTabsButtonVisible({
             iconPosition={matches ? "start" : "top"}
             sx={{ bgcolor: s.sportId === value ? color : "" }}
           />
-        ))}
+        )})}
       </Tabs>
     </Box>
   );

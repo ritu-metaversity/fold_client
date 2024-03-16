@@ -30,6 +30,8 @@ const InPlaySidebar = () => {
     }
   };
 
+  const host = window.location.hostname;
+
   useEffect(() => {
     const getMatches = async () => {
       const { response } = await sportServices.allActiveEvent();
@@ -97,7 +99,12 @@ const InPlaySidebar = () => {
         </ListItemButton>
       </ListItem>
       <Collapse in={open}>
-        {activeMatches.map((match) => (
+        {activeMatches.map((match) => 
+        {
+          if(host.includes("onlysession.in")){
+            if(match.sportId != "4") return null
+          }
+          return(
           <ListItem key={match.matchId} disablePadding>
             <ListItemButton
               onClick={() =>
@@ -121,7 +128,8 @@ const InPlaySidebar = () => {
               />
             </ListItemButton>
           </ListItem>
-        ))}
+        )}
+        )}
       </Collapse>
     </div>
   );

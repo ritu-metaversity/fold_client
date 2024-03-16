@@ -31,13 +31,16 @@ const Home = () => {
 
   useEffect(() => {
     getBannerList();
-
     return () => {};
   }, []);
 
+  const host = window.location.hostname;
+
   const homeRightMenu = useMemo(
     () => (
-      <BoxWithTitle title="Our Casino">
+      <>
+      {
+        host.includes("onlysession.in") ? null : <BoxWithTitle title="Our Casino">
         <Box
           maxHeight={"calc(100vh - 135px)"}
           minHeight={"calc(100vh - 135px)"}
@@ -76,19 +79,27 @@ const Home = () => {
           </Slider>
         </Box>
       </BoxWithTitle>
+      }
+      
+      </>
     ),
     [sideBanner, isSignedIn]
   );
 
+
+
   return (
     <HomeLayout sideWidth={250} sideWidthXl={300} rightMenu={homeRightMenu}>
       {/* {!isSignedIn && */}
-      <Hero />
+     {window.location.hostname.includes("onlysession.in") ? null : <Hero />}
       {/* } */}
       <ButtonTabs />
       <Sports />
       {/* <TopCasinoHero sideBanner={sideBanner} /> */}
-      <AllProviderName />
+      {
+        window.location.hostname.includes("onlysession.in") ? null : <AllProviderName />
+      }
+      
     </HomeLayout>
   );
 };

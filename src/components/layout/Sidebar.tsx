@@ -100,7 +100,7 @@ const Sidebar = (props: Props) => {
           <>{sideBar}</>
         ) : (
           <Drawers handleDrawerToggle={props.handleDrawerToggle} />
-        )}
+        )} 
         {/* {drawer} */}
       </Drawer>
     </Box>

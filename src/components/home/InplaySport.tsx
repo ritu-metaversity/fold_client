@@ -42,8 +42,9 @@ const InplaySport = () => {
     };
 
     getMatches();
-    return () => {};
+    return () => { };
   }, []);
+  const host = window.location.hostname;
   return (
     <Box
       maxHeight={{ xs: "310px", lg: "100%" }}
@@ -64,32 +65,37 @@ const InplaySport = () => {
           <Loading />
         </Box>
       ) : activeMatches.length > 0 ? (
-        activeMatches.map((sport) => (
-          <>
-            <SportHeader
-              color={sport.color}
-              name={sport.name}
-              iconClass={sport.iconClass}
-            />
-            <Box
-            // maxHeight={{ xs: "310px", lg: "100%" }}
-            // // minHeight={{ lg: "calc(100vh - 440px)" }}
-            // sx={{
-            //   overflowY: "overlay",
-            //   overflowX: "hidden",
-            //   p: { xs: 0.5, lg: 0 },
-            // }}
-            >
-              {sport.matchList?.map((item) => (
-                <Match
-                  key={"sportlist" + item?.matchId}
-                  sportId={sport?.sportid?.toString()}
-                  matches={item}
-                />
-              ))}
-            </Box>
-          </>
-        ))
+        activeMatches.map((sport) => {
+          if(host?.includes("onlysession.in")){
+            if(sport?.sportid !== 4) return null
+          }
+          return (
+            <>
+              <SportHeader
+                color={sport.color}
+                name={sport.name}
+                iconClass={sport.iconClass}
+              />
+              <Box
+              // maxHeight={{ xs: "310px", lg: "100%" }}
+              // // minHeight={{ lg: "calc(100vh - 440px)" }}
+              // sx={{
+              //   overflowY: "overlay",
+              //   overflowX: "hidden",
+              //   p: { xs: 0.5, lg: 0 },
+              // }}
+              >
+                {sport.matchList?.map((item) => (
+                  <Match
+                    key={"sportlist" + item?.matchId}
+                    sportId={sport?.sportid?.toString()}
+                    matches={item}
+                  />
+                ))}
+              </Box>
+            </>
+          )
+        })
       ) : (
         <BoxWithTitleBox>No Data Found</BoxWithTitleBox>
       )}

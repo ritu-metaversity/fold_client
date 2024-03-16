@@ -98,6 +98,8 @@ export function ButtonTabs() {
   const linksAndLabel = isSignedIn
     ? getLinksAndLabels(allocatedCasino)
     : LinksAndLabels;
+
+    const host = window.location.hostname;
   return (
     <Box
       width={"calc(100% - 8px)"}
@@ -116,7 +118,9 @@ export function ButtonTabs() {
         color="secondary"
         variant="contained"
       >
-        {linksAndLabel.map((item) => (
+        {linksAndLabel.map((item) => {if(host.includes("onlysession.in")){
+            if(item?.label !== "Exchange") return null
+          }return(
           <ButtonTabStyledButton
             onClick={() => {
               if (isSignedIn) {
@@ -130,7 +134,7 @@ export function ButtonTabs() {
           >
             {item.label}
           </ButtonTabStyledButton>
-        ))}
+        )})}
         {/* <Button
           onClick={() => {
             if (isSignedIn) {

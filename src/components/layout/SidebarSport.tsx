@@ -49,8 +49,8 @@ const SidebarSport = () => {
               onClick={() =>
                 isSignedIn
                   ? nav(
-                      `/sports/details/?match-id=${match.matchId}&sport-id=${sport.sportId}`
-                    )
+                    `/sports/details/?match-id=${match.matchId}&sport-id=${sport.sportId}`
+                  )
                   : openLoginModal()
               }
               sx={{
@@ -72,6 +72,8 @@ const SidebarSport = () => {
     [activeEventList, isSignedIn]
   );
 
+  const host = window.location.hostname;
+
   return (
     <>
       <SidebarHeader
@@ -91,67 +93,73 @@ const SidebarSport = () => {
       </SidebarHeader>
       <Collapse in={open[0]}>
         <InPlaySidebar />
-        {activeEventList?.map((sport, index) => (
-          <React.Fragment key={sport.sportId + index}>
-            <ListItem
-              sx={{
-                p: 0,
-                gap: 0,
-                bgcolor: matchCollapse[index]
-                  ? sportsTabList.find(
+        {activeEventList?.map((sport, index) => {
+          if(host.includes("onlysession.in")){
+            if(sport?.sportId !== 4) return null
+          }
+          return (
+            <React.Fragment key={sport.sportId + index}>
+              <ListItem
+                sx={{
+                  p: 0,
+                  gap: 0,
+                  bgcolor: matchCollapse[index]
+                    ? sportsTabList.find(
                       (sItem) => sItem.name === sport.sportName
                     )?.color
-                  : "",
-              }}
-              key={sport.sportId + sport.totalMatch}
-              disablePadding
-            >
-              <ListItemButton
-                onClick={() => handleClickSport(index)}
-                sx={{
-                  color: matchCollapse[index] ? "white" : "text.secondary",
+                    : "",
                 }}
+                key={sport.sportId + sport.totalMatch}
+                disablePadding
               >
-                <ListItemIcon
+                <ListItemButton
+                  onClick={() => handleClickSport(index)}
                   sx={{
-                    minWidth: 30,
+                    color: matchCollapse[index] ? "white" : "text.secondary",
                   }}
                 >
-                  {
-                    <i
-                      className={
-                        sportsTabList.find(
-                          (sItem) => sItem.name === sport.sportName
-                        )?.iconClass
-                      }
-                      style={{
-                        color: matchCollapse[index]
-                          ? "white"
-                          : sportsTabList.find(
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 30,
+                    }}
+                  >
+                    {
+                      <i
+                        className={
+                          sportsTabList.find(
+                            (sItem) => sItem.name === sport.sportName
+                          )?.iconClass
+                        }
+                        style={{
+                          color: matchCollapse[index]
+                            ? "white"
+                            : sportsTabList.find(
                               (sItem) => sItem.name === sport.sportName
                             )?.color,
-                      }}
-                    />
-                  }
-                </ListItemIcon>
-                <ListItemText
-                  primaryTypographyProps={{
-                    sx: {
-                      fontSize: "0.8rem",
-                    },
-                  }}
-                  primary={`${sport.sportName} ( ${sport.totalMatch} )`}
-                />
-                {matchCollapse[index] ? (
-                  <ExpandLess fontSize="small" />
-                ) : (
-                  <ExpandMore fontSize="small" />
-                )}
-              </ListItemButton>
-            </ListItem>
-            <Collapse in={matchCollapse[index]}>{matchList[index]}</Collapse>
-          </React.Fragment>
-        ))}
+                        }}
+                      />
+                    }
+                  </ListItemIcon>
+                  <ListItemText
+                    primaryTypographyProps={{
+                      sx: {
+                        fontSize: "0.8rem",
+                      },
+                    }}
+                    primary={`${sport.sportName} ( ${sport.totalMatch} )`}
+                  />
+                  {matchCollapse[index] ? (
+                    <ExpandLess fontSize="small" />
+                  ) : (
+                    <ExpandMore fontSize="small" />
+                  )}
+                </ListItemButton>
+              </ListItem>
+              <Collapse in={matchCollapse[index]}>{matchList[index]}</Collapse>
+            </React.Fragment>
+          )
+        }
+        )}
       </Collapse>
     </>
   );

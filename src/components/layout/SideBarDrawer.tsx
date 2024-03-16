@@ -40,6 +40,8 @@ export const Drawers = ({
   //     ]);
   // }, [activeEventList]);
 
+  const host = window.location.hostname;
+
   const nav = useNavigate();
   const showSideCasino = useMemo(
     () =>
@@ -129,7 +131,7 @@ export const Drawers = ({
               />
             </ListItemButton>
           </SidebarHeader>
-          {showSideCasino && (
+          {host.includes("onlysession.in")? null : showSideCasino && (
             <SidebarHeader
               sx={{
                 borderBottom: "1px solid " + colorHex.borderLine,
