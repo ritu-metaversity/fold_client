@@ -22,7 +22,7 @@ export const casinoProviderList: ProviderInterface[] = [
   {
     name: "Q Tech",
     customFilter: true,
-    logo: "https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/QTECH.png",
+    logo: "https://admin-api-banners-2.s3.ap-south-1.amazonaws.com/logos/QTECH.jpeg",
     filterType: "QTech-Lobby",
     type: "custom",
   },

@@ -115,7 +115,7 @@ export const AllCasinoProviderName: AllCasinoProviderNameType = {
     },
     {
       name: "Q Tech",
-      logo: "https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/QTECH.png",
+      logo: "https://admin-api-banners-2.s3.ap-south-1.amazonaws.com/logos/QTECH.jpeg",
       gameCode: "QTech-Lobby",
       PageUrl: "/livecasino",
       filter: "LIVECASINO",
