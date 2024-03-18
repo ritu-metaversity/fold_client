@@ -664,7 +664,13 @@ const Event = () => {
         {/* Fancy Section */}
         {/* accordians for fancy with values */}
         {Object.keys(fancyOdds).map((fancyMarket: any) => {
-          if (["Odds", "Bookmaker"].includes(fancyMarket)) return <></>;
+          if (window.location.hostname.includes("onlysession.in")) {
+            if (["Odds", "Bookmaker", "OddEven", "Fancy3"].includes(fancyMarket)) return <></>;
+
+          } else {
+
+            if (["Odds", "Bookmaker"].includes(fancyMarket)) return <></>;
+          }
           if (fancyOdds[fancyMarket]?.length > 0)
             return (
               <CustomizedAccordions

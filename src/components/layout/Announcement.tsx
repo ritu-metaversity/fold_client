@@ -5,6 +5,7 @@ import { UserContext } from "../../App";
 import { AnnouncementBox, SpeakerIcon } from "./styledComponents";
 export function Announcement() {
   const { announcement, isSignedIn } = useContext(UserContext);
+  const host = window.location.hostname;
   return (
     <AnnouncementBox isSignedIn={!!isSignedIn}>
       <Marquee
@@ -12,7 +13,7 @@ export function Announcement() {
         speed={50}
         style={{ overflow: "hidden", color: "white", fontSize: "0.8rem" }}
       >
-        {announcement}
+        {host?.includes("onlysession.in")?<span><b style={{marginLeft:"12px"}}>Radhe Radhe</b> Welcomes You All to OnlySession Wish You All The Best.</span> :announcement}
       </Marquee>
       <SpeakerIcon alt="" src={"/assets/images/speaker.svg"} />
     </AnnouncementBox>

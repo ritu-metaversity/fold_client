@@ -13,7 +13,7 @@ export interface GameDataInterface {
 export const data: ProviderInterface[] = [
   {
     name: "Aviator",
-    logo: "https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/AVIATOR.png",
+    logo: "https://sitethemedata.com/casino_icons/fantasy/aviator.png",
     filterType: "SPB",
   },
   {
