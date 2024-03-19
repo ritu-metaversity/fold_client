@@ -255,7 +255,7 @@ const RegisterPage = ({ footerImage }) => {
           </h4>
 
           {StatusVal === true ? <p className="error">{errorMsg}</p> : ""}
-          {footerImage?.s_whatsapp?.link != null &&
+          {footerImage?.s_whatsapp?.link  &&
             footerImage?.s_whatsapp?.link != "" && (
               <>
                 <WhatsAppBox whatsapp={footerImage?.s_whatsapp} />

@@ -11,15 +11,16 @@ const WhatsAppBox = ({ whatsapp }) => {
           <h4>Get your instant ID from whatsapp</h4>
         </div>
 
-        <Link
-          to={whatsapp?.link}
+        <a
+          href={whatsapp?.link}
           target="_blank"
+          rel="noreferrer"
           className="create-whatsapp-link">
           <div className="whatsapp-icon">
             <i className="fab fa-whatsapp" />
           </div>
           <div className="click-here">click here</div>
-        </Link>
+        </a>
       </div>
     </>
   );
