@@ -12,6 +12,7 @@ import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
 import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 import { CasinoApi } from "../../apis/CasinoApi";
+import LatestEvent from "../../common/LatestEvent";
 
 const InPlay = ({ casinoAllow }) => {
   const [gameName, setGameName] = useState("");
@@ -72,6 +73,8 @@ const InPlay = ({ casinoAllow }) => {
 
   return (
     <div className="main">
+        <LatestEvent iplPath="/gamedetail/28127348" elePath="/gamedetail/1706456690"/>
+
       <div className="container-fluid container-fluid-5">
         <div className="row itemHome">
           <div className="header-btm">

@@ -8,6 +8,7 @@ import LotteryHome from "../../CasinoHome/LotteryHome";
 import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 import Slot from "../../component/Items/Slot/Slot";
 import { CasinoApi } from "../../apis/CasinoApi";
+import LatestEvent from "../../common/LatestEvent";
 
 function ItemPageForHome({ casinoAllow }) {
   const [providerList, setProviderList] = useState({})
@@ -25,6 +26,8 @@ function ItemPageForHome({ casinoAllow }) {
     <div className="main">
       <div className="container-fluid container-fluid-5">
         <div className="row itemHome">
+        <LatestEvent iplPath="/gamedetail/28127348" elePath="/gamedetail/1706456690"/>
+
           <DeskMainPage />
           {(casinoAllow?.Aura || token === null) && <NewLunch />}
           {(casinoAllow?.Nowa || token === null) && <SuperNowaHome path={"/supernowa"} />}

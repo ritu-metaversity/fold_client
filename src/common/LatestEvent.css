@@ -3,7 +3,6 @@
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
         overflow-y: hidden !important;
-        justify-content: flex-start !important;
         margin-bottom: 0 !important;
         white-space: nowrap !important;
         background-color: #0088cc !important;
@@ -26,7 +25,6 @@
     background: #0088cc;
     background-color: transparent;
     padding: 0;
-    align-items: flex-start;
 }
 
 .latest-event-item {
@@ -72,8 +70,8 @@
     margin-left: 5px;
     white-space: nowrap;
     height: auto;
-    max-width: calc(100% - 42px);
-    width: 100%;
+    /* max-width: calc(100% - 42px); */
+    /* width: 100%; */
     text-overflow: ellipsis;
     overflow: hidden;
 }

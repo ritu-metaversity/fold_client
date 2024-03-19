@@ -244,6 +244,7 @@ const RouteDesktop = ({ footerImage }) => {
               <Route path="/Football" element={<HomePage />} />
               <Route path="/Kabaddi" element={<HomePage />} />
               <Route path="/horseracing" element={<HomePage />} />
+              <Route path="/Election" element={<HomePage />} />
               {/* <Route path="/casino/:id" element={<CasinoForDesk />} /> */}
               <Route
                 path="/livecasino"

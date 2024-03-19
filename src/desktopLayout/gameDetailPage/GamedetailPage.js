@@ -125,7 +125,7 @@ function GamedetailPage({ getStackValue, SportId }) {
       setMatchodd(res?.Odds);
       var matchData = res?.Odds[0];
       setETime(matchData);
-      setMatchDelatil(matchData?.runners);
+      setMatchDelatil(matchData);
     }
   };
 
@@ -438,8 +438,8 @@ function GamedetailPage({ getStackValue, SportId }) {
                   <>
                     <div className="game-heading desk_game_heading d-flex">
                       <div className="card-header-title">
-                        {matchDetail?.length && matchDetail[0]?.name} v{" "}
-                        {matchDetail?.length && matchDetail[1]?.name}
+                      
+                        {matchDetail?.matchName}
                       </div>{" "}
                       <div className="score_detail">
                         <div className="event_time">{eTime?.eventTime}</div>

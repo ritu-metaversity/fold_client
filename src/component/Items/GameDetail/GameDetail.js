@@ -102,7 +102,7 @@ function GameDetail({ getStackValue }) {
       setMatchodd(res?.Odds);
       var matchData = res?.Odds[0];
       setETime(matchData);
-      setMatchDelatil(matchData?.runners);
+      setMatchDelatil(matchData);
     }
   };
 
@@ -419,8 +419,8 @@ function GameDetail({ getStackValue }) {
               <div id="odds" className="tab-pane ">
                 <div className="match-title">
                   <span className="match-name">
-                    {matchDetail?.length && matchDetail[0]?.name} v{" "}
-                    {matchDetail?.length && matchDetail[1]?.name}
+                    
+                    {matchDetail?.matchName}
                   </span>{" "}
                   <span className="float-right">{eTime?.eventTime}</span>
                 </div>

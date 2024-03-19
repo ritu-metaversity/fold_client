@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import "../Nav.css";
+import LatestEvent from "../../../common/LatestEvent";
 
 function Mobilenav({ casinoAllow }) {
   const [Active, setActive] = useState(1);
@@ -62,6 +63,8 @@ function Mobilenav({ casinoAllow }) {
 
   return (
     <>
+        <LatestEvent iplPath="/m/gamedetail/28127348" elePath="/m/gamedetail/1706456690"/>
+
       <ul className="nav nav-tabs main-gameHead1 game-nav-bar">
         <li
           className={`nav-item ${Active === 1 ? "active2" : ""}`}

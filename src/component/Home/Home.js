@@ -3,6 +3,8 @@ import Item from "../item/Item";
 import TopNav from "../navBar/TopNav";
 import BannerList from "../BannerSection/BannerList";
 import FooterForMob from "../FooterForMob/FooterForMob";
+import NewEvent from "../NewEvent";
+import LatestEvent from "../../common/LatestEvent";
 
 function Home(props) {
 
