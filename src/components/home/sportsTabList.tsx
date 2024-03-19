@@ -79,4 +79,9 @@ export const sportsTabList = [
     iconClass: "d-icon icon-19",
     color: "#3D2B58",
   },
+  {
+    name: "Election",
+    iconClass: "d-icon icon-772",
+    color: "#3D2B58",
+  },
 ];
