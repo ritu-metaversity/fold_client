@@ -1,0 +1,86 @@
+/* .header-b-menu{
+    background-color: #666;
+    padding: 5px;
+}
+.header-b-menu a{
+   text-decoration: unset;
+   color: #fff;
+   font-weight: 600;
+   text-transform: uppercase;
+} */
+
+.new-event {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 0 6px 0;
+}
+
+.new-event .new-event-item {
+    flex: 1;
+    max-width: 100%;
+    background-image: url(/assets/images/wave2.svg);
+    background-position: center bottom;
+    min-width: calc(20% - 10px);
+    margin: 0 5px;
+    border-radius: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.sport4, .sport4:hover, .sport4:focus, .sport4:active {
+    background-color: red !important;
+}
+
+.new-event .new-event-item .link_div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #fff;
+    width: 100%;
+    text-decoration: unset;
+}
+.new-event .new-event-item .link_div span {
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 3px;
+}
+
+
+.sport2, .sport2:hover, .sport2:focus, .sport2:active {
+    background-color: #f18521 !important;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1279px){
+.new-event {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+.new-event .new-event-item {
+    padding: 9px;
+    background-repeat: repeat;
+    background-size: contain;
+    min-width: calc(40% - 10px);
+    margin: 0 2px;
+}
+.new-event span {
+    font-size: 12px;
+    line-height: normal;
+}
+.new-event .new-event-item .link_div span {
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 3px;
+}
+}

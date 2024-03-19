@@ -14,6 +14,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 import AllProviderName from "./AllProviderName";
+import TopHeader from "./TopHeader";
 
 const Home = () => {
   const nav = useNavigate();
@@ -31,7 +32,7 @@ const Home = () => {
 
   useEffect(() => {
     getBannerList();
-    return () => {};
+    return () => { };
   }, []);
 
   const host = window.location.hostname;
@@ -39,48 +40,48 @@ const Home = () => {
   const homeRightMenu = useMemo(
     () => (
       <>
-      {
-        host.includes("onlysession.in") ? null : <BoxWithTitle title="Our Casino">
-        <Box
-          maxHeight={"calc(100vh - 135px)"}
-          minHeight={"calc(100vh - 135px)"}
-          sx={{
-            scrollBehavior: "smooth",
-            "&::-webkit-scrollbar": {
-              width: "0em",
-            },
-          }}
-        >
-          <Slider
-            vertical
-            infinite
-            swipeToSlide={true}
-            pauseOnHover={false}
-            pauseOnFocus={false}
-            adaptiveHeight
-            slidesToShow={3}
-            autoplaySpeed={5000}
-            autoplay
-            arrows={false}
-            slidesToScroll={4}
-          >
-            {sideBanner.map((banner, index) => (
-              <BlinkImage
-                onClick={() => {
-                  isSignedIn
-                    ? nav("/livecasino/" + banner.clickUrl)
-                    : setModal && setModal({ login: true });
-                }}
-                key={index}
-                src={banner.path}
-                alt={banner.name}
-              />
-            ))}
-          </Slider>
-        </Box>
-      </BoxWithTitle>
-      }
-      
+        {
+          host.includes("onlysession.in") ? null : <BoxWithTitle title="Our Casino">
+            <Box
+              maxHeight={"calc(100vh - 135px)"}
+              minHeight={"calc(100vh - 135px)"}
+              sx={{
+                scrollBehavior: "smooth",
+                "&::-webkit-scrollbar": {
+                  width: "0em",
+                },
+              }}
+            >
+              <Slider
+                vertical
+                infinite
+                swipeToSlide={true}
+                pauseOnHover={false}
+                pauseOnFocus={false}
+                adaptiveHeight
+                slidesToShow={3}
+                autoplaySpeed={5000}
+                autoplay
+                arrows={false}
+                slidesToScroll={4}
+              >
+                {sideBanner.map((banner, index) => (
+                  <BlinkImage
+                    onClick={() => {
+                      isSignedIn
+                        ? nav("/livecasino/" + banner.clickUrl)
+                        : setModal && setModal({ login: true });
+                    }}
+                    key={index}
+                    src={banner.path}
+                    alt={banner.name}
+                  />
+                ))}
+              </Slider>
+            </Box>
+          </BoxWithTitle>
+        }
+
       </>
     ),
     [sideBanner, isSignedIn]
@@ -91,7 +92,8 @@ const Home = () => {
   return (
     <HomeLayout sideWidth={250} sideWidthXl={300} rightMenu={homeRightMenu}>
       {/* {!isSignedIn && */}
-     {window.location.hostname.includes("onlysession.in") ? null : <Hero />}
+      {window.location.hostname.includes("onlysession.in") ? null : <TopHeader />}
+      {window.location.hostname.includes("onlysession.in") ? null : <Hero />}
       {/* } */}
       <ButtonTabs />
       <Sports />
@@ -99,7 +101,7 @@ const Home = () => {
       {
         window.location.hostname.includes("onlysession.in") ? null : <AllProviderName />
       }
-      
+
     </HomeLayout>
   );
 };
