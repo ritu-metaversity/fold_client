@@ -314,10 +314,12 @@ function App() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const host = window.location.hostname;
+
   if (isSignedIn === null) {
     return <LoadingBallSvg />;
   }
-  console.log("version2");
   
   return (
     <ThemeProvider theme={theme}>
@@ -376,7 +378,21 @@ function App() {
             title="dhee_iframe"
             src="http://15.207.226.246:10004?clientId=1a07c68d-1c26-43d1-880b-3a9e5deb2e93"
           />
-          {!isSignedIn && appData?.selfAllowed && (
+          {}
+          {!isSignedIn && host.includes("onlysession.in") ? (
+            <a
+              ref={appRef}
+              target="_blank"
+              href="https://wa.me/7509039999?text=I want id"
+              className="whatsapp-fixed"
+            >
+              <div className="whatsapp-text">
+                <span>Get an ID Instantly on Whatsapp</span>{" "}
+                <span>Click Here Now</span>
+              </div>
+              <img alt="whatsapp" src="/assets/images/images.png"></img>
+            </a>
+          ): (!isSignedIn && appData?.selfAllowed) && (
             <a
               ref={appRef}
               href={footerData?.s_whatsapp.link}
