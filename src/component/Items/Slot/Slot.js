@@ -37,7 +37,7 @@ const Slot = () => {
   useEffect(() => {
     if(token !== null){
       GameAPI.SINGLE_USER_VALUE().then((res) => {
-        setSingleUserValue(res?.data?.qtech);
+        setSingleUserValue(res?.data?.aura);
       });
     }
   }, [token]);

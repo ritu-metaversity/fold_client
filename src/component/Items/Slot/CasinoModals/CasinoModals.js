@@ -3,7 +3,7 @@ import { GameAPI } from "../../../../apis/gameAPI";
 
 const CasinoModals = ({ type, setShow, show, singleUserValue }) => {
   
-
+  console.log(singleUserValue, "dfadfasdasdasda")
 
   return (
     <>

@@ -152,6 +152,7 @@ const LiveCasinoHome = ({ providerList }) => {
             show={setShow}
             setShow={setRuleShow}
           />
+          {/* <CasinoModals type={"aura"} singleUserValue={singleUserValue} show={setCasinoShow} setShow={setShow} /> */}
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={() => setRuleShow(false)}>
