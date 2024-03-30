@@ -92,7 +92,7 @@ export default function Header(props: Props) {
         }}
       >
         {linkAndLabel.map((item, index) => {
-          if(host.includes("onlysession.in")){
+          if(host.includes("onlycricket.co.in")){
             if(item?.label !== "Exchange") return null
           }
           return(
@@ -116,7 +116,7 @@ export default function Header(props: Props) {
             >
               {item.label}
             </TopNavLinks>
-            {host.includes("onlysession.in")?null: isSignedIn && index + 1 !== linkAndLabel.length && <Circle />}
+            {host.includes("onlycricket.co.in")?null: isSignedIn && index + 1 !== linkAndLabel.length && <Circle />}
           </>
         )})}
 

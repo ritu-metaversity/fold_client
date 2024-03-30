@@ -118,7 +118,7 @@ export function ButtonTabs() {
         color="secondary"
         variant="contained"
       >
-        {linksAndLabel.map((item) => {if(host.includes("onlysession.in")){
+        {linksAndLabel.map((item) => {if(host.includes("onlycricket.co.in") ){
             if(item?.label !== "Exchange") return null
           }return(
           <ButtonTabStyledButton

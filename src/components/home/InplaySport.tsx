@@ -66,7 +66,7 @@ const InplaySport = () => {
         </Box>
       ) : activeMatches.length > 0 ? (
         activeMatches.map((sport) => {
-          if(host?.includes("onlysession.in")){
+          if(host?.includes("onlycricket.co.in") ){
             if(sport?.sportid !== 4) return null
           }
           return (

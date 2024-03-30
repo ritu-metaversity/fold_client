@@ -41,7 +41,7 @@ const Home = () => {
     () => (
       <>
         {
-          host.includes("onlysession.in") ? null : <BoxWithTitle title="Our Casino">
+          host.includes("onlycricket.co.in")  ? null : <BoxWithTitle title="Our Casino">
             <Box
               maxHeight={"calc(100vh - 135px)"}
               minHeight={"calc(100vh - 135px)"}
@@ -92,14 +92,14 @@ const Home = () => {
   return (
     <HomeLayout sideWidth={250} sideWidthXl={300} rightMenu={homeRightMenu}>
       {/* {!isSignedIn && */}
-      {window.location.hostname.includes("onlysession.in") ? null : <TopHeader />}
-      {window.location.hostname.includes("onlysession.in") ? null : <Hero />}
+      {window.location.hostname.includes("onlycricket.co.in") ? null : <TopHeader />}
+      {window.location.hostname.includes("onlycricket.co.in") ? null : <Hero />}
       {/* } */}
       <ButtonTabs />
       <Sports />
       {/* <TopCasinoHero sideBanner={sideBanner} /> */}
       {
-        window.location.hostname.includes("onlysession.in") ? null : <AllProviderName />
+        window.location.hostname.includes("onlycricket.co.in") ? null : <AllProviderName />
       }
 
     </HomeLayout>

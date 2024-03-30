@@ -13,7 +13,7 @@ export function Announcement() {
         speed={50}
         style={{ overflow: "hidden", color: "white", fontSize: "0.8rem" }}
       >
-        {host?.includes("onlysession.in")?<span><b style={{marginLeft:"12px"}}>Radhe Radhe</b> Welcomes You All to OnlySession Wish You All The Best.</span> :announcement}
+        {host?.includes("onlycricket.co.in")?<span><b style={{marginLeft:"12px"}}>Radhe Radhe</b> Welcomes You All to OnlyCricket Wish You All The Best.</span> :announcement}
       </Marquee>
       <SpeakerIcon alt="" src={"/assets/images/speaker.svg"} />
     </AnnouncementBox>

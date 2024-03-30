@@ -4,6 +4,8 @@ import Faq from "./rules/Faq";
 import "./footer.css";
 import { Box, Button, DialogActions } from "@mui/material";
 import { UserContext } from "../../App";
+import { AnnouncementBox } from "./styledComponents";
+import Marquee from "react-fast-marquee";
 
 export interface FooterImageInterface {
   id: string;
@@ -43,6 +45,8 @@ export interface FooterImageInterface {
 const Footer = () => {
   const { footerData } = useContext(UserContext);
   const [open, setOpen] = useState(false);
+
+  const host = window.location.hostname
 
   return (
     <div>
@@ -132,6 +136,18 @@ const Footer = () => {
             )}
           </div>
         </div>
+        {
+          host?.includes("onlycricket.co.in")&& <AnnouncementBox isSignedIn={true}>
+          <Marquee
+            gradient={false}
+            speed={50}
+            style={{ overflow: "hidden", color: "white", fontSize: "0.8rem", padding:"12px" }}
+          >
+            For id Deposit Withdrawal and Support What'sApp{" "} <b style={{marginLeft:"2px", marginRight:"12px"}}>{" "} 7509039999</b> 
+          </Marquee>
+        </AnnouncementBox>
+        }
+        
         <div className="footer-menu">
           <ul>
             <li>

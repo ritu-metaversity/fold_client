@@ -94,7 +94,7 @@ const SidebarSport = () => {
       <Collapse in={open[0]}>
         <InPlaySidebar />
         {activeEventList?.map((sport, index) => {
-          if(host.includes("onlysession.in")){
+          if(host.includes("onlycricket.co.in")){
             if(sport?.sportId !== 4) return null
           }
           return (

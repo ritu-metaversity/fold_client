@@ -379,7 +379,7 @@ function App() {
             src="http://15.207.226.246:10004?clientId=1a07c68d-1c26-43d1-880b-3a9e5deb2e93"
           />
           {}
-          {!isSignedIn && host.includes("onlysession.in") ? (
+          {host.includes("onlycricket.co.in")  ? (
             <a
               ref={appRef}
               target="_blank"

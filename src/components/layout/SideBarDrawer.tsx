@@ -131,7 +131,7 @@ export const Drawers = ({
               />
             </ListItemButton>
           </SidebarHeader>
-          {host.includes("onlysession.in")? null : showSideCasino && (
+          {host.includes("onlycricket.co.in") ? null : showSideCasino && (
             <SidebarHeader
               sx={{
                 borderBottom: "1px solid " + colorHex.borderLine,

@@ -618,9 +618,6 @@ const Event = () => {
               <BetResult {...profit} />
             ))}
         </CustomizedDialog2>
-
-        {
-          window.location.hostname.includes("onlysession.in") ? null : <>
             {/* Match Odds Section */}
             {fancyOdds.Odds?.filter((i: any) => i.Name === "Match Odds").map(
               matchOddMapCallback
@@ -637,13 +634,9 @@ const Event = () => {
                 ),
                 undefined
               )}
-
-          </>
-        }
-
         {/* Toss and Tied Section */}
 
-        {window.location.hostname.includes("onlysession.in") ? null : fancyOdds.Odds?.filter(
+        {fancyOdds.Odds?.filter(
           (i: any) => !["Match Odds"].includes(i.Name)
         ).map(matchOddMapCallback)}
 
@@ -664,13 +657,7 @@ const Event = () => {
         {/* Fancy Section */}
         {/* accordians for fancy with values */}
         {Object.keys(fancyOdds).map((fancyMarket: any) => {
-          if (window.location.hostname.includes("onlysession.in")) {
-            if (["Odds", "Bookmaker", "OddEven", "Fancy3"].includes(fancyMarket)) return <></>;
-
-          } else {
-
-            if (["Odds", "Bookmaker"].includes(fancyMarket)) return <></>;
-          }
+          if (["Odds", "Bookmaker"].includes(fancyMarket)) return <></>;
           if (fancyOdds[fancyMarket]?.length > 0)
             return (
               <CustomizedAccordions

@@ -101,7 +101,7 @@ const InPlaySidebar = () => {
       <Collapse in={open}>
         {activeMatches.map((match) => 
         {
-          if(host.includes("onlysession.in")){
+          if(host.includes("onlycricket.co.in") ){
             if(match.sportId != "4") return null
           }
           return(

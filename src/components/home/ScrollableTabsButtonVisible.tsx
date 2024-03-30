@@ -67,7 +67,7 @@ export function ScrollableTabsButtonVisible({
           sx={{ bgcolor: 0 === value ? "gray" : "" }}
         />
         {sports.map((s) => {
-          if(host?.includes("onlysession.in")){
+          if(host?.includes("onlycricket.co.in") ){
             if(s.name !== "Cricket") return null
           }
           return(

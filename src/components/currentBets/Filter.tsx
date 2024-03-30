@@ -111,7 +111,7 @@ const Filter = ({
               Sports
             </CategoryTabs>
             {
-              host.includes("onlysession.in") ? null : <CategoryTabs
+              host.includes("onlycricket.co.in")   ? null : <CategoryTabs
                 onClick={() =>
                   setSearchFilters({ ...searchFilters, category: 2 })
                 }
