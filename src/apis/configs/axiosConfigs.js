@@ -3,8 +3,8 @@ import axios from "axios";
 const token = localStorage.getItem("token");
 
 export const api = axios.create({
-  // baseURL: "https://adminapi.247idhub.com/admin-new-apis",  
-  baseURL: "http://3.34.146.14:8080/admin-new-apis",
+  baseURL: "https://adminapi.247idhub.com/admin-new-apis",
+  // baseURL: "http://3.34.146.14:8080/admin-new-apis",
   // baseURL: "http://18.139.200.104/admin-new-apis",
   // headers: {
   //     'Authorization': 'Bearer ' + localStorage.getItem("token"),
