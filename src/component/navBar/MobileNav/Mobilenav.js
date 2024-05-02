@@ -80,7 +80,7 @@ function Mobilenav({ casinoAllow }) {
             Sports
           </Link>
         </li>
-        {(casinoAllow?.Aura || localStorage.getItem("token") == null) && (
+        {/* {(casinoAllow?.Aura || localStorage.getItem("token") == null) && (
           <li
             className={`nav-item ${Active === 6 ? "active2" : ""}`}
             onClick={(e) => handleClick(6, e)}>
@@ -88,8 +88,8 @@ function Mobilenav({ casinoAllow }) {
               Aura
             </Link>
           </li>
-        )}
-        {(casinoAllow?.Nowa || localStorage.getItem("token") == null) && (
+        )} */}
+        {/* {(casinoAllow?.Nowa || localStorage.getItem("token") == null) && (
           <li
             className={`nav-item ${Active === 7 ? "active2" : ""}`}
             onClick={(e) => handleClick(7, e)}>
@@ -97,7 +97,7 @@ function Mobilenav({ casinoAllow }) {
               Super Nowa
             </Link>
           </li>
-        )}
+        )} */}
         {(casinoAllow?.Qtech || localStorage.getItem("token") == null) && (
           <>
             <li

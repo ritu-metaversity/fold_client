@@ -8,7 +8,7 @@ const SlotData = () => {
     <div>
         <Mobilenav/>
     </div>
-    <Slot/>
+    {/* <Slot/> */}
     </>
   )
 }

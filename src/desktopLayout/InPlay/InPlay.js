@@ -284,8 +284,8 @@ const InPlay = ({ casinoAllow }) => {
           </div>
         </div>
       </div>
-      {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <NewLunch />}
-      {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/supernowa"} />}
+      {/* {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <NewLunch />} */}
+      {/* {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/supernowa"} />} */}
       {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
         <>
           <LiveCasinoHome  providerList={providerList?.liveCasino}/>

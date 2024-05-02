@@ -207,11 +207,11 @@ function Item({ gameIdForItemPage, casinoAllow }) {
               </div>
             </div>
           </div>
-          {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <Slot />}
+          {/* {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <Slot />} */}
 
           <div className="casino-main">
-            {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/m/sueprnowa"} />}
-            {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
+            {/* {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/m/sueprnowa"} />} */}
+            {(casinoAllow?.Qtech ) && (
               <>
                 <LiveCasinoHome providerList={providerList?.liveCasino}/>
                 <FantasyGamesHome path={"/m/fantsy"} />
@@ -220,18 +220,18 @@ function Item({ gameIdForItemPage, casinoAllow }) {
             )}
           </div>
 
-          {/* {localStorage.getItem("token") === null && (
+          {localStorage.getItem("token") === null && (
             <>
-              <Slot />
+              {/* <Slot /> */}
               <div className="casino-main">
-                <SuperNowaHome path={"/m/sueprnowa"} />
+                {/* <SuperNowaHome path={"/m/sueprnowa"} /> */}
 
                 <LiveCasinoHome  providerList={providerList?.liveCasino} />
                 <FantasyGamesHome path={"/m/fantsy"} />
                 <SlotHome providerList={providerList} />
               </div>
             </>
-          )} */}
+          )}
            {localStorage.getItem("token") === null && <LotteryHome path={"/lottery"} />}
         </>
       )}
