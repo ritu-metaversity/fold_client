@@ -8,7 +8,7 @@ export interface ProviderObject {
 }
 
 export type key =
-  | "Indian Casino"
+  // | "Indian Casino"
   | "Internation Casino"
   | "Fantasy Games"
   | "Slot Games"
@@ -18,22 +18,22 @@ export type AllCasinoProviderNameType = {
   [x in key]: ProviderObject[];
 };
 export const AllCasinoProviderName: AllCasinoProviderNameType = {
-  "Indian Casino": [
-    {
-      name: "Super nowa",
-      logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
-      gameCode: "NOWA",
-      PageUrl: "/livecasino",
-      filter: "LIVECASINO",
-    },
-    {
-      name: "Aura",
-      logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
-      gameCode: "AURA",
-      PageUrl: "/livecasino",
-      filter: "LIVECASINO",
-    },
-  ],
+  // "Indian Casino": [
+  //   {
+  //     name: "Super nowa",
+  //     logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
+  //     gameCode: "NOWA",
+  //     PageUrl: "/livecasino",
+  //     filter: "LIVECASINO",
+  //   },
+  //   {
+  //     name: "Aura",
+  //     logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
+  //     gameCode: "AURA",
+  //     PageUrl: "/livecasino",
+  //     filter: "LIVECASINO",
+  //   },
+  // ],
   "Internation Casino": [
     {
       name: "EVOLUTION",
