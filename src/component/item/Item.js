@@ -207,10 +207,10 @@ function Item({ gameIdForItemPage, casinoAllow }) {
               </div>
             </div>
           </div>
-          {/* {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <Slot />} */}
+          {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <Slot />}
 
           <div className="casino-main">
-            {/* {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/m/sueprnowa"} />} */}
+            {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/m/sueprnowa"} />}
             {(casinoAllow?.Qtech ) && (
               <>
                 <LiveCasinoHome providerList={providerList?.liveCasino}/>

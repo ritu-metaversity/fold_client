@@ -39,10 +39,10 @@ const SportData = ({ casinoAllow }) => {
 
       <Sport gameIdForItemPage={gameIdForItemPage} />
 
-      {/* {(casinoAllow?.Aura || token === null) && <Slot />} */}
+      {(casinoAllow?.Aura || token === null) && <Slot />}
 
           <div className="casino-main">
-            {/* {(casinoAllow?.Nowa || token === null) && <SuperNowaHome path={"/m/sueprnowa"} />} */}
+            {(casinoAllow?.Nowa || token === null) && <SuperNowaHome path={"/m/sueprnowa"} />}
             {(casinoAllow?.Qtech || token === null) && (
               <>
                 <LiveCasinoHome providerList={providerList?.liveCasino}/>

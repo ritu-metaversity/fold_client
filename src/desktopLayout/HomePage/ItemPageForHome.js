@@ -29,8 +29,8 @@ function ItemPageForHome({ casinoAllow }) {
         <LatestEvent iplPath="/gamedetail/28127348" elePath="/gamedetail/1706456690"/>
 
           <DeskMainPage />
-          {/* {(casinoAllow?.Aura || token === null) && <NewLunch />} */}
-          {/* {(casinoAllow?.Nowa || token === null) && <SuperNowaHome path={"/supernowa"} />} */}
+          {(casinoAllow?.Aura || token === null) && <NewLunch />}
+          {(casinoAllow?.Nowa || token === null) && <SuperNowaHome path={"/supernowa"} />}
           {(casinoAllow?.Qtech || token === null) && (
             <>
               <LiveCasinoHome providerList={providerList?.liveCasino}/>
