@@ -105,59 +105,96 @@ function GamedetailPage({ getStackValue, SportId }) {
     // eslint-disable-next-line
   }, [sId]);
 
-  const oddFromSocketSlower = (res) => {
-    if (res) {
-      setFancyOdds((fancyOdds) => {
-        if (fancyOdds) {
-          const oldOdds = { ...fancyOdds };
-          setPreviousState(oldOdds);
-        } else {
-          setPreviousState(res);
-        }
-        return res;
-      });
+  // const oddFromSocketSlower = (res) => {
+  //   if (res) {
+  //     setFancyOdds((fancyOdds) => {
+  //       if (fancyOdds) {
+  //         const oldOdds = { ...fancyOdds };
+  //         setPreviousState(oldOdds);
+  //       } else {
+  //         setPreviousState(res);
+  //       }
+  //       return res;
+  //     });
 
-      setMFancyOdds(res);
-      setMaxBet(res?.Bookmaker[0]);
-      setMinBet(res);
-      setIsLoading(false);
-      setGameName(Object.keys(res));
-      setMatchodd(res?.Odds);
-      var matchData = res?.Odds[0];
-      setETime(matchData);
-      setMatchDelatil(matchData);
-    }
-  };
+  //     setMFancyOdds(res);
+  //     setMaxBet(res?.Bookmaker[0]);
+  //     setMinBet(res);
+  //     setIsLoading(false);
+  //     setGameName(Object.keys(res));
+  //     setMatchodd(res?.Odds);
+  //     var matchData = res?.Odds[0];
+  //     setETime(matchData);
+  //     setMatchDelatil(matchData);
+  //   }
+  // };
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      setOddSocketConnected(false);
-    });
-    socket.on("OddsUpdated", oddFromSocketSlower);
-    socket.on("JoinedSuccessfully", () => {
-      setOddSocketConnected(true);
-    });
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
+  useEffect(()=>{
     let timer = setInterval(
       () =>
-        !OddSocketConnected &&
-        socket.emit("JoinRoom", {
-          eventId: id,
-        }),
+      fetch(`https://oddsapi.247idhub.com/betfair_api/fancy/${id}`)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res) {
+          setFancyOdds((fancyOdds) => {
+            if (fancyOdds) {
+              const oldOdds = { ...fancyOdds };
+              setPreviousState(oldOdds);
+            } else {
+              setPreviousState(res);
+            }
+            return res;
+          });
+    
+          setMFancyOdds(res);
+          setMaxBet(res?.Bookmaker[0]);
+          setMinBet(res);
+          setIsLoading(false);
+          setGameName(Object.keys(res));
+          setMatchodd(res?.Odds);
+          var matchData = res?.Odds[0];
+          setETime(matchData);
+          setMatchDelatil(matchData);
+        }
+      }),
       1000
     );
     return () => {
       clearInterval(timer);
     };
-  }, [OddSocketConnected, id, matchodd, fancyOdds]);
+    
 
-  useEffect(() => {
-    OddSocketConnected && setOddSocketConnected(false);
-    // eslint-disable-next-line
-  }, [id]);
+  }, [id])
+
+  // useEffect(() => {
+  //   socket.on("connect", () => {
+  //     setOddSocketConnected(false);
+  //   });
+  //   socket.on("OddsUpdated", oddFromSocketSlower);
+  //   socket.on("JoinedSuccessfully", () => {
+  //     setOddSocketConnected(true);
+  //   });
+  //   // eslint-disable-next-line
+  // }, []);
+
+  // useEffect(() => {
+  //   let timer = setInterval(
+  //     () =>
+  //       !OddSocketConnected &&
+  //       socket.emit("JoinRoom", {
+  //         eventId: id,
+  //       }),
+  //     1000
+  //   );
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, [OddSocketConnected, id, matchodd, fancyOdds]);
+
+  // useEffect(() => {
+  //   OddSocketConnected && setOddSocketConnected(false);
+  //   // eslint-disable-next-line
+  // }, [id]);
 
   useEffect(() => {
     fetch("https://oddsapi.247idhub.com/betfair_api/my-ip")

@@ -82,54 +82,54 @@ function GameDetail({ getStackValue }) {
     // eslint-disable-next-line
   }, [localStorage.getItem("SportId")]);
 
-  const oddFromSocketSlower = (res) => {
-    if (res) {
-      setFancyOdds((fancyOdds) => {
-        if (fancyOdds) {
-          const oldOdds = { ...fancyOdds };
-          setPreviousState(oldOdds);
-        } else {
-          setPreviousState(res);
-        }
-        return res;
-      });
+  // const oddFromSocketSlower = (res) => {
+  //   if (res) {
+  //     setFancyOdds((fancyOdds) => {
+  //       if (fancyOdds) {
+  //         const oldOdds = { ...fancyOdds };
+  //         setPreviousState(oldOdds);
+  //       } else {
+  //         setPreviousState(res);
+  //       }
+  //       return res;
+  //     });
 
-      setMFancyOdds(res);
-      setMaxBet(res?.Bookmaker[0]);
-      setMinBet(res);
-      setIsLoading(false);
-      setGameName(Object.keys(res));
-      setMatchodd(res?.Odds);
-      var matchData = res?.Odds[0];
-      setETime(matchData);
-      setMatchDelatil(matchData);
-    }
-  };
+  //     setMFancyOdds(res);
+  //     setMaxBet(res?.Bookmaker[0]);
+  //     setMinBet(res);
+  //     setIsLoading(false);
+  //     setGameName(Object.keys(res));
+  //     setMatchodd(res?.Odds);
+  //     var matchData = res?.Odds[0];
+  //     setETime(matchData);
+  //     setMatchDelatil(matchData);
+  //   }
+  // };
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      setOddSocketConnected(false);
-    });
-    socket.on("OddsUpdated", oddFromSocketSlower);
-    socket.on("JoinedSuccessfully", () => {
-      setOddSocketConnected(true);
-    });
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   socket.on("connect", () => {
+  //     setOddSocketConnected(false);
+  //   });
+  //   socket.on("OddsUpdated", oddFromSocketSlower);
+  //   socket.on("JoinedSuccessfully", () => {
+  //     setOddSocketConnected(true);
+  //   });
+  //   // eslint-disable-next-line
+  // }, []);
 
-  useEffect(() => {
-    let timer = setInterval(
-      () =>
-        !OddSocketConnected &&
-        socket.emit("JoinRoom", {
-          eventId: id,
-        }),
-      1000
-    );
-    return () => {
-      clearInterval(timer);
-    };
-  }, [OddSocketConnected, id, matchodd, fancyOdds]);
+  // useEffect(() => {
+  //   let timer = setInterval(
+  //     () =>
+  //       !OddSocketConnected &&
+  //       socket.emit("JoinRoom", {
+  //         eventId: id,
+  //       }),
+  //     1000
+  //   );
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, [OddSocketConnected, id, matchodd, fancyOdds]);
 
   useEffect(() => {
     OddSocketConnected && setOddSocketConnected(false);
@@ -143,6 +143,44 @@ function GameDetail({ getStackValue }) {
         setUserIP(res?.ip);
       });
   }, []);
+
+
+  useEffect(()=>{
+    let timer = setInterval(
+      () =>
+      fetch(`https://oddsapi.247idhub.com/betfair_api/fancy/${id}`)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res) {
+          setFancyOdds((fancyOdds) => {
+            if (fancyOdds) {
+              const oldOdds = { ...fancyOdds };
+              setPreviousState(oldOdds);
+            } else {
+              setPreviousState(res);
+            }
+            return res;
+          });
+    
+          setMFancyOdds(res);
+          setMaxBet(res?.Bookmaker[0]);
+          setMinBet(res);
+          setIsLoading(false);
+          setGameName(Object.keys(res));
+          setMatchodd(res?.Odds);
+          var matchData = res?.Odds[0];
+          setETime(matchData);
+          setMatchDelatil(matchData);
+        }
+      }),
+      1000
+    );
+    return () => {
+      clearInterval(timer);
+    };
+    
+
+  }, [id])
 
   useEffect(() => {
     UserAPI.USER_ODDS_PNL({
