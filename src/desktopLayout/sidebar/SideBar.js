@@ -168,12 +168,6 @@ function SideBar({ casinoAllow }) {
           {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
         </p>
       </div> */}
-      {casinoAllow?.Aura ||
-        casinoAllow?.Nowa ||
-        casinoAllow?.Qtech ||
-        casinoAllow?.Virtual ||
-        casinoAllow?.Sportbook ||
-        (localStorage.getItem("token") === null && (
           <div
             className="sidebar-title m-t-5 theme2bg"
             onClick={collapse2}
@@ -185,7 +179,7 @@ function SideBar({ casinoAllow }) {
               {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
             </p>
           </div>
-        ))}
+       
 
       <Accordion defaultActiveKey="0" className="main_sport_header">
         <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
@@ -230,7 +224,7 @@ function SideBar({ casinoAllow }) {
                 <span className="">1 DAY TEENPATTI</span>
               </Link>
             </li> */}
-            {(casinoAllow?.Aura || localStorage.getItem("token") === null) && (
+            {/* {(casinoAllow?.Aura || localStorage.getItem("token") === null) && (
               <li className="nav-item">
                 <Link to="/aura" className="nav-link">
                   <span
@@ -240,14 +234,14 @@ function SideBar({ casinoAllow }) {
                   </span>
                 </Link>
               </li>
-            )}
-            {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && (
+            )} */}
+            {/* {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && (
               <li className="nav-item">
                 <Link to="/supernowa" className="nav-link">
                   <span>Super Nowa</span>
                 </Link>
               </li>
-            )}
+            )} */}
 
             {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
               <>

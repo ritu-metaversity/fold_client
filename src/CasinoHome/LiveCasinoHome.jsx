@@ -101,7 +101,7 @@ const LiveCasinoHome = ({ providerList }) => {
               className="sub_live_casino">
               <img
                 className="live_casino_logo"
-                src={item?.image}
+                src={item?.providerName !== "Evolution Gaming"?item?.image : "https://wver.sprintstaticdata.com/v14/static/front/img/icons/5.png"}
                 alt="fsfsdfsd"
               />
               <p style={{ fontWeight: "900", paddingTop: "2px" }}>
@@ -114,7 +114,7 @@ const LiveCasinoHome = ({ providerList }) => {
           localStorage.getItem("token") !== null && <div onClick={() => handleShowQtech()} className="sub_live_casino">
           <img
             className="live_casino_logo"
-            src="https://upi-gateway.s3.ap-south-1.amazonaws.com/sus-logos/QTECH.png"
+            src="https://admin-api-banners-2.s3.ap-south-1.amazonaws.com/logos/QTECH.jpeg"
             alt="fsfsdfsd"
           />
           <p style={{ fontWeight: "900", paddingTop: "2px" }}>Qtech</p>

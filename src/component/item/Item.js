@@ -3,12 +3,12 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Slot from "../Items/Slot/Slot";
-import LiveCasino from "../../desktopLayout/LiveCasino/LiveCasino";
+// import LiveCasino from "../../desktopLayout/LiveCasino/LiveCasino";
 import LiveCasinoHome from "../../CasinoHome/LiveCasinoHome";
 import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
 import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
-import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
+// import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 import { CasinoApi } from "../../apis/CasinoApi";
 
 function Item({ gameIdForItemPage, casinoAllow }) {
@@ -207,10 +207,10 @@ function Item({ gameIdForItemPage, casinoAllow }) {
               </div>
             </div>
           </div>
-          {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <Slot />}
+          {/* {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <Slot />} */}
 
           <div className="casino-main">
-            {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/m/sueprnowa"} />}
+            {/* {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/m/sueprnowa"} />} */}
             {(casinoAllow?.Qtech ) && (
               <>
                 <LiveCasinoHome providerList={providerList?.liveCasino}/>

@@ -5,12 +5,12 @@ import { GameAPI } from "../../apis/gameAPI";
 import BannerList from "../../component/BannerSection/BannerList";
 import moment from "moment";
 import "./InPlay.css";
-import NewLunch from "../Newlunch/NewLunch";
+// import NewLunch from "../Newlunch/NewLunch";
 import LiveCasinoHome from "../../CasinoHome/LiveCasinoHome";
 import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
 import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
-import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
+// import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 import { CasinoApi } from "../../apis/CasinoApi";
 import LatestEvent from "../../common/LatestEvent";
 
@@ -284,8 +284,8 @@ const InPlay = ({ casinoAllow }) => {
           </div>
         </div>
       </div>
-      {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <NewLunch />}
-      {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/supernowa"} />}
+      {/* {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <NewLunch />} */}
+      {/* {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/supernowa"} />} */}
       {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
         <>
           <LiveCasinoHome  providerList={providerList?.liveCasino}/>

@@ -246,8 +246,8 @@ const token = localStorage.getItem("token")
             <Route path="" element={<Mobilenav casinoAllow={casinoAllow}/>}>
               <Route path="/m/Home" element={<Home idddd={idddd} casinoAllow={casinoAllow}/>} />
               <Route path="/m/sports" element={<SportData  casinoAllow={casinoAllow} />} />
-              <Route path="/m/others" element={<Home />} casinoAllow={casinoAllow}/>
-              <Route path="/m/In-play" element={<Home />} casinoAllow={casinoAllow}/>
+              <Route path="/m/others" element={<Home casinoAllow={casinoAllow}/>} />
+              <Route path="/m/In-play" element={<Home casinoAllow={casinoAllow}/>} />
               <Route path="/m/slot" element={<Slot />} />
 
               <Route path="/m/livecasino" element={<LiveCasino liveCasino={"LIVECASINO"} showid={2}/>} />

@@ -1,11 +1,11 @@
 import { React, useEffect, useState } from "react";
-import NewLunch from "../Newlunch/NewLunch";
+// import NewLunch from "../Newlunch/NewLunch";
 import DeskMainPage from "../itemPageforDesktop/DeskMainPage";
 import LiveCasinoHome from "../../CasinoHome/LiveCasinoHome";
 import FantasyGamesHome from "../../CasinoHome/FantasyGamesHome";
 import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
-import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
+// import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 import Slot from "../../component/Items/Slot/Slot";
 import { CasinoApi } from "../../apis/CasinoApi";
 import LatestEvent from "../../common/LatestEvent";
@@ -29,8 +29,8 @@ function ItemPageForHome({ casinoAllow }) {
         <LatestEvent iplPath="/gamedetail/28127348" elePath="/gamedetail/1706456690"/>
 
           <DeskMainPage />
-          {(casinoAllow?.Aura || token === null) && <NewLunch />}
-          {(casinoAllow?.Nowa || token === null) && <SuperNowaHome path={"/supernowa"} />}
+          {/* {(casinoAllow?.Aura || token === null) && <NewLunch />} */}
+          {/* {(casinoAllow?.Nowa || token === null) && <SuperNowaHome path={"/supernowa"} />} */}
           {(casinoAllow?.Qtech || token === null) && (
             <>
               <LiveCasinoHome providerList={providerList?.liveCasino}/>
