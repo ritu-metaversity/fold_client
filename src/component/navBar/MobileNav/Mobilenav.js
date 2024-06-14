@@ -63,7 +63,7 @@ function Mobilenav({ casinoAllow }) {
 
   return (
     <>
-        <LatestEvent iplPath="/m/gamedetail/28127348" elePath="/m/gamedetail/1706456690"/>
+        {/* <LatestEvent iplPath="/m/gamedetail/28127348" elePath="/m/gamedetail/1706456690"/> */}
 
       <ul className="nav nav-tabs main-gameHead1 game-nav-bar">
         <li

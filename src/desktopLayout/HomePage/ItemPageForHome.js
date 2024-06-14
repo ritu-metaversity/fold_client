@@ -26,7 +26,7 @@ function ItemPageForHome({ casinoAllow }) {
     <div className="main">
       <div className="container-fluid container-fluid-5">
         <div className="row itemHome">
-        <LatestEvent iplPath="/gamedetail/28127348" elePath="/gamedetail/1706456690"/>
+        {/* <LatestEvent iplPath="/gamedetail/28127348" elePath="/gamedetail/1706456690"/> */}
 
           <DeskMainPage />
           {/* {(casinoAllow?.Aura || token === null) && <NewLunch />} */}

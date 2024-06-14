@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <>
       <div className="main">
-      <LatestEvent iplPath="/gamedetail/28127348" elePath="/gamedetail/1706456690"/>
+      {/* <LatestEvent iplPath="/gamedetail/28127348" elePath="/gamedetail/1706456690"/> */}
         <div className="container-fluid container-fluid-5">
           <div className="row itemHome">
             <Itemdesk SportId={SportId} />
