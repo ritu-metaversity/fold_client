@@ -182,7 +182,7 @@ const PayManually = (props) => {
         </div>
         <div className="col-6 marTop deposit-value">
           <div className="row price-values">
-            {AllBetData.map(({ value, key }) => (
+            {AllBetData && AllBetData?.map(({ value, key }) => (
               <div className="col-3 price-data">
                 <button
                   className="btn btn-secondary btn-block mb-2"

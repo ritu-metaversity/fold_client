@@ -67,7 +67,7 @@ function SideBar({ casinoAllow }) {
   useEffect(() => {
     axios
       .post(
-        "https://adminapi.247idhub.com/admin-new-apis/enduser/left-menu-data-open"
+        "https://adminapi.foldexch.com/admin-new-apis/enduser/left-menu-data-open"
       )
       .then((res) => {
         setMatchList(res?.data?.data);
@@ -168,18 +168,17 @@ function SideBar({ casinoAllow }) {
           {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
         </p>
       </div> */}
-          <div
-            className="sidebar-title m-t-5 theme2bg"
-            onClick={collapse2}
-            aria-controls="events"
-            aria-expanded="true"
-            role="button">
-            <h5 className="text-white d-inline-block m-b-0">Others Game</h5>
-            <p className="arrow-line">
-              {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
-            </p>
-          </div>
-       
+      <div
+        className="sidebar-title m-t-5 theme2bg"
+        onClick={collapse2}
+        aria-controls="events"
+        aria-expanded="true"
+        role="button">
+        <h5 className="text-white d-inline-block m-b-0">Others Game</h5>
+        <p className="arrow-line">
+          {visible2 ? <IoIosArrowDown /> : <IoIosArrowUp />}
+        </p>
+      </div>
 
       <Accordion defaultActiveKey="0" className="main_sport_header">
         <nav className={`casino ${visible2 ? "collapse show" : "d-none"}`}>
