@@ -102,7 +102,7 @@ const LiveCasinoHome = ({ providerList }) => {
               <img
                 className="live_casino_logo"
                 src={item?.providerName !== "Evolution Gaming"?item?.image : "https://wver.sprintstaticdata.com/v14/static/front/img/icons/5.png"}
-                alt="fsfsdfsd"
+                alt=""
               />
               <p style={{ fontWeight: "900", paddingTop: "2px" }}>
                 {item?.providerName}
@@ -115,7 +115,7 @@ const LiveCasinoHome = ({ providerList }) => {
           <img
             className="live_casino_logo"
             src="https://admin-api-banners-2.s3.ap-south-1.amazonaws.com/logos/QTECH.jpeg"
-            alt="fsfsdfsd"
+            alt=""
           />
           <p style={{ fontWeight: "900", paddingTop: "2px" }}>Qtech</p>
         </div>
@@ -133,7 +133,7 @@ const LiveCasinoHome = ({ providerList }) => {
                 <img
                   className="live_casino_logo"
                   src={item?.logo}
-                  alt="fsfsdfsd"
+                  alt=""
                 />
                 <p style={{ fontWeight: "900", paddingTop: "2px" }}>
                   {item?.name}

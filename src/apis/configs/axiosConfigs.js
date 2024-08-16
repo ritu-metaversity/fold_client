@@ -11,7 +11,7 @@ export const api = axios.create({
   // },
 });
 export const casinoApi = axios.create({
-  baseURL: "https://api.247idhub.com/api/qtech",
+  baseURL: "https://api.247idhub.com/FOLDEXCH/api/qtech",
 });
 
 export const superNowaApi = axios.create({
