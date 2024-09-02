@@ -7,10 +7,8 @@ import "./PayManually.css";
 import { Input } from "antd";
 import Modal from "react-bootstrap/Modal";
 import AlertBtn from "../../Alert/AlertBtn";
-import toast, { Toaster } from 'react-hot-toast';
-import {
-  CopyOutlined , CloseCircleFilled
-} from '@ant-design/icons';
+import toast, { Toaster } from "react-hot-toast";
+import { CopyOutlined, CloseCircleFilled } from "@ant-design/icons";
 
 const PayManually = (props) => {
   const [payMethods, setPayMethods] = useState();
@@ -130,14 +128,14 @@ const PayManually = (props) => {
     setAlertBtnshow(false);
   };
 
-  const handleCopy = (text)=>{
+  const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
-    toast.success("Copied Successfully")
-  }
+    toast.success("Copied Successfully");
+  };
 
   return (
     <div>
-      <Toaster position="top-right"/>
+      <Toaster position="top-right" />
 
       {alertBtnshow ? (
         <AlertBtn color={color} val={messege} popupClose={popupClose} />
@@ -182,16 +180,17 @@ const PayManually = (props) => {
         </div>
         <div className="col-6 marTop deposit-value">
           <div className="row price-values">
-            {AllBetData && AllBetData?.map(({ value, key }) => (
-              <div className="col-3 price-data">
-                <button
-                  className="btn btn-secondary btn-block mb-2"
-                  value="1000"
-                  onClick={() => handleStaticAmount(value)}>
-                  {key}
-                </button>
-              </div>
-            ))}
+            {AllBetData &&
+              AllBetData?.map(({ value, key }) => (
+                <div className="col-3 price-data">
+                  <button
+                    className="btn btn-secondary btn-block mb-2"
+                    value="1000"
+                    onClick={() => handleStaticAmount(value)}>
+                    {key}
+                  </button>
+                </div>
+              ))}
           </div>
         </div>
       </div>
@@ -264,9 +263,14 @@ const PayManually = (props) => {
                       marginInline: "2%",
                       width: "95%",
                     }}>
-                    <Modal.Body className="image-body" style={{position:"relative"}}>
-                    <button onClick={handleCloseModal} className="close_btn_modal"><CloseCircleFilled /></button>
-                      {" "}
+                    <Modal.Body
+                      className="image-body"
+                      style={{ position: "relative" }}>
+                      <button
+                        onClick={handleCloseModal}
+                        className="close_btn_modal">
+                        <CloseCircleFilled />
+                      </button>{" "}
                       <img
                         src={res?.accountNumber && res?.accountNumber}
                         className="modals-image"
@@ -288,7 +292,7 @@ const PayManually = (props) => {
                           />
                           <p className="deposit_image">
                             <a href={res?.accountNumber} download>
-                            Download <i className="fa fa-download"></i>
+                              Download <i className="fa fa-download"></i>
                             </a>
                           </p>
                         </div>
@@ -335,8 +339,9 @@ const PayManually = (props) => {
                     <Col className="name-d">
                       <div className="upi_copy">
                         <p className="Typography-root">{res?.accountNumber}</p>
-                        <p onClick={() => handleCopy(res?.accountNumber)}><CopyOutlined /></p>
-
+                        <p onClick={() => handleCopy(res?.accountNumber)}>
+                          <CopyOutlined />
+                        </p>
                       </div>
                     </Col>
                   </Row>
@@ -370,7 +375,9 @@ const PayManually = (props) => {
                       <p className="Typography-root text-right">
                         {res?.accountNumber}
                       </p>
-                      <p onClick={() => handleCopy(res?.accountNumber)}><CopyOutlined /></p>
+                      <p onClick={() => handleCopy(res?.accountNumber)}>
+                        <CopyOutlined />
+                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -383,7 +390,9 @@ const PayManually = (props) => {
                   <Col>
                     <div className="upi_copy">
                       <p className="Typography-root text-right">{res?.ifsc}</p>
-                      <p onClick={() => handleCopy(res?.ifsc)}><CopyOutlined /></p>
+                      <p onClick={() => handleCopy(res?.ifsc)}>
+                        <CopyOutlined />
+                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -405,179 +414,52 @@ const PayManually = (props) => {
                 </Row>
               </Container>
             )}
-          </>
-        );
-      })}
 
-      {/* <div className="paymethods">
-        {paymentMode === "UPI" ? (
-          <Container>
-            <div className="bank-logo mode">
-              <Row className="upi-detail head-deposit">
-                <Col className="name-d">
-                  <div className="">
-                    <p className="Typography-root ">Mode</p>
-                  </div>
-                </Col>
-                <Col className="name-d">
-                  <div className="">
-                    <p className="Typography-root ">Display Name</p>
-                  </div>
-                </Col>
-                <Col className="name-d">
-                  <div className="">
-                    <p className="Typography-root ">UPI Detail</p>
-                  </div>
-                </Col>
-              </Row>
-
-              <Row className="upi-detail">
-                <Col className="name-d">
-                  <div className="">
-                    <p className="Typography-root ">{UpiDetail?.upiName}</p>
-                  </div>
-                </Col>
-                <Col className="name-d">
-                  <div className="">
-                    <p className="Typography-root ">{UpiDetail?.displayName}</p>
-                  </div>
-                </Col>
-                <Col className="name-d">
-                  <div className="">
-                    <p className="Typography-root">{UpiDetail?.upiId}</p>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </Container>
-        ) : (
-          ""
-        )}
-        {paymentMode === "Bank" ? (
-          <Container className="bank-detail">
-            <Row>
-              <Col className="name-d">
-                <div className="">
-                  <p className="Typography-root root">Bank Name</p>
-                </div>
-              </Col>
-              <Col>
-                <div className="">
-                  <p className="Typography-root text-right">
-                    {allDatataa?.bankDetail?.bankName}
-                  </p>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col className="name-d">
-                <div className="">
-                  <p className="Typography-root root">Account Number</p>
-                </div>
-              </Col>
-              <Col>
-                <div className="">
-                  <p className="Typography-root text-right">
-                    {allDatataa?.bankDetail?.accountNumber}
-                  </p>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col className="name-d">
-                <div className="">
-                  <p className="Typography-root root">IFSC Code</p>
-                </div>
-              </Col>
-              <Col>
-                <div className="">
-                  <p className="Typography-root text-right">
-                    {allDatataa?.bankDetail?.ifscCode}
-                  </p>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col className="name-d">
-                <div className="">
-                  <p className="Typography-root root">Account Holder Name</p>
-                </div>
-              </Col>
-              <Col>
-                <div className="">
-                  <p className="Typography-root text-right">
-                    {allDatataa?.bankDetail?.accountHolderName}
-                  </p>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        ) : (
-          ""
-        )}  
-        {paymentMode === "QR" ? (
-          <Container className="bank-detail">
-            <Row>
-              <p>QR Code For Payment</p>
-              <Col className="name-d">
-                <div className="">
-                  <img
-                    src={
-                      allDatataa &&
-                      allDatataa?.qrCode &&
-                      allDatataa?.qrCode?.qrCodeImage
-                    }
-                    style={{ width: "150px" }}
-                    onClick={(e) => handleShow(e)}
-                    alt="QR-Code"
-                  />
-                </div>
-              </Col>
-              <Modal
-                show={showModals}
-                onHide={handleCloseModal}
-                centered
-                style={{
-                  marginTop: "12px",
-                  marginInline: "2%",
-                  width: "95%",
-                }}>
-                <Modal.Body className="image-body">
-                  <img
-                    src={
-                      allDatataa &&
-                      allDatataa?.qrCode &&
-                      allDatataa?.qrCode?.qrCodeImage
-                    }
-                    className="modals-image"
-                    alt="QR-code"
-                  />
-                </Modal.Body>
-              </Modal>
-              <Col className="qr-payment">
+            {DepositType === "G PAY" && (
+              <Container className="bank-detail">
                 <Row>
-                  <Col>
+                  <Col className="name-d">
                     <div className="">
-                      <p>Display Name</p>
-                      <Input
-                        value={
-                          allDatataa &&
-                          allDatataa?.qrCode &&
-                          allDatataa?.qrCode?.displayName
-                        }
-                        readOnly
-                        type="text"
-                      />
+                      <p className="Typography-root root">Mobile No.</p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="upi_copy">
+                      <p className="Typography-root text-right">
+                        {res?.accountNumber}
+                      </p>
+                      <p onClick={() => handleCopy(res?.accountHolderName)}>
+                        <CopyOutlined />
+                      </p>
                     </div>
                   </Col>
                 </Row>
-              </Col>
-            </Row>
-          </Container>
-        ) : (
-          ""
-        )}
-      </div> */}
+              </Container>
+            )}
+            {DepositType === "PHONE PE" && (
+              <Container className="bank-detail">
+                <Row>
+                  <Col className="name-d">
+                    <div className="">
+                      <p className="Typography-root root">Mobile No.</p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="upi_copy">
+                      <p className="Typography-root text-right">
+                        {res?.accountNumber}
+                      </p>
+                      <p onClick={() => handleCopy(res?.accountHolderName)}>
+                        <CopyOutlined />
+                      </p>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            )}
+          </>
+        );
+      })}
 
       <div className="paymethods">
         <Container>

@@ -6,10 +6,8 @@ import { Input } from "antd";
 import Modal from "react-bootstrap/Modal";
 import AlertBtn from "../../component/Alert/AlertBtn";
 import { UserAPI } from "../../apis/UserAPI";
-import toast, { Toaster } from 'react-hot-toast';
-import {
-  CopyOutlined , CloseCircleFilled
-} from '@ant-design/icons';
+import toast, { Toaster } from "react-hot-toast";
+import { CopyOutlined, CloseCircleFilled } from "@ant-design/icons";
 
 const PaymanuallyDesk = (props) => {
   const [payMethods, setPayMethods] = useState();
@@ -51,10 +49,10 @@ const PaymanuallyDesk = (props) => {
   //   });
   // }, []);
 
-  const handleCopy = (text)=>{
+  const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
-    toast.success("Copied Successfully")
-  }
+    toast.success("Copied Successfully");
+  };
 
   useEffect(() => {
     UserAPI.NEW_DEPOSITE_API().then((res) => {
@@ -143,7 +141,7 @@ const PaymanuallyDesk = (props) => {
   }, []);
   return (
     <div>
-      <Toaster position="top-right"/>
+      <Toaster position="top-right" />
       {alertBtnshow ? (
         <AlertBtn color={color} val={messege} popupClose={popupClose} />
       ) : (
@@ -187,16 +185,17 @@ const PaymanuallyDesk = (props) => {
         </div>
         <div className="col-6 marTop deposit-value">
           <div className="row price-values">
-            {AllBetData && AllBetData?.map(({ value, key }) => (
-              <div className="col-3 price-data">
-                <button
-                  className="btn btn-secondary btn-block mb-2"
-                  value="1000"
-                  onClick={() => handleStaticAmount(value)}>
-                  {key}
-                </button>
-              </div>
-            ))}
+            {AllBetData &&
+              AllBetData?.map(({ value, key }) => (
+                <div className="col-3 price-data">
+                  <button
+                    className="btn btn-secondary btn-block mb-2"
+                    value="1000"
+                    onClick={() => handleStaticAmount(value)}>
+                    {key}
+                  </button>
+                </div>
+              ))}
           </div>
         </div>
       </div>
@@ -269,9 +268,14 @@ const PaymanuallyDesk = (props) => {
                       marginInline: "2%",
                       width: "95%",
                     }}>
-                    <Modal.Body className="image-body" style={{position:"relative"}}>
-                    <button onClick={handleCloseModal} className="close_btn_modal"><CloseCircleFilled /></button>
-                      {" "}
+                    <Modal.Body
+                      className="image-body"
+                      style={{ position: "relative" }}>
+                      <button
+                        onClick={handleCloseModal}
+                        className="close_btn_modal">
+                        <CloseCircleFilled />
+                      </button>{" "}
                       <img
                         src={res?.accountNumber && res?.accountNumber}
                         className="modals-image"
@@ -293,7 +297,7 @@ const PaymanuallyDesk = (props) => {
                           />
                           <p className="deposit_image">
                             <a href={res?.accountNumber} download>
-                            Download <i className="fa fa-download"></i>
+                              Download <i className="fa fa-download"></i>
                             </a>
                           </p>
                         </div>
@@ -340,7 +344,9 @@ const PaymanuallyDesk = (props) => {
                     <Col className="name-d">
                       <div className="upi_copy">
                         <p className="Typography-root">{res?.accountNumber}</p>
-                        <p onClick={() => handleCopy(res?.accountNumber)}><CopyOutlined /></p>
+                        <p onClick={() => handleCopy(res?.accountNumber)}>
+                          <CopyOutlined />
+                        </p>
                       </div>
                     </Col>
                   </Row>
@@ -374,7 +380,9 @@ const PaymanuallyDesk = (props) => {
                       <p className="Typography-root text-right">
                         {res?.accountNumber}
                       </p>
-                      <p onClick={() => handleCopy(res?.accountNumber)}><CopyOutlined /></p>
+                      <p onClick={() => handleCopy(res?.accountNumber)}>
+                        <CopyOutlined />
+                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -387,7 +395,9 @@ const PaymanuallyDesk = (props) => {
                   <Col>
                     <div className="upi_copy">
                       <p className="Typography-root text-right">{res?.ifsc}</p>
-                      <p onClick={() => handleCopy(res?.ifsc)}><CopyOutlined /></p>
+                      <p onClick={() => handleCopy(res?.ifsc)}>
+                        <CopyOutlined />
+                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -403,6 +413,48 @@ const PaymanuallyDesk = (props) => {
                     <div className="">
                       <p className="Typography-root text-right">
                         {res?.accountHolderName}
+                      </p>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            )}
+            {DepositType === "G PAY" && (
+              <Container className="bank-detail">
+                <Row>
+                  <Col className="name-d">
+                    <div className="">
+                      <p className="Typography-root root">Mobile No.</p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="upi_copy">
+                      <p className="Typography-root text-right">
+                        {res?.accountNumber}
+                      </p>
+                      <p onClick={() => handleCopy(res?.accountHolderName)}>
+                        <CopyOutlined />
+                      </p>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            )}
+            {DepositType === "PHONE PE" && (
+              <Container className="bank-detail">
+                <Row>
+                  <Col className="name-d">
+                    <div className="">
+                      <p className="Typography-root root">Mobile No.</p>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="upi_copy">
+                      <p className="Typography-root text-right">
+                        {res?.accountNumber}
+                      </p>
+                      <p onClick={() => handleCopy(res?.accountHolderName)}>
+                        <CopyOutlined />
                       </p>
                     </div>
                   </Col>
