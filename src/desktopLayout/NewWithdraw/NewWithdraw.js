@@ -232,7 +232,7 @@ const NewWithdraw = () => {
       //   setIsLoading(false);
       //   return false;
       // }
-    } else if (withType === "PAYTM") {
+    } else if (withType === "PAYTM" || withType === "G PAY" || withType === "PHONE PE") {
       if (
         withCoinValue === "" ||
         withCoinValue === undefined ||
@@ -536,11 +536,11 @@ const NewWithdraw = () => {
                     }`}>
                     <div className="mx-input-wrapper account-field">
                       <label className="account-lable">
-                        {withType === "PAYTM" ? "Mobile No" : "UPI ID"}
+                        {(withType === "PAYTM" || withType == "G PAY" || withType == "PHONE PE") ? "Mobile No" : "UPI ID"}
                       </label>
                       <br />
 
-                      {withType === "PAYTM" ? (
+                      {(withType === "PAYTM" || withType === "G PAY" || withType === "PHONE PE") ? (
                         <input
                           className="account-input"
                           value={accountNumber}
@@ -566,7 +566,7 @@ const NewWithdraw = () => {
                     </div>
                     <div className="mx-input-wrapper account-field">
                       <label className="account-lable">
-                        {withType === "PAYTM" ? "Name" : "Account Name"}
+                        {(withType === "PAYTM" || withType === "G PAY" || withType === "PHONE PE") ? "Name" : "Account Name"}
                       </label>
                       <br />
                       <input
