@@ -175,3 +175,64 @@ export const fantsyGameList = [
         "https://client-int.qtlauncher.com/images/?id=NLC-bushidowaysxnudge_en_US&type=banner&version=1667798993145",
     },
   ];
+
+
+
+  export const avitorList = [
+    {
+      providerId: "SPB",
+      id: "SPB-aviator",
+      name: "Aviator",
+      image:
+        "https://client-int.qtlauncher.com/images/?id=SPB-aviator_en_US&type=banner&version=1667798993145",
+    },
+    {
+      providerId: "SPB",
+      id: "SPB-dice",
+      name: "Dice",
+      image:
+        "https://client-int.qtlauncher.com/images/?id=SPB-dice_en_US&type=banner&version=1667798993145",
+    },
+    {
+      providerId: "SPB",
+      id: "SPB-goal",
+      name: "Goal",
+      image:
+        "https://client-int.qtlauncher.com/images/?id=SPB-goal_en_US&type=banner&version=1667798993145",
+    },
+    {
+      providerId: "SPB",
+      id: "SPB-hilo",
+      name: "Hilo",
+      image:
+        "https://client-int.qtlauncher.com/images/?id=SPB-hilo_en_US&type=banner&version=1667798993145",
+    },
+    {
+      providerId: "SPB",
+      id: "SPB-hotline",
+      name: "Hotline",
+      image:
+        "https://client-int.qtlauncher.com/images/?id=SPB-hotline_en_US&type=banner&version=1667798993145",
+    },
+    {
+      providerId: "SPB",
+      id: "SPB-mines",
+      name: "Mines",
+      image:
+        "https://client-int.qtlauncher.com/images/?id=SPB-mines_en_US&type=banner&version=1667798993145",
+    },
+    {
+      providerId: "SPB",
+      id: "SPB-miniroulette",
+      name: "Mini Roulette",
+      image:
+        "https://client-int.qtlauncher.com/images/?id=SPB-miniroulette_en_US&type=banner&version=1667798993145",
+    },
+    {
+      providerId: "SPB",
+      id: "SPB-plinko",
+      name: "Plinko",
+      image:
+        "https://client-int.qtlauncher.com/images/?id=SPB-plinko_en_US&type=banner&version=1667798993145",
+    },
+  ];

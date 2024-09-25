@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { isBrowser } from "react-device-detect";
 import { MdOutlineClose } from "react-icons/md";
-import { fantsyGameList } from "./FantsyGameList";
+import { avitorList, fantsyGameList } from "./FantsyGameList";
 import LiveCasinoModals from "../LiveCasino/casinoTabs/LiveCasinoModals";
 import { CasinoApi } from "../../apis/CasinoApi";
 import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
 import { GameAPI } from "../../apis/gameAPI";
+import { useNavigate } from "react-router-dom";
 
-const FantsyList = ({ providerFilter }) => {
+const FantsyList = ({ providerFilter, showHome }) => {
   const [show, setShow] = useState(false);
   const [gameId, setGameId] = useState("");
   const [iframeData, setIframeData] = useState("");
@@ -29,13 +30,23 @@ const FantsyList = ({ providerFilter }) => {
     setCasinoShow(false);
   };
 
+  const nav = useNavigate();
+
   const handleClose = () => setShow(false);
   const handleShow = (val) => {
-    setGameId(val);
-    if (setCasinoShow !== 1) {
-      setCasinoShow(true);
+    const token = localStorage.getItem("token");
+
+    const link = isBrowser ? "/login" : "/m/login";
+
+    if (!token) {
+      nav(link);
     } else {
-      setShow(true);
+      setGameId(val);
+      if (setCasinoShow !== 1) {
+        setCasinoShow(true);
+      } else {
+        setShow(true);
+      }
     }
   };
 
@@ -53,7 +64,7 @@ const FantsyList = ({ providerFilter }) => {
         mode: "real",
         device: isBrowser ? "desktop" : "mobile",
         // returnUrl: window.location.host,
-        returnUrl:window.location.origin,
+        returnUrl: window.location.origin,
         token: gameToken,
         walletSessionId: token,
       }).then((res) => {
@@ -64,20 +75,50 @@ const FantsyList = ({ providerFilter }) => {
 
   return (
     <>
-      <div className="fantsy_img">
-        <div className="provider_images">
-          {fantsyGameList?.map((item) => {
-            if (providerFilter !== item?.providerId) return <></>;
-            return (
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => handleShow(item?.id)}>
-                <img src={item?.image} alt="" />
-              </div>
-            );
-          })}
+      {showHome ? (
+        <div
+          className="casino-main"
+          style={{
+            margin: "14px 7px",
+            padding: "12px 0px",
+          }}>
+          <h4
+            style={{
+              fontSize: "16px",
+              fontWeight: "bold",
+              textTransform: "uppercase",
+              paddingLeft: "12px",
+            }}>
+            Fantasy Game
+          </h4>
+          <div className="provider_images">
+            {avitorList?.map((item) => {
+              return (
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleShow(item?.id)}>
+                  <img src={item?.image} alt="" />
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="fantsy_img">
+          <div className="provider_images">
+            {fantsyGameList?.map((item) => {
+              if (providerFilter !== item?.providerId) return <></>;
+              return (
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleShow(item?.id)}>
+                  <img src={item?.image} alt="" />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       <Modal centered show={casinoShow} onHide={handleClose}>
         <Modal.Body className="casino_modals_body">

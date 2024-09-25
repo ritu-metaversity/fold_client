@@ -87,7 +87,7 @@ const FantsyTabs = () => {
           </button>
         )}
       </div>
-      <FantsyList providerFilter={providerFilter} />
+      <FantsyList providerFilter={providerFilter} showHome={false}/>
     </>
   );
 };

@@ -10,6 +10,7 @@ import SlotHome from "../../CasinoHome/SlotHome";
 import LotteryHome from "../../CasinoHome/LotteryHome";
 // import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 import { CasinoApi } from "../../apis/CasinoApi";
+import FantsyList from "../../desktopLayout/fantasyGame/FantsyList";
 
 function Item({ gameIdForItemPage, casinoAllow }) {
   const [gameName, setGameName] = useState("");
@@ -207,10 +208,11 @@ function Item({ gameIdForItemPage, casinoAllow }) {
               </div>
             </div>
           </div>
-          {/* {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <Slot />} */}
+          <FantsyList  showHome={true}/>
+          <Slot />
 
-          <div className="casino-main">
-            {/* {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/m/sueprnowa"} />} */}
+          {/* <div className="casino-main">
+            {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/m/sueprnowa"} />}
             {(casinoAllow?.Qtech ) && (
               <>
                 <LiveCasinoHome providerList={providerList?.liveCasino}/>
@@ -218,21 +220,21 @@ function Item({ gameIdForItemPage, casinoAllow }) {
                 <SlotHome providerList={providerList} />
               </>
             )}
-          </div>
+          </div> */}
 
-          {localStorage.getItem("token") === null && (
+          {/* {localStorage.getItem("token") === null && (
             <>
-              {/* <Slot /> */}
+              <Slot />
               <div className="casino-main">
-                {/* <SuperNowaHome path={"/m/sueprnowa"} /> */}
+                <SuperNowaHome path={"/m/sueprnowa"} />
 
                 <LiveCasinoHome  providerList={providerList?.liveCasino} />
                 <FantasyGamesHome path={"/m/fantsy"} />
                 <SlotHome providerList={providerList} />
               </div>
             </>
-          )}
-           {localStorage.getItem("token") === null && <LotteryHome path={"/lottery"} />}
+          )} */}
+           {/* {localStorage.getItem("token") === null && <LotteryHome path={"/lottery"} />} */}
         </>
       )}
     </div>

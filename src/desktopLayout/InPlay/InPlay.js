@@ -13,6 +13,8 @@ import LotteryHome from "../../CasinoHome/LotteryHome";
 // import SuperNowaHome from "../../CasinoHome/SuperNowaHome";
 import { CasinoApi } from "../../apis/CasinoApi";
 import LatestEvent from "../../common/LatestEvent";
+import Slot from "../../component/Items/Slot/Slot";
+import FantsyList from "../fantasyGame/FantsyList";
 
 const InPlay = ({ casinoAllow }) => {
   const [gameName, setGameName] = useState("");
@@ -284,16 +286,18 @@ const InPlay = ({ casinoAllow }) => {
           </div>
         </div>
       </div>
+      <FantsyList  showHome={true}/>
+      <Slot />
       {/* {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <NewLunch />} */}
       {/* {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/supernowa"} />} */}
-      {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
+      {/* {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (
         <>
           <LiveCasinoHome  providerList={providerList?.liveCasino}/>
           <FantasyGamesHome path={"/fantsy"} />
           <SlotHome providerList={providerList}/>
         </>
       )}
-      {localStorage.getItem("token") === null && <LotteryHome path={"/lottery"} />}
+      {localStorage.getItem("token") === null && <LotteryHome path={"/lottery"} />} */}
     </div>
   );
 };

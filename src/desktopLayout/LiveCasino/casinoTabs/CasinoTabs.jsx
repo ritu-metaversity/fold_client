@@ -4,6 +4,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import ProviderTabs from "./providerTabs/ProviderTabs";
 import GameList from "./gameList/GameList";
 import { CasinoApi } from "../../../apis/CasinoApi";
+import { newProvider } from "../../../common/casinoProvider/NewCasinoProvider";
 
 const CasinoTabs = ({
   gameLists,
@@ -82,7 +83,7 @@ const CasinoTabs = ({
           )}
 
           <ul ref={ref}>
-            {providerList &&providerList?.map((item, id) => {
+            {liveCasino === "SLOT" && providerList && providerList?.map((item, id) => {
               return (
                 <>
                   <li
@@ -100,47 +101,24 @@ const CasinoTabs = ({
                 </>
               );
             })}
-            {/* {liveCasino == "LIVECASINO" &&
-              casinoProviderList?.map((item, id) => {
-                return (
-                  <>
-                    <li
-                      className={activeClass == id ? "casino_active" : ""}
-                      onClick={() =>
-                        handleCasino(
-                          id,
-                          item?.filterType,
-                          item?.name,
-                          item?.gameCode
-                        )
-                      }>
-                      {item?.name}
-                    </li>
-                  </>
-                );
-              })}
-
-            {liveCasino == "SLOT" &&
-              slotProviderList?.map((item, id) => {
-                return (
+            {newProvider?.map((item, id) => {
+              return (
+                <>
                   <li
                     className={activeClass == id ? "casino_active" : ""}
-                    onClick={() => handleCasino(id, item?.filterType)}>
-                    {item?.name}
+                    onClick={() =>
+                      handleCasino(
+                        id,
+                        item?.providerId,
+                        item?.providerName,
+                        item?.gameCode
+                      )
+                    }>
+                    {item?.providerName}
                   </li>
-                );
-              })}
-
-            {liveCasino == "LOTTERY" &&
-              Lottry?.map((item, id) => {
-                return (
-                  <li
-                    className={activeClass == id ? "casino_active" : ""}
-                    onClick={() => handleCasino(id, item?.filterType)}>
-                    {item?.name}
-                  </li>
-                );
-              })} */}
+                </>
+              );
+            })}
           </ul>
           {hideButton ? (
             ""

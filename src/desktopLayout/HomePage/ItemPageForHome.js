@@ -9,6 +9,7 @@ import LotteryHome from "../../CasinoHome/LotteryHome";
 import Slot from "../../component/Items/Slot/Slot";
 import { CasinoApi } from "../../apis/CasinoApi";
 import LatestEvent from "../../common/LatestEvent";
+import FantsyList from "../fantasyGame/FantsyList";
 
 function ItemPageForHome({ casinoAllow }) {
   const [providerList, setProviderList] = useState({})
@@ -29,8 +30,11 @@ function ItemPageForHome({ casinoAllow }) {
         {/* <LatestEvent iplPath="/gamedetail/28127348" elePath="/gamedetail/1706456690"/> */}
 
           <DeskMainPage />
-          {/* {(casinoAllow?.Aura || token === null) && <NewLunch />} */}
-          {/* {(casinoAllow?.Nowa || token === null) && <SuperNowaHome path={"/supernowa"} />} */}
+          <FantsyList  showHome={true}/>
+           <Slot />
+
+          {/* {(casinoAllow?.Aura || token === null) && <NewLunch />}
+          {(casinoAllow?.Nowa || token === null) && <SuperNowaHome path={"/supernowa"} />}
           {(casinoAllow?.Qtech || token === null) && (
             <>
               <LiveCasinoHome providerList={providerList?.liveCasino}/>
@@ -42,7 +46,7 @@ function ItemPageForHome({ casinoAllow }) {
            token === null && <LotteryHome path={"/lottery"} />
           }
 
-          {/* <LiveCasino liveCasino={"LIVECASINO"} showid={1}/> */}
+          <LiveCasino liveCasino={"LIVECASINO"} showid={1}/> */}
         </div>
       </div>
     </div>
