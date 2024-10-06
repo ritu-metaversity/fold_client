@@ -428,7 +428,7 @@ const PayManually = (props) => {
                       <p className="Typography-root text-right">
                         {res?.accountNumber}
                       </p>
-                      <p onClick={() => handleCopy(res?.accountHolderName)}>
+                      <p onClick={() => handleCopy(res?.accountNumber)}>
                         <CopyOutlined />
                       </p>
                     </div>
@@ -449,7 +449,7 @@ const PayManually = (props) => {
                       <p className="Typography-root text-right">
                         {res?.accountNumber}
                       </p>
-                      <p onClick={() => handleCopy(res?.accountHolderName)}>
+                      <p onClick={() => handleCopy(res?.accountNumber)}>
                         <CopyOutlined />
                       </p>
                     </div>
