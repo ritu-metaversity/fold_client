@@ -3,7 +3,7 @@ import axios from "axios";
 const token = localStorage.getItem("token");
 
 export const api = axios.create({
-  baseURL: "https://adminapi.foldexch.com/admin-new-apis",
+  baseURL: "https://adminapi.247idhub.com/admin-new-apis",
   // baseURL: "http://3.34.146.14:8080/admin-new-apis",
   // baseURL: "http://18.139.200.104/admin-new-apis",
   // headers: {
@@ -11,11 +11,11 @@ export const api = axios.create({
   // },
 });
 export const casinoApi = axios.create({
-  baseURL: "https://api.247idhub.com/FOLDEXCH/api/qtech",
+  baseURL: "https://api.247idhub.com/api/qtech",
 });
 
 export const superNowaApi = axios.create({
-  baseURL: "https://adminapi.foldexch.com/admin-new-apis/api/supernowa",
+  baseURL: "https://adminapi.247idhub.com/admin-new-apis/api/supernowa",
 });
 
 export const LiveCasinoBaseUrl = axios.create({

@@ -31,7 +31,7 @@ function ItemPageForHome({ casinoAllow }) {
 
           <DeskMainPage />
           <FantsyList  showHome={true}/>
-           <Slot />
+           {/* <Slot /> */}
 
           {/* {(casinoAllow?.Aura || token === null) && <NewLunch />}
           {(casinoAllow?.Nowa || token === null) && <SuperNowaHome path={"/supernowa"} />}

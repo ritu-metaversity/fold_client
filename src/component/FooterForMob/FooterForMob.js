@@ -30,7 +30,7 @@ function FooterForMob({ ItselfAllowed }) {
                   href={footerImage?.s_whatsapp?.link}
                   target="_blank"
                   rel="noreferrer">
-                  <img src={footerImage?.s_whatsapp?.icon} alt="Twitter" />
+                  <img src={footerImage?.s_whatsapp?.icon}  />
                 </a>
               </div>
               }
@@ -60,7 +60,7 @@ function FooterForMob({ ItselfAllowed }) {
                   href={footerImage?.s_telegram?.link}
                   target="_blank"
                   rel="noreferrer">
-                  <img src={footerImage?.s_telegram?.icon} alt="Twitter" />
+                  <img src={footerImage?.s_telegram?.icon}  />
                 </a>
               </div>
               }
@@ -71,7 +71,7 @@ function FooterForMob({ ItselfAllowed }) {
                   href={footerImage?.s_youtube?.link}
                   target="_blank"
                   rel="noreferrer">
-                  <img src={footerImage?.s_youtube?.icon} alt="Twitter" />
+                  <img src={footerImage?.s_youtube?.icon}  />
                 </a>
               </div>
               }
@@ -81,7 +81,7 @@ function FooterForMob({ ItselfAllowed }) {
                     href={footerImage?.s_twitter?.link}
                     target="_blank"
                     rel="noreferrer">
-                    <img src={footerImage?.s_twitter?.icon} alt="Twitter" />
+                    <img src={footerImage?.s_twitter?.icon}  />
                   </a>
                 </div>
               )}

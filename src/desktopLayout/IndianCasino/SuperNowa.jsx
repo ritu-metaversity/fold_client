@@ -69,7 +69,7 @@ const SuperNowa = () => {
     };
     axios
       .post(
-        `https://adminapi.foldexch.com/admin-new-apis/api/supernowa/v1/authentication`,
+        `https://adminapi.247idhub.com/admin-new-apis/api/supernowa/v1/authentication`,
         dtatata,
         {
           headers: {

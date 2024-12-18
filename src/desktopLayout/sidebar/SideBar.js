@@ -67,7 +67,7 @@ function SideBar({ casinoAllow }) {
   useEffect(() => {
     axios
       .post(
-        "https://adminapi.foldexch.com/admin-new-apis/enduser/left-menu-data-open"
+        "https://adminapi.247idhub.com/admin-new-apis/enduser/left-menu-data-open"
       )
       .then((res) => {
         setMatchList(res?.data?.data);

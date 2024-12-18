@@ -209,7 +209,7 @@ function Item({ gameIdForItemPage, casinoAllow }) {
             </div>
           </div>
           <FantsyList  showHome={true}/>
-          <Slot />
+          {/* <Slot /> */}
 
           {/* <div className="casino-main">
             {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/m/sueprnowa"} />}
