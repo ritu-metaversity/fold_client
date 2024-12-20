@@ -3891,6 +3891,202 @@ export const Ezugi = [
 ]
 
 
+export const homeCasino = [
+  {
+      "id": "7ML-500xturkishroulette",
+      "name": "500x Turkish Roulette",
+      "category": "CASINO/LIVECASINO/ROULETTE",
+      "images": [
+          {
+              "type": "logo-round",
+              "url": "https://client.qtlauncher.com/images/?id=7ML-500xturkishroulette_en_US&type=logo-round&version=1726040671239"
+          },
+          {
+              "type": "banner",
+              "url": "https://client.qtlauncher.com/images/?id=7ML-500xturkishroulette_en_US&type=banner&version=1726040671267"
+          },
+          {
+              "type": "logo-square",
+              "url": "https://client.qtlauncher.com/images/?id=7ML-500xturkishroulette_en_US&type=logo-square&version=1726040671429"
+          }
+      ]
+  },
+  {
+      "id": "BTV-6poker",
+      "name": "6+ Poker",
+      "category": "CASINO/LIVECASINO/POKER",
+      "images": [
+          {
+              "type": "logo-round",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-6poker_en_US&type=logo-round&version=1597908178522"
+          },
+          {
+              "type": "banner",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-6poker_en_US&type=banner&version=1597908178332"
+          },
+          {
+              "type": "logo-square",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-6poker_en_US&type=logo-square&version=1662918821015"
+          }
+      ]
+  },
+  {
+      "id": "7ML-777xgalaxyroulette",
+      "name": "777x Galaxy Roulette",
+      "category": "CASINO/LIVECASINO/ROULETTE",
+      "images": [
+          {
+              "type": "logo-round",
+              "url": "https://client.qtlauncher.com/images/?id=7ML-777xgalaxyroulette_en_US&type=logo-round&version=1726040783533"
+          },
+          {
+              "type": "banner",
+              "url": "https://client.qtlauncher.com/images/?id=7ML-777xgalaxyroulette_en_US&type=banner&version=1726040808788"
+          },
+          {
+              "type": "logo-square",
+              "url": "https://client.qtlauncher.com/images/?id=7ML-777xgalaxyroulette_en_US&type=logo-square&version=1726040810107"
+          }
+      ]
+  },
+  {
+      "id": "EVO-always8baccarat",
+      "name": "Always 8 Baccarat",
+      "category": "CASINO/LIVECASINO/BACCARAT",
+      "images": [
+          {
+              "type": "logo-round",
+              "url": "https://client.qtlauncher.com/images/?id=EVO-always8baccarat_en_US&type=logo-round&version=1731473903911"
+          },
+          {
+              "type": "banner",
+              "url": "https://client.qtlauncher.com/images/?id=EVO-always8baccarat_en_US&type=banner&version=1731473901843"
+          },
+          {
+              "type": "logo-square",
+              "url": "https://client.qtlauncher.com/images/?id=EVO-always8baccarat_en_US&type=logo-square&version=1731473904011"
+          }
+      ]
+  },
+  {
+      "id": "BTV-baccarat",
+      "name": "Baccarat",
+      "category": "CASINO/LIVECASINO/BACCARAT",
+      "images": [
+          {
+              "type": "logo-round",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-baccarat_en_US&type=logo-round&version=1597823557779"
+          },
+          {
+              "type": "banner",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-baccarat_en_US&type=banner&version=1597823557441"
+          },
+          {
+              "type": "logo-square",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-baccarat_en_US&type=logo-square&version=1662976207439"
+          }
+      ]
+  },
+  {
+      "id": "BTV-lobby",
+      "name": "BetGames.TV Lobby",
+      "category": "CASINO/LIVECASINO/LOBBY",
+      "images": [
+          {
+              "type": "logo-round",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-lobby_en_US&type=logo-round&version=1718949853424"
+          },
+          {
+              "type": "banner",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-lobby_en_US&type=banner&version=1718949853510"
+          },
+          {
+              "type": "logo-square",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-lobby_en_US&type=logo-square&version=1718949853464"
+          }
+      ]
+  },
+  {
+      "id": "BTL-betonteenpatti",
+      "name": "Bet on Teen Patti",
+      "category": "CASINO/LIVECASINO/TEEN_PATTI",
+      "images": [
+          {
+              "type": "logo-round",
+              "url": "https://client.qtlauncher.com/images/?id=BTL-betonteenpatti_en_US&type=logo-round&version=1727274881003"
+          },
+          {
+              "type": "banner",
+              "url": "https://client.qtlauncher.com/images/?id=BTL-betonteenpatti_en_US&type=banner&version=1727274918237"
+          },
+          {
+              "type": "logo-square",
+              "url": "https://client.qtlauncher.com/images/?id=BTL-betonteenpatti_en_US&type=logo-square&version=1727274881690"
+          }
+      ]
+  },
+  {
+      "id": "BTV-betonpoker",
+      "name": "Bet on Poker",
+      "category": "CASINO/LIVECASINO/POKER",
+      "images": [
+          {
+              "type": "logo-round",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-betonpoker_en_US&type=logo-round&version=1597822417410"
+          },
+          {
+              "type": "banner",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-betonpoker_en_US&type=banner&version=1597822417233"
+          },
+          {
+              "type": "logo-square",
+              "url": "https://client.qtlauncher.com/images/?id=BTV-betonpoker_en_US&type=logo-square&version=1662976432530"
+          }
+      ]
+  },
+  {
+      "id": "EZU-baccarata",
+      "name": "Baccarat A",
+      "category": "CASINO/LIVECASINO/BACCARAT",
+      "images": [
+          {
+              "type": "logo-round",
+              "url": "https://client.qtlauncher.com/images/?id=EZU-baccarata_en_US&type=logo-round&version=1717130391404"
+          },
+          {
+              "type": "banner",
+              "url": "https://client.qtlauncher.com/images/?id=EZU-baccarata_en_US&type=banner&version=1717130390945"
+          },
+          {
+              "type": "logo-square",
+              "url": "https://client.qtlauncher.com/images/?id=EZU-baccarata_en_US&type=logo-square&version=1717130391537"
+          }
+      ]
+  },
+  {
+      "id": "7ML-500xautorouletteimperial",
+      "name": "500x Auto Roulette Imperial",
+      "category": "CASINO/LIVECASINO/ROULETTE",
+      "images": [
+          {
+              "type": "logo-round",
+              "url": "https://client.qtlauncher.com/images/?id=7ML-500xautorouletteimperial_en_US&type=logo-round&version=1726211479579"
+          },
+          {
+              "type": "banner",
+              "url": "https://client.qtlauncher.com/images/?id=7ML-500xautorouletteimperial_en_US&type=banner&version=1726211479472"
+          },
+          {
+              "type": "logo-square",
+              "url": "https://client.qtlauncher.com/images/?id=7ML-500xautorouletteimperial_en_US&type=logo-square&version=1726211479547"
+          }
+      ]
+  },
+  
+]
+
+
+
 
 export const newProvider = [
     {

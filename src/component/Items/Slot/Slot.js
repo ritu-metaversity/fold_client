@@ -7,7 +7,7 @@ import { Button } from "antd";
 import CasinoModals from "./CasinoModals/CasinoModals";
 import { CasinoApi } from "../../../apis/CasinoApi";
 import { isBrowser } from "react-device-detect";
-import { EvolutionGamming } from "../../../common/casinoProvider/NewCasinoProvider";
+import { EvolutionGamming, homeCasino } from "../../../common/casinoProvider/NewCasinoProvider";
 
 const casinoImageData = [
   {
@@ -255,8 +255,8 @@ const Slot = () => {
                               className={`row row5 mt-2 ${
                                 casinoData === null ? "dis-none" : ""
                               }`}>
-                              {EvolutionGamming?.length > 0 &&
-                                EvolutionGamming.map((item, id) => {
+                              {homeCasino?.length > 0 &&
+                                homeCasino.map((item, id) => {
                                   return (
                                     <div
                                       key={item.gameId}

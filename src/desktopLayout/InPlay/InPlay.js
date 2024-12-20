@@ -287,7 +287,7 @@ const InPlay = ({ casinoAllow }) => {
         </div>
       </div>
       <FantsyList  showHome={true}/>
-      {/* <Slot /> */}
+      <Slot />
       {/* {(casinoAllow?.Aura || localStorage.getItem("token") === null) && <NewLunch />} */}
       {/* {(casinoAllow?.Nowa || localStorage.getItem("token") === null) && <SuperNowaHome path={"/supernowa"} />} */}
       {/* {(casinoAllow?.Qtech || localStorage.getItem("token") === null) && (

@@ -41,7 +41,7 @@ const SportData = ({ casinoAllow }) => {
 
       <Sport gameIdForItemPage={gameIdForItemPage} />
       <FantsyList  showHome={true}/>
-      {/* <Slot /> */}
+      <Slot />
 
       {/* {(casinoAllow?.Aura || token === null) && <Slot />} */}
 
