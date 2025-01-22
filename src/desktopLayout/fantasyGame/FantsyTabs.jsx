@@ -53,7 +53,7 @@ const FantsyTabs = () => {
 
   return (
     <>
-      <div className="casino_tabs">
+      {/* <div className="casino_tabs">
         {hideButton ? (
           ""
         ) : (
@@ -86,7 +86,7 @@ const FantsyTabs = () => {
             <MdKeyboardArrowRight />
           </button>
         )}
-      </div>
+      </div> */}
       <FantsyList providerFilter={providerFilter} showHome={false}/>
     </>
   );

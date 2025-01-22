@@ -250,17 +250,17 @@ function SideBar({ casinoAllow }) {
                   </Link>
                 </li>
 
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link to="/slot" className="nav-link">
                     <span className="">Slot</span>
                   </Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Link to="/fantsy" className="nav-link">
                     <span className="">Fantasy Game</span>
                   </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link to="/lottery" className="nav-link">
                     <span className="">Lottery</span>
                   </Link>
@@ -269,7 +269,7 @@ function SideBar({ casinoAllow }) {
                   <Link to="/instantWin" className="nav-link">
                     <span className="">Instant Win</span>
                   </Link>
-                </li>
+                </li> */}
               </>
             )}
 

@@ -40,7 +40,7 @@ const SportData = ({ casinoAllow }) => {
       {token !== null ? "" : <BannerList />}
 
       <Sport gameIdForItemPage={gameIdForItemPage} />
-      <FantsyList  showHome={true}/>
+      {/* <FantsyList  showHome={true}/> */}
       <Slot />
 
       {/* {(casinoAllow?.Aura || token === null) && <Slot />} */}

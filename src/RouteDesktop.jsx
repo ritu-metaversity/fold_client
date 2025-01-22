@@ -37,6 +37,7 @@ import WhatsAppIcon from "./common/whatsAppIcon/WhatsAppIcon";
 import { GameAPI } from "./apis/gameAPI";
 import CasinoMainPage from "./Casino_New/CasinoMainPage/CasinoMainPage";
 import CasinoResult from "./Casino_New/CasinoResult/CasinoResult";
+import AuraCasino from "./component/Items/Aura/AuraCasino";
 
 const RouteDesktop = ({ footerImage }) => {
   const [SportId, setSportId] = useState("");
@@ -50,9 +51,6 @@ const RouteDesktop = ({ footerImage }) => {
   const { pathname } = useLocation();
 
   const id = pathname?.slice(13);
-
-  console.log(footerImage, "footerImagefooterImage");
-
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       nav("/login");
@@ -74,10 +72,6 @@ const RouteDesktop = ({ footerImage }) => {
     }
   }, [pathname]);
 
-  const idddd = (id) => {
-    setSportId(id);
-  };
-
   const statusMassege = (val) => {
     setStatusmessage(val);
   };
@@ -86,9 +80,6 @@ const RouteDesktop = ({ footerImage }) => {
   };
 
   const statusMsg = (val) => {
-    setStatusmessage(val);
-  };
-  const statusMsgForLogout = (val) => {
     setStatusmessage(val);
   };
 
@@ -250,6 +241,7 @@ const RouteDesktop = ({ footerImage }) => {
                 path="/livecasino"
                 element={<LiveCasino liveCasino={"LIVECASINO"} showid={2} />}
               />
+              <Route path="/indian-casino/:id" element={<AuraCasino />} />
               <Route
                 path="/slot"
                 element={<LiveCasino liveCasino={"SLOT"} showid={2} />}

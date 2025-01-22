@@ -208,7 +208,7 @@ function Item({ gameIdForItemPage, casinoAllow }) {
               </div>
             </div>
           </div>
-          <FantsyList  showHome={true}/>
+          {/* <FantsyList  showHome={true}/> */}
           <Slot />
 
           {/* <div className="casino-main">

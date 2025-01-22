@@ -100,13 +100,13 @@ function Mobilenav({ casinoAllow }) {
         )} */}
         {(casinoAllow?.Qtech || localStorage.getItem("token") == null) && (
           <>
-            <li
+            {/* <li
               className={`nav-item ${Active === 3 ? "active2" : ""}`}
               onClick={(e) => handleClick(3, e)}>
               <Link to="/slot" className="nav-link navlink1">
                 Slot
               </Link>
-            </li>
+            </li> */}
             <li
               className={`nav-item ${Active === 4 ? "active2" : ""}`}
               onClick={(e) => handleClick(4, e)}>
@@ -121,20 +121,20 @@ function Mobilenav({ casinoAllow }) {
                 Fantsy
               </Link>
             </li>
-            <li
+            {/* <li
               className={`nav-item ${Active === 8 ? "active2" : ""}`}
               onClick={(e) => handleClick(8, e)}>
               <Link to="/lottery" className="nav-link navlink1">
                 Lottery
               </Link>
-            </li>
-            <li
+            </li> */}
+            {/* <li
               className={`nav-item ${Active === 9 ? "active2" : ""}`}
               onClick={(e) => handleClick(9, e)}>
               <Link to="/instantWin" className="nav-link navlink1">
                 Instant Win
               </Link>
-            </li>
+            </li> */}
           </>
         )}
         {/* <li

@@ -1095,7 +1095,8 @@ ul#home-events {
 }
 
 .header .logo {
-    width: 111px;
+    /* width: 111px; */
+    height:34px
 }
 
 .pb-1,

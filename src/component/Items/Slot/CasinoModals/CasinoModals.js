@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { GameAPI } from "../../../../apis/gameAPI";
 
 const CasinoModals = ({ type, setShow, show, singleUserValue }) => {
-  
-  console.log(singleUserValue, "dfadfasdasdasda")
-
   return (
     <>
       {(singleUserValue !== 1 || singleUserValue !== undefined) && (

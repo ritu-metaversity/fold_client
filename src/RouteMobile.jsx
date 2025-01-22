@@ -41,6 +41,7 @@ import WhatsAppIcon from "./common/whatsAppIcon/WhatsAppIcon";
 import { GameAPI } from "./apis/gameAPI";
 import CasinoMainPage from "./Casino_New/CasinoMainPage/CasinoMainPage";
 import CasinoResult from "./Casino_New/CasinoResult/CasinoResult";
+import AuraCasino from "./component/Items/Aura/AuraCasino";
 
 const RouteMobile = ({footerImage}) => {
   const { pathname } = useLocation();
@@ -257,6 +258,7 @@ const token = localStorage.getItem("token")
               <Route path="/m/fantsy" element={<FantsyTabs  />} />
               <Route path="/m/sueprnowa" element={<SuperNowa/>} />
               <Route path="/m/aura" element={<NewLunch/>} />
+              <Route path="/indian-casino/:id" element={<AuraCasino />} />
               {/* <Route path="/m/:id/casino" element={<CasinoMainPage />} />
               <Route path="/casinoresult/:id" element={<CasinoResult />} /> */}
 

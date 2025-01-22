@@ -9,6 +9,42 @@ import CasinoModals from "../../component/Items/Slot/CasinoModals/CasinoModals";
 import { GameAPI } from "../../apis/gameAPI";
 import { useNavigate } from "react-router-dom";
 
+const fanSlot = [
+  {
+    match_id: "70001",
+  },
+  {
+    match_id: "70003",
+  },
+  {
+    match_id: "70004",
+  },
+  {
+    match_id: "70005",
+  },
+  {
+    match_id: "70006",
+  },
+  {
+    match_id: "70008",
+  },
+  {
+    match_id: "70009",
+  },
+  {
+    match_id: "70010",
+  },
+  {
+    match_id: "70011",
+  },
+  {
+    match_id: "70013",
+  },
+  {
+    match_id: "677222",
+  },
+];
+
 const FantsyList = ({ providerFilter, showHome }) => {
   const [show, setShow] = useState(false);
   const [gameId, setGameId] = useState("");
@@ -50,39 +86,39 @@ const FantsyList = ({ providerFilter, showHome }) => {
     }
   };
 
-  useEffect(() => {
-    const gameToken = localStorage.getItem("gameToken");
-    if (token !== null) {
-      CasinoApi.Casino_GameLink({
-        playerId: "121212",
-        currency: "INR",
-        country: "IN",
-        gender: "M",
-        gameName: gameId,
-        birthDate: "1986-01-01",
-        lang: "en_IN",
-        mode: "real",
-        device: isBrowser ? "desktop" : "mobile",
-        // returnUrl: window.location.host,
-        returnUrl: window.location.origin,
-        token: gameToken,
-        walletSessionId: token,
-      }).then((res) => {
-        setIframeData(res?.data?.data?.url);
-      });
-    }
-  }, [gameId, token]);
+  // useEffect(() => {
+  //   const gameToken = localStorage.getItem("gameToken");
+  //   if (token !== null) {
+  //     CasinoApi.Casino_GameLink({
+  //       playerId: "121212",
+  //       currency: "INR",
+  //       country: "IN",
+  //       gender: "M",
+  //       gameName: gameId,
+  //       birthDate: "1986-01-01",
+  //       lang: "en_IN",
+  //       mode: "real",
+  //       device: isBrowser ? "desktop" : "mobile",
+  //       // returnUrl: window.location.host,
+  //       returnUrl: window.location.origin,
+  //       token: gameToken,
+  //       walletSessionId: token,
+  //     }).then((res) => {
+  //       setIframeData(res?.data?.data?.url);
+  //     });
+  //   }
+  // }, [gameId, token]);
 
   return (
     <>
-      {showHome ? (
-        <div
-          className="casino-main"
-          style={{
-            margin: "14px 7px",
-            padding: "12px 0px",
-          }}>
-          <h4
+      {/* {showHome ? ( */}
+      <div
+        className="casino-main"
+        style={{
+          margin: "14px 7px",
+          padding: "12px 0px",
+        }}>
+        {/* <h4
             style={{
               fontSize: "16px",
               fontWeight: "bold",
@@ -90,20 +126,23 @@ const FantsyList = ({ providerFilter, showHome }) => {
               paddingLeft: "12px",
             }}>
             Fantasy Game
-          </h4>
-          <div className="provider_images">
-            {avitorList?.map((item) => {
-              return (
-                <div
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleShow(item?.id)}>
-                  <img src={item?.image} alt="" />
-                </div>
-              );
-            })}
-          </div>
+          </h4> */}
+        <div className="provider_images">
+          {fanSlot?.map((item) => {
+            return (
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => handleShow(item?.match_id)}>
+                <img
+                  src={`https://s3buket.blr1.cdn.digitaloceanspaces.com/avitor/${item?.match_id}.avif`}
+                  alt=""
+                />
+              </div>
+            );
+          })}
         </div>
-      ) : (
+      </div>
+      {/* ) : (
         <div className="fantsy_img">
           <div className="provider_images">
             {fantsyGameList?.map((item) => {
@@ -118,12 +157,12 @@ const FantsyList = ({ providerFilter, showHome }) => {
             })}
           </div>
         </div>
-      )}
+      )} */}
 
       <Modal centered show={casinoShow} onHide={handleClose}>
         <Modal.Body className="casino_modals_body">
           <CasinoModals
-            type={"fantasyGames"}
+            type={"aura"}
             singleUserValue={singleUserValue}
             show={setShow}
             setShow={setCasinoShow}
@@ -142,7 +181,15 @@ const FantsyList = ({ providerFilter, showHome }) => {
           <button onClick={handleClose} className="close_iframe">
             <MdOutlineClose />
           </button>
-          <LiveCasinoModals iframeData={iframeData} />
+          {/* <LiveCasinoModals iframeData={iframeData} /> */}
+          <iframe
+            src={`https://aura.fawk.app/${token}/9677/${gameId}`}
+            className="desktop_if"
+            width="100%"
+            title="mobile"
+            height="100vh"
+            allowFullScreen={true}
+          />
         </Modal.Body>
       </Modal>
     </>

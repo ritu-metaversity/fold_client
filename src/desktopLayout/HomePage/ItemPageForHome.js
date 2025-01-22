@@ -30,7 +30,7 @@ function ItemPageForHome({ casinoAllow }) {
         {/* <LatestEvent iplPath="/gamedetail/28127348" elePath="/gamedetail/1706456690"/> */}
 
           <DeskMainPage />
-          <FantsyList  showHome={true}/>
+          {/* <FantsyList  showHome={true}/> */}
            <Slot />
 
           {/* {(casinoAllow?.Aura || token === null) && <NewLunch />}

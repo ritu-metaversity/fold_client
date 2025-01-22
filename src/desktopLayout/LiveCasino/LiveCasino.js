@@ -6,6 +6,7 @@ import {
   EvolutionGamming,
   Ezugi,
 } from "../../common/casinoProvider/NewCasinoProvider";
+import Slot from "../../component/Items/Slot/Slot";
 
 const LiveCasino = ({ liveCasino, showid }) => {
   const [category, setCategory] = useState([]);
@@ -75,7 +76,7 @@ const LiveCasino = ({ liveCasino, showid }) => {
   return (
     <>
       <div className="main">
-        <CasinoTabs
+        {/* <CasinoTabs
           state={state}
           showid={showid}
           liveCasino={liveCasino}
@@ -83,7 +84,8 @@ const LiveCasino = ({ liveCasino, showid }) => {
           setProviderTags={setProviderTags}
           providerTag={providerTag}
           category={category}
-        />
+        /> */}
+        <Slot />
       </div>
     </>
   );
